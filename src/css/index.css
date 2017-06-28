@@ -1,0 +1,157 @@
+/* Base styles */
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+  background-color: #0082c8;
+  height: 80px;
+}
+
+.name{
+  margin: 10% 0 7.5%;
+}
+
+.material-icons.card-icon{
+  line-height: 1.85;
+  margin-right: 1.5%;
+}
+
+i.side-icons{
+  font-size: 4.5rem;
+  margin-bottom: 7%;
+  text-align: center;
+}
+
+md-list-item > md-icon:first-child:not(.md-avatar-icon), md-list-item .md-list-item-inner > md-icon:first-child:not(.md-avatar-icon){
+  margin: 0;
+}
+
+md-list{
+  padding: 0;
+}
+
+.side-nav md-list md-list-item{
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 15.5% 0;
+  box-sizing: border-box;
+}
+
+.layout-column > .flex{
+  height: 100%;
+}
+
+.body-app{
+  min-height: 758px;
+}
+
+md-sidenav.md-locked-open, md-sidenav.md-locked-open.md-closed, md-sidenav.md-locked-open.md-closed.md-sidenav-left, md-sidenav.md-locked-open.md-closed, md-sidenav.md-locked-open.md-closed.md-sidenav-right{
+  /*background: #303841;*/
+  color: #fff;
+  background: #252830;
+}
+
+.home-icon{
+  color: #1bc98e;
+}
+
+.profile-icon{
+  color: #1a80a8;
+}
+
+.events-icon{
+  color: #e64759;
+}
+
+.help-icon{
+  color: #fbb03b;
+}
+
+.register-icon{
+  color: #46B7B9;
+}
+
+.side-nav md-list md-list-item:hover{
+  background: rgba(255,255,255,0.1);
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+  height: 0;
+  background: #252830;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 5% 7.5%;
+}
+
+md-toolbar h1{
+  margin: 0;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar).tool-icons{
+  padding: 0.5% 0;
+  background: rgba(0,0,0,0.1);
+}
+
+.user-nav-icons{
+  color: #252830;
+}
+
+md-list-item._md-button-wrap{
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+md-list-item > p, md-list-item > .md-list-item-inner > p, md-list-item .md-list-item-inner > p, md-list-item .md-list-item-inner > .md-list-item-inner > p{
+  font-weight: 500;
+}
+
+.points{
+  width: 37.5px;
+  height: 37.5px;
+  border-radius: 50%;
+  background: #1ca8dd;
+  color: #fff;
+}
+
+.fa-star{
+  color: #fbb03b;
+  font-size: 1.5rem;
+  margin-left: 8%;
+}
+
+.person-points{
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.container-competition{
+  padding: 5% 0;
+}
+
+.container-competition h2{
+  padding: 3% 0;
+}
+
+.fa-trophy{
+  margin-left: 1.5%;
+  font-size: 1.8rem;
+  color: #fbb03b;
+}
+
+md-content{
+  box-sizing: border-box;
+}
+
+.logo-nav{
+  padding:0;
+  margin: 0;
+  width: 87.5%;
+  margin: 0 auto;
+}
+
+.logo-nav img{
+  width: 100%;
+}
+
+.menu-button{
+  text-align: center;
+}
+
+md-list-item::before, md-list-item .md-list-item-inner::before{
+  min-height: 0;
+}
