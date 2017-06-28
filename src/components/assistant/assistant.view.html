@@ -1,40 +1,32 @@
 <!-- Sidenav view -->
 <div class="body-app md-menu-demo" layout="column" ng-cloak">
 	<div class="side-content-container" layout="row" flex>
-		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="15">
-			<md-toolbar>
-				<h1>FCT App</h1>
-			</md-toolbar>
+		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10">
 			<md-list>
 				<md-list-item>
-					<md-icon>
+					<figure class="logo-nav">
+					<img src="images/logo.png">
+				</figure>
+				</md-list-item>
+				<md-list-item  layout="column">
 						<i class="material-icons side-icons home-icon">&#xE88A;</i>
-					</md-icon>
-					<span class="menu-button" flex>Home</span>
+					<p class="menu-button">Home</p>
 				</md-list-item>
-				<md-list-item>
-					<md-icon>
+				<md-list-item layout="column">
 						<i class="material-icons side-icons profile-icon">&#xE853;</i>
-					</md-icon>
-					<span class="menu-button" flex>Perfil</span>
+					<p class="menu-button">Perfil</p>
 				</md-list-item>
-				<md-list-item>
-					<md-icon>
+				<md-list-item  layout="column">
 						<i class="material-icons side-icons events-icon">&#xE878;</i>
-					</md-icon>
-					<span class="menu-button" flex>Eventos</span>
+					<p class="menu-button" flex>Eventos</p>
 				</md-list-item>
-				<md-list-item>
-					<md-icon>
+				<md-list-item  layout="column">
 						<i class="material-icons side-icons help-icon">&#xEB3F;</i>
-					</md-icon>
-					<span class="menu-button" flex>Patrocinadores</span>
+					<p class="menu-button" flex>Patrocinadores</p>
 				</md-list-item>
-				<md-list-item>
-					<md-icon>
+				<md-list-item  layout="column">
 						<i class="material-icons side-icons register-icon">&#xE873;</i>
-					</md-icon>
-					<span class="menu-button" flex>Registro de alumno</span>
+					<p class="menu-button" flex>Registros</p>
 				</md-list-item>
 			</md-list>
 		</md-sidenav>
@@ -42,7 +34,7 @@
 	  		<md-toolbar class="tool-icons md-whiteframe-3dp" layout="row">
 	  			<md-list-item class="noright" flex="20">
     				<img alt="{{ person.name }}" ng-src="{{ person.img }}" class="md-avatar" />
-    				<p>{{person.name}}</p>
+    				<p>Person name{{person.name}}</p>
   				</md-list-item>
     			<div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
     				<div class="icons-profile-container">
@@ -81,6 +73,7 @@
   			<!-- Place your view here 
 
   			!!-->
+
   			
 
 		</md-content>
