@@ -1,8 +1,9 @@
 angular.module('app')
   .controller('adminCtrl', ['$scope', function ($scope) {
   	var originatorEv;
-	  	/*Sidenav functionality*/
- 	var originatorEv;
+    $scope.selected = 0;
+    
+	  	/*Sidenav*/
 
     $scope.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
@@ -31,6 +32,6 @@ angular.module('app')
     $scope.checkVoicemail = function() {
       // This never happens.
     };
-    /*End sidenav functionality
+    /*Final sidenav
     -->>*/   
 }]);

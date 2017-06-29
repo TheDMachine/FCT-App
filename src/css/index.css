@@ -1,4 +1,4 @@
-/* Base styles */
+/* Estilos semilla */
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
   background-color: #0082c8;
   height: 80px;
@@ -14,8 +14,8 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 }
 
 i.side-icons{
-  font-size: 4.5rem;
-  margin-bottom: 7%;
+  font-size: 4rem;
+  margin-bottom: 0;
   text-align: center;
 }
 
@@ -27,10 +27,15 @@ md-list{
   padding: 0;
 }
 
+p{
+  margin: 0;
+  line-height: 0.9;
+}
+
 .side-nav md-list md-list-item{
   cursor: pointer;
   border-bottom: 1px solid rgba(255,255,255,0.05);
-  padding: 15.5% 0;
+  padding: 14.75% 0;
   box-sizing: border-box;
 }
 
@@ -68,15 +73,15 @@ md-sidenav.md-locked-open, md-sidenav.md-locked-open.md-closed, md-sidenav.md-lo
   color: #46B7B9;
 }
 
-.side-nav md-list md-list-item:hover{
+/*.side-nav md-list md-list-item:hover{
   background: rgba(255,255,255,0.1);
-}
+}*/
 
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
   height: 0;
   background: #252830;
   border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding: 5% 7.5%;
+  padding: 4.5% 7.5%;
 }
 
 md-toolbar h1{
@@ -156,4 +161,15 @@ md-list-item::before, md-list-item .md-list-item-inner::before{
   min-height: 0;
 }
 
-/* End base styles*/
+button.button-selected{
+  width: auto;
+  height: auto;
+  padding: 0;
+  width: 90%;
+  padding: 5% 0;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Fin de estilos base */
