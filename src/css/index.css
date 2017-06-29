@@ -170,6 +170,7 @@ button.button-selected{
   box-sizing: border-box;
   text-align: center;
   margin: 0 auto;
+  text-transform: none;
 }
 
 /* Fin de estilos base */
