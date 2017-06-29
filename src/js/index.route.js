@@ -74,6 +74,17 @@
       },
       controller: 'teacherCtrl'
     })
+        .state('login',{
+      url : '/login', //ruta del url del estado
+      templateUrl : 'components/login/login.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/login/login.controller.js')
+        }]
+      },
+      controller: 'loginCtrl'
+    })
 
     $urlRouterProvider.otherwise('/admin');
   }
