@@ -1,3 +1,33 @@
+/*Inicio estilos buttons de pasos formulario eventos*/
+
+#statusButtons a{
+  color: #242629;
+  font-size: 1.143em;
+  display: inline-block;
+  text-align: center;
+  margin-right: 8%;
+}
+
+#statusButtons a:hover{
+  text-decoration: none;
+}
+
+#statusButtons span{
+   display: block;
+   height: 30px;
+   margin:0 auto 10px;
+   padding-top: 5px;
+   width: 30px;
+   border: 1px solid #ee334e;
+   border-radius: 50%;
+}
+
+#statusButtons a.active span{
+  background-color: #cd3d3e;
+}
+
+/*Fin estilos buttons de pasos formulario eventos*/
+
 /* Estilos semilla */
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
   background-color: #0082c8;

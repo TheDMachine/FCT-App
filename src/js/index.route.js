@@ -28,8 +28,36 @@
           return $ocLazyLoad.load('components/admin/admin.controller.js')
         }]
       },
-      controller: 'adminCtrl'
+      controller: 'adminCtrl',
+      controllerAs: 'vm'
     })
+    //Inicio de las vistas hijas del formulario de registro del administrador
+    .state('admin.part1',{
+      url : '/part1', //ruta del url del estado
+      templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart1.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.part2',{
+      url : '/part2', //ruta del url del estado
+      templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart2.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.part3',{
+      url : '/part3', //ruta del url del estado
+      templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart3.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.part4',{
+      url : '/part4', //ruta del url del estado
+      templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart4.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.part5',{
+      url : '/part5', //ruta del url del estado
+      templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart5.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.part6',{
+      url : '/part6', //ruta del url del estado
+      templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart6.view.html'//vista que se va a cargar para este estado
+    })
+    // Fin de las vistas hojas del formualrio de registro del administrador.
+
     .state('assistant',{
       url : '/assistant', //ruta del url del estado
       templateUrl : 'components/assistant/assistant.view.html',//vista que se va a cargar para este estado
@@ -39,7 +67,8 @@
           return $ocLazyLoad.load('components/assistant/assistant.controller.js')
         }]
       },
-      controller: 'assistantCtrl'
+      controller: 'assistantCtrl',
+      controllerAs: 'vm'
     })
     .state('competitor',{
       url : '/competitor', //ruta del url del estado
@@ -50,7 +79,8 @@
           return $ocLazyLoad.load('components/competitor/competitor.controller.js')
         }]
       },
-      controller: 'competitorCtrl'
+      controller: 'competitorCtrl',
+      controllerAs: 'vm'
     })
     .state('consul',{
       url : '/consul', //ruta del url del estado
@@ -61,7 +91,8 @@
           return $ocLazyLoad.load('components/consul/consul.controller.js')
         }]
       },
-      controller: 'consulCtrl'
+      controller: 'consulCtrl',
+      controllerAs: 'vm'
     })
     .state('teacher',{
       url : '/teacher', //ruta del url del estado
@@ -72,7 +103,8 @@
           return $ocLazyLoad.load('components/profesor/teacher.controller.js')
         }]
       },
-      controller: 'teacherCtrl'
+      controller: 'teacherCtrl',
+      controllerAs: 'vm'
     })
         .state('login',{
       url : '/login', //ruta del url del estado

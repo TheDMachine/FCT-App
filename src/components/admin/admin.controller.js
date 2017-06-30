@@ -1,6 +1,10 @@
-angular.module('app')
+(function(){
+  'use strict';
+  angular
+  .module('app')
   .controller('adminCtrl', ['$scope', function ($scope) {
   	var originatorEv;
+    var vm = this;
     $scope.selected = 0;
     
 	  	/*Sidenav*/
@@ -34,4 +38,5 @@ angular.module('app')
     };
     /*Final sidenav
     -->>*/   
-}]);
+  }]);
+})();
