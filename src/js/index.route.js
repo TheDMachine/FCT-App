@@ -28,7 +28,8 @@
           return $ocLazyLoad.load('components/admin/admin.controller.js')
         }]
       },
-      controller: 'adminCtrl'
+      controller: 'adminCtrl',
+      controllerAs: 'vm'
     })
     .state('assistant',{
       url : '/assistant', //ruta del url del estado

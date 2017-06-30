@@ -30,13 +30,13 @@
 					<md-button class="button-selected" ng-click="selected = 4" ng-style="selected == 4 ? {'background' : 'rgba(251,176,59,0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons help-icon" ng-style="selected == 4 ? {'color': '#fff'} : {'color': '#fbb03b'} ">&#xEB3F;</i>
 						<p class="menu-button">Patrocinadores</p>
-					</md-button>	
+					</md-button>
 				</md-list-item>
 				<md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="selected = 5" ng-style="selected == 5 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons register-icon" ng-style="selected == 5 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
 						<p class="menu-button">Registros</p>
-					</md-button>	
+					</md-button>
 				</md-list-item>
 			</md-list>
 		</md-sidenav>
@@ -65,7 +65,7 @@
 				        </md-menu-item>
 				        <md-menu-item>
 				          <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
-				            
+
 				            Recuperar contraseña
 				          </md-button>
 				        </md-menu-item>
@@ -80,7 +80,7 @@
     				</div>
     			</div>
   			</md-toolbar>
-  			<!-- Poner la vista aquí 
+  			<!-- Poner la vista aquí
 
   			!!-->
   			<div ng-show="selected == 5" flex="" ng-cloak>
@@ -89,8 +89,71 @@
 			      <md-tab label="Registro de academias">
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Registro de academias</h1>
-			          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
-			        </md-content>
+								<div layout="row">
+									<div flex="50">
+										<form name="frmAcademy" novalidate autocomplete="off">
+											<md-input-container flex-offset class="md-block">
+												<label for="">Nombre de academia</label>
+												<input type="text" name="name" ng-model="vm.name" required/>
+											</md-input-container>
+
+											<md-input-container flex-offset class="md-block">
+												<label for="">Direccion</label>
+												<input type="text" name="name" ng-model="vm.address" required/>
+											</md-input-container>
+
+											<md-input-container flex-offset class="md-block">
+												<label for="">Nombre del encagado</label>
+												<input type="text" name="name" ng-model="vm.manager" required/>
+											</md-input-container>
+
+											<md-input-container flex-offset class="md-block">
+												<label for="">Cantidad de competidores</label>
+												<input type="number" name="name" ng-model="vm.competitors" required/>
+											</md-input-container>
+
+											<md-input-container flex-offset class="md-block">
+												<label for="">Teléfono</label>
+												<input type="text" name="name" ng-model="vm.phone" required/>
+											</md-input-container>
+
+											<md-input-container flex-offset class="md-block">
+												<label for="">Email</label>
+												<input type="text" name="name" ng-model="vm.email" required/>
+											</md-input-container>
+
+											<md-button ng-click="vm.save()" class="md-raised">Agregar Academia</md-button>
+										</form>
+										<div class="container-fluid row">
+											<div class="col-xs-12">
+												<table class="table">
+													<thead>
+														<tr>
+															<th>Nombre de la academia</th>
+															<th>Dirección</th>
+															<th>Encargado</th>
+															<th>Cantidad de competidores</th>
+															<th>teléfono</th>
+															<th>Email</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr ng-repeat="academy in vm.academy">
+															<td>{{academy.name}}</td>
+															<td>{{academy.address}}</td>
+															<td>{{academy.manager}}</td>
+															<td>{{academy.competitors}}</td>
+															<td>{{academy.phone}}</td>
+															<td>{{academy.email}}</td>
+															<td><md-button ng-click="vm.updateAcademy()" class="md-raised">Editar</md-button></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</md-content>
 			      </md-tab>
 			      <md-tab label="Registro de profesores">
 			        <md-content class="Registro de profesores">
@@ -110,7 +173,7 @@
 			  </md-content>
 			</div>
 
-  			
+
 
 		</md-content>
 
