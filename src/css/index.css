@@ -1,0 +1,301 @@
+/* Estilos semilla */
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+  background-color: #0082c8;
+  height: 80px;
+}
+
+.name{
+  margin: 10% 0 7.5%;
+}
+
+.material-icons.card-icon{
+  line-height: 1.85;
+  margin-right: 1.5%;
+}
+
+i.side-icons{
+  font-size: 4rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+md-list-item > md-icon:first-child:not(.md-avatar-icon), md-list-item .md-list-item-inner > md-icon:first-child:not(.md-avatar-icon){
+  margin: 0;
+}
+
+md-list{
+  padding: 0;
+}
+
+p{
+  margin: 0;
+  line-height: 0.9;
+}
+
+.side-nav md-list md-list-item{
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 14.75% 0;
+  box-sizing: border-box;
+}
+
+.layout-column > .flex{
+  height: 100%;
+}
+
+.body-app{
+  min-height: 758px;
+}
+
+md-sidenav.md-locked-open, md-sidenav.md-locked-open.md-closed, md-sidenav.md-locked-open.md-closed.md-sidenav-left, md-sidenav.md-locked-open.md-closed, md-sidenav.md-locked-open.md-closed.md-sidenav-right{
+  /*background: #303841;*/
+  color: #fff;
+  background: #252830;
+}
+
+.home-icon{
+  color: #1bc98e;
+}
+
+.profile-icon{
+  color: #1a80a8;
+}
+
+.events-icon{
+  color: #e64759;
+}
+
+.help-icon{
+  color: #fbb03b;
+}
+
+.register-icon{
+  color: #46B7B9;
+}
+
+/*.side-nav md-list md-list-item:hover{
+  background: rgba(255,255,255,0.1);
+}*/
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+  height: 0;
+  background: #252830;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 4.5% 7.5%;
+}
+
+md-toolbar h1{
+  margin: 0;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar).tool-icons{
+  padding: 0.5% 0;
+  background: rgba(0,0,0,0.1);
+}
+
+.user-nav-icons{
+  color: #252830;
+}
+
+md-list-item._md-button-wrap{
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+md-list-item > p, md-list-item > .md-list-item-inner > p, md-list-item .md-list-item-inner > p, md-list-item .md-list-item-inner > .md-list-item-inner > p{
+  font-weight: 500;
+}
+
+.points{
+  width: 37.5px;
+  height: 37.5px;
+  border-radius: 50%;
+  background: #1ca8dd;
+  color: #fff;
+}
+
+.fa-star{
+  color: #fbb03b;
+  font-size: 1.5rem;
+  margin-left: 8%;
+}
+
+.person-points{
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.container-competition{
+  padding: 5% 0;
+}
+
+.container-competition h2{
+  padding: 3% 0;
+}
+
+.fa-trophy{
+  margin-left: 1.5%;
+  font-size: 1.8rem;
+  color: #fbb03b;
+}
+
+md-content{
+  box-sizing: border-box;
+}
+
+.logo-nav{
+  padding:0;
+  margin: 0;
+  width: 87.5%;
+  margin: 0 auto;
+}
+
+.logo-nav img{
+  width: 100%;
+}
+
+.menu-button{
+  text-align: center;
+}
+
+md-list-item::before, md-list-item .md-list-item-inner::before{
+  min-height: 0;
+}
+
+button.button-selected{
+  width: auto;
+  height: auto;
+  padding: 0;
+  width: 90%;
+  padding: 5% 0;
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0 auto;
+  text-transform: none;
+}
+
+/* Fin de estilos base */
+
+/* Login estilos*/
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.body {
+  background: url('../components/login/background-event2.jpg') center center;
+  background-size: cover;
+  /*background: #254B62;*/
+}
+
+:target:before {
+  content: "";
+  display: block;
+  height: 60px;
+  /* fixed header height*/
+  margin: -60px 0 0;
+  /* negative fixed header height */
+}
+
+#main-content {
+  margin-top: 60px;
+}
+
+#startup,
+#sub-content,
+#sub-content .row {
+  margin-top: -70px;
+  padding-top: 70px;
+}
+
+#sub-content h4 {
+  margin-top: 40px;
+}
+
+{
+  padding-top: 50px;
+}
+
+.component {
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+
+.component h3 {
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.demo {}
+
+.description {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+h2{
+  text-align: center;
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.log-container{
+  border: 1px solid rgba(255,255,255,0.2);
+  width: 20%;
+  margin: 0 auto;
+  padding: 1.5%;
+  box-sizing: border-box;
+  color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 3px;
+
+}
+
+.btn.btn-raised:not(.btn-link):hover.btn-info, .input-group-btn .btn.btn-raised:not(.btn-link):hover.btn-info, .btn-group-raised .btn:not(.btn-link):hover.btn-info, .btn-group-raised .input-group-btn .btn:not(.btn-link):hover.btn-info, .btn.btn-raised:not(.btn-link):focus.btn-info, .input-group-btn .btn.btn-raised:not(.btn-link):focus.btn-info, .btn-group-raised .btn:not(.btn-link):focus.btn-info, .btn-group-raised .input-group-btn .btn:not(.btn-link):focus.btn-info, .btn.btn-raised:not(.btn-link).active.btn-info, .input-group-btn .btn.btn-raised:not(.btn-link).active.btn-info, .btn-group-raised .btn:not(.btn-link).active.btn-info, .btn-group-raised .input-group-btn .btn:not(.btn-link).active.btn-info, .btn.btn-raised:not(.btn-link):active.btn-info, .input-group-btn .btn.btn-raised:not(.btn-link):active.btn-info, .btn-group-raised .btn:not(.btn-link):active.btn-info, .btn-group-raised .input-group-btn .btn:not(.btn-link):active.btn-info{
+  /*background-color: #254B62;*/
+  background-color: #1997c6;
+}
+
+.btn.btn-raised:not(.btn-link).btn-info{
+  /*background-color: #31588A;*/
+  /*background-color: #254B62;*/
+  background-color: #0082c8;
+}
+
+.form-group label.control-label{
+  color: #fff;
+}
+
+.body{
+  padding: 12.5% 0;
+}
+
+.logo{
+  width: 62.5%;
+  margin: 0 auto;
+}
+
+.logo img{
+  width: 100%;
+}
+
+md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-container .md-placeholder{
+  font-size: 1.2rem;
+}
+
+.login-icon{
+  margin: 0;
+
+}
+
+.login-icon i{
+  line-height: 3.55;
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.form-group{
+  margin: 3% 0;
+}
+
+/*Fin estilos login*/

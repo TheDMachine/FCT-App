@@ -1,0 +1,82 @@
+<!-- Sidenav view -->
+<div class="body-app md-menu-demo" layout="column" ng-cloak">
+	<div class="side-content-container" layout="row" flex>
+		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10">
+			<md-list>
+				<md-list-item>
+					<figure class="logo-nav">
+					<img src="images/logo.png">
+				</figure>
+				</md-list-item>
+				<md-list-item  layout="column">
+						<i class="material-icons side-icons home-icon">&#xE88A;</i>
+					<p class="menu-button">Home</p>
+				</md-list-item>
+				<md-list-item layout="column">
+						<i class="material-icons side-icons profile-icon">&#xE853;</i>
+					<p class="menu-button">Perfil</p>
+				</md-list-item>
+				<md-list-item  layout="column">
+						<i class="material-icons side-icons events-icon">&#xE878;</i>
+					<p class="menu-button" flex>Eventos</p>
+				</md-list-item>
+				<md-list-item  layout="column">
+						<i class="material-icons side-icons help-icon">&#xEB3F;</i>
+					<p class="menu-button" flex>Patrocinadores</p>
+				</md-list-item>
+				<md-list-item  layout="column">
+						<i class="material-icons side-icons register-icon">&#xE873;</i>
+					<p class="menu-button" flex>Registros</p>
+				</md-list-item>
+			</md-list>
+		</md-sidenav>
+		<md-content id="content" flex>
+	  		<md-toolbar class="tool-icons md-whiteframe-3dp" layout="row">
+	  			<md-list-item class="noright" flex="20">
+    				<img alt="{{ person.name }}" ng-src="{{ person.img }}" class="md-avatar" />
+    				<p>Person name{{person.name}}</p>
+  				</md-list-item>
+    			<div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
+    				<div class="icons-profile-container">
+    					      				<md-icon flex>
+      						<i class="material-icons user-nav-icons">&#xE7F4;</i>
+      					</md-icon>
+    				 <md-menu>
+				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
+				        <md-icon md-menu-origin>
+				        	<i class="material-icons user-nav-icons">&#xE8B8;</i>
+				        </md-icon>
+				      </md-button>
+				      <md-menu-content width="4">
+				        <md-menu-item>
+				          <md-button ng-click="ctrl.redial($event)">
+				            Edit profile
+				          </md-button>
+				        </md-menu-item>
+				        <md-menu-item>
+				          <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+				            
+				            Recuperar contraseña
+				          </md-button>
+				        </md-menu-item>
+				        <md-menu-divider></md-menu-divider>
+				        <md-menu-item>
+				          <md-button ng-click="ctrl.toggleNotifications()">
+				            Cerrar sesión
+				          </md-button>
+				        </md-menu-item>
+				      </md-menu-content>
+				    </md-menu>
+    				</div>
+    			</div>
+  			</md-toolbar>
+  			<!-- Poner la vista aquí 
+
+  			!!-->
+
+  			
+
+		</md-content>
+
+	</div>
+</div>
