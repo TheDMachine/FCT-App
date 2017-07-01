@@ -1,7 +1,7 @@
 {
-  "name": "angular-bootstrap-material",
-  "description": "AngularJS directives for creating material design style Bootstrap components",
-  "main": "dist/angular-bootstrap-material.js",
+  "name": "fct app",
+  "description": "",
+  "main": "",
   "moduleType": [],
   "authors": [
     "Luis Bianco"
