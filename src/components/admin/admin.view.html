@@ -89,70 +89,81 @@
 			      <md-tab label="Registro de academias">
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Registro de academias</h1>
-								<div layout="row">
-									<div flex="50">
+								<div class="container-fluid row">
+									<div class="col-xs-12 col-sm-6">
 										<form name="frmAcademy" novalidate autocomplete="off">
+											<!-- input nombre de acdemia -->
 											<md-input-container flex-offset class="md-block">
 												<label for="">Nombre de academia</label>
-												<input type="text" name="name" ng-model="vm.name" required/>
+												<input type="text" ng-model="vm.name" required/>
 											</md-input-container>
-
+											<!-- input de direcion -->
 											<md-input-container flex-offset class="md-block">
-												<label for="">Direccion</label>
-												<input type="text" name="name" ng-model="vm.address" required/>
+												<label for="">Dirección</label>
+												<input type="text" ng-model="vm.address" required/>
 											</md-input-container>
-
+											<!-- input de encargado -->
 											<md-input-container flex-offset class="md-block">
-												<label for="">Nombre del encagado</label>
-												<input type="text" name="name" ng-model="vm.manager" required/>
+												<label for="">Nombre del encargado</label>
+												<input type="text" ng-model="vm.manager" required/>
 											</md-input-container>
-
+											<!-- input de cantidad de competidores -->
 											<md-input-container flex-offset class="md-block">
 												<label for="">Cantidad de competidores</label>
-												<input type="number" name="name" ng-model="vm.competitors" required/>
+												<input type="number" ng-model="vm.competitors" required/>
 											</md-input-container>
-
+											<!-- input de telefono -->
 											<md-input-container flex-offset class="md-block">
 												<label for="">Teléfono</label>
-												<input type="text" name="name" ng-model="vm.phone" required/>
+												<input type="text" ng-model="vm.phone" required/>
 											</md-input-container>
-
+											<!-- input de email -->
 											<md-input-container flex-offset class="md-block">
 												<label for="">Email</label>
-												<input type="text" name="name" ng-model="vm.email" required/>
+												<input type="text" ng-model="vm.email" required/>
 											</md-input-container>
-
+											<!-- boton para guardar -->
 											<md-button ng-click="vm.save()" class="md-raised">Agregar Academia</md-button>
+											<!-- boton para editar -->
+											<md-button ng-click="vm.updateAcademy()" class="md-raised">Editar Academia</md-button>
 										</form>
-										<div class="container-fluid row">
-											<div class="col-xs-12">
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Nombre de la academia</th>
-															<th>Dirección</th>
-															<th>Encargado</th>
-															<th>Cantidad de competidores</th>
-															<th>teléfono</th>
-															<th>Email</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr ng-repeat="academy in vm.academy">
-															<td>{{academy.name}}</td>
-															<td>{{academy.address}}</td>
-															<td>{{academy.manager}}</td>
-															<td>{{academy.competitors}}</td>
-															<td>{{academy.phone}}</td>
-															<td>{{academy.email}}</td>
-															<td><md-button ng-click="vm.updateAcademy()" class="md-raised">Editar</md-button></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
 									</div>
 								</div>
+								<!-- filtro por nombre -->
+								<div class="col-xs-12 col-sm-4 pull-right">
+									<md-input-container flex-offset class="md-block">
+										<label for="">Filtrar por nombre</label>
+										<input type="text" name="nameFilter" ng-model="vm.nameFilter"/>
+									</md-input-container>
+								</div>
+								<!-- tabla -->
+									<div class="container-fluid row">
+										<div class="col-xs-12">
+											<table class="table col-xs-12">
+												<thead>
+													<tr>
+														<th>Nombre de la academia</th>
+														<th>Dirección</th>
+														<th>Encargado</th>
+														<th>Cantidad de competidores</th>
+														<th>teléfono</th>
+														<th>Email</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="academy in vm.academy | filter:{name:vm.nameFilter}">
+														<td>{{academy.name}}</td>
+														<td>{{academy.address}}</td>
+														<td>{{academy.manager}}</td>
+														<td>{{academy.competitors}}</td>
+														<td>{{academy.phone}}</td>
+														<td>{{academy.email}}</td>
+														<td><md-button ng-click="vm.getAcademy(academy)" class="md-raised">Editar</md-button></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
 							</md-content>
 			      </md-tab>
 			      <md-tab label="Registro de profesores">
