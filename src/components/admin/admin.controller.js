@@ -49,19 +49,19 @@
 
     // Función para pre guardar datos del evento
 
-    vm.presave = function(pNewEvent){
+    vm.presaveEvent = function(pNewEvent){
         console.log(pNewEvent);
         vm.cloudObj.data.file = document.getElementById("photo").files[0];
         Upload.upload(vm.cloudObj)
           .success(function(data){
             pNewEvent.photo = data.url;
-            vm.save(pNewEvent);
+            vm.createNewEvent(pNewEvent);
           });
       }
 
     // Función para guardar
 
-    vm.save= function(pNewEvent){
+    vm.createNewEvent= function(pNewEvent){
       eventService.setEvents(pNewEvent);
       // vm.error = false;
       // if (vm.error === true) {
