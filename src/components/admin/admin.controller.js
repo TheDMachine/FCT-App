@@ -7,6 +7,8 @@
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
     $scope.selected = 0;
+    $scope.updateDisable = true;
+    $scope.submitDisable = false;
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.events = eventService.getEvents();
@@ -47,33 +49,99 @@
 
     // Función para pre guardar datos del evento
 
-    vm.presave= function(pNewEvent){
-      vm.cloudObj.data.file = document.getElementById("photo").files[0];
-        Upload.upload(vm.cloudObj)
-          .success(function(data){
-            pNewEvent.photo = data.url;
-            vm.save(pNewEvent);
-          });
+    vm.presave = function(pNewEvent){
+        // vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        // Upload.upload(vm.cloudObj)
+        //   .success(function(data){
+        //     pNewEvent.photo = data.url;
+        //     vm.save(pNewEvent);
+        //   });
+          vm.save(pNewEvent);
       }
-
-      $scope.$watch('files.length',function(newVal,oldVal){
-    console.log($scope.files);
-});
 
     // Función para guardar
 
     vm.save= function(pNewEvent){
-        eventService.setEvents(pNewEvent);
-        limpiar();
-        init();
+      
+      eventService.setEvents(pNewEvent);
+      clean();
+      init();
       }
+
+    // Función para imprimir datos en el formulario
+    vm.getInfo = function(pEvent){
+      vm.event.eventName = pEvent.eventName;
+      vm.event.invitedName = pEvent.invitedName;
+      vm.event.eventType = pEvent.eventType;
+      vm.event.eventState = pEvent.eventState;
+      vm.event.photo = pEvent.photo;
+      vm.event.date1 = pEvent.date1;
+      vm.event.time1 = pEvent.time1;
+      vm.event.date2 = pEvent.date2;
+      vm.event.time2 = pEvent.time2;
+      vm.event.selectAcademies = pEvent.selectAcademies;
+      vm.event.selectCategories = pEvent.selectCategories;
+      vm.event.costInsc = pEvent.costInsc;
+      vm.event.selectSponsors = pEvent.selectSponsors;
+      vm.event.placeName = pEvent.placeName;
+      vm.event.location = pEvent.location;
+      vm.event.latitude = pEvent.latitude;
+      vm.event.length = pEvent.length;
+      vm.event.seats = pEvent.seats;
+      vm.event.tickets = pEvent.tickets;
+      vm.event.contactName = pEvent.contactName;
+      vm.event.contactPhone = pEvent.contactPhone;
+      vm.event.charityEvent = pEvent.charityEvent;
+      vm.event.orgName = pEvent.orgName;
+      vm.event.orgType = pEvent.orgType;
+      vm.event.description = pEvent.description;
+
+      $scope.updateDisable = false;
+      $scope.submitDisable = true;
+    }
+
+    // Función para actualizar datos de evento
+    vm.update = function(){
+      var modEvent = {
+      eventName : vm.event.eventName,
+      invitedName : vm.event.invitedName,
+      eventType : vm.event.eventType,
+      eventState : vm.event.eventState,
+      photo : vm.event.photo,
+      date1 : vm.event.date1,
+      time1 : vm.event.time1,
+      date2 : vm.event.date2,
+      time2 : vm.event.time2,
+      selectAcademies : vm.event.selectAcademies,
+      selectCategories : vm.event.selectCategories,
+      costInsc : vm.event.costInsc,
+      selectSponsors : vm.event.selectSponsors,
+      placeName : vm.event.placeName,
+      location : vm.event.location,
+      latitude : vm.event.latitude,
+      length : vm.event.length,
+      seats : vm.event.seats,
+      tickets : vm.event.tickets,
+      contactName : vm.event.contactName,
+      contactPhone : vm.event.contactPhone,
+      charityEvent : vm.event.charityEvent,
+      orgName : vm.event.orgName,
+      orgType : vm.event.orgType,
+      description : vm.event.description
+      }
+
+      $scope.submitDisable = false;
+      $scope.updateDisable = true;
+      eventService.updateEvent(modEvent);
+      init();
+      clean();
+    }
 
     // Función para limpiar campos
 
-    function limpiar(){
-      vm.event={}
-    }
-
+    function clean(){
+      vm.event='';
+    };
 
 
   }]);

@@ -22,7 +22,10 @@
 </md-input-container>
 
 <!-- botón para guardar datos -->
-<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid" ng-click="vm.reset()">Ingresar</button>
+<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || submitDisable" ng-click="vm.reset()">Ingresar</button>
+
+<!-- botón para guardar datos actualizados -->
+<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.update()">Actualizar</button>
 
 <!-- Botón Anterior -->
 <a ui-sref="admin.part5" class="btn btn-info">Anterior <span class="glyphicon glyphicon-circle-arrow-left"></span></a>

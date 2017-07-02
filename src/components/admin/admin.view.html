@@ -125,6 +125,32 @@
 		          			<div id="form-views" ui-view></div>
 			          	</form>
 			          </div>
+					
+						<!-- Tabla para listar eventos -->
+			          <div>
+			          	<table>
+						    <thead>
+						      	<tr>
+							        <th>Fecha</th>
+							        <th>Nombre del Evento</th>
+							        <th>Lugar</th>
+						      	</tr>
+						    </thead>
+						    <tbody>
+						      	<tr ng-repeat="event in vm.events | filter:vm.nameFilter">
+							        <td>{{event.date1}} {{event.time1}}</td>
+							        <td>{{event.eventName}}</td>
+							        <td>{{event.placeName}}</td>
+							    	
+							    	<!-- Botones para editar y cancelar eventos -->
+							        <td><input type="button" value="Editar" ng-click="vm.getInfo(event)"></td>
+						      	</tr>
+						    </tbody>
+					  	</table>
+
+			          </div>
+
+
 
 			          
 			        </md-content>

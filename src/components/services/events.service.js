@@ -34,7 +34,7 @@
     function _updateEvent(pModEvent){
       var eventsList = _getEvents();
       for(var i = 0; i < eventsList.length; i++){
-        if(eventsList[i].name == pModEvent.name){
+        if(eventsList[i].eventName == pModEvent.eventName){
           eventsList[i] = pModEvent;
         }
       }

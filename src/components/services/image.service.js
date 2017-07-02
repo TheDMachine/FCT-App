@@ -9,15 +9,15 @@
       url:'https://api.cloudinary.com/v1_1/thedmachine/image/upload',
       data:{
         upload_preset: 'thedmachine',
-        tags:'TDM',
+        tags:'Any',
         context:'photo=test'
       }
-    };
+    }; 
 
-    var public_API = {
-      getConfiguration:_getConfiguration
+    var publicAPI = {
+      getConfiguration : _getConfiguration
     }
-    return public_API;
+    return publicAPI;
 
     function _getConfiguration(){
       return cloudObj;
