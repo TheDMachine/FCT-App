@@ -62,8 +62,14 @@
     // Función para guardar
 
     vm.save= function(pNewEvent){
-      
       eventService.setEvents(pNewEvent);
+      vm.error = false;
+      if (vm.error === true) {
+        document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+        }else{
+        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+      }
+      
       clean();
       init();
       }
