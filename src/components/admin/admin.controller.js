@@ -1,8 +1,16 @@
 angular.module('app')
-  .controller('adminCtrl', ['$scope', function ($scope) {
+  .controller('adminCtrl', ['$scope','logService', function ($scope,logService) {
+    var vm = this;
+    $scope.user = {};
+    vm.log = {};
+    vm.stepOneConsult = true;
+    vm.stepTwoConsult = false;
+    vm.stepThreeConsult = false;
   	var originatorEv;
     $scope.selected = 0;
-    
+    function init(){
+      vm.log = logService.showLog();
+    }init();
 	  	/*Sidenav*/
 
     $scope.openMenu = function($mdMenu, ev) {
@@ -33,5 +41,9 @@ angular.module('app')
       // This never happens.
     };
     /*Final sidenav
-    -->>*/   
+    -->>*/
+    vm.save = function(pNewConsultUser){
+      logService.createLog(0,'Administrador','user Adrian');
+      console.log("El usuario regristado es %o",pNewConsultUser);
+    }
 }]);

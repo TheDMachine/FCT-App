@@ -83,9 +83,6 @@
   			<!-- Poner la vista aquí
 
   			!!-->
-				<form name="frmRegisterConsult" invalid ng-submit="vm.registerConsult()">
-				<div ui-view></div>
-				</form>
   			<div ng-show="selected == 5" flex="" ng-cloak>
 			  <md-content>
 			    <md-tabs md-dynamic-height md-border-bottom>
@@ -109,13 +106,31 @@
 			          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
 			        </md-content>
 			      </md-tab>
+						<md-tab label="Registro de representante de consejo" ui-sref="admin.partOne">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Registro de representante de consejo</h1>
+								<!-- the links to our nested states using relative paths -->
+            <!-- add the active class if the state matches our ui-sref -->
+						<div id="status-buttons" class="text-center">
+								<a ng-disabled="vm.stepOneConsult"  ui-sref=".partOne"><span>1</span> First Step</a>
+								<a ng-disabled="!vm.stepTwoConsult"  ui-sref=".partTwo"><span>2</span> Second Step</a>
+								<a ng-disabled="!vm.stepThreeConsult"  ui-sref=".partThree"><span>3</span> Last Step</a>
+						</div>
+								<form name="frmRegisterConsult">
+									<div ui-view></div>
+								</form>
+			        </md-content>
+			      </md-tab>
+						<md-tab label="Bitacora del sistema" ui-sref="admin.log">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Bitacora del sistema</h1>
+								<div ui-view="log-sistem"></div>
+			        </md-content>
+			      </md-tab>
 			    </md-tabs>
 			  </md-content>
 			</div>
-
-
-
-		</md-content>
+</md-content>
 
 	</div>
 </div>
