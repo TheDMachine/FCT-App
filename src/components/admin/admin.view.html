@@ -107,7 +107,7 @@
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Eventos</h1>
 			          <!-- links de cada paso del formulario -->
-			          <div id="statusButtons" class="text-center">
+			          <div class="text-center statusButtons">
 			          	<a ui-sref-active="active" ui-sref=".part1"><span>1</span></a>
 			          	<a ui-sref-active="active" ui-sref=".part2"><span>2</span></a>
 			          	<a ui-sref-active="active" ui-sref=".part3"><span>3</span></a>
@@ -141,6 +141,7 @@
 							        <td>{{event.date1}} {{event.time1}}</td>
 							        <td>{{event.eventName}}</td>
 							        <td>{{event.placeName}}</td>
+							        <td>{{event.photo}}</td>
 							    	
 							    	<!-- Botones para editar y cancelar eventos -->
 							        <td><input type="button" value="Editar" ng-click="vm.getInfo(event)"></td>

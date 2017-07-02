@@ -21,6 +21,13 @@
 	<textarea name="description" ng-model="vm.event.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
 </md-input-container>
 
+<!-- Subir logo -->
+<div>
+	<label class="btn btn-default btn-file">
+    Adjuntar logo <input id="photo" name="photo" type="file" style="display: none;" ng-model="vm.event.photo">
+	</label>
+</div>
+
 <!-- botón para guardar datos -->
 <button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || submitDisable" ng-click="vm.reset()">Ingresar</button>
 

@@ -1,6 +1,6 @@
 /*Inicio estilos de pasos formulario eventos*/
 
-#statusButtons a{
+.statusButtons a{
   color: #ee334e;
   font-size: 1.143em;
   display: inline-block;
@@ -9,7 +9,7 @@
   text-decoration: none;
 }
 
-#statusButtons span{
+.statusButtons span{
    display: block;
    height: 30px;
    padding-top: 4px;
@@ -19,7 +19,7 @@
    font-weight: bold;
 }
 
-#statusButtons a.active span{
+.statusButtons a.active span{
   background-color: #ee334e;
   color: #fff;
 }

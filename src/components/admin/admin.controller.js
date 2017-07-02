@@ -2,7 +2,7 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', function ($scope, eventService, imageService) {
+  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'Upload', function ($scope, eventService, imageService, Upload) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -50,26 +50,26 @@
     // Función para pre guardar datos del evento
 
     vm.presave = function(pNewEvent){
-        // vm.cloudObj.data.file = document.getElementById("photo").files[0];
-        // Upload.upload(vm.cloudObj)
-        //   .success(function(data){
-        //     pNewEvent.photo = data.url;
-        //     vm.save(pNewEvent);
-        //   });
-          vm.save(pNewEvent);
+        console.log(pNewEvent);
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewEvent.photo = data.url;
+            vm.save(pNewEvent);
+          });
       }
 
     // Función para guardar
 
     vm.save= function(pNewEvent){
       eventService.setEvents(pNewEvent);
-      vm.error = false;
-      if (vm.error === true) {
-        document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
-        }else{
-        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
-      }
-      
+      // vm.error = false;
+      // if (vm.error === true) {
+      //   document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+      //   }else{
+      //   document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+      // }
+
       clean();
       init();
       }
