@@ -2,7 +2,7 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'sponsorService', function ($scope, eventService, imageService, sponsorService) {
+  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'sponsorService', 'AuthService', function ($scope, eventService, imageService, sponsorService, AuthService) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -205,6 +205,10 @@
     function clean(){
       vm.event='';
     };
+
+        vm.logOut = function(){
+      AuthService.logOut();
+    }
 
 
   }]);

@@ -46,6 +46,12 @@
         case 'Competidor':
           $location.path('/competitor');
           break;
+        case 'Representante':
+          $location.path('/consul');
+          break;
+        case 'Asistente':
+          $location.path('/assistant');
+          break;
         default:
           $location.path('/');
           break;
