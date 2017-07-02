@@ -117,8 +117,9 @@
 			          </div>
 
 			          <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
+
 			          	<!-- Formulario para registro de eventos -->
-			          	<form id="sign-form" name="frmEventInfo" autocomplete="off">
+			          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presave(vm.event)">
 		          		
 		          			<!-- Espacio para mostrar vistas del registro -->
 		          			<div id="form-views" ui-view></div>

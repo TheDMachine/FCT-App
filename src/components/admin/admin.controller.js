@@ -2,12 +2,18 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl', ['$scope', function ($scope) {
-  	var originatorEv;
+  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', function ($scope, eventService, imageService) {
+    var originatorEv;
     var vm = this;
+    vm.cloudObj = imageService.getConfiguration();
     $scope.selected = 0;
+
+    function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
+        vm.events = eventService.getEvents();
+        vm.event = {};
+      }init();
     
-	  	/*Sidenav*/
+      /*Sidenav*/
 
     $scope.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
@@ -37,6 +43,38 @@
       // This never happens.
     };
     /*Final sidenav
-    -->>*/   
+    -->>*/  
+
+    // Función para pre guardar datos del evento
+
+    vm.presave= function(pNewEvent){
+      vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewEvent.photo = data.url;
+            vm.save(pNewEvent);
+          });
+      }
+
+      $scope.$watch('files.length',function(newVal,oldVal){
+    console.log($scope.files);
+});
+
+    // Función para guardar
+
+    vm.save= function(pNewEvent){
+        eventService.setEvents(pNewEvent);
+        limpiar();
+        init();
+      }
+
+    // Función para limpiar campos
+
+    function limpiar(){
+      vm.event={}
+    }
+
+
+
   }]);
 })();

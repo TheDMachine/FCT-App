@@ -1,7 +1,7 @@
 <!-- Campo nombre del lugar -->
 <md-input-container flex-offset>
 	<label>Nombre del lugar </label>
-	<input name="placeName" ng-model="vm.placeName" required>
+	<input name="placeName" ng-model="vm.event.placeName" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.placeName.$error">
@@ -12,7 +12,7 @@
 <!-- Campo subir locación -->
 <md-input-container flex-offset>
 	<label>Locación</label>
-	<input name="location" ng-model="vm.location" required>
+	<input name="location" ng-model="vm.event.location" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.location.$error">
@@ -23,7 +23,7 @@
 <!-- Campo latitud -->
 <md-input-container flex-offset>
 	<label>Latitud</label>
-	<input name="latitude" ng-model="vm.latitude" required>
+	<input name="latitude" ng-model="vm.event.latitude" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.latitude.$error">
@@ -34,7 +34,7 @@
 <!-- Campo longitud -->
 <md-input-container flex-offset>
 	<label>Logitud</label>
-	<input name="length" ng-model="vm.length" required>
+	<input name="length" ng-model="vm.event.length" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.length.$error">
@@ -42,6 +42,9 @@
 	</div>
 </md-input-container>
 
+<!-- Botón Anterior -->
+<a ui-sref="admin.part3" class="btn btn-info">Anterior <span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+
 <!-- Botón siguiente -->
-<a ui-sref="admin.part5" class="btn btn-block btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+<a ui-sref="admin.part5" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
 

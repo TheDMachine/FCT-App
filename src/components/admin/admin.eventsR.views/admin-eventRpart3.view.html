@@ -2,11 +2,11 @@
 <!-- Campo academias invitadas -->
 <md-input-container>
 	<label>Academias invitadas</label>
-	<md-select name="academies" ng-model="vm.selectAcademies" multiple required>
+	<md-select name="academies" ng-model="vm.event.selectAcademies" multiple required>
 		<md-optgroup>
 			<!-- <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'meat' }">{{topping.name}}</md-option> -->
 			<!-- <md-option ng-value="" ng-repeat=""></md-option> -->
-			<md-option></md-option>
+			<md-option value="acadia">Acadia</md-option>
 		</md-optgroup>
 	</md-select>
 
@@ -19,9 +19,9 @@
 <!-- Campo de categorías por participar -->
 <md-input-container>
 	<label>Categorías por participar</label>
-	<md-select name="categories" ng-model="vm.selectCategories" multiple required>
+	<md-select name="categories" ng-model="vm.event.selectCategories" multiple required>
 		<md-optgroup>
-			<md-option></md-option>
+			<md-option value="juvenil">juvenial</md-option>
 		</md-optgroup>
 	</md-select>
 
@@ -34,7 +34,7 @@
 <!-- Campo costo de inscripción -->
 <md-input-container flex-offset>
 	<label>Costo de inscripción</label>
-	<input name="costInsc" ng-model="vm.costInsc" required>
+	<input name="costInsc" ng-model="vm.event.costInsc" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.costInsc.$error">
@@ -45,9 +45,9 @@
 <!-- Campo de Patrocinadores -->
 <md-input-container>
 	<label>Patrocinadores</label>
-	<md-select name="sponsors" ng-model="vm.selectSponsors" multiple required>
+	<md-select name="sponsors" ng-model="vm.event.selectSponsors" multiple required>
 		<md-optgroup>
-			<md-option></md-option>
+			<md-option value="huawei">Huawei</md-option>
 		</md-optgroup>
 	</md-select>
 
@@ -57,5 +57,8 @@
 	</div>
 </md-input-container>
 
+<!-- Botón Anterior -->
+<a ui-sref="admin.part2" class="btn btn-info">Anterior <span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+
 <!-- Botón siguiente -->
-<a ui-sref="admin.part4" class="btn btn-block btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+<a ui-sref="admin.part4" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
