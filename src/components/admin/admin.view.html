@@ -201,11 +201,11 @@
 			      </md-tab>
 
 			      <!-- Tab de Eventos -->
-			      <md-tab label="Eventos">
+			      <md-tab label="Eventos" ui-sref=".part1">
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Eventos</h1>
 			          <!-- links de cada paso del formulario -->
-			          <div class="statusButtons text-center">
+			          <div class="text-center statusButtons">
 			          	<a ui-sref-active="active" ui-sref=".part1"><span>1</span></a>
 			          	<a ui-sref-active="active" ui-sref=".part2"><span>2</span></a>
 			          	<a ui-sref-active="active" ui-sref=".part3"><span>3</span></a>
@@ -217,7 +217,7 @@
 			          <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
 
 			          	<!-- Formulario para registro de eventos -->
-			          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presave(vm.event)">
+			          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
 
 		          			<!-- Espacio para mostrar vistas del registro -->
 		          			<div id="form-views" ui-view></div>
@@ -235,10 +235,11 @@
 						      	</tr>
 						    </thead>
 						    <tbody>
-						      	<tr ng-repeat="event in vm.events | filter:vm.nameFilter">
-							        <td>{{event.date1}} {{event.time1}}</td>
+						      	<tr ng-repeat="event in vm.events track by $index">
+							        <td>{{event.date1}}</td>
 							        <td>{{event.eventName}}</td>
 							        <td>{{event.placeName}}</td>
+							        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
 
 							    	<!-- Botones para editar y cancelar eventos -->
 							        <td><input type="button" value="Editar" ng-click="vm.getInfo(event)"></td>

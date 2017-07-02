@@ -4,22 +4,29 @@
 </md-radio-group>
 
 <!-- Campo nombre de organización -->
-<md-input-container flex-offset>
+<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'charity'">
 	<label>Nombre de la organización</label>
 	<input name="orgName" ng-model="vm.event.orgName">
 </md-input-container>
 
 <!-- Campo tipo de organización -->
-<md-input-container flex-offset>
+<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'charity'">
 	<label>Tipo de organización</label>
 	<input name="orgType" ng-model="vm.event.orgType">
 </md-input-container>
 
 <!-- Campo para descripción de la organización -->
-<md-input-container class="md-block">
+<md-input-container class="md-block" flex-gt-sm ng-show="vm.event.charityEvent == 'charity'">
 	<label>Descripción de la organización</label>
 	<textarea name="description" ng-model="vm.event.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
 </md-input-container>
+
+<!-- Subir logo -->
+<div>
+	<label class="btn btn-default btn-file">
+    Adjuntar logo <input id="photo" name="photo" type="file" style="display: none;" ng-model="vm.event.photo">
+	</label>
+</div>
 
 <!-- botón para guardar datos -->
 <button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || submitDisable" ng-click="vm.reset()">Ingresar</button>
@@ -28,7 +35,7 @@
 <p class="SuccessMessage"></p>
 
 <!-- botón para guardar datos actualizados -->
-<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.update()">Actualizar</button>
+<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateEvent()">Actualizar</button>
 
 <!-- Botón Anterior -->
 <a ui-sref="admin.part5" class="btn btn-info">Anterior <span class="glyphicon glyphicon-circle-arrow-left"></span></a>

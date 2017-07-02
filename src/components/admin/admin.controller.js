@@ -2,9 +2,7 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl', adminCtrl);
-//adminCtrl.$inyector = [Upload, eventService, userService, imageService, logService, academyServices];
-  function adminCtrl($scope, $state, Upload, eventService, userService, imageService, logService, academyServices) {
+  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'Upload', function ($scope, eventService, imageService, Upload) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -54,6 +52,21 @@
 
     // Función para pre guardar datos del evento
 
+    vm.presaveEvent = function(pNewEvent){
+        console.log(pNewEvent);
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewEvent.photo = data.url;
+            vm.createNewEvent(pNewEvent);
+          });
+      }
+
+// Función para guardar
+    vm.createNewEvent= function(pNewEvent){
+      eventService.setEvents(pNewEvent);
+      // vm.error = false;
+    }
       vm.preSaveConsult = function(pNewConsult){
         console.log(pNewConsult);
         vm.cloudObj.data.file = document.querySelector("#photo").files[0];
@@ -63,19 +76,7 @@
             vm.createNewConsult(pNewConsult);
           });
         }
-    // Función para guardar
 
-    vm.save= function(pNewEvent){
-      // vm.error = eventService.setEvents(pNewEvent);
-      // if (vm.error === true) {
-      //   document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
-      //   }else{
-      //   document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
-      // }
-
-      clean();
-      init();
-      }
 
     // Función para imprimir datos en el formulario
     vm.getInfo = function(pEvent){
@@ -110,7 +111,7 @@
     }
 
     // Función para actualizar datos de evento
-    vm.update = function(){
+    vm.updateEvent = function(){
       var modEvent = {
       eventName : vm.event.eventName,
       invitedName : vm.event.invitedName,
