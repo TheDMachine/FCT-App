@@ -1,7 +1,11 @@
-angular.module('app')
+(function(){
+  'use strict';
+  angular
+  .module('app')
   .controller('teacherCtrl', ['$scope', function ($scope) {
   	/*Sidenav functionality*/
  	var originatorEv;
+  var vm = this;
 
     $scope.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
@@ -36,4 +40,5 @@ angular.module('app')
     vm.logOut = function(){
       AuthService.logOut();
     }
-}]);
+  }]);
+})();

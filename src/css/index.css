@@ -1,3 +1,35 @@
+/*Inicio estilos de pasos formulario eventos*/
+
+#statusButtons a{
+  color: #ee334e;
+  font-size: 1.143em;
+  display: inline-block;
+  text-align: center;
+  margin-right: 8%;
+  text-decoration: none;
+}
+
+#statusButtons span{
+   display: block;
+   height: 30px;
+   padding-top: 4px;
+   width: 30px;
+   border: 2px solid #ee334e;
+   border-radius: 50%;
+   font-weight: bold;
+}
+
+#statusButtons a.active span{
+  background-color: #ee334e;
+  color: #fff;
+}
+
+md-input-container{
+  width: 30%;
+}
+
+/*Fin estilos de pasos formulario eventos*/
+
 /* Estilos semilla */
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
   background-color: #0082c8;

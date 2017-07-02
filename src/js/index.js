@@ -1,1 +1,5 @@
-angular.module('app', ['appRoutes','ngMaterial','ngMessages','angularBootstrapMaterial', 'ngCookies', 'ngAnimate', 'ui.bootstrap']);
+(function(){
+'use strict';
+angular
+.module('app', ['appRoutes','ngMaterial','ngMessages','angularBootstrapMaterial', 'ngAnimate', 'ngCookies', 'ui.bootstrap', 'lfNgMdFileInput']);
+})();
