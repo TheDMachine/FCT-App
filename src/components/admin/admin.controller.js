@@ -107,7 +107,7 @@
     }
 
     // Función para actualizar datos de evento
-    vm.update = function(){
+    vm.updateEvent = function(){
       var modEvent = {
       eventName : vm.event.eventName,
       invitedName : vm.event.invitedName,
