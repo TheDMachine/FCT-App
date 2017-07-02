@@ -49,11 +49,6 @@
       url:'/new-consult-part2',
       templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepTwo.view.html'
     })
-    .state('admin.partThree',{
-      url:'/new-consult-part3',
-      templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepThree.view.html',
-      controllerAs: 'vm'
-    })
     //Inicio de las vistas hijas del formulario de registro del administrador
     .state('admin.part1',{
       url : '/part1', //ruta del url del estado
@@ -129,7 +124,7 @@
       controller: 'teacherCtrl',
       controllerAs: 'vm'
     })
-        .state('login',{
+    .state('login',{
       url : '/login', //ruta del url del estado
       templateUrl : 'components/login/login.view.html',//vista que se va a cargar para este estado
       // El resolve sirve para el controlador junto con la vista
@@ -138,9 +133,10 @@
           return $ocLazyLoad.load('components/login/login.controller.js')
         }]
       },
-      controller: 'loginCtrl'
+      controller: 'loginCtrl',
+      controllerAs: 'vm'
     })
 
-    $urlRouterProvider.otherwise('/admin');
+    $urlRouterProvider.otherwise('/login');
   }
 })();

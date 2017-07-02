@@ -265,14 +265,14 @@
 						<md-tab label="Representante de consejo" ui-sref="admin.partOne">
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Registro de representante de consejo</h1>
+								<h2 id="errorConsul"></h2>
 								<!-- the links to our nested states using relative paths -->
             <!-- add the active class if the state matches our ui-sref -->
 						<div class="statusButtons text-center">
 							<a ui-sref-active="active" ui-sref=".partOne"><span>1</span></a>
 							<a ui-sref-active="active" ui-sref=".partTwo"><span>2</span></a>
-							<a ui-sref-active="active" ui-sref=".partThree"><span>3</span></a>
 						</div>
-								<form name="frmRegisterConsult" ng-submit="vm.createNewConsult(vm.user)">
+								<form name="frmRegisterConsult" ng-submit="vm.preSaveConsult(vm.user)">
 									<div ui-view></div>
 								</form>
 			        </md-content>

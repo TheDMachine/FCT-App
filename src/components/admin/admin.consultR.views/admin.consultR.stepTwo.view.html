@@ -24,9 +24,14 @@
   </md-input-container>
 </div>
 <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 col-offset-2">
-    <label>Foto del represetante</label>
-    <input type="file" id="photo" name="photo" ng-model="vm.user.photo"/>
+  <!-- Subir logo -->
+<div>
+<label class="btn btn-default btn-file">
+  Adjuntar logo <input id="photo" name="photo" type="file" style="display: none;" ng-model="vm.user.photo">
+</label>
+</div>
 </div>
 <div class="col-xs-6 col-xs-offset-3">
-  <button type="submit" class="btn btn-success">Registrar</button>
+  <button type="submit" class="btn btn-success" ng-click="reset()">Registrar</button>
+  <span class=bg-danger" id="feedbackMesage"></span>
 </div>

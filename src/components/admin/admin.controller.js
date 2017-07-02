@@ -3,13 +3,14 @@
   angular
   .module('app')
   .controller('adminCtrl', adminCtrl);
-  function adminCtrl($scope,Upload, eventService, imageService, logService, academyServices) {
+//adminCtrl.$inyector = [Upload, eventService, userService, imageService, logService, academyServices];
+  function adminCtrl($scope, $state, Upload, eventService, userService, imageService, logService, academyServices) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
-    $scope.selected = 0;
-    $scope.updateDisable = true;
-    $scope.submitDisable = false;
+    vm.selected = 0;
+    vm.updateDisable = true;
+    vm.submitDisable = false;
     vm.stepTwoConsult = false;
     vm.stepThreeConsult = false;
     vm.stepOneConsult = true;
@@ -53,24 +54,19 @@
 
     // Función para pre guardar datos del evento
 
-    vm.presave = function(pNewEvent,pPhoto){
-         vm.cloudObj.data.file = pPhoto;
-         Upload.upload(vm.cloudObj)
-           .success(function(data){
-             pNewEvent.photo = data.url
-             return pNewEvent;
-        })
-          .catch(function(e){
-            console.log(e);
+      vm.preSaveConsult = function(pNewConsult){
+        console.log(pNewConsult);
+        vm.cloudObj.data.file = document.querySelector("#photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewConsult.photo = data.url;
+            vm.createNewConsult(pNewConsult);
           });
-
-      }
-
+        }
     // Función para guardar
 
     vm.save= function(pNewEvent){
-      eventService.setEvents(pNewEvent);
-      //vm.error = false;
+      // vm.error = eventService.setEvents(pNewEvent);
       // if (vm.error === true) {
       //   document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
       //   }else{
@@ -149,14 +145,18 @@
       init();
       clean();
     }
-    vm.createNewConsult = function(pNewConsult){
-      var rawImg =  document.getElementById("photo").files[0];
-      console.log("El objeto sin imagen es %o",pNewConsult);
-      var ObjWithImg = vm.presave(pNewConsult, rawImg);
-      console.log("El objeto con imagen es %o",ObjWithImg);
+    vm.createNewConsult = function(pNewConsul){
+      //var rawImg =  document.getElementById("photo").files[0];
+      console.log("El objeto con imagen es %o",pNewConsul);
       //userService.newcONSULT(ObjWithImg);
-      console.log(ObjWithImg);
-      console.log("Gracias, ha sido creado un nuevo represetante de consejo %o",pNewConsult)
+      console.log("Gracias, ha sido creado un nuevo represetante de consejo %o",pNewConsul);
+      var bFlag = userService.createNewConsult(pNewConsul);
+      if(bFlag == false){
+        document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
+        $state.go(admin.partOne);
+      }else{
+        document.getElementById('feedbackMesage').innerHTML = 'El represesante ha sido creado exitoxamente';
+      }
     }
     // Función para limpiar campos
 
