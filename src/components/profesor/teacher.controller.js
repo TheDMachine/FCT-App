@@ -32,4 +32,8 @@ angular.module('app')
     };
     /*End sidenav functionality
     -->>*/   
+
+    vm.logOut = function(){
+      AuthService.logOut();
+    }
 }]);

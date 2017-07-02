@@ -1,1 +1,1 @@
-angular.module('app', ['appRoutes','ngMaterial','ngMessages','angularBootstrapMaterial', 'ngAnimate', 'ui.bootstrap']);
+angular.module('app', ['appRoutes','ngMaterial','ngMessages','angularBootstrapMaterial', 'ngCookies', 'ngAnimate', 'ui.bootstrap']);
