@@ -1,4 +1,5 @@
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-8">
+<div class="center-block">
+<div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 col-offset-2">
   <md-input-container layout="column">
     <label>Cédula</label>
     <input type="text" name="id" ng-model="vm.user.id" required>
@@ -21,7 +22,7 @@
     </div>
   </md-input-container>
 </div>
-<div class="col-xs-6 col-md-4">
+<div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 col-offset-2">
   <md-input-container layout="column">
     <label>Primer Apellido</label>
     <input type="text" name="firstLastName" ng-model="vm.user.firstLastName" required>
@@ -44,6 +45,8 @@
     </div>
   </md-input-container>
 </div>
+</div>
+<!-- Boton de siguiente centrado -->
 <div class="col-xs-6 col-xs-offset-3">
     <a ui-sref="admin.partTwo" class="btn btn-block btn-info">
     Siguiente paso <span class="glyphicon glyphicon-circle-arrow-right"></span>

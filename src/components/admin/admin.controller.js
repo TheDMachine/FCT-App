@@ -2,7 +2,8 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl', ['$scope', 'eventService', 'imageService','logService','academyServices', function ($scope, eventService, imageService, logService, academyServices) {
+  .controller('adminCtrl', adminCtrl);
+  function adminCtrl($scope,Upload, eventService, imageService, logService, academyServices) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -20,17 +21,17 @@
         vm.event = {};
         vm.log = logService.showLog();
       }init();
-    $scope.openMenu = function($mdMenu, ev) {
+    vm.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
       $mdMenu.open(ev);
     };
 
-    $scope.notificationsEnabled = true;
-    $scope.toggleNotifications = function() {
-      $scope.notificationsEnabled = !this.notificationsEnabled;
+    vm.notificationsEnabled = true;
+    vm.toggleNotifications = function() {
+      vm.notificationsEnabled = !this.notificationsEnabled;
     };
 
-    $scope.redial = function() {
+    vm.redial = function() {
       $mdDialog.show(
         $mdDialog.alert()
           .targetEvent(originatorEv)
@@ -44,7 +45,7 @@
       originatorEv = null;
     };
 
-    $scope.checkVoicemail = function() {
+    vm.checkVoicemail = function() {
       // This never happens.
     };
     /*Final sidenav
@@ -52,26 +53,29 @@
 
     // Función para pre guardar datos del evento
 
-    vm.presave = function(pNewEvent){
-        // vm.cloudObj.data.file = document.getElementById("photo").files[0];
-        // Upload.upload(vm.cloudObj)
-        //   .success(function(data){
-        //     pNewEvent.photo = data.url;
-        //     vm.save(pNewEvent);
-        //   });
-          vm.save(pNewEvent);
+    vm.presave = function(pNewEvent,pPhoto){
+         vm.cloudObj.data.file = pPhoto;
+         Upload.upload(vm.cloudObj)
+           .success(function(data){
+             pNewEvent.photo = data.url
+             return pNewEvent;
+        })
+          .catch(function(e){
+            console.log(e);
+          });
+
       }
 
     // Función para guardar
 
     vm.save= function(pNewEvent){
       eventService.setEvents(pNewEvent);
-      vm.error = false;
-      if (vm.error === true) {
-        document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
-        }else{
-        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
-      }
+      //vm.error = false;
+      // if (vm.error === true) {
+      //   document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+      //   }else{
+      //   document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+      // }
 
       clean();
       init();
@@ -101,12 +105,12 @@
       vm.event.contactName = pEvent.contactName;
       vm.event.contactPhone = pEvent.contactPhone;
       vm.event.charityEvent = pEvent.charityEvent;
-      vm.event.orgName = pEvent.orgName;
       vm.event.orgType = pEvent.orgType;
+      vm.event.orgName = pEvent.orgName;
       vm.event.description = pEvent.description;
 
-      $scope.updateDisable = false;
-      $scope.submitDisable = true;
+      vm.updateDisable = false;
+      vm.submitDisable = true;
     }
 
     // Función para actualizar datos de evento
@@ -139,13 +143,19 @@
       description : vm.event.description
       }
 
-      $scope.submitDisable = false;
-      $scope.updateDisable = true;
+      vm.submitDisable = false;
+      vm.updateDisable = true;
       eventService.updateEvent(modEvent);
       init();
       clean();
     }
     vm.createNewConsult = function(pNewConsult){
+      var rawImg =  document.getElementById("photo").files[0];
+      console.log("El objeto sin imagen es %o",pNewConsult);
+      var ObjWithImg = vm.presave(pNewConsult, rawImg);
+      console.log("El objeto con imagen es %o",ObjWithImg);
+      //userService.newcONSULT(ObjWithImg);
+      console.log(ObjWithImg);
       console.log("Gracias, ha sido creado un nuevo represetante de consejo %o",pNewConsult)
     }
     // Función para limpiar campos
@@ -200,5 +210,5 @@
       init();
       cleanAcademy();
     }
-}]);
+};
 })();

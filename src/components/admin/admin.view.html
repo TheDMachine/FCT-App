@@ -205,7 +205,7 @@
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Eventos</h1>
 			          <!-- links de cada paso del formulario -->
-			          <div id="statusButtons" class="text-center">
+			          <div class="statusButtons text-center">
 			          	<a ui-sref-active="active" ui-sref=".part1"><span>1</span></a>
 			          	<a ui-sref-active="active" ui-sref=".part2"><span>2</span></a>
 			          	<a ui-sref-active="active" ui-sref=".part3"><span>3</span></a>
@@ -262,17 +262,17 @@
 			          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
 			        </md-content>
 			      </md-tab>
-						<md-tab label="Registro de representante de consejo" ui-sref="admin.partOne">
+						<md-tab label="Representante de consejo" ui-sref="admin.partOne">
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Registro de representante de consejo</h1>
 								<!-- the links to our nested states using relative paths -->
             <!-- add the active class if the state matches our ui-sref -->
-						<div id="status-buttons" class="text-center">
-								<a ng-disabled="vm.stepOneConsult"  ui-sref=".partOne"><span>1</span> First Step</a>
-								<a ng-disabled="!vm.stepTwoConsult"  ui-sref=".partTwo"><span>2</span> Second Step</a>
-								<a ng-disabled="!vm.stepThreeConsult"  ui-sref=".partThree"><span>3</span> Last Step</a>
+						<div class="statusButtons text-center">
+							<a ui-sref-active="active" ui-sref=".partOne"><span>1</span></a>
+							<a ui-sref-active="active" ui-sref=".partTwo"><span>2</span></a>
+							<a ui-sref-active="active" ui-sref=".partThree"><span>3</span></a>
 						</div>
-								<form name="frmRegisterConsult">
+								<form name="frmRegisterConsult" ng-submit="vm.createNewConsult(vm.user)">
 									<div ui-view></div>
 								</form>
 			        </md-content>
