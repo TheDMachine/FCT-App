@@ -28,7 +28,30 @@
           return $ocLazyLoad.load('components/admin/admin.controller.js')
         }]
       },
-      controller: 'adminCtrl'
+      controller: 'adminCtrl',
+      controllerAs:'vm'
+    })
+    .state('admin.log',{
+      url:'/log',
+      views:{
+        'log-sistem':{
+          templateUrl:'components/log/log.view.html',
+          controller:'adminCtrl',
+          controllerAs:'vm'
+        }
+      }
+    })
+    .state('admin.partOne',{
+      url:'/new-consult-part1',
+      templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepOne.view.html'
+    })
+    .state('admin.partTwo',{
+      url:'/new-consult-part2',
+      templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepTwo.view.html'
+    })
+    .state('admin.partThree',{
+      url:'/new-consult-part3',
+      templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepThree.view.html'
     })
     .state('assistant',{
       url : '/assistant', //ruta del url del estado
