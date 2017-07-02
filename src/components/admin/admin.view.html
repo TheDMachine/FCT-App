@@ -95,37 +95,61 @@
 											<!-- input nombre de acdemia -->
 											<md-input-container flex-offset class="md-block">
 												<label for="">Nombre de academia</label>
-												<input type="text" ng-model="vm.name" required/>
+												<input name="name" type="text" ng-model="vm.name" required/>
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
 											</md-input-container>
 											<!-- input de direcion -->
 											<md-input-container flex-offset class="md-block">
 												<label for="">Dirección</label>
 												<input type="text" ng-model="vm.address" required/>
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
 											</md-input-container>
 											<!-- input de encargado -->
 											<md-input-container flex-offset class="md-block">
 												<label for="">Nombre del encargado</label>
 												<input type="text" ng-model="vm.manager" required/>
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
 											</md-input-container>
 											<!-- input de cantidad de competidores -->
 											<md-input-container flex-offset class="md-block">
 												<label for="">Cantidad de competidores</label>
 												<input type="number" ng-model="vm.competitors" required/>
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
 											</md-input-container>
 											<!-- input de telefono -->
 											<md-input-container flex-offset class="md-block">
 												<label for="">Teléfono</label>
 												<input type="text" ng-model="vm.phone" required/>
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
 											</md-input-container>
 											<!-- input de email -->
 											<md-input-container flex-offset class="md-block">
 												<label for="">Email</label>
 												<input type="text" ng-model="vm.email" required/>
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
 											</md-input-container>
 											<!-- boton para guardar -->
-											<md-button ng-click="vm.save()" class="md-raised">Agregar Academia</md-button>
+											<md-button ng-click="vm.save()" class="md-raised" ng-disabled="frmAcademy.$invalid">Agregar Academia</md-button>
 											<!-- boton para editar -->
-											<md-button ng-click="vm.updateAcademy()" class="md-raised">Editar Academia</md-button>
+											<md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Editar Academia</md-button>
 										</form>
 									</div>
 								</div>
