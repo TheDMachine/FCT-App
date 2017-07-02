@@ -2,7 +2,7 @@
   'use strict';
   angular
   .module('app')
-  .controller('teacherCtrl', ['$scope', function ($scope) {
+  .controller('teacherCtrl', ['$scope', 'AuthService', function ($scope, AuthService) {
   	/*Sidenav functionality*/
  	var originatorEv;
   var vm = this;
