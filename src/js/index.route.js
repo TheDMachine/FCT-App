@@ -29,7 +29,6 @@
         }]
       },
       controller: 'adminCtrl',
-<<<<<<< HEAD
       controllerAs:'vm'
     })
     .state('admin.log',{
@@ -52,10 +51,8 @@
     })
     .state('admin.partThree',{
       url:'/new-consult-part3',
-      templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepThree.view.html'
-=======
+      templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepThree.view.html',
       controllerAs: 'vm'
->>>>>>> 0dae39a34545e077c79c7df1326ce83189880d0f
     })
     //Inicio de las vistas hijas del formulario de registro del administrador
     .state('admin.part1',{
