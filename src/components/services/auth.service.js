@@ -4,13 +4,15 @@
   function AuthService($cookies,$location){
     return {
       getCredencials:_getAuthCredencials,
-      logOut : _destroyAuthCredentials
+      logOut : _destroyAuthCredentials,
+      getCookie : _getCookie
     }
     function _getAuthCredencials(pEmail,pPassword){
       var user = 
         { 'email' : 'luisbianco28@hotmail.com',
           'password' : '123',
-          'userType' : 'Profesor'
+          'userType' : 'Profesor',
+          'newUser' : 1
         };
       //console.log("Yass work correctly auth service. The user is %s and the password is %s",pUsername,pPassword);
       var userFounded = user;
@@ -18,7 +20,7 @@
         $location.path('/');
       }
       _validateFields(pEmail, pPassword, userFounded);
-      $cookies.put('currentUserActive',userFounded.userName);
+      $cookies.put('currentUserActive',userFounded.email);
     }
     function _destroyAuthCredentials(){
       var currentUser = $cookies.get('currentUserActive');
@@ -58,5 +60,9 @@
 
       }
     }
+
+   function _getCookie(){
+    return $cookies.get('currentUserActive');
+   }
   }
 }());

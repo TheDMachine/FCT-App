@@ -55,7 +55,8 @@ md-input-container{
 }
 
 md-icon.sponsor-icon{
-  margin: 0;
+  margin: 0 3.5% 0 6%;
+  color: #ffd034;
 }
 
 .sponsor-p-type{
@@ -132,7 +133,7 @@ md-sidenav.md-locked-open, md-sidenav.md-locked-open.md-closed, md-sidenav.md-lo
 }
 
 .help-icon{
-  color: #fbb03b;
+  color: #fcb132;
 }
 
 .register-icon{

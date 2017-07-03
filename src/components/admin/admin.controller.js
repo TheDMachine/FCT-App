@@ -2,7 +2,8 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'sponsorService', 'AuthService', function ($scope, eventService, imageService, sponsorService, AuthService) {
+  .controller('adminCtrl', adminCtrl)
+    function adminCtrl($scope, eventService, imageService, sponsorService, AuthService, $location) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -10,6 +11,7 @@
     $scope.updateDisable = true;
     $scope.submitDisable = false;
     $scope.sponsor = false;
+    vm.editSponsor = false;
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.events = eventService.getEvents();
@@ -110,6 +112,9 @@
       vm.sponsor.sponsorMoney = pSponsor.sponsorMoney,
       vm.sponsor.sponsorDescription = pSponsor.sponsorDescription
 
+      vm.editSponsor = true;
+      $location.path('admin/sponsorPartOne'); // path not hash
+
 
       $scope.updateDisable = false;
       $scope.submitDisable = true;
@@ -206,10 +211,8 @@
       vm.event='';
     };
 
-        vm.logOut = function(){
+    vm.logOut = function(){
       AuthService.logOut();
     }
-
-
-  }]);
+  }
 })();

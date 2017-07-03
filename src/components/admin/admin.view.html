@@ -27,8 +27,8 @@
 					</md-button>
 				</md-list-item>
 				<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="selected = 4" ng-style="selected == 4 ? {'background' : 'rgba(251,176,59,0.7)'} : {'background' : 'inherit'} ">
-						<i class="material-icons side-icons help-icon" ng-style="selected == 4 ? {'color': '#fff'} : {'color': '#fbb03b'} ">&#xEB3F;</i>
+					<md-button class="button-selected" ng-click="selected = 4" ng-style="selected == 4 ? {'background' : 'rgba(252, 177, 50, 0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons help-icon" ng-style="selected == 4 ? {'color': '#fff'} : {'color': '#fcb132'} ">&#xEB3F;</i>
 						<p class="menu-button">Patrocinadores</p>
 					</md-button>	
 				</md-list-item>
@@ -86,7 +86,7 @@
   			<!--Vista patrocinadores-->
   			<div ng-show="selected == 4" ng-cloak>
   				<md-content layout="row">
-  					<md-card ng-repeat="item in vm.sponsors" flex="30">
+  					<md-card ng-repeat="item in vm.sponsors" flex="20">
 				        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
 				        <md-card-title>
 				          <md-card-title-text>
@@ -106,14 +106,14 @@
 					        </md-icon>
 					        <p class="sponsor-p-type">{{item.sponsorType}}</p>
 				        </div>
-				        <md-card-actions layout="row" layout-align="start center">
+				        	<md-card-content>
+					          <p>
+					            {{item.sponsorDescription}}
+					          </p>
+					        </md-card-content>
+				        <md-card-actions layout="row" layout-align="end">
 				          <md-button ng-click="vm.getSponsorInfo(item)">Editar</md-button>
 				        </md-card-actions>
-				        <md-card-content>
-				          <p>
-				            {{item.sponsorDescription}}
-				          </p>
-				        </md-card-content>
 			      </md-card>
   				</md-content>
   			</div>
@@ -206,7 +206,7 @@
 		          		<form  name="sponsorForm" autocomplete="off" ng-submit="vm.presave(vm.event)">
 		          		
 		          			<!-- Espacio para mostrar vistas del registro -->
-		          			<div id="form-views" ui-view></div>
+		          			<div ng-show="vm.editSponsor" id="form-views" ui-view></div>
 		          			<div flex="90" layout-gt-sm="row" layout-align="end">
         						<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.saveSponsor(vm.sponsor)">Submit</md-button>
         						<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
