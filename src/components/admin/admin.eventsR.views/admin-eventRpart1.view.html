@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="col-xs-12">
+
+		<!-- Campo nombre evento -->
+		<md-input-container flex-offset>
+			<label>Nombre de evento</label>
+			<input name="eventName" ng-model="vm.event.eventName" required>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.eventName.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+
+		<!-- Campo Tipo de evento -->
+		<md-input-container>
+		    <label>Tipo de evento</label>
+		    <md-select name="eventType" ng-model="vm.event.eventType" required>
+		    	<md-option value="exhibicion">Exhicibición</md-option>
+		        <md-option value="torneo">Torneo</md-option>
+		    </md-select>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.eventType.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+	</div>
+	<div class="col-xs-12"> 
+
+		<!-- Estado de evento -->
+		<md-input-container>
+		    <label>Estado del evento</label>
+		    <md-select name="eventState" ng-model="vm.event.eventState" required>
+		    	<md-option value="aceptado">Aceptado</md-option>
+		        <md-option value="cancelado">Cancelado</md-option>
+		    </md-select>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.eventState.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>		
+
+		<!-- Campo Nombre del invitado-->
+		<md-input-container flex-gt-sm ng-show="vm.event.eventType == 'exhibicion'">
+			<label>Nombre del invitado</label>
+			<input name="invitedName" ng-model="vm.event.invitedName">
+		</md-input-container>
+
+		
+	</div>
+
+	<div class="col-xs-12">
+
+		<!-- Botón siguiente -->
+		<a ui-sref="admin.part2" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+	</div>
+</div>
+
+
+
+
+
+
+
