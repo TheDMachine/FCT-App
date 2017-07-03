@@ -4,7 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService) {
+  function adminCtrl($scope, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -16,10 +16,18 @@
     vm.stepOneConsult = true;
     vm.user = {};
     vm.log = {};
+    $scope.sponsor = false;
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.academy = academyServices.getAcademy();
         vm.events = eventService.getEvents();
         vm.event = {};
+        vm.sponsors = sponsorService.getSponsors();
+        vm.sponsor = {
+          sponsorName : vm.sponsorName,
+          sponsorCompany : vm.sponsorCompany,
+          sponsorType : vm.sponsorType,
+          sponsorMoney : vm.sponsorMoney
+        };
         vm.log = logService.showLog();
       }init();
     vm.openMenu = function($mdMenu, ev) {
@@ -68,6 +76,29 @@
     vm.createNewEvent= function(pNewEvent){
       eventService.setEvents(pNewEvent);
       // vm.error = false;
+      // if (vm.error === true) {
+      //   document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+      //   }else{
+      //   document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+      // }
+      // console.log(eventService.getEvents());
+      // clean();
+      // init();
+      }
+
+    vm.saveSponsor= function(pNewSponsor){
+      sponsorService.setSponsors(pNewSponsor);
+      vm.error = false;
+      /*if (vm.error === true) {
+        document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+        }else{
+        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+      }*/
+      console.log(sponsorService.getSponsors());
+      clean();
+      init();
+      }
+      // vm.error = false;
     }
       vm.preSaveConsul = function(pNewConsult){
         console.log(pNewConsult);
@@ -79,6 +110,45 @@
         });
         }
 
+
+          vm.presaveSponsor = function(pNewSponsor){
+        // vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        // Upload.upload(vm.cloudObj)
+        //   .success(function(data){
+        //     pNewEvent.photo = data.url;
+        //     vm.save(pNewEvent);
+        //   });
+          vm.saveSponsor(pNewSponsor);
+      }
+
+          // Función para imprimir datos en el formulario de patrocinadores
+    vm.getSponsorInfo = function(pSponsor){
+      vm.sponsor.sponsorName = pSponsor.sponsorName,
+      vm.sponsor.sponsorCompany = pSponsor.sponsorCompany,
+      vm.sponsor.sponsorType = pSponsor.sponsorType,
+      vm.sponsor.sponsorMoney = pSponsor.sponsorMoney,
+      vm.sponsor.sponsorDescription = pSponsor.sponsorDescription
+
+
+      $scope.updateDisable = false;
+      $scope.submitDisable = true;
+    }
+
+    vm.updateSponsor = function(){
+      var modSponsor = {
+      sponsorName : vm.sponsor.sponsorName,
+      sponsorCompany : vm.sponsor.sponsorCompany,
+      sponsorType : vm.sponsor.sponsorType,
+      sponsorMoney : vm.sponsor.sponsorMoney,
+      sponsorDescription : vm.sponsor.sponsorDescription,
+      }
+
+      $scope.submitDisable = false;
+      $scope.updateDisable = true;
+      sponsorService.updateSponsor(modSponsor);
+      init();
+      clean();
+    }
 
     // Función para imprimir datos en el formulario
     vm.getInfo = function(pEvent){
@@ -217,4 +287,9 @@
       cleanAcademy();
     }
   }
+})();
+
+        vm.logOut = function(){
+      AuthService.logOut();
+    }
 })();

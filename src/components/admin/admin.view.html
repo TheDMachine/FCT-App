@@ -71,7 +71,7 @@
 				        </md-menu-item>
 				        <md-menu-divider></md-menu-divider>
 				        <md-menu-item>
-				          <md-button ng-click="ctrl.toggleNotifications()">
+				          <md-button ng-click="vm.logOut()">
 				            Cerrar sesión
 				          </md-button>
 				        </md-menu-item>
@@ -83,6 +83,40 @@
   			<!-- Poner la vista aquí
 
   			!!-->
+  			<!--Vista patrocinadores-->
+  			<div ng-show="selected == 4" ng-cloak>
+  				<md-content layout="row">
+  					<md-card ng-repeat="item in vm.sponsors" flex="30">
+				        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+				        <md-card-title>
+				          <md-card-title-text>
+				            <span class="md-headline">{{item.sponsorName}}</span>
+				            <span class="md-subhead">{{item.sponsorCompany}}</span>
+				          </md-card-title-text>
+				        </md-card-title>
+				        <div layout="row">
+				        	<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'money'">
+					        	<i class="material-icons">&#xE227;</i>
+					        </md-icon>
+					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'equipo'">
+					        	<i class="material-icons">&#xE903;</i>
+					        </md-icon>
+					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'food'">
+					        	<i class="material-icons">&#xE8CC;</i>
+					        </md-icon>
+					        <p class="sponsor-p-type">{{item.sponsorType}}</p>
+				        </div>
+				        <md-card-actions layout="row" layout-align="start center">
+				          <md-button ng-click="vm.getSponsorInfo(item)">Editar</md-button>
+				        </md-card-actions>
+				        <md-card-content>
+				          <p>
+				            {{item.sponsorDescription}}
+				          </p>
+				        </md-card-content>
+			      </md-card>
+  				</md-content>
+  			</div>
   			<!-- Vista registros -->
   			<div ng-show="selected == 5" flex="" ng-cloak>
 			  <md-content>
@@ -257,10 +291,26 @@
 			      </md-tab>
 
 			      <!-- Tab de patrocinadores -->
-			      <md-tab label="Patrocinadores">
+			      <md-tab label="Patrocinadores" ng-click="sponsor = true" >
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Patrocinadores</h1>
-			          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+ 			          <div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
+ 			          	<div>
+ 			          		<a ui-sref-active="active" ui-sref=".sponsorPartOne">1</a>	
+ 			          	</div>
+ 			          	<div>
+ 			          		<a ui-sref-active="active" ui-sref=".sponsorPartTwo">2</a>
+ 			          	</div>
+			          </div>
+		          		<form  name="sponsorForm" autocomplete="off" ng-submit="vm.presave(vm.event)">
+		          		
+		          			<!-- Espacio para mostrar vistas del registro -->
+		          			<div id="form-views" ui-view></div>
+		          			<div flex="90" layout-gt-sm="row" layout-align="end">
+        						<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.saveSponsor(vm.sponsor)">Submit</md-button>
+        						<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
+							</div>
+			          	</form>
 			        </md-content>
 			      </md-tab>
 						<md-tab label="Representante de consejo" ui-sref="admin.partOne">

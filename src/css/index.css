@@ -30,6 +30,40 @@ md-input-container{
 
 /*Fin estilos de pasos formulario eventos*/
 
+/*Inicio estilos de pasos formulario patrocinadores*/
+#sponsorButtons div{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #fbb03b;
+  text-align: center;
+  margin: 0 1%;
+  font-weight: 500;
+}
+
+#sponsorButtons div a{
+  color: #fbb03b;
+  line-height: 2.7;
+  text-decoration: none;
+  padding: 1.5%;
+}
+
+.sponsor-form{
+  margin: 0 auto;
+  padding: 3.5% 0;
+  box-sizing: border-box;
+}
+
+md-icon.sponsor-icon{
+  margin: 0;
+}
+
+.sponsor-p-type{
+  line-height: 1.6;
+  font-weight: 600;
+}
+/*Fin estilos de pasos formulario patrocinadores*/
+
 /* Estilos semilla */
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
   background-color: #0082c8;
