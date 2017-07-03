@@ -29,7 +29,25 @@
         }]
       },
       controller: 'adminCtrl',
-      controllerAs: 'vm'
+      controllerAs:'vm'
+    })
+    .state('admin.log',{
+      url:'/log',
+      views:{
+        'log-sistem':{
+          templateUrl:'components/log/log.view.html',
+          controller:'adminCtrl',
+          controllerAs:'vm'
+        }
+      }
+    })
+    .state('admin.partOne',{
+      url:'/new-consult-part1',
+      templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepOne.view.html'
+    })
+    .state('admin.partTwo',{
+      url:'/new-consult-part2',
+      templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepTwo.view.html'
     })
     //Inicio de las vistas hijas del formulario de registro del administrador
     .state('admin.part1',{

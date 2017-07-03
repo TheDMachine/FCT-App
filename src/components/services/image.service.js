@@ -12,7 +12,7 @@
         tags:'TDM',
         context:'photo=test'
       }
-    }; 
+    };
 
     var publicAPI = {
       getConfiguration : _getConfiguration
