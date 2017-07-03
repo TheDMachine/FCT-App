@@ -21,7 +21,6 @@
         obtainConsult:_getUserConsult,
         createTeacher:_setNewTeacher,
         obtainTeacher:_getUserTeacher,
-        createCompetitor:_setNewCompetitor
       }
       //retorna el api.
       return publicApi;

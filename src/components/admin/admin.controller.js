@@ -5,7 +5,6 @@
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
   function adminCtrl($scope, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService) {
-    var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
     vm.selected = 0;
@@ -16,10 +15,10 @@
     vm.stepOneConsult = true;
     vm.user = {};
     vm.log = {};
-    $scope.sponsor = false;
-    $scope.imageActive = false;
+    vm.imageActive = false;
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
+        vm.originatorEv;
         vm.academy = academyServices.getAcademy();
         vm.events = eventService.getEvents();
         vm.event = {};
@@ -32,8 +31,9 @@
         };
         vm.log = logService.showLog();
       }init();
+
     vm.openMenu = function($mdMenu, ev) {
-      originatorEv = ev;
+     vm.originatorEv = ev;
       $mdMenu.open(ev);
     };
 
@@ -45,7 +45,7 @@
     vm.redial = function() {
       $mdDialog.show(
         $mdDialog.alert()
-          .targetEvent(originatorEv)
+          .targetEvent(vm.originatorEv)
           .clickOutsideToClose(true)
           .parent('body')
           .title('Suddenly, a redial')
@@ -53,7 +53,7 @@
           .ok('That was easy')
       );
 
-      originatorEv = null;
+      vm.originatorEv = null;
     };
 
     vm.checkVoicemail = function() {
@@ -101,7 +101,6 @@
       init();
       }
       // vm.error = false;
-    }
       vm.preSaveConsul = function(pNewConsult){
         console.log(pNewConsult);
        vm.cloudObj.data.file = document.getElementById("photo").files[0];
@@ -131,8 +130,8 @@
       vm.sponsor.sponsorMoney = pSponsor.sponsorMoney,
       vm.sponsor.sponsorDescription = pSponsor.sponsorDescription
 
-      $scope.selected = 5;
-      $scope.imageActive = true;
+      vm.selected = 5;
+      vm.imageActive = true;
 
 
       $scope.updateDisable = false;
@@ -291,11 +290,9 @@
       init();
       cleanAcademy();
     }
-  }
 
     vm.logOut = function(){
       AuthService.logOut();
     }
   }
 })();
-

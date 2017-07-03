@@ -52,7 +52,7 @@
       						<i class="material-icons user-nav-icons">&#xE7F4;</i>
       					</md-icon>
     				 <md-menu>
-				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
+				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="vm.openMenu($mdMenu, $event)">
 				        <md-icon md-menu-origin>
 				        	<i class="material-icons user-nav-icons">&#xE8B8;</i>
 				        </md-icon>
@@ -291,7 +291,7 @@
 			      </md-tab>
 
 			      <!-- Tab de patrocinadores -->
-			      <md-tab label="Patrocinadores" md-active="imageActive" ui-sref=".sponsorPartOne">
+			      <md-tab label="Patrocinadores" md-active="vm.imageActive" ui-sref=".sponsorPartOne">
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Patrocinadores</h1>
  			          <div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
