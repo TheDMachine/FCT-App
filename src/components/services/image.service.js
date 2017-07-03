@@ -9,7 +9,7 @@
       url:'https://api.cloudinary.com/v1_1/thedmachine/image/upload',
       data:{
         upload_preset: 'thedmachine',
-        tags:'Any',
+        tags:'TDM',
         context:'photo=test'
       }
     }; 

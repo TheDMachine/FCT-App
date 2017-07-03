@@ -20,3 +20,7 @@
 	  </div>
 	</md-input-container>
 </div>
+	<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
+		<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.saveSponsor(vm.sponsor)">Submit</md-button>
+		<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
+	</div>

@@ -3,7 +3,7 @@
   angular
   .module('app')
   .controller('adminCtrl', adminCtrl)
-    function adminCtrl($scope, eventService, imageService, sponsorService, AuthService, $location) {
+    function adminCtrl($scope, eventService, imageService, sponsorService, AuthService, $location, Upload) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -11,7 +11,7 @@
     $scope.updateDisable = true;
     $scope.submitDisable = false;
     $scope.sponsor = false;
-    vm.editSponsor = false;
+    $scope.imageActive = false;
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.events = eventService.getEvents();
@@ -56,19 +56,19 @@
 
     // Función para pre guardar datos del evento
 
-    vm.presave = function(pNewEvent){
-        // vm.cloudObj.data.file = document.getElementById("photo").files[0];
-        // Upload.upload(vm.cloudObj)
-        //   .success(function(data){
-        //     pNewEvent.photo = data.url;
-        //     vm.save(pNewEvent);
-        //   });
-          vm.save(pNewEvent);
+    vm.presaveEvent = function(pNewEvent){
+        console.log(pNewEvent);
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewEvent.photo = data.url;
+            vm.createNewEvent(pNewEvent);
+          });
       }
 
     // Función para guardar
 
-    vm.save= function(pNewEvent){
+    vm.createNewEvent= function(pNewEvent){
       eventService.setEvents(pNewEvent);
       vm.error = false;
       if (vm.error === true) {
@@ -94,14 +94,14 @@
       init();
       }
 
-          vm.presaveSponsor = function(pNewSponsor){
+      vm.presaveSponsor = function(pNewSponsor){
         // vm.cloudObj.data.file = document.getElementById("photo").files[0];
         // Upload.upload(vm.cloudObj)
         //   .success(function(data){
         //     pNewEvent.photo = data.url;
         //     vm.save(pNewEvent);
         //   });
-          vm.saveSponsor(pNewSponsor);
+        vm.saveSponsor(pNewSponsor);
       }
 
           // Función para imprimir datos en el formulario de patrocinadores
@@ -112,8 +112,8 @@
       vm.sponsor.sponsorMoney = pSponsor.sponsorMoney,
       vm.sponsor.sponsorDescription = pSponsor.sponsorDescription
 
-      vm.editSponsor = true;
-      $location.path('admin/sponsorPartOne'); // path not hash
+      $scope.selected = 5;
+      $scope.imageActive = true;
 
 
       $scope.updateDisable = false;
@@ -169,7 +169,7 @@
     }
 
     // Función para actualizar datos de evento
-    vm.update = function(){
+    vm.updateEvent = function(){
       var modEvent = {
       eventName : vm.event.eventName,
       invitedName : vm.event.invitedName,
