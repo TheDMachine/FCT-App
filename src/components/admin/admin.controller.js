@@ -2,7 +2,7 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'Upload', function ($scope, eventService, imageService, Upload) {
+  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'Upload', 'userService', function ($scope, eventService, imageService, Upload, userService) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -12,7 +12,9 @@
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.events = eventService.getEvents();
+        vm.teachers = userService.getTeachers();
         vm.event = {};
+        vm.teacher = {};
       }init();
     
       /*Sidenav*/
@@ -143,10 +145,34 @@
       clean();
     }
 
+    // Función para pre guardar datos del profesor
+
+    vm.presaveTeacher = function(pNewTeacher){
+        console.log(pNewTeacher);
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewTeacher.photo = data.url;
+            vm.createNewTeacher(pNewTeacher);
+          });
+      }
+
+    // Función para guardar profesores
+
+    vm.createNewTeacher = function(pNewTeacher){
+      userService.setTeachers(pNewTeacher);
+     
+
+      clean();
+      init();
+    }
+
+
     // Función para limpiar campos
 
     function clean(){
       vm.event='';
+      vm.teacher = '';
     };
 
 
