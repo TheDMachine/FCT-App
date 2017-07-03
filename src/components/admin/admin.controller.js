@@ -2,7 +2,9 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'Upload', function ($scope, eventService, imageService, Upload) {
+  .controller('adminCtrl', adminCtrl);
+  //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
+  function adminCtrl($scope, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -67,14 +69,14 @@
       eventService.setEvents(pNewEvent);
       // vm.error = false;
     }
-      vm.preSaveConsult = function(pNewConsult){
+      vm.preSaveConsul = function(pNewConsult){
         console.log(pNewConsult);
-        vm.cloudObj.data.file = document.querySelector("#photo").files[0];
-        Upload.upload(vm.cloudObj)
-          .success(function(data){
-            pNewConsult.photo = data.url;
+       vm.cloudObj.data.file = document.getElementById("photo").files[0];
+       Upload.upload(vm.cloudObj)
+         .success(function(data){
+           pNewConsult.photo = data.url;
             vm.createNewConsult(pNewConsult);
-          });
+        });
         }
 
 
@@ -147,15 +149,18 @@
       clean();
     }
     vm.createNewConsult = function(pNewConsul){
-      //var rawImg =  document.getElementById("photo").files[0];
       console.log("El objeto con imagen es %o",pNewConsul);
-      //userService.newcONSULT(ObjWithImg);
       console.log("Gracias, ha sido creado un nuevo represetante de consejo %o",pNewConsul);
-      var bFlag = userService.createNewConsult(pNewConsul);
+      var bFlag = userService.createConsul(pNewConsul);
+      var temDataZero = $cookies.get('currentUserActive');
       if(bFlag == false){
         document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
-        $state.go(admin.partOne);
+        $state.go('admin.partOne');
+        var tempDataOne = 'fallo al crear a '+pNewConsul.firstName;
+        logService.createLog(false,temDataZero,tempDataOne);
       }else{
+        var tempDataOne = 'Creado con exito '+pNewConsul.firstName;
+        logService.createLog(0,temDataZero,tempDataOne);
         document.getElementById('feedbackMesage').innerHTML = 'El represesante ha sido creado exitoxamente';
       }
     }
@@ -178,7 +183,7 @@
        academyServices.setAcademy(newAcademy);
        cleanAcademy();
        init();
-     };
+     }
     //funcion para limpiar los input  de academia
     function cleanAcademy(){
       vm.name = '',
@@ -211,5 +216,5 @@
       init();
       cleanAcademy();
     }
-};
+  }
 })();

@@ -39,6 +39,7 @@ angular
           resultAction: pWhatDo,
           timestamp: new Date()
         }
+        _setLog(objToPush);
         break;
         case 2://Eliminar de forma logica.
         objToPush = {
@@ -47,7 +48,17 @@ angular
           resultAction: pWhatDo,
           timestamp: new Date()
         }
+        _setLog(objToPush);
         break;
+        default:
+        objToPush = {
+          action: 'Error',
+          actionBy:pWhoMake,
+          resultAction: pWhatDo,
+          timestamp: new Date()
+        }
+        _setLog(objToPush);
+
       }
     }
 }
