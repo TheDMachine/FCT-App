@@ -28,6 +28,10 @@
           sponsorType : vm.sponsorType,
           sponsorMoney : vm.sponsorMoney
         };
+        vm.events = eventService.getEvents();
+        vm.teachers = userService.getTeachers();
+        vm.event = {};
+        vm.teacher = {};
         vm.log = logService.showLog();
       }init();
     vm.openMenu = function($mdMenu, ev) {
@@ -72,7 +76,8 @@
           });
       }
 
-// Función para guardar
+    // Función para guardar
+
     vm.createNewEvent= function(pNewEvent){
       eventService.setEvents(pNewEvent);
       // vm.error = false;
@@ -234,6 +239,30 @@
         document.getElementById('feedbackMesage').innerHTML = 'El represesante ha sido creado exitoxamente';
       }
     }
+
+    // Función para pre guardar datos del profesor
+
+    vm.presaveTeacher = function(pNewTeacher){
+        console.log(pNewTeacher);
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewTeacher.photo = data.url;
+            vm.createNewTeacher(pNewTeacher);
+          });
+      }
+
+    // Función para guardar profesores
+
+    vm.createNewTeacher = function(pNewTeacher){
+      userService.setTeachers(pNewTeacher);
+
+
+      clean();
+      init();
+    }
+
+
     // Función para limpiar campos
 
     function clean(){
@@ -292,4 +321,10 @@
         vm.logOut = function(){
       AuthService.logOut();
     }
+})();
+      vm.teacher = '';
+    };
+
+
+  }]);
 })();

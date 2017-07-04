@@ -123,6 +123,207 @@
 			    <md-tabs md-dynamic-height md-border-bottom>
 			      <md-tab label="Academias">
 			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Academias</h1>
+			          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+			        </md-content>
+			      </md-tab>
+
+
+			      <md-tab label="Profesores">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Profesores</h1>
+     			         <div class="hola" layout="row">
+                				 <form name="frmRegTeacher" autocomplete="off"  ng-submit="vm.presaveTeacher(vm.teacher)">
+
+     	           				 <!--Campo para la cédula -->
+     	           				 <md-input-container flex-offset>
+     	               			    <label>Cédula</label>
+     	                			<input name="teacherId" ng-model="vm.teacher.id" ng-pattern="/^[0-9]{9}$/" required>
+
+     	                		 <!-- Mensaje de retroalimentacion -->
+								  <div ng-messages="frmRegTeacher.teacherId.$error">
+								  	<div ng-messages-include="components/includes/messages.html"></div>
+								  </div>
+     	                		</md-input-container>
+
+     	                		 <!-- Campo para el primer nombre -->
+     	                		 <md-input-container flex-offset>
+     	               			    <label>Primer nombre</label>
+     	                			<input name="teacherFirstName" ng-model="vm.teacher.firstName" ng-pattern="/^[a-zA-Z_-]{3,30}$/" required>
+
+
+     	                		<!-- Mensaje de retroalimentacion -->
+								  <div ng-messages="frmRegTeacher.teacherFirstName.$error">
+								  	<div ng-messages-include="components/includes/messages.html"></div>
+								  </div>
+     	                		</md-input-container>
+
+     	                		<!-- Campo para el segundo nombre -->
+     							<md-input-container flex-offset>
+     	               				<label>Segundo nombre</label>
+     	                			<input name="teacherSecondName" ng-model="vm.teacher.secondName" ng-pattern="/^[a-zA-Z_-]{3,30}$/">
+     	                		</md-input-container>
+
+     	                		<!-- Campo para el primer Apellido -->
+     							<md-input-container flex-offset>
+     	               				<label>Primer apellido</label>
+     	                			<input name="teacherFirstLastName" ng-model="vm.teacher.firstLastName" ng-pattern="/^[a-zA-Z_-]{3,30}$/" required>
+
+     	                			<!-- Mensaje de retroalimentacion -->
+								  <div ng-messages="frmRegTeacher.teacherFirstLastName.$error">
+								  	<div ng-messages-include="components/includes/messages.html"></div>
+								  </div>
+     	                		</md-input-container>
+
+     	                		<!-- Campo para el segundo apellido -->
+     							<md-input-container flex-offset>
+     	               				<label>Segundo apellido</label>
+     	                			<input name="teacherSecondLastName" ng-model="vm.teacher.secondLastName" ng-pattern="/^[a-zA-Z_-]{3,30}$/" required>
+     	                		</md-input-container>
+
+                				 	<!-- Campo para telefono -->
+                				   <md-input-container flex-offset>
+                    				<label>Télefono</label>
+                     			    <input name="teacherPhone" ng-model="vm.teacher.phone" ng-pattern="/^[0-9]{8}$/" required>
+
+                     			    <!-- Mensaje de retroalimentacion -->
+								  <div ng-messages="frmRegTeacher.teacherPhone.$error">
+								  	<div ng-messages-include="components/includes/messages.html"></div>
+								  </div>
+                     		   </md-input-container>
+
+                     			<!-- Campo para correo -->
+                   				<md-input-container flex-offset>
+                    				 	<label>Correo electrónico</label>
+                    				 	<input name="teacherEmail" ng-model="vm.teacher.email" ng-pattern="/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/" required>
+
+                    				 	  <!-- Mensaje de retroalimentacion -->
+								  <div ng-messages="frmRegTeacher.teacherEmail.$error">
+								  	<div ng-messages-include="components/includes/messages.html"></div>
+								  </div>
+                    			</md-input-container>
+
+                    				 <!-- Calendario Fecha Nacimiento -->
+      							<md-input-container flex-offset>
+          					 		<md-datepicker name="teacherBornDate" ng-model="vm.teacher.myDate" md-placeholder="Ingrese una fecha" required></md-datepicker>
+
+          					 		 	  <!-- Mensaje de retroalimentacion -->
+								  <div ng-messages="frmRegTeacher.teacherBornDate.$error">
+								  	<div ng-messages-include="components/includes/messages.html"></div>
+								  </div>
+         						</md-input-container>
+
+         					<div class="col-md-12">
+
+                    				<!-- Select para seleccionar academia -->
+                    				<md-input-container flex-offset>
+                    				 	<label>Seleccione el género</label>
+                    				 	<md-select id="sltGender"  ng-model="vm.teacher.gender" >
+                    					 <md-option value="genero">Academia</md-option>
+                    				    </md-select>
+                    				 </md-input-container>
+
+                    				 <!-- Select para seleccionar grado -->
+                    				<md-input-container flex-offset>
+                    				    <label>Seleccione la nacionalidad</label>
+                    				    <md-select id="sltCountry" ng-model= "vm.teacher.nationality" >
+                    					 <md-option value="nacionalidad">Grado1</md-option>
+                    				 	</md-select>
+                    				 </md-input-container>
+                    			</div>
+
+                    			 <div layout="row">
+                    			  <div>
+                    				<!-- Select para seleccionar academia -->
+                    				<md-input-container flex-offset>
+                    				   <label>Seleccione una academia</label>
+                    				   <md-select id="sltAcademia"  ng-model="vm.teacher.academy" required>
+                    				    <md-option value="academia">Academia</md-option>
+                    				   </md-select>
+                    				</md-input-container>
+
+                    				 <!-- Select para seleccionar grado -->
+                    				<md-input-container flex-offset>
+                    				    <label>Seleccione el grado</label>
+                    				    <md-select id="sltGrade" ng-model= "vm.teacher.grade" >
+                    				     <md-option value="grado">Grado1</md-option>
+                    				    </md-select>
+                    				</md-input-container>
+                    			  </div>
+
+                    			 <div>
+                    			  	<label class= "btn btn-default btn-file">Adjuntar imagen <input id="photo" type="file" name="photo" style="display:none" ng-model= "vm.teacher.photo"></label>
+                    			  </div>
+
+     						 	 <button type="submit" ng-click="vm.reset()">Registrar</button>
+                    			 </div>
+                    			 </form>
+                    		</div>
+                    			 </md-content>
+
+			      </md-tab>
+
+			      <!-- Tab de Eventos -->
+			      <md-tab label="Eventos" ui-sref=".part1">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Eventos</h1>
+			          <!-- links de cada paso del formulario -->
+			          <div class="text-center statusButtons">
+			          	<a ui-sref-active="active" ui-sref=".part1"><span>1</span></a>
+			          	<a ui-sref-active="active" ui-sref=".part2"><span>2</span></a>
+			          	<a ui-sref-active="active" ui-sref=".part3"><span>3</span></a>
+			          	<a ui-sref-active="active" ui-sref=".part4"><span>4</span></a>
+			          	<a ui-sref-active="active" ui-sref=".part5"><span>5</span></a>
+			          	<a ui-sref-active="active" ui-sref=".part6"><span>6</span></a>
+			          </div>
+
+			          <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
+
+			          	<!-- Formulario para registro de eventos -->
+			          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
+
+		          			<!-- Espacio para mostrar vistas del registro -->
+		          			<div id="form-views" ui-view></div>
+			          	</form>
+			          </div>
+
+						<!-- Tabla para listar eventos -->
+			          <div>
+			          	<table>
+						    <thead>
+						      	<tr>
+							        <th>Fecha</th>
+							        <th>Nombre del Evento</th>
+							        <th>Lugar</th>
+						      	</tr>
+						    </thead>
+						    <tbody>
+						      	<tr ng-repeat="event in vm.events track by $index">
+							        <td>{{event.date1}}</td>
+							        <td>{{event.eventName}}</td>
+							        <td>{{event.placeName}}</td>
+							        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
+
+							    	<!-- Botones para editar y cancelar eventos -->
+							        <td><input type="button" value="Editar" ng-click="vm.getInfo(event)"></td>
+							        <td><input type="button" value="Cancelar"></td>
+						      	</tr>
+						    </tbody>
+					  	</table>
+
+			          </div>
+
+
+
+
+			        </md-content>
+			      </md-tab>
+
+			      <!-- Tab de patrocinadores -->
+			      <md-tab label="Patrocinadores">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Patrocinadores</h1>
+			          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
 			          <h1 class="md-display-2">Registro de academias</h1>
 								<div class="container-fluid row">
 									<div class="col-xs-12 col-sm-6">
@@ -296,14 +497,14 @@
 			          <h1 class="md-display-2">Patrocinadores</h1>
  			          <div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
  			          	<div>
- 			          		<a ui-sref-active="active" ui-sref=".sponsorPartOne">1</a>	
+ 			          		<a ui-sref-active="active" ui-sref=".sponsorPartOne">1</a>
  			          	</div>
  			          	<div>
  			          		<a ui-sref-active="active" ui-sref=".sponsorPartTwo">2</a>
  			          	</div>
 			          </div>
 		          		<form  name="sponsorForm" autocomplete="off" ng-submit="vm.presave(vm.event)">
-		          		
+
 		          			<!-- Espacio para mostrar vistas del registro -->
 		          			<div id="form-views" ui-view></div>
 		          			<div flex="90" layout-gt-sm="row" layout-align="end">

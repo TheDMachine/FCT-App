@@ -35,7 +35,7 @@
       // This never happens.
     };
     /*End sidenav functionality
-    -->>*/   
+    -->>*/
 
     vm.logOut = function(){
       AuthService.logOut();
