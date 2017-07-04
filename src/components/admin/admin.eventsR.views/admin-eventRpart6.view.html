@@ -1,22 +1,22 @@
 <!-- Campo de seleccionar evento beneficencia -->
 <md-radio-group layout="row" layout-align="start center" ng-model="vm.event.charityEvent">
-	<md-radio-button name="charityEvent" value="charity" class="md-primary">Evento de beneficencia</md-radio-button>
+	<md-radio-button name="charityEvent" value="Beneficencia" class="md-primary">Evento de beneficencia</md-radio-button>
 </md-radio-group>
 
 <!-- Campo nombre de organización -->
-<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'charity'">
+<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
 	<label>Nombre de la organización</label>
-	<input name="orgName" ng-model="vm.event.orgName">
+	<input type="text" name="orgName" ng-model="vm.event.orgName" maxlength="30">
 </md-input-container>
 
 <!-- Campo tipo de organización -->
-<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'charity'">
+<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
 	<label>Tipo de organización</label>
-	<input name="orgType" ng-model="vm.event.orgType">
+	<input type="text" name="orgType" ng-model="vm.event.orgType" maxlength="20">
 </md-input-container>
 
 <!-- Campo para descripción de la organización -->
-<md-input-container class="md-block" flex-gt-sm ng-show="vm.event.charityEvent == 'charity'">
+<md-input-container class="md-block" flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
 	<label>Descripción de la organización</label>
 	<textarea name="description" ng-model="vm.event.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
 </md-input-container>

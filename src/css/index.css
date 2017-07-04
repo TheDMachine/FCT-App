@@ -27,6 +27,12 @@
 md-input-container{
   width: 30%;
 }
+.tables{
+  width: 200px;
+  height: 400px;
+  overflow: scroll;
+}
+
 
 /*Fin estilos de pasos formulario eventos*/
 

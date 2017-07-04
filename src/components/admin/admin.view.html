@@ -126,35 +126,6 @@
 			          	</form>
 			          </div>
 					
-						<!-- Tabla para listar eventos -->
-			          <div>
-			          	<table>
-						    <thead>
-						      	<tr>
-							        <th>Fecha</th>
-							        <th>Nombre del Evento</th>
-							        <th>Lugar</th>
-						      	</tr>
-						    </thead>
-						    <tbody>
-						      	<tr ng-repeat="event in vm.events track by $index">
-							        <td>{{event.date1}}</td>
-							        <td>{{event.eventName}}</td>
-							        <td>{{event.placeName}}</td>
-							        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
-							    	
-							    	<!-- Botones para editar y cancelar eventos -->
-							        <td><input type="button" value="Editar" ng-click="vm.getInfo(event)"></td>
-							        <td><input type="button" value="Cancelar"></td>
-						      	</tr>
-						    </tbody>
-					  	</table>
-
-			          </div>
-
-
-
-			          
 			        </md-content>
 			      </md-tab>
 
@@ -168,12 +139,120 @@
 			    </md-tabs>
 			  </md-content>
 			</div>
+
+			<!-- Sección de consulta, modificación, eliminar y listar eventos -->
 			<div ng-show="selected == 3">
-				<p>gv hngvtvv</p>
+				<md-content>
+				    <md-tabs md-dynamic-height md-border-bottom>
+
+				    	<!-- Tab consultar de eventos -->
+				      	<md-tab label="Consultar Eventos">
+					        <md-content class="md-padding">
+					        	<!-- Tabla de info eventos -->
+						        <div>
+						          	<table class="tables">
+									    <thead>
+									      	<tr>
+									      		<th>Nombre del evento</th>
+										        <th>Tipo de evento</th>
+										        <th>Estado</th>
+										        <th>invitado</th>
+										        <th>Fecha inicio</th>
+										        <th>Hora inicio</th>
+										        <th>Fecha Fin</th>
+										        <th>Hora Fin</th>
+										        <th>Academias</th>
+										        <th>Categorías</th>
+										        <th>Costo inscripción</th>
+										        <th>Patrocinadores</th>
+										        <th>Nombre del lugar</th>
+										        <th>Latitud</th>
+										        <th>Longitud</th>
+										        <th>Ubicación</th>
+										        <th>Asientos</th>
+										        <th>Entradas</th>
+										        <th>Nombre contacto</th>
+										        <th>Tel contacto</th>
+										        <th>Es de:</th>
+										        <th>Nombre organización</th>
+										        <th>Tipo de organización</th>
+										        <th>Descripción de la organización</th>
+										        <th>Logo del evento</th>
+									      	</tr>
+									    </thead>
+									    <tbody>
+									      	<tr ng-repeat="event in vm.events track by $index">
+									      		<td>{{event.eventName}}</td>
+									      		<td>{{event.eventType}}</td>
+									      		<td>{{event.eventState}}</td>
+									      		<td>{{event.invitedName}}</td>
+										        <td>{{event.date1}}</td>
+										        <td>{{event.time1}}</td>
+										        <td>{{event.date2}}</td>
+										        <td>{{event.time2}}</td>
+										        <td>{{event.selectAcademies}}</td>
+										        <td>{{event.selectCategories}}</td>
+										        <td>{{event.costInsc}}</td>
+										        <td>{{event.selectSponsors}}</td>
+										        <td>{{event.placeName}}</td>
+										        <td>{{event.latitude}}</td>
+										        <td>{{event.length}}</td>
+										        <td>{{event.location}}</td>
+										        <td>{{event.seats}}</td>
+										        <td>{{event.tickets}}</td>
+										        <td>{{event.contactName}}</td>
+										        <td>{{event.contactPhone}}</td>
+										        <td>{{event.charityEvent}}</td>
+										        <td>{{event.orgName}}</td>
+										        <td>{{event.orgType}}</td>
+										        <td>{{event.description}}</td>
+										        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
+										    	
+										    	<!-- Botones para editar y cancelar eventos -->
+										        <td><md-button class="md-raised" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button></td>
+										        <td><md-button class="md-raised">Cancelar</md-button></td>
+									      	</tr>
+									    </tbody>
+								  	</table>
+						        </div>
+					        </md-content>
+				      	</md-tab>
+
+				      	<!-- Tab historial de eventos -->
+				      	<md-tab label="Historial de eventos">
+					        <md-content class="md-padding">
+					        	<!-- Tabla para listar eventos -->
+						        <div>
+						          	<table class="tables">
+									    <thead>
+									      	<tr>
+									      		<th>Fecha</th>
+									      		<th>Nombre del evento</th>
+										        <th>Estado</th>
+										        <th>Nombre del lugar</th>
+									      	</tr>
+									    </thead>
+									    <tbody>
+									      	<tr ng-repeat="event in vm.events track by $index">
+									      		<td>{{event.date1}}</td>
+									      		<td>{{event.eventName}}</td>
+									      		<td>{{event.eventState}}</td>
+										        <td>{{event.placeName}}</td>
+									      	</tr>
+									    </tbody>
+								  	</table>
+						        </div>
+					        </md-content>
+				      	</md-tab>
+				      	<!-- Tab historial de competencias -->
+					    <md-tab label="Historial de competencias">
+					        <md-content class="md-padding">
+					        	
+					        </md-content>
+					    </md-tab>
+				    </md-tabs>
+			  	</md-content>
 			</div>
-
-  			
-
 		</md-content>
 
 	</div>

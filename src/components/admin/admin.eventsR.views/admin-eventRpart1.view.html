@@ -4,7 +4,7 @@
 		<!-- Campo nombre evento -->
 		<md-input-container flex-offset>
 			<label>Nombre de evento</label>
-			<input name="eventName" ng-model="vm.event.eventName" required>
+			<input name="eventName" ng-model="vm.event.eventName" md-maxlength="40" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.eventName.$error">
@@ -44,8 +44,8 @@
 
 		<!-- Campo Nombre del invitado-->
 		<md-input-container flex-gt-sm ng-show="vm.event.eventType == 'exhibicion'">
-			<label>Nombre del invitado</label>
-			<input name="invitedName" ng-model="vm.event.invitedName">
+			<label>Nombre completo del invitado</label>
+			<input name="invitedName" ng-model="vm.event.invitedName" md-maxlength="30">
 		</md-input-container>
 
 		

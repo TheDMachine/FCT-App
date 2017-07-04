@@ -1,7 +1,7 @@
 <!-- Campo nombre del lugar -->
 <md-input-container flex-offset>
 	<label>Cantidad de asientos</label>
-	<input name="seats" ng-model="vm.event.seats" required>
+	<input type="number" name="seats" ng-model="vm.event.seats" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.seats.$error">
@@ -12,7 +12,7 @@
 <!-- Campo cantidad de entradas -->
 <md-input-container flex-offset>
 	<label>Cantidad de entradas a vender</label>
-	<input name="tickets" ng-model="vm.event.tickets" required>
+	<input type="number" name="tickets" ng-model="vm.event.tickets" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.tickets.$error">
@@ -23,7 +23,7 @@
 <!-- Campo nombre de contacto -->
 <md-input-container flex-offset>
 	<label>Nombre de contacto</label>
-	<input name="contactName" ng-model="vm.event.contactName" required>
+	<input name="contactName" ng-model="vm.event.contactName" maxlength="30" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.contactName.$error">
@@ -34,7 +34,7 @@
 <!-- Campo teléfono de contacto -->
 <md-input-container flex-offset>
 	<label>Teléfono de contacto</label>
-	<input name="contactPhone" ng-model="vm.event.contactPhone" required>
+	<input name="contactPhone" ng-model="vm.event.contactPhone" ng-pattern="/^[0-9]{8}$/" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.contactPhone.$error">
