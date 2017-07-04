@@ -27,10 +27,15 @@
 md-input-container{
   width: 30%;
 }
-.tables{
-  width: 200px;
-  height: 400px;
-  overflow: scroll;
+thead, tbody tr{
+  display: table;
+  width: 100%;
+  border : none;
+}
+tbody{
+  display: block;
+  height: 200px;
+  overflow: auto;
 }
 
 

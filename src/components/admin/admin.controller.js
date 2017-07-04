@@ -6,12 +6,14 @@
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
+    vm.events = eventService.getEvents();
+    vm.acceptedEvents = [];
     $scope.selected = 0;
-    $scope.updateDisable = true;
-    $scope.submitDisable = false;
+    
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.events = eventService.getEvents();
+        aceptedEvents();
         vm.event = {};
       }init();
     
@@ -62,17 +64,23 @@
     // Función para guardar
 
     vm.createNewEvent= function(pNewEvent){
-      eventService.setEvents(pNewEvent);
-      // vm.error = false;
-      // if (vm.error === true) {
-      //   document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
-      //   }else{
-      //   document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
-      // }
-
-      clean();
-      init();
+      if (vm.events.length == 0) {
+        eventService.setEvents(pNewEvent);
+        document.querySelector('.ErrorMessage').innerHTML = 'El evento se registró exitosamente';
+        clean();
+        init();
+      }else{
+        for (var i = 0; i < vm.events.length; i++) {
+          if (pNewEvent.eventName == vm.events[i].eventName) {
+            document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+          }
+        }
+        eventService.setEvents(pNewEvent);
+        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+        clean();
+        init();
       }
+    }
 
     // Función para imprimir datos en el formulario
     vm.getInfo = function(pEvent){
@@ -102,8 +110,7 @@
       vm.event.orgType = pEvent.orgType;
       vm.event.description = pEvent.description;
 
-      $scope.updateDisable = false;
-      $scope.submitDisable = true;
+      
     }
 
     // Función para actualizar datos de evento
@@ -136,12 +143,26 @@
       description : vm.event.description
       }
 
-      $scope.submitDisable = false;
-      $scope.updateDisable = true;
+      
       eventService.updateEvent(modEvent);
       init();
       clean();
     }
+
+    vm.cancelEvent = function(pEvent){
+      pEvent.eventState = 'cancelado';
+      eventService.updateEvent(pEvent);
+      init();
+      aceptedEvents();
+    }
+
+    function aceptedEvents(){
+        for (var i = 0; i < vm.events.length; i++) {
+          if (vm.events[i].eventState === 'aceptado') {
+            vm.acceptedEvents.push(vm.events[i]);
+          }
+        }
+      }
 
     // Función para limpiar campos
 
