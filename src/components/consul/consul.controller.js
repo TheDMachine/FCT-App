@@ -2,22 +2,23 @@
   'use strict';
   angular
   .module('app')
-  .controller('consulCtrl', ['$scope', function ($scope) {
+  .controller('consulCtrl', consulCtrl);
+  function consulCtrl($scope, eventService) {
 	  	/*Sidenav functionality*/
  	var originatorEv;
   var vm = this;
 
-    $scope.openMenu = function($mdMenu, ev) {
+    vm.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
       $mdMenu.open(ev);
     };
 
-    $scope.notificationsEnabled = true;
-    $scope.toggleNotifications = function() {
-      $scope.notificationsEnabled = !this.notificationsEnabled;
+    vm.notificationsEnabled = true;
+    vm.toggleNotifications = function() {
+      vm.notificationsEnabled = !this.notificationsEnabled;
     };
 
-    $scope.redial = function() {
+    vm.redial = function() {
       $mdDialog.show(
         $mdDialog.alert()
           .targetEvent(originatorEv)
@@ -31,10 +32,33 @@
       originatorEv = null;
     };
 
-    $scope.checkVoicemail = function() {
+    vm.checkVoicemail = function() {
       // This never happens.
     };
     /*End sidenav functionality
-    -->>*/   
-  }]);
+    -->>*/
+    vm.presavePropose = function(pNewPropose){
+        console.log(pNewPropose);
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewPropose.photo = data.url;
+            vm.createNewPropose(pNewPropose);
+          });
+      }
+
+// Función para guardar
+    vm.createNewPropose= function(pNewPropose){
+      eventService.setPropose(pNewPropose);
+      vm.error = false;
+      if (vm.error === true) {
+        document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+        }else{
+        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+      }
+      console.log(eventService.getPropose());
+      clean();
+      init();
+      }
+    }
 })();

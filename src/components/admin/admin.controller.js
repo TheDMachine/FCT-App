@@ -320,6 +320,6 @@
     vm.logOut = function(){
       AuthService.logOut();
     }
+    vm.teacher = '';
   }
-      vm.teacher = '';
 })();

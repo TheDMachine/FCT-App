@@ -9,9 +9,19 @@
     var publicAPI = {
       setEvents : _setEvents,
       getEvents : _getEvents,
-      updateEvent : _updateEvent
+      updateEvent : _updateEvent,
+      setPropose: _setProposeEvent,
+      getPropose: _getProposeEvent
     };
     return publicAPI; // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
+
+    //Functión para crear una propouesta de evento
+    function _setProposeEvent(pObject){
+      localStorage.setItem('lsProposeEvents',JSON.stringify(pObject));
+    }
+    function _getProposeEvent(){
+      return JSON.parse(localStorage.getItem('lsProposeEvents'));
+    }
 
     // Función para guardar eventos
     function _setEvents(pEvent){
@@ -40,7 +50,7 @@
       }
       localStorage.setItem('lsEventsList', JSON.stringify(eventsList));
     }
-    
+
   }
 
 })();

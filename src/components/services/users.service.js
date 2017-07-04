@@ -44,6 +44,7 @@
          return userStorage[i];
        }
      }
+     return false;
    }
       //Se obtiene los usuarios de tipo representantes de consejo
       function _getUserConsult(){

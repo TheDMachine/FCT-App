@@ -19,6 +19,42 @@
       },
       controller: 'validationDemoCtrl'
     })*/
+    .state('consul',{
+      url : '/consul', //ruta del url del estado
+      templateUrl : 'components/consul/consul.view.html',//vista que se va a cargar para este estado
+        // El resolve sirve para el controlador junto con la vista
+        resolve: {
+          load: ['$ocLazyLoad', function($ocLazyLoad){
+            return $ocLazyLoad.load('components/consul/consul.controller.js')
+          }]
+        },
+        controller: 'consulCtrl',
+        controllerAs:'vm'
+      })
+      .state('consul.proposeOne',{
+        url:'/proposeOne',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart1.view.html'
+      })
+      .state('consul.proposeTwo',{
+        url:'/proposeTwo',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart2.view.html'
+      })
+      .state('consul.proposeThree',{
+        url:'/proposeThree',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart3.view.html'
+      })
+      .state('consul.proposeFourth',{
+        url:'/proposeFourth',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart4.view.html'
+      })
+      .state('consul.proposeFive',{
+        url:'/proposeFive',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart5.view.html'
+      })
+      .state('consul.proposeSix',{
+        url:'/proposeSix',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart6.view.html'
+      })
     .state('admin',{
       url : '/admin', //ruta del url del estado
       templateUrl : 'components/admin/admin.view.html',//vista que se va a cargar para este estado
@@ -106,18 +142,6 @@
         }]
       },
       controller: 'competitorCtrl',
-      controllerAs: 'vm'
-    })
-    .state('consul',{
-      url : '/consul', //ruta del url del estado
-      templateUrl : 'components/consul/consul.view.html',//vista que se va a cargar para este estado
-      // El resolve sirve para el controlador junto con la vista
-      resolve: {
-        load: ['$ocLazyLoad', function($ocLazyLoad){
-          return $ocLazyLoad.load('components/consul/consul.controller.js')
-        }]
-      },
-      controller: 'consulCtrl',
       controllerAs: 'vm'
     })
     .state('teacher',{
