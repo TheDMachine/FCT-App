@@ -49,6 +49,7 @@
       url:'/new-consult-part2',
       templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepTwo.view.html'
     })
+
     //Inicio de las vistas hijas del formulario de registro del administrador
     .state('admin.part1',{
       url : '/part1', //ruta del url del estado
