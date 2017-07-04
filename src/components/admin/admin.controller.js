@@ -5,7 +5,6 @@
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
   function adminCtrl($scope, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService) {
-    var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
     vm.selected = 0;
@@ -16,17 +15,22 @@
     vm.stepOneConsult = true;
     vm.user = {};
     vm.log = {};
-    $scope.sponsor = false;
+    vm.imageActive = false;
+
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
+        vm.originatorEv;
         vm.academy = academyServices.getAcademy();
         vm.events = eventService.getEvents();
         vm.event = {};
         vm.sponsors = sponsorService.getSponsors();
+        vm.teacher = {};
+        vm.teachers = userService.getTeachers();
         vm.sponsor = {
           sponsorName : vm.sponsorName,
           sponsorCompany : vm.sponsorCompany,
           sponsorType : vm.sponsorType,
-          sponsorMoney : vm.sponsorMoney
+          sponsorMoney : vm.sponsorMoney,
+          sponsorPhoto : vm.sponsorPhoto
         };
         vm.events = eventService.getEvents();
         vm.teachers = userService.getTeachers();
@@ -47,7 +51,7 @@
     vm.redial = function() {
       $mdDialog.show(
         $mdDialog.alert()
-          .targetEvent(originatorEv)
+          .targetEvent(vm.originatorEv)
           .clickOutsideToClose(true)
           .parent('body')
           .title('Suddenly, a redial')
@@ -55,7 +59,7 @@
           .ok('That was easy')
       );
 
-      originatorEv = null;
+      vm.originatorEv = null;
     };
 
     vm.checkVoicemail = function() {
@@ -76,20 +80,21 @@
           });
       }
 
-    // Función para guardar
-
+// Función para guardar
     vm.createNewEvent= function(pNewEvent){
       eventService.setEvents(pNewEvent);
-      // vm.error = false;
-      // if (vm.error === true) {
-      //   document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
-      //   }else{
-      //   document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
-      // }
-      // console.log(eventService.getEvents());
-      // clean();
-      // init();
+      vm.error = false;
+      if (vm.error === true) {
+        document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+        }else{
+        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
       }
+      console.log(eventService.getEvents());
+      clean();
+      init();
+      }
+
+      // Funciones para guardar patrocinadores
 
     vm.saveSponsor= function(pNewSponsor){
       sponsorService.setSponsors(pNewSponsor);
@@ -103,8 +108,16 @@
       clean();
       init();
       }
+
+      vm.presaveSponsor = function(pNewSponsor){
+        /*vm.cloudObj.data.file = document.getElementById("photoSponsor").files[0];
+        Upload.upload(vm.cloudObj)
+        .success(function(data){
+        pNewSponsor.sponsorPhoto = vm.data.url;
+         });*/
+         vm.saveSponsor(pNewSponsor);
+      }
       // vm.error = false;
-    }
       vm.preSaveConsul = function(pNewConsult){
         console.log(pNewConsult);
        vm.cloudObj.data.file = document.getElementById("photo").files[0];
@@ -115,17 +128,6 @@
         });
         }
 
-
-          vm.presaveSponsor = function(pNewSponsor){
-        // vm.cloudObj.data.file = document.getElementById("photo").files[0];
-        // Upload.upload(vm.cloudObj)
-        //   .success(function(data){
-        //     pNewEvent.photo = data.url;
-        //     vm.save(pNewEvent);
-        //   });
-          vm.saveSponsor(pNewSponsor);
-      }
-
           // Función para imprimir datos en el formulario de patrocinadores
     vm.getSponsorInfo = function(pSponsor){
       vm.sponsor.sponsorName = pSponsor.sponsorName,
@@ -133,6 +135,9 @@
       vm.sponsor.sponsorType = pSponsor.sponsorType,
       vm.sponsor.sponsorMoney = pSponsor.sponsorMoney,
       vm.sponsor.sponsorDescription = pSponsor.sponsorDescription
+
+      vm.selected = 5;
+      vm.imageActive = true;
 
 
       $scope.updateDisable = false;
@@ -256,13 +261,9 @@
 
     vm.createNewTeacher = function(pNewTeacher){
       userService.setTeachers(pNewTeacher);
-
-
       clean();
       init();
     }
-
-
     // Función para limpiar campos
 
     function clean(){
@@ -315,16 +316,10 @@
       init();
       cleanAcademy();
     }
-  }
-})();
 
-        vm.logOut = function(){
+    vm.logOut = function(){
       AuthService.logOut();
     }
-})();
+  }
       vm.teacher = '';
-    };
-
-
-  }]);
 })();

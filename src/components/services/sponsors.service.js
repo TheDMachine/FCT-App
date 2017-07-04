@@ -24,7 +24,6 @@
         }
       }
       sponsorsList.push(pSponsor);
-      return error;
       localStorage.setItem('lsSponsorsList', JSON.stringify(sponsorsList));
     }
 

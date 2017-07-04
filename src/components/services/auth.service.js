@@ -1,24 +1,26 @@
 (function() {
   angular.module('app')
   .service('AuthService',AuthService);
-  function AuthService($cookies,$location){
+  function AuthService($cookies,$location, userService){
     return {
       getCredencials:_getAuthCredencials,
-      logOut : _destroyAuthCredentials
+      logOut : _destroyAuthCredentials,
+      getCookie : _getCookie
     }
     function _getAuthCredencials(pEmail,pPassword){
-      var user = 
+      /*var user = 
         { 'email' : 'luisbianco28@hotmail.com',
           'password' : '123',
-          'userType' : 'Profesor'
-        };
+          'userType' : 'Profesor',
+          'newUser' : 1
+        };*/
       //console.log("Yass work correctly auth service. The user is %s and the password is %s",pUsername,pPassword);
-      var userFounded = user;
-      if(userFounded.length == 0){
+      var userFoundedTeacher = userService.findUserTeacher(pEmail);
+      if(userFoundedTeacher.length == 0){
         $location.path('/');
       }
-      _validateFields(pEmail, pPassword, userFounded);
-      $cookies.put('currentUserActive',userFounded.userName);
+      _validateFields(pEmail, pPassword, userFoundedTeacher);
+      $cookies.put('currentUserActive',userFoundedTeacher.email);
     }
     function _destroyAuthCredentials(){
       var currentUser = $cookies.get('currentUserActive');
@@ -58,5 +60,9 @@
 
       }
     }
+
+   function _getCookie(){
+    return $cookies.get('currentUserActive');
+   }
   }
 }());

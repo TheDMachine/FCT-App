@@ -36,6 +36,39 @@
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
     }
 
-  }
+    //encontrar usuario profesor para agarrar información
+    function _findUserTeacher(pUsernameToFind){
+      var userStorage = _getTeachers();
+     for (var i = 0; i < userStorage.length; i++) {
+       if(userStorage[i].email == pUsernameToFind){
+         return userStorage[i];
+       }
+     }
+   }
+      //Se obtiene los usuarios de tipo representantes de consejo
+      function _getUserConsult(){
+      var consulList = JSON.parse(localStorage.getItem('lsConsulUsers'));
+        if(consulList == null){
+          consulList = _UsersConsult;
+        }
+        return consulList;
+      }
+      //se crea un nuevo representante de consejo.
+      function _setNewConsul(pNewObjConsult){
+        var consulList = _getUserConsult();
+        for (var i = 0; i < consulList.length; i++) {
+          if (consulList[i].name == pNewObjConsult.name) {
+            return false;
+          }else{
+            consulList.push(pNewObjConsult);
+            localStorage.setItem('lsConsulUsers', JSON.stringify(consulList));
+            return true;
+          }
+        }
+    }
 
+   function _getCookie(){
+    return $cookies.get('currentUserActive');
+   }
+  }
 })();
