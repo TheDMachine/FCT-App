@@ -12,7 +12,8 @@
   vm.currentUser;
 
   function init(){
-    vm.currentUser = AuthService.getCookie();
+    vm.currentUser = $cookies.get('currentUserActive');
+    
     console.log(vm.currentUser);
     if(vm.currentUser.newUser == 1){
       $scope.showPrompt();

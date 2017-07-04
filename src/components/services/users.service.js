@@ -21,6 +21,7 @@
         obtainConsult:_getUserConsult,
         createTeacher:_setNewTeacher,
         obtainTeacher:_getUserTeacher,
+        findUserTeacher : _findUserTeacher
       }
       //retorna el api.
       return publicApi;
@@ -57,5 +58,14 @@
           }
         }
     }
+    //encontrar usuario para agarar información
+    function _findUserTeacher(pUsernameToFind){
+      var userStorage = _getUserTeacher();
+     for (var i = 0; i < userStorage.length; i++) {
+       if(userStorage[i].email == pUsernameToFind){
+         return userStorage[i];
+       }
+     }
+   }
   }
 })();

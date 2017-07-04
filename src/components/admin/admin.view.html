@@ -87,7 +87,7 @@
   			<div ng-show="vm.selected == 4" ng-cloak>
   				<md-content layout="row">
   					<md-card ng-repeat="item in vm.sponsors" flex="20">
-				        <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+				        <img ng-src="{{item.sponsorPhoto}}" class="md-card-image" alt="Washed Out">
 				        <md-card-title>
 				          <md-card-title-text>
 				            <span class="md-headline">{{item.sponsorName}}</span>
@@ -302,7 +302,7 @@
  			          		<a>2</a>
  			          	</div>
 			          </div>
-		          		<form  name="sponsorForm" autocomplete="off" ng-submit="vm.presave(vm.event)">
+		          		<form id="spon-form" name="sponsorForm" autocomplete="off" ng-submit="vm.presaveSponsor(vm.sponsor)">
 		          		
 		          			<!-- Espacio para mostrar vistas del registro -->
 		          			<div id="form-views" ui-view></div>

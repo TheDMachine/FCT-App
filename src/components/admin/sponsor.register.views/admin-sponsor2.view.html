@@ -8,7 +8,7 @@
       </md-select>
     </md-input-container>
 	
-		<md-input-container class="md-block" flex-gt-sm>
+	<md-input-container class="md-block" flex-gt-sm>
 	  <label>Equivalente en dinero</label>
 	  <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorMoney" />
 
@@ -20,7 +20,13 @@
 	  </div>
 	</md-input-container>
 </div>
+<!-- Subir logo -->
+<div>
+	<label class="btn btn-default btn-file">
+    Adjuntar logo <input id="photoSponsor" name="photo-sponsor" type="file" style="display: none;" ng-model="vm.sponsor.sponsorPhoto">
+	</label>
+</div>
 	<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
-		<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.saveSponsor(vm.sponsor)">Submit</md-button>
+		<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.reset()">Submit</md-button>
 		<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
 	</div>

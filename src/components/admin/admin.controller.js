@@ -27,7 +27,8 @@
           sponsorName : vm.sponsorName,
           sponsorCompany : vm.sponsorCompany,
           sponsorType : vm.sponsorType,
-          sponsorMoney : vm.sponsorMoney
+          sponsorMoney : vm.sponsorMoney,
+          sponsorPhoto : vm.sponsorPhoto
         };
         vm.log = logService.showLog();
       }init();
@@ -88,6 +89,8 @@
       init();
       }
 
+      // Funciones para guardar patrocinadores
+
     vm.saveSponsor= function(pNewSponsor){
       sponsorService.setSponsors(pNewSponsor);
       vm.error = false;
@@ -100,6 +103,15 @@
       clean();
       init();
       }
+
+      vm.presaveSponsor = function(pNewSponsor){
+        /*vm.cloudObj.data.file = document.getElementById("photoSponsor").files[0];
+        Upload.upload(vm.cloudObj)
+        .success(function(data){
+        pNewSponsor.sponsorPhoto = vm.data.url;
+         });*/
+         vm.saveSponsor(pNewSponsor);
+      }
       // vm.error = false;
       vm.preSaveConsul = function(pNewConsult){
         console.log(pNewConsult);
@@ -110,17 +122,6 @@
             vm.createNewConsult(pNewConsult);
         });
         }
-
-
-      vm.presaveSponsor = function(pNewSponsor){
-        // vm.cloudObj.data.file = document.getElementById("photo").files[0];
-        // Upload.upload(vm.cloudObj)
-        //   .success(function(data){
-        //     pNewEvent.photo = data.url;
-        //     vm.save(pNewEvent);
-        //   });
-        vm.saveSponsor(pNewSponsor);
-      }
 
           // Función para imprimir datos en el formulario de patrocinadores
     vm.getSponsorInfo = function(pSponsor){
