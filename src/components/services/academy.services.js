@@ -11,7 +11,7 @@
       updateAcademy : _updateAcademy
     };
     return publicAPI;
-    //Guardar informacion
+    //Guardar academia
     function _setAcademy(newAcademy){
       var academyList = _getAcademy();
       var position = searchAcademy(newAcademy);
@@ -20,7 +20,7 @@
         localStorage.setItem('lsAcademyList', JSON.stringify(academyList));
       }
     }
-    //buscar si la academia se repit
+    //buscar si la academia se repite
     function searchAcademy(newAcademy){
       var academyList = _getAcademy();
       var position = -1;

@@ -2,7 +2,7 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl',['$scope','academyServices', function ($scope, academyServices) {
+  .controller('adminCtrl', ['$scope','academyServices'/*,'userServices'*/, function ($scope, academyServices/*, userServices*/) {
   	var originatorEv;
     var vm = this;
     $scope.selected = 0;
@@ -40,9 +40,10 @@
     -->>*/
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.academy = academyServices.getAcademy();
+      //  vm.user = usersServices.getUsers();
       }init();
       //funcion para guardar informacuon de academia
-     vm.save = function(){
+     vm.saveAcademy = function(){
        var newAcademy = {
          name: vm.name,
          address: vm.address,
@@ -88,5 +89,101 @@
       init();
       cleanAcademy();
     }
+    //funcion para guardar informacion del alumno
+    vm.saveStudent = function(){
+      var newUser = {
+        id: vm.id,
+        birthday: vm.birthday,
+        firstName: vm.firstName,
+        secondName: vm.secondName,
+        firstLastName: vm.firstLastName,
+        secondLastName: vm.secondLastName,
+        genre: vm.genre,
+        weight: vm.weight,
+        height: vm.height,
+        nationality: vm.nationality,
+        phone: vm.phone,
+        email: vm.email,
+        attendAcademy: vm.attendAcademy,
+        teacher: vm.teacher,
+        belt: vm.belt,
+        category: vm.category,
+        tournaments: vm.tournaments,
+        tournamentsWins: vm.tournamentsWins
+      };
+      console.log(newUser);
+      userServices._setUsers(newUser);
+      cleanStudent();
+      init();
+    }
+    //funcion para limpiar los input del alumno
+    function cleanStudent(){
+      vm.id = '',
+      vm.birthday = '',
+      vm.firstName = '',
+      vm.secondName = '',
+      vm.firstLastName = '',
+      vm.secondLastName = '',
+      vm.genre = '',
+      vm.weight = '',
+      vm.height = '',
+      vm.nationality = '',
+      vm.phone = '',
+      vm.email = '',
+      vm.attendAcademy = '',
+      vm.teacher = '',
+      vm.belt = '',
+      vm.category = '',
+      vm.tournaments = '',
+      vm.tournamentsWins = ''
+    }
+    //funcion para editar alumno
+    vm.getStudent = function(student){
+      vm.id = student.id,
+      vm.birthday = student.birthday,
+      vm.firstName = student.firstName,
+      vm.secondName = student.secondName,
+      vm.firstLastName = student.firstLastName,
+      vm.secondLastName = student.secondLastName,
+      vm.genre = student.genre,
+      vm.weight = student.weight,
+      vm.height = student.height,
+      vm.nationality = student.nationality,
+      vm.phone = student.phone,
+      vm.email = student.email,
+      vm.attendAcademy = student.attendAcademy,
+      vm.teacher = student.teacher,
+      vm.belt = student.belt,
+      vm.category = student.category,
+      vm.tournaments = student.tournaments,
+      vm.tournamentsWins = student.tournamentsWins
+    }
+    //funcion para guardar alumno editada
+    vm.updateStudent = function(){
+      var editstudent = {
+        id: vm.id,
+        birthday: vm.birthday,
+        firstName: vm.firstName,
+        secondName: vm.secondName,
+        firstLastName: vm.firstLastName,
+        secondLastName: vm.secondLastName,
+        genre: vm.genre,
+        weight: vm.weight,
+        height: vm.height,
+        nationality: vm.nationality,
+        phone: vm.phone,
+        email: vm.email,
+        attendAcademy: vm.attendAcademy,
+        teacher: vm.teacher,
+        belt: vm.belt,
+        category: vm.category,
+        tournaments: vm.tournaments,
+        tournamentsWins: vm.tournamentsWins
+      }
+      userServices.updateUsers(editstudent);
+      init();
+      cleanStudent();
+    }
+
 }]);
 })();
