@@ -2,7 +2,6 @@
   'use strict';
   angular
   .module('app')
-<<<<<<< HEAD
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
   function adminCtrl($scope, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService) {
@@ -258,8 +257,6 @@
 
     vm.createNewTeacher = function(pNewTeacher){
       userService.setTeachers(pNewTeacher);
-     
-
       clean();
       init();
     }

@@ -4,7 +4,7 @@
   .module('app')
   .controller('teacherCtrl', teacherCtrl);
 
-  function teacherCtrl ($scope, AuthService, $location, $cookies) {
+  function teacherCtrl ($scope, AuthService, $location, $cookies, userService) {
   	/*Sidenav functionality*/
  	var originatorEv;
   var vm = this;
@@ -12,7 +12,7 @@
   vm.currentUser;
 
   function init(){
-    vm.currentUser = $cookies.get('currentUserActive');
+    vm.currentUser = userService.findUserTeacher(userService.getCookie());
     
     console.log(vm.currentUser);
     if(vm.currentUser.newUser == 1){

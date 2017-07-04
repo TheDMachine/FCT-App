@@ -5,7 +5,7 @@
     //Inicia servicio de usuarios
     //que maneja todos los usuarios y sus formas.
     .service('userService',userService);
-    function userService(){
+    function userService($cookies){
       var teachers = [];
       //EL usuario quemado de represetante de consejo.
       var _UsersConsult = [{"nationality":"costarricense"
@@ -17,15 +17,14 @@
       ,"secondLastName":"Arce"
       ,"birthday":"1994-03-13T06:00:00.000Z"}];
       //Se publica el api para acceso al servicio.
-      var publicApi = {
+      var publicAPI = {
         createConsul:_setNewConsul,
         obtainConsult:_getUserConsult,
-        createTeacher:_setNewTeacher,
-        obtainTeacher:_getUserTeacher,
-        findUserTeacher : _findUserTeacher
+        findUserTeacher : _findUserTeacher,
         setTeachers : _setTeachers,
         getTeachers : _getTeachers,
-        updateTeacher : _updateTeacher
+        updateTeacher : _updateTeacher,
+        getCookie : _getCookie
     };
     return publicAPI; // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
@@ -51,6 +50,16 @@
       }
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
     }
+
+    //encontrar usuario profesor para agarrar información
+    function _findUserTeacher(pUsernameToFind){
+      var userStorage = _getTeachers();
+     for (var i = 0; i < userStorage.length; i++) {
+       if(userStorage[i].email == pUsernameToFind){
+         return userStorage[i];
+       }
+     }
+   }
       //Se obtiene los usuarios de tipo representantes de consejo
       function _getUserConsult(){
       var consulList = JSON.parse(localStorage.getItem('lsConsulUsers'));
@@ -72,14 +81,9 @@
           }
         }
     }
-    //encontrar usuario para agarar información
-    function _findUserTeacher(pUsernameToFind){
-      var userStorage = _getUserTeacher();
-     for (var i = 0; i < userStorage.length; i++) {
-       if(userStorage[i].email == pUsernameToFind){
-         return userStorage[i];
-       }
-     }
+
+   function _getCookie(){
+    return $cookies.get('currentUserActive');
    }
   }
 })();

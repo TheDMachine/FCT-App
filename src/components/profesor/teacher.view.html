@@ -43,8 +43,8 @@
 		<md-content id="content" flex>
 	  		<md-toolbar class="tool-icons md-whiteframe-3dp" layout="row">
 	  			<md-list-item class="noright" flex="20">
-    				<img alt="{{ person.name }}" ng-src="{{ person.img }}" class="md-avatar" />
-    				<p>Person name{{person.name}}</p>
+    				<img alt="{{ person.name }}" ng-src="{{ vm.currentUser.photo }}" class="md-avatar" />
+    				<p>{{vm.currentUser.email}}</p>
   				</md-list-item>
     			<div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
     				<div class="icons-profile-container">
