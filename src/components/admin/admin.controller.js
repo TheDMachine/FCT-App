@@ -1,25 +1,27 @@
 (function(){
-  'use strict';
+  'use strit'
   angular
   .module('app')
-  .controller('adminCtrl', ['$scope','academyServices'/*,'userServices'*/, function ($scope, academyServices/*, userServices*/) {
-  	var originatorEv;
+  .controller('adminCtrl', adminCtrl);
+
+  function adminCtrl($scope, academyServices, userServices){
     var vm = this;
-    $scope.selected = 0;
+    var originatorEv;
+    vm.selected = 0;
 
-	  /*Inicio Sidenav*/
+    /*Inicio Sidenav*/
 
-    $scope.openMenu = function($mdMenu, ev) {
+    vm.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
       $mdMenu.open(ev);
     };
 
-    $scope.notificationsEnabled = true;
-    $scope.toggleNotifications = function() {
-      $scope.notificationsEnabled = !this.notificationsEnabled;
+    vm.notificationsEnabled = true;
+    vm.toggleNotifications = function() {
+      vm.notificationsEnabled = !this.notificationsEnabled;
     };
 
-    $scope.redial = function() {
+    vm.redial = function() {
       $mdDialog.show(
         $mdDialog.alert()
           .targetEvent(originatorEv)
@@ -33,17 +35,19 @@
       originatorEv = null;
     };
 
-    $scope.checkVoicemail = function() {
+    vm.checkVoicemail = function() {
       // This never happens.
     };
     /*Final sidenav
     -->>*/
+
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.academy = academyServices.getAcademy();
-      //  vm.user = usersServices.getUsers();
+        vm.user = userServices.getUsers();
       }init();
-      //funcion para guardar informacuon de academia
-     vm.saveAcademy = function(){
+
+     //funcion para guardar informacuon de academia
+     vm.createAcademy = function(){
        var newAcademy = {
          name: vm.name,
          address: vm.address,
@@ -56,7 +60,8 @@
        academyServices.setAcademy(newAcademy);
        cleanAcademy();
        init();
-     };
+     }
+
     //funcion para limpiar los input  de academia
     function cleanAcademy(){
       vm.name = '',
@@ -66,6 +71,7 @@
       vm.phone = '',
       vm.email = ''
     }
+
     //funcion para editar academia
     vm.getAcademy = function(academy){
       vm.name = academy.name;
@@ -75,6 +81,7 @@
       vm.phone = academy.phone;
       vm.email =academy.email;
     }
+
     //funcion para guardar la academia editada
     vm.updateAcademy = function(){
       var editAcademy = {
@@ -89,8 +96,9 @@
       init();
       cleanAcademy();
     }
+
     //funcion para guardar informacion del alumno
-    vm.saveStudent = function(){
+    vm.createStudent = function(){
       var newUser = {
         id: vm.id,
         birthday: vm.birthday,
@@ -112,10 +120,11 @@
         tournamentsWins: vm.tournamentsWins
       };
       console.log(newUser);
-      userServices._setUsers(newUser);
+      userServices.setUsers(newUser);
       cleanStudent();
       init();
     }
+
     //funcion para limpiar los input del alumno
     function cleanStudent(){
       vm.id = '',
@@ -137,6 +146,7 @@
       vm.tournaments = '',
       vm.tournamentsWins = ''
     }
+
     //funcion para editar alumno
     vm.getStudent = function(student){
       vm.id = student.id,
@@ -158,6 +168,7 @@
       vm.tournaments = student.tournaments,
       vm.tournamentsWins = student.tournamentsWins
     }
+
     //funcion para guardar alumno editada
     vm.updateStudent = function(){
       var editstudent = {
@@ -185,5 +196,5 @@
       cleanStudent();
     }
 
-}]);
+  }
 })();

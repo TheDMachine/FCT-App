@@ -8,7 +8,7 @@
     var publicAPI = {
       setUsers: _setUsers,
       getUsers: _getUsers,
-      updateUsers : _updateUsers
+      updateUsers: _updateUsers
     };
     return publicAPI;
     //Guardar alumno
@@ -16,7 +16,7 @@
       var usersList = _getUsers();
       var position = searchUser(newUser);
       if (position == -1) {
-        academyList.push(newUser);
+        usersList.push(newUser);
         localStorage.setItem('lsUsersList', JSON.stringify(usersList));
       }
     }
