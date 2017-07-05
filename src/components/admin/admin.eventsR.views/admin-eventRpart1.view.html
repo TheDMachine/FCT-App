@@ -16,8 +16,9 @@
 		<md-input-container>
 		    <label>Tipo de evento</label>
 		    <md-select name="eventType" ng-model="vm.event.eventType" required>
+		    	<md-option value="torneo">Torneo</md-option>
 		    	<md-option value="exhibicion">Exhicibición</md-option>
-		        <md-option value="torneo">Torneo</md-option>
+		        <md-option value="fogueo">fogueo</md-option>
 		    </md-select>
 
 			<!-- Mensaje de retroalimentacion -->
@@ -32,7 +33,7 @@
 		<md-input-container>
 		    <label>Estado del evento</label>
 		    <md-select name="eventState" ng-model="vm.event.eventState" required>
-		    	<md-option value="aceptado">Aceptado</md-option>
+		    	<md-option value="aprobado">Aceptado</md-option>
 		        <md-option value="cancelado">Cancelado</md-option>
 		    </md-select>
 
@@ -44,7 +45,7 @@
 
 		<!-- Campo Nombre del invitado-->
 		<md-input-container flex-gt-sm ng-show="vm.event.eventType == 'exhibicion'">
-			<label>Nombre completo del invitado</label>
+			<label>Nombre completo del invitado (opcional)</label>
 			<input name="invitedName" ng-model="vm.event.invitedName" md-maxlength="30">
 		</md-input-container>
 

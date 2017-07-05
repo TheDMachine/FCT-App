@@ -188,7 +188,7 @@
 									    </thead>
 									    <tbody>
 									    <!-- | dateRange:vm.from:vm.to -->
-									      	<tr ng-repeat="event in vm.acceptedEvents">
+									      	<tr ng-repeat="event in vm.acceptedEvents track by $index">
 									      		<td>{{event.eventName}}</td>
 									      		<td>{{event.eventType}}</td>
 									      		<td>{{event.eventState}}</td>

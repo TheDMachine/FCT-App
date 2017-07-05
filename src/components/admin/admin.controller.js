@@ -64,6 +64,7 @@
     // Función para guardar
 
     vm.createNewEvent= function(pNewEvent){
+      console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
         document.querySelector('.ErrorMessage').innerHTML = 'El evento se registró exitosamente';
@@ -158,7 +159,7 @@
 
     function aceptedEvents(){
         for (var i = 0; i < vm.events.length; i++) {
-          if (vm.events[i].eventState === 'aceptado') {
+          if (vm.events[i].eventState === 'aprobado') {
             vm.acceptedEvents.push(vm.events[i]);
           }
         }
