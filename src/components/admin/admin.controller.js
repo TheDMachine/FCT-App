@@ -4,7 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
 
-  function adminCtrl($scope, academyServices, userServices){
+  function adminCtrl($scope, academyServices, userServices, estabInfoService){
     var vm = this;
     var originatorEv;
     vm.selected = 0;
@@ -44,6 +44,9 @@
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.academy = academyServices.getAcademy();
         vm.user = userServices.getUsers();
+        vm.belts = estabInfoService.getBelts();
+        vm.weights = estabInfoService.getWeight();
+        vm.categoriesAge = estabInfoService.getCategories();
       }init();
 
      //funcion para guardar informacuon de academia
