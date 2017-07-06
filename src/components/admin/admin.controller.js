@@ -1,5 +1,5 @@
 (function(){
-  'use strict';
+  'use strit'
   angular
   .module('app')
   .controller('adminCtrl', adminCtrl);
@@ -62,6 +62,7 @@
     vm.checkVoicemail = function() {
       // This never happens.
     };
+<<<<<<< HEAD
     /*Final sidenav*/
 
     // Función para pre guardar datos del evento
@@ -267,6 +268,18 @@
     };
       //funcion para guardar informacuon de academia
      vm.createNewAcademy = function(){
+=======
+    /*Final sidenav
+    -->>*/
+
+    function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
+        vm.academy = academyServices.getAcademy();
+        vm.user = userServices.getUsers();
+      }init();
+
+     //funcion para guardar informacuon de academia
+     vm.createAcademy = function(){
+>>>>>>> Charlie
        var newAcademy = {
          name: vm.name,
          address: vm.address,
@@ -280,6 +293,10 @@
        cleanAcademy();
        init();
      }
+<<<<<<< HEAD
+=======
+
+>>>>>>> Charlie
     //funcion para limpiar los input  de academia
     function cleanAcademy(){
       vm.name = '',
@@ -289,6 +306,7 @@
       vm.phone = '',
       vm.email = ''
     }
+
     //funcion para editar academia
     vm.getAcademy = function(academy){
       vm.name = academy.name;
@@ -298,6 +316,7 @@
       vm.phone = academy.phone;
       vm.email =academy.email;
     }
+
     //funcion para guardar la academia editada
     vm.updateAcademy = function(){
       var editAcademy = {
@@ -313,8 +332,110 @@
       cleanAcademy();
     }
 
+<<<<<<< HEAD
     vm.logOut = function(){
       AuthService.logOut();
     }
+=======
+    //funcion para guardar informacion del alumno
+    vm.createStudent = function(){
+      var newUser = {
+        id: vm.id,
+        birthday: vm.birthday,
+        firstName: vm.firstName,
+        secondName: vm.secondName,
+        firstLastName: vm.firstLastName,
+        secondLastName: vm.secondLastName,
+        genre: vm.genre,
+        weight: vm.weight,
+        height: vm.height,
+        nationality: vm.nationality,
+        phone: vm.phone,
+        email: vm.email,
+        attendAcademy: vm.attendAcademy,
+        teacher: vm.teacher,
+        belt: vm.belt,
+        category: vm.category,
+        tournaments: vm.tournaments,
+        tournamentsWins: vm.tournamentsWins
+      };
+      console.log(newUser);
+      userServices.setUsers(newUser);
+      cleanStudent();
+      init();
+    }
+
+    //funcion para limpiar los input del alumno
+    function cleanStudent(){
+      vm.id = '',
+      vm.birthday = '',
+      vm.firstName = '',
+      vm.secondName = '',
+      vm.firstLastName = '',
+      vm.secondLastName = '',
+      vm.genre = '',
+      vm.weight = '',
+      vm.height = '',
+      vm.nationality = '',
+      vm.phone = '',
+      vm.email = '',
+      vm.attendAcademy = '',
+      vm.teacher = '',
+      vm.belt = '',
+      vm.category = '',
+      vm.tournaments = '',
+      vm.tournamentsWins = ''
+    }
+
+    //funcion para editar alumno
+    vm.getStudent = function(student){
+      vm.id = student.id,
+      vm.birthday = student.birthday,
+      vm.firstName = student.firstName,
+      vm.secondName = student.secondName,
+      vm.firstLastName = student.firstLastName,
+      vm.secondLastName = student.secondLastName,
+      vm.genre = student.genre,
+      vm.weight = student.weight,
+      vm.height = student.height,
+      vm.nationality = student.nationality,
+      vm.phone = student.phone,
+      vm.email = student.email,
+      vm.attendAcademy = student.attendAcademy,
+      vm.teacher = student.teacher,
+      vm.belt = student.belt,
+      vm.category = student.category,
+      vm.tournaments = student.tournaments,
+      vm.tournamentsWins = student.tournamentsWins
+    }
+
+    //funcion para guardar alumno editada
+    vm.updateStudent = function(){
+      var editstudent = {
+        id: vm.id,
+        birthday: vm.birthday,
+        firstName: vm.firstName,
+        secondName: vm.secondName,
+        firstLastName: vm.firstLastName,
+        secondLastName: vm.secondLastName,
+        genre: vm.genre,
+        weight: vm.weight,
+        height: vm.height,
+        nationality: vm.nationality,
+        phone: vm.phone,
+        email: vm.email,
+        attendAcademy: vm.attendAcademy,
+        teacher: vm.teacher,
+        belt: vm.belt,
+        category: vm.category,
+        tournaments: vm.tournaments,
+        tournamentsWins: vm.tournamentsWins
+      }
+      userServices.updateUsers(editstudent);
+      init();
+      cleanStudent();
+    }
+
+>>>>>>> Charlie
   }
 })();

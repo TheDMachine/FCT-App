@@ -1,3 +1,4 @@
+
 (function() {
   'use strict';
   angular
@@ -7,6 +8,7 @@
     .service('userService',userService);
     function userService($cookies){
       var teachers = [];
+       var users = [];
       //EL usuario quemado de represetante de consejo.
       var _UsersConsult = [{"nationality":"costarricense"
       ,"email":"daniel.camposarce@gmail.com"
@@ -24,9 +26,51 @@
         setTeachers : _setTeachers,
         getTeachers : _getTeachers,
         updateTeacher : _updateTeacher,
-        getCookie : _getCookie
+        getCookie : _getCookie,
+        setUsers: _setUsers,
+        getUsers: _getUsers,
+        updateUsers: _updateUsers
     };
-    return publicAPI; // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
+    return publicAPI;
+
+    function _setUsers(newUser){
+      var usersList = _getUsers();
+      var position = searchUser(newUser);
+      if (position == -1) {
+        usersList.push(newUser);
+        localStorage.setItem('lsUsersList', JSON.stringify(usersList));
+      }
+    }
+    //buscar si la cédula se repite
+    function searchUser(newUser){
+      var usersList = _getUsers();
+      var position = -1;
+
+      for (var i = 0; i < usersList.length; i++) {
+        if (newUser.id == usersList[i].id) {
+          position = i;
+        }
+      }
+      return position;
+    }
+    //muestra la informacion mas actual
+    function _getUsers(){
+      var usersList = JSON.parse(localStorage.getItem('lsUsersList'));
+      if(usersList == null){
+        usersList = users;
+      }
+      return usersList;
+    }
+    //editar la informacion del alumno ya registrada
+    function _updateUsers(editUser){
+      var usersList = _getUsers();
+      for(var i = 0; i < usersList.length; i++){
+        if(usersList[i].id == editUser.id){
+          usersList[i] = editUser;
+        }
+      }
+      localStorage.setItem('lsUsersList', JSON.stringify(usersList));
+    } // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
     function _setTeachers(pTeacher){
       var teachersList = _getTeachers();
@@ -86,5 +130,3 @@
    function _getCookie(){
     return $cookies.get('currentUserActive');
    }
-  }
-})();
