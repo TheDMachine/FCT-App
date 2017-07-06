@@ -29,7 +29,7 @@
       .cancel('');
 
     $mdDialog.show(confirm).then(function(result) {
-      $scope.status = 'You decided to name your dog ' + result + '.';
+      $scope.status =  result;
     }, function() {
       $scope.status = 'You didn\'t name your dog.';
     });

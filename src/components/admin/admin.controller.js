@@ -32,6 +32,8 @@
           sponsorMoney : vm.sponsorMoney,
           sponsorPhoto : vm.sponsorPhoto
         };
+        vm.academy = academyServices.getAcademy();
+        vm.user = userService.getUsers();
         vm.log = logService.showLog();
       }init();
 
@@ -62,7 +64,6 @@
     vm.checkVoicemail = function() {
       // This never happens.
     };
-<<<<<<< HEAD
     /*Final sidenav*/
 
     // Función para pre guardar datos del evento
@@ -267,19 +268,11 @@
       vm.event='';
     };
       //funcion para guardar informacuon de academia
-     vm.createNewAcademy = function(){
-=======
     /*Final sidenav
     -->>*/
 
-    function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
-        vm.academy = academyServices.getAcademy();
-        vm.user = userServices.getUsers();
-      }init();
-
-     //funcion para guardar informacuon de academia
+     //funcion para guardar informacion de academia
      vm.createAcademy = function(){
->>>>>>> Charlie
        var newAcademy = {
          name: vm.name,
          address: vm.address,
@@ -293,10 +286,7 @@
        cleanAcademy();
        init();
      }
-<<<<<<< HEAD
-=======
 
->>>>>>> Charlie
     //funcion para limpiar los input  de academia
     function cleanAcademy(){
       vm.name = '',
@@ -332,11 +322,9 @@
       cleanAcademy();
     }
 
-<<<<<<< HEAD
     vm.logOut = function(){
       AuthService.logOut();
     }
-=======
     //funcion para guardar informacion del alumno
     vm.createStudent = function(){
       var newUser = {
@@ -436,6 +424,5 @@
       cleanStudent();
     }
 
->>>>>>> Charlie
   }
 })();
