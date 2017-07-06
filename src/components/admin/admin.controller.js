@@ -2,18 +2,20 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'Upload', 'estabInfoService', function ($scope, eventService, imageService, Upload, estabInfoService) {
-    var originatorEv;
+  .controller('adminCtrl', adminCtrl);
+  //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
+  function adminCtrl($scope, eventService, imageService, Upload, estabInfoService) {
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
     //vm.events = eventService.getEvents();
     vm.weights = estabInfoService.getWeight();
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
-    $scope.selected = 0;
+    vm.selected = 0;
     
-
-    function init() { // función que se llama así misma para indicar que sea lo primero que se ejecute
+    // función que se llama así misma para indicar que sea lo primero que se ejecute
+    function init() { 
+        vm.originatorEv;
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
         aceptedEvents();
@@ -21,18 +23,17 @@
       }init();
     
       /*Sidenav*/
-
-    $scope.openMenu = function($mdMenu, ev) {
+    vm.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
       $mdMenu.open(ev);
     };
 
-    $scope.notificationsEnabled = true;
-    $scope.toggleNotifications = function() {
-      $scope.notificationsEnabled = !this.notificationsEnabled;
+    vm.notificationsEnabled = true;
+    vm.toggleNotifications = function() {
+      vm.notificationsEnabled = !this.notificationsEnabled;
     };
 
-    $scope.redial = function() {
+    vm.redial = function() {
       $mdDialog.show(
         $mdDialog.alert()
           .targetEvent(originatorEv)
@@ -46,7 +47,7 @@
       originatorEv = null;
     };
 
-    $scope.checkVoicemail = function() {
+    vm.checkVoicemail = function() {
       // This never happens.
     };
     /*Final sidenav
@@ -180,5 +181,5 @@
     }
 
 
-  }]);
+   }
 })();
