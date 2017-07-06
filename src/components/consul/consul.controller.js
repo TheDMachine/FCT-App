@@ -37,6 +37,7 @@
     };
     /*End sidenav functionality
     -->>*/
+    //Funcion para guardar la  imagen
     vm.presavePropose = function(pNewPropose){
         console.log(pNewPropose);
         vm.cloudObj.data.file = document.getElementById("photo").files[0];
@@ -48,12 +49,12 @@
       }
 
 // Función para guardar
-    vm.createNewPropose= function(pNewPropose){
+    vm.createNewPropose= function(pNewPropose) {
       eventService.setPropose(pNewPropose);
       vm.error = false;
       if (vm.error === true) {
         document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
-        }else{
+        }else {
         document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
       }
       console.log(eventService.getPropose());

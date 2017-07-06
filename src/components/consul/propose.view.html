@@ -1,22 +1,23 @@
-<md-tab label="Propuestas de eventos" ui-sref=".proposeOne">
-  <md-content class="md-padding">
-    <h1 class="md-display-2">Crear propuesta de evento</h1>
-    <!-- links de cada paso del formulario -->
-    <div class="text-center statusButtons">
-      <a ui-sref-active="active" ui-sref=".proposeOne"><span>1</span></a>
-      <a ui-sref-active="active" ui-sref=".proposeTwo"><span>2</span></a>
-      <a ui-sref-active="active" ui-sref=".proposeThree"><span>3</span></a>
-      <a ui-sref-active="active" ui-sref=".proposeFourth"><span>4</span></a>
-      <a ui-sref-active="active" ui-sref=".proposeFive"><span>5</span></a>
-      <a ui-sref-active="active" ui-sref=".proposeSix"><span>6</span></a>
-    </div>
+<md-card md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{vm.}}</span>
+            <span class="md-subhead">Extra Large</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="row" layout-align="space-between">
+          <div class="md-media-xl card-media"></div>
 
-    <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
-
-      <!-- Formulario para registro de eventos -->
-      <form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presavePropose(vm.event)">
-
-        <!-- Espacio para mostrar vistas del registro -->
-        <div id="form-views" ui-view></div>
-      </form>
-    </div>
+          <md-card-actions layout="column">
+            <md-button class="md-icon-button" aria-label="Favorite">
+              <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Settings">
+              <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Share">
+              <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
+            </md-button>
+          </md-card-actions>
+        </md-card-content>
+      </md-card>

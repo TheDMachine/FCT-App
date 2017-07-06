@@ -70,7 +70,7 @@
 
     // Función para pre guardar datos del evento
 
-    vm.presaveEvent = function(pNewEvent){
+    vm.presaveEvent = function(pNewEvent) {
         console.log(pNewEvent);
         vm.cloudObj.data.file = document.getElementById("photo").files[0];
         Upload.upload(vm.cloudObj)
@@ -81,7 +81,7 @@
       }
 
 // Función para guardar
-    vm.createNewEvent= function(pNewEvent){
+    vm.createNewEvent= function(pNewEvent) {
       eventService.setEvents(pNewEvent);
       vm.error = false;
       if (vm.error === true) {
@@ -96,7 +96,7 @@
 
       // Funciones para guardar patrocinadores
 
-    vm.saveSponsor= function(pNewSponsor){
+    vm.saveSponsor= function(pNewSponsor) {
       sponsorService.setSponsors(pNewSponsor);
       vm.error = false;
       /*if (vm.error === true) {
@@ -109,7 +109,7 @@
       init();
       }
 
-      vm.presaveSponsor = function(pNewSponsor){
+      vm.presaveSponsor = function(pNewSponsor) {
         /*vm.cloudObj.data.file = document.getElementById("photoSponsor").files[0];
         Upload.upload(vm.cloudObj)
         .success(function(data){
@@ -118,18 +118,18 @@
          vm.saveSponsor(pNewSponsor);
       }
       // vm.error = false;
-      vm.preSaveConsul = function(pNewConsult){
+      vm.preSaveConsul = function(pNewConsult) {
         console.log(pNewConsult);
-       vm.cloudObj.data.file = document.getElementById("photo").files[0];
-       Upload.upload(vm.cloudObj)
-         .success(function(data){
-           pNewConsult.photo = data.url;
-            vm.createNewConsult(pNewConsult);
-        });
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewConsult.photo = data.url;
+            vm.createNewEvent(pNewConsult);
+          });
         }
 
           // Función para imprimir datos en el formulario de patrocinadores
-    vm.getSponsorInfo = function(pSponsor){
+    vm.getSponsorInfo = function(pSponsor) {
       vm.sponsor.sponsorName = pSponsor.sponsorName,
       vm.sponsor.sponsorCompany = pSponsor.sponsorCompany,
       vm.sponsor.sponsorType = pSponsor.sponsorType,
@@ -144,7 +144,7 @@
       $scope.submitDisable = true;
     }
 
-    vm.updateSponsor = function(){
+    vm.updateSponsor = function() {
       var modSponsor = {
       sponsorName : vm.sponsor.sponsorName,
       sponsorCompany : vm.sponsor.sponsorCompany,
@@ -161,7 +161,7 @@
     }
 
     // Función para imprimir datos en el formulario
-    vm.getInfo = function(pEvent){
+    vm.getInfo = function(pEvent) {
       vm.event.eventName = pEvent.eventName;
       vm.event.invitedName = pEvent.invitedName;
       vm.event.eventType = pEvent.eventType;
@@ -228,13 +228,14 @@
       init();
       clean();
     }
-    vm.createNewConsult = function(pNewConsul){
+    vm.createNewConsult = function(pNewConsul) {
       console.log("El objeto con imagen es %o",pNewConsul);
       console.log("Gracias, ha sido creado un nuevo represetante de consejo %o",pNewConsul);
-      var bFlag = userService.createConsul(pNewConsul);
-      var temDataZero = $cookies.get('currentUserActive');
-      if(bFlag == false){
+      var bFlag = userService.createConsul(pNewConsul); //Crea el nuevo represetante de consejo.
+      var temDataZero = $cookies.get('currentUserActive'); // Obtiene el usuario logeado.
+      if(bFlag == false){// si retorna algun boleano implica que fallo que en su defecto seria que ya existe el represetante de consejo.
         document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
+        //te manda a la página uno del registro.
         $state.go('admin.partOne');
         var tempDataOne = 'fallo al crear a '+pNewConsul.firstName;
         logService.createLog(false,temDataZero,tempDataOne);
