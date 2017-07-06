@@ -117,6 +117,18 @@
       },
       controller: 'loginCtrl'
     })
+        .state('landing',{
+      url : '/landing', //ruta del url del estado
+      templateUrl : 'components/landing/landing.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/landing/landing.controller.js')
+        }]
+      },
+      controller: 'landingCtrl',
+      controllerAs: 'vm'
+    })
 
     $urlRouterProvider.otherwise('/admin');
   }

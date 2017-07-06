@@ -2,16 +2,20 @@
   'use strict';
   angular
   .module('app')
-  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'Upload', function ($scope, eventService, imageService, Upload) {
+  .controller('adminCtrl', ['$scope', 'eventService', 'imageService', 'Upload', 'estabInfoService', function ($scope, eventService, imageService, Upload, estabInfoService) {
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
     vm.events = eventService.getEvents();
+    vm.weights = estabInfoService.getWeight();
+    vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
     $scope.selected = 0;
     
 
-    function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
+    function init() { // función que se llama así misma para indicar que sea lo primero que se ejecute
+        vm.weights = estabInfoService.getWeight();
+        vm.categories = estabInfoService.getCategories();
         vm.events = eventService.getEvents();
         aceptedEvents();
         vm.event = {};
@@ -51,7 +55,7 @@
 
     // Función para pre guardar datos del evento
 
-    vm.presaveEvent = function(pNewEvent){
+    vm.presaveEvent = function(pNewEvent) {
         console.log(pNewEvent);
         vm.cloudObj.data.file = document.getElementById("photo").files[0];
         Upload.upload(vm.cloudObj)
@@ -59,11 +63,11 @@
             pNewEvent.photo = data.url;
             vm.createNewEvent(pNewEvent);
           });
-      }
+      };
 
     // Función para guardar
 
-    vm.createNewEvent= function(pNewEvent){
+    vm.createNewEvent= function(pNewEvent) {
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
@@ -81,10 +85,10 @@
         clean();
         init();
       }
-    }
+    };
 
     // Función para imprimir datos en el formulario
-    vm.getInfo = function(pEvent){
+    vm.getInfo = function(pEvent) {
       vm.event.eventName = pEvent.eventName;
       vm.event.invitedName = pEvent.invitedName;
       vm.event.eventType = pEvent.eventType;
@@ -109,13 +113,11 @@
       vm.event.charityEvent = pEvent.charityEvent;
       vm.event.orgName = pEvent.orgName;
       vm.event.orgType = pEvent.orgType;
-      vm.event.description = pEvent.description;
-
-      
-    }
+      vm.event.description = pEvent.description; 
+    };
 
     // Función para actualizar datos de evento
-    vm.updateEvent = function(){
+    vm.updateEvent = function() {
       var modEvent = {
       eventName : vm.event.eventName,
       invitedName : vm.event.invitedName,
@@ -148,16 +150,16 @@
       eventService.updateEvent(modEvent);
       init();
       clean();
-    }
+    };
 
-    vm.cancelEvent = function(pEvent){
+    vm.cancelEvent = function(pEvent) {
       pEvent.eventState = 'cancelado';
       eventService.updateEvent(pEvent);
       init();
       aceptedEvents();
-    }
+    };
 
-    function aceptedEvents(){
+    function aceptedEvents() {
         for (var i = 0; i < vm.events.length; i++) {
           if (vm.events[i].eventState === 'aprobado') {
             vm.acceptedEvents.push(vm.events[i]);
@@ -167,9 +169,9 @@
 
     // Función para limpiar campos
 
-    function clean(){
+    function clean() {
       vm.event='';
-    };
+    }
 
 
   }]);
