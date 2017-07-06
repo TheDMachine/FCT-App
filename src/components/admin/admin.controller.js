@@ -4,7 +4,8 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService) {
+  function adminCtrl($scope, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
+
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
     vm.selected = 0;
@@ -29,6 +30,9 @@
         vm.academy = academyServices.getAcademy();
         vm.user = userService.getUsers();
         vm.log = logService.showLog();
+        vm.belts = estabInfoService.getBelts();
+        vm.weights = estabInfoService.getWeight();
+        vm.categoriesAge = estabInfoService.getCategories();
         $http.get('http://api.population.io:80/1.0/countries').then(function(data){
           console.log(data);
           vm.countries = data.data.countries;
@@ -291,11 +295,12 @@
     function clean(){
       vm.event='';
     };
-      //funcion para guardar informacion de academia
+
     /*Final sidenav
     -->>*/
 
      //funcion para guardar informacion de academia
+
      vm.createAcademy = function(){
        var newAcademy = {
          name: vm.name,
@@ -446,6 +451,26 @@
       userServices.updateUsers(editstudent);
       init();
       cleanStudent();
+    }
+
+    //funcion para guardar competencia
+    vm.createCompetition = function(){
+      var newCompetition = {
+        competitionNumber: vm.competitionNumber,
+        eventBelongs: vm.eventBelongs,
+        competitionGenre: vm.competitionGenre,
+        competitionBelt: vm.competitionBelt,
+        competitionWeight: vm.competitionWeight,
+        competitor1: vm.competitor1,
+        competitor2: vm.competitor2,
+        competitor3: vm.competitor3,
+        competitor4: vm.competitor4,
+        competitor5: vm.competitor5
+      }
+      console.log(newCompetition);
+      eventService.setCompetitions(newCompetition);
+      cleanStudent();
+      init();
     }
 
   }
