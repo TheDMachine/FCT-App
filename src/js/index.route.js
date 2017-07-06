@@ -85,6 +85,21 @@
     })
     // Fin de las vistas hojas del formualrio de registro del administrador.
 
+    //Inicio de las vistas hijas del formulario de registro del profesor
+    .state('admin.teachpart1',{
+      url : '/teachpart1', //ruta del url del estado
+      templateUrl : 'components/admin/admin.teachers.views/admin-teachersregpart1.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.teachpart2',{
+      url : '/teachpart2', //ruta del url del estado
+      templateUrl : 'components/admin/admin.teachers.views/admin-teachersregpart2.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.teachpart3',{
+      url : '/teachpart3', //ruta del url del estado
+      templateUrl : 'components/admin/admin.teachers.views/admin-teachersregpart3.view.html'//vista que se va a cargar para este estado
+    })
+    // Fin de las vistas hojas del formualrio de registro del profesor.
+
     .state('assistant',{
       url : '/assistant', //ruta del url del estado
       templateUrl : 'components/assistant/assistant.view.html',//vista que se va a cargar para este estado

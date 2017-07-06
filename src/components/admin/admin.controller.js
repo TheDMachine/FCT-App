@@ -240,7 +240,7 @@
 
     // Función para pre guardar datos del profesor
 
-    vm.presaveTeacher = function(pNewTeacher){
+    vm.presaveTeacher = function(pNewTeacher) {
         console.log(pNewTeacher);
         vm.cloudObj.data.file = document.getElementById("photo").files[0];
         Upload.upload(vm.cloudObj)
@@ -257,6 +257,26 @@
       clean();
       init();
     }
+
+ // Función para imprimir datos del profesor en la lista
+    vm.getInfoTeacher = function(teacher) {
+      vm.teacher.id = teacher.id;
+      vm.teacher.firstName = teacher.firstName;
+      vm.teacher.secondName = teacher.secondName;
+      vm.teacher.firstLastName = teacher.firstLastName;
+      vm.teacher.secondLastName = teacher.secondLastName;
+      vm.teacher.phone = teacher.phone;
+      vm.teacher.email = teacher.email;
+      vm.teacher.bornhDate = teacher.bornhDate;
+      vm.teacher.gender = teacher.gender;
+      vm.teacher.nationality = teacher.nationality;
+      vm.teacher.academy = teacher.academy;
+      vm.teacher.grade = teacher.grade;
+      vm.teacher.photo = teacher.photo;
+     
+      init()
+    }
+
     // Función para limpiar campos
 
     function clean(){
