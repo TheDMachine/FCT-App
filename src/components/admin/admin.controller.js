@@ -247,13 +247,16 @@
           .success(function(data){
             pNewTeacher.photo = data.url;
             vm.createNewTeacher(pNewTeacher);
-          });
+          })
+          .catch(function(error){
+            console.log(error);
+          })
       }
 
     // Función para guardar profesores
 
     vm.createNewTeacher = function(pNewTeacher){
-      userService.setTeachers(pNewTeacher);
+      userService.setTeachers(pNewTeacher); 
       clean();
       init();
     }

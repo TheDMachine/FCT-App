@@ -86,7 +86,13 @@
   			<!--Vista patrocinadores-->
   			<div ng-show="vm.selected == 4" ng-cloak>
   				<md-content layout="row">
-  					<md-card ng-repeat="item in vm.sponsors" flex="20">
+  					<div>
+  						<md-input-container flex-offset class="md-block" flex="100">
+						<label for="">Filtrar por nombre</label>
+							<input type="text" name="sponsorFilter" ng-model="vm.sponsorFilter"/>
+						</md-input-container>
+  					</div>
+  					<md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="20">
 				        <img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
 				        <md-card-title>
 				          <md-card-title-text>
@@ -614,12 +620,10 @@
 								</md-input-container>
 							</div>
 							<!-- Subir logo -->
-							<div layout="row" layout-align="center center">
-								<label class="btn btn-default btn-file">
+								<label class="btn btn-default btn-file" for="photo">
 									Adjuntar logo
 								</label>
 							 	 <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.sponsor.photo">	
-							</div>
 								<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
 									<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.reset()">Submit</md-button>
 									<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
