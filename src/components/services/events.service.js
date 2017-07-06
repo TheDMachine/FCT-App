@@ -4,8 +4,9 @@
   .module('app')
   .service('eventService', eventService);
 
-  function eventService(){
+  function eventService(logService){
     var events = [];
+    var proposes = [];
     var publicAPI = {
       setEvents : _setEvents,
       getEvents : _getEvents,
@@ -16,11 +17,27 @@
     return publicAPI; // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
     //Functión para crear una propouesta de evento
-    function _setProposeEvent(pObject){
-      localStorage.setItem('lsProposeEvents',JSON.stringify(pObject));
+    function _setProposeEvent(pObject) {
+      var proposesStorage = _getProposeEvent();
+      for (var i = 0; i < proposesStorage.length; i++) {
+        if(proposesStorage[i].proposeName == pObject.proposeName) {
+            logService.createLog(false, 'Usuario no registrado', 'Propuesta de evento ' +oObject.proposeName + 'repetida.');
+            return true;
+        } else {
+          proposesStorage.push(pObject);
+          localStorage.setItem('lsProposeEvents', JSON.stringify(pObject));
+          logService.createLog(0, 'Usuario no registrado', 'Propuesta de evento ' +oObject.proposeName);
+          return false;
+        }
+      }
     }
-    function _getProposeEvent(){
-      return JSON.parse(localStorage.getItem('lsProposeEvents'));
+    //Función para obtener las propuestas ya registradas con la función setProposeEvent
+    function _getProposeEvent() {
+      var proposeSrg = JSON.parse(localStorage.getItem('lsProposeEvents'));
+      if(proposeSrg == null) {
+        proposeSrg = proposes;
+      }
+      return proposeSrg;
     }
 
     // Función para guardar eventos

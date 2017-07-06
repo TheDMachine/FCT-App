@@ -1,10 +1,10 @@
 <!-- Campo nombre del lugar -->
 <md-input-container flex-offset>
 	<label>Cantidad de asientos</label>
-	<input name="seats" ng-model="vm.event.seats" required>
+	<input name="seats" ng-model="vm.propose.seats" required>
 
 	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.seats.$error">
+	<div ng-messages="frmProposeRegister.seats.$error">
 		<div ng-messages-include="components/includes/messages.html"></div>
 	</div>
 </md-input-container>
@@ -12,10 +12,10 @@
 <!-- Campo cantidad de entradas -->
 <md-input-container flex-offset>
 	<label>Cantidad de entradas a vender</label>
-	<input name="tickets" ng-model="vm.event.tickets" required>
+	<input name="tickets" ng-model="vm.propose.tickets" required>
 
 	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.tickets.$error">
+	<div ng-messages="frmProposeRegister.tickets.$error">
 		<div ng-messages-include="components/includes/messages.html"></div>
 	</div>
 </md-input-container>
@@ -23,10 +23,10 @@
 <!-- Campo nombre de contacto -->
 <md-input-container flex-offset>
 	<label>Nombre de contacto</label>
-	<input name="contactName" ng-model="vm.event.contactName" required>
+	<input name="contactName" ng-model="vm.propose.contactName" required>
 
 	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.contactName.$error">
+	<div ng-messages="frmProposeRegister.contactName.$error">
 		<div ng-messages-include="components/includes/messages.html"></div>
 	</div>
 </md-input-container>
@@ -34,17 +34,12 @@
 <!-- Campo teléfono de contacto -->
 <md-input-container flex-offset>
 	<label>Teléfono de contacto</label>
-	<input name="contactPhone" ng-model="vm.event.contactPhone" required>
+	<input name="contactPhone" ng-model="vm.propose.contactPhone" required>
 
 	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.contactPhone.$error">
+	<div ng-messages="frmProposeRegister.contactPhone.$error">
 		<div ng-messages-include="components/includes/messages.html"></div>
 	</div>
 </md-input-container>
-
-<!-- Botón Anterior -->
-<a ui-sref="admin.part4" class="btn btn-info">Anterior <span class="glyphicon glyphicon-circle-arrow-left"></span></a>
-
 <!-- Botón siguiente -->
-<a ui-sref="admin.part6" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
-
+<a ui-sref="consul.proposeSix" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
