@@ -4,7 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
 
-  function adminCtrl($scope, academyServices, userServices, estabInfoService){
+  function adminCtrl($scope, academyServices, userServices, estabInfoService, eventService){
     var vm = this;
     var originatorEv;
     vm.selected = 0;
@@ -197,6 +197,26 @@
       userServices.updateUsers(editstudent);
       init();
       cleanStudent();
+    }
+
+    //funcion para guardar competencia
+    vm.createCompetition = function(){
+      var newCompetition = {
+        competitionNumber: vm.competitionNumber,
+        eventBelongs: vm.eventBelongs,
+        competitionGenre: vm.competitionGenre,
+        competitionBelt: vm.competitionBelt,
+        competitionWeight: vm.competitionWeight,
+        competitor1: vm.competitor1,
+        competitor2: vm.competitor2,
+        competitor3: vm.competitor3,
+        competitor4: vm.competitor4,
+        competitor5: vm.competitor5
+      }
+      console.log(newCompetition);
+      eventService.setCompetitions(newCompetition);
+      cleanStudent();
+      init();
     }
 
   }

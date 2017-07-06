@@ -532,8 +532,8 @@
 											<!-- input nombre de la competencia -->
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
-													<label for="">Nombre de la competencia</label>
-													<input name="name" type="text" ng-model="vm.competitionName" required/>
+													<label for="">Numero de la competencia</label>
+													<input name="competitionName" type="number" ng-model="vm.competitionNumber" required/>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmCompetition.competitionName.$error">
@@ -573,6 +573,21 @@
 												</md-input-container>
 											</div>
 
+											<!-- categoria de edad* -->
+											<div class="col-xs-12 col-sm-6">
+												<md-input-container flex-offset class="md-block">
+													<label for="">Categoria por edad</label>
+													<md-select name="competitionAge" ng-model="vm.competitionAge" required>
+														<md-option ng-repeat="age in vm.categoriesAge" ng-value="age.categorieName">{{age.categorieName}}</md-option>
+													</md-select>
+
+													<!-- Mensaje de retroalimentacion -->
+													<div ng-messages="frmCompetition.competitionGenre.$error">
+														<div ng-messages-include="components/includes/messages.html"></div>
+													</div>
+												</md-input-container>
+											</div>
+
 											<!-- categoria de cinta -->
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
@@ -593,7 +608,7 @@
 												<md-input-container flex-offset class="md-block">
 													<label for="">Categoria por peso</label>
 													<md-select name="competitionWeight" ng-model="vm.competitionWeight" required>
-														<md-option ng-repeat="weight in vm.categoriesAge" ng-value="weight.categorieName">{{weight.categorieName}}</md-option>
+														<md-option ng-repeat="weight in vm.weights" ng-value="weight.weightName">{{weight.aliasName}}</md-option>
 													</md-select>
 
 													<!-- Mensaje de retroalimentacion -->
@@ -667,7 +682,7 @@
 													</div>
 												</md-input-container>
 											</div>
-											
+
 											<!-- contenedor de botones -->
 											<div class="col-xs-12">
 
