@@ -52,10 +52,6 @@
       url : '/part5', //ruta del url del estado
       templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart5.view.html'//vista que se va a cargar para este estado
     })
-    .state('admin.part6',{
-      url : '/part6', //ruta del url del estado
-      templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart6.view.html'//vista que se va a cargar para este estado
-    })
     // Fin de las vistas hojas del formualrio de registro del administrador.
 
     .state('assistant',{

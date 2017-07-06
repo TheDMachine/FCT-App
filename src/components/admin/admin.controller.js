@@ -6,7 +6,7 @@
     var originatorEv;
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
-    vm.events = eventService.getEvents();
+    //vm.events = eventService.getEvents();
     vm.weights = estabInfoService.getWeight();
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
@@ -15,7 +15,6 @@
 
     function init() { // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.weights = estabInfoService.getWeight();
-        vm.categories = estabInfoService.getCategories();
         vm.events = eventService.getEvents();
         aceptedEvents();
         vm.event = {};
@@ -68,6 +67,7 @@
     // Función para guardar
 
     vm.createNewEvent= function(pNewEvent) {
+      var bError = false;
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
@@ -77,13 +77,19 @@
       }else{
         for (var i = 0; i < vm.events.length; i++) {
           if (pNewEvent.eventName == vm.events[i].eventName) {
-            document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+            
+            bError =true;
           }
         }
-        eventService.setEvents(pNewEvent);
-        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
-        clean();
-        init();
+        if(bError == false){
+           eventService.setEvents(pNewEvent);
+          document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+          clean();
+          init();
+        }else{
+          document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+        }
+       
       }
     };
 
