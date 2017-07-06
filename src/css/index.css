@@ -56,6 +56,20 @@
     transition: 0.3s;
 }
 
+#landing #listaNav .dropdown-menu{
+  background-color: transparent;
+  border: 0.5px solid rgba(252, 177, 50, 0.5);
+}
+
+#landing #listaNav .dropdown-menu li a{
+  color: #fff;
+  font-weight: lighter;
+}
+
+#landing #listaNav .dropdown-menu li a:hover{
+  background: rgba(252, 177, 50, 0.5);
+}
+
 /*Fin estilos del landing*/
 
 /*Inicio estilo de tablas de consulta e historial eventos*/

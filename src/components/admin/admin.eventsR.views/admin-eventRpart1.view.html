@@ -7,7 +7,7 @@
 			<input name="frmEventInfo.eventName" ng-model="vm.event.eventName" md-maxlength="40" required>
 
 			<!-- Mensaje de retroalimentacion -->
-			<div ng-messages="frmEventInfo.eventName.$error">
+			<div ng-messages="frmEventInfo.$error">
 				<div ng-messages-include="components/includes/messages.html"></div>
 			</div>
 		</md-input-container>
@@ -22,7 +22,7 @@
 		    </md-select>
 
 			<!-- Mensaje de retroalimentacion -->
-			<div ng-messages="frmEventInfo.eventType.$error">
+			<div ng-messages="frmEventInfo.$error">
 				<div ng-messages-include="components/includes/messages.html"></div>
 			</div>
 		</md-input-container>
@@ -38,7 +38,7 @@
 		    </md-select>
 
 			<!-- Mensaje de retroalimentacion -->
-			<div ng-messages="frmEventInfo.eventState.$error">
+			<div ng-messages="frmEventInfo.$error">
 				<div ng-messages-include="components/includes/messages.html"></div>
 			</div>
 		</md-input-container>		

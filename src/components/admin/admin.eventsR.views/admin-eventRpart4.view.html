@@ -4,7 +4,7 @@
 	<input name="frmEventInfo.placeName" ng-model="vm.event.placeName" md-maxlength="40" required>
 
 	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.placeName.$error">
+	<div ng-messages="frmEventInfo.$error">
 		<div ng-messages-include="components/includes/messages.html"></div>
 	</div>
 </md-input-container>
@@ -15,7 +15,7 @@
 	<input name="frmEventInfo.latitude" ng-model="vm.event.latitude" required>
 
 	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.latitude.$error">
+	<div ng-messages="frmEventInfo.$error">
 		<div ng-messages-include="components/includes/messages.html"></div>
 	</div>
 </md-input-container>
@@ -26,7 +26,7 @@
 	<input name="frmEventInfo.length" ng-model="vm.event.length" required>
 
 	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.length.$error">
+	<div ng-messages="frmEventInfo.$error">
 		<div ng-messages-include="components/includes/messages.html"></div>
 	</div>
 </md-input-container>
@@ -37,7 +37,7 @@
 	<textarea name="frmEventInfo.location" ng-model="vm.event.location" md-maxlength="150" rows="5" md-select-on-focus required></textarea>
 
 	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.location.$error">
+	<div ng-messages="frmEventInfo.$error">
 		<div ng-messages-include="components/includes/messages.html"></div>
 	</div>
 </md-input-container>
