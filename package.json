@@ -1,10 +1,11 @@
 {
   "name": "FTC App",
-  "version": "0.1.4",
+  "version": "0.1.0",
   "description": "Material design app",
-  "main": "src/js/index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node start server.js"
   },
   "repository": {
     "type": "git",
@@ -23,12 +24,12 @@
   },
   "homepage": "http://tilwinjoy.github.io/angular-bootstrap-material/",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-angular-templatecache": "^1.8.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-jsbeautifier": "^2.0.3",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.3",
-    "merge2": "^1.0.2"
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-firefox-launcher": "^1.0.1"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "mongoose": "^4.11.0"
   }
 }

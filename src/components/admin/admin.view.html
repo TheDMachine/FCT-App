@@ -1,7 +1,7 @@
 <!-- Sidenav view -->
 <div class="body-app md-menu-demo" layout="column" ng-cloak ng-init="selected = 0">
 	<div class="side-content-container" layout="row" flex>
-		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10">
+		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10" flex-sm="15" flex-xs="20">
 			<md-list>
 				<md-list-item>
 					<figure class="logo-nav">
@@ -9,32 +9,32 @@
 				</figure>
 				</md-list-item>
 				<md-list-item layout="column">
-					<md-button class="button-selected" ng-click="selected = 1" ng-style="selected == 1 ? {'background' : 'rgba(27,201,142,0.7)'} : {'background' : 'inherit'} ">
-						<i class="material-icons side-icons home-icon" ng-style="selected == 1 ? {'color': '#fff'} : {'color': '#1bc98e'} ">&#xE88A;</i>
+					<md-button class="button-selected" ng-click="vm.selected = 1" ng-style="vm.selected == 1 ? {'background' : 'rgba(27,201,142,0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons home-icon" ng-style="vm.selected == 1 ? {'color': '#fff'} : {'color': '#1bc98e'} ">&#xE88A;</i>
 						<p class="menu-button">Home</p>
 					</md-button>
 				</md-list-item>
 				<md-list-item layout="column">
-					<md-button class="button-selected" ng-click="selected = 2" ng-style="selected == 2 ? {'background' : 'rgba(0,130,200,0.7)'} : {'background' : 'inherit'} ">
-						<i class="material-icons side-icons profile-icon" ng-style="selected == 2 ? {'color': '#fff'} : {'color': '#1a80a8'} ">&#xE853;</i>
+					<md-button class="button-selected" ng-click="vm.selected = 2" ng-style="vm.selected == 2 ? {'background' : 'rgba(0,130,200,0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 2 ? {'color': '#fff'} : {'color': '#1a80a8'} ">&#xE853;</i>
 						<p class="menu-button">Perfil</p>
 					</md-button>
 				</md-list-item>
 				<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="selected = 3" ng-style="selected == 3 ? {'background' : 'rgba(230,71,89,0.7)'} : {'background' : 'inherit'} ">
-						<i class="material-icons side-icons events-icon" ng-style="selected == 3 ? {'color': '#fff'} : {'color': '#e64759'} ">&#xE878;</i>
+					<md-button class="button-selected" ng-click="vm.selected = 3" ng-style="vm.selected == 3 ? {'background' : 'rgba(230,71,89,0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons events-icon" ng-style="vm.selected == 3 ? {'color': '#fff'} : {'color': '#e64759'} ">&#xE878;</i>
 						<p class="menu-button">Eventos</p>
 					</md-button>
 				</md-list-item>
 				<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="selected = 4" ng-style="selected == 4 ? {'background' : 'rgba(251,176,59,0.7)'} : {'background' : 'inherit'} ">
-						<i class="material-icons side-icons help-icon" ng-style="selected == 4 ? {'color': '#fff'} : {'color': '#fbb03b'} ">&#xEB3F;</i>
+					<md-button class="button-selected" ng-click="vm.selected = 4" ng-style="vm.selected == 4 ? {'background' : 'rgba(252, 177, 50, 0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 4 ? {'color': '#fff'} : {'color': '#fcb132'} ">&#xEB3F;</i>
 						<p class="menu-button">Patrocinadores</p>
 					</md-button>
 				</md-list-item>
 				<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="selected = 5" ng-style="selected == 5 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
-						<i class="material-icons side-icons register-icon" ng-style="selected == 5 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
+					<md-button class="button-selected" ng-click="vm.selected = 5" ng-style="vm.selected == 5 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons register-icon" ng-style="vm.selected == 5 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
 						<p class="menu-button">Registros</p>
 					</md-button>
 				</md-list-item>
@@ -52,7 +52,7 @@
       						<i class="material-icons user-nav-icons">&#xE7F4;</i>
       					</md-icon>
     				 <md-menu>
-				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
+				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="vm.openMenu($mdMenu, $event)">
 				        <md-icon md-menu-origin>
 				        	<i class="material-icons user-nav-icons">&#xE8B8;</i>
 				        </md-icon>
@@ -71,7 +71,7 @@
 				        </md-menu-item>
 				        <md-menu-divider></md-menu-divider>
 				        <md-menu-item>
-				          <md-button ng-click="ctrl.toggleNotifications()">
+				          <md-button ng-click="vm.logOut()">
 				            Cerrar sesión
 				          </md-button>
 				        </md-menu-item>
@@ -83,10 +83,178 @@
   			<!-- Poner la vista aquí
 
   			!!-->
+  			<!--Vista patrocinadores-->
+  			<div ng-show="vm.selected == 4" ng-cloak>
+  				<md-content layout="row">
+  					<div>
+  						<md-input-container flex-offset class="md-block" flex="100">
+						<label for="">Filtrar por nombre</label>
+							<input type="text" name="sponsorFilter" ng-model="vm.sponsorFilter"/>
+						</md-input-container>
+  					</div>
+  					<md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="20">
+				        <img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
+				        <md-card-title>
+				          <md-card-title-text>
+				            <span class="md-headline">ID: {{item.sponsorName}}</span>
+				            <span class="md-subhead">{{item.sponsorCompany}}</span>
+				          </md-card-title-text>
+				        </md-card-title>
+				        <div layout="row">
+				        	<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
+					        	<i class="material-icons">&#xE227;</i>
+					        </md-icon>
+					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Equipo'">
+					        	<i class="material-icons">&#xE903;</i>
+					        </md-icon>
+					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Comida'">
+					        	<i class="material-icons">&#xE8CC;</i>
+					        </md-icon>
+					        <p class="sponsor-p-type">{{item.sponsorType}}</p>
+				        </div>
+				        	<md-card-content>
+					          <p>
+					            {{item.description}}
+					          </p>
+					        </md-card-content>
+				        <md-card-actions layout="row" layout-align="end">
+				          <md-button ng-click="vm.getSponsorInfo(item)">Editar</md-button>
+				        </md-card-actions>
+			      </md-card>
+  				</md-content>
+  			</div>
+  			<!-- Vista registros -->
+  			<div ng-show="vm.selected == 5" flex="" ng-cloak>
+
+  			<!-- Sección de home -->
+			<div ng-show="selected == 1">
+				<div id="homeSection" class="container-fluid">
+
+					<!-- Visualización de los cinturones -->
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xs-12">
+								<h1 class="md-display-2">CINTURONES</h1>
+							</div>
+						</div>
+						<div class="row">
+							<div id="beltNum1" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA BLANCO</h3>
+									<p><span>Nombre de la Cinta:</span> Jin-Ti</p>
+									<p><span>Simbolismo:</span> Pureza / Inocencia</p>
+									<p><span>Significado:</span> Esta cinta representa la pureza, el portador del mismo es una persona que comienza en la práctica del Arte Marcial, busca comprender el sentido y orden de su Micro Universo interno y comienza a entender que se debe trabajar duro para conseguir las metas propuestas.</p>
+								</div>
+							</div>
+							<div id="beltNum2" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA AMARILLO</h3>
+									<p><span>Nombre de la Cinta:</span> Norang-Ti</p>
+									<p><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
+									<p><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
+									<p><span>Requisitos:</span> para ascender del cinturón blanco al amarillo debe tener como mínimo 3 torneos participados.</p>
+								</div>
+							</div>
+							<div id="beltNum3" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA VERDE</h3>
+									<p><span>Nombre de la Cinta:</span> Chorok-Ti</p>
+									<p><span>Simbolismo:</span> Naturaleza, fe y esperanza</p>
+									<p><span>Significado:</span> La cinta verde representa el florecimiento de una nueva vida. En este color se demuestra que el practicante del Arte Marcial comienza a meterse dentro de la práctica y empieza a desarrollar destrezas.</p>
+									<p><span>Requisitos:</span> para ascender del cinturón amarillo al verde debe tener como mínimo 4 torneos participados.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="lastSectBelt" class="container-fluid">
+						<div class="row">
+							<div id="beltNum4" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA AZUL</h3>
+									<p><span>Nombre de la Cinta:</span> Parang-Ti</p>
+									<p><span>Simbolismo:</span> Atardecer / Fruto maduro</p>
+									<p><span>Significado:</span> La cinta roja es considerada uno de los grados más dificiles, ya que en este el practicante del Arte Marcial debe alcanzar la fuerza, el arrojo, la valentía y lo que es más importante la humildad necesaria para poder llegar al grado de cinta negra. El color rojo representa el esfuerzo realizado a través de los años para llegar a ese nivel.</p>
+									<p><span>Requisitos:</span> para ascender del cinturón verde al azul debe tener como mínimo 5 torneos participados.</p>
+								</div>
+							</div>
+							<div id="beltNum5" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA ROJO</h3>
+									<p><span>Nombre de la Cinta:</span> Palgang-Ti</p>
+									<p><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
+									<p><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
+									<p><span>Requisitos:</span> para ascender del cinturón azul al rojo debe tener como mínimo 6 torneos participados.</p>
+								</div>
+							</div>
+							<div id="beltNum6" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA NEGRO</h3>
+									<p><span>Nombre de la Cinta:</span> Conjon-Ti</p>
+									<p><span>Simbolismo:</span> Idealismo y Pureza</p>
+									<p><span>Significado:</span> El trayecto transcurrido entre la "Cinta blanca y la "Cinta negra" solo representa un proceso de preparación del practicante de Tae Kwon Do, pero solo al llegar a "cinta negra" es capaz de empezar a recorrer el camino para aprender a disfrutarlo. La "cinta negra" es también, símbolo de habilidad y madurez, el saber aceptar y ejercer esta responsabilidad siempre van juntas, son inseparables.</p>
+									<p><span>Requisitos:</span> para ascender del cinturón rojo al negro debe tener como mínimo 7 torneos participados y 3 exhibiciones.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Visualizar pesos y categorías -->
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-6 tableContainer">
+							<div class="col-xs-12">
+								<h1 class="md-display-2">PESOS</h1>
+							</div>
+								<table>
+								    <thead>
+								      	<tr>
+								      		<th>Peso</th>
+								      		<th>Alias</th>
+									        <th>Kg min</th>
+									        <th>Kg max</th>
+								      	</tr>
+								    </thead>
+								    <tbody>
+								      	<tr ng-repeat="weight in vm.weights track by $index">
+								      		<td>{{weight.weightName}}</td>
+								      		<td>{{weight.aliasName}}</td>
+								      		<td>{{weight.minweightRange}}</td>
+									        <td>{{weight.maxweightRange}}</td>
+								      	</tr>
+								    </tbody>
+								</table>
+							</div>
+							<div class="col-md-6 tableContainer">
+							<div class="col-xs-12">
+								<h1 class="md-display-2">CATEGORÍAS</h1>
+							</div>
+								<table>
+								    <thead>
+								      	<tr>
+								      		<th>Categoría</th>
+									        <th>Min edad</th>
+									        <th>Max edad</th>
+								      	</tr>
+								    </thead>
+								    <tbody>
+								      	<tr ng-repeat="categ in vm.categories track by $index">
+								      		<td>{{categ.categorieName}}</td>
+								      		<td>{{categ.minAgeRange}}</td>
+									        <td>{{categ.maxAgeRange}}</td>
+								      	</tr>
+								    </tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Sección de Registros -->
   			<div ng-show="selected == 5" flex="" ng-cloak>
 			  <md-content>
 			    <md-tabs md-dynamic-height md-border-bottom>
-			      <md-tab label="Registro de academias">
+			      <md-tab label="Academias">
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Registro de academias</h1>
 								<div class="container-fluid row">
@@ -219,14 +387,60 @@
 									</div>
 							</md-content>
 			      </md-tab>
-			      <md-tab label="Registro de profesores">
-			        <md-content class="Registro de profesores">
-			          <h1 class="md-display-2">Registro de profesores</h1>
-			          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-			          <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-			          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+
+			    <!-- Tab de Eventos -->
+			    <md-tab id="events" label="Eventos" ui-sref=".part1">
+			        <md-content class="md-padding">
+<<<<<<< HEAD
+			          <h1 class="md-display-2">Eventos</h1>
+			          <!-- links de cada paso del formulario -->
+			          <div class="text-center statusButtons">
+			          	<a ui-sref-active="active" ui-sref=".part1"><span>1</span></a>
+			          	<a ui-sref-active="active" ui-sref=".part2"><span>2</span></a>
+			          	<a ui-sref-active="active" ui-sref=".part3"><span>3</span></a>
+			          	<a ui-sref-active="active" ui-sref=".part4"><span>4</span></a>
+			          	<a ui-sref-active="active" ui-sref=".part5"><span>5</span></a>
+			          	<a ui-sref-active="active" ui-sref=".part6"><span>6</span></a>
+			          </div>
+
+			          <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
+
+			          	<!-- Formulario para registro de eventos -->
+			          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
+
+		          			<!-- Espacio para mostrar vistas del registro -->
+		          			<div id="form-views" ui-view></div>
+			          	</form>
+			          </div>
+
+						<!-- Tabla para listar eventos -->
+			          <div>
+			          	<table>
+						    <thead>
+						      	<tr>
+							        <th>Fecha</th>
+							        <th>Nombre del Evento</th>
+							        <th>Lugar</th>
+						      	</tr>
+						    </thead>
+						    <tbody>
+						      	<tr ng-repeat="event in vm.events track by $index">
+							        <td>{{event.date1}}</td>
+							        <td>{{event.eventName}}</td>
+							        <td>{{event.placeName}}</td>
+							        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
+
+							    	<!-- Botones para editar y cancelar eventos -->
+							        <td><input type="button" value="Editar" ng-click="vm.getInfo(event)"></td>
+							        <td><input type="button" value="Cancelar"></td>
+						      	</tr>
+						    </tbody>
+					  	</table>
+
+			          </div>
 			        </md-content>
-			      </md-tab>
+			    </md-tab>
+
 						<md-tab label="Registro de alumnos">
 							<md-content class="md-padding">
 								<h1 class="md-display-2">Registro de alumnos</h1>
@@ -516,11 +730,310 @@
 									</div>
 							</md-content>
 						</md-tab>
-			      <md-tab label="Registro de patrocinadores">
+
+						<!-- Tab de patrocinadores -->
+					<md-tab label="Patrocinadores" md-active="vm.imageActive" ui-sref=".sponsorPartOne">
 			        <md-content class="md-padding">
-			          <h1 class="md-display-2">Registro de patrocinadores</h1>
-			          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+			          <h1 class="md-display-2">Patrocinadores</h1>
+ 			          <!--<div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
+ 			          	<div ui-sref-active="active" ui-sref=".sponsorPartOne">
+ 			          		<a>1</a>	
+ 			          	</div>
+ 			          	<div ui-sref-active="active" ui-sref=".sponsorPartTwo">
+ 			          		<a>2</a>
+ 			          	</div>
+			          </div>-->
+		          		<form id="spon-form" name="sponsorForm" autocomplete="off" ng-submit="vm.presaveSponsor(vm.sponsor)">
+		          		
+		          			<!-- Espacio para mostrar vistas del registro -->
+		          			<!--<div id="form-views" ui-view></div>-->
+		          			<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+								<md-input-container class="md-block" flex-gt-sm >
+								  <label>Nombre del patrocinador</label>
+								  <input md-maxlength="30" required name="name" ng-model="vm.sponsor.sponsorName" />
+
+								  <div class="hint" ng-if="showHints">Ingrese el nombre del patrocinador</div>
+
+								  <div ng-messages="sponsorForm.name.$error" ng-if="!showHints">
+								    <div ng-message="required">El primer nombre es requerido.</div>
+								    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
+								  </div>
+								</md-input-container>
+								
+									<md-input-container class="md-block" flex-gt-sm>
+								  <label>Nombre de la compañía</label>
+								  <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorCompany" />
+
+								  <div class="hint" ng-if="showHints">Ingrese el nombre de la compañía</div>
+
+								  <div ng-messages="sponsorForm.company.$error" ng-if="!showHints">
+								    <div ng-message="required">El primer nombre es requerido.</div>
+								    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
+								  </div>
+								</md-input-container>
+							</div>
+							<!--<div flex="90" layout="row" layout-align="end">
+								<a ui-sref="admin.sponsorPartTwo" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+							</div>-->
+		          			<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+							    <md-input-container flex="50">
+							      <label>Tipo de patrocinio</label>
+							      <md-select name="idType" ng-model="vm.sponsor.sponsorType" required>
+							        <md-option value="Dinero">Dinero</md-option>
+							        <md-option value="Equipo">Equipo</md-option>
+							        <md-option value="Comida">Alimento</md-option>
+							      </md-select>
+							    </md-input-container>
+								
+								<md-input-container class="md-block" flex-gt-sm>
+								  <label>Equivalente en dinero</label>
+								  <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorMoney" />
+
+								  <div class="hint" ng-if="showHints">Ingrese el nombre de la compañía</div>
+
+								  <div ng-messages="sponsorForm.company.$error" ng-if="!showHints">
+								    <div ng-message="required">El primer nombre es requerido.</div>
+								    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
+								  </div>
+								</md-input-container>
+							</div>
+							<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+								<md-input-container flex="90">
+									<label>Descripción</label>	
+									<textarea></textarea ng-model="vm.sponsor.description">
+								</md-input-container>
+							</div>
+							<!-- Subir logo -->
+								<label class="btn btn-default btn-file" for="photo">
+									Adjuntar logo
+								</label>
+							 	 <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.sponsor.photo">	
+								<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
+									<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.reset()">Submit</md-button>
+									<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
+								</div>
+			          	</form>
 			        </md-content>
+			      </md-tab>
+						<md-tab label="Representante de consejo" ui-sref="admin.partOne">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Registro de representante de consejo</h1>
+								<h2 id="errorConsul"></h2>
+								<!-- the links to our nested states using relative paths -->
+            <!-- add the active class if the state matches our ui-sref -->
+						<div class="statusButtons text-center">
+							<a ui-sref-active="active" ui-sref=".partOne"><span>1</span></a>
+							<a ui-sref-active="active" ui-sref=".partTwo"><span>2</span></a>
+						</div>
+								<form name="frmRegisterConsult" ng-submit="vm.preSaveConsul(vm.user)">
+									<div ui-view></div>
+								</form>
+			        </md-content>
+			      </md-tab>
+						<md-tab label="Bitacora del sistema" ui-sref="admin.log">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Bitacora del sistema</h1>
+								<div ui-view="log-sistem"></div>
+			          <h1 class="md-display-2">Academias</h1>
+			          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+			        </md-content>
+			      </md-tab>
+
+			      <md-tab ui-sref=".teachpart1" label="Profesores">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Profesores</h1>
+     		
+     			          <div class="text-center statusButtons">
+			          	<a ui-sref-active="active" ui-sref=".teachpart1"><span>1</span></a>
+			          	<a ui-sref-active="active" ui-sref=".teachpart2"><span>2</span></a>
+			          	<a ui-sref-active="active" ui-sref=".teachpart3"><span>3</span></a>
+			          	
+			          </div>
+			           <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
+
+                				 <form name="frmRegTeacher" autocomplete="off"  ng-submit="vm.presaveTeacher(vm.teacher)">
+                				 	<!-- Espacio para mostrar vistas del registro -->
+		          			<div id="form-views" ui-view></div>
+			          	</form>
+			          </div>
+			    </md-tabs>
+			  </md-content>
+			</div>
+
+			<!-- Sección de consulta, modificación, eliminar y listar eventos -->
+			<div ng-show="selected == 3">
+				<md-content>
+				    <md-tabs md-dynamic-height md-border-bottom>
+				
+				    	<!-- Tab consultar de eventos -->
+				      	<md-tab label="Consultar Eventos">
+					        <md-content class="md-padding">
+					        <h3>Filtrar Eventos</h3>
+
+							<!-- Filtro por fecha -->
+							<!-- <md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
+					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
+
+					        	<!-- Tabla de info eventos -->
+						        <div>
+						          	<table>
+									    <thead>
+									      	<tr>
+									      		<th>Nombre del evento</th>
+										        <th>Tipo de evento</th>
+										        <th>Estado</th>
+										        <th>invitado</th>
+										        <th>Fecha inicio</th>
+										        <th>Hora inicio</th>
+										        <th>Fecha Fin</th>
+										        <th>Hora Fin</th>
+										        <th>Academias</th>
+										        <th>Categorías</th>
+										        <th>Costo inscripción</th>
+										        <th>Patrocinadores</th>
+										        <th>Nombre del lugar</th>
+										        <th>Latitud</th>
+										        <th>Longitud</th>
+										        <th>Ubicación</th>
+										        <th>Asientos</th>
+										        <th>Entradas</th>
+										        <th>Nombre contacto</th>
+										        <th>Tel contacto</th>
+										        <th>Es de:</th>
+										        <th>Nombre organización</th>
+										        <th>Tipo de organización</th>
+										        <th>Descripción de la organización</th>
+										        <th>Logo del evento</th>
+									      	</tr>
+									    </thead>
+									    <tbody>
+									    <!-- | dateRange:vm.from:vm.to -->
+									      	<tr ng-repeat="event in vm.acceptedEvents track by $index">
+									      		<td>{{event.eventName}}</td>
+									      		<td>{{event.eventType}}</td>
+									      		<td>{{event.eventState}}</td>
+									      		<td>{{event.invitedName}}</td>
+										        <td>{{event.date1}}</td>
+										        <td>{{event.time1}}</td>
+										        <td>{{event.date2}}</td>
+										        <td>{{event.time2}}</td>
+										        <td>{{event.selectAcademies}}</td>
+										        <td>{{event.selectCategories}}</td>
+										        <td>{{event.costInsc}}</td>
+										        <td>{{event.selectSponsors}}</td>
+										        <td>{{event.placeName}}</td>
+										        <td>{{event.latitude}}</td>
+										        <td>{{event.length}}</td>
+										        <td>{{event.location}}</td>
+										        <td>{{event.seats}}</td>
+										        <td>{{event.tickets}}</td>
+										        <td>{{event.contactName}}</td>
+										        <td>{{event.contactPhone}}</td>
+										        <td>{{event.charityEvent}}</td>
+										        <td>{{event.orgName}}</td>
+										        <td>{{event.orgType}}</td>
+										        <td>{{event.description}}</td>
+										        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
+										    	
+										    	<!-- Botones para editar y cancelar eventos -->
+										        <td><md-button class="md-raised" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button></td>
+										        <td><md-button class="md-raised" ng-click="vm.cancelEvent(event)">Cancelar</md-button></td>
+									      	</tr>
+									    </tbody>
+								  	</table>
+						        </div>
+					        </md-content>
+				      	</md-tab>
+
+				      	<!-- Tab historial de eventos -->
+				      	<md-tab label="Historial de eventos">
+					        <md-content class="md-padding">
+					        	<h3>Filtrar Eventos</h3>
+
+					        	<!-- Filtros -->
+								<!-- Filtro por fecha -->
+								<!-- <md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
+						    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
+
+						    	<!-- Filtro por estado -->
+								<!-- <md-input-container>
+								    <label>Seleccione el estado</label>
+								    <md-select name="stateFilter" ng-model="vm.stateFilter">
+								    	<md-option value="aceptado">Aceptado</md-option>
+								        <md-option value="cancelado">Cancelado</md-option>
+								    </md-select>
+								</md-input-container> -->
+
+					        	<!-- Tabla historial de eventos -->
+						        <div>
+						          	<table>
+									    <thead>
+									      	<tr>
+									      		<th>Fecha</th>
+									      		<th>Nombre del evento</th>
+										        <th>Estado</th>
+										        <th>Nombre del lugar</th>
+									      	</tr>
+									    </thead>
+									    <tbody>
+									    <!-- dateRange:vm.from:vm.to | --> 
+									    <!-- | filter:{stateFilter:vm.stateFilter} -->
+									      	<tr ng-repeat="event in vm.events track by $index">
+									      		<td>{{event.date1}}</td>
+									      		<td>{{event.eventName}}</td>
+									      		<td>{{event.eventState}}</td>
+										        <td>{{event.placeName}}</td>
+									      	</tr>
+									    </tbody>
+								  	</table>
+						        </div>
+					        </md-content>
+				      	</md-tab>
+
+				      	<!-- Tab historial de competencias -->
+					    <md-tab label="Historial de competencias">
+					        <md-content class="md-padding">
+					        	
+					        </md-content>
+					    </md-tab>
+				    </md-tabs>
+			  	</md-content>
+			</div>
+		</md-content>
+			          	<!-- Tabla para listar eventos -->
+			          <div>
+			          	<table>
+						    <thead>
+						      	<tr>
+							        <th>Cedula</th>
+							        <th>Primer nombre</th>
+							        <th>Primer apellido</th>
+						      	</tr>
+						    </thead>
+						    <tbody>
+						      	<tr ng-repeat="teacher in vm.teachers track by $index">
+							        <td>{{teacher.id}}</td>
+							        <td>{{teacher.firstName}}</td>
+							        <td>{{teacher.firstLastName}}</td>
+							        <td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
+							    	
+							    	<!-- Botones para editar profesores -->
+							        <td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(pTeacher)"></td>
+							        
+						      	</tr>
+						    </tbody>
+					  	</table>
+
+			          </div>
+                    			 <!--<div>
+                    			  	<label class= "btn btn-default btn-file">Adjuntar imagen <input id="photo" type="file" name="photo" style="display:none" ng-model= "vm.teacher.photo"></label>
+                    			  </div>-->
+                    			  
+     						 	 <button type="submit" ng-click="vm.reset()">Registrar</button> 
+                    			 </div>
+                    			 </form>
+                    		</div>
+            			 </md-content>
 			      </md-tab>
 						<md-tab label="Registro de competencias">
 							<md-content class="md-padding">
@@ -700,6 +1213,5 @@
 			    </md-tabs>
 			  </md-content>
 			</div>
-		</md-content>
 	</div>
 </div>

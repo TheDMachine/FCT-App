@@ -1,14 +1,12 @@
 angular.module('app')
-  .controller('loginCtrl', ['$scope', function ($scope) {
-    $scope.user = {
-      name: "",
-      notifications: {}
+  .controller('loginCtrl', loginCtrl)
+    function loginCtrl(AuthService, $scope){
+    var vm = this;
+    function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
+      vm.email = '';
+      vm.password = '';
+    }init();
+    $scope.login = function(){
+      AuthService.getCredencials(vm.email,vm.password);
     }
-    $scope.errorMap = {
-      required: "This field is mandatory",
-      email: "Please enter a valid email"
-    }
-    $scope.change = function () {
-      console.log($scope);
-    }
-}]);
+  };

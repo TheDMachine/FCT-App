@@ -1,5 +1,5 @@
 *.swp
 *~
-.DS_store
+.DS_Store
 src/bower_components/
 node_modules/

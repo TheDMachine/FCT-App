@@ -1,4 +1,4 @@
-<div class="body">
+<div class="body" >
   <div class="log-container">
   <form name="signup">
       <figure class="logo">
@@ -11,7 +11,7 @@
         </md-icon>
           <md-input-container class="md-block" flex="80">
         <label>Email</label>
-        <input required type="email" name="clientEmail" ng-model="project.clientEmail"
+        <input required type="email" name="clientEmail" ng-model="vm.email"
                minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
 
         <div ng-messages="projectForm.clientEmail.$error" role="alert">
@@ -27,7 +27,7 @@
         </md-icon>
           <md-input-container flex="80">
             <label class="md-primary">Contraseña</label>
-            <input name="password" type="password" required ng-model="user.password" ng-pattern="/^[a-zA-Z0-9]*$/" />
+            <input name="password" type="password" required ng-model="vm.password" ng-pattern="/^[a-zA-Z0-9]*$/" />
 
             <div class="hint" ng-if="showHints">xyz08 OR abcd78</div>
 
@@ -38,7 +38,9 @@
         </div>
         <div class="text-center">
           <!--<a href="" class="btn btn-raised btn-info text-center" ng-disabled="signup.$invalid" abm-component>Log In</a>-->
-          <a href="javascript:void(0)" class="btn btn-default" style="color: #fff">Log In</a>
+          <md-button style="color: #fff" ng-click="login()" class="btn btn-default">
+            Log In
+          </md-button>
         </div>
       </div>
   </form>
