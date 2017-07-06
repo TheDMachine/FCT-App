@@ -376,3 +376,45 @@ md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-c
 }
 
 /*Fin estilos login*/
+
+/*estilos profesor*/
+
+
+md-card md-card-title md-card-title-media .md-media-lg{
+  width: 75%;
+  height: 20%;
+}
+
+span.md-headline.name-profile{
+  font-size: 3rem;
+}
+
+span.md-subhead.info-profile{
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding-bottom: 0.75%;
+}
+
+.profile-info{
+  font-size: 1.6rem;
+  margin: 1.5% 0;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  color: rgba(0,0,0,0.54);
+}
+
+.profile-info span{
+    color: #000;
+}
+
+md-card md-card-title md-card-title-text{
+  padding: 1.5% 0;
+}
+
+.phone-info{
+  line-height: 0;
+  margin-left: 0.5%;
+}
+
+.contact-info{
+  margin: 0.75% 0;
+}
