@@ -35,7 +35,7 @@ angular
           action: 'Crear',
           actionBy:pWhoMake,
           resultAction: pWhatDo,
-          timestamp: new Date();
+          timestamp: new Date()
         }
         //Guarda el objeto en el localStorage por el momento.
         _setLog(objToPush);
@@ -45,7 +45,7 @@ angular
           action: 'Modificar',
           actionBy:pWhoMake,
           resultAction: pWhatDo,
-          timestamp: new Date();
+          timestamp: new Date()
         }
         //Guarda el objeto en el localStorage por el momento.
         _setLog(objToPush);
@@ -55,7 +55,7 @@ angular
           action: 'Eliminar',
           actionBy:pWhoMake,
           resultAction: pWhatDo,
-          timestamp: new Date();
+          timestamp: new Date()
         }
         //Guarda el objeto en el localStorage por el momento.
         _setLog(objToPush);
@@ -65,7 +65,7 @@ angular
           action: 'Error',
           actionBy:pWhoMake,
           resultAction: pWhatDo,
-          timestamp: new Date();
+          timestamp: new Date()
         }
         //Guarda el objeto en el localStorage por el momento.
         _setLog(objToPush);
