@@ -87,7 +87,7 @@
   			<div ng-show="vm.selected == 4" ng-cloak>
   				<md-content layout="row">
   					<md-card ng-repeat="item in vm.sponsors" flex="20">
-				        <img ng-src="{{item.sponsorPhoto}}" class="md-card-image" alt="Washed Out">
+				        <img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
 				        <md-card-title>
 				          <md-card-title-text>
 				            <span class="md-headline">{{item.sponsorName}}</span>
@@ -95,20 +95,20 @@
 				          </md-card-title-text>
 				        </md-card-title>
 				        <div layout="row">
-				        	<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'money'">
+				        	<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
 					        	<i class="material-icons">&#xE227;</i>
 					        </md-icon>
-					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'equipo'">
+					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Equipo'">
 					        	<i class="material-icons">&#xE903;</i>
 					        </md-icon>
-					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'food'">
+					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Comida'">
 					        	<i class="material-icons">&#xE8CC;</i>
 					        </md-icon>
 					        <p class="sponsor-p-type">{{item.sponsorType}}</p>
 				        </div>
 				        	<md-card-content>
 					          <p>
-					            {{item.sponsorDescription}}
+					            {{item.description}}
 					          </p>
 					        </md-card-content>
 				        <md-card-actions layout="row" layout-align="end">
@@ -545,18 +545,85 @@
 					<md-tab label="Patrocinadores" md-active="vm.imageActive" ui-sref=".sponsorPartOne">
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Patrocinadores</h1>
- 			          <div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
+ 			          <!--<div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
  			          	<div ui-sref-active="active" ui-sref=".sponsorPartOne">
  			          		<a>1</a>	
  			          	</div>
  			          	<div ui-sref-active="active" ui-sref=".sponsorPartTwo">
  			          		<a>2</a>
  			          	</div>
-			          </div>
+			          </div>-->
 		          		<form id="spon-form" name="sponsorForm" autocomplete="off" ng-submit="vm.presaveSponsor(vm.sponsor)">
 		          		
 		          			<!-- Espacio para mostrar vistas del registro -->
-		          			<div id="form-views" ui-view></div>
+		          			<!--<div id="form-views" ui-view></div>-->
+		          			<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+								<md-input-container class="md-block" flex-gt-sm >
+								  <label>Nombre del patrocinador</label>
+								  <input md-maxlength="30" required name="name" ng-model="vm.sponsor.sponsorName" />
+
+								  <div class="hint" ng-if="showHints">Ingrese el nombre del patrocinador</div>
+
+								  <div ng-messages="sponsorForm.name.$error" ng-if="!showHints">
+								    <div ng-message="required">El primer nombre es requerido.</div>
+								    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
+								  </div>
+								</md-input-container>
+								
+									<md-input-container class="md-block" flex-gt-sm>
+								  <label>Nombre de la compañía</label>
+								  <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorCompany" />
+
+								  <div class="hint" ng-if="showHints">Ingrese el nombre de la compañía</div>
+
+								  <div ng-messages="sponsorForm.company.$error" ng-if="!showHints">
+								    <div ng-message="required">El primer nombre es requerido.</div>
+								    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
+								  </div>
+								</md-input-container>
+							</div>
+							<!--<div flex="90" layout="row" layout-align="end">
+								<a ui-sref="admin.sponsorPartTwo" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+							</div>-->
+		          			<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+							    <md-input-container flex="50">
+							      <label>Tipo de patrocinio</label>
+							      <md-select name="idType" ng-model="vm.sponsor.sponsorType" required>
+							        <md-option value="Dinero">Dinero</md-option>
+							        <md-option value="Equipo">Equipo</md-option>
+							        <md-option value="Comida">Alimento</md-option>
+							      </md-select>
+							    </md-input-container>
+								
+								<md-input-container class="md-block" flex-gt-sm>
+								  <label>Equivalente en dinero</label>
+								  <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorMoney" />
+
+								  <div class="hint" ng-if="showHints">Ingrese el nombre de la compañía</div>
+
+								  <div ng-messages="sponsorForm.company.$error" ng-if="!showHints">
+								    <div ng-message="required">El primer nombre es requerido.</div>
+								    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
+								  </div>
+								</md-input-container>
+							</div>
+							<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+								<md-input-container flex="90">
+									<label>Descripción</label>	
+									<textarea></textarea ng-model="vm.sponsor.description">
+								</md-input-container>
+							</div>
+							<!-- Subir logo -->
+							<div layout="row" layout-align="center center">
+								<label class="btn btn-default btn-file">
+									Adjuntar logo
+								</label>
+							 	 <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.sponsor.photo">	
+							</div>
+								<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
+									<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.reset()">Submit</md-button>
+									<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
+								</div>
 			          	</form>
 			        </md-content>
 			      </md-tab>
@@ -706,9 +773,9 @@
                     				</md-input-container>
                     			  </div>
 
-                    			 <div>
+                    			 <!--<div>
                     			  	<label class= "btn btn-default btn-file">Adjuntar imagen <input id="photo" type="file" name="photo" style="display:none" ng-model= "vm.teacher.photo"></label>
-                    			  </div>
+                    			  </div>-->
                     			  
      						 	 <button type="submit" ng-click="vm.reset()">Registrar</button> 
                     			 </div>

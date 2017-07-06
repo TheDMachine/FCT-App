@@ -10,6 +10,7 @@
   var vm = this;
   vm.newPassword = false;
   vm.currentUser;
+  vm.selected = 0;
 
   function init() {
     vm.currentUser = userService.findUserTeacher(userService.getCookie());

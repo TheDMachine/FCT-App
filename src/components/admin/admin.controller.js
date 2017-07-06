@@ -25,13 +25,7 @@
         vm.sponsors = sponsorService.getSponsors();
         vm.teacher = {};
         vm.teachers = userService.getTeachers();
-        vm.sponsor = {
-          sponsorName : vm.sponsorName,
-          sponsorCompany : vm.sponsorCompany,
-          sponsorType : vm.sponsorType,
-          sponsorMoney : vm.sponsorMoney,
-          sponsorPhoto : vm.sponsorPhoto
-        };
+        vm.sponsor = {};
         vm.academy = academyServices.getAcademy();
         vm.user = userService.getUsers();
         vm.log = logService.showLog();
@@ -68,7 +62,7 @@
 
     // Función para pre guardar datos del evento
 
-    vm.presaveEvent = function(pNewEvent){
+    vm.presaveEvent = function(pNewEvent) {
         console.log(pNewEvent);
         vm.cloudObj.data.file = document.getElementById("photo").files[0];
         Upload.upload(vm.cloudObj)
@@ -79,7 +73,7 @@
       }
 
 // Función para guardar
-    vm.createNewEvent= function(pNewEvent){
+    vm.createNewEvent= function(pNewEvent) {
       eventService.setEvents(pNewEvent);
       vm.error = false;
       if (vm.error === true) {
@@ -94,29 +88,30 @@
 
       // Funciones para guardar patrocinadores
 
-    vm.saveSponsor= function(pNewSponsor){
+    vm.saveSponsor= function(pNewSponsor) {
       sponsorService.setSponsors(pNewSponsor);
       vm.error = false;
       /*if (vm.error === true) {
-        document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+        document.querySelector('.ErrorMessage').innerHTML = 'El patrocinador ya existe';
         }else{
-        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+        document.querySelector('.SuccessMessage').innerHTML = 'El patrocinador se registró exitosamente';
       }*/
       console.log(sponsorService.getSponsors());
       clean();
       init();
       }
 
-      vm.presaveSponsor = function(pNewSponsor){
-        /*vm.cloudObj.data.file = document.getElementById("photoSponsor").files[0];
+      vm.presaveSponsor = function(pNewSponsor) {
+        console.log(pNewSponsor);
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
         Upload.upload(vm.cloudObj)
         .success(function(data){
-        pNewSponsor.sponsorPhoto = vm.data.url;
-         });*/
-         vm.saveSponsor(pNewSponsor);
+        pNewSponsor.photo = data.url;
+        vm.saveSponsor(pNewSponsor);
+         });
       }
       // vm.error = false;
-      vm.preSaveConsul = function(pNewConsult){
+      vm.preSaveConsul = function(pNewConsult) {
         console.log(pNewConsult);
        vm.cloudObj.data.file = document.getElementById("photo").files[0];
        Upload.upload(vm.cloudObj)
@@ -127,7 +122,7 @@
         }
 
           // Función para imprimir datos en el formulario de patrocinadores
-    vm.getSponsorInfo = function(pSponsor){
+    vm.getSponsorInfo = function(pSponsor) {
       vm.sponsor.sponsorName = pSponsor.sponsorName,
       vm.sponsor.sponsorCompany = pSponsor.sponsorCompany,
       vm.sponsor.sponsorType = pSponsor.sponsorType,
