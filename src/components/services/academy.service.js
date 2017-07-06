@@ -1,18 +1,18 @@
-(function(){
+(function () {
   angular
-  .module('app')
-  .service('academyServices', academyServices);
+    .module('app')
+    .service('academyServices', academyServices);
 
   function academyServices() {
     var academy = [];
     var publicAPI = {
       setAcademy: _setAcademy,
       getAcademy: _getAcademy,
-      updateAcademy : _updateAcademy
+      updateAcademy: _updateAcademy
     };
     return publicAPI;
     //Guardar academia
-    function _setAcademy(newAcademy){
+    function _setAcademy(newAcademy) {
       var academyList = _getAcademy();
       var position = searchAcademy(newAcademy);
       if (position == -1) {
@@ -21,7 +21,7 @@
       }
     }
     //buscar si la academia se repite
-    function searchAcademy(newAcademy){
+    function searchAcademy(newAcademy) {
       var academyList = _getAcademy();
       var position = -1;
 
@@ -33,18 +33,18 @@
       return position;
     }
     //muestra la informacion mas actual
-    function _getAcademy(){
+    function _getAcademy() {
       var academyList = JSON.parse(localStorage.getItem('lsAcademyList'));
-      if(academyList == null){
+      if (academyList == null) {
         academyList = academy;
       }
       return academyList;
     }
     //editar la informacion de la academian ya registrada
-    function _updateAcademy(editAcademy){
+    function _updateAcademy(editAcademy) {
       var academyList = _getAcademy();
-      for(var i = 0; i < academyList.length; i++){
-        if(academyList[i].name == editAcademy.name){
+      for (var i = 0; i < academyList.length; i++) {
+        if (academyList[i].name == editAcademy.name) {
           academyList[i] = editAcademy;
         }
       }
@@ -52,3 +52,4 @@
     }
   }
 })();
+
