@@ -30,6 +30,51 @@ md-input-container{
 
 /*Fin estilos de pasos formulario eventos*/
 
+/*Inicio estilos de pasos formulario patrocinadores*/
+#sponsorButtons div{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #fbb03b;
+  text-align: center;
+  margin: 0 1%;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#sponsorButtons div a{
+  color: #fbb03b;
+  line-height: 2.7;
+  text-decoration: none;
+  padding: 1.5%;
+}
+
+#sponsorButtons div.active{
+  background: #fbb03b;
+  color: #fff;
+}
+
+#sponsorButtons div.active a{
+  color: #fff;
+}
+
+.sponsor-form{
+  margin: 0 auto;
+  padding: 1.5% 0;
+  box-sizing: border-box;
+}
+
+md-icon.sponsor-icon{
+  margin: 0 3.5% 0 6%;
+  color: #ffd034;
+}
+
+.sponsor-p-type{
+  line-height: 1.6;
+  font-weight: 600;
+}
+/*Fin estilos de pasos formulario patrocinadores*/
+
 /* Estilos semilla */
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
   background-color: #0082c8;
@@ -98,7 +143,7 @@ md-sidenav.md-locked-open, md-sidenav.md-locked-open.md-closed, md-sidenav.md-lo
 }
 
 .help-icon{
-  color: #fbb03b;
+  color: #fcb132;
 }
 
 .register-icon{

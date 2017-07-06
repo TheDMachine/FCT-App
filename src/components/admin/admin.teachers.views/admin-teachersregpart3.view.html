@@ -13,7 +13,7 @@
     <md-input-container flex-offset>
       <label>Seleccione la nacionalidad</label>
       <md-select id="sltCountry" ng-model="vm.teacher.nationality">
-        <md-option value="nacionalidad">Grado1</md-option>
+        <md-option ng-repeat='country in vm.countries' value="{{country}}">{{country}}</md-option>
       </md-select>
     </md-input-container>
 
@@ -23,7 +23,7 @@
     <md-input-container flex-offset>
       <label>Seleccione una academia</label>
       <md-select id="sltAcademia" ng-model="vm.teacher.academy" required>
-        <md-option value="academia">Academia</md-option>
+        <md-option ng-repeat="academy in vm.academy" value="{{academy.name}}">{{academy.name}}</md-option>
       </md-select>
     </md-input-container>
 
@@ -37,9 +37,10 @@
 
 
     <div>
-      <label class="btn btn-default btn-file">Adjuntar imagen
-        <input id="photo" type="file" name="photo" style="display:none" ng-model="vm.teacher.photo">
+      <label class="btn btn-default btn-file" for="photo">
+        Adjuntar logo
       </label>
+       <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.teacher.photo">  
     </div>
 
     <button type="submit" ng-disabled="frmRegTeacher.$invalid || submitDisable" ng-click="vm.reset()">Registrar</button>

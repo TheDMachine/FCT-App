@@ -29,8 +29,27 @@
         }]
       },
       controller: 'adminCtrl',
-      controllerAs: 'vm'
+      controllerAs:'vm'
     })
+    .state('admin.log',{
+      url:'/log',
+      views:{
+        'log-sistem':{
+          templateUrl:'components/log/log.view.html',
+          controller:'adminCtrl',
+          controllerAs:'vm'
+        }
+      }
+    })
+    .state('admin.partOne',{
+      url:'/new-consult-part1',
+      templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepOne.view.html'
+    })
+    .state('admin.partTwo',{
+      url:'/new-consult-part2',
+      templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepTwo.view.html'
+    })
+
     //Inicio de las vistas hijas del formulario de registro del administrador
     .state('admin.part1',{
       url : '/part1', //ruta del url del estado
@@ -55,6 +74,14 @@
     .state('admin.part6',{
       url : '/part6', //ruta del url del estado
       templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart6.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.sponsorPartOne', {
+      url : '/sponsorPartOne',
+      templateUrl : 'components/admin/sponsor.register.views/admin-sponsor1.view.html'
+    })
+    .state('admin.sponsorPartTwo', {
+      url : '/sponsorPartTwo',
+      templateUrl : 'components/admin/sponsor.register.views/admin-sponsor2.view.html'
     })
     // Fin de las vistas hojas del formualrio de registro del administrador.
 
@@ -121,7 +148,7 @@
       controller: 'teacherCtrl',
       controllerAs: 'vm'
     })
-        .state('login',{
+    .state('login',{
       url : '/login', //ruta del url del estado
       templateUrl : 'components/login/login.view.html',//vista que se va a cargar para este estado
       // El resolve sirve para el controlador junto con la vista
@@ -130,9 +157,10 @@
           return $ocLazyLoad.load('components/login/login.controller.js')
         }]
       },
-      controller: 'loginCtrl'
+      controller: 'loginCtrl',
+      controllerAs: 'vm'
     })
 
-    $urlRouterProvider.otherwise('/admin');
+    $urlRouterProvider.otherwise('/login');
   }
 })();
