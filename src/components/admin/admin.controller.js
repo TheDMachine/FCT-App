@@ -4,7 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService) {
+  function adminCtrl($scope, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService) {
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
     vm.selected = 0;
@@ -29,6 +29,12 @@
         vm.academy = academyServices.getAcademy();
         vm.user = userService.getUsers();
         vm.log = logService.showLog();
+        $http.get('http://api.population.io:80/1.0/countries').then(function(data){
+          console.log(data);
+          vm.countries = data.data.countries;
+        },function(err){
+          console.log(err);
+        })
       }init();
 
     vm.openMenu = function($mdMenu, ev) {
@@ -285,7 +291,7 @@
     function clean(){
       vm.event='';
     };
-      //funcion para guardar informacuon de academia
+      //funcion para guardar informacion de academia
     /*Final sidenav
     -->>*/
 
