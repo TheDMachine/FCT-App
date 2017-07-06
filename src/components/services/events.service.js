@@ -20,7 +20,6 @@
     // Función para guardar eventos
     function _setEvents(pEvent){
       var eventsList = _getEvents();
-
       eventsList.push(pEvent);
       localStorage.setItem('lsEventsList', JSON.stringify(eventsList));
       console.log(eventsList);

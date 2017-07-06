@@ -17,17 +17,24 @@
     vm.user = {};
     vm.log = {};
     vm.imageActive = false;
+    vm.cloudObj = imageService.getConfiguration();
+    vm.events = eventService.getEvents();
+    vm.weights = estabInfoService.getWeight();
+    vm.categories = estabInfoService.getCategories();
+    vm.acceptedEvents = [];
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.originatorEv;
         vm.academy = academyServices.getAcademy();
+        vm.weights = estabInfoService.getWeight();
+        vm.categories = estabInfoService.getCategories();
         vm.events = eventService.getEvents();
+        aceptedEvents();
         vm.event = {};
         vm.sponsors = sponsorService.getSponsors();
         vm.teacher = {};
         vm.teachers = userService.getTeachers();
         vm.sponsor = {};
-        vm.academy = academyServices.getAcademy();
         vm.user = userService.getUsers();
         vm.log = logService.showLog();
         vm.belts = estabInfoService.getBelts();
@@ -80,21 +87,28 @@
             pNewEvent.photo = data.url;
             vm.createNewEvent(pNewEvent);
           });
-      }
+      };
 
 // Función para guardar
     vm.createNewEvent= function(pNewEvent) {
-      eventService.setEvents(pNewEvent);
-      vm.error = false;
-      if (vm.error === true) {
-        document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
-        }else{
+      console.log(pNewEvent.time1);
+      if (vm.events.length == 0) {
+        eventService.setEvents(pNewEvent);
+        document.querySelector('.ErrorMessage').innerHTML = 'El evento se registró exitosamente';
+        clean();
+        init();
+      }else{
+        for (var i = 0; i < vm.events.length; i++) {
+          if (pNewEvent.eventName == vm.events[i].eventName) {
+            document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+          }
+        }
+        eventService.setEvents(pNewEvent);
         document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+        clean();
+        init();
       }
-      console.log(eventService.getEvents());
-      clean();
-      init();
-      }
+    };
 
       // Funciones para guardar patrocinadores
 
@@ -109,7 +123,9 @@
       console.log(sponsorService.getSponsors());
       clean();
       init();
-      }
+
+    }
+    // Función para guardar
 
       vm.presaveSponsor = function(pNewSponsor) {
         console.log(pNewSponsor);
@@ -164,7 +180,7 @@
     }
 
     // Función para imprimir datos en el formulario
-    vm.getInfo = function(pEvent){
+    vm.getInfo = function(pEvent) {
       vm.event.eventName = pEvent.eventName;
       vm.event.invitedName = pEvent.invitedName;
       vm.event.eventType = pEvent.eventType;
@@ -196,7 +212,7 @@
     }
 
     // Función para actualizar datos de evento
-    vm.updateEvent = function(){
+    vm.updateEvent = function() {
       var modEvent = {
       eventName : vm.event.eventName,
       invitedName : vm.event.invitedName,
@@ -230,7 +246,23 @@
       eventService.updateEvent(modEvent);
       init();
       clean();
-    }
+    };
+
+    vm.cancelEvent = function(pEvent) {
+      pEvent.eventState = 'cancelado';
+      eventService.updateEvent(pEvent);
+      init();
+      aceptedEvents();
+    };
+
+    function aceptedEvents() {
+        for (var i = 0; i < vm.events.length; i++) {
+          if (vm.events[i].eventState === 'aprobado') {
+            vm.acceptedEvents.push(vm.events[i]);
+          }
+        }
+      }
+
     vm.createNewConsult = function(pNewConsul){
       console.log("El objeto con imagen es %o",pNewConsul);
       console.log("Gracias, ha sido creado un nuevo represetante de consejo %o",pNewConsul);
@@ -292,9 +324,9 @@
 
     // Función para limpiar campos
 
-    function clean(){
+    function clean() {
       vm.event='';
-    };
+    }
 
     /*Final sidenav
     -->>*/
@@ -474,4 +506,5 @@
     }
 
   }
+
 })();
