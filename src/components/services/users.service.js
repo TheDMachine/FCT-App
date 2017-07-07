@@ -33,7 +33,8 @@
     };
     return publicAPI;
 
-    function _setUsers(newUser) {
+    //Guardar alumno
+    function _setUsers(newUser){
       var usersList = _getUsers();
       var position = searchUser(newUser);
       if (position == -1) {
@@ -41,6 +42,7 @@
         localStorage.setItem('lsUsersList', JSON.stringify(usersList));
       }
     }
+
     //buscar si la cédula se repite
     function searchUser(newUser) {
       var usersList = _getUsers();
@@ -53,6 +55,7 @@
       }
       return position;
     }
+
     //muestra la informacion mas actual
     function _getUsers() {
       var usersList = JSON.parse(localStorage.getItem('lsUsersList'));
@@ -61,6 +64,7 @@
       }
       return usersList;
     }
+
     //editar la informacion del alumno ya registrada
     function _updateUsers(editUser) {
       var usersList = _getUsers();

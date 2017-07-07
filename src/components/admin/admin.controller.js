@@ -4,7 +4,8 @@
     .module('app')
     .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService) {
+  function adminCtrl($scope, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
+
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
     vm.selected = 0;
@@ -16,19 +17,29 @@
     vm.user = {};
     vm.log = {};
     vm.imageActive = false;
+    vm.cloudObj = imageService.getConfiguration();
+    vm.events = eventService.getEvents();
+    vm.weights = estabInfoService.getWeight();
+    vm.categories = estabInfoService.getCategories();
+    vm.acceptedEvents = [];
 
     function init() { // función que se llama así misma para indicar que sea lo primero que se ejecute
       vm.originatorEv;
       vm.academy = academyServices.getAcademy();
+      vm.weights = estabInfoService.getWeight();
+      vm.categories = estabInfoService.getCategories();
       vm.events = eventService.getEvents();
+      aceptedEvents();
       vm.event = {};
       vm.sponsors = sponsorService.getSponsors();
       vm.teacher = {};
       vm.teachers = userService.getTeachers();
       vm.sponsor = {};
-      vm.academy = academyServices.getAcademy();
-      vm.user = userService.getUsers();
+      vm.users = userService.getUsers();
       vm.log = logService.showLog();
+      vm.belts = estabInfoService.getBelts();
+      vm.weights = estabInfoService.getWeight();
+      vm.categoriesAge = estabInfoService.getCategories();
       $http.get('http://api.population.io:80/1.0/countries').then(function (data) {
         console.log(data);
         vm.countries = data.data.countries;
@@ -77,36 +88,44 @@
           pNewEvent.photo = data.url;
           vm.createNewEvent(pNewEvent);
         });
-    }
+    };
 
     // Función para guardar
     vm.createNewEvent = function (pNewEvent) {
-      eventService.setEvents(pNewEvent);
-      vm.error = false;
       if (vm.error === true) {
-        document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+      console.log(pNewEvent.time1);
+      if (vm.events.length == 0) {
+        eventService.setEvents(pNewEvent);
+        document.querySelector('.ErrorMessage').innerHTML = 'El evento se registró exitosamente';
+        clean();
+        init();
       } else {
+        for (var i = 0; i < vm.events.length; i++) {
+          if (pNewEvent.eventName == vm.events[i].eventName) {
+            document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+          }
+        }
+        eventService.setEvents(pNewEvent);
         document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+        clean();
+        init();
       }
-      console.log(eventService.getEvents());
-      clean();
-      init();
-    }
+    };
 
     // Funciones para guardar patrocinadores
 
     vm.saveSponsor = function (pNewSponsor) {
-      sponsorService.setSponsors(pNewSponsor);
-      vm.error = false;
-      /*if (vm.error === true) {
-        document.querySelector('.ErrorMessage').innerHTML = 'El patrocinador ya existe';
-        }else{
-        document.querySelector('.SuccessMessage').innerHTML = 'El patrocinador se registró exitosamente';
-      }*/
-      console.log(sponsorService.getSponsors());
-      clean();
-      init();
-    }
+        sponsorService.setSponsors(pNewSponsor);
+        vm.error = false;
+        /*if (vm.error === true) {
+          }else{
+          document.querySelector('.SuccessMessage').innerHTML = 'El patrocinador se registró exitosamente';
+        }*/
+        console.log(sponsorService.getSponsors());
+        init();
+
+      }
+      // Función para guardar
 
     vm.presaveSponsor = function (pNewSponsor) {
         console.log(pNewSponsor);
@@ -227,7 +246,22 @@
       eventService.updateEvent(modEvent);
       init();
       clean();
+    };
+
+    vm.cancelEvent = function (pEvent) {
+      pEvent.eventState = 'cancelado';
+      eventService.updateEvent(pEvent);
+      init();
+      aceptedEvents();
+    };
+
+      for (var i = 0; i < vm.events.length; i++) {
+        if (vm.events[i].eventState === 'aprobado') {
+          vm.acceptedEvents.push(vm.events[i]);
+        }
+      }
     }
+
     vm.createNewConsult = function (pNewConsul) {
       console.log("El objeto con imagen es %o", pNewConsul);
       console.log("Gracias, ha sido creado un nuevo represetante de consejo %o", pNewConsul);
@@ -291,12 +325,13 @@
 
     function clean() {
       vm.event = '';
-    };
-    //funcion para guardar informacion de academia
+    }
+
     /*Final sidenav
     -->>*/
 
     //funcion para guardar informacion de academia
+
     vm.createAcademy = function () {
       var newAcademy = {
         name: vm.name,
@@ -370,11 +405,9 @@
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins,
-        status: vm.status
+        tournamentsWins: vm.tournamentsWins
       };
       console.log(newUser);
-      userServices.setUsers(newUser);
       cleanStudent();
       init();
     }
@@ -420,8 +453,7 @@
         vm.belt = student.belt,
         vm.category = student.category,
         vm.tournaments = student.tournaments,
-        vm.tournamentsWins = student.tournamentsWins,
-        vm.status = student.status
+        vm.tournamentsWins = student.tournamentsWins
     }
 
     //funcion para guardar alumno editada
@@ -444,14 +476,37 @@
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins,
-        status: vm.status
+        tournamentsWins: vm.tournamentsWins
       }
-      userServices.updateUsers(editstudent);
+      userService.updateUsers(editstudent);
       init();
       cleanStudent();
     }
 
+    //funcion para guardar competencia
+    vm.createCompetition = function () {
+      var newCompetition = {
+        competitionNumber: vm.competitionNumber,
+        eventBelongs: vm.eventBelongs,
+        competitionGenre: vm.competitionGenre,
+        competitionBelt: vm.competitionBelt,
+        competitionWeight: vm.competitionWeight,
+        arrayObject: [vm.competitors]
+      }
+      newCompetition.competitors = [];
+      newCompetition.competitors.push(newCompetition.arrayObject[0]['0']);
+      newCompetition.competitors.push(newCompetition.arrayObject[0]['1']);
+      newCompetition.competitors.push(newCompetition.arrayObject[0]['2']);
+      newCompetition.competitors.push(newCompetition.arrayObject[0]['3']);
+      newCompetition.competitors.push(newCompetition.arrayObject[0]['4']);
+      console.log(newCompetition);
+      console.log(newCompetition.competitors)
+      eventService.setCompetitions(newCompetition);
+      cleanStudent();
+      init();
+    }
+
   }
+
 })();
 
