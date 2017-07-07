@@ -409,7 +409,7 @@
         tournamentsWins: vm.tournamentsWins
       };
       console.log(newUser);
-      userServices.setUsers(newUser);
+      userService.setUsers(newUser);
       cleanStudent();
       init();
     }
@@ -480,7 +480,7 @@
         tournaments: vm.tournaments,
         tournamentsWins: vm.tournamentsWins
       }
-      userServices.updateUsers(editstudent);
+      userService.updateUsers(editstudent);
       init();
       cleanStudent();
     }
