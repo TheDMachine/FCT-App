@@ -251,7 +251,7 @@
 			</div>
 
 			<!-- Sección de Registros -->
-  			<div ng-show="selected == 5" flex="" ng-cloak>
+  			<div ng-show="vm.selected == 5" flex="" ng-cloak>
 			  <md-content>
 			    <md-tabs md-dynamic-height md-border-bottom>
 			      <md-tab label="Academias">
@@ -343,7 +343,7 @@
 											<md-button ng-click="vm.createAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Agregar Academia</md-button>
 
 											<!-- boton para editar -->
-											<md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Actualizar Academia</md-button>
+											<md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Editar Academia</md-button>
 										</form>
 									</div>
 								</div>
@@ -379,7 +379,7 @@
 														<td>{{academy.competitors}}</td>
 														<td>{{academy.phone}}</td>
 														<td>{{academy.email}}</td>
-														<td><md-button ng-click="vm.getAcademy(academy)" class="md-raised">Actualizar</md-button></td>
+														<td><md-button ng-click="vm.getAcademy(academy)" class="md-raised">Editar</md-button></td>
 													</tr>
 												</tbody>
 											</table>
@@ -391,7 +391,6 @@
 			    <!-- Tab de Eventos -->
 			    <md-tab id="events" label="Eventos" ui-sref=".part1">
 			        <md-content class="md-padding">
-<<<<<<< HEAD
 			          <h1 class="md-display-2">Eventos</h1>
 			          <!-- links de cada paso del formulario -->
 			          <div class="text-center statusButtons">
@@ -438,10 +437,10 @@
 					  	</table>
 
 			          </div>
+
 			        </md-content>
 			    </md-tab>
-
-						<md-tab label="Registro de alumnos">
+				<md-tab label="Registro de alumnos">
 							<md-content class="md-padding">
 								<h1 class="md-display-2">Registro de alumnos</h1>
 								<div class="container-fluid row">
@@ -621,7 +620,9 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Profesor</label>
-													<input name="teacher" type="text" ng-model="vm.teacher" required/>
+													<md-select name="teacher" ng-model="vm.teacher" required>
+								            <md-option ng-repeat="teacher in vm.teachers" ng-value="teacher.id">{{teacher.firstName}} {{teacher.firstLastName}}</md-option>
+													</md-select>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.teacher.$error">
@@ -634,7 +635,9 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Cinta</label>
-													<input name="belt" type="text" ng-model="vm.belt" required/>
+													<md-select name="belt" ng-model="vm.belt" required>
+								            <md-option ng-repeat="belt in vm.belts" ng-value="belt.belt">{{belt.belt}}</md-option>
+													</md-select>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.belt.$error">
@@ -647,7 +650,9 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Categoría</label>
-													<input name="category" type="text" ng-model="vm.category" required/>
+													<md-select name="category" ng-model="vm.category" required>
+								            <md-option ng-repeat="category in vm.categoriesAge" ng-value="category.categorieName">{{category.categorieName}}</md-option>
+													</md-select>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.category.$error">
@@ -686,7 +691,7 @@
 											<md-button ng-click="vm.createStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Agregar Alumno</md-button>
 
 											<!-- boton para editar -->
-											<md-button ng-click="vm.updateStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Actualizar Alumno</md-button>
+											<md-button ng-click="vm.updateStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Editar Alumno</md-button>
 										</form>
 									</div>
 								</div>
@@ -722,7 +727,7 @@
 														<td>{{student.belt}}</td>
 														<td>{{student.category}}</td>
 														<td>{{student.email}}</td>
-														<td><md-button ng-click="vm.getStudent(student)" class="md-raised">Actualizar</md-button></td>
+														<td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
 													</tr>
 												</tbody>
 											</table>
@@ -737,14 +742,14 @@
 			          <h1 class="md-display-2">Patrocinadores</h1>
  			          <!--<div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
  			          	<div ui-sref-active="active" ui-sref=".sponsorPartOne">
- 			          		<a>1</a>	
+ 			          		<a>1</a>
  			          	</div>
  			          	<div ui-sref-active="active" ui-sref=".sponsorPartTwo">
  			          		<a>2</a>
  			          	</div>
 			          </div>-->
 		          		<form id="spon-form" name="sponsorForm" autocomplete="off" ng-submit="vm.presaveSponsor(vm.sponsor)">
-		          		
+
 		          			<!-- Espacio para mostrar vistas del registro -->
 		          			<!--<div id="form-views" ui-view></div>-->
 		          			<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
@@ -759,7 +764,7 @@
 								    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
 								  </div>
 								</md-input-container>
-								
+
 									<md-input-container class="md-block" flex-gt-sm>
 								  <label>Nombre de la compañía</label>
 								  <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorCompany" />
@@ -784,7 +789,7 @@
 							        <md-option value="Comida">Alimento</md-option>
 							      </md-select>
 							    </md-input-container>
-								
+
 								<md-input-container class="md-block" flex-gt-sm>
 								  <label>Equivalente en dinero</label>
 								  <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorMoney" />
@@ -799,7 +804,7 @@
 							</div>
 							<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
 								<md-input-container flex="90">
-									<label>Descripción</label>	
+									<label>Descripción</label>
 									<textarea></textarea ng-model="vm.sponsor.description">
 								</md-input-container>
 							</div>
@@ -807,7 +812,7 @@
 								<label class="btn btn-default btn-file" for="photo">
 									Adjuntar logo
 								</label>
-							 	 <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.sponsor.photo">	
+							 	 <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.sponsor.photo">
 								<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
 									<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.reset()">Submit</md-button>
 									<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
@@ -815,227 +820,7 @@
 			          	</form>
 			        </md-content>
 			      </md-tab>
-						<md-tab label="Representante de consejo" ui-sref="admin.partOne">
-			        <md-content class="md-padding">
-			          <h1 class="md-display-2">Registro de representante de consejo</h1>
-								<h2 id="errorConsul"></h2>
-								<!-- the links to our nested states using relative paths -->
-            <!-- add the active class if the state matches our ui-sref -->
-						<div class="statusButtons text-center">
-							<a ui-sref-active="active" ui-sref=".partOne"><span>1</span></a>
-							<a ui-sref-active="active" ui-sref=".partTwo"><span>2</span></a>
-						</div>
-								<form name="frmRegisterConsult" ng-submit="vm.preSaveConsul(vm.user)">
-									<div ui-view></div>
-								</form>
-			        </md-content>
-			      </md-tab>
-						<md-tab label="Bitacora del sistema" ui-sref="admin.log">
-			        <md-content class="md-padding">
-			          <h1 class="md-display-2">Bitacora del sistema</h1>
-								<div ui-view="log-sistem"></div>
-			          <h1 class="md-display-2">Academias</h1>
-			          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
-			        </md-content>
-			      </md-tab>
-
-			      <md-tab ui-sref=".teachpart1" label="Profesores">
-			        <md-content class="md-padding">
-			          <h1 class="md-display-2">Profesores</h1>
-     		
-     			          <div class="text-center statusButtons">
-			          	<a ui-sref-active="active" ui-sref=".teachpart1"><span>1</span></a>
-			          	<a ui-sref-active="active" ui-sref=".teachpart2"><span>2</span></a>
-			          	<a ui-sref-active="active" ui-sref=".teachpart3"><span>3</span></a>
-			          	
-			          </div>
-			           <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
-
-                				 <form name="frmRegTeacher" autocomplete="off"  ng-submit="vm.presaveTeacher(vm.teacher)">
-                				 	<!-- Espacio para mostrar vistas del registro -->
-		          			<div id="form-views" ui-view></div>
-			          	</form>
-			          </div>
-			    </md-tabs>
-			  </md-content>
-			</div>
-
-			<!-- Sección de consulta, modificación, eliminar y listar eventos -->
-			<div ng-show="selected == 3">
-				<md-content>
-				    <md-tabs md-dynamic-height md-border-bottom>
-				
-				    	<!-- Tab consultar de eventos -->
-				      	<md-tab label="Consultar Eventos">
-					        <md-content class="md-padding">
-					        <h3>Filtrar Eventos</h3>
-
-							<!-- Filtro por fecha -->
-							<!-- <md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
-					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
-
-					        	<!-- Tabla de info eventos -->
-						        <div>
-						          	<table>
-									    <thead>
-									      	<tr>
-									      		<th>Nombre del evento</th>
-										        <th>Tipo de evento</th>
-										        <th>Estado</th>
-										        <th>invitado</th>
-										        <th>Fecha inicio</th>
-										        <th>Hora inicio</th>
-										        <th>Fecha Fin</th>
-										        <th>Hora Fin</th>
-										        <th>Academias</th>
-										        <th>Categorías</th>
-										        <th>Costo inscripción</th>
-										        <th>Patrocinadores</th>
-										        <th>Nombre del lugar</th>
-										        <th>Latitud</th>
-										        <th>Longitud</th>
-										        <th>Ubicación</th>
-										        <th>Asientos</th>
-										        <th>Entradas</th>
-										        <th>Nombre contacto</th>
-										        <th>Tel contacto</th>
-										        <th>Es de:</th>
-										        <th>Nombre organización</th>
-										        <th>Tipo de organización</th>
-										        <th>Descripción de la organización</th>
-										        <th>Logo del evento</th>
-									      	</tr>
-									    </thead>
-									    <tbody>
-									    <!-- | dateRange:vm.from:vm.to -->
-									      	<tr ng-repeat="event in vm.acceptedEvents track by $index">
-									      		<td>{{event.eventName}}</td>
-									      		<td>{{event.eventType}}</td>
-									      		<td>{{event.eventState}}</td>
-									      		<td>{{event.invitedName}}</td>
-										        <td>{{event.date1}}</td>
-										        <td>{{event.time1}}</td>
-										        <td>{{event.date2}}</td>
-										        <td>{{event.time2}}</td>
-										        <td>{{event.selectAcademies}}</td>
-										        <td>{{event.selectCategories}}</td>
-										        <td>{{event.costInsc}}</td>
-										        <td>{{event.selectSponsors}}</td>
-										        <td>{{event.placeName}}</td>
-										        <td>{{event.latitude}}</td>
-										        <td>{{event.length}}</td>
-										        <td>{{event.location}}</td>
-										        <td>{{event.seats}}</td>
-										        <td>{{event.tickets}}</td>
-										        <td>{{event.contactName}}</td>
-										        <td>{{event.contactPhone}}</td>
-										        <td>{{event.charityEvent}}</td>
-										        <td>{{event.orgName}}</td>
-										        <td>{{event.orgType}}</td>
-										        <td>{{event.description}}</td>
-										        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
-										    	
-										    	<!-- Botones para editar y cancelar eventos -->
-										        <td><md-button class="md-raised" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button></td>
-										        <td><md-button class="md-raised" ng-click="vm.cancelEvent(event)">Cancelar</md-button></td>
-									      	</tr>
-									    </tbody>
-								  	</table>
-						        </div>
-					        </md-content>
-				      	</md-tab>
-
-				      	<!-- Tab historial de eventos -->
-				      	<md-tab label="Historial de eventos">
-					        <md-content class="md-padding">
-					        	<h3>Filtrar Eventos</h3>
-
-					        	<!-- Filtros -->
-								<!-- Filtro por fecha -->
-								<!-- <md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
-						    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
-
-						    	<!-- Filtro por estado -->
-								<!-- <md-input-container>
-								    <label>Seleccione el estado</label>
-								    <md-select name="stateFilter" ng-model="vm.stateFilter">
-								    	<md-option value="aceptado">Aceptado</md-option>
-								        <md-option value="cancelado">Cancelado</md-option>
-								    </md-select>
-								</md-input-container> -->
-
-					        	<!-- Tabla historial de eventos -->
-						        <div>
-						          	<table>
-									    <thead>
-									      	<tr>
-									      		<th>Fecha</th>
-									      		<th>Nombre del evento</th>
-										        <th>Estado</th>
-										        <th>Nombre del lugar</th>
-									      	</tr>
-									    </thead>
-									    <tbody>
-									    <!-- dateRange:vm.from:vm.to | --> 
-									    <!-- | filter:{stateFilter:vm.stateFilter} -->
-									      	<tr ng-repeat="event in vm.events track by $index">
-									      		<td>{{event.date1}}</td>
-									      		<td>{{event.eventName}}</td>
-									      		<td>{{event.eventState}}</td>
-										        <td>{{event.placeName}}</td>
-									      	</tr>
-									    </tbody>
-								  	</table>
-						        </div>
-					        </md-content>
-				      	</md-tab>
-
-				      	<!-- Tab historial de competencias -->
-					    <md-tab label="Historial de competencias">
-					        <md-content class="md-padding">
-					        	
-					        </md-content>
-					    </md-tab>
-				    </md-tabs>
-			  	</md-content>
-			</div>
-		</md-content>
-			          	<!-- Tabla para listar eventos -->
-			          <div>
-			          	<table>
-						    <thead>
-						      	<tr>
-							        <th>Cedula</th>
-							        <th>Primer nombre</th>
-							        <th>Primer apellido</th>
-						      	</tr>
-						    </thead>
-						    <tbody>
-						      	<tr ng-repeat="teacher in vm.teachers track by $index">
-							        <td>{{teacher.id}}</td>
-							        <td>{{teacher.firstName}}</td>
-							        <td>{{teacher.firstLastName}}</td>
-							        <td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
-							    	
-							    	<!-- Botones para editar profesores -->
-							        <td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(pTeacher)"></td>
-							        
-						      	</tr>
-						    </tbody>
-					  	</table>
-
-			          </div>
-                    			 <!--<div>
-                    			  	<label class= "btn btn-default btn-file">Adjuntar imagen <input id="photo" type="file" name="photo" style="display:none" ng-model= "vm.teacher.photo"></label>
-                    			  </div>-->
-                    			  
-     						 	 <button type="submit" ng-click="vm.reset()">Registrar</button> 
-                    			 </div>
-                    			 </form>
-                    		</div>
-            			 </md-content>
-			      </md-tab>
-						<md-tab label="Registro de competencias">
+					<md-tab label="Registro de competencias">
 							<md-content class="md-padding">
 								<h1 class="md-display-2">Registro de competencias</h1>
 								<div class="container-fluid row">
@@ -1210,8 +995,218 @@
 								</div>
 							</md-content>
 						</md-tab>
-			    </md-tabs>
+						<md-tab label="Representante de consejo" ui-sref="admin.partOne">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Registro de representante de consejo</h1>
+								<h2 id="errorConsul"></h2>
+								<!-- the links to our nested states using relative paths -->
+            <!-- add the active class if the state matches our ui-sref -->
+						<div class="statusButtons text-center">
+							<a ui-sref-active="active" ui-sref=".partOne"><span>1</span></a>
+							<a ui-sref-active="active" ui-sref=".partTwo"><span>2</span></a>
+						</div>
+								<form name="frmRegisterConsult" ng-submit="vm.preSaveConsul(vm.user)">
+									<div ui-view></div>
+								</form>
+			        </md-content>
+			      </md-tab>
+					<md-tab label="Bitacora del sistema" ui-sref="admin.log">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Bitacora del sistema</h1>
+								<div ui-view="log-sistem"></div>
+			          <h1 class="md-display-2">Academias</h1>
+			          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+			        </md-content>
+			      </md-tab>
+
+			      <md-tab ui-sref=".teachpart1" label="Profesores">
+			        <md-content class="md-padding">
+			          <h1 class="md-display-2">Profesores</h1>
+
+     			          <div class="text-center statusButtons">
+			          	<a ui-sref-active="active" ui-sref=".teachpart1"><span>1</span></a>
+			          	<a ui-sref-active="active" ui-sref=".teachpart2"><span>2</span></a>
+			          	<a ui-sref-active="active" ui-sref=".teachpart3"><span>3</span></a>
+
+			          </div>
+			           <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
+
+                				 <form name="frmRegTeacher" autocomplete="off"  ng-submit="vm.presaveTeacher(vm.teacher)">
+                				 	<!-- Espacio para mostrar vistas del registro -->
+		          			<div id="form-views" ui-view></div>
+			          	</form>
+			          </div>
+			          			          	<!-- Tabla para listar profesores -->
+			          <div>
+			          	<table>
+						    <thead>
+						      	<tr>
+							        <th>Cedula</th>
+							        <th>Primer nombre</th>
+							        <th>Primer apellido</th>
+						      	</tr>
+						    </thead>
+						    <tbody>
+						      	<tr ng-repeat="teacher in vm.teachers track by $index">
+							        <td>{{teacher.id}}</td>
+							        <td>{{teacher.firstName}}</td>
+							        <td>{{teacher.firstLastName}}</td>
+							        <td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
+
+							    	<!-- Botones para editar profesores -->
+							        <td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(pTeacher)"></td>
+
+						      	</tr>
+						    </tbody>
+					  	</table>
+
+			          </div>
 			  </md-content>
+			  </md-tab>
+	    </md-tabs>
+	    </md-content>
+	</div>
+
+			<!-- Sección de consulta, modificación, eliminar y listar eventos -->
+			<div ng-show="selected == 3">
+				<md-content>
+				    <md-tabs md-dynamic-height md-border-bottom>
+
+				    	<!-- Tab consultar de eventos -->
+				      	<md-tab label="Consultar Eventos">
+					        <md-content class="md-padding">
+					        <h3>Filtrar Eventos</h3>
+
+							<!-- Filtro por fecha -->
+							<!-- <md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
+					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
+
+					        	<!-- Tabla de info eventos -->
+						        <div>
+						          	<table>
+									    <thead>
+									      	<tr>
+									      		<th>Nombre del evento</th>
+										        <th>Tipo de evento</th>
+										        <th>Estado</th>
+										        <th>invitado</th>
+										        <th>Fecha inicio</th>
+										        <th>Hora inicio</th>
+										        <th>Fecha Fin</th>
+										        <th>Hora Fin</th>
+										        <th>Academias</th>
+										        <th>Categorías</th>
+										        <th>Costo inscripción</th>
+										        <th>Patrocinadores</th>
+										        <th>Nombre del lugar</th>
+										        <th>Latitud</th>
+										        <th>Longitud</th>
+										        <th>Ubicación</th>
+										        <th>Asientos</th>
+										        <th>Entradas</th>
+										        <th>Nombre contacto</th>
+										        <th>Tel contacto</th>
+										        <th>Es de:</th>
+										        <th>Nombre organización</th>
+										        <th>Tipo de organización</th>
+										        <th>Descripción de la organización</th>
+										        <th>Logo del evento</th>
+									      	</tr>
+									    </thead>
+									    <tbody>
+									    <!-- | dateRange:vm.from:vm.to -->
+									      	<tr ng-repeat="event in vm.acceptedEvents track by $index">
+									      		<td>{{event.eventName}}</td>
+									      		<td>{{event.eventType}}</td>
+									      		<td>{{event.eventState}}</td>
+									      		<td>{{event.invitedName}}</td>
+										        <td>{{event.date1}}</td>
+										        <td>{{event.time1}}</td>
+										        <td>{{event.date2}}</td>
+										        <td>{{event.time2}}</td>
+										        <td>{{event.selectAcademies}}</td>
+										        <td>{{event.selectCategories}}</td>
+										        <td>{{event.costInsc}}</td>
+										        <td>{{event.selectSponsors}}</td>
+										        <td>{{event.placeName}}</td>
+										        <td>{{event.latitude}}</td>
+										        <td>{{event.length}}</td>
+										        <td>{{event.location}}</td>
+										        <td>{{event.seats}}</td>
+										        <td>{{event.tickets}}</td>
+										        <td>{{event.contactName}}</td>
+										        <td>{{event.contactPhone}}</td>
+										        <td>{{event.charityEvent}}</td>
+										        <td>{{event.orgName}}</td>
+										        <td>{{event.orgType}}</td>
+										        <td>{{event.description}}</td>
+										        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
+
+										    	<!-- Botones para editar y cancelar eventos -->
+										        <td><md-button class="md-raised" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button></td>
+										        <td><md-button class="md-raised" ng-click="vm.cancelEvent(event)">Cancelar</md-button></td>
+									      	</tr>
+									    </tbody>
+								  	</table>
+						        </div>
+					        </md-content>
+				      	</md-tab>
+
+				      	<!-- Tab historial de eventos -->
+				      	<md-tab label="Historial de eventos">
+					        <md-content class="md-padding">
+					        	<h3>Filtrar Eventos</h3>
+
+					        	<!-- Filtros -->
+								<!-- Filtro por fecha -->
+								<!-- <md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
+						    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
+
+						    	<!-- Filtro por estado -->
+								<!-- <md-input-container>
+								    <label>Seleccione el estado</label>
+								    <md-select name="stateFilter" ng-model="vm.stateFilter">
+								    	<md-option value="aceptado">Aceptado</md-option>
+								        <md-option value="cancelado">Cancelado</md-option>
+								    </md-select>
+								</md-input-container> -->
+
+					        	<!-- Tabla historial de eventos -->
+						        <div>
+						          	<table>
+									    <thead>
+									      	<tr>
+									      		<th>Fecha</th>
+									      		<th>Nombre del evento</th>
+										        <th>Estado</th>
+										        <th>Nombre del lugar</th>
+									      	</tr>
+									    </thead>
+									    <tbody>
+									    <!-- dateRange:vm.from:vm.to | -->
+									    <!-- | filter:{stateFilter:vm.stateFilter} -->
+									      	<tr ng-repeat="event in vm.events track by $index">
+									      		<td>{{event.date1}}</td>
+									      		<td>{{event.eventName}}</td>
+									      		<td>{{event.eventState}}</td>
+										        <td>{{event.placeName}}</td>
+									      	</tr>
+									    </tbody>
+								  	</table>
+						        </div>
+					        </md-content>
+				      	</md-tab>
+
+				      	<!-- Tab historial de competencias -->
+					    <md-tab label="Historial de competencias">
+					        <md-content class="md-padding">
+
+					        </md-content>
+					    </md-tab>
+			  	</md-content>
+			</div>
+		</md-content>
+ 				</md-content>
 			</div>
 	</div>
 </div>

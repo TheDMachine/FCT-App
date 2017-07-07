@@ -298,7 +298,7 @@
     // Función para guardar profesores
 
     vm.createNewTeacher = function(pNewTeacher){
-      userService.setTeachers(pNewTeacher); 
+      userService.setTeachers(pNewTeacher);
       clean();
       init();
     }
@@ -318,7 +318,7 @@
       vm.teacher.academy = teacher.academy;
       vm.teacher.grade = teacher.grade;
       vm.teacher.photo = teacher.photo;
-     
+
       init()
     }
 
@@ -409,7 +409,7 @@
         tournamentsWins: vm.tournamentsWins
       };
       console.log(newUser);
-      userServices.setUsers(newUser);
+      userService.setUsers(newUser);
       cleanStudent();
       init();
     }
@@ -480,7 +480,7 @@
         tournaments: vm.tournaments,
         tournamentsWins: vm.tournamentsWins
       }
-      userServices.updateUsers(editstudent);
+      userService.updateUsers(editstudent);
       init();
       cleanStudent();
     }
