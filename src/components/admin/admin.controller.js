@@ -35,7 +35,7 @@
         vm.teacher = {};
         vm.teachers = userService.getTeachers();
         vm.sponsor = {};
-        vm.user = userService.getUsers();
+        vm.users = userService.getUsers();
         vm.log = logService.showLog();
         vm.belts = estabInfoService.getBelts();
         vm.weights = estabInfoService.getWeight();
@@ -298,7 +298,7 @@
     // Función para guardar profesores
 
     vm.createNewTeacher = function(pNewTeacher){
-      userService.setTeachers(pNewTeacher); 
+      userService.setTeachers(pNewTeacher);
       clean();
       init();
     }
@@ -318,7 +318,7 @@
       vm.teacher.academy = teacher.academy;
       vm.teacher.grade = teacher.grade;
       vm.teacher.photo = teacher.photo;
-     
+
       init()
     }
 
@@ -493,13 +493,16 @@
         competitionGenre: vm.competitionGenre,
         competitionBelt: vm.competitionBelt,
         competitionWeight: vm.competitionWeight,
-        competitor1: vm.competitor1,
-        competitor2: vm.competitor2,
-        competitor3: vm.competitor3,
-        competitor4: vm.competitor4,
-        competitor5: vm.competitor5
+        arrayObject : [vm.competitors]
       }
+      newCompetition.competitors = [];
+      newCompetition.competitors.push(newCompetition.arrayObject[0]['0']);
+      newCompetition.competitors.push(newCompetition.arrayObject[0]['1']);
+      newCompetition.competitors.push(newCompetition.arrayObject[0]['2']);
+      newCompetition.competitors.push(newCompetition.arrayObject[0]['3']);
+      newCompetition.competitors.push(newCompetition.arrayObject[0]['4']);
       console.log(newCompetition);
+      console.log(newCompetition.competitors)
       eventService.setCompetitions(newCompetition);
       cleanStudent();
       init();
