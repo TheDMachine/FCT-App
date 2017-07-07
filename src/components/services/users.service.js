@@ -33,7 +33,7 @@
     };
     return publicAPI;
 
-    function _setUsers(newUser){
+    function _setUsers(newUser) {
       var usersList = _getUsers();
       var position = searchUser(newUser);
       if (position == -1) {
@@ -42,7 +42,7 @@
       }
     }
     //buscar si la cédula se repite
-    function searchUser(newUser){
+    function searchUser(newUser) {
       var usersList = _getUsers();
       var position = -1;
 
@@ -54,7 +54,7 @@
       return position;
     }
     //muestra la informacion mas actual
-    function _getUsers(){
+    function _getUsers() {
       var usersList = JSON.parse(localStorage.getItem('lsUsersList'));
       if(usersList == null){
         usersList = users;
@@ -62,7 +62,7 @@
       return usersList;
     }
     //editar la informacion del alumno ya registrada
-    function _updateUsers(editUser){
+    function _updateUsers(editUser) {
       var usersList = _getUsers();
       for(var i = 0; i < usersList.length; i++){
         if(usersList[i].id == editUser.id){
@@ -72,20 +72,20 @@
       localStorage.setItem('lsUsersList', JSON.stringify(usersList));
     } // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
-    function _setTeachers(pTeacher){
+    function _setTeachers(pTeacher) {
       var teachersList = _getTeachers();
 
       teachersList.push(pTeacher);
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
     }
-    function _getTeachers(){
+    function _getTeachers() {
       var teachersList = JSON.parse(localStorage.getItem('lsTeachersList'));
       if(teachersList == null){
         teachersList = teachers;
       }
       return teachersList;
     }
-    function _updateTeacher(pobjUsuario){
+    function _updateTeacher(pobjUsuario) {
       var teachersList = _getTeachers();
       for(var i = 0; i < teachersList.length; i++){
         if(teachersList[i].id == pobjUsuario.id){
@@ -96,7 +96,7 @@
     }
 
     //encontrar usuario profesor para agarrar información
-    function _findUserTeacher(pUsernameToFind){
+    function _findUserTeacher(pUsernameToFind) {
       var userStorage = _getTeachers();
      for (var i = 0; i < userStorage.length; i++) {
        if(userStorage[i].email == pUsernameToFind){
@@ -106,7 +106,7 @@
      return false;
    }
       //Se obtiene los usuarios de tipo representantes de consejo
-      function _getUserConsult(){
+      function _getUserConsult() {
       var consulList = JSON.parse(localStorage.getItem('lsConsulUsers'));
         if(consulList == null){
           consulList = _UsersConsult;
@@ -114,7 +114,7 @@
         return consulList;
       }
       //se crea un nuevo representante de consejo.
-      function _setNewConsul(pNewObjConsult){
+      function _setNewConsul(pNewObjConsult) {
         var consulList = _getUserConsult();
         for (var i = 0; i < consulList.length; i++) {
           if (consulList[i].name == pNewObjConsult.name) {
@@ -127,7 +127,7 @@
         }
     }
 
-   function _getCookie(){
+   function _getCookie() {
     return $cookies.get('currentUserActive');
    }
   }
