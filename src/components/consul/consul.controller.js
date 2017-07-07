@@ -54,10 +54,19 @@
       function init() {
         vm.proposes = eventService.getPropose();
       }init();
-
+      vm.processPropose= function(pProposeName, pFlag) {
+        //pReceived es el usuario encontrado que
+        var pReceived = eventService.findPropose(pProposeName);
+        //true = aceptado
+        // false = rechazado
+        if(pFlag) {
+          pReceived.status = 'Aceptado';
+          eventService.setEvents(pReceived);
+        }
+      }
 // Función para guardar
     vm.createNewPropose= function(pNewPropose) {
-      pNewPropose.status = 'Pendiente de revisión';
+      pNewPropose.status = 'Pendiente';
       vm.error = false;
       vm.error = eventService.setPropose(pNewPropose);
       //Si es true implica que ya la propouesta de evento ya fue registrada.

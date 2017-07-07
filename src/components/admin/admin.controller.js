@@ -4,7 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService) {
+  function adminCtrl($scope, $location, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService) {
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
     vm.selected = 0;
@@ -37,6 +37,14 @@
         vm.event = {};
         vm.teacher = {};
         vm.log = logService.showLog();
+        vm.countries;
+        $http.get('http://api.population.io:80/1.0/countries').then(function(data){
+          console.log(data);
+          vm.countries = data.data.countries;
+        },function(err){
+          console.log(err);
+        })
+        console.log(vm.countries);
       }init();
     vm.openMenu = function($mdMenu, ev) {
       originatorEv = ev;

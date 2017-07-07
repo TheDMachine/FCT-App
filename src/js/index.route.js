@@ -31,6 +31,10 @@
         controller: 'consulCtrl',
         controllerAs:'vm'
       })
+      .state('consul.displayProposes',{
+        url:'/displayProposes',
+        templateUrl:'components/consul/propose.view.html'
+      })
       .state('consul.proposeOne',{
         url:'/proposeOne',
         templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart1.view.html'
