@@ -370,7 +370,8 @@
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins
+        tournamentsWins: vm.tournamentsWins,
+        status: vm.status
       };
       console.log(newUser);
       userServices.setUsers(newUser);
@@ -419,7 +420,8 @@
         vm.belt = student.belt,
         vm.category = student.category,
         vm.tournaments = student.tournaments,
-        vm.tournamentsWins = student.tournamentsWins
+        vm.tournamentsWins = student.tournamentsWins,
+        vm.status = student.status
     }
 
     //funcion para guardar alumno editada
@@ -442,7 +444,8 @@
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins
+        tournamentsWins: vm.tournamentsWins,
+        status: vm.status
       }
       userServices.updateUsers(editstudent);
       init();
