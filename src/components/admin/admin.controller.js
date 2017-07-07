@@ -78,7 +78,6 @@
       }else{
         for (var i = 0; i < vm.events.length; i++) {
           if (pNewEvent.eventName == vm.events[i].eventName) {
-            
             bError =true;
           }
         }
@@ -167,6 +166,7 @@
     };
 
     function aceptedEvents() {
+      // && vm.events[i].date1 => new Date()
         for (var i = 0; i < vm.events.length; i++) {
           if (vm.events[i].eventState === 'aprobado') {
             vm.acceptedEvents.push(vm.events[i]);

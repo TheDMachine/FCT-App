@@ -1,0 +1,98 @@
+<section class="container-fluid">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<form name="frmTktsReservations" autocomplete="off" ng-submit="vm.saveReservation(vm.reservation)">
+				<!-- Escoge el evento -->
+				<md-input-container>
+				    <label>Selecciona el evento</label>
+				    <md-select name="event" ng-model="vm.reservation.event" required>
+				    	<md-option value="aprobado">Aceptado</md-option>
+				        <md-option value="cancelado">Cancelado</md-option>
+				    </md-select>
+
+					<!-- Mensaje de retroalimentacion -->
+					<div ng-messages="frmTktsReservations.event.$error">
+						<div ng-messages-include="components/includes/messages.html"></div>
+					</div>
+				</md-input-container>
+
+				<div id="tktsAvailable">
+					<p>Entradas disponibles:</p>
+				</div>
+
+				<!-- Campo cantidad de entradas -->
+				<md-input-container flex-offset>
+					<label>Cantidad de entradas</label>
+					<input type="number" name="tktsQuantity" ng-model="vm.reservation.tktsQuantity" required>
+
+					<!-- Mensaje de retroalimentacion -->
+					<div ng-messages="frmTktsReservations.tktsQuantity.$error">
+						<div ng-messages-include="components/includes/messages.html"></div>
+					</div>
+				</md-input-container>
+
+				<!-- Campo correo electrónico -->
+				<md-input-container flex-offset>
+					<label>Correo electrónico</label>
+					<input name="email" ng-model="vm.reservation.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}" required>
+
+					<!-- Mensaje de retroalimentacion -->
+					<div ng-messages="frmTktsReservations.email.$error">
+						<div ng-messages-include="components/includes/messages.html"></div>
+					</div>
+				</md-input-container>
+
+				<!-- Campo nombre evento -->
+				<md-input-container flex-offset>
+					<label>Nombre completo</label>
+					<input type="text" name="fullName" ng-model="vm.reservation.fullName" maxlength="40" md-maxlength="40" required>
+
+					<!-- Mensaje de retroalimentacion -->
+					<div ng-messages="frmTktsReservations.fullName.$error">
+						<div ng-messages-include="components/includes/messages.html"></div>
+					</div>
+				</md-input-container>
+
+				<!-- Campo nombre evento -->
+				<md-input-container flex-offset>
+					<label>Cédula</label>
+					<input name="id" ng-model="vm.reservation.id" ng-pattern="/^[0-9]{9}$/" maxlength="9" md-maxlength="9" required>
+
+					<!-- Mensaje de retroalimentacion -->
+					<div ng-messages="frmTktsReservations.id.$error">
+						<div ng-messages-include="components/includes/messages.html"></div>
+					</div>
+				</md-input-container>
+
+				<!-- Campo nombre evento -->
+				<md-input-container flex-offset>
+					<label>Número de tarjeta</label>
+					<input name="card" ng-model="vm.reservation.card" ng-pattern="/^[0-9]{16}$/" maxlength="16" md-maxlength="16" required>
+
+					<!-- Mensaje de retroalimentacion -->
+					<div ng-messages="frmTktsReservations.card.$error">
+						<div ng-messages-include="components/includes/messages.html"></div>
+					</div>
+				</md-input-container>
+
+				<!-- Campo nombre evento -->
+				<md-input-container flex-offset>
+					<label>Expiración</label>
+					<input type="text" name="expCard" ng-model="vm.reservation.expCard" maxlength="5" md-maxlength="5" placeholder="01-22" required>
+
+					<!-- Mensaje de retroalimentacion -->
+					<div ng-messages="frmTktsReservations.expCard.$error">
+						<div ng-messages-include="components/includes/messages.html"></div>
+					</div>
+				</md-input-container>
+				
+				<!-- Botón para ingresar reserva -->
+				<md-button class="md-raised" ng-disabled="frmTktsReservations.$invalid" ng-click="vm.reset()">Button</md-button>	
+			</form>	
+
+			<!-- Mensajes de error o éxito del registro -->
+			<p class="ErrorMessage"></p>
+			<p class="SuccessMessage"></p>
+		</div>
+	</div>
+</section>

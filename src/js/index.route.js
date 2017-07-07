@@ -125,6 +125,18 @@
       controller: 'landingCtrl',
       controllerAs: 'vm'
     })
+        .state('reserve',{
+      url : '/reserve', //ruta del url del estado
+      templateUrl : 'components/tickets/reserve.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/tickets/reserve.controller.js')
+        }]
+      },
+      controller: 'reserveCtrl',
+      controllerAs: 'vm'
+    })
 
     $urlRouterProvider.otherwise('/admin');
   }

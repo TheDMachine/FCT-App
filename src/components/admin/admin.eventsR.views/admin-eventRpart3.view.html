@@ -34,7 +34,7 @@
 <!-- Campo costo de inscripción -->
 <md-input-container flex-offset>
 	<label>Costo de inscripción</label>
-	<input name="frmEventInfo.costInsc" type="number" ng-model="vm.event.costInsc" required>
+	<input name="frmEventInfo.costInsc" type="number" ng-model="vm.event.costInsc" md-maxlength="6" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.$error">
@@ -58,7 +58,7 @@
 </md-input-container>
 
 <!-- Botón Anterior -->
-<a ui-sref="admin.part2" class="btn btn-info">Anterior <span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+<a ui-sref="admin.part2" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
 
 <!-- Botón siguiente -->
 <a ui-sref="admin.part4" class="btn btn-info" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>

@@ -23,7 +23,7 @@
 <!-- Campo nombre de contacto -->
 <md-input-container flex-offset>
 	<label>Nombre de contacto</label>
-	<input name="frmEventInfo.contactName" ng-model="vm.event.contactName" maxlength="30" required>
+	<input type="text" name="frmEventInfo.contactName" ng-model="vm.event.contactName" maxlength="30" md-maxlength="30" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.$error">
@@ -50,18 +50,17 @@
 </div>
 
 <!-- botón para guardar datos -->
-<button type="submit" class="btn btn-danger"  ng-disabled="frmEventInfo.$invalid" ng-click="vm.reset()">Ingresar</button>
-
+<md-button class="md-raised"  ng-disabled="frmEventInfo.$invalid" ng-click="vm.reset()">Ingresar</md-button>
 
 <!-- Mensajes de error o éxito del registro -->
 <p class="ErrorMessage"></p>
 <p class="SuccessMessage"></p>
 
 <!-- botón para guardar datos actualizados -->
-<button type="submit" class="btn btn-danger" ng-click="vm.updateEvent()">Actualizar</button>
+<md-button class="md-raised" ng-disabled="frmEventInfo.$invalid" ng-click="vm.updateEvent()">Actualizar</md-button>
 
 <!-- Botón Anterior -->
-<a ui-sref="admin.part4" class="btn btn-info">Anterior <span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+<a ui-sref="admin.part4" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
 
 
 

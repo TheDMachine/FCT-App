@@ -272,6 +272,13 @@
 md-input-container{
   width: 30%;
 }
+
+#reqMsj{
+  color: #ee334e;
+  font-size: 0.786em;
+}
+
+
 /*Fin estilos de pasos formulario eventos*/
 
 /* Estilos semilla */
