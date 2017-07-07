@@ -50,14 +50,14 @@
 </div>
 
 <!-- botón para guardar datos -->
-<md-button class="md-raised"  ng-disabled="frmEventInfo.$invalid" ng-click="vm.reset()">Ingresar</md-button>
+<md-button type="submit" class="md-raised"  ng-disabled="frmEventInfo.$invalid" ng-click="vm.reset()">Ingresar</md-button>
 
 <!-- Mensajes de error o éxito del registro -->
 <p class="ErrorMessage"></p>
 <p class="SuccessMessage"></p>
 
 <!-- botón para guardar datos actualizados -->
-<md-button class="md-raised" ng-disabled="frmEventInfo.$invalid" ng-click="vm.updateEvent()">Actualizar</md-button>
+<md-button type="submit" class="md-raised" ng-disabled="frmEventInfo.$invalid" ng-click="vm.updateEvent()">Actualizar</md-button>
 
 <!-- Botón Anterior -->
 <a ui-sref="admin.part4" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>

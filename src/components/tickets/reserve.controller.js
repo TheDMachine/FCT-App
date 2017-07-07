@@ -13,7 +13,14 @@
       vm.reservations = ticketService.getsReservations();
       }init();
 
-    // función para guardar reservaciones
+    // funciones para guardar reservaciones
+
+    vm.presaveReservation = function(pReservation) {
+         console.log(pReservation);
+         vm.saveReservation(pReservation);
+      };
+
+
     vm.saveReservation = function(pReservation) {
       vm.availableTkts = availableTickects(pReservation);
       vm.Error = false;
@@ -24,6 +31,8 @@
       if (vm.Error === false) {
         ticketService.setReservations(pReservation);
         document.querySelector('.SuccessMessage').innerHTML = 'La reservación ha sido enviada exitosamente';
+        clean();
+        init();
       }else{
         document.querySelector('.ErrorMessage').innerHTML = 'No se puede reservar, la cantidad de entradas solicitadas excede las entradas disponibles';
       }

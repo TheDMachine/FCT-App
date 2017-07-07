@@ -1,13 +1,12 @@
 <section class="container-fluid">
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
-			<form name="frmTktsReservations" autocomplete="off" ng-submit="vm.saveReservation(vm.reservation)">
+			<form name="frmTktsReservations" autocomplete="off" ng-submit="vm.presaveReservation(vm.reservation)">
 				<!-- Escoge el evento -->
 				<md-input-container>
 				    <label>Selecciona el evento</label>
 				    <md-select name="event" ng-model="vm.reservation.event" required>
-				    	<md-option value="aprobado">Aceptado</md-option>
-				        <md-option value="cancelado">Cancelado</md-option>
+				    	<md-option ng-repeat="event in vm.events" value="{{event.eventName}}">{{event.eventName}}</md-option>
 				    </md-select>
 
 					<!-- Mensaje de retroalimentacion -->
@@ -87,7 +86,7 @@
 				</md-input-container>
 				
 				<!-- Botón para ingresar reserva -->
-				<md-button class="md-raised" ng-disabled="frmTktsReservations.$invalid" ng-click="vm.reset()">Button</md-button>	
+				<md-button type="submit" class="md-raised" ng-disabled="frmTktsReservations.$invalid" ng-click="vm.reset()">Button</md-button>	
 			</form>	
 
 			<!-- Mensajes de error o éxito del registro -->
