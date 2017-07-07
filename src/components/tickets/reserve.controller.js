@@ -73,15 +73,11 @@
       return vm.reservedTkts;
     }
   
-   
-
     // Función para limpiar campos
 
     function clean() {
       vm.reservations='';
     }
-
-    
 
    }
 })();
