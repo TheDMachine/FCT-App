@@ -38,6 +38,12 @@
 						<p class="menu-button">Registros</p>
 					</md-button>
 				</md-list-item>
+				<md-list-item  layout="column">
+					<md-button class="button-selected" ng-click="vm.selected = 6" ng-style="vm.selected == 6 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons register-icon fa fa-trophy" ng-style="vm.selected == 6 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
+						<p class="menu-button">Competencias</p>
+					</md-button>
+				</md-list-item>
 			</md-list>
 		</md-sidenav>
 		<md-content id="content" flex>
@@ -83,6 +89,10 @@
   			<!-- Poner la vista aquí
 
   			!!-->
+  			<!--Vista competiciones-->
+  			<div ng-show="vm.selected == 6">
+  				
+  			</div>
   			<!--Vista patrocinadores-->
   			<div ng-show="vm.selected == 4" ng-cloak>
   				<md-content layout="row">
