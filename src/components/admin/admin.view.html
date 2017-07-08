@@ -83,6 +83,7 @@
       <!-- Poner la vista aquí
 
   			!!-->
+
       <!--Vista patrocinadores-->
       <div ng-show="vm.selected == 4" ng-cloak>
         <md-content layout="row">
@@ -96,7 +97,6 @@
             <img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
             <md-card-title>
               <md-card-title-text>
-                <span class="md-headline">{{item.sponsorName}}</span>
                 <span class="md-headline">ID: {{item.sponsorName}}</span>
                 <span class="md-subhead">{{item.sponsorCompany}}</span>
               </md-card-title-text>
@@ -687,6 +687,12 @@
                             </div>
                           </md-input-container>
                         </div>
+                        <!-- Switch para cambio de estad -->
+                        <div class="inset form-group col-xs-12 col-md-4 floating-label-form-group control" ng-cloak>
+                          <md-switch ng-model="vm.status" aria-label="Switch 2" ng-true-value="'Inactivo'" ng-false-value="'Activo'" class="md-warn">
+                            Estado: {{vm.status}}
+                          </md-switch>
+                        </div>
 
                         <!-- boton para guardar -->
                         <md-button ng-click="vm.createStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Agregar Alumno</md-button>
@@ -717,12 +723,12 @@
                             <th>Cinta</th>
                             <th>Categoria</th>
                             <th>Email</th>
-                            <th>Activo</th>
+                            <th>Estado</th>
                             <th></th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr ng-repeat="student in vm.user | filter:{firstName:vm.studentFilter}">
+                          <tr ng-repeat="student in vm.user track by $index">
                             <td>{{student.id}}</td>
                             <td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
                             <td>{{student.teacher}}</td>
@@ -785,7 +791,6 @@
                     <!--<div flex="90" layout="row" layout-align="end">
 								<a ui-sref="admin.sponsorPartTwo" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
 							</div>-->
-                  <div class="sponsor-form" flex="80" layout-align="center center" layout="row">
                     <div class="sponsor-form" flex="80" layout-align="center center" layout="row">
                       <md-input-container flex="50">
                         <label>Tipo de patrocinio</label>
@@ -1061,7 +1066,7 @@
 
                           <!-- Botones para editar profesores -->
                           <td>
-                            <input type="button" value="Editar" ng-click="vm.getInfoTeacher(pTeacher)">
+                            <input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)">
                           </td>
 
                         </tr>

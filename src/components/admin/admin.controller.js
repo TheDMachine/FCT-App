@@ -92,7 +92,6 @@
 
     // Función para guardar
     vm.createNewEvent = function (pNewEvent) {
-      if (vm.error === true) {
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
@@ -118,10 +117,12 @@
         sponsorService.setSponsors(pNewSponsor);
         vm.error = false;
         /*if (vm.error === true) {
+          document.querySelector('.ErrorMessage').innerHTML = 'El patrocinador ya existe';
           }else{
           document.querySelector('.SuccessMessage').innerHTML = 'El patrocinador se registró exitosamente';
         }*/
         console.log(sponsorService.getSponsors());
+        clean();
         init();
 
       }
@@ -255,6 +256,7 @@
       aceptedEvents();
     };
 
+    function aceptedEvents() {
       for (var i = 0; i < vm.events.length; i++) {
         if (vm.events[i].eventState === 'aprobado') {
           vm.acceptedEvents.push(vm.events[i]);
@@ -303,22 +305,23 @@
     }
 
     // Función para imprimir datos del profesor en la lista
-    vm.getInfoTeacher = function (teacher) {
-      vm.teacher.id = teacher.id;
-      vm.teacher.firstName = teacher.firstName;
-      vm.teacher.secondName = teacher.secondName;
-      vm.teacher.firstLastName = teacher.firstLastName;
-      vm.teacher.secondLastName = teacher.secondLastName;
-      vm.teacher.phone = teacher.phone;
-      vm.teacher.email = teacher.email;
-      vm.teacher.bornhDate = teacher.bornhDate;
-      vm.teacher.gender = teacher.gender;
-      vm.teacher.nationality = teacher.nationality;
-      vm.teacher.academy = teacher.academy;
-      vm.teacher.grade = teacher.grade;
-      vm.teacher.photo = teacher.photo;
+    vm.getInfoTeacher = function (pTeacher) {
+      vm.teacher.id = pTeacher.id;
+      vm.teacher.firstName = pTeacher.firstName;
+      vm.teacher.secondName = pTeacher.secondName;
+      vm.teacher.firstLastName = pTeacher.firstLastName;
+      vm.teacher.secondLastName = pTeacher.secondLastName;
+      vm.teacher.phone = pTeacher.phone;
+      vm.teacher.email = pTeacher.email;
+      vm.teacher.bornhDate = pTeacher.bornhDate;
+      vm.teacher.gender = pTeacher.gender;
+      vm.teacher.nationality = pTeacher.nationality;
+      vm.teacher.academy = pTeacher.academy;
+      vm.teacher.grade = pTeacher.grade;
+      vm.teacher.photo = pTeacher.photo;
+      vm.teacher.status = pTeacher.status;
 
-      init()
+      
     }
 
     // Función para limpiar campos
@@ -405,9 +408,11 @@
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins
+        tournamentsWins: vm.tournamentsWins,
+        status: vm.status
       };
       console.log(newUser);
+      userService.setUsers(newUser);
       cleanStudent();
       init();
     }
@@ -431,7 +436,8 @@
         vm.belt = '',
         vm.category = '',
         vm.tournaments = '',
-        vm.tournamentsWins = ''
+        vm.tournamentsWins = '',
+        vm.status = ''
     }
 
     //funcion para editar alumno
@@ -453,7 +459,8 @@
         vm.belt = student.belt,
         vm.category = student.category,
         vm.tournaments = student.tournaments,
-        vm.tournamentsWins = student.tournamentsWins
+        vm.tournamentsWins = student.tournamentsWins,
+        vm.status = student.status
     }
 
     //funcion para guardar alumno editada
