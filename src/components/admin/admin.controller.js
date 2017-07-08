@@ -28,6 +28,7 @@
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
+        vm.competitions = eventService.getCompetitions();
         aceptedEvents();
         vm.event = {};
         vm.sponsors = sponsorService.getSponsors();

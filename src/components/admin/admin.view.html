@@ -91,7 +91,34 @@
   			!!-->
   			<!--Vista competiciones-->
   			<div ng-show="vm.selected == 6">
-  				
+  					<md-card ng-repeat="item in vm.competitions" flex="20">
+				        <md-card-title>
+				          <md-card-title-text>
+				            <span class="md-headline">Competencia {{item.competitionNumber}}</span>
+				            <span class="md-subhead">Evento: {{item.eventBelongs}}</span>
+				          </md-card-title-text>
+				        </md-card-title>
+				        <div layout="row">
+				        	<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
+					        	<i class="material-icons">&#xE227;</i>
+					        </md-icon>
+					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Equipo'">
+					        	<i class="material-icons">&#xE903;</i>
+					        </md-icon>
+					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Comida'">
+					        	<i class="material-icons">&#xE8CC;</i>
+					        </md-icon>
+					        <p class="sponsor-p-type">{{item.sponsorType}}</p>
+				        </div>
+				        	<md-card-content>
+					          <p>
+					            {{item.description}}
+					          </p>
+					        </md-card-content>
+				        <md-card-actions layout="row" layout-align="end">
+				          <md-button ng-click="vm.getSponsorInfo(item)">Editar</md-button>
+				        </md-card-actions>
+			      </md-card>
   			</div>
   			<!--Vista patrocinadores-->
   			<div ng-show="vm.selected == 4" ng-cloak>
