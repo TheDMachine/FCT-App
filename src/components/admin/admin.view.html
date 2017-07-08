@@ -139,7 +139,7 @@
 						<div class="row">
 							<div id="beltNum1" class="col-md-4">
 								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA BLANCO</h3>
+									<h3>CINTA BLANCA</h3>
 									<p><span>Nombre de la Cinta:</span> Jin-Ti</p>
 									<p><span>Simbolismo:</span> Pureza / Inocencia</p>
 									<p><span>Significado:</span> Esta cinta representa la pureza, el portador del mismo es una persona que comienza en la práctica del Arte Marcial, busca comprender el sentido y orden de su Micro Universo interno y comienza a entender que se debe trabajar duro para conseguir las metas propuestas.</p>
@@ -147,7 +147,7 @@
 							</div>
 							<div id="beltNum2" class="col-md-4">
 								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA AMARILLO</h3>
+									<h3>CINTA AMARILLA</h3>
 									<p><span>Nombre de la Cinta:</span> Norang-Ti</p>
 									<p><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
 									<p><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
@@ -178,7 +178,7 @@
 							</div>
 							<div id="beltNum5" class="col-md-4">
 								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA ROJO</h3>
+									<h3>CINTA ROJA</h3>
 									<p><span>Nombre de la Cinta:</span> Palgang-Ti</p>
 									<p><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
 									<p><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
@@ -187,7 +187,7 @@
 							</div>
 							<div id="beltNum6" class="col-md-4">
 								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA NEGRO</h3>
+									<h3>CINTA NEGRA</h3>
 									<p><span>Nombre de la Cinta:</span> Conjon-Ti</p>
 									<p><span>Simbolismo:</span> Idealismo y Pureza</p>
 									<p><span>Significado:</span> El trayecto transcurrido entre la "Cinta blanca y la "Cinta negra" solo representa un proceso de preparación del practicante de Tae Kwon Do, pero solo al llegar a "cinta negra" es capaz de empezar a recorrer el camino para aprender a disfrutarlo. La "cinta negra" es también, símbolo de habilidad y madurez, el saber aceptar y ejercer esta responsabilidad siempre van juntas, son inseparables.</p>
@@ -390,26 +390,16 @@
 			    <!-- Tab de Eventos -->
 			    <md-tab id="events" label="Eventos" ui-sref=".part1">
 			        <md-content class="md-padding">
-			          <h1 class="md-display-2">Eventos</h1>
-			          <!-- links de cada paso del formulario -->
-			          <div class="text-center statusButtons">
-			          	<a ui-sref-active="active" ui-sref=".part1"><span>1</span></a>
-			          	<a ui-sref-active="active" ui-sref=".part2"><span>2</span></a>
-			          	<a ui-sref-active="active" ui-sref=".part3"><span>3</span></a>
-			          	<a ui-sref-active="active" ui-sref=".part4"><span>4</span></a>
-			          	<a ui-sref-active="active" ui-sref=".part5"><span>5</span></a>
-			          	<a ui-sref-active="active" ui-sref=".part6"><span>6</span></a>
-			          </div>
+			          	<h1 class="md-display-2">Eventos</h1>
 
-			          <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
-
-			          	<!-- Formulario para registro de eventos -->
-			          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
-
-		          			<!-- Espacio para mostrar vistas del registro -->
-		          			<div id="form-views" ui-view></div>
-			          	</form>
-			          </div>
+			          	<!-- links de cada paso del formulario de registro de eventos -->
+				        <div class="text-center statusButtons">
+				          	<a ui-sref-active="active" ui-sref=".part1"><span>1</span></a>
+				          	<a ui-sref-active="active" ui-sref=".part2"><span>2</span></a>
+				          	<a ui-sref-active="active" ui-sref=".part3"><span>3</span></a>
+				          	<a ui-sref-active="active" ui-sref=".part4"><span>4</span></a>
+				          	<a ui-sref-active="active" ui-sref=".part5"><span>5</span></a>
+				        </div>
 
 						<!-- Tabla para listar eventos -->
 			          <div>
@@ -1018,16 +1008,16 @@
 				    <md-tabs md-dynamic-height md-border-bottom>
 				    	<!-- Tab consultar de eventos -->
 				      	<md-tab label="Consultar Eventos">
-					        <md-content class="md-padding">
-					        <h3>Filtrar Eventos</h3>
+					        <md-content id="table1" class="md-padding">
+					        <h3>FILTRAR EVENTOS</h3>
 
 							<!-- Filtro por fecha -->
-							<!-- <md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
-					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
+							<md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
+					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker>
 
 					        	<!-- Tabla de info eventos -->
 						        <div>
-						          	<table>
+						          	<table class="table-responsive">
 									    <thead>
 									      	<tr>
 									      		<th>Nombre del evento</th>
@@ -1051,23 +1041,25 @@
 										        <th>Nombre contacto</th>
 										        <th>Tel contacto</th>
 										        <th>Es de:</th>
-										        <th>Nombre organización</th>
-										        <th>Tipo de organización</th>
-										        <th>Descripción de la organización</th>
+										        <th>Organización (Benef)</th>
+										        <th>Tipo de Org</th>
+										        <th>Descripción de la Org</th>
 										        <th>Logo del evento</th>
+										        <th></th>
+										        <th></th>
 									      	</tr>
 									    </thead>
 									    <tbody>
 									    <!-- | dateRange:vm.from:vm.to -->
-									      	<tr ng-repeat="event in vm.acceptedEvents track by $index">
+									      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to" > 
 									      		<td>{{event.eventName}}</td>
 									      		<td>{{event.eventType}}</td>
 									      		<td>{{event.eventState}}</td>
 									      		<td>{{event.invitedName}}</td>
-										        <td>{{event.date1}}</td>
-										        <td>{{event.time1}}</td>
-										        <td>{{event.date2}}</td>
-										        <td>{{event.time2}}</td>
+										        <td>{{event.date1 | date : "shortDate"}}</td>
+										        <td>{{event.time1 | date : "shortTime"}}</td>
+										        <td>{{event.date2 | date : "shortDate"}}</td>
+										        <td>{{event.time2 | date : "shortTime"}}</td>
 										        <td>{{event.selectAcademies}}</td>
 										        <td>{{event.selectCategories}}</td>
 										        <td>{{event.costInsc}}</td>
@@ -1097,26 +1089,26 @@
 
 				      	<!-- Tab historial de eventos -->
 				      	<md-tab label="Historial de eventos">
-					        <md-content class="md-padding">
-					        	<h3>Filtrar Eventos</h3>
+					        <md-content id="table2" class="md-padding">
+					        	<h3>FILTRAR EVENTOS</h3>
 
 					        	<!-- Filtros -->
 								<!-- Filtro por fecha -->
-								<!-- <md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
-						    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
+								<md-datepicker name="from"  ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
+						    	<md-datepicker name="to"  ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
 
 						    	<!-- Filtro por estado -->
-								<!-- <md-input-container>
+								<md-input-container>
 								    <label>Seleccione el estado</label>
 								    <md-select name="stateFilter" ng-model="vm.stateFilter">
-								    	<md-option value="aceptado">Aceptado</md-option>
+								    	<md-option value="aprobado">Aceptado</md-option>
 								        <md-option value="cancelado">Cancelado</md-option>
 								    </md-select>
-								</md-input-container> -->
+								</md-input-container>
 
 					        	<!-- Tabla historial de eventos -->
 						        <div>
-						          	<table>
+						          	<table class="table-responsive">
 									    <thead>
 									      	<tr>
 									      		<th>Fecha</th>
@@ -1127,8 +1119,9 @@
 									    </thead>
 									    <tbody>
 									    <!-- | filter:{stateFilter:vm.stateFilter} -->
-									      	<tr ng-repeat="event in vm.events track by $index">
-									      		<td>{{event.date1}}</td>
+									      	<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
+									      	
+									      		<td>{{event.date1 | date : "shortDate"}}</td>
 									      		<td>{{event.eventName}}</td>
 									      		<td>{{event.eventState}}</td>
 										        <td>{{event.placeName}}</td>
