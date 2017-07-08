@@ -21,12 +21,12 @@
         userFounded.newUser = 1;
         userService.updateTeacher(userFounded);
       }
-      if(userService.searchUser(pEmail) !== false){
+      /*if(userService.searchUser(pEmail) !== false){
         var userFounded = userService.searchUser(pEmail);
         userFounded.userType = 'Competidor';
         userFounded.newUser = 1;
         userService.updateUsers(userFounded);
-      }
+      }*/
 
       if(userFounded.length == 0){
         $location.path('/');

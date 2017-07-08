@@ -38,6 +38,12 @@
 						<p class="menu-button">Registros</p>
 					</md-button>
 				</md-list-item>
+				<md-list-item  layout="column">
+					<md-button class="button-selected" ng-click="vm.selected = 6" ng-style="vm.selected == 6 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons register-icon fa fa-trophy" ng-style="vm.selected == 6 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
+						<p class="menu-button">Competencias</p>
+					</md-button>
+				</md-list-item>
 			</md-list>
 		</md-sidenav>
 		<md-content id="content" flex>
@@ -83,6 +89,37 @@
   			<!-- Poner la vista aquí
 
   			!!-->
+  			<!--Vista competiciones-->
+  			<div ng-show="vm.selected == 6">
+  					<md-card ng-repeat="item in vm.competitions" flex="20">
+				        <md-card-title>
+				          <md-card-title-text>
+				            <span class="md-headline">Competencia {{item.competitionNumber}}</span>
+				            <span class="md-subhead">Evento: {{item.eventBelongs}}</span>
+				          </md-card-title-text>
+				        </md-card-title>
+				        <div layout="row">
+				        	<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
+					        	<i class="material-icons">&#xE227;</i>
+					        </md-icon>
+					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Equipo'">
+					        	<i class="material-icons">&#xE903;</i>
+					        </md-icon>
+					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Comida'">
+					        	<i class="material-icons">&#xE8CC;</i>
+					        </md-icon>
+					        <p class="sponsor-p-type">{{item.sponsorType}}</p>
+				        </div>
+				        	<md-card-content>
+					          <p>
+					            {{item.description}}
+					          </p>
+					        </md-card-content>
+				        <md-card-actions layout="row" layout-align="end">
+				          <md-button ng-click="vm.getSponsorInfo(item)">Editar</md-button>
+				        </md-card-actions>
+			      </md-card>
+  			</div>
   			<!--Vista patrocinadores-->
   			<div ng-show="vm.selected == 4" ng-cloak>
   				<md-content layout="row">
@@ -602,6 +639,16 @@
 				          	<a ui-sref-active="active" ui-sref=".part5"><span>5</span></a>
 				        </div>
 
+				        <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
+
+			          	<!-- Formulario para registro de eventos -->
+			          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
+
+		          			<!-- Espacio para mostrar vistas del registro -->
+		          			<div id="form-views" ui-view></div>
+			          	</form>
+			          </div>
+
 						<!-- Tabla para listar eventos -->
 			          <div>
 			          	<table>
@@ -1001,7 +1048,7 @@
 							<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
 								<md-input-container flex="90">
 									<label>Descripción</label>
-									<textarea></textarea ng-model="vm.sponsor.description">
+									<textarea></textarea ng-model="vm.sponsor.description" required>
 								</md-input-container>
 							</div>
 							<!-- Subir logo -->

@@ -24,11 +24,11 @@
                  			</li>
                  			<li href="#" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">ENTRADAS <span class="fa fa-angle-down"></span></a>
                    				<ul class="dropdown-menu">
-                   					<li><a href="#">RESERVAR</a></li>
-				                    <li><a href="#">CANCELAR</a></li>
+                   					<li><a ng-click="vm.reserve($event)">RESERVAR</a></li>
+				                    <li><a ng-click="vm.cancel($event)">CANCELAR</a></li>
                    				</ul>
                  			</li>
-			                <li><a href="#">LOG IN</a></li>
+			                <li><a ng-click="vm.logIn($event)">LOG IN</a></li>
                			</ul>
              		</div>
            		</div>

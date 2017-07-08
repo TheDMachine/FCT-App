@@ -284,7 +284,10 @@ md-input-container{
 
 /*Fin estilos de pasos formulario eventos*/
 
+
 /*Inicio estilos de pasos formulario patrocinadores*/
+
+/*Botones*/
 #sponsorButtons div{
   width: 40px;
   height: 40px;
@@ -311,6 +314,8 @@ md-input-container{
 #sponsorButtons div.active a{
   color: #fff;
 }
+
+/* Fin estilo botones*/
 
 .sponsor-form{
   margin: 0 auto;

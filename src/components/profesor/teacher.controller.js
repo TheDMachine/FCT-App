@@ -9,7 +9,7 @@
  	var originatorEv;
   var vm = this;
   vm.newPassword = false;
-  vm.currentUser;
+  vm.currentUser = '';
   vm.selected = 0;
 
   function init() {
@@ -45,9 +45,6 @@
   }
 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
-    function init() { 
-      vm.originatorEv;
-      }init();
 
       /*Sidenav*/
     vm.openMenu = function($mdMenu, ev) {
