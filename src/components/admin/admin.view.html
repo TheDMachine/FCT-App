@@ -438,6 +438,16 @@
 				          	<a ui-sref-active="active" ui-sref=".part5"><span>5</span></a>
 				        </div>
 
+				        <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
+
+			          	<!-- Formulario para registro de eventos -->
+			          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
+
+		          			<!-- Espacio para mostrar vistas del registro -->
+		          			<div id="form-views" ui-view></div>
+			          	</form>
+			          </div>
+
 						<!-- Tabla para listar eventos -->
 			          <div>
 			          	<table>

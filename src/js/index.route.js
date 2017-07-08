@@ -194,6 +194,6 @@
       controllerAs: 'vm'
     })
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/landing');
   }
 })();
