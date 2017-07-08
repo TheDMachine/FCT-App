@@ -995,6 +995,7 @@
 		          			<div id="form-views" ui-view></div>
 			          	</form>
 			          </div>
+
 			          			          	<!-- Tabla para listar profesores -->
 			          <div>
 			          	<table>
@@ -1003,6 +1004,7 @@
 							        <th>Cedula</th>
 							        <th>Primer nombre</th>
 							        <th>Primer apellido</th>
+							        <th>Estado</th>
 						      	</tr>
 						    </thead>
 						    <tbody>
@@ -1010,9 +1012,11 @@
 							        <td>{{teacher.id}}</td>
 							        <td>{{teacher.firstName}}</td>
 							        <td>{{teacher.firstLastName}}</td>
+							        <td>{{teacher.status}}</td>
 							        <td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
+
 							    	<!-- Botones para editar profesores -->
-							        <td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(pTeacher)"></td>
+							        <td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)"></td>
 						      	</tr>
 						    </tbody>
 					  	</table>
@@ -1428,7 +1432,7 @@
 
                           <!-- Botones para editar profesores -->
                           <td>
-                            <input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)">
+                            <input type="button" value="Editar" ng-click="vm.getInfoTeacher(pTeacher)">
                           </td>
 
                         </tr>

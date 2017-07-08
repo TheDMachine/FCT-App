@@ -23,36 +23,37 @@
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
 
-    function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
-        vm.originatorEv;
-        vm.academy = academyServices.getAcademy();
-        vm.weights = estabInfoService.getWeight();
-        vm.events = eventService.getEvents();
-        vm.competitions = eventService.getCompetitions();
-        aceptedEvents();
-        vm.event = {};
-        vm.sponsors = sponsorService.getSponsors();
-        vm.teacher = {};
-        vm.teachers = userService.getTeachers();
-        vm.sponsor = {};
-        vm.users = userService.getUsers();
-        vm.log = logService.showLog();
-        vm.belts = estabInfoService.getBelts();
-        vm.to = new Date();
-        vm.to2 = new Date();
-        vm.weights = estabInfoService.getWeight();
-        vm.categoriesAge = estabInfoService.getCategories();
-        $http.get('http://api.population.io:80/1.0/countries').then(function(data){
-          console.log(data);
-          vm.countries = data.data.countries;
-        },function(err){
-          console.log(err);
-        })
-      }init();
+    function init() { // función que se llama así misma para indicar que sea lo primero que se ejecute
+      vm.originatorEv;
+      vm.academy = academyServices.getAcademy();
+      vm.weights = estabInfoService.getWeight();
+      vm.events = eventService.getEvents();
+      vm.competitions = eventService.getCompetitions();
+      aceptedEvents();
+      vm.event = {};
+      vm.sponsors = sponsorService.getSponsors();
+      vm.teacher = {};
+      vm.teachers = userService.getTeachers();
+      vm.sponsor = {};
+      vm.users = userService.getUsers();
+      vm.log = logService.showLog();
+      vm.belts = estabInfoService.getBelts();
+      vm.to = new Date();
+      vm.to2 = new Date();
+      vm.weights = estabInfoService.getWeight();
+      vm.categoriesAge = estabInfoService.getCategories();
+      $http.get('http://api.population.io:80/1.0/countries').then(function (data) {
+        console.log(data);
+        vm.countries = data.data.countries;
+      }, function (err) {
+        console.log(err);
+      })
+    }
+    init();
 
-    
-      /*Sidenav*/
-    vm.openMenu = function($mdMenu, ev) {
+
+    /*Sidenav*/
+    vm.openMenu = function ($mdMenu, ev) {
       originatorEv = ev;
       $mdMenu.open(ev);
     };
@@ -92,7 +93,7 @@
           vm.createNewEvent(pNewEvent);
         });
     };
-    vm.createNewEvent= function(pNewEvent) {
+    vm.createNewEvent = function (pNewEvent) {
       var bError = false;
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
@@ -103,15 +104,15 @@
       } else {
         for (var i = 0; i < vm.events.length; i++) {
           if (pNewEvent.eventName == vm.events[i].eventName) {
-            bError =true;
+            bError = true;
           }
         }
-        if(bError == false){
-           eventService.setEvents(pNewEvent);
+        if (bError == false) {
+          eventService.setEvents(pNewEvent);
           document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
           clean();
           init();
-        }else{
+        } else {
           document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
         }
       }
@@ -266,9 +267,9 @@
       for (var i = 0; i < vm.events.length; i++) {
         if (vm.events[i].eventState === 'aprobado') {
           vm.acceptedEvents.push(vm.events[i]);
-          }
         }
       }
+    }
 
     vm.createNewConsult = function (pNewConsul) {
       console.log("El objeto con imagen es %o", pNewConsul);
@@ -304,11 +305,12 @@
 
     // Función para guardar profesores
 
-    vm.createNewTeacher = function(pNewTeacher){
+    vm.createNewTeacher = function (pNewTeacher) {
       userService.setTeachers(pNewTeacher);
       clean();
       init();
     }
+
     // Función para imprimir datos del profesor en la lista
     vm.getInfoTeacher = function (pTeacher) {
       vm.teacher.id = pTeacher.id;
@@ -332,6 +334,29 @@
     function clean() {
       vm.event = '';
     }
+
+    // Función para actualizar datos del profesor
+    vm.updateTeacher = function () {
+      var editTeacher = {
+        id: vm.teacher.id,
+        firstName: vm.teacher.firstName,
+        secondName: vm.teacher.secondName,
+        firstLastName: vm.teacher.firstLastName,
+        secondLastName: vm.teacher.secondLastName,
+        phone: vm.teacher.phone,
+        email: vm.teacher.email,
+        bornhDate: vm.teacher.bornhDate,
+        gender: vm.teacher.gender,
+        nationality: vm.teacher.nationality,
+        academy: vm.teacher.academy,
+        grade: vm.teacher.grade,
+        photo: vm.teacher.photo,
+        status: vm.teacher.status
+      }
+      userService.updateTeacher(editTeacher);
+      init();
+      clean();
+    };
 
     /*Final sidenav
     -->>*/
@@ -501,7 +526,7 @@
         competitionGenre: vm.competitionGenre,
         competitionBelt: vm.competitionBelt,
         competitionWeight: vm.competitionWeight,
-        arrayObject : [vm.competitors]
+        arrayObject: [vm.competitors]
       }
       newCompetition.competitors = [];
       newCompetition.competitors.push(newCompetition.arrayObject[0]['0']);
