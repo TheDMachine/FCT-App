@@ -29,7 +29,8 @@
         getCookie : _getCookie,
         setUsers: _setUsers,
         getUsers: _getUsers,
-        updateUsers: _updateUsers
+        updateUsers: _updateUsers,
+        searchUser : _searchUser
     };
     return publicAPI;
 
@@ -44,17 +45,15 @@
     }
 
     //buscar si la cédula se repite
-    function searchUser(newUser) {
+    function _searchUser(newUser){
       var usersList = _getUsers();
-      var position = -1;
-
-      for (var i = 0; i < usersList.length; i++) {
-        if (newUser.id == usersList[i].id) {
-          position = i;
-        }
-      }
-      return position;
-    }
+     for (var i = 0; i < usersList.length; i++) {
+       if(usersList[i].email == pUsernameToFind){
+         return usersList[i];
+       }
+     }
+     return false;
+   }
 
     //muestra la informacion mas actual
     function _getUsers() {
@@ -93,7 +92,7 @@
       return teachersList;
     }
 
-    //editar la informacion del profesor 
+    //editar la informacion del profesor
     function _updateTeacher(pobjUsuario) {
       var teachersList = _getTeachers();
       for(var i = 0; i < teachersList.length; i++){
