@@ -284,6 +284,56 @@ md-input-container{
 
 /*Fin estilos de pasos formulario eventos*/
 
+
+/*Inicio estilos de pasos formulario patrocinadores*/
+
+/*Botones*/
+#sponsorButtons div{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #fbb03b;
+  text-align: center;
+  margin: 0 1%;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#sponsorButtons div a{
+  color: #fbb03b;
+  line-height: 2.7;
+  text-decoration: none;
+  padding: 1.5%;
+}
+
+#sponsorButtons div.active{
+  background: #fbb03b;
+  color: #fff;
+}
+
+#sponsorButtons div.active a{
+  color: #fff;
+}
+
+/* Fin estilo botones*/
+
+.sponsor-form{
+  margin: 0 auto;
+  padding: 1.5% 0;
+  box-sizing: border-box;
+}
+
+md-icon.sponsor-icon{
+  margin: 0 3.5% 0 6%;
+  color: #ffd034;
+}
+
+.sponsor-p-type{
+  line-height: 1.6;
+  font-weight: 600;
+}
+/*Fin estilos de pasos formulario patrocinadores*/
+
 /* Estilos semilla */
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
   background-color: #0082c8;
@@ -352,7 +402,7 @@ md-sidenav.md-locked-open, md-sidenav.md-locked-open.md-closed, md-sidenav.md-lo
 }
 
 .help-icon{
-  color: #fbb03b;
+  color: #fcb132;
 }
 
 .register-icon{
@@ -583,5 +633,46 @@ md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-c
 .form-group{
   margin: 3% 0;
 }
+/*Fin estilos login*/
 
-/*Fin estilos login
+/*estilos profesor*/
+
+
+md-card md-card-title md-card-title-media .md-media-lg{
+  width: 75%;
+  height: 20%;
+}
+
+span.md-headline.name-profile{
+  font-size: 3rem;
+}
+
+span.md-subhead.info-profile{
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding-bottom: 0.75%;
+}
+
+.profile-info{
+  font-size: 1.6rem;
+  margin: 1.5% 0;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  color: rgba(0,0,0,0.54);
+}
+
+.profile-info span{
+    color: #000;
+}
+
+md-card md-card-title md-card-title-text{
+  padding: 1.5% 0;
+}
+
+.phone-info{
+  line-height: 0;
+  margin-left: 0.5%;
+}
+
+.contact-info{
+  margin: 0.75% 0;
+}

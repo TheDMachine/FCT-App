@@ -1,5 +1,5 @@
 <!-- Sidenav view -->
-<div class="body-app md-menu-demo" layout="column" ng-cloak">
+<div class="body-app md-menu-demo" layout="column" ng-cloak ng-init="vm.selected = 0">
 	<div class="side-content-container" layout="row" flex>
 		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10">
 			<md-list>
@@ -8,33 +8,43 @@
 					<img src="images/logo.png">
 				</figure>
 				</md-list-item>
-				<md-list-item  layout="column">
-						<i class="material-icons side-icons home-icon">&#xE88A;</i>
-					<p class="menu-button">Home</p>
+				<md-list-item layout="column">
+					<md-button class="button-selected" ng-click="vm.selected = 1" ng-style="vm.selected == 1 ? {'background' : 'rgba(27,201,142,0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons home-icon" ng-style="vm.selected == 1 ? {'color': '#fff'} : {'color': '#1bc98e'} ">&#xE88A;</i>
+						<p class="menu-button">Home</p>
+					</md-button>
 				</md-list-item>
 				<md-list-item layout="column">
-						<i class="material-icons side-icons profile-icon">&#xE853;</i>
-					<p class="menu-button">Perfil</p>
+					<md-button class="button-selected" ng-click="vm.selected = 2" ng-style="vm.selected == 2 ? {'background' : 'rgba(0,130,200,0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 2 ? {'color': '#fff'} : {'color': '#1a80a8'} ">&#xE853;</i>
+						<p class="menu-button">Perfil</p>
+					</md-button>
 				</md-list-item>
 				<md-list-item  layout="column">
-						<i class="material-icons side-icons events-icon">&#xE878;</i>
-					<p class="menu-button" flex>Eventos</p>
+					<md-button class="button-selected" ng-click="vm.selected = 3" ng-style="vm.selected == 3 ? {'background' : 'rgba(230,71,89,0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons events-icon" ng-style="vm.selected == 3 ? {'color': '#fff'} : {'color': '#e64759'} ">&#xE878;</i>
+						<p class="menu-button">Eventos</p>
+					</md-button>
 				</md-list-item>
 				<md-list-item  layout="column">
-						<i class="material-icons side-icons help-icon">&#xEB3F;</i>
-					<p class="menu-button" flex>Patrocinadores</p>
+					<md-button class="button-selected" ng-click="vm.selected = 4" ng-style="vm.selected == 4 ? {'background' : 'rgba(251,176,59,0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons help-icon" ng-style="selected == 4 ? {'color': '#fff'} : {'color': '#fbb03b'} ">&#xEB3F;</i>
+						<p class="menu-button">Patrocinadores</p>
+					</md-button>	
 				</md-list-item>
 				<md-list-item  layout="column">
-						<i class="material-icons side-icons register-icon">&#xE873;</i>
-					<p class="menu-button" flex>Registros</p>
+					<md-button class="button-selected" ng-click="vm.selected = 5" ng-style="vm.selected == 5 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons register-icon" ng-style="selected == 5 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
+						<p class="menu-button">Registros</p>
+					</md-button>	
 				</md-list-item>
 			</md-list>
 		</md-sidenav>
 		<md-content id="content" flex>
 	  		<md-toolbar class="tool-icons md-whiteframe-3dp" layout="row">
 	  			<md-list-item class="noright" flex="20">
-    				<img alt="{{ person.name }}" ng-src="{{ person.img }}" class="md-avatar" />
-    				<p>Person name{{person.name}}</p>
+    				<img alt="{{ person.name }}" ng-src="{{ vm.currentUser.photo }}" class="md-avatar" />
+    				<p>{{vm.currentUser.email}}</p>
   				</md-list-item>
     			<div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
     				<div class="icons-profile-container">
@@ -61,7 +71,7 @@
 				        </md-menu-item>
 				        <md-menu-divider></md-menu-divider>
 				        <md-menu-item>
-				          <md-button ng-click="ctrl.toggleNotifications()">
+				          <md-button ng-click="vm.logOut()">
 				            Cerrar sesión
 				          </md-button>
 				        </md-menu-item>
@@ -73,7 +83,44 @@
   			<!-- Poner la vista aquí 
 
   			!!-->
-
+  			<div ng-show="vm.selected == 2">
+  				<h2 layout="row" layout-align="start">Perfil</h2>
+  				<div flex-xs flex-gt-xs="100" layout="column">
+			      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+			        <md-card-title>
+			          <md-card-title-media flex="35">
+			            <div class="md-media-lg card-media profile-picture">
+			            	<img ng-src="{{vm.currentUser.photo}}">
+			            </div>
+			          </md-card-title-media>
+			          <md-card-title-text>
+			            <span class="md-headline name-profile">{{vm.currentUser.firstName}}  {{vm.currentUser.firstLastName}}</span>
+			            <span class="md-subhead info-profile">Academia: {{vm.currentUser.academy}}</span>
+			            <p class="profile-info"><span>ID:</span> {{vm.currentUser.id}}</p>
+			            <p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
+			            <p class="profile-info"><span>Edad:</span> {{vm.currentUser.bornhDate}}</p>
+			            <p class="profile-info"><span>Grado:</span> {{vm.currentUser.grade}}</p>
+			            <div layout="row" class="contact-info">
+		            		<i class="material-icons">&#xE0CD;</i>
+			            	<p class="profile-info phone-info"><span>Teléfono:</span> {{vm.currentUser.phone}}</p>
+			            </div>
+			            <div layout="row" class="contact-info">
+		            		<i class="material-icons">&#xE0BE;</i>
+			            	<p class="profile-info phone-info"><span>Email:</span> {{vm.currentUser.phone}}</p>
+			            </div>
+			          </md-card-title-text>
+			        </md-card-title>
+			        <md-card-actions layout="row" layout-align="end center">
+			          <md-button>Editar</md-button>
+			        </md-card-actions>
+			      </md-card>
+  				</div>
+  			</div>
+		<!--<div ng-if="status" id="status">
+    <b layout="row" layout-align="center center" class="md-padding">
+      {{status}}
+    </b>
+  </div>-->
   			
   			
 
