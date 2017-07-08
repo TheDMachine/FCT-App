@@ -20,7 +20,7 @@
   <script src="https://use.fontawesome.com/b21fa3aa05.js"></script>
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Bootstrap Material Design -->
   <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.css">
   <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css">
@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="./bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.min.css">
   <!-- custom -->
   <link rel="stylesheet" href="css/index.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
 
@@ -36,6 +37,8 @@
 <div ui-view></div>
   <!-- Fixed navbar -->
 
+  <!-- Dependencias de angular -->
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
@@ -59,15 +62,18 @@
   <script src="js/index.route.js"></script>
   <script src="components/login/login.controller.js"></script>
   <script src="components/admin/admin.controller.js"></script>
+  <script src="components/date.filter.js"></script>
 
   <!-- Servicios -->
-  <script src="components/services/academy.services.js"></script>
+  <script src="components/services/academy.service.js"></script>
   <script src="components/services/events.service.js"></script>
   <script src="components/services/image.service.js"></script>
   <script src="components/services/logsistem.service.js"></script>
   <script src="components/services/auth.service.js"></script>
   <script src="components/services/sponsors.service.js"></script>
   <script src="components/services/users.service.js"></script>
+  <script src="components/services/establishedInfo.service.js"></script>
+  <script src="components/services/tickets.service.js"></script>
 </body>
 
 </html>

@@ -110,10 +110,6 @@
       url : '/part5', //ruta del url del estado
       templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart5.view.html'//vista que se va a cargar para este estado
     })
-    .state('admin.part6',{
-      url : '/part6', //ruta del url del estado
-      templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart6.view.html'//vista que se va a cargar para este estado
-    })
     .state('admin.sponsorPartOne', {
       url : '/sponsorPartOne',
       templateUrl : 'components/admin/sponsor.register.views/admin-sponsor1.view.html'
@@ -122,7 +118,23 @@
       url : '/sponsorPartTwo',
       templateUrl : 'components/admin/sponsor.register.views/admin-sponsor2.view.html'
     })
+    
     // Fin de las vistas hojas del formualrio de registro del administrador.
+
+    //Inicio de las vistas hijas del formulario de registro del profesor
+    .state('admin.teachpart1',{
+      url : '/teachpart1', //ruta del url del estado
+      templateUrl : 'components/admin/admin.teachers.views/admin-teachersregpart1.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.teachpart2',{
+      url : '/teachpart2', //ruta del url del estado
+      templateUrl : 'components/admin/admin.teachers.views/admin-teachersregpart2.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.teachpart3',{
+      url : '/teachpart3', //ruta del url del estado
+      templateUrl : 'components/admin/admin.teachers.views/admin-teachersregpart3.view.html'//vista que se va a cargar para este estado
+    })
+    // Fin de las vistas hojas del formualrio de registro del profesor.
 
     .state('assistant',{
       url : '/assistant', //ruta del url del estado
@@ -170,6 +182,42 @@
         }]
       },
       controller: 'loginCtrl',
+      controllerAs: 'vm'
+    })
+        .state('landing',{
+      url : '/landing', //ruta del url del estado
+      templateUrl : 'components/landing/landing.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/landing/landing.controller.js')
+        }]
+      },
+      controller: 'landingCtrl',
+      controllerAs: 'vm'
+    })
+        .state('reserve',{
+      url : '/reserve', //ruta del url del estado
+      templateUrl : 'components/tickets/reserve.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/tickets/reserve.controller.js')
+        }]
+      },
+      controller: 'reserveCtrl',
+      controllerAs: 'vm'
+    })
+        .state('cancelRsv',{
+      url : '/cancelRsv', //ruta del url del estado
+      templateUrl : 'components/tickets/cancelRsv.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/tickets/cancelRsv.controller.js')
+        }]
+      },
+      controller: 'cancelRsvCtrl',
       controllerAs: 'vm'
     })
 

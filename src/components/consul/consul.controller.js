@@ -3,11 +3,23 @@
   angular
   .module('app')
   .controller('consulCtrl', consulCtrl);
+<<<<<<< HEAD
   function consulCtrl($scope, eventService) {
 	  	/*Sidenav functionality*/
  	var originatorEv;
   var vm = this;
 
+=======
+  function consulCtrl($scope) {
+  var vm = this;
+
+    // función que se llama así misma para indicar que sea lo primero que se ejecute
+    function init() { 
+      vm.originatorEv;
+      }init();
+
+      /*Sidenav*/
+>>>>>>> master
     vm.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
       $mdMenu.open(ev);
@@ -36,6 +48,7 @@
       // This never happens.
     };
     /*End sidenav functionality
+<<<<<<< HEAD
     -->>*/
 
     //Funcion para guardar la  imagen
@@ -85,3 +98,9 @@
       };
     }
 })();
+=======
+    -->>*/   
+
+   }
+})();
+>>>>>>> master

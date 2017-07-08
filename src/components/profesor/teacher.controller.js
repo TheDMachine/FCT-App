@@ -4,52 +4,63 @@
   .module('app')
   .controller('teacherCtrl', teacherCtrl);
 
-  function teacherCtrl ($scope, AuthService, $location, $cookies, userService) {
+  function teacherCtrl ($scope, AuthService, $location, $cookies, userService, $mdDialog) {
   	/*Sidenav functionality*/
  	var originatorEv;
   var vm = this;
   vm.newPassword = false;
   vm.currentUser;
+  vm.selected = 0;
 
-  function init(){
+  function init() {
     vm.currentUser = userService.findUserTeacher(userService.getCookie());
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     console.log(vm.currentUser);
-    if(vm.currentUser.newUser == 1){
-      $scope.showPrompt();
-    }
   }init();
 
     $scope.showPrompt = function() {
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog.prompt()
-      .title('What would you name your dog?')
-      .textContent('Bowser is a common name.')
-      .placeholder('Dog name')
-      .ariaLabel('Dog name')
-      .initialValue('Buddy')
-      .targetEvent(ev)
-      .ok('Okay!')
-      .cancel('I\'m a cat person');
+      .title('Bienvenido ' + vm.currentUser.email + '!')
+      .textContent('Modifica tu contraseña temporal')
+      .placeholder('Nueva contraseña')
+      .ariaLabel('New password')
+      .initialValue('')
+      .targetEvent()
+      .ok('Cambiar')
+      .cancel('');
 
     $mdDialog.show(confirm).then(function(result) {
-      $scope.status = 'You decided to name your dog ' + result + '.';
+      $scope.status =  result;
     }, function() {
       $scope.status = 'You didn\'t name your dog.';
     });
   };
 
-    $scope.openMenu = function($mdMenu, ev) {
+  if(vm.currentUser.newUser == 1) {
+    $scope.showPrompt();
+  }
+
+    // función que se llama así misma para indicar que sea lo primero que se ejecute
+    function init() { 
+      vm.originatorEv;
+      }init();
+
+      /*Sidenav*/
+    vm.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
       $mdMenu.open(ev);
     };
 
-    $scope.notificationsEnabled = true;
-    $scope.toggleNotifications = function() {
-      $scope.notificationsEnabled = !this.notificationsEnabled;
+    vm.notificationsEnabled = true;
+    vm.toggleNotifications = function() {
+      vm.notificationsEnabled = !this.notificationsEnabled;
     };
 
-    $scope.redial = function() {
+    vm.redial = function() {
       $mdDialog.show(
         $mdDialog.alert()
           .targetEvent(originatorEv)
@@ -63,13 +74,13 @@
       originatorEv = null;
     };
 
-    $scope.checkVoicemail = function() {
+    vm.checkVoicemail = function() {
       // This never happens.
     };
     /*End sidenav functionality
     -->>*/
 
-    vm.logOut = function(){
+    vm.logOut = function() {
       AuthService.logOut();
     }
   };

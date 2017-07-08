@@ -1,4 +1,252 @@
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+
+/*Estilos del landing*/
+
+@font-face {
+  font-family: 'om-telolet';
+  src: url(fonts/om_telolet_om/Om_Telolet_Om.otf);
+}
+
+#landing{
+  background-image: url(../images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#landing .navbar{
+  background-color: inherit;
+  border: none;
+}
+
+#Navegation{
+  margin-bottom: 120px;
+}
+
+#landing #titleFCT{
+  font-family: 'om-telolet';
+  color: #fff;
+  font-size: 4.429em;
+  margin-bottom: 50px;
+}
+
+#landing #infoFCT{
+  margin-bottom: 40px;
+}
+
+#landing p{
+  color: #fff;
+  text-align: center;
+  line-height: 1.5;
+}
+
+#landing #buttonInfo{
+  margin-bottom: 200px;
+  align-content: center;
+}
+
+#landing .md-button{
+  background-color: #fcb132;
+  color: #fff;
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#landing .md-button:not([disabled]):hover {
+    background-color: rgba(252, 177, 50, 0.5);
+    transition: 0.3s;
+}
+
+#landing #listaNav .dropdown-menu{
+  background-color: transparent;
+  border: 0.5px solid rgba(252, 177, 50, 0.5);
+}
+
+#landing #listaNav .dropdown-menu li a{
+  color: #fff;
+  font-weight: lighter;
+}
+
+#landing #listaNav .dropdown-menu li a:hover{
+  background: rgba(252, 177, 50, 0.5);
+}
+
+/*Fin estilos del landing*/
+
+/*Inicio estilo de tablas de consulta e historial eventos*/
+#table1 h3, #table2 h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 60px;
+}
+
+#table1 table, #table2 table{
+  width: 100%;
+}
+
+#table1 thead, #table1 tbody, #table2 thead, #table2 tbody{
+  width: 100%;
+} 
+
+#table1 tbody, #table2 tbody{
+  text-align: center;
+}
+
+#table1 tr th, #table2 tr th{
+  width: 60px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: #cd3d3e;
+  color: #fff;
+}
+
+#table1 tr:hover, #table2 tr:hover{
+  background: rgba(205, 61, 62,0.1);
+}
+
+#table1 tbody td, #table2 tbody td{
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+
+#table1 .md-button{
+  background-color: rgba(252, 177, 50, 0.8);
+  color: #fff;
+}
+
+#table1 .md-button:not([disabled]):hover {
+    background-color: #fcb132;
+    transition: 0.3s;
+}
+
+/*Fin estils de tablas de consulta e historial eventos*/
+
+/*Inicio estilos de cinturones*/
+#homeSection div h1{
+  font-family: 'Montserrat';
+  font-size: 2.143em;
+}
+#homeSection #beltNum1 h3{
+  border: 1px solid #dbd8d8;
+  border-radius: 7px;
+  color: #242629;
+  padding:10px 0;
+}
+
+#homeSection #beltNum1 div p{
+  color: #242629;
+}
+
+#homeSection #beltNum1 h3, #homeSection #beltNum2 h3, #homeSection #beltNum3 h3, #homeSection #beltNum4 h3, #homeSection #beltNum5 h3, #homeSection #beltNum6 h3{
+  font-family: 'Montserrat';
+  text-align: center;
+  font-size: 1.571em;
+}
+
+#homeSection #beltNum1 p, #homeSection #beltNum2 p, #homeSection #beltNum3 p, #homeSection #beltNum4 p, #homeSection #beltNum5 p, #homeSection #beltNum6 p{
+  line-height: 1.5;
+  text-align: justify;
+  font-size: 1em;
+}
+
+#homeSection div{
+  padding-bottom: 10px;
+}
+
+#homeSection div p span{
+  font-weight: normal;
+  font-size: 1.143em;
+}
+
+#homeSection #beltNum2 h3{
+  border-radius: 7px;
+  color: #fff;
+  background-color: #fcb132;
+  padding:10px 0;
+}
+
+#homeSection #beltNum3 h3{
+  border-radius: 7px;
+  color: #fff;
+  background-color: #00a652;
+  padding:10px 0;
+}
+
+#homeSection #beltNum4 h3{
+  border-radius: 7px;
+  color: #fff;
+  background-color: #0082c8;
+  padding:10px 0;
+}
+
+#homeSection #beltNum5 h3{
+  border-radius: 7px;
+  color: #fff;
+  background-color: #ee334e;
+  padding:10px 0;
+}
+
+#homeSection #beltNum6 h3{
+  border-radius: 7px;
+  color: #fff;
+  background-color: #000;
+  padding:10px 0;
+}
+#lastSectBelt{
+  margin-bottom: 30px;
+}
+
+/*Fin estilos de cinturones*/
+
+/*Inicio estilos de tabla pesos y categorías*/
+
+
+#homeSection table{
+  width: 100%;
+  margin: 0 auto;
+}
+
+#homeSection thead, #homeSection tbody{
+  width: 100%;
+}
+
+#homeSection tbody{
+  text-align: center;
+}
+
+#homeSection tr th{
+  width: 16.66%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 0.1%;
+  font-size: 1.143em;
+  background-color: #00978f;
+}
+
+#homeSection tr:hover{
+  background: rgba(0, 166, 82,0.1);
+}
+
+#homeSection tbody td{
+  width: 16.66%;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+/*Fin estilos de tabla pesos y categorías */
+
 /*Inicio estilos de pasos formulario eventos*/
+#events md-content h1{
+  font-family: 'Montserrat';
+}
 
 .statusButtons a{
   color: #ee334e;
@@ -27,6 +275,12 @@
 md-input-container{
   width: 30%;
 }
+
+#reqMsj{
+  color: #ee334e;
+  font-size: 0.786em;
+}
+
 
 /*Fin estilos de pasos formulario eventos*/
 
@@ -60,7 +314,7 @@ md-input-container{
 
 .sponsor-form{
   margin: 0 auto;
-  padding: 3.5% 0;
+  padding: 1.5% 0;
   box-sizing: border-box;
 }
 
@@ -374,5 +628,46 @@ md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-c
 .form-group{
   margin: 3% 0;
 }
-
 /*Fin estilos login*/
+
+/*estilos profesor*/
+
+
+md-card md-card-title md-card-title-media .md-media-lg{
+  width: 75%;
+  height: 20%;
+}
+
+span.md-headline.name-profile{
+  font-size: 3rem;
+}
+
+span.md-subhead.info-profile{
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding-bottom: 0.75%;
+}
+
+.profile-info{
+  font-size: 1.6rem;
+  margin: 1.5% 0;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 400;
+  color: rgba(0,0,0,0.54);
+}
+
+.profile-info span{
+    color: #000;
+}
+
+md-card md-card-title md-card-title-text{
+  padding: 1.5% 0;
+}
+
+.phone-info{
+  line-height: 0;
+  margin-left: 0.5%;
+}
+
+.contact-info{
+  margin: 0.75% 0;
+}

@@ -15,12 +15,24 @@
           'newUser' : 1
         };*/
       //console.log("Yass work correctly auth service. The user is %s and the password is %s",pUsername,pPassword);
-      var userFoundedTeacher = userService.findUserTeacher(pEmail);
-      if(userFoundedTeacher.length == 0){
+      if(userService.findUserTeacher(pEmail) !== false){
+        var userFounded = userService.findUserTeacher(pEmail);
+        userFounded.userType = 'Profesor';
+        userFounded.newUser = 1;
+        userService.updateTeacher(userFounded);
+      }
+      if(userService.searchUser(pEmail) !== false){
+        var userFounded = userService.searchUser(pEmail);
+        userFounded.userType = 'Competidor';
+        userFounded.newUser = 1;
+        userService.updateUsers(userFounded);
+      }
+
+      if(userFounded.length == 0){
         $location.path('/');
       }
-      _validateFields(pEmail, pPassword, userFoundedTeacher);
-      $cookies.put('currentUserActive',userFoundedTeacher.email);
+      _validateFields(pEmail, pPassword, userFounded);
+      $cookies.put('currentUserActive',userFounded.email);
     }
     function _destroyAuthCredentials(){
       var currentUser = $cookies.get('currentUserActive');
@@ -30,7 +42,7 @@
       _redirectTo(false);
     }
     function _validateFields(pUserField, pPassField, userFound){
-      if(userFound.email == pUserField && userFound.password == pPassField){
+      if(userFound.email == pUserField /*&& userFound.password == pPassField*/){
         _redirectTo(userFound);
       }
       else {
