@@ -23,34 +23,37 @@
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
 
-    function init() { // función que se llama así misma para indicar que sea lo primero que se ejecute
-      vm.originatorEv;
-      vm.academy = academyServices.getAcademy();
-      vm.weights = estabInfoService.getWeight();
-      vm.categories = estabInfoService.getCategories();
-      vm.events = eventService.getEvents();
-      aceptedEvents();
-      vm.event = {};
-      vm.sponsors = sponsorService.getSponsors();
-      vm.teacher = {};
-      vm.teachers = userService.getTeachers();
-      vm.sponsor = {};
-      vm.users = userService.getUsers();
-      vm.log = logService.showLog();
-      vm.belts = estabInfoService.getBelts();
-      vm.weights = estabInfoService.getWeight();
-      vm.categoriesAge = estabInfoService.getCategories();
-      $http.get('http://api.population.io:80/1.0/countries').then(function (data) {
-        console.log(data);
-        vm.countries = data.data.countries;
-      }, function (err) {
-        console.log(err);
-      })
-    }
-    init();
+    function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
+        vm.originatorEv;
+        vm.academy = academyServices.getAcademy();
+        vm.weights = estabInfoService.getWeight();
+        vm.events = eventService.getEvents();
+        vm.competitions = eventService.getCompetitions();
+        aceptedEvents();
+        vm.event = {};
+        vm.sponsors = sponsorService.getSponsors();
+        vm.teacher = {};
+        vm.teachers = userService.getTeachers();
+        vm.sponsor = {};
+        vm.users = userService.getUsers();
+        vm.log = logService.showLog();
+        vm.belts = estabInfoService.getBelts();
+        vm.to = new Date();
+        vm.to2 = new Date();
+        vm.weights = estabInfoService.getWeight();
+        vm.categoriesAge = estabInfoService.getCategories();
+        $http.get('http://api.population.io:80/1.0/countries').then(function(data){
+          console.log(data);
+          vm.countries = data.data.countries;
+        },function(err){
+          console.log(err);
+        })
+      }init();
 
-    vm.openMenu = function ($mdMenu, ev) {
-      vm.originatorEv = ev;
+    
+      /*Sidenav*/
+    vm.openMenu = function($mdMenu, ev) {
+      originatorEv = ev;
       $mdMenu.open(ev);
     };
 
@@ -89,9 +92,8 @@
           vm.createNewEvent(pNewEvent);
         });
     };
-
-    // Función para guardar
-    vm.createNewEvent = function (pNewEvent) {
+    vm.createNewEvent= function(pNewEvent) {
+      var bError = false;
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
@@ -101,13 +103,17 @@
       } else {
         for (var i = 0; i < vm.events.length; i++) {
           if (pNewEvent.eventName == vm.events[i].eventName) {
-            document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+            bError =true;
           }
         }
-        eventService.setEvents(pNewEvent);
-        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
-        clean();
-        init();
+        if(bError == false){
+           eventService.setEvents(pNewEvent);
+          document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+          clean();
+          init();
+        }else{
+          document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+        }
       }
     };
 
@@ -260,9 +266,9 @@
       for (var i = 0; i < vm.events.length; i++) {
         if (vm.events[i].eventState === 'aprobado') {
           vm.acceptedEvents.push(vm.events[i]);
+          }
         }
       }
-    }
 
     vm.createNewConsult = function (pNewConsul) {
       console.log("El objeto con imagen es %o", pNewConsul);
@@ -298,12 +304,11 @@
 
     // Función para guardar profesores
 
-    vm.createNewTeacher = function (pNewTeacher) {
+    vm.createNewTeacher = function(pNewTeacher){
       userService.setTeachers(pNewTeacher);
       clean();
       init();
     }
-
     // Función para imprimir datos del profesor en la lista
     vm.getInfoTeacher = function (pTeacher) {
       vm.teacher.id = pTeacher.id;
@@ -320,8 +325,6 @@
       vm.teacher.grade = pTeacher.grade;
       vm.teacher.photo = pTeacher.photo;
       vm.teacher.status = pTeacher.status;
-
-      
     }
 
     // Función para limpiar campos
@@ -498,7 +501,7 @@
         competitionGenre: vm.competitionGenre,
         competitionBelt: vm.competitionBelt,
         competitionWeight: vm.competitionWeight,
-        arrayObject: [vm.competitors]
+        arrayObject : [vm.competitors]
       }
       newCompetition.competitors = [];
       newCompetition.competitors.push(newCompetition.arrayObject[0]['0']);

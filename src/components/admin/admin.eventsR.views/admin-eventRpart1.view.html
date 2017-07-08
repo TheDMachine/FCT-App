@@ -4,10 +4,10 @@
 		<!-- Campo nombre evento -->
 		<md-input-container flex-offset>
 			<label>Nombre de evento</label>
-			<input name="eventName" ng-model="vm.event.eventName" md-maxlength="40" required>
+			<input type="text" name="frmEventInfo.eventName" ng-model="vm.event.eventName" maxlength="40" md-maxlength="40" required>
 
 			<!-- Mensaje de retroalimentacion -->
-			<div ng-messages="frmEventInfo.eventName.$error">
+			<div ng-messages="frmEventInfo.$error">
 				<div ng-messages-include="components/includes/messages.html"></div>
 			</div>
 		</md-input-container>
@@ -15,14 +15,14 @@
 		<!-- Campo Tipo de evento -->
 		<md-input-container>
 		    <label>Tipo de evento</label>
-		    <md-select name="eventType" ng-model="vm.event.eventType" required>
+		    <md-select name="frmEventInfo.eventType" ng-model="vm.event.eventType" required>
 		    	<md-option value="torneo">Torneo</md-option>
 		    	<md-option value="exhibicion">Exhicibición</md-option>
 		        <md-option value="fogueo">fogueo</md-option>
 		    </md-select>
 
 			<!-- Mensaje de retroalimentacion -->
-			<div ng-messages="frmEventInfo.eventType.$error">
+			<div ng-messages="frmEventInfo.$error">
 				<div ng-messages-include="components/includes/messages.html"></div>
 			</div>
 		</md-input-container>
@@ -32,13 +32,13 @@
 		<!-- Estado de evento -->
 		<md-input-container>
 		    <label>Estado del evento</label>
-		    <md-select name="eventState" ng-model="vm.event.eventState" required>
+		    <md-select name="frmEventInfo.eventState" ng-model="vm.event.eventState" required>
 		    	<md-option value="aprobado">Aceptado</md-option>
 		        <md-option value="cancelado">Cancelado</md-option>
 		    </md-select>
 
 			<!-- Mensaje de retroalimentacion -->
-			<div ng-messages="frmEventInfo.eventState.$error">
+			<div ng-messages="frmEventInfo.$error">
 				<div ng-messages-include="components/includes/messages.html"></div>
 			</div>
 		</md-input-container>		
@@ -46,16 +46,37 @@
 		<!-- Campo Nombre del invitado-->
 		<md-input-container flex-gt-sm ng-show="vm.event.eventType == 'exhibicion'">
 			<label>Nombre completo del invitado (opcional)</label>
-			<input name="invitedName" ng-model="vm.event.invitedName" md-maxlength="30">
+			<input type="text" name="frmEventInfo.invitedName" ng-model="vm.event.invitedName" maxlength="30" md-maxlength="30">
 		</md-input-container>
 
-		
+		<!-- Campo de seleccionar evento beneficencia -->
+		<md-radio-group layout="row" layout-align="start center" ng-model="vm.event.charityEvent">
+			<md-radio-button name="frmEventInfo.charityEvent" value="Beneficencia" class="md-primary">Evento de beneficencia</md-radio-button>
+		</md-radio-group>
+
+		<!-- Campo nombre de organización -->
+		<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
+			<label>Nombre de la organización</label>
+			<input type="text" name="frmEventInfo.orgName" ng-model="vm.event.orgName" maxlength="30">
+		</md-input-container>
+
+		<!-- Campo tipo de organización -->
+		<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
+			<label>Tipo de organización</label>
+			<input type="text" name="frmEventInfo.orgType" ng-model="vm.event.orgType" maxlength="20" md-maxlength="20">
+		</md-input-container>
+
+		<!-- Campo para descripción de la organización -->
+		<md-input-container class="md-block" flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
+			<label>Descripción de la organización</label>
+			<textarea name="frmEventInfo.description" ng-model="vm.event.description" maxlength="150" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+		</md-input-container>
 	</div>
 
 	<div class="col-xs-12">
 
 		<!-- Botón siguiente -->
-		<a ui-sref="admin.part2" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+		<a ui-sref="admin.part2" class="btn btn-info" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
 	</div>
 </div>
 
