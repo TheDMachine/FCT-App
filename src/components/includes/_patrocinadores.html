@@ -1,0 +1,37 @@
+<md-content layout="row">
+  <div>
+    <md-input-container flex-offset class="md-block" flex="100">
+  <label for="">Filtrar por nombre</label>
+    <input type="text" name="sponsorFilter" ng-model="vm.sponsorFilter"/>
+  </md-input-container>
+  </div>
+  <md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="20">
+      <img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">ID: {{item.sponsorName}}</span>
+          <span class="md-subhead">{{item.sponsorCompany}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <div layout="row">
+        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
+          <i class="material-icons">&#xE227;</i>
+        </md-icon>
+        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Equipo'">
+          <i class="material-icons">&#xE903;</i>
+        </md-icon>
+        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Comida'">
+          <i class="material-icons">&#xE8CC;</i>
+        </md-icon>
+        <p class="sponsor-p-type">{{item.sponsorType}}</p>
+      </div>
+        <md-card-content>
+          <p>
+            {{item.description}}
+          </p>
+        </md-card-content>
+      <md-card-actions layout="row" layout-align="end">
+        <md-button ng-click="vm.getSponsorInfo(item)">Editar</md-button>
+      </md-card-actions>
+  </md-card>
+</md-content>
