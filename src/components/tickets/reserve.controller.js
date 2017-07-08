@@ -15,36 +15,67 @@
 
     // funciones para guardar reservaciones
 
-    vm.presaveReservation = function(pReservation) {
-         console.log(pReservation);
-         vm.saveReservation(pReservation);
+    vm.saveReservation = function(pReservation) {
+      var newRsv = {
+        event : vm.reservation.event,
+        tktsQuantity : vm.reservation.tktsQuantity,
+        email : vm.reservation.email,
+        fullName : vm.reservation.fullName,
+        id : vm.reservation.id,
+        card : vm.reservation.card,
+        expCard : vm.reservation.expCard,
+        confirmationNum : conNum(),
+        state : 'activo'
       };
 
-
-    vm.saveReservation = function(pReservation) {
-      vm.availableTkts = availableTickects(pReservation);
+      vm.availableTkts = availableTickects(newRsv);
       vm.Error = false;
 
-      if (pReservation.tktsQuantity > vm.availableTkts) {
+      if (newRsv.tktsQuantity > vm.availableTkts) {
         vm.Error = true;
       }
       if (vm.Error === false) {
-        ticketService.setReservations(pReservation);
-        document.querySelector('.SuccessMessage').innerHTML = 'La reservación ha sido enviada exitosamente';
+        ticketService.setReservations(newRsv);
+        document.querySelector('.SuccessMessage').innerHTML = 'La confirmación de su reserva es: ' + newRsv.confirmationNum;
         clean();
         init();
       }else{
-        document.querySelector('.ErrorMessage').innerHTML = 'No se puede reservar, la cantidad de entradas solicitadas excede las entradas disponibles';
+        document.querySelector('.ErrorMessage').innerHTML = 'La cantidad de entradas solicitadas excede las entradas disponibles, hay ' + vm.availableTkts + ' entradas disponibles';
       }
     };
 
-     function availableTickects(pReservation) {
+      // Función para generar el número de confirmación
+      function conNum() {
+        var a = [];
+        for (var i = 97; i <= 122; i++) {
+        a[a.length] = String.fromCharCode(i).toUpperCase();
+        
+        // crear letras random.
+        var one = a[Math.floor(Math.random() * a.length)];
+        var two = a[Math.floor(Math.random() * a.length)];
+        var three = a[Math.floor(Math.random() * a.length)];
+        var four = a[Math.floor(Math.random() * a.length)];
+
+        // crear números random.
+        var int1 = Math.floor(Math.random() * 10);
+        var int2 = Math.floor(Math.random() * 10);
+        var ints = int1.toFixed(0) + int2.toFixed(0);
+        var intsDecimal = int1.toFixed(0) + "." + int2.toFixed(0);
+
+        // crear variable moviendo todas las letras y números juntos.
+        var confNum = one + two + three + four + ints;
+        }
+        return confNum;
+        console.log(confNum);
+    }
+
+     function availableTickects(pNewRsv) {
       vm.events = eventService.getEvents();
-      vm.reservedTkts = reservedTickects(pReservation);
+      vm.reservedTkts = reservedTickects(pNewRsv);
       vm.availableTkts = 0;
 
       for (var i = 0; i < vm.events.length; i++) {
-        if (pReservation.event === vm.events[i].eventName) {
+        if (pNewRsv.event === vm.events[i].eventName) {
           vm.availableTkts = vm.events[i].tickets - vm.reservedTkts;
         }
       }
@@ -52,13 +83,13 @@
     }
 
     // función para sumar los tiquetes reservados
-    function reservedTickects(pReservation) {
+    function reservedTickects(pNewRsv) {
       vm.reservations = ticketService.getsReservations();
       vm.reservedTkts = 0;
       vm.eventReservations = [];
 
       for (var i = 0; i < vm.reservations.length; i++) {
-        if (pReservation.event === vm.reservations[i].event) {
+        if (pNewRsv.event === vm.reservations[i].event && vm.reservations[i].state === 'activo') {
           vm.eventReservations.push(vm.reservations[i]);
         }
       }
@@ -76,7 +107,7 @@
     // Función para limpiar campos
 
     function clean() {
-      vm.reservations='';
+      vm.reservation ='';
     }
 
    }

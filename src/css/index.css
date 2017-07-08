@@ -1,3 +1,6 @@
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+
 /*Estilos del landing*/
 
 @font-face {

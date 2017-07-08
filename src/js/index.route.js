@@ -137,6 +137,18 @@
       controller: 'reserveCtrl',
       controllerAs: 'vm'
     })
+        .state('cancelRsv',{
+      url : '/cancelRsv', //ruta del url del estado
+      templateUrl : 'components/tickets/cancelRsv.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/tickets/cancelRsv.controller.js')
+        }]
+      },
+      controller: 'cancelRsvCtrl',
+      controllerAs: 'vm'
+    })
 
     $urlRouterProvider.otherwise('/admin');
   }

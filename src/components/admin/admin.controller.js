@@ -7,7 +7,6 @@
   function adminCtrl($scope, eventService, imageService, Upload, estabInfoService) {
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
-    //vm.events = eventService.getEvents();
     vm.weights = estabInfoService.getWeight();
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
@@ -20,6 +19,8 @@
         vm.events = eventService.getEvents();
         aceptedEvents();
         vm.event = {};
+        vm.to = new Date();
+        vm.to2 = new Date();
       }init();
     
       /*Sidenav*/
@@ -89,7 +90,6 @@
         }else{
           document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
         }
-       
       }
     };
 
@@ -151,8 +151,6 @@
       orgType : vm.event.orgType,
       description : vm.event.description
       }
-
-      
       eventService.updateEvent(modEvent);
       init();
       clean();

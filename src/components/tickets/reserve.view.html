@@ -1,7 +1,7 @@
 <section class="container-fluid">
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
-			<form name="frmTktsReservations" autocomplete="off" ng-submit="vm.presaveReservation(vm.reservation)">
+			<form name="frmTktsReservations" autocomplete="off">
 				<!-- Escoge el evento -->
 				<md-input-container>
 				    <label>Selecciona el evento</label>
@@ -14,10 +14,6 @@
 						<div ng-messages-include="components/includes/messages.html"></div>
 					</div>
 				</md-input-container>
-
-				<div id="tktsAvailable">
-					<p>Entradas disponibles:</p>
-				</div>
 
 				<!-- Campo cantidad de entradas -->
 				<md-input-container flex-offset>
@@ -86,7 +82,7 @@
 				</md-input-container>
 				
 				<!-- Botón para ingresar reserva -->
-				<md-button type="submit" class="md-raised" ng-disabled="frmTktsReservations.$invalid" ng-click="vm.reset()">Button</md-button>	
+				<md-button type="submit" class="md-raised" ng-disabled="frmTktsReservations.$invalid" ng-click="vm.saveReservation(vm.reservation)">Reservar</md-button>	
 			</form>	
 
 			<!-- Mensajes de error o éxito del registro -->

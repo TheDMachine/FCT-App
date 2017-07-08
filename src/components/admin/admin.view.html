@@ -275,8 +275,8 @@
 					        <h3>FILTRAR EVENTOS</h3>
 
 							<!-- Filtro por fecha -->
-							<!-- <md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
-					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
+							<md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
+					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker>
 
 					        	<!-- Tabla de info eventos -->
 						        <div>
@@ -314,7 +314,7 @@
 									    </thead>
 									    <tbody>
 									    <!-- | dateRange:vm.from:vm.to -->
-									      	<tr ng-repeat="event in vm.acceptedEvents track by $index">
+									      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to" > 
 									      		<td>{{event.eventName}}</td>
 									      		<td>{{event.eventType}}</td>
 									      		<td>{{event.eventState}}</td>
@@ -358,17 +358,17 @@
 
 					        	<!-- Filtros -->
 								<!-- Filtro por fecha -->
-								<!-- <md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio"></md-datepicker>
-						    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
+								<md-datepicker name="from"  ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
+						    	<md-datepicker name="to"  ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
 
 						    	<!-- Filtro por estado -->
-								<!-- <md-input-container>
+								<md-input-container>
 								    <label>Seleccione el estado</label>
 								    <md-select name="stateFilter" ng-model="vm.stateFilter">
-								    	<md-option value="aceptado">Aceptado</md-option>
+								    	<md-option value="aprobado">Aceptado</md-option>
 								        <md-option value="cancelado">Cancelado</md-option>
 								    </md-select>
-								</md-input-container> -->
+								</md-input-container>
 
 					        	<!-- Tabla historial de eventos -->
 						        <div>
@@ -384,7 +384,8 @@
 									    <tbody>
 									    <!-- dateRange:vm.from:vm.to | --> 
 									    <!-- | filter:{stateFilter:vm.stateFilter} -->
-									      	<tr ng-repeat="event in vm.events track by $index">
+									      	<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
+									      	
 									      		<td>{{event.date1 | date : "shortDate"}}</td>
 									      		<td>{{event.eventName}}</td>
 									      		<td>{{event.eventState}}</td>
