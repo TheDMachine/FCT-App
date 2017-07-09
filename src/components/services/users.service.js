@@ -135,18 +135,33 @@
     return $cookies.get('currentUserActive');
    }
    function _generatePassword() {
-     var tempPass = '',
-         lPw = 10;
-     characters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','x','y','z','0','1','2','3','4','5','6','7','8','9','0','$','@','%','&','?','!','¡','+','*'];
-     for (var i = 0; i < lPw; i++) {
-       var iteration =Math.floor(Math.random() *100);
-       var pw= characters[iteration];
-       tempPass +=pw;
-         if(i == lPw){
-           return tempPass;
-             console.log(tempPass);
-         }
-     }
+     a = [];
+  var chars = ['#', '%', '£', '!', '?', '&', ';', '(', ')', '=', '+', '$'];
+  for (var i = 97; i <= 122; i++) {
+  	a[a.length] = String.fromCharCode(i).toUpperCase();
+        
+    // create random letters.
+  	var one = a[Math.floor(Math.random() * a.length)];
+    var two = a[Math.floor(Math.random() * a.length)];
+    var three = a[Math.floor(Math.random() * a.length)];
+    var four = a[Math.floor(Math.random() * a.length)];
+    var five = a[Math.floor(Math.random() * a.length)];
+    var six = a[Math.floor(Math.random() * a.length)];
+    var seven = a[Math.floor(Math.random() * a.length)];
+    var eight = a[Math.floor(Math.random() * a.length)];
+
+    // create random numbers.
+    var int1 = Math.floor(Math.random() * 10);
+    var int2 = Math.floor(Math.random() * 10);
+    var ints = int1.toFixed(0) + int2.toFixed(0);
+    var intsDecimal = int1.toFixed(0) + "." + int2.toFixed(0);
+
+    // create random characters, based on array (chars).
+    var randChar = chars[Math.floor(Math.random() * chars.length).toFixed(0)];
+
+    // create variable moving all letters, numbers and characters together.
+    var c = one + two + three + four + five + six + seven + eight + ints + randChar;
+ 		}
    }
   }
 })();
