@@ -1,0 +1,9 @@
+<form novalidate name="frmUpdateWeigth" ng-submit="vm.updateWeigth(vm.userWeigth)">
+  <input type="hidden" ng-model="vm.userWeigth.name" value="vm.userWeigth.name">
+  <h2>{{vm.name + vm.firstName + vm.lastName}}</h2>
+  <md-input-container>
+    <label>Peso</label>
+    <input type="text" name="weigth" ng-model="vm.userWeigth.weigth"/>
+  </md-input-container>
+  <md-button type="submit">Actualizar peso</md-button>
+</form>

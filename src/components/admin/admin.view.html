@@ -957,7 +957,7 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr ng-repeat="student in vm.user | filter:{firstName:vm.studentFilter}">
+													<tr ng-repeat="student in vm.user | filter:vm.studentFilter">
 														<td>{{student.id}}</td>
 														<td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
 														<td>{{student.teacher}}</td>

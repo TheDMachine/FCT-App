@@ -18,6 +18,7 @@
       ,"firstLastName":"Campos"
       ,"secondLastName":"Arce"
       ,"birthday":"1994-03-13T06:00:00.000Z"}];
+
       //Se publica el api para acceso al servicio.
       var publicAPI = {
         createConsul:_setNewConsul,
@@ -54,7 +55,15 @@
      }
      return false;
    }
-
+    function _findAndSetUserToWeigth(pUserToSearch) {
+      var users = _getUsers();
+      for (var i = 0; i < users.length; i++) {
+        if(users[i].name == pUserToSearch.name) {
+          user[i].weigth = pUserToSearch.weigth;
+          _updateUsers(user[i]);
+        }
+      }
+    }
     //muestra la informacion mas actual
     function _getUsers(){
       var usersList = JSON.parse(localStorage.getItem('lsUsersList'));
@@ -139,7 +148,7 @@
   var chars = ['#', '%', '£', '!', '?', '&', ';', '(', ')', '=', '+', '$'];
   for (var i = 97; i <= 122; i++) {
   	a[a.length] = String.fromCharCode(i).toUpperCase();
-        
+
     // create random letters.
   	var one = a[Math.floor(Math.random() * a.length)];
     var two = a[Math.floor(Math.random() * a.length)];
@@ -162,6 +171,7 @@
     // create variable moving all letters, numbers and characters together.
     var c = one + two + three + four + five + six + seven + eight + ints + randChar;
  		}
+    return c;
    }
   }
 })();
