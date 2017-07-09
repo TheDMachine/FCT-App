@@ -14,6 +14,10 @@
 
   function init() {
     vm.currentUser = userService.findUserTeacher(userService.getCookie());
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
     console.log(vm.currentUser);
   }init();
 
@@ -71,7 +75,7 @@
       // This never happens.
     };
     /*End sidenav functionality
-    -->>*/   
+    -->>*/
 
     vm.logOut = function() {
       AuthService.logOut();
