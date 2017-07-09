@@ -1,1 +1,17 @@
-{{vm.currentUser}}
+<md-card>
+  <!-- Imagen de la card -->
+        <img ng-src="{{vm.currentUser.photo}}" class="md-card-image" alt="Foto de perfil">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Perfil</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>Cédula: {{vm.currentUser.id}}</p>
+          <p>Nombre: {{vm.currentUser.firstName +' ' +vm.currentUser.firstLastName +' ' +vm.currentUser.secondLastName}}</p>
+          <p>Fecha de nacimiento: {{vm.currentUser.myDate}}</p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ui-sref="profile.editProfile">Modificar Perfil</md-button>
+        </md-card-actions>
+      </md-card>

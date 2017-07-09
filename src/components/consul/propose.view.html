@@ -11,10 +11,10 @@
           <div class="md-media-xl card-media"></div>
 
           <md-card-actions layout="column">
-            <md-button ng-click="vm.proposeAproved(prop.proposeName)" class="md-icon-button" aria-label="Favorite">
+            <md-button ng-click="vm.proposeAproved(prop.proposeName, true)" class="md-icon-button" aria-label="Favorite">
               <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
             </md-button>
-            <md-button ng-click="vm.proposeRejected(prop.proposeName)" class="md-icon-button" aria-label="Settings">
+            <md-button ng-click="vm.proposeRejected(prop.proposeName, false)" class="md-icon-button" aria-label="Settings">
               <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
             </md-button>
             <md-button class="md-icon-button" aria-label="Share">

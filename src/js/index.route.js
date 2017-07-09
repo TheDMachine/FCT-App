@@ -233,6 +233,10 @@
         controller: 'profileCtrl',
         controllerAs:'vm'
       })
+      .state('profile.editProfile',{
+        url:'/editProfile',
+        templateUrl:'components/profile/edit.view.html'
+      })
     $urlRouterProvider.otherwise('/');
   }
 })();
