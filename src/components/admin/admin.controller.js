@@ -500,17 +500,12 @@
       var newCompetition = {
         competitionNumber: vm.competitionNumber,
         eventBelongs: vm.eventBelongs,
+        competitionAge : vm.competitionAge,
         competitionGenre: vm.competitionGenre,
         competitionBelt: vm.competitionBelt,
         competitionWeight: vm.competitionWeight,
-        arrayObject : [vm.competitors]
       }
       newCompetition.competitors = [];
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['0']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['1']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['2']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['3']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['4']);
       console.log(newCompetition);
       console.log(newCompetition.competitors)
       eventService.setCompetitions(newCompetition);

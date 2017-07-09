@@ -1,4 +1,4 @@
-
+  
 (function() {
   'use strict';
   angular
@@ -37,11 +37,16 @@
     //Guardar alumno
     function _setUsers(newUser){
       var usersList = _getUsers();
-      var position = searchUser(newUser);
-      if (position == -1) {
-        usersList.push(newUser);
-        localStorage.setItem('lsUsersList', JSON.stringify(usersList));
+      var error = false;
+      for (var i = 0; i < usersList.length; i++) {
+        if (usersList[i].email == newUser.email) {
+          error = true;
+          return;
+        }
       }
+      usersList.push(newUser);
+      localStorage.setItem('lsUsersList', JSON.stringify(usersList));
+      console.log(_getUsers());
     }
 
     //buscar si la cédula se repite

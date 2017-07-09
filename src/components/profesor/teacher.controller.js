@@ -4,18 +4,59 @@
   .module('app')
   .controller('teacherCtrl', teacherCtrl);
 
-  function teacherCtrl ($scope, AuthService, $location, $cookies, userService, $mdDialog) {
+  function teacherCtrl ($scope, AuthService, $location, $cookies, userService, $mdDialog, imageService, eventService, estabInfoService, academyServices, sponsorService, logService, $http) {
   	/*Sidenav functionality*/
  	var originatorEv;
   var vm = this;
   vm.newPassword = false;
   vm.currentUser = '';
   vm.selected = 0;
+    vm.cloudObj = imageService.getConfiguration();
+    vm.selected = 0;
+    vm.updateDisable = true;
+    vm.submitDisable = false;
+    vm.stepTwoConsult = false;
+    vm.stepThreeConsult = false;
+    vm.stepOneConsult = true;
+    vm.user = {};
+    vm.log = {};
+    vm.imageActive = false;
+    vm.cloudObj = imageService.getConfiguration();
+    vm.events = eventService.getEvents();
+    vm.weights = estabInfoService.getWeight();
+    vm.categories = estabInfoService.getCategories();
+    vm.acceptedEvents = [];
+    vm.userActive = false;
 
   function init() {
     vm.currentUser = userService.findUserTeacher(userService.getCookie());
     console.log(vm.currentUser);
-  }init();
+        vm.academy = academyServices.getAcademy();
+        vm.weights = estabInfoService.getWeight();
+        vm.events = eventService.getEvents();
+        vm.competitions = eventService.getCompetitions();
+        aceptedEvents();
+        vm.event = {};
+        vm.sponsors = sponsorService.getSponsors();
+        vm.teacher = {};
+        vm.teachers = userService.getTeachers();
+        vm.sponsor = {};
+        vm.users = userService.getUsers();
+        vm.log = logService.showLog();
+        vm.belts = estabInfoService.getBelts();
+        vm.to = new Date();
+        vm.to2 = new Date();
+        vm.weights = estabInfoService.getWeight();
+        vm.categoriesAge = estabInfoService.getCategories();
+        console.log(vm.competitions);
+        console.log(vm.users)
+        $http.get('http://api.population.io:80/1.0/countries').then(function(data){
+          console.log(data);
+          vm.countries = data.data.countries;
+        },function(err){
+          console.log(err);
+        })
+      }init();
 
     $scope.showPrompt = function() {
     // Appending dialog to document.body to cover sidenav in docs app
@@ -75,6 +116,147 @@
 
     vm.logOut = function() {
       AuthService.logOut();
+    }
+    function aceptedEvents() {
+      // && vm.events[i].date1 => new Date()
+        for (var i = 0; i < vm.events.length; i++) {
+          if (vm.events[i].eventState === 'aprobado') {
+            vm.acceptedEvents.push(vm.events[i]);
+          }
+        }
+      }
+
+      vm.registerUsersCompetitions = function(competition){
+        vm.competitor;
+        for(var i = 0; i < vm.competitions.length; i++){
+          if(competition == vm.competitions[i].competitionNumber){
+            vm.competitions[i].competitors.push(vm.competitor);
+            eventService.updateCompetition(vm.competitions[i]);
+            return;
+          }
+        }
+        console.log(eventService.getCompetitions());
+      }
+
+      vm.changeViews = function(){
+        vm.userActive = true;
+        vm.selected = 5;
+      }
+
+      //funcion para guardar informacion del alumno
+    vm.createStudent = function(){
+      var newUser = {
+        id: vm.id,
+        birthday: vm.birthday,
+        firstName: vm.firstName,
+        secondName: vm.secondName,
+        firstLastName: vm.firstLastName,
+        secondLastName: vm.secondLastName,
+        genre: vm.genre,
+        weight: vm.weight,
+        height: vm.height,
+        nationality: vm.nationality,
+        phone: vm.phone,
+        email: vm.email,
+        attendAcademy: vm.attendAcademy,
+        teacher: vm.teacher,
+        belt: vm.belt,
+        category: vm.category,
+        tournaments: vm.tournaments,
+        tournamentsWins: vm.tournamentsWins
+      };
+      console.log(newUser);
+      userService.setUsers(newUser);
+      cleanStudent();
+      init();
+    }
+
+    //funcion para limpiar los input del alumno
+    function cleanStudent(){
+      vm.id = '',
+      vm.birthday = '',
+      vm.firstName = '',
+      vm.secondName = '',
+      vm.firstLastName = '',
+      vm.secondLastName = '',
+      vm.genre = '',
+      vm.weight = '',
+      vm.height = '',
+      vm.nationality = '',
+      vm.phone = '',
+      vm.email = '',
+      vm.attendAcademy = '',
+      vm.teacher = '',
+      vm.belt = '',
+      vm.category = '',
+      vm.tournaments = '',
+      vm.tournamentsWins = ''
+    }
+
+    //funcion para editar alumno
+    vm.getStudent = function(student){
+      vm.id = student.id,
+      vm.birthday = student.birthday,
+      vm.firstName = student.firstName,
+      vm.secondName = student.secondName,
+      vm.firstLastName = student.firstLastName,
+      vm.secondLastName = student.secondLastName,
+      vm.genre = student.genre,
+      vm.weight = student.weight,
+      vm.height = student.height,
+      vm.nationality = student.nationality,
+      vm.phone = student.phone,
+      vm.email = student.email,
+      vm.attendAcademy = student.attendAcademy,
+      vm.teacher = student.teacher,
+      vm.belt = student.belt,
+      vm.category = student.category,
+      vm.tournaments = student.tournaments,
+      vm.tournamentsWins = student.tournamentsWins
+    }
+
+    //funcion para guardar alumno editada
+    vm.updateStudent = function(){
+      var editstudent = {
+        id: vm.id,
+        birthday: vm.birthday,
+        firstName: vm.firstName,
+        secondName: vm.secondName,
+        firstLastName: vm.firstLastName,
+        secondLastName: vm.secondLastName,
+        genre: vm.genre,
+        weight: vm.weight,
+        height: vm.height,
+        nationality: vm.nationality,
+        phone: vm.phone,
+        email: vm.email,
+        attendAcademy: vm.attendAcademy,
+        teacher: vm.teacher,
+        belt: vm.belt,
+        category: vm.category,
+        tournaments: vm.tournaments,
+        tournamentsWins: vm.tournamentsWins
+      }
+      userService.updateUsers(editstudent);
+      init();
+      cleanStudent();
+    }
+
+    vm.updateOptions = function(competition){
+      vm.competitorsEvent = [];
+      for(var i = 0; i < vm.competitions.length; i++){
+        if(competition == vm.competitions[i].competitionNumber){
+          for(var j = 0; j < vm.users.length; j++){
+            if(vm.currentUser.id == vm.users[j].teacher){
+              if(vm.users[j].category == vm.competitions[i].competitionAge){
+                if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+                  vm.competitorsEvent.push(vm.users[j]);
+                }
+              }
+            }
+          }
+        }
+      }
     }
   };
 })();
