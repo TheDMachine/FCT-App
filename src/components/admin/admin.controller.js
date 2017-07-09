@@ -42,12 +42,8 @@
       vm.to2 = new Date();
       vm.weights = estabInfoService.getWeight();
       vm.categoriesAge = estabInfoService.getCategories();
-      $http.get('http://api.population.io:80/1.0/countries').then(function (data) {
-        console.log(data);
-        vm.countries = data.data.countries;
-      }, function (err) {
-        console.log(err);
-      })
+      vm.countries = estabInfoService.getCountries();
+      vm.teacher.status = "Activo";
     }
     init();
 
