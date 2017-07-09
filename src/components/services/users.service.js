@@ -102,6 +102,7 @@
       for(var i = 0; i < teachersList.length; i++){
         if(teachersList[i].id == pobjUsuario.id){
           teachersList[i] = pobjUsuario;
+          return false;
         }
       }
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));

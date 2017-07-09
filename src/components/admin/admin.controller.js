@@ -163,8 +163,11 @@
         // Upload.upload(vm.cloudObj)
         //   .success(function(data){
         //     pNewConsult.photo = data.url;
-             vm.createNewEvent(pNewConsult);
-        //   });
+             vm.createNewConsult(pNewConsult);
+        //   })
+        // .catch(function(err) {
+        //   console.log(err);
+        // })
         }
 
           // Función para imprimir datos en el formulario de patrocinadores
@@ -288,18 +291,18 @@
       console.log("El objeto con imagen es %o",pNewConsul);
       console.log("Gracias, ha sido creado un nuevo represetante de consejo %o",pNewConsul);
       var bFlag = userService.createConsul(pNewConsul); //Crea el nuevo represetante de consejo.
-      // var temDataZero = $cookies.get('currentUserActive'); // Obtiene el usuario logeado.
-      // if(bFlag == false){// si retorna algun boleano implica que fallo que en su defecto seria que ya existe el represetante de consejo.
-      //   document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
-      //   //te manda a la página uno del registro.
-      //   $state.go('admin.partOne');
-      //   var tempDataOne = 'fallo al crear a '+pNewConsul.firstName;
-      //   logService.createLog(false,temDataZero,tempDataOne);
-      // }else{
-      //   var tempDataOne = 'Creado con exito '+pNewConsul.firstName;
-      //   logService.createLog(0,temDataZero,tempDataOne);
-      //   document.getElementById('feedbackMesage').innerHTML = 'El represesante ha sido creado exitoxamente';
-      // }
+      var temDataZero = $cookies.get('currentUserActive'); // Obtiene el usuario logeado.
+      if(bFlag == false){// si retorna algun boleano implica que fallo que en su defecto seria que ya existe el represetante de consejo.
+        document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
+        //te manda a la página uno del registro.
+        $state.go('admin.partOne');
+        var tempDataOne = 'fallo al crear a '+pNewConsul.firstName;
+        logService.createLog(false,temDataZero,tempDataOne);
+      }else{
+        var tempDataOne = 'Creado con exito '+pNewConsul.firstName;
+        logService.createLog(0,temDataZero,tempDataOne);
+        document.getElementById('feedbackMesage').innerHTML = 'El represesante ha sido creado exitoxamente';
+      }
     }
 
     // Función para pre guardar datos del profesor

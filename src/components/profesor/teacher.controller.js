@@ -14,10 +14,6 @@
 
   function init() {
     vm.currentUser = userService.findUserTeacher(userService.getCookie());
-<<<<<<< HEAD
-
-=======
->>>>>>> master
     console.log(vm.currentUser);
   }init();
 
