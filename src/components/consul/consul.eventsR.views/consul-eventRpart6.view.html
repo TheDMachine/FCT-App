@@ -1,0 +1,35 @@
+<!-- Campo de seleccionar proposeo beneficencia -->
+<md-radio-group layout="row" layout-align="start center" ng-model="vm.propose.charityEvent">
+	<md-radio-button name="charityEvent" value="charity" class="md-primary">Evento de beneficencia</md-radio-button>
+</md-radio-group>
+
+<!-- Campo nombre de organización -->
+<md-input-container flex-gt-sm ng-show="vm.propose.charityEvent == 'charity'">
+	<label>Nombre de la organización</label>
+	<input name="orgName" ng-model="vm.propose.orgName">
+</md-input-container>
+
+<!-- Campo tipo de organización -->
+<md-input-container flex-gt-sm ng-show="vm.propose.charityEvent == 'charity'">
+	<label>Tipo de organización</label>
+	<input name="orgType" ng-model="vm.propose.orgType">
+</md-input-container>
+
+<!-- Campo para descripción de la organización -->
+<md-input-container class="md-block" flex-gt-sm ng-show="vm.propose.charityEvent == 'charity'">
+	<label>Descripción de la organización</label>
+	<textarea name="description" ng-model="vm.propose.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+</md-input-container>
+
+<!-- Subir logo -->
+<div>
+	<label class="btn btn-default btn-file">
+    Adjuntar logo <input id="photo" name="photo" type="file" style="display: none;" ng-model="vm.propose.photo">
+	</label>
+</div>
+
+<!-- botón para guardar datos -->
+<button type="submit" class="btn btn-danger" ng-disabled="frmProposeRegister.$invalid || submitDisable" ng-click="vm.reset()">Ingresar</button>
+
+<p class="ErrorMessage"></p>
+<p class="SuccessMessage"></p>

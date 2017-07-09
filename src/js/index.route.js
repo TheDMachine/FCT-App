@@ -19,6 +19,47 @@
       },
       controller: 'validationDemoCtrl'
     })*/
+    .state('proposes',{
+      url : '/proposes', //ruta del url del estado
+      templateUrl : 'components/consul/consul.view.html',//vista que se va a cargar para este estado
+        // El resolve sirve para el controlador junto con la vista
+        resolve: {
+          load: ['$ocLazyLoad', function($ocLazyLoad){
+            return $ocLazyLoad.load('components/consul/consul.controller.js')
+          }]
+        },
+        controller: 'consulCtrl',
+        controllerAs:'vm'
+      })
+      .state('proposes.proposeOne',{
+        url:'/proposeOne',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart1.view.html'
+      })
+      .state('proposes.proposeTwo',{
+        url:'/proposeTwo',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart2.view.html'
+      })
+      .state('proposes.proposeThree',{
+        url:'/proposeThree',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart3.view.html'
+      })
+      .state('proposes.proposeFourth',{
+        url:'/proposeFourth',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart4.view.html'
+      })
+      .state('proposes.proposeFive',{
+        url:'/proposeFive',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart5.view.html'
+      })
+      .state('proposes.proposeSix',{
+        url:'/proposeSix',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart6.view.html'
+      })
+
+      .state('consul.displayProposes',{
+        url:'/displayProposes',
+        templateUrl:'components/consul/propose.view.html'
+      })
     .state('admin',{
       url : '/admin', //ruta del url del estado
       templateUrl : 'components/admin/admin.view.html',//vista que se va a cargar para este estado
@@ -49,7 +90,6 @@
       url:'/new-consult-part2',
       templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepTwo.view.html'
     })
-
     //Inicio de las vistas hijas del formulario de registro del administrador
     .state('admin.part1',{
       url : '/part1', //ruta del url del estado
@@ -79,7 +119,7 @@
       url : '/sponsorPartTwo',
       templateUrl : 'components/admin/sponsor.register.views/admin-sponsor2.view.html'
     })
-    
+
     // Fin de las vistas hojas del formualrio de registro del administrador.
 
     //Inicio de las vistas hijas del formulario de registro del profesor
@@ -121,18 +161,6 @@
       controller: 'competitorCtrl',
       controllerAs: 'vm'
     })
-    .state('consul',{
-      url : '/consul', //ruta del url del estado
-      templateUrl : 'components/consul/consul.view.html',//vista que se va a cargar para este estado
-      // El resolve sirve para el controlador junto con la vista
-      resolve: {
-        load: ['$ocLazyLoad', function($ocLazyLoad){
-          return $ocLazyLoad.load('components/consul/consul.controller.js')
-        }]
-      },
-      controller: 'consulCtrl',
-      controllerAs: 'vm'
-    })
     .state('teacher',{
       url : '/teacher', //ruta del url del estado
       templateUrl : 'components/profesor/teacher.view.html',//vista que se va a cargar para este estado
@@ -158,7 +186,7 @@
       controllerAs: 'vm'
     })
         .state('landing',{
-      url : '/landing', //ruta del url del estado
+      url : '/', //ruta del url del estado
       templateUrl : 'components/landing/landing.view.html',//vista que se va a cargar para este estado
       // El resolve sirve para el controlador junto con la vista
       resolve: {
@@ -193,7 +221,22 @@
       controller: 'cancelRsvCtrl',
       controllerAs: 'vm'
     })
-
-    $urlRouterProvider.otherwise('/landing');
+    .state('profile',{
+      url : '/profile', //ruta del url del estado
+      templateUrl : 'components/profile/profile.view.html',//vista que se va a cargar para este estado
+        // El resolve sirve para el controlador junto con la vista
+        resolve: {
+          load: ['$ocLazyLoad', function($ocLazyLoad){
+            return $ocLazyLoad.load('components/profile/profile.controller.js')
+          }]
+        },
+        controller: 'profileCtrl',
+        controllerAs:'vm'
+      })
+      .state('profile.editProfile',{
+        url:'/editProfile',
+        templateUrl:'components/profile/edit.view.html'
+      })
+    $urlRouterProvider.otherwise('/');
   }
 })();

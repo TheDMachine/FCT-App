@@ -42,6 +42,16 @@
         vm.to2 = new Date();
         vm.weights = estabInfoService.getWeight();
         vm.categoriesAge = estabInfoService.getCategories();
+        vm.sponsor = {
+          sponsorName : vm.sponsorName,
+          sponsorCompany : vm.sponsorCompany,
+          sponsorType : vm.sponsorType,
+          sponsorMoney : vm.sponsorMoney,
+          sponsorPhoto : vm.sponsorPhoto
+        };
+        vm.events = eventService.getEvents();
+        vm.teachers = userService.getTeachers();
+        vm.countries;
         $http.get('http://api.population.io:80/1.0/countries').then(function(data){
           console.log(data);
           vm.countries = data.data.countries;
@@ -50,7 +60,7 @@
         })
       }init();
 
-    
+
       /*Sidenav*/
     vm.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
@@ -79,7 +89,8 @@
     vm.checkVoicemail = function() {
       // This never happens.
     };
-    /*Final sidenav*/
+    /*Final sidenav
+    -->>*/
 
     // Función para pre guardar datos del evento
 
@@ -148,12 +159,12 @@
       // vm.error = false;
       vm.preSaveConsul = function(pNewConsult) {
         console.log(pNewConsult);
-       vm.cloudObj.data.file = document.getElementById("photo").files[0];
-       Upload.upload(vm.cloudObj)
-         .success(function(data){
-           pNewConsult.photo = data.url;
-            vm.createNewConsult(pNewConsult);
-        });
+        // vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        // Upload.upload(vm.cloudObj)
+        //   .success(function(data){
+        //     pNewConsult.photo = data.url;
+             vm.createNewEvent(pNewConsult);
+        //   });
         }
 
           // Función para imprimir datos en el formulario de patrocinadores
@@ -172,7 +183,7 @@
       $scope.submitDisable = true;
     }
 
-    vm.updateSponsor = function(){
+    vm.updateSponsor = function() {
       var modSponsor = {
       sponsorName : vm.sponsor.sponsorName,
       sponsorCompany : vm.sponsor.sponsorCompany,
@@ -276,18 +287,19 @@
     vm.createNewConsult = function(pNewConsul){
       console.log("El objeto con imagen es %o",pNewConsul);
       console.log("Gracias, ha sido creado un nuevo represetante de consejo %o",pNewConsul);
-      var bFlag = userService.createConsul(pNewConsul);
-      var temDataZero = $cookies.get('currentUserActive');
-      if(bFlag == false){
-        document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
-        $state.go('admin.partOne');
-        var tempDataOne = 'fallo al crear a '+pNewConsul.firstName;
-        logService.createLog(false,temDataZero,tempDataOne);
-      }else{
-        var tempDataOne = 'Creado con exito '+pNewConsul.firstName;
-        logService.createLog(0,temDataZero,tempDataOne);
-        document.getElementById('feedbackMesage').innerHTML = 'El represesante ha sido creado exitoxamente';
-      }
+      var bFlag = userService.createConsul(pNewConsul); //Crea el nuevo represetante de consejo.
+      // var temDataZero = $cookies.get('currentUserActive'); // Obtiene el usuario logeado.
+      // if(bFlag == false){// si retorna algun boleano implica que fallo que en su defecto seria que ya existe el represetante de consejo.
+      //   document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
+      //   //te manda a la página uno del registro.
+      //   $state.go('admin.partOne');
+      //   var tempDataOne = 'fallo al crear a '+pNewConsul.firstName;
+      //   logService.createLog(false,temDataZero,tempDataOne);
+      // }else{
+      //   var tempDataOne = 'Creado con exito '+pNewConsul.firstName;
+      //   logService.createLog(0,temDataZero,tempDataOne);
+      //   document.getElementById('feedbackMesage').innerHTML = 'El represesante ha sido creado exitoxamente';
+      // }
     }
 
     // Función para pre guardar datos del profesor

@@ -1,0 +1,25 @@
+<md-card ng-repeat="prop in vm.proposes" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Nombre del evento: {{prop.proposeName}}</span>
+            <span class="md-subhead">Promovido por: {{prop.respPerson}}</span>
+            <span class="md-subhead">Fecha del evento: {{prop.date1}}</span>
+            <span class="md-subhead">Tipo de evento: {{prop.proposeType}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="row" layout-align="space-between">
+          <div class="md-media-xl card-media"></div>
+
+          <md-card-actions layout="column">
+            <md-button ng-click="vm.proposeAproved(prop.proposeName, true)" class="md-icon-button" aria-label="Favorite">
+              <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+            </md-button>
+            <md-button ng-click="vm.proposeRejected(prop.proposeName, false)" class="md-icon-button" aria-label="Settings">
+              <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Share">
+              <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
+            </md-button>
+          </md-card-actions>
+        </md-card-content>
+</md-card>

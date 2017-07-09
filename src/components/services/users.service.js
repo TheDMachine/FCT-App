@@ -18,6 +18,7 @@
       ,"firstLastName":"Campos"
       ,"secondLastName":"Arce"
       ,"birthday":"1994-03-13T06:00:00.000Z"}];
+
       //Se publica el api para acceso al servicio.
       var publicAPI = {
         createConsul:_setNewConsul,
@@ -33,7 +34,7 @@
         searchUser : _searchUser
     };
     return publicAPI;
-    
+
     //Guardar alumno
     function _setUsers(newUser){
       var usersList = _getUsers();
@@ -54,7 +55,15 @@
      }
      return false;
    }
-
+    function _findAndSetUserToWeigth(pUserToSearch) {
+      var users = _getUsers();
+      for (var i = 0; i < users.length; i++) {
+        if(users[i].name == pUserToSearch.name) {
+          user[i].weigth = pUserToSearch.weigth;
+          _updateUsers(user[i]);
+        }
+      }
+    }
     //muestra la informacion mas actual
     function _getUsers(){
       var usersList = JSON.parse(localStorage.getItem('lsUsersList'));
@@ -123,6 +132,7 @@
           if (consulList[i].name == pNewObjConsult.name) {
             return false;
           }else{
+            pNewObjConsult.password = _generatePassword();
             consulList.push(pNewObjConsult);
             localStorage.setItem('lsConsulUsers', JSON.stringify(consulList));
             return true;
@@ -132,6 +142,36 @@
 
    function _getCookie(){
     return $cookies.get('currentUserActive');
+   }
+   function _generatePassword() {
+     a = [];
+  var chars = ['#', '%', '£', '!', '?', '&', ';', '(', ')', '=', '+', '$'];
+  for (var i = 97; i <= 122; i++) {
+  	a[a.length] = String.fromCharCode(i).toUpperCase();
+
+    // create random letters.
+  	var one = a[Math.floor(Math.random() * a.length)];
+    var two = a[Math.floor(Math.random() * a.length)];
+    var three = a[Math.floor(Math.random() * a.length)];
+    var four = a[Math.floor(Math.random() * a.length)];
+    var five = a[Math.floor(Math.random() * a.length)];
+    var six = a[Math.floor(Math.random() * a.length)];
+    var seven = a[Math.floor(Math.random() * a.length)];
+    var eight = a[Math.floor(Math.random() * a.length)];
+
+    // create random numbers.
+    var int1 = Math.floor(Math.random() * 10);
+    var int2 = Math.floor(Math.random() * 10);
+    var ints = int1.toFixed(0) + int2.toFixed(0);
+    var intsDecimal = int1.toFixed(0) + "." + int2.toFixed(0);
+
+    // create random characters, based on array (chars).
+    var randChar = chars[Math.floor(Math.random() * chars.length).toFixed(0)];
+
+    // create variable moving all letters, numbers and characters together.
+    var c = one + two + three + four + five + six + seven + eight + ints + randChar;
+ 		}
+    return c;
    }
   }
 })();

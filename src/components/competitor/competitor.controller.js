@@ -7,7 +7,7 @@
   var vm = this;
 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
-    function init() { 
+    function init() {
       vm.originatorEv;
       }init();
 
@@ -40,7 +40,9 @@
       // This never happens.
     };
     /*End sidenav functionality
-    -->>*/   
-
+    -->>*/
+    vm.updateWeigth = function(pWeigthUser) {
+      userService.setUser(pWeigthUser);
+    }
    }
 })();
