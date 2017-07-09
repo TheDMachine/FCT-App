@@ -1,5 +1,5 @@
 (function () {
-  'use strit'
+  'use strict'
   angular
     .module('app')
     .controller('adminCtrl', adminCtrl);
@@ -34,6 +34,7 @@
       vm.sponsors = sponsorService.getSponsors();
       vm.teacher = {};
       vm.teachers = userService.getTeachers();
+      console.log(vm.teachers);
       vm.sponsor = {};
       vm.users = userService.getUsers();
       vm.log = logService.showLog();
@@ -42,7 +43,7 @@
       vm.to2 = new Date();
       vm.weights = estabInfoService.getWeight();
       vm.categoriesAge = estabInfoService.getCategories();
-      vm.countries = estabInfoService.getCountries();
+      estabInfoService.getCountries().then(function(data){vm.countries = data.data.countries;});
       vm.teacher.status = "Activo";
     }
     init();
@@ -333,7 +334,7 @@
 
     // Función para actualizar datos del profesor
     vm.updateTeacher = function () {
-      var editTeacher = {
+      var pEditTeacher = {
         id: vm.teacher.id,
         firstName: vm.teacher.firstName,
         secondName: vm.teacher.secondName,
@@ -349,7 +350,7 @@
         photo: vm.teacher.photo,
         status: vm.teacher.status
       }
-      userService.updateTeacher(editTeacher);
+      userService.updateTeacher(pModTeacher);
       init();
       clean();
     };

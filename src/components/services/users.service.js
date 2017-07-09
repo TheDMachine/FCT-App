@@ -77,10 +77,24 @@
 
     //agrega profesores al localStorage
     function _setTeachers(pTeacher) {
+      var bError = false;
       var teachersList = _getTeachers();
 
-      teachersList.push(pTeacher);
-      localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
+      if (teachersList.length === 0) {
+        teachersList.push(pTeacher);
+        localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
+      }else{
+        for (var i = 0; i < teachersList.length; i++) {
+        if (teachersList[i].firstName === pTeacher.firstName) {
+          bError = true;
+          _updateTeacher(pTeacher);
+        }
+      }
+      if (bError = false) {
+        teachersList.push(pTeacher);
+        localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
+        }
+      }
     }
 
     //muestra los usuarios profesores actualizados

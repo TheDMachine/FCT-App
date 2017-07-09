@@ -61,12 +61,7 @@
 
     //Función para select countries
     function _getCountries() {
-      $http.get('http://api.population.io:80/1.0/countries').then(function(data){
-          console.log(data);
-          return data.data.countries;
-        },function(err){
-          console.log(err);
-        })
+      return $http.get('http://api.population.io:80/1.0/countries');
     }
   }
 })();
