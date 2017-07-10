@@ -1,5 +1,5 @@
 (function(){
-  'use strit'
+  'use strict'
   angular
   .module('app')
   .controller('adminCtrl', adminCtrl);
@@ -18,7 +18,6 @@
     vm.log = {};
     vm.imageActive = false;
     vm.cloudObj = imageService.getConfiguration();
-    vm.events = eventService.getEvents();
     vm.weights = estabInfoService.getWeight();
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
@@ -28,8 +27,9 @@
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
+        console.log(vm.events);
         vm.competitions = eventService.getCompetitions();
-        aceptedEvents();
+        acceptedEvents();
         vm.event = {};
         vm.sponsors = sponsorService.getSponsors();
         vm.teacher = {};
@@ -99,7 +99,7 @@
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
-        document.querySelector('.ErrorMessage').innerHTML = 'El evento se registró exitosamente';
+        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
         clean();
         init();
       }else{
@@ -156,7 +156,7 @@
         });
         }
 
-          // Función para imprimir datos en el formulario de patrocinadores
+    // Función para imprimir datos en el formulario de patrocinadores
     vm.getSponsorInfo = function(pSponsor) {
       vm.sponsor.sponsorName = pSponsor.sponsorName,
       vm.sponsor.sponsorCompany = pSponsor.sponsorCompany,
@@ -215,9 +215,6 @@
       vm.event.orgType = pEvent.orgType;
       vm.event.orgName = pEvent.orgName;
       vm.event.description = pEvent.description;
-
-      vm.updateDisable = false;
-      vm.submitDisable = true;
     }
 
     // Función para actualizar datos de evento
@@ -249,9 +246,6 @@
       orgType : vm.event.orgType,
       description : vm.event.description
       }
-
-      vm.submitDisable = false;
-      vm.updateDisable = true;
       eventService.updateEvent(modEvent);
       init();
       clean();
@@ -261,16 +255,19 @@
       pEvent.eventState = 'cancelado';
       eventService.updateEvent(pEvent);
       init();
-      aceptedEvents();
+      acceptedEvents();
     };
 
-    function aceptedEvents() {
+    // Función para filtrar la tabla de consulta de eventos
+    function acceptedEvents() {
+      vm.events = eventService.getEvents();
       // && vm.events[i].date1 => new Date()
         for (var i = 0; i < vm.events.length; i++) {
           if (vm.events[i].eventState === 'aprobado') {
             vm.acceptedEvents.push(vm.events[i]);
           }
         }
+        // return vm.acceptedEvents;
       }
 
     vm.createNewConsult = function(pNewConsul){

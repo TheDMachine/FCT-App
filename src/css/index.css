@@ -1,5 +1,46 @@
-.dialogdemoBasicUsage #popupContainer {
-  position: relative; }
+/*Inicio de estilos de historial de competencias*/
+
+#categHist h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 30px;
+}
+
+#categHist table{
+  width: 100%;
+}
+
+#categHist thead, #categHist tbody{
+  width: 100%;
+} 
+
+#categHist tbody{
+  text-align: center;
+}
+
+#categHist tr th{
+  width: 60px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: #cd3d3e;
+  color: #fff;
+}
+
+#categHist tr:hover{
+  background: rgba(205, 61, 62,0.1);
+}
+
+#categHist tbody td{
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/*Fin estilos de historial de competencias*/
 
 /*Estilos del landing*/
 

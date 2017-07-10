@@ -4,9 +4,7 @@
 	<label>Academias invitadas</label>
 	<md-select name="frmEventInfo.academies" ng-model="vm.event.selectAcademies" multiple required>
 		<md-optgroup>
-			<!-- <md-option ng-value="topping.name" ng-repeat="topping in toppings | filter: {category: 'meat' }">{{topping.name}}</md-option> -->
-			<!-- <md-option ng-value="" ng-repeat=""></md-option> -->
-			<md-option value="acadia">Acadia</md-option>
+			<md-option ng-repeat="academy in vm.academy" value="{{academy.name}}">{{academy.name}}</md-option>
 		</md-optgroup>
 	</md-select>
 
@@ -21,7 +19,7 @@
 	<label>Categorías por participar</label>
 	<md-select name="frmEventInfo.categories" ng-model="vm.event.selectCategories" multiple required>
 		<md-optgroup>
-			<md-option value="juvenil">juvenial</md-option>
+			<md-option ng-repeat="category in vm.categories" value="{{category.categorieName}}">{{category.categorieName}}</md-option>
 		</md-optgroup>
 	</md-select>
 
@@ -47,7 +45,7 @@
 	<label>Patrocinadores</label>
 	<md-select name="frmEventInfo.sponsors" ng-model="vm.event.selectSponsors" multiple required>
 		<md-optgroup>
-			<md-option value="huawei">Huawei</md-option>
+			<md-option ng-repeat="sponsor in vm.sponsors" value="{{sponsor.sponsorName}}">{{sponsor.sponsorName}}</md-option>
 		</md-optgroup>
 	</md-select>
 
