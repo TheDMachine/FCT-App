@@ -136,7 +136,7 @@
 }
 
 #table1 tr th, #table2 tr th{
-  width: 60px;
+  width: 100px;
   text-align: center;
   margin: 0 auto;
   padding: 20px 10px;
@@ -150,21 +150,11 @@
 }
 
 #table1 tbody td, #table2 tbody td{
-  width: 60px;
+  width: 100px;
   margin: 0 auto;
   border-bottom: 0.1px solid #242629;
   text-align: center;
   padding: 10px 0;
-}
-
-#table1 .md-button{
-  background-color: rgba(252, 177, 50, 0.8);
-  color: #fff;
-}
-
-#table1 .md-button:not([disabled]):hover {
-    background-color: #fcb132;
-    transition: 0.3s;
 }
 
 /*Fin estils de tablas de consulta e historial eventos*/
@@ -290,7 +280,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid #ee334e;
+  border: 1px solid #0082c8;
   text-align: center;
   margin: 0 1%;
   font-weight: 500;
@@ -299,14 +289,14 @@
 }
 
 #buttonForm div a{
-  color: #ee334e;
+  color: #0082c8;
   line-height: 2.7;
   text-decoration: none;
   padding: 1.5%;
 }
 
 #buttonForm div.active{
-  background: #ee334e;
+  background: #0082c8;
   color: #fff;
 }
 
@@ -348,7 +338,7 @@ md-input-container{
 }
 
 #buttonLogo{
-  background: #cb3e42;
+  background: #0082c8;
   border-radius: 7px;
   text-align: center;
   color: #fff;
@@ -360,12 +350,61 @@ md-input-container{
   color: #cb3e42;
 }
 
-#events .buttonSteps,#events .buttonSteps span {
-  color: cb3e42;;
-}
-
 /*Fin estilos de pasos formulario eventos*/
 
+/*Inicio estilos de tabla modificar*/
+
+#modTable h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 60px;
+}
+
+#modTable table{
+  width: 100%;
+}
+
+#modTable thead, #modTable tbody{
+  width: 100%;
+} 
+
+#modTable tbody{
+  text-align: center;
+}
+
+#modTable tr th{
+  width: 60px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: #0082c8;;
+  color: #fff;
+}
+
+#modTable tr:hover{
+  background: rgba(0, 130, 200,0.1);
+}
+
+#modTable tbody td{
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+
+#modTable .editCxlB{
+  background-color: rgba(252, 177, 50, 0.8);
+  color: #fff;
+}
+
+#modTable .editCxlB:not([disabled]):hover {
+    background-color: #fcb132;
+    transition: 0.3s;
+}
+
+/*Fin estilos tabla modificar*/
 
 /*Inicio estilos de pasos formulario patrocinadores*/
 
