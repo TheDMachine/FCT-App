@@ -36,8 +36,8 @@
 	<div class="col-md-6">
 		<!-- Campo costo de inscripción -->
 		<md-input-container flex-offset>
-			<label>Costo de inscripción</label>
-			<input name="frmEventInfo.costInsc" type="number" ng-model="vm.event.costInsc"  required>
+			<label>Costo de inscripción en colones</label>
+			<input name="frmEventInfo.costInsc" type="number" ng-model="vm.event.costInsc" min="0" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">

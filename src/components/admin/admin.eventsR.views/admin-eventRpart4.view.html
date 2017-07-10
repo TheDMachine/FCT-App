@@ -3,7 +3,7 @@
 		<!-- Campo nombre del lugar -->
 		<md-input-container flex-offset>
 			<label>Nombre del lugar </label>
-			<input type="text" name="frmEventInfo.placeName" ng-model="vm.event.placeName" maxlength="40" md-maxlength="40" required>
+			<input type="text" name="frmEventInfo.placeName" ng-model="vm.event.placeName" maxlength="30" md-maxlength="30" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">
@@ -19,7 +19,7 @@
 		<!-- Campo latitud -->
 		<md-input-container flex-offset>
 			<label>Latitud</label>
-			<input type="text" name="frmEventInfo.latitude" ng-model="vm.event.latitude" required>
+			<input type="text" name="frmEventInfo.latitude" ng-model="vm.event.latitude" maxlength="15" md-maxlength="15" placeholder="9,9331" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">
@@ -31,7 +31,7 @@
 		<!-- Campo longitud -->
 		<md-input-container flex-offset>
 			<label>Logitud</label>
-			<input type="text" name="frmEventInfo.length" ng-model="vm.event.length" required>
+			<input type="text" name="frmEventInfo.length" ng-model="vm.event.length" placeholder="-84,0986" maxlength="20" md-maxlength="20" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">
@@ -45,7 +45,7 @@
 		<!-- Campo para descripción de la organización -->
 		<md-input-container class="md-block" flex-gt-sm>
 			<label>Ubicación</label>
-			<textarea name="frmEventInfo.location" ng-model="vm.event.location" maxlength="150" md-maxlength="150" rows="5" md-select-on-focus required></textarea>
+			<textarea name="frmEventInfo.location" ng-model="vm.event.location" maxlength="50" md-maxlength="50" rows="5" md-select-on-focus required></textarea>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">

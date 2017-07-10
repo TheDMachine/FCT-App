@@ -360,6 +360,10 @@ md-input-container{
   color: #cb3e42;
 }
 
+#events .buttonSteps,#events .buttonSteps span {
+  color: cb3e42;;
+}
+
 /*Fin estilos de pasos formulario eventos*/
 
 
