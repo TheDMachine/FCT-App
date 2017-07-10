@@ -303,9 +303,28 @@
     // Función para guardar profesores
 
     vm.createNewTeacher = function (pNewTeacher) {
-      userService.setTeachers(pNewTeacher);
-      clean();
-      init();
+      var bError = false;
+      console.log(pNewTeacher.id);
+      if (vm.teacher.length == 0) {
+        userService.setTeachers(pNewTeacher);
+        document.querySelector('.SuccessMessage').innerHTML = 'El profesor se registró exitosamente';
+        clean();
+        init();
+      } else {
+        for (var i = 0; i < vm.teachers.length; i++) {
+          if (pNewTeacher.id == vm.teachers[i].id) {
+            bError = true;
+          }
+        }
+        if (bError == false) {
+          userService.setTeachers(pNewTeacher);
+          document.querySelector('#SuccessMessage').innerHTML = 'El profesor se registró exitosamente';
+          clean();
+          init();
+        } else {
+          document.querySelector('#ErrorMessage').innerHTML = 'El profesor ya existe';
+        }
+      }
     }
 
     // Función para imprimir datos del profesor en la lista
@@ -350,7 +369,7 @@
         photo: vm.teacher.photo,
         status: vm.teacher.status
       }
-      userService.updateTeacher(pModTeacher);
+      userService.updateTeacher(pEditTeacher);
       init();
       clean();
     };
@@ -538,7 +557,5 @@
       init();
     }
 
-  }
-
-})();
+}})();
 
