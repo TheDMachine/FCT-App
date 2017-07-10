@@ -325,8 +325,6 @@
       vm.teacher.academy = teacher.academy;
       vm.teacher.grade = teacher.grade;
       vm.teacher.photo = teacher.photo;
-
-      init()
     }
 
     // Función para limpiar campos
