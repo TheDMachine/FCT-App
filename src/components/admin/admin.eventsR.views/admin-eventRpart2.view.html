@@ -1,6 +1,6 @@
 <!-- Campo de fecha inicio  -->
 <md-input-container flex-offset>
-	<md-datepicker name="date1"  ng-model="vm.event.date1"  md-placeholder="Fecha inicio" required></md-datepicker>
+	<md-datepicker name="frmEventInfo.date1"  ng-model="vm.event.date1"  md-placeholder="Fecha inicio" required></md-datepicker>
 
 	<!-- Mensaje de retroalimentacion -->
  	<div ng-messages="frmEventInfo.date1.$error">
@@ -11,7 +11,7 @@
 <!-- Campo para la hora de inicio -->
 <div>
 	<label>Hora Inicio</label>
-	<input type="time" name="time1" ng-model="vm.event.time1" required>
+	<input type="time" name="frmEventInfo.time1" ng-model="vm.event.time1" required>
 
 	<!-- Mensaje de retroalimentacion -->
  	<div ng-messages="frmEventInfo.time1.$error">
@@ -21,7 +21,7 @@
 
 <!-- Campo de Fecha fin -->
 <md-input-container flex-offset>
-	<md-datepicker name="date2"  ng-model="vm.event.date2"  md-placeholder="Fecha fin" required></md-datepicker>
+	<md-datepicker name="frmEventInfo.date2"  ng-model="vm.event.date2"  md-placeholder="Fecha fin" required></md-datepicker>
 
 	<!-- Mensaje de retroalimentacion -->
  	<div ng-messages="frmEventInfo.date2.$error">
@@ -32,7 +32,7 @@
 <!-- Campo para la hora de fin -->
 <div>
 	<label>Hora fin</label>
-	<input type="time" name="time2" ng-model="vm.event.time2" required>
+	<input type="time" name="frmEventInfo.time2" ng-model="vm.event.time2" required>
 
 	<!-- Mensaje de retroalimentacion -->
  	<div ng-messages="frmEventInfo.time2.$error">
@@ -45,6 +45,6 @@
 <a ui-sref="admin.part1" class="btn btn-info">Anterior <span class="glyphicon glyphicon-circle-arrow-left"></span></a>
 
 <!-- Botón siguiente -->
-<a ui-sref="admin.part3" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+<a ui-sref="admin.part3" class="btn btn-info" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
 
 

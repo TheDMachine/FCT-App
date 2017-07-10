@@ -3,10 +3,14 @@
   angular
   .module('app')
   .controller('teacherCtrl', teacherCtrl);
+<<<<<<< HEAD
 
   function teacherCtrl ($scope, AuthService, $location, $cookies, userService, $mdDialog) {
   	/*Sidenav functionality*/
  	var originatorEv;
+=======
+  function teacherCtrl($scope) {
+>>>>>>> fct/Rebeca
   var vm = this;
   vm.newPassword = false;
   vm.currentUser;
@@ -40,17 +44,23 @@
     $scope.showPrompt();
   }
 
-    $scope.openMenu = function($mdMenu, ev) {
+    // función que se llama así misma para indicar que sea lo primero que se ejecute
+    function init() { 
+      vm.originatorEv;
+      }init();
+
+      /*Sidenav*/
+    vm.openMenu = function($mdMenu, ev) {
       originatorEv = ev;
       $mdMenu.open(ev);
     };
 
-    $scope.notificationsEnabled = true;
-    $scope.toggleNotifications = function() {
-      $scope.notificationsEnabled = !this.notificationsEnabled;
+    vm.notificationsEnabled = true;
+    vm.toggleNotifications = function() {
+      vm.notificationsEnabled = !this.notificationsEnabled;
     };
 
-    $scope.redial = function() {
+    vm.redial = function() {
       $mdDialog.show(
         $mdDialog.alert()
           .targetEvent(originatorEv)
@@ -64,14 +74,19 @@
       originatorEv = null;
     };
 
-    $scope.checkVoicemail = function() {
+    vm.checkVoicemail = function() {
       // This never happens.
     };
     /*End sidenav functionality
     -->>*/   
 
+<<<<<<< HEAD
     vm.logOut = function() {
       AuthService.logOut();
     }
   };
 })();
+=======
+   }
+})();
+>>>>>>> fct/Rebeca

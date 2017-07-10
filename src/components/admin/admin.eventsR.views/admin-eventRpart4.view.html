@@ -1,7 +1,7 @@
 <!-- Campo nombre del lugar -->
 <md-input-container flex-offset>
 	<label>Nombre del lugar </label>
-	<input name="placeName" ng-model="vm.event.placeName" md-maxlength="40" required>
+	<input name="frmEventInfo.placeName" ng-model="vm.event.placeName" md-maxlength="40" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.placeName.$error">
@@ -12,7 +12,7 @@
 <!-- Campo latitud -->
 <md-input-container flex-offset>
 	<label>Latitud</label>
-	<input name="latitude" ng-model="vm.event.latitude" required>
+	<input name="frmEventInfo.latitude" ng-model="vm.event.latitude" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.latitude.$error">
@@ -23,7 +23,7 @@
 <!-- Campo longitud -->
 <md-input-container flex-offset>
 	<label>Logitud</label>
-	<input name="length" ng-model="vm.event.length" required>
+	<input name="frmEventInfo.length" ng-model="vm.event.length" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.length.$error">
@@ -34,7 +34,7 @@
 <!-- Campo para descripción de la organización -->
 <md-input-container class="md-block" flex-gt-sm>
 	<label>Ubicación</label>
-	<textarea name="location" ng-model="vm.event.location" md-maxlength="150" rows="5" md-select-on-focus required></textarea>
+	<textarea name="frmEventInfo.location" ng-model="vm.event.location" md-maxlength="150" rows="5" md-select-on-focus required></textarea>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmEventInfo.location.$error">
@@ -46,5 +46,5 @@
 <a ui-sref="admin.part3" class="btn btn-info">Anterior <span class="glyphicon glyphicon-circle-arrow-left"></span></a>
 
 <!-- Botón siguiente -->
-<a ui-sref="admin.part5" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+<a ui-sref="admin.part5" class="btn btn-info" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
 

@@ -4,6 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
+
   function adminCtrl($scope, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
 
     var vm = this;
@@ -27,7 +28,6 @@
         vm.originatorEv;
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
-        vm.categories = estabInfoService.getCategories();
         vm.events = eventService.getEvents();
         aceptedEvents();
         vm.event = {};
@@ -91,6 +91,7 @@
 
 // Función para guardar
     vm.createNewEvent= function(pNewEvent) {
+      var bError = false;
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
@@ -100,13 +101,19 @@
       }else{
         for (var i = 0; i < vm.events.length; i++) {
           if (pNewEvent.eventName == vm.events[i].eventName) {
-            document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+
+            bError =true;
           }
         }
-        eventService.setEvents(pNewEvent);
-        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
-        clean();
-        init();
+        if(bError == false){
+           eventService.setEvents(pNewEvent);
+          document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+          clean();
+          init();
+        }else{
+          document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+        }
+
       }
     };
 
@@ -206,9 +213,6 @@
       vm.event.orgType = pEvent.orgType;
       vm.event.orgName = pEvent.orgName;
       vm.event.description = pEvent.description;
-
-      vm.updateDisable = false;
-      vm.submitDisable = true;
     }
 
     // Función para actualizar datos de evento
@@ -241,8 +245,6 @@
       description : vm.event.description
       }
 
-      vm.submitDisable = false;
-      vm.updateDisable = true;
       eventService.updateEvent(modEvent);
       init();
       clean();
