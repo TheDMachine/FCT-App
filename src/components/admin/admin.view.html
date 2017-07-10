@@ -15,7 +15,7 @@
 					</md-button>
 				</md-list-item>
 				<md-list-item layout="column">
-					<md-button ui-sref="profile" class="button-selected" ng-click="vm.selected = 2" ng-style="vm.selected == 2 ? {'background' : 'rgba(0,130,200,0.7)'} : {'background' : 'inherit'} ">
+					<md-button ui-sref="profile({cuser:vm.user})" class="button-selected" ng-click="vm.selected = 2" ng-style="vm.selected == 2 ? {'background' : 'rgba(0,130,200,0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 2 ? {'color': '#fff'} : {'color': '#1a80a8'} ">&#xE853;</i>
 						<p class="menu-button">Perfil</p>
 					</md-button>

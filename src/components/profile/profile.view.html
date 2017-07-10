@@ -10,6 +10,8 @@
           <p>Cédula: {{vm.currentUser.id}}</p>
           <p>Nombre: {{vm.currentUser.firstName +' ' +vm.currentUser.firstLastName +' ' +vm.currentUser.secondLastName}}</p>
           <p>Fecha de nacimiento: {{vm.currentUser.myDate}}</p>
+          <p ng-show="vm.currentUser.role == estudiante">Grado: {{vm.currentUser.grade}}</p>
+          <p ng-show="vm.currentUser.role == estudiante">Academia: {{vm.currentUser.academy}}</p>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
           <md-button ui-sref="profile.editProfile">Modificar Perfil</md-button>

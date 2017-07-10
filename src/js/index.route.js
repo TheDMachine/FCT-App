@@ -231,11 +231,25 @@
           }]
         },
         controller: 'profileCtrl',
+        params:{
+          cuser: null
+        },
         controllerAs:'vm'
       })
       .state('profile.editProfile',{
         url:'/editProfile',
         templateUrl:'components/profile/edit.view.html'
+      })
+      .state('configuration',{
+        url:'/settings',
+        templateUrl:'components/config/config.view.html',
+        resolve: {
+          load: ['$ocLazyLoad', function($ocLazyLoad){
+            return $ocLazyLoad.load('components/config/config.controller.js')
+          }]
+        },
+        controller:'globalConfigCtrl',
+        controllerAs:'vm'
       })
     $urlRouterProvider.otherwise('/');
   }

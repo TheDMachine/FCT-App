@@ -5,11 +5,11 @@
   .controller('profileCtrl',profileCtrl);
 
 //Función constructura de profile
-  function profileCtrl(userService, AuthService) {
+  function profileCtrl(userService, AuthService, $stateParams) {
     var vm = this;
     //función para iniciar el controlador.
     function init(){
-     vm.currentUser =userService.searchUser(AuthService.getCookie());
+      vm.currentUser = $stateParams.cuser;
    }init();
    vm.updateProfile = function (vmUserToUpdate) {
     var fotoEdit = document.querySelect('#photo').files[0];

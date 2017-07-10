@@ -1,0 +1,53 @@
+<md-card>
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">Configuración del sistema</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-content>
+    <p>Dirreción fisica: {{vm.stt.address}}</p>
+    <p>Teléfono: {{vm.stt.phone}}</p>
+    <p>Cédula juridica: {{vm.stt.idJ}}</p>
+    <p>Correo de notificaciónes: {{vm.stt.emailNotifications}}</p>
+    <md-button ng-click="vm.addNewDirect()">Agregar nuevo miembro de junta</md-button>
+    <table class="table table-responsive table-striped">
+      <thead>
+        <th>Nombre</th>
+        <th>Puesto</th>
+        <th>Correo electrónico</th>
+        <th>Teléfono</th>
+        <th>Actualizar</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="direct in vm.stt.direct">
+          <td>{{direct.name}}</td>
+          <td>{{direct.position}}</td>
+          <td>{{direct.email}}</td>
+          <td>{{direct.phone | telFilter}}</td>
+          <td><md-button data-toggle="collapse" data-target="#directModif" ng-click="vm.updateDirect(direct)">Actualizar</md-button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="directModif">
+      <md-input-container>
+        <label>Nombre de miembro de junta directiva</label>
+        <input type="text" ng-model="vm.directMod.name" name="directModifName"/>
+      </md-input-container>
+      <md-input-container>
+        <label>Cargo de miembro de junta directiva</label>
+        <input type="text" ng-model="vm.directMod.position" name="directModifPosition"/>
+      </md-input-container>
+      <md-input-container>
+        <label>Correo electrónico de miembro de junta directiva</label>
+        <input type="text" ng-model="vm.directMod.email" name="directModidEmail"/>
+      </md-input-container>
+      <md-input-container>
+        <label>Teléfono del miembro de junta directiva</label>
+        <input type="text" ng-model="vm.directMod.phone" name="directModifPhone"/>
+      </md-input-container>
+    </div>
+  </md-card-content>
+  <md-card-actions layout="row" layout-align="end center">
+    <md-button ui-sref="profile.editProfile">Modificar Perfil</md-button>
+  </md-card-actions>
+</md-card>

@@ -28,14 +28,19 @@ function init() {
 
       //procesarw propuesta de eventos
       vm.processPropose= function(pProposeName, pFlag) {
+
         //pReceived es el usuario encontrado que
         var pReceived = eventService.findPropose(pProposeName);
+
         //true = aceptado
         // false = rechazado
         if(pFlag) {
+          //Se envia que fue aceptado
           pReceived.status = 'Aceptado';
-          eventService.setEvents(pReceived);
+        } else {
+          pReceived.status = "Rechazado";
         }
+        eventService.setEvents(pReceived);
       }
 
 // Función para guardar
