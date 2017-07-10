@@ -285,36 +285,37 @@
 /*Fin estilos de tabla pesos y categorías */
 
 /*Inicio estilos de pasos formulario eventos*/
-#events md-content h1{
-  font-family: 'Montserrat';
-}
 
-.statusButtons a{
-  color: #ee334e;
-  font-size: 1.143em;
-  display: inline-block;
+#buttonForm div{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #ee334e;
   text-align: center;
+  margin: 0 1%;
+  font-weight: 500;
+  cursor: pointer;
   margin-right: 8%;
+}
+
+#buttonForm div a{
+  color: #ee334e;
+  line-height: 2.7;
   text-decoration: none;
+  padding: 1.5%;
 }
 
-.statusButtons span{
-   display: block;
-   height: 30px;
-   padding-top: 4px;
-   width: 30px;
-   border: 2px solid #ee334e;
-   border-radius: 50%;
-   font-weight: bold;
+#buttonForm div.active{
+  background: #ee334e;
+  color: #fff;
 }
 
-.statusButtons a.active span{
-  background-color: #ee334e;
+#buttonForm div.active a{
   color: #fff;
 }
 
 md-input-container{
-  width: 30%;
+  width: 100%;
 }
 
 #reqMsj{
@@ -322,6 +323,42 @@ md-input-container{
   font-size: 0.786em;
 }
 
+#buttonForm{
+  margin-top: 40px;
+  margin-bottom: 70px;
+}
+
+#botonRadio{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#last2Part {
+  margin-bottom: 60px;
+}
+
+#last2Part input{
+  border: none;
+  background: inherit;
+}
+
+#last2Part label{
+  font-size: 1em;
+  margin-right: 40px;
+}
+
+#buttonLogo{
+  background: #cb3e42;
+  border-radius: 7px;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+}
+
+#messages p {
+  text-align: center;
+  color: #cb3e42;
+}
 
 /*Fin estilos de pasos formulario eventos*/
 

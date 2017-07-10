@@ -1,66 +1,104 @@
-<!-- Campo nombre del lugar -->
-<md-input-container flex-offset>
-	<label>Cantidad de asientos</label>
-	<input type="number" name="frmEventInfo.seats" ng-model="vm.event.seats" required>
+<div class="row">
+	<div class="col-md-6">
+		<!-- Campo nombre del lugar -->
+		<md-input-container flex-offset>
+			<label>Cantidad de asientos</label>
+			<input type="number" name="frmEventInfo.seats" ng-model="vm.event.seats" required>
 
-	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.$error">
-		<div ng-messages-include="components/includes/messages.html"></div>
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
 	</div>
-</md-input-container>
+	<div class="col-md-6">
+		<!-- Campo cantidad de entradas -->
+		<md-input-container flex-offset>
+			<label>Cantidad de entradas a vender</label>
+			<input type="number" name="frmEventInfo.tickets" ng-model="vm.event.tickets" required>
 
-<!-- Campo cantidad de entradas -->
-<md-input-container flex-offset>
-	<label>Cantidad de entradas a vender</label>
-	<input type="number" name="frmEventInfo.tickets" ng-model="vm.event.tickets" required>
-
-	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.$error">
-		<div ng-messages-include="components/includes/messages.html"></div>
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
 	</div>
-</md-input-container>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<!-- Campo nombre de contacto -->
+		<md-input-container flex-offset>
+			<label>Nombre de contacto</label>
+			<input type="text" name="frmEventInfo.contactName" ng-model="vm.event.contactName" maxlength="30" md-maxlength="30" required>
 
-<!-- Campo nombre de contacto -->
-<md-input-container flex-offset>
-	<label>Nombre de contacto</label>
-	<input type="text" name="frmEventInfo.contactName" ng-model="vm.event.contactName" maxlength="30" md-maxlength="30" required>
-
-	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.$error">
-		<div ng-messages-include="components/includes/messages.html"></div>
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
 	</div>
-</md-input-container>
+	<div class="col-md-6">
+		<!-- Campo teléfono de contacto -->
+		<md-input-container flex-offset>
+			<label>Teléfono de contacto</label>
+			<input name="frmEventInfo.contactPhone" ng-model="vm.event.contactPhone" ng-pattern="/^[0-9]{8}$/" minlength="8" maxlength="8" required>
 
-<!-- Campo teléfono de contacto -->
-<md-input-container flex-offset>
-	<label>Teléfono de contacto</label>
-	<input name="frmEventInfo.contactPhone" ng-model="vm.event.contactPhone" ng-pattern="/^[0-9]{8}$/" minlength="8" maxlength="8" required>
-
-	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.$error">
-		<div ng-messages-include="components/includes/messages.html"></div>
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
 	</div>
-</md-input-container>
+</div>
+<div class="row">
+	<!-- Subir logo -->
+	<div class="col-md-12">
+		<label id="buttonLogo" for="photo" class="btn btn-primary btn-file">
+	    Adjuntar logo <input id="photo" name="frmEventInfo.photo" type="file" style="display: none;" ng-model="vm.event.photo">
+		</label>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-offset-8 col-md-4">
+		<!-- botón para guardar datos -->
+		<md-button type="submit" class="md-raised"  ng-disabled="frmEventInfo.$invalid" ng-click="vm.reset()">Ingresar</md-button>
 
-<!-- Subir logo -->
-<div>
-	<label for="photo" class="btn btn-default btn-file">
-    Adjuntar logo <input id="photo" name="frmEventInfo.photo" type="file" style="display: none;" ng-model="vm.event.photo">
-	</label>
+		<!-- botón para guardar datos actualizados -->
+		<md-button type="submit" class="md-raised" ng-disabled="frmEventInfo.$invalid" ng-click="vm.updateEvent()">Actualizar</md-button>
+	</div>
+	<div id="messages" class="col-md-12">
+		<!-- Mensajes de error o éxito del registro -->
+		<p class="ErrorMessage"></p>
+		<p class="SuccessMessage"></p>
+	</div>
+</div>
+<div class="row">
+	<div class="cl-md-2">
+		<!-- Botón Anterior -->
+		<a ui-sref="admin.part4" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
+	</div>
 </div>
 
-<!-- botón para guardar datos -->
-<md-button type="submit" class="md-raised"  ng-disabled="frmEventInfo.$invalid" ng-click="vm.reset()">Ingresar</md-button>
 
-<!-- Mensajes de error o éxito del registro -->
-<p class="ErrorMessage"></p>
-<p class="SuccessMessage"></p>
 
-<!-- botón para guardar datos actualizados -->
-<md-button type="submit" class="md-raised" ng-disabled="frmEventInfo.$invalid" ng-click="vm.updateEvent()">Actualizar</md-button>
 
-<!-- Botón Anterior -->
-<a ui-sref="admin.part4" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

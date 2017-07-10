@@ -474,25 +474,45 @@
 			    <!-- Tab de Eventos -->
 			    <md-tab id="events" label="Eventos" ui-sref=".part1">
 			        <md-content class="md-padding">
-			          	<h1 class="md-display-2">Eventos</h1>
+			          	<h3 class="md-display-2">Eventos</h3>
+
+			          	<!--<div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
+	 			          	<div ui-sref-active="active" ui-sref=".sponsorPartOne">
+	 			          		<a>1</a>
+	 			          	</div>
+	 			          	<div ui-sref-active="active" ui-sref=".sponsorPartTwo">
+	 			          		<a>2</a>
+	 			          	</div>
+				          </div>-->
 
 			          	<!-- links de cada paso del formulario de registro de eventos -->
-				        <div class="text-center statusButtons">
-				          	<a ui-sref-active="active" ui-sref=".part1"><span>1</span></a>
-				          	<a ui-sref-active="active" ui-sref=".part2"><span>2</span></a>
-				          	<a ui-sref-active="active" ui-sref=".part3"><span>3</span></a>
-				          	<a ui-sref-active="active" ui-sref=".part4"><span>4</span></a>
-				          	<a ui-sref-active="active" ui-sref=".part5"><span>5</span></a>
+				        <div id="buttonForm" class="text-center" layout="row" layout-align="center center">
+				        	<div ui-sref-active="active" ui-sref=".part1">
+				        		<a>1</a>
+				        	</div>
+				        	<div ui-sref-active="active" ui-sref=".part2"">
+				        		<a>2</a>
+				        	</div>
+				        	<div ui-sref-active="active" ui-sref=".part3">
+				        		<a >3</a>
+				        	</div>
+				        	<div ui-sref-active="active" ui-sref=".part4">
+				        		<a >4</a>
+				        	</div>
+				        	<div ui-sref-active="active" ui-sref=".part5">
+				        		<a >5</a>
+				        	</div>	
 				        </div>
 
-				        <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
+				        <div class="row">
+				        <div class="col-md-offset-1 col-md-10">
+				        	<!-- Formulario para registro de eventos -->
+				          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
 
-			          	<!-- Formulario para registro de eventos -->
-			          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
-
-		          			<!-- Espacio para mostrar vistas del registro -->
-		          			<div id="form-views" ui-view></div>
-			          	</form>
+			          			<!-- Espacio para mostrar vistas del registro -->
+			          			<div id="form-views" ui-view></div>
+				          	</form>
+				        </div>
 			          </div>
 			        </md-content>
 			    </md-tab>
