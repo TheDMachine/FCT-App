@@ -45,7 +45,6 @@
         estabInfoService.getCountries().then(function (data) {vm.countries = data.data.countries;});
         vm.teacher.status = "Activo";
       }
-    }
     init();
 
 
@@ -330,20 +329,20 @@
     }
 
     // Función para imprimir datos del profesor en la lista
-    vm.getInfoTeacher = function (teacher) {
-      vm.teacher.id = teacher.id;
-      vm.teacher.firstName = teacher.firstName;
-      vm.teacher.secondName = teacher.secondName;
-      vm.teacher.firstLastName = teacher.firstLastName;
-      vm.teacher.secondLastName = teacher.secondLastName;
-      vm.teacher.phone = teacher.phone;
-      vm.teacher.email = teacher.email;
-      vm.teacher.bornhDate = teacher.bornhDate;
-      vm.teacher.gender = teacher.gender;
-      vm.teacher.nationality = teacher.nationality;
-      vm.teacher.academy = teacher.academy;
-      vm.teacher.grade = teacher.grade;
-      vm.teacher.photo = teacher.photo;
+    vm.getInfoTeacher = function (pTeacher) {
+      vm.teacher.id = pTeacher.id;
+      vm.teacher.firstName = pTeacher.firstName;
+      vm.teacher.secondName = pTeacher.secondName;
+      vm.teacher.firstLastName = pTeacher.firstLastName;
+      vm.teacher.secondLastName = pTeacher.secondLastName;
+      vm.teacher.phone = pTeacher.phone;
+      vm.teacher.email = pTeacher.email;
+      vm.teacher.bornDate = pTeacher.bornDate;
+      vm.teacher.gender = pTeacher.gender;
+      vm.teacher.nationality = pTeacher.nationality;
+      vm.teacher.academy = pTeacher.academy;
+      vm.teacher.grade = pTeacher.grade;
+      vm.teacher.photo = pTeacher.photo;
       vm.teacher.status = pTeacher.status;
     }
 
@@ -351,11 +350,12 @@
 
     function clean() {
       vm.event = '';
+      vm.teacher = '';
     }
 
       // Función para actualizar datos del profesor
     vm.updateTeacher = function () {
-      var pEditTeacher = {
+      var editTeacher = {
         id: vm.teacher.id,
         firstName: vm.teacher.firstName,
         secondName: vm.teacher.secondName,
@@ -363,7 +363,7 @@
         secondLastName: vm.teacher.secondLastName,
         phone: vm.teacher.phone,
         email: vm.teacher.email,
-        bornhDate: vm.teacher.bornhDate,
+        bornDate: vm.teacher.bornDate,
         gender: vm.teacher.gender,
         nationality: vm.teacher.nationality,
         academy: vm.teacher.academy,
@@ -371,7 +371,7 @@
         photo: vm.teacher.photo,
         status: vm.teacher.status
       }
-      userService.updateTeacher(pEditTeacher);
+      userService.updateTeacher(editTeacher);
       init();
       clean();
     };
@@ -451,7 +451,8 @@
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins
+        tournamentsWins: vm.tournamentsWins,
+        status : vm.status
       };
       console.log(newUser);
       userService.setUsers(newUser);
@@ -478,7 +479,8 @@
         vm.belt = '',
         vm.category = '',
         vm.tournaments = '',
-        vm.tournamentsWins = ''
+        vm.tournamentsWins = '',
+        vm.status = ''
     }
 
     //funcion para editar alumno
@@ -500,7 +502,8 @@
         vm.belt = student.belt,
         vm.category = student.category,
         vm.tournaments = student.tournaments,
-        vm.tournamentsWins = student.tournamentsWins
+        vm.tournamentsWins = student.tournamentsWins,
+        vm.status = student.status
     }
 
     //funcion para guardar alumno editada
@@ -523,7 +526,8 @@
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins
+        tournamentsWins: vm.tournamentsWins,
+        status : vm.status 
       }
       userService.updateUsers(editstudent);
       init();

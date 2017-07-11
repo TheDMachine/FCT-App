@@ -93,11 +93,11 @@
     }
 
     //editar la informacion del profesor
-    function _updateTeacher(pobjUsuario) {
+    function _updateTeacher(pEditTeacher) {
       var teachersList = _getTeachers();
       for(var i = 0; i < teachersList.length; i++){
-        if(teachersList[i].id == pobjUsuario.id){
-          teachersList[i] = pobjUsuario;
+        if(teachersList[i].id == pEditTeacher.id){
+          teachersList[i] = pEditTeacher;
         }
       }
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
