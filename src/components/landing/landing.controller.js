@@ -25,6 +25,11 @@
         $location.path('/cancelRsv');
        }
 
+       vm.events = function(event){
+        event.preventDefault();
+        $location.path('/events');
+       }
+
     }
 
      //se establece un objeto de angular normal

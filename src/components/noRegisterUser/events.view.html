@@ -1,0 +1,56 @@
+<section id="eventsViewSection" class="container-fluid">
+	<div class="row">
+		<div id="topSpace" class="col-xs-12">
+			<div class="col-xs-2 imageLogo"><img src="images/logFCT.png" width="75px" height="75px"></div>
+			<div class="col-xs-offset-9 col-xs-1"><a ng-click="vm.return($event)"><span class="fa fa-times quitX"></span></a></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h3>CONSULTAR EVENTOS</h3>
+
+				<!-- Filtros -->
+				<!-- Filtro por fecha -->
+				<p>Filtre por fechas: </p>
+				<br>
+				<md-datepicker name="from"  ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
+		    	<md-datepicker name="to"  ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
+
+		    	<!-- Filtro por estado -->
+		    	<p>Filtre por estado: </p>
+				<md-input-container>
+				    <label>Seleccione el estado</label>
+				    <md-select name="stateFilter" ng-model="vm.stateFilter">
+				    	<md-option value="aprobado">Aceptado</md-option>
+				        <md-option value="cancelado">Cancelado</md-option>
+				    </md-select>
+				</md-input-container>
+				
+
+	        	<!-- Tabla historial de eventos -->
+		        <div>
+		          	<table class="table-responsive">
+					    <thead>
+					      	<tr>
+					      		<th>Nombre del evento</th>
+					      		<th>Fecha</th>
+						        <th>Nombre del lugar</th>
+						        <th>Dirección</th>
+					      	</tr>
+					    </thead>
+					    <tbody>
+					    <!-- | dateRange:vm.from:vm.to | filter:{eventState:vm.stateFilter} -->
+					      	<tr ng-repeat="event in vm.events ">
+					      		
+					      		<td>{{event.eventName}}</td>
+					      		<td>{{event.date1 | date : "shortDate"}}</td>
+						        <td>{{event.placeName}}</td>
+						        <td>{{event.location}}</td>
+					      	</tr>
+					    </tbody>
+				  	</table>
+		        </div>
+				
+		</div>
+	</div>
+</section>

@@ -98,12 +98,12 @@
   margin: 0 auto;
   padding: 20px 10px;
   font-size: 1.143em;
-  background-color: #cd3d3e;
+  background-color: rgba(255, 208, 52,0.8);
   color: #fff;
 }
 
 #categHist tr:hover{
-  background: rgba(205, 61, 62,0.1);
+  background: rgba(255, 208, 52,0.1);
 }
 
 #categHist tbody td{
