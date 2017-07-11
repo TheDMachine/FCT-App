@@ -1113,11 +1113,17 @@
 			      	<md-tab ui-sref=".teachpart1" label="Profesores">
 				        <md-content class="md-padding">
 				          <h1 class="md-display-2">Profesores</h1>
-	     			          <div class="text-center statusButtons">
-				          	<a ui-sref-active="active" ui-sref=".teachpart1"><span>1</span></a>
-				          	<a ui-sref-active="active" ui-sref=".teachpart2"><span>2</span></a>
-				          	<a ui-sref-active="active" ui-sref=".teachpart3"><span>3</span></a>
-				          </div>
+	     			          <div class="text-center" id="buttonTeacher" layout="row" layout-align="center center">
+				                  <div ui-sref-active="active" ui-sref=".teachpart1">
+				                    <a>1</a>
+				                  </div>
+				                  <div ui-sref-active="active" ui-sref=".teachpart2">
+				                    <a>2</a>
+				                  </div>
+				                  <div ui-sref-active="active" ui-sref=".teachpart3">
+				                    <a>3</a>
+				                  </div>
+			          			</div>
 				           <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
 
 	                				 <form name="frmRegTeacher" autocomplete="off"  ng-submit="vm.presaveTeacher(vm.teacher)">
