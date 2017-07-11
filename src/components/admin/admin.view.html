@@ -797,6 +797,12 @@
 										       <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.photo">  
 										    </div>
 
+										    <div class="inset form-group col-xs-12 col-md-4 floating-label-form-group control" ng-cloak>
+											 	<md-switch ng-model="vm.status" aria-label="Switch 2" ng-true-value="'Activo'" ng-false-value="'Inactivo'" class="md-warn">
+												Estado: {{vm.status}}
+												</md-switch>
+										 	</div>
+
 											<!-- boton para guardar -->
 											<md-button type="submit" ng-click="vm.reset()" class="md-raised" ng-disabled="frmStudent.$invalid">Agregar Alumno</md-button>
 
