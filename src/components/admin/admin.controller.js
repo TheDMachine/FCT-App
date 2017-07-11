@@ -51,13 +51,11 @@
         };
         vm.events = eventService.getEvents();
         vm.teachers = userService.getTeachers();
-        vm.countries;
-        $http.get('http://api.population.io:80/1.0/countries').then(function(data){
-          console.log(data);
-          vm.countries = data.data.countries;
-        },function(err){
-          console.log(err);
-        })
+        estabInfoService.getCountries().then(
+          function(data) {
+            vm.countries = data.data.countries;
+          }
+        );
       }init();
 
 
@@ -102,7 +100,7 @@
             pNewEvent.photo = data.url;
             vm.createNewEvent(pNewEvent);
           });
-      };
+    };
 
 // Función para guardar
     vm.createNewEvent= function(pNewEvent) {
@@ -157,18 +155,6 @@
          });
       }
       // vm.error = false;
-      vm.preSaveConsul = function(pNewConsult) {
-        console.log(pNewConsult);
-        // vm.cloudObj.data.file = document.getElementById("photo").files[0];
-        // Upload.upload(vm.cloudObj)
-        //   .success(function(data){
-        //     pNewConsult.photo = data.url;
-             vm.createNewConsult(pNewConsult);
-        //   })
-        // .catch(function(err) {
-        //   console.log(err);
-        // })
-        }
 
           // Función para imprimir datos en el formulario de patrocinadores
     vm.getSponsorInfo = function(pSponsor) {
@@ -287,6 +273,18 @@
         }
       }
 
+    vm.presaveConsul = function(pNewConsult) {
+        // console.log(pNewConsult);
+        // vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        // Upload.upload(vm.cloudObj)
+        //   .success(function(data){
+        //     pNewConsult.photo = data.url;
+             vm.createNewConsult(pNewConsult);
+        //   })
+        // .catch(function(err) {
+        //   console.log(err);
+        // })
+        }
     vm.createNewConsult = function(pNewConsul){
       console.log("El objeto con imagen es %o",pNewConsul);
       console.log("Gracias, ha sido creado un nuevo represetante de consejo %o",pNewConsul);

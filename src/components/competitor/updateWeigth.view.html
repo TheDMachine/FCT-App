@@ -1,9 +1,13 @@
-<form novalidate name="frmUpdateWeigth" ng-submit="vm.updateWeigth(vm.userWeigth)">
-  <input type="hidden" ng-model="vm.userWeigth.name" value="vm.userWeigth.name">
+<form name="frmUpdateWeigth" ng-submit="vm.updateWeigth(vm.userWeigth)">
+  <input type="hidden" ng-model="vm.userWeigth.firstName" value="vm.userWeigth.name">
   <h2>{{vm.name + vm.firstName + vm.lastName}}</h2>
   <md-input-container>
     <label>Peso</label>
-    <input type="text" name="weigth" ng-model="vm.userWeigth.weigth"/>
+    <input type="text" name="weigth" ng-model="vm.userWeigth.weigth" required/>
+    <!-- Mensaje de retroalimentacion -->
+    <div ng-messages="frmUpdateWeigth.weigth.$error">
+      <div ng-messages-include="components/includes/messages.html"></div>
+    </div>
   </md-input-container>
   <md-button type="submit">Actualizar peso</md-button>
 </form>

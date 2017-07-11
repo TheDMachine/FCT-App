@@ -10,14 +10,17 @@
 </md-input-container>
   <md-input-container layout="column">
     <label>Nacionalidad</label>
-    <input type="text" name="nationality" ng-model="vm.user.nationality" required>
+    <md-select name="nationality" ng-model="vm.user.nationality" required>
+      <md-option value="">Seleciona el país</md-option>
+      <md-option ng-repeat="country in vm.countries" value="{{country}}" ng-disabled="$index === 1">{{country}}</md-option>
+    </md-select>
     <div ng-messages="frmRegisterConsult.nationality.$error">
     <div ng-messages-include="components/includes/messages.html"></div>
     </div>
   </md-input-container>
   <md-input-container layout="column">
     <label>Correo electrónico</label>
-    <input type="email" name="email" ng-model="vm.user.email" required>
+    <input type="email" name="email" ng-model="vm.user.email" required pattern="([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})">
     <div ng-messages="frmRegisterConsult.email.$error">
     <div ng-messages-include="components/includes/messages.html"></div>
     </div>

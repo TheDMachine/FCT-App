@@ -44,7 +44,7 @@ phone:'88561919'}
     //functionn para actualizar algo
     function _setSettings(pNewSetting) {
       var settingsList = _getSettings();
-      settingsList.push()
+      settingsList.push(pNewSetting);
     }
     //function para obtener los parametros de configuración del sistema
     function _getSettings() {

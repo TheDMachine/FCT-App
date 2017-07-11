@@ -221,9 +221,9 @@
       controller: 'cancelRsvCtrl',
       controllerAs: 'vm'
     })
-    .state('profile',{
-      url : '/profile', //ruta del url del estado
-      templateUrl : 'components/profile/profile.view.html',//vista que se va a cargar para este estado
+    .state('profile-competitor',{
+      url : '/profile-competitor', //ruta del url del estado
+      templateUrl : 'components/profile-competitor/profile.view.html',//vista que se va a cargar para este estado
         // El resolve sirve para el controlador junto con la vista
         resolve: {
           load: ['$ocLazyLoad', function($ocLazyLoad){
@@ -236,9 +236,9 @@
         },
         controllerAs:'vm'
       })
-      .state('profile.editProfile',{
-        url:'/editProfile',
-        templateUrl:'components/profile/edit.view.html'
+      .state('profile-competitor.editProfile',{
+        url:'/editProfile-competitor',
+        templateUrl:'components/profile-competitor/edit.view.html'
       })
       .state('configuration',{
         url:'/settings',

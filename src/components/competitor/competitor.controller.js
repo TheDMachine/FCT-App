@@ -42,7 +42,7 @@
     /*End sidenav functionality
     -->>*/
     vm.updateWeigth = function(pWeigthUser) {
-      userService.setUser(pWeigthUser);
+      userService.update(pWeigthUser);
     }
    }
 })();

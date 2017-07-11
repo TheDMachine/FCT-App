@@ -10,14 +10,18 @@
       var teachers = [];
        var users = [];
       //EL usuario quemado de represetante de consejo.
-      var _UsersConsult = [{"nationality":"costarricense"
-      ,"email":"daniel.camposarce@gmail.com"
-      ,"id":"402220554"
-      ,"firstName":"Daniel"
-      ,"secondName":"Jose"
-      ,"firstLastName":"Campos"
-      ,"secondLastName":"Arce"
-      ,"birthday":"1994-03-13T06:00:00.000Z"}];
+      var _UsersConsult = [
+        {
+          "nationality":"costarricense"
+          ,"email":"daniel.camposarce@gmail.com"
+          ,"id":"402220554"
+          ,"firstName":"Daniel"
+          ,"secondName":"Jose"
+          ,"LastName":"Campos"
+          ,"LastName2":"Arce"
+          ,"birthday":"1994-03-13T06:00:00.000Z"
+        }
+      ];
 
       //Se publica el api para acceso al servicio.
       var publicAPI = {
@@ -31,7 +35,9 @@
         setUsers: _setUsers,
         getUsers: _getUsers,
         updateUsers: _updateUsers,
-        searchUser : _searchUser
+        searchUser : _searchUser,
+        updateConsul: _updateUsersConsul,
+        updateWeigth: _findAndSetUserToWeigth
     };
     return publicAPI;
 
@@ -58,7 +64,7 @@
     function _findAndSetUserToWeigth(pUserToSearch) {
       var users = _getUsers();
       for (var i = 0; i < users.length; i++) {
-        if(users[i].name == pUserToSearch.name) {
+        if(users[i].firstName == pUserToSearch.firstName) {
           user[i].weigth = pUserToSearch.weigth;
           _updateUsers(user[i]);
         }
@@ -72,7 +78,6 @@
       }
       return usersList;
     }
-
     //editar la informacion del alumno ya registrada
     function _updateUsers(editUser){
       var usersList = _getUsers();
@@ -82,7 +87,18 @@
         }
       }
       localStorage.setItem('lsUsersList', JSON.stringify(usersList));
-    } // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
+    }
+
+    function _updateUsersConsul(editUser) {
+      var usersList = _getUsers();
+      for(var i = 0; i < usersList.length; i++){
+        if(usersList[i].id == editUser.id){
+          usersList[i] = editUser;
+        }
+      }
+      localStorage.setItem('lsConsulUsers', JSON.stringify(usersList));
+    }
+    // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
     function _setTeachers(pTeacher){
       var teachersList = _getTeachers();
@@ -130,7 +146,7 @@
       function _setNewConsul(pNewObjConsult){
         var consulList = _getUserConsult();
         for (var i = 0; i < consulList.length; i++) {
-          if (consulList[i].name == pNewObjConsult.name) {
+          if (consulList[i].id == pNewObjConsult.id) {
             return false;
           }else{
             pNewObjConsult.password = _generatePassword();
@@ -145,34 +161,34 @@
     return $cookies.get('currentUserActive');
    }
    function _generatePassword() {
-     a = [];
-  var chars = ['#', '%', '£', '!', '?', '&', ';', '(', ')', '=', '+', '$'];
-  for (var i = 97; i <= 122; i++) {
-  	a[a.length] = String.fromCharCode(i).toUpperCase();
+     var a = [];
+     var chars = ['#', '%', '£', '!', '?', '&', ';', '(', ')', '=', '+', '$'];
+     for (var i = 97; i <= 122; i++) {
+    	    a[a.length] = String.fromCharCode(i).toUpperCase();
 
-    // create random letters.
-  	var one = a[Math.floor(Math.random() * a.length)];
-    var two = a[Math.floor(Math.random() * a.length)];
-    var three = a[Math.floor(Math.random() * a.length)];
-    var four = a[Math.floor(Math.random() * a.length)];
-    var five = a[Math.floor(Math.random() * a.length)];
-    var six = a[Math.floor(Math.random() * a.length)];
-    var seven = a[Math.floor(Math.random() * a.length)];
-    var eight = a[Math.floor(Math.random() * a.length)];
+          // create random letters.
+    	     var one = a[Math.floor(Math.random() * a.length)];
+           var two = a[Math.floor(Math.random() * a.length)];
+           var three = a[Math.floor(Math.random() * a.length)];
+           var four = a[Math.floor(Math.random() * a.length)];
+           var five = a[Math.floor(Math.random() * a.length)];
+           var six = a[Math.floor(Math.random() * a.length)];
+           var seven = a[Math.floor(Math.random() * a.length)];
+           var eight = a[Math.floor(Math.random() * a.length)];
 
-    // create random numbers.
-    var int1 = Math.floor(Math.random() * 10);
-    var int2 = Math.floor(Math.random() * 10);
-    var ints = int1.toFixed(0) + int2.toFixed(0);
-    var intsDecimal = int1.toFixed(0) + "." + int2.toFixed(0);
+           // create random numbers.
+           var int1 = Math.floor(Math.random() * 10);
+           var int2 = Math.floor(Math.random() * 10);
+           var ints = int1.toFixed(0) + int2.toFixed(0);
+           var intsDecimal = int1.toFixed(0) + "." + int2.toFixed(0);
 
-    // create random characters, based on array (chars).
-    var randChar = chars[Math.floor(Math.random() * chars.length).toFixed(0)];
+           // create random characters, based on array (chars).
+           var randChar = chars[Math.floor(Math.random() * chars.length).toFixed(0)];
 
-    // create variable moving all letters, numbers and characters together.
-    var c = one + two + three + four + five + six + seven + eight + ints + randChar;
- 		}
-    return c;
-   }
+           // create variable moving all letters, numbers and characters together.
+           var c = one + two + three + four + five + six + seven + eight + ints + randChar;
+ 		    }
+        return c;
+      }
   }
 })();

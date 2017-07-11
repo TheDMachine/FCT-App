@@ -41,6 +41,6 @@
           else{
               return "(" + city;
           }
-
+        }
       };
 }());

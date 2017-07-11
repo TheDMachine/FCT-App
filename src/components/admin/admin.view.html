@@ -1190,13 +1190,13 @@
 			        <md-content class="md-padding">
 			          <h1 class="md-display-2">Registro de representante de consejo</h1>
 								<h2 id="errorConsul"></h2>
-								<!-- the links to our nested states using relative paths -->
-            <!-- add the active class if the state matches our ui-sref -->
+
+								<!-- Paso a paso para irse a diferente lado -->
 						<div class="statusButtons text-center">
 							<a ui-sref-active="active" ui-sref=".partOne"><span>1</span></a>
 							<a ui-sref-active="active" ui-sref=".partTwo"><span>2</span></a>
 						</div>
-								<form name="frmConsulRegister" autocomplete="off" ng-submit="vm.preSaveConsul(vm.user)">
+								<form name="frmConsulRegister" autocomplete="off" ng-submit="vm.presaveConsul(vm.user)">
 									<div ui-view></div>
 								</form>
 			        </md-content>
@@ -1218,7 +1218,7 @@
 			          </div>
 			           <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
 
-                				 <form name="frmRegTeacher" autocomplete="off"  ng-submit="vm.presaveTeacher(vm.teacher)">
+                	<form name="frmRegTeacher" autocomplete="off"  ng-submit="vm.presaveTeacher(vm.teacher)">
                 				 	<!-- Espacio para mostrar vistas del registro -->
 		          			<div id="form-views" ui-view></div>
 			          	</form>

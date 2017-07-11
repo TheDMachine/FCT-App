@@ -1,0 +1,30 @@
+<div flex-xs flex-gt-xs="100" layout="column">
+  <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+    <md-card-title>
+      <md-card-title-media flex="35">
+        <div class="md-media-lg card-media profile-picture">
+          <img ng-src="{{vm.currentUser.photo}}">
+        </div>
+      </md-card-title-media>
+      <md-card-title-text>
+        <span class="md-headline name-profile">{{vm.currentUser.firstName}}  {{vm.currentUser.firstLastName}}</span>
+        <span class="md-subhead info-profile">Academia: {{vm.currentUser.academy}}</span>
+        <p class="profile-info"><span>ID:</span> {{vm.currentUser.id}}</p>
+        <p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
+        <p class="profile-info"><span>Edad:</span> {{vm.currentUser.bornDate}}</p>
+        <p class="profile-info"><span>Grado:</span> {{vm.currentUser.grade}}</p>
+        <div layout="row" class="contact-info">
+          <i class="material-icons">&#xE0CD;</i>
+          <p class="profile-info phone-info"><span>Teléfono:</span> {{vm.currentUser.phone}}</p>
+        </div>
+        <div layout="row" class="contact-info">
+          <i class="material-icons">&#xE0BE;</i>
+          <p class="profile-info phone-info"><span>Email:</span> {{vm.currentUser.phone}}</p>
+        </div>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button>Editar</md-button>
+    </md-card-actions>
+  </md-card>
+</div>
