@@ -4,7 +4,7 @@
   .module('app')
   .service('estabInfoService', estabInfoService);
 
-  function estabInfoService(){
+  function estabInfoService($http){
     var belts = [
       {belt: 'blanco'}, 
       {belt: 'amarillo'}, 
@@ -27,7 +27,8 @@
     var publicAPI = {
       getBelts : _getBelts,
       getWeight : _getWeight,
-      getCategories : _getCategories
+      getCategories : _getCategories,
+      getCountries : _getCountries
     };
     return publicAPI; // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
@@ -56,6 +57,11 @@
         categoriesList = categories;
       }
       return categoriesList;
+    }
+    
+    //Función para select countries
+    function _getCountries() {
+      return $http.get('http://api.population.io:80/1.0/countries');
     }
   }
 })();

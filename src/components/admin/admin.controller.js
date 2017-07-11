@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (function() {
   'use strict'
   angular
@@ -45,59 +46,55 @@
         vm.to2 = new Date();
         vm.weights = estabInfoService.getWeight();
         vm.categoriesAge = estabInfoService.getCategories();
-        $http.get('http://api.population.io:80/1.0/countries').then(function(data){
-          console.log(data);
-          vm.countries = data.data.countries;
-        },function(err){
-          console.log(err);
-        })
+        estabInfoService.getCountries().then(function (data) {vm.countries = data.data.countries;});
+        vm.teacher.status = "Activo";
       }init();
 
-    
-      /*Sidenav*/
-    vm.openMenu = function($mdMenu, ev) {
+
+    /*Sidenav*/
+    vm.openMenu = function ($mdMenu, ev) {
       originatorEv = ev;
       $mdMenu.open(ev);
     };
 
     vm.notificationsEnabled = true;
-    vm.toggleNotifications = function() {
+    vm.toggleNotifications = function () {
       vm.notificationsEnabled = !this.notificationsEnabled;
     };
 
-    vm.redial = function() {
+    vm.redial = function () {
       $mdDialog.show(
         $mdDialog.alert()
-          .targetEvent(vm.originatorEv)
-          .clickOutsideToClose(true)
-          .parent('body')
-          .title('Suddenly, a redial')
-          .textContent('You just called a friend; who told you the most amazing story. Have a cookie!')
-          .ok('That was easy')
+        .targetEvent(vm.originatorEv)
+        .clickOutsideToClose(true)
+        .parent('body')
+        .title('Suddenly, a redial')
+        .textContent('You just called a friend; who told you the most amazing story. Have a cookie!')
+        .ok('That was easy')
       );
 
       vm.originatorEv = null;
     };
 
-    vm.checkVoicemail = function() {
+    vm.checkVoicemail = function () {
       // This never happens.
     };
     /*Final sidenav*/
 
     // Función para pre guardar datos del evento
 
-    vm.presaveEvent = function(pNewEvent) {
-        console.log(pNewEvent);
-        vm.cloudObj.data.file = document.getElementById("photo").files[0];
-        Upload.upload(vm.cloudObj)
-          .success(function(data){
-            pNewEvent.photo = data.url;
-            vm.createNewEvent(pNewEvent);
-          });
-      };
+    vm.presaveEvent = function (pNewEvent) {
+      console.log(pNewEvent);
+      vm.cloudObj.data.file = document.getElementById("photo").files[0];
+      Upload.upload(vm.cloudObj)
+        .success(function (data) {
+          pNewEvent.photo = data.url;
+          vm.createNewEvent(pNewEvent);
+        });
+    };
 
-// Función para guardar
-    vm.createNewEvent= function(pNewEvent) {
+    // Función para guardar
+    vm.createNewEvent = function (pNewEvent) {
       var bError = false;
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
@@ -105,23 +102,22 @@
         document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
         clean();
         init();
-      }else{
+      } else {
         for (var i = 0; i < vm.events.length; i++) {
           if (pNewEvent.eventName == vm.events[i].eventName) {
-            bError =true;
+            bError = true;
           }
         }
-        if(bError == false){
-           eventService.setEvents(pNewEvent);
+        if (bError == false) {
+          eventService.setEvents(pNewEvent);
           document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
           clean();
           init();
-        }else{
+        } else {
           document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
         }
       }
     };
-
       // Funciones para guardar patrocinadores
 
     vm.saveSponsor= function(pNewSponsor) {
@@ -142,28 +138,28 @@
       clean();
       init();
 
-    }
-    // Función para guardar
+      }
+      // Función para guardar
 
-      vm.presaveSponsor = function(pNewSponsor) {
+    vm.presaveSponsor = function (pNewSponsor) {
         console.log(pNewSponsor);
         vm.cloudObj.data.file = document.getElementById("photo").files[0];
         Upload.upload(vm.cloudObj)
-        .success(function(data){
-        pNewSponsor.photo = data.url;
-        vm.saveSponsor(pNewSponsor);
-         });
+          .success(function (data) {
+            pNewSponsor.photo = data.url;
+            vm.saveSponsor(pNewSponsor);
+          });
       }
       // vm.error = false;
-      vm.preSaveConsul = function(pNewConsult) {
-        console.log(pNewConsult);
-       vm.cloudObj.data.file = document.getElementById("photo").files[0];
-       Upload.upload(vm.cloudObj)
-         .success(function(data){
-           pNewConsult.photo = data.url;
-            vm.createNewConsult(pNewConsult);
+    vm.preSaveConsul = function (pNewConsult) {
+      console.log(pNewConsult);
+      vm.cloudObj.data.file = document.getElementById("photo").files[0];
+      Upload.upload(vm.cloudObj)
+        .success(function (data) {
+          pNewConsult.photo = data.url;
+          vm.createNewConsult(pNewConsult);
         });
-        }
+    }
 
     // Función para imprimir datos en el formulario de patrocinadores
     vm.getSponsorInfo = function(pSponsor) {
@@ -183,7 +179,7 @@
       vm.submitDisable = true;
     }
 
-    vm.updateSponsor = function(){
+    vm.updateSponsor = function () {
       var modSponsor = {
       sponsorName : vm.sponsor.sponsorName,
       sponsorCompany : vm.sponsor.sponsorCompany,
@@ -217,7 +213,7 @@
   };
 
     // Función para imprimir datos en el formulario
-    vm.getInfo = function(pEvent) {
+    vm.getInfo = function (pEvent) {
       vm.event.eventName = pEvent.eventName;
       vm.event.invitedName = pEvent.invitedName;
       vm.event.eventType = pEvent.eventType;
@@ -247,33 +243,33 @@
     };
 
     // Función para actualizar datos de evento
-    vm.updateEvent = function() {
+    vm.updateEvent = function () {
       var modEvent = {
-      eventName : vm.event.eventName,
-      invitedName : vm.event.invitedName,
-      eventType : vm.event.eventType,
-      eventState : vm.event.eventState,
-      photo : vm.event.photo,
-      date1 : vm.event.date1,
-      time1 : vm.event.time1,
-      date2 : vm.event.date2,
-      time2 : vm.event.time2,
-      selectAcademies : vm.event.selectAcademies,
-      selectCategories : vm.event.selectCategories,
-      costInsc : vm.event.costInsc,
-      selectSponsors : vm.event.selectSponsors,
-      placeName : vm.event.placeName,
-      location : vm.event.location,
-      latitude : vm.event.latitude,
-      length : vm.event.length,
-      seats : vm.event.seats,
-      tickets : vm.event.tickets,
-      contactName : vm.event.contactName,
-      contactPhone : vm.event.contactPhone,
-      charityEvent : vm.event.charityEvent,
-      orgName : vm.event.orgName,
-      orgType : vm.event.orgType,
-      description : vm.event.description
+        eventName: vm.event.eventName,
+        invitedName: vm.event.invitedName,
+        eventType: vm.event.eventType,
+        eventState: vm.event.eventState,
+        photo: vm.event.photo,
+        date1: vm.event.date1,
+        time1: vm.event.time1,
+        date2: vm.event.date2,
+        time2: vm.event.time2,
+        selectAcademies: vm.event.selectAcademies,
+        selectCategories: vm.event.selectCategories,
+        costInsc: vm.event.costInsc,
+        selectSponsors: vm.event.selectSponsors,
+        placeName: vm.event.placeName,
+        location: vm.event.location,
+        latitude: vm.event.latitude,
+        length: vm.event.length,
+        seats: vm.event.seats,
+        tickets: vm.event.tickets,
+        contactName: vm.event.contactName,
+        contactPhone: vm.event.contactPhone,
+        charityEvent: vm.event.charityEvent,
+        orgName: vm.event.orgName,
+        orgType: vm.event.orgType,
+        description: vm.event.description
       }
       $scope.updateDisable = true;
       eventService.updateEvent(modEvent);
@@ -281,7 +277,7 @@
       clean();
     };
 
-    vm.cancelEvent = function(pEvent) {
+    vm.cancelEvent = function (pEvent) {
       pEvent.eventState = 'cancelado';
       eventService.updateEvent(pEvent);
       init();
@@ -298,111 +294,151 @@
         }
       }
 
-    vm.createNewConsult = function(pNewConsul){
-      console.log("El objeto con imagen es %o",pNewConsul);
-      console.log("Gracias, ha sido creado un nuevo represetante de consejo %o",pNewConsul);
+    vm.createNewConsult = function (pNewConsul) {
+      console.log("El objeto con imagen es %o", pNewConsul);
+      console.log("Gracias, ha sido creado un nuevo represetante de consejo %o", pNewConsul);
       var bFlag = userService.createConsul(pNewConsul);
       var temDataZero = $cookies.get('currentUserActive');
-      if(bFlag == false){
+      if (bFlag == false) {
         document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
         $state.go('admin.partOne');
-        var tempDataOne = 'fallo al crear a '+pNewConsul.firstName;
-        logService.createLog(false,temDataZero,tempDataOne);
-      }else{
-        var tempDataOne = 'Creado con exito '+pNewConsul.firstName;
-        logService.createLog(0,temDataZero,tempDataOne);
+        var tempDataOne = 'fallo al crear a ' + pNewConsul.firstName;
+        logService.createLog(false, temDataZero, tempDataOne);
+      } else {
+        var tempDataOne = 'Creado con exito ' + pNewConsul.firstName;
+        logService.createLog(0, temDataZero, tempDataOne);
         document.getElementById('feedbackMesage').innerHTML = 'El represesante ha sido creado exitoxamente';
       }
     }
 
     // Función para pre guardar datos del profesor
 
-    vm.presaveTeacher = function(pNewTeacher) {
-        console.log(pNewTeacher);
-        vm.cloudObj.data.file = document.getElementById("photo").files[0];
-        Upload.upload(vm.cloudObj)
-          .success(function(data){
-            pNewTeacher.photo = data.url;
-            vm.createNewTeacher(pNewTeacher);
-          })
-          .catch(function(error){
-            console.log(error);
-          })
-      }
-
-    // Función para guardar profesores
-
-    vm.createNewTeacher = function(pNewTeacher){
-      userService.setTeachers(pNewTeacher);
-      clean();
-      init();
+    vm.presaveTeacher = function (pNewTeacher) {
+      console.log(pNewTeacher);
+      vm.cloudObj.data.file = document.getElementById("photo").files[0];
+      Upload.upload(vm.cloudObj)
+        .success(function (data) {
+          pNewTeacher.photo = data.url;
+          vm.createNewTeacher(pNewTeacher);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
     }
 
- // Función para imprimir datos del profesor en la lista
-    vm.getInfoTeacher = function(teacher) {
-      vm.teacher.id = teacher.id;
-      vm.teacher.firstName = teacher.firstName;
-      vm.teacher.secondName = teacher.secondName;
-      vm.teacher.firstLastName = teacher.firstLastName;
-      vm.teacher.secondLastName = teacher.secondLastName;
-      vm.teacher.phone = teacher.phone;
-      vm.teacher.email = teacher.email;
-      vm.teacher.bornhDate = teacher.bornhDate;
-      vm.teacher.gender = teacher.gender;
-      vm.teacher.nationality = teacher.nationality;
-      vm.teacher.academy = teacher.academy;
-      vm.teacher.grade = teacher.grade;
-      vm.teacher.photo = teacher.photo;
+    // Función para guardar profesores
+    vm.createNewTeacher = function (pNewTeacher) {
+      var bError = false;
+      console.log(pNewTeacher.id);
+      if (vm.teacher.length == 0) {
+        userService.setTeachers(pNewTeacher);
+        document.querySelector('.SuccessMessage').innerHTML = 'El profesor se registró exitosamente';
+        clean();
+        init();
+      } else {
+        for (var i = 0; i < vm.teachers.length; i++) {
+          if (pNewTeacher.id == vm.teachers[i].id) {
+            bError = true;
+          }
+        }
+        if (bError == false) {
+          userService.setTeachers(pNewTeacher);
+          document.querySelector('#SuccessMessage').innerHTML = 'El profesor se registró exitosamente';
+          clean();
+          init();
+        } else {
+          document.querySelector('#ErrorMessage').innerHTML = 'El profesor ya existe';
+        }
+      }
+    }
+
+    // Función para imprimir datos del profesor en la lista
+    vm.getInfoTeacher = function (pTeacher) {
+      vm.teacher.id = pTeacher.id;
+      vm.teacher.firstName = pTeacher.firstName;
+      vm.teacher.secondName = pTeacher.secondName;
+      vm.teacher.firstLastName = pTeacher.firstLastName;
+      vm.teacher.secondLastName = pTeacher.secondLastName;
+      vm.teacher.phone = pTeacher.phone;
+      vm.teacher.email = pTeacher.email;
+      vm.teacher.bornDate = pTeacher.bornDate;
+      vm.teacher.gender = pTeacher.gender;
+      vm.teacher.nationality = pTeacher.nationality;
+      vm.teacher.academy = pTeacher.academy;
+      vm.teacher.grade = pTeacher.grade;
+      vm.teacher.photo = pTeacher.photo;
+      vm.teacher.status = pTeacher.status;
     }
 
     // Función para limpiar campos
 
     function clean() {
-      vm.event='';
+      vm.event = '';
+      vm.teacher = '';
     }
 
-    /*Final sidenav
-    -->>*/
+      // Función para actualizar datos del profesor
+    vm.updateTeacher = function () {
+      var editTeacher = {
+        id: vm.teacher.id,
+        firstName: vm.teacher.firstName,
+        secondName: vm.teacher.secondName,
+        firstLastName: vm.teacher.firstLastName,
+        secondLastName: vm.teacher.secondLastName,
+        phone: vm.teacher.phone,
+        email: vm.teacher.email,
+        bornDate: vm.teacher.bornDate,
+        gender: vm.teacher.gender,
+        nationality: vm.teacher.nationality,
+        academy: vm.teacher.academy,
+        grade: vm.teacher.grade,
+        photo: vm.teacher.photo,
+        status: vm.teacher.status
+      }
+      userService.updateTeacher(editTeacher);
+      init();
+      clean();
+    };
 
-     //funcion para guardar informacion de academia
+    //funcion para guardar informacion de academia
 
-     vm.createAcademy = function(){
-       var newAcademy = {
-         name: vm.name,
-         address: vm.address,
-         manager: vm.manager,
-         competitors: vm.competitors,
-         phone: vm.phone,
-         email: vm.email
-       };
-       console.log(newAcademy);
-       academyServices.setAcademy(newAcademy);
-       cleanAcademy();
-       init();
-     }
+    vm.createAcademy = function () {
+      var newAcademy = {
+        name: vm.name,
+        address: vm.address,
+        manager: vm.manager,
+        competitors: vm.competitors,
+        phone: vm.phone,
+        email: vm.email
+      };
+      console.log(newAcademy);
+      academyServices.setAcademy(newAcademy);
+      cleanAcademy();
+      init();
+    }
 
     //funcion para limpiar los input  de academia
-    function cleanAcademy(){
+    function cleanAcademy() {
       vm.name = '',
-      vm.address = '',
-      vm.manager = '',
-      vm.competitors = '',
-      vm.phone = '',
-      vm.email = ''
+        vm.address = '',
+        vm.manager = '',
+        vm.competitors = '',
+        vm.phone = '',
+        vm.email = ''
     }
 
     //funcion para editar academia
-    vm.getAcademy = function(academy){
+    vm.getAcademy = function (academy) {
       vm.name = academy.name;
       vm.address = academy.address;
       vm.manager = academy.manager;
       vm.competitors = academy.competitors;
       vm.phone = academy.phone;
-      vm.email =academy.email;
+      vm.email = academy.email;
     }
 
     //funcion para guardar la academia editada
-    vm.updateAcademy = function(){
+    vm.updateAcademy = function () {
       var editAcademy = {
         name: vm.name,
         address: vm.address,
@@ -456,6 +492,7 @@
         tournaments: vm.tournaments,
         tournamentsWins: vm.tournamentsWins,
         photo: vm.photo
+        status : vm.status
       };
       console.log(newUser);
       userService.setUsers(newUser);
@@ -464,51 +501,53 @@
     }
 
     //funcion para limpiar los input del alumno
-    function cleanStudent(){
+    function cleanStudent() {
       vm.id = '',
-      vm.birthday = '',
-      vm.firstName = '',
-      vm.secondName = '',
-      vm.firstLastName = '',
-      vm.secondLastName = '',
-      vm.genre = '',
-      vm.weight = '',
-      vm.height = '',
-      vm.nationality = '',
-      vm.phone = '',
-      vm.email = '',
-      vm.attendAcademy = '',
-      vm.teacher = '',
-      vm.belt = '',
-      vm.category = '',
-      vm.tournaments = '',
-      vm.tournamentsWins = ''
+        vm.birthday = '',
+        vm.firstName = '',
+        vm.secondName = '',
+        vm.firstLastName = '',
+        vm.secondLastName = '',
+        vm.genre = '',
+        vm.weight = '',
+        vm.height = '',
+        vm.nationality = '',
+        vm.phone = '',
+        vm.email = '',
+        vm.attendAcademy = '',
+        vm.teacher = '',
+        vm.belt = '',
+        vm.category = '',
+        vm.tournaments = '',
+        vm.tournamentsWins = '',
+        vm.status = ''
     }
 
     //funcion para editar alumno
-    vm.getStudent = function(student){
+    vm.getStudent = function (student) {
       vm.id = student.id,
-      vm.birthday = student.birthday,
-      vm.firstName = student.firstName,
-      vm.secondName = student.secondName,
-      vm.firstLastName = student.firstLastName,
-      vm.secondLastName = student.secondLastName,
-      vm.genre = student.genre,
-      vm.weight = student.weight,
-      vm.height = student.height,
-      vm.nationality = student.nationality,
-      vm.phone = student.phone,
-      vm.email = student.email,
-      vm.attendAcademy = student.attendAcademy,
-      vm.teacher = student.teacher,
-      vm.belt = student.belt,
-      vm.category = student.category,
-      vm.tournaments = student.tournaments,
-      vm.tournamentsWins = student.tournamentsWins
+        vm.birthday = student.birthday,
+        vm.firstName = student.firstName,
+        vm.secondName = student.secondName,
+        vm.firstLastName = student.firstLastName,
+        vm.secondLastName = student.secondLastName,
+        vm.genre = student.genre,
+        vm.weight = student.weight,
+        vm.height = student.height,
+        vm.nationality = student.nationality,
+        vm.phone = student.phone,
+        vm.email = student.email,
+        vm.attendAcademy = student.attendAcademy,
+        vm.teacher = student.teacher,
+        vm.belt = student.belt,
+        vm.category = student.category,
+        vm.tournaments = student.tournaments,
+        vm.tournamentsWins = student.tournamentsWins,
+        vm.status = student.status
     }
 
     //funcion para guardar alumno editada
-    vm.updateStudent = function(){
+    vm.updateStudent = function () {
       var editstudent = {
         id: vm.id,
         birthday: vm.birthday,
@@ -527,7 +566,8 @@
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins
+        tournamentsWins: vm.tournamentsWins,
+        status : vm.status 
       }
       userService.updateUsers(editstudent);
       init();
@@ -535,7 +575,7 @@
     }
 
     //funcion para guardar competencia
-    vm.createCompetition = function(){
+    vm.createCompetition = function () {
       var newCompetition = {
         competitionNumber: vm.competitionNumber,
         eventBelongs: vm.eventBelongs,
@@ -555,3 +595,4 @@
   }
 
 })();
+
