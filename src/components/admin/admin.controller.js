@@ -170,7 +170,7 @@
       vm.sponsor.description = pSponsor.description,
       vm.sponsor.photo = pSponsor.photo
 
-      vm.selected = 5;
+      vm.selected = 2;
       vm.imageActive = true;
       vm.nameSponsorEdit = true;
 

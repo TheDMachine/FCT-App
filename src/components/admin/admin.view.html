@@ -975,43 +975,6 @@
 								<!--<div flex="90" layout="row" layout-align="end">
 									<a ui-sref="admin.sponsorPartTwo" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
 								</div>-->
-			          			<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
-								    <md-input-container flex="50">
-								      <label>Tipo de patrocinio</label>
-								      <md-select name="idType" ng-model="vm.sponsor.sponsorType" required>
-								        <md-option value="Dinero">Dinero</md-option>
-								        <md-option value="Equipo">Equipo</md-option>
-								        <md-option value="Comida">Alimento</md-option>
-								      </md-select>
-								    </md-input-container>
-
-									<md-input-container class="md-block" flex-gt-sm>
-									  <label>Equivalente en dinero</label>
-									  <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorMoney" />
-
-									  <div class="hint" ng-if="showHints">Ingrese el nombre de la compañía</div>
-
-									  <div ng-messages="sponsorForm.company.$error" ng-if="!showHints">
-									    <div ng-message="required">El primer nombre es requerido.</div>
-									    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
-									  </div>
-									</md-input-container>
-								</div>
-								<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
-									<md-input-container flex="90">
-										<label>Descripción</label>
-										<textarea></textarea ng-model="vm.sponsor.description" required>
-									</md-input-container>
-								</div>
-								<!-- Subir logo -->
-									<label class="btn btn-default btn-file" for="photo">
-										Adjuntar logo
-									</label>
-								 	 <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.sponsor.photo">
-									<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
-										<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.reset()">Submit</md-button>
-										<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
-									</div>
 				          		</form>
 				        	</md-content>
 			      	</md-tab>
