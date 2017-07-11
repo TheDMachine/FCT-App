@@ -131,7 +131,7 @@
   			</div>
   			<!--Vista de competencias y competidores -->
   			<div ng-show="vm.selected == 8">
-  				<div ng-repeat="item in vm.competitionsToShow" flex>
+  				<div ng-repeat="item in vm.competitionsToShow track by $index" flex>
   					<h1>Competencia {{item.competitionNumber}}</h1>
   					<h2 class="text-center">Competidores</h2>
 					<div class="competitors-info-container" layout="row">
