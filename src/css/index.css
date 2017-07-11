@@ -1,3 +1,29 @@
+/*Inicio estilos de espcio reservas de tiquetes*/
+
+#reserveSection{
+  background: #fff;
+}
+
+#topSpace{
+  background: #f4f1eb;
+  margin-bottom: 30px;
+}
+
+#topSpace div img{
+  margin-left: 3%;
+}
+
+#topSpace .quitX{
+  margin-top: 30px;
+}
+
+#reserveSection h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 30px;
+}
+/*Fin estilos de espacio de reservas de tiquetes*/
+
 /*Inicio de estilos de historial de competencias*/
 
 #categHist h3{
