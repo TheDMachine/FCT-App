@@ -30,7 +30,8 @@
         setUsers: _setUsers,
         getUsers: _getUsers,
         updateUsers: _updateUsers,
-        searchUser : _searchUser
+        searchUser : _searchUser,
+        searchAdmin : _searchAdmin
     };
     return publicAPI;
     
@@ -59,6 +60,28 @@
        }
      }
      return false;
+   }
+
+   //buscar administrador
+
+     function _searchAdmin(newAdmin){
+      var admin = {
+        id : '123456789',
+        firstName : 'Administrador',
+        firstLastName : 'FCT',
+        bornhDate : '30',
+        nationality : 'Costarricense',
+        phone : '87456321',
+        email : 'adminFCT@hotmail.com',
+        password : 'admin123',
+        photo : 'admin.jpg'
+      }
+      if(admin.id == newAdmin){
+        return admin;
+      }
+      else{
+        return false;
+      }
    }
 
     //muestra la informacion mas actual

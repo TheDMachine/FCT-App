@@ -25,7 +25,10 @@
     vm.nameSponsorEdit = false;
     vm.today = new Date();
 
-    function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
+    function init(){ 
+    // función que se llama así misma para indicar que sea lo primero que se ejecute
+        vm.currentUser = userService.searchAdmin(userService.getCookie());
+        console.log(vm.currentUser);
         vm.originatorEv;
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
@@ -458,7 +461,7 @@
 
     vm.presaveStudent = function(pNewStudent) {
         console.log(pNewStudent);
-        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        vm.cloudObj.data.file = document.getElementById("photoStudent").files[0];
         Upload.upload(vm.cloudObj)
           .success(function(data){
             pNewStudent.photo = data.url;

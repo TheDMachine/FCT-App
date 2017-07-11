@@ -1,3 +1,33 @@
+/*Inicio estilos de pasos formulario profesoresbuttonTeacher*/
+
+#buttonTeacher div{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #0082c8;
+  text-align: center;
+  margin: 0 1%;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 8%;
+}
+
+#buttonTeacher div a{
+  color: #0082c8;
+  line-height: 2.7;
+  text-decoration: none;
+  padding: 1.5%;
+}
+
+#buttonTeacher div.active{
+  background: #0082c8;
+  color: #fff;
+}
+
+#buttonTeacher div.active a{
+  color: #fff;
+}
+
 /*Inicio de estilos de eventos de no registrado*/
 
 #eventsTable h3{
