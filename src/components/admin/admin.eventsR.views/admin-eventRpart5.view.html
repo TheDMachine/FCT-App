@@ -64,7 +64,7 @@
 		<md-button type="submit" class="md-raised"  ng-disabled="frmEventInfo.$invalid" ng-click="vm.reset()">Ingresar</md-button>
 
 		<!-- botón para guardar datos actualizados -->
-		<md-button type="submit" class="md-raised" ng-disabled="frmEventInfo.$invalid" ng-click="vm.updateEvent()">Actualizar</md-button>
+		<md-button type="submit" class="md-raised" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateEvent()">Actualizar</md-button>
 	</div>
 	<div id="messages" class="col-md-12">
 		<!-- Mensajes de error o éxito del registro -->

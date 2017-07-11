@@ -22,6 +22,7 @@
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
     vm.today = new Date();
+    $scope.updateDisable = false;
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.originatorEv;
@@ -216,7 +217,8 @@
       vm.event.orgType = pEvent.orgType;
       vm.event.orgName = pEvent.orgName;
       vm.event.description = pEvent.description;
-    }
+      $scope.updateDisable = false;
+    };
 
     // Función para actualizar datos de evento
     vm.updateEvent = function() {
@@ -247,6 +249,7 @@
       orgType : vm.event.orgType,
       description : vm.event.description
       }
+      $scope.updateDisable = true;
       eventService.updateEvent(modEvent);
       init();
       clean();

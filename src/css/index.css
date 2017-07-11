@@ -1,6 +1,55 @@
+/*Inicio de estilos de eventos de no registrado*/
+
+#eventsTable h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 60px;
+}
+
+#eventsTable table{
+  width: 100%;
+}
+
+#eventsTable thead, #eventsTable tbody{
+  width: 100%;
+} 
+
+#eventsTable tbody{
+  text-align: center;
+}
+
+#eventsTable tr th{
+  width: 60px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: #00978f;;
+  color: #fff;
+}
+
+#eventsTable tr:hover{
+  background: rgba(252, 179, 50,0.2);
+}
+
+#eventsTable tbody td{
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+
+#tableSpace{
+  margin-bottom: 200px;
+}
+
+
+/*Fin estilos de eventos no registrado*/
+
 /*Inicio estilos de espacio reservas y cancelación de tiquetes*/
 
-#reserveSection, #cancelSection{
+#reserveSection, #cancelSection, #eventsViewSection {
   background: #fff;
 }
 
