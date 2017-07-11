@@ -89,6 +89,46 @@
   			<!-- Poner la vista aquí 
 
   			!!-->
+  			<!-- Vista de editar profesor-->
+  			<div ng-show="vm.editTeacherProfile">
+  				
+              <!-- Campo contraseña -->
+              <md-input-container flex-offset>
+                <label>Contraseña</label>
+                <input name="password" ng-model="vm.currentUser.password" ng-pattern="/^[a-zA-Z0-9]*$/" type="password" required>
+                <!-- Mensaje de retroalimentacion -->
+                <div ng-messages="frmModInfo.password.$error">
+                  <div ng-messages-include="components/includes/messages.html"></div>
+                </div>
+              </md-input-container>
+
+              <!-- Campo teléfono -->
+              <md-input-container flex-offset>
+                <label>Teléfono</label>
+                <input name="phone" ng-model="vm.currentUser.phone" ng-pattern="/^[0-9]{8}$/" required>
+                <!-- Mensaje de retroalimentacion -->
+                <div ng-messages="frmModInfo.phone.$error">
+                  <div ng-messages-include="components/includes/messages.html"></div>
+                </div>
+              </md-input-container>
+
+              <!-- Campo Contacto de emergencia -->
+              <md-input-container flex-offset>
+                <label>Contacto de emergencia</label>
+                <input name="emergContact" ng-model="vm.currentUser.email" type="text" required>
+                <!-- Mensaje de retroalimentacion -->
+                <div ng-messages="frmModInfo.emergContact.$error">
+                  <div ng-messages-include="components/includes/messages.html"></div>
+                </div>
+              </md-input-container>
+
+              <br>
+              
+              <!-- Campo fotografía -->
+
+              <button class="btn btn-primary buttonForm" type="submit" ng-click="vm.updateCurrentTeacher()" ng-disabled="frmModInfo.$invalid">Actualizar</button>
+            </form>
+  			</div>
   			<!--Vista de competencias y competidores -->
   			<div ng-show="vm.selected == 8">
   				<div ng-repeat="item in vm.competitionsToShow" flex>
@@ -560,12 +600,12 @@
 			            </div>
 			            <div layout="row" class="contact-info">
 		            		<i class="material-icons">&#xE0BE;</i>
-			            	<p class="profile-info phone-info"><span>Email:</span> {{vm.currentUser.phone}}</p>
+			            	<p class="profile-info phone-info"><span>Email:</span> {{vm.currentUser.email}}</p>
 			            </div>
 			          </md-card-title-text>
 			        </md-card-title>
 			        <md-card-actions layout="row" layout-align="end center">
-			          <md-button>Editar</md-button>
+			          <md-button ng-click="vm.getCurrentTeacher(vm.currentUser)">Editar</md-button>
 			        </md-card-actions>
 			      </md-card>
   				</div>

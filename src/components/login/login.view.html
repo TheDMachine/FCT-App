@@ -10,9 +10,9 @@
           <i class="material-icons">account_circle</i>
         </md-icon>
           <md-input-container class="md-block" flex="80">
-        <label>Email</label>
-        <input required type="email" name="clientEmail" ng-model="vm.email"
-               minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+        <label>ID</label>
+        <input required name="clientEmail" ng-model="vm.id"
+               minlength="9" maxlength="100" ng-pattern="/^[0-9]{9}$/" />
 
         <div ng-messages="projectForm.clientEmail.$error" role="alert">
           <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
@@ -48,3 +48,7 @@
 </div>
 
 <!-- ng-pattern="/^[a-zA-Z0-9]*$/"-->
+
+<!--cedula: ng-pattern="/^[0-9]{9}$/"-->
+
+<!-- correo: ng-pattern="/^.+@.+\..+$/"-->

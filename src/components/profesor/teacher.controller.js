@@ -32,6 +32,7 @@
     vm.fights = [];
     vm.pairFights = [];
     vm.ready = false;
+    vm.editTeacherProfile = false;
 
 
   function init() {
@@ -67,7 +68,7 @@
     $scope.showPrompt = function() {
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog.prompt()
-      .title('Bienvenido ' + vm.currentUser.email + '!')
+      .title('Bienvenido ' + vm.currentUser.id + '!')
       .textContent('Modifica tu contraseña temporal')
       .placeholder('Nueva contraseña')
       .ariaLabel('New password')
@@ -254,7 +255,7 @@
       }
       userService.updateUsers(editstudent);
       init();
-      cleanStudent();
+      cleanTeacher();
     }
 
     vm.updateOptions = function(competition){
@@ -322,6 +323,38 @@
       }
       console.log(vm.fights);
       vm.selected = 8;
+    }
+    /*Editar profesor en perfil*/
+
+    vm.getCurrentTeacher = function(teacher){
+      vm.editTeacherProfile = true;
+      vm.currentUser.password = teacher.password;
+      vm.currentUser.email = teacher.email;
+      vm.currentUser.phone = teacher.phone;
+    }
+
+    //funcion para guardar alumno editada
+    vm.updateCurrentTeacher = function(){
+      var editTeacher = {
+      password : vm.currentUser.password,
+      id : vm.currentUser.id,
+      firstName : vm.currentUser.firstName,
+      secondName : vm.currentUser.secondName,
+      firstLastName : vm.currentUser.firstLastName,
+      bornhDate : vm.currentUser.bornhDate,
+      gender : vm.currentUser.gender,
+      nationality : vm.currentUser.nationality,
+      academy : vm.currentUser.academy,
+      grade : vm.currentUser.grade,
+      phone : vm.currentUser.phone,
+      email : vm.currentUser.email,
+      photo : vm.currentUser.photo,
+      newUser : vm.currentUser.newUser
+      }
+      userService.updateTeacher(editTeacher);
+      init();
+      vm.editTeacherProfile = false;
+      cleanTeacher();
     }
 
     vm.updatePoints = function(competitor, $index){

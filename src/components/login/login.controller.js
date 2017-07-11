@@ -7,6 +7,6 @@ angular.module('app')
       vm.password = '';
     }init();
     vm.login = function(){
-      AuthService.getCredencials(vm.email,vm.password);
+      AuthService.getCredencials(vm.id,vm.password);
     }
   };

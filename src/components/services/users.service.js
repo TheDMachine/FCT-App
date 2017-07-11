@@ -98,7 +98,7 @@
     function _updateTeacher(pobjUsuario){
       var teachersList = _getTeachers();
       for(var i = 0; i < teachersList.length; i++){
-        if(teachersList[i].email == pobjUsuario.email){
+        if(teachersList[i].id == pobjUsuario.id){
           teachersList[i] = pobjUsuario;
         }
       }
@@ -109,7 +109,7 @@
     function _findUserTeacher(pUsernameToFind){
       var userStorage = _getTeachers();
      for (var i = 0; i < userStorage.length; i++) {
-       if(userStorage[i].email == pUsernameToFind){
+       if(userStorage[i].id == pUsernameToFind){
          return userStorage[i];
        }
      }
