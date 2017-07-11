@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 (function() {
   'use strict'
   angular
@@ -491,7 +490,7 @@
         category: vm.category,
         tournaments: vm.tournaments,
         tournamentsWins: vm.tournamentsWins,
-        photo: vm.photo
+        photo: vm.photo,
         status : vm.status
       };
       console.log(newUser);
