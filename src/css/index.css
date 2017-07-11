@@ -1,5 +1,169 @@
-.dialogdemoBasicUsage #popupContainer {
-  position: relative; }
+/*Inicio de estilos de eventos de no registrado*/
+
+#eventsTable h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 60px;
+}
+
+#eventsTable table{
+  width: 100%;
+}
+
+#eventsTable thead, #eventsTable tbody{
+  width: 100%;
+} 
+
+#eventsTable tbody{
+  text-align: center;
+}
+
+#eventsTable tr th{
+  width: 60px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: #00978f;;
+  color: #fff;
+}
+
+#eventsTable tr:hover{
+  background: rgba(252, 179, 50,0.2);
+}
+
+#eventsTable tbody td{
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+
+#tableSpace{
+  margin-bottom: 400px;
+}
+
+
+/*Fin estilos de eventos no registrado*/
+
+/*Inicio estilos de espacio reservas y cancelación de tiquetes*/
+
+#reserveSection, #cancelSection, #eventsViewSection {
+  background: #fff;
+}
+
+#topSpace{
+  background: #f4f1eb;
+  margin-bottom: 30px;
+}
+
+#topSpace div img{
+  margin-left: 3%;
+}
+
+#topSpace .quitX{
+  margin-top: 30px;
+}
+
+#reserveSection h3, #cancelSection h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 40px;
+}
+
+#lastInputs{
+  margin-bottom: 60px;
+}
+#reserveSection .md-button, #cancelSection .md-button{
+  width: 100%;
+  background: #00978f;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+#reserveSection .messages{
+  text-align: center;
+  color: #cd3d3e;
+  margin-bottom: 20px;
+}
+
+#information, #cxlRSpace{
+  background: #f4f1eb;
+  border-radius: 7px;
+  margin-bottom: 40px;
+}
+
+#information div, #cxlRSpace div{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#information div p{
+  color: #242629;
+  line-height: 2;
+}
+
+#searchSpace{
+  margin-bottom: 60px;
+}
+
+#cxlRSpace .contenedor a{
+   background: #fcb132;
+   color: #fff;
+   width: 100%;
+}
+
+#cxlRSpace .SuccessMessage{
+  text-align: center;
+  color: #cd3d3e;
+}
+
+/*Fin estilos de espacio de reservas y cancelación de tiquetes*/
+
+/*Inicio de estilos de historial de competencias*/
+
+#categHist h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 30px;
+}
+
+#categHist table{
+  width: 100%;
+}
+
+#categHist thead, #categHist tbody{
+  width: 100%;
+} 
+
+#categHist tbody{
+  text-align: center;
+}
+
+#categHist tr th{
+  width: 60px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: rgba(255, 208, 52,0.8);
+  color: #fff;
+}
+
+#categHist tr:hover{
+  background: rgba(255, 208, 52,0.1);
+}
+
+#categHist tbody td{
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/*Fin estilos de historial de competencias*/
 
 /*Estilos del landing*/
 
@@ -95,7 +259,7 @@
 }
 
 #table1 tr th, #table2 tr th{
-  width: 60px;
+  width: 100px;
   text-align: center;
   margin: 0 auto;
   padding: 20px 10px;
@@ -109,21 +273,11 @@
 }
 
 #table1 tbody td, #table2 tbody td{
-  width: 60px;
+  width: 100px;
   margin: 0 auto;
   border-bottom: 0.1px solid #242629;
   text-align: center;
   padding: 10px 0;
-}
-
-#table1 .md-button{
-  background-color: rgba(252, 177, 50, 0.8);
-  color: #fff;
-}
-
-#table1 .md-button:not([disabled]):hover {
-    background-color: #fcb132;
-    transition: 0.3s;
 }
 
 /*Fin estils de tablas de consulta e historial eventos*/
@@ -244,36 +398,37 @@
 /*Fin estilos de tabla pesos y categorías */
 
 /*Inicio estilos de pasos formulario eventos*/
-#events md-content h1{
-  font-family: 'Montserrat';
-}
 
-.statusButtons a{
-  color: #ee334e;
-  font-size: 1.143em;
-  display: inline-block;
+#buttonForm div{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #0082c8;
   text-align: center;
+  margin: 0 1%;
+  font-weight: 500;
+  cursor: pointer;
   margin-right: 8%;
+}
+
+#buttonForm div a{
+  color: #0082c8;
+  line-height: 2.7;
   text-decoration: none;
+  padding: 1.5%;
 }
 
-.statusButtons span{
-   display: block;
-   height: 30px;
-   padding-top: 4px;
-   width: 30px;
-   border: 2px solid #ee334e;
-   border-radius: 50%;
-   font-weight: bold;
+#buttonForm div.active{
+  background: #0082c8;
+  color: #fff;
 }
 
-.statusButtons a.active span{
-  background-color: #ee334e;
+#buttonForm div.active a{
   color: #fff;
 }
 
 md-input-container{
-  width: 30%;
+  width: 100%;
 }
 
 #reqMsj{
@@ -281,9 +436,98 @@ md-input-container{
   font-size: 0.786em;
 }
 
+#buttonForm{
+  margin-top: 40px;
+  margin-bottom: 70px;
+}
+
+#botonRadio{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#last2Part {
+  margin-bottom: 60px;
+}
+
+#last2Part input{
+  border: none;
+  background: inherit;
+}
+
+#last2Part label{
+  font-size: 1em;
+  margin-right: 40px;
+}
+
+#buttonLogo{
+  background: #0082c8;
+  border-radius: 7px;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+}
+
+#messages p {
+  text-align: center;
+  color: #cb3e42;
+}
 
 /*Fin estilos de pasos formulario eventos*/
 
+/*Inicio estilos de tabla modificar*/
+
+#modTable h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 60px;
+}
+
+#modTable table{
+  width: 100%;
+}
+
+#modTable thead, #modTable tbody{
+  width: 100%;
+} 
+
+#modTable tbody{
+  text-align: center;
+}
+
+#modTable tr th{
+  width: 60px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: #0082c8;;
+  color: #fff;
+}
+
+#modTable tr:hover{
+  background: rgba(0, 130, 200,0.1);
+}
+
+#modTable tbody td{
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+
+#modTable .editCxlB{
+  background-color: rgba(252, 177, 50, 0.8);
+  color: #fff;
+}
+
+#modTable .editCxlB:not([disabled]):hover {
+    background-color: #fcb132;
+    transition: 0.3s;
+}
+
+/*Fin estilos tabla modificar*/
 
 /*Inicio estilos de pasos formulario patrocinadores*/
 
@@ -521,6 +765,7 @@ button.button-selected{
 .body {
   background: url('../components/login/background-event2.jpg') center center;
   background-size: cover;
+
   /*background: #254B62;*/
 }
 

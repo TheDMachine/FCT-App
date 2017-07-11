@@ -25,7 +25,6 @@
     vm.events = eventService.getEvents();
     vm.weights = estabInfoService.getWeight();
     vm.categories = estabInfoService.getCategories();
-    vm.acceptedEvents = [];
     vm.userActive = false;
     vm.showCompetition = false;
     vm.competitionsToShow = [];
@@ -33,7 +32,8 @@
     vm.pairFights = [];
     vm.ready = false;
     vm.editTeacherProfile = false;
-
+    vm.today = new Date();
+    vm.acceptedEvents = [];
 
   function init() {
     vm.currentUser = userService.findUserTeacher(userService.getCookie());
@@ -42,7 +42,7 @@
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
         vm.competitions = eventService.getCompetitions();
-        aceptedEvents();
+        acceptedEvents();
         vm.event = {};
         vm.sponsors = sponsorService.getSponsors();
         vm.teacher = {};
@@ -126,8 +126,10 @@
     vm.logOut = function() {
       AuthService.logOut();
     }
-    function aceptedEvents() {
-      // && vm.events[i].date1 => new Date()
+
+    // Función para filtrar la tabla de consulta de eventos
+    function acceptedEvents() {
+      vm.events = eventService.getEvents();
         for (var i = 0; i < vm.events.length; i++) {
           if (vm.events[i].eventState === 'aprobado') {
             vm.acceptedEvents.push(vm.events[i]);

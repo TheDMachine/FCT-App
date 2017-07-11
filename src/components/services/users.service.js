@@ -81,6 +81,7 @@
       localStorage.setItem('lsUsersList', JSON.stringify(usersList));
     } // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
+    //función para pushear objeto profesores
     function _setTeachers(pTeacher){
       var teachersList = _getTeachers();
       pTeacher.password = _generatePassword();
@@ -88,18 +89,22 @@
       console.log(teachersList);
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
     }
-    function _getTeachers(){
+
+    //función para obtener a los profesores actualizados
+    function _getTeachers() {
       var teachersList = JSON.parse(localStorage.getItem('lsTeachersList'));
       if(teachersList == null){
         teachersList = teachers;
       }
       return teachersList;
     }
-    function _updateTeacher(pobjUsuario){
+
+    //editar la informacion del profesor
+    function _updateTeacher(pEditTeacher) {
       var teachersList = _getTeachers();
       for(var i = 0; i < teachersList.length; i++){
-        if(teachersList[i].id == pobjUsuario.id){
-          teachersList[i] = pobjUsuario;
+        if(teachersList[i].id == pEditTeacher.id){
+          teachersList[i] = pEditTeacher;
         }
       }
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));

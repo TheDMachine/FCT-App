@@ -131,7 +131,7 @@
   			</div>
   			<!--Vista de competencias y competidores -->
   			<div ng-show="vm.selected == 8">
-  				<div ng-repeat="item in vm.competitionsToShow" flex>
+  				<div ng-repeat="item in vm.competitionsToShow track by $index" flex>
   					<h1>Competencia {{item.competitionNumber}}</h1>
   					<h2 class="text-center">Competidores</h2>
 					<div class="competitors-info-container" layout="row">
@@ -615,6 +615,68 @@
       {{status}}
     </b>
   </div>-->
+
+  			<!-- Sección de consulta, modificación, eliminar y listar eventos -->
+			<div ng-show="vm.selected == 3">
+				<md-content>
+				    <md-tabs md-dynamic-height md-border-bottom>
+
+				    	<!-- Tab consultar de eventos -->
+				      	<md-tab label="Consultar Eventos">
+					        <md-content id="table1" class="md-padding">
+					        <h3>CONSULTAR EVENTOS</h3>
+
+							<!-- Filtro por fecha -->
+							<p>Filtre por fechas: </p>
+							<br>
+							<md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
+					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker>
+							
+					        	<!-- Tabla de info eventos -->
+						        <div>
+						          	<table class="table-responsive">
+									    <thead>
+									      	<tr>
+									      		<th>Evento</th>
+										        <th>invitado</th>
+										        <th>Fecha/inicio</th>
+										        <th>Hora/inicio</th>
+										        <th>Fecha/Fin</th>
+										        <th>Hora/Fin</th>
+										        <th>Academias</th>
+										        <th>Categorías</th>
+										        <th>Inscripción</th>
+										        <th>Lugar</th>
+										        <th>Ubicación</th>
+										        <th>Para:</th>
+										        <th>Org/Beneficiada</th>
+										        <th>Logo/evento</th>
+									      	</tr>
+									    </thead>
+									    <tbody>
+									      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to" > 
+									      		<td>{{event.eventName}}</td>
+									      		<td>{{event.invitedName}}</td>
+										        <td>{{event.date1 | date : "shortDate"}}</td>
+										        <td>{{event.time1 | date : "shortTime"}}</td>
+										        <td>{{event.date2 | date : "shortDate"}}</td>
+										        <td>{{event.time2 | date : "shortTime"}}</td>
+										        <td>{{event.selectAcademies}}</td>
+										        <td>{{event.selectCategories}}</td>
+										        <td>{{event.costInsc}}</td>
+										        <td>{{event.placeName}}</td>
+										        <td>{{event.location}}</td>
+										        <td>{{event.charityEvent}}</td>
+										        <td>{{event.orgName}}</td>
+										        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
+									      	</tr>
+									    </tbody>
+								  	</table>
+						        </div>
+					        </md-content>
+				      	</md-tab>
+			  	</md-content>
+			</div>	
   			
   			
 
