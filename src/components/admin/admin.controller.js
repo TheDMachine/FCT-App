@@ -4,7 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
+  function adminCtrl($scope,$mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
 
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -23,6 +23,7 @@
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
     vm.updateDisable = true;
+    vm.nameSponsorEdit = false;
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.originatorEv;
@@ -123,7 +124,13 @@
       // Funciones para guardar patrocinadores
 
     vm.saveSponsor= function(pNewSponsor) {
-      sponsorService.setSponsors(pNewSponsor);
+      if(sponsorService.findSponsor(pNewSponsor.sponsorName) !== false){
+
+      }
+      else{
+        sponsorService.setSponsors(pNewSponsor);
+        vm.showSponsorAlert();
+      }
       vm.error = false;
       /*if (vm.error === true) {
         document.querySelector('.ErrorMessage').innerHTML = 'El patrocinador ya existe';
@@ -168,6 +175,7 @@
 
       vm.selected = 5;
       vm.imageActive = true;
+      vm.nameSponsorEdit = true;
 
 
       vm.updateDisable = false;
@@ -190,6 +198,22 @@
       init();
       clean();
     }
+
+    vm.showSponsorAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('This is an alert title')
+        .textContent('You can specify some description text in here.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!')
+        .targetEvent()
+    );
+  };
 
     // Función para imprimir datos en el formulario
     vm.getInfo = function(pEvent) {
@@ -399,8 +423,23 @@
     vm.logOut = function(){
       AuthService.logOut();
     }
+
+    vm.presaveStudent = function(pNewStudent) {
+        console.log(pNewStudent);
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewStudent.photo = data.url;
+          })
+          .catch(function(error){
+            console.log(error);
+          })
+          vm.createStudent(pNewStudent);
+      }
+
+
     //funcion para guardar informacion del alumno
-    vm.createStudent = function(){
+    vm.createStudent = function(pNewStudent){
       var newUser = {
         id: vm.id,
         birthday: vm.birthday,
@@ -419,7 +458,8 @@
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins
+        tournamentsWins: vm.tournamentsWins,
+        photo: vm.photo
       };
       console.log(newUser);
       userService.setUsers(newUser);

@@ -77,7 +77,9 @@
       .cancel('');
 
     $mdDialog.show(confirm).then(function(result) {
-      $scope.status =  result;
+      vm.currentUser.password =  result;
+      vm.currentUser.newUser = 0;
+      userService.updateTeacher(vm.currentUser);
     }, function() {
       $scope.status = 'You didn\'t name your dog.';
     });

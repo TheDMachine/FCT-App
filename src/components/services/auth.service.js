@@ -18,15 +18,39 @@
       if(userService.findUserTeacher(pEmail) !== false){
         var userFounded = userService.findUserTeacher(pEmail);
         userFounded.userType = 'Profesor';
-        userFounded.newUser = 1;
-        userService.updateTeacher(userFounded);
+        if(!userFounded.newUser){
+          userFounded.newUser = 1;
+          userService.updateTeacher(userFounded);
+        }
+      }
+      if(userService.searchUser(pEmail) !== false){
+        var userFounded = userService.searchUser(pEmail);
+        userFounded.userType = 'Competidor';
+        if(userFounded.newUser == undefined){
+          userFounded.newUser = 1;
+          userService.updateUsers(userFounded);
+        }
       }
       /*if(userService.searchUser(pEmail) !== false){
         var userFounded = userService.searchUser(pEmail);
-        userFounded.userType = 'Competidor';
+        userFounded.userType = 'Administrador';
+        userFounded.newUser = 1;
+        userService.updateUsers(userFounded);
+      }
+      if(userService.searchUser(pEmail) !== false){
+        var userFounded = userService.searchUser(pEmail);
+        userFounded.userType = 'Representante';
+        userFounded.newUser = 1;
+        userService.updateUsers(userFounded);
+      }
+      if(userService.searchUser(pEmail) !== false){
+        var userFounded = userService.searchUser(pEmail);
+        userFounded.userType = 'Asistente';
         userFounded.newUser = 1;
         userService.updateUsers(userFounded);
       }*/
+
+
 
       if(userFounded.length == 0){
         $location.path('/');
@@ -42,7 +66,7 @@
       _redirectTo(false);
     }
     function _validateFields(pUserField, pPassField, userFound){
-      if(userFound.email == pUserField /*&& userFound.password == pPassField*/){
+      if(userFound.email == pUserField && userFound.password == pPassField){
         _redirectTo(userFound);
       }
       else {

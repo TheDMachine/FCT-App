@@ -9,7 +9,8 @@
     var publicAPI = {
       setSponsors : _setSponsors,
       getSponsors : _getSponsors,
-      updateSponsor : _updateSponsor
+      updateSponsor : _updateSponsor,
+      findSponsor : _findSponsor
     };
     return publicAPI; // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
@@ -46,6 +47,16 @@
       }
       localStorage.setItem('lsSponsorsList', JSON.stringify(sponsorsList));
     }
+
+    function _findSponsor(pSponsorName){
+      var sponsorStorage = _getSponsors();
+     for (var i = 0; i < sponsorStorage.length; i++) {
+       if(sponsorStorage[i].sponsorName == pSponsorName){
+         return sponsorStorage[i];
+       }
+     }
+     return false;
+   }
     
   }
 
