@@ -1,4 +1,4 @@
-
+  
 (function() {
   'use strict';
   angular
@@ -37,18 +37,24 @@
     //Guardar alumno
     function _setUsers(newUser){
       var usersList = _getUsers();
-      var position = searchUser(newUser);
-      if (position == -1) {
-        usersList.push(newUser);
-        localStorage.setItem('lsUsersList', JSON.stringify(usersList));
+      newUser.password = _generatePassword();
+      var error = false;
+      for (var i = 0; i < usersList.length; i++) {
+        if (usersList[i].email == newUser.email) {
+          error = true;
+          return;
+        }
       }
+      usersList.push(newUser);
+      localStorage.setItem('lsUsersList', JSON.stringify(usersList));
+      console.log(_getUsers());
     }
 
     //buscar si la cédula se repite
     function _searchUser(newUser){
       var usersList = _getUsers();
      for (var i = 0; i < usersList.length; i++) {
-       if(usersList[i].email == pUsernameToFind){
+       if(usersList[i].email == newUser){
          return usersList[i];
        }
      }
@@ -77,8 +83,9 @@
 
     function _setTeachers(pTeacher){
       var teachersList = _getTeachers();
-
+      pTeacher.password = _generatePassword();
       teachersList.push(pTeacher);
+      console.log(teachersList);
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
     }
     function _getTeachers(){
@@ -102,7 +109,7 @@
     function _findUserTeacher(pUsernameToFind){
       var userStorage = _getTeachers();
      for (var i = 0; i < userStorage.length; i++) {
-       if(userStorage[i].email == pUsernameToFind){
+       if(userStorage[i].id == pUsernameToFind){
          return userStorage[i];
        }
      }
@@ -133,5 +140,36 @@
    function _getCookie(){
     return $cookies.get('currentUserActive');
    }
+
+      function _generatePassword() {
+     var a = [];
+     var chars = ['#', '%', '£', '!', '?', '&', ';', '(', ')', '=', '+', '$'];
+     for (var i = 97; i <= 122; i++) {
+          a[a.length] = String.fromCharCode(i).toUpperCase();
+
+          // create random letters.
+           var one = a[Math.floor(Math.random() * a.length)];
+           var two = a[Math.floor(Math.random() * a.length)];
+           var three = a[Math.floor(Math.random() * a.length)];
+           var four = a[Math.floor(Math.random() * a.length)];
+           var five = a[Math.floor(Math.random() * a.length)];
+           var six = a[Math.floor(Math.random() * a.length)];
+           var seven = a[Math.floor(Math.random() * a.length)];
+           var eight = a[Math.floor(Math.random() * a.length)];
+
+           // create random numbers.
+           var int1 = Math.floor(Math.random() * 10);
+           var int2 = Math.floor(Math.random() * 10);
+           var ints = int1.toFixed(0) + int2.toFixed(0);
+           var intsDecimal = int1.toFixed(0) + "." + int2.toFixed(0);
+
+           // create random characters, based on array (chars).
+           var randChar = chars[Math.floor(Math.random() * chars.length).toFixed(0)];
+
+           // create variable moving all letters, numbers and characters together.
+           var c = one + two + three + four + five + six + seven + eight + ints + randChar;
+        }
+        return c;
+      }
   }
 })();

@@ -7,7 +7,7 @@
       logOut : _destroyAuthCredentials,
       getCookie : _getCookie
     }
-    function _getAuthCredencials(pEmail,pPassword){
+    function _getAuthCredencials(pId,pPassword){
       /*var user = 
         { 'email' : 'luisbianco28@hotmail.com',
           'password' : '123',
@@ -15,24 +15,48 @@
           'newUser' : 1
         };*/
       //console.log("Yass work correctly auth service. The user is %s and the password is %s",pUsername,pPassword);
-      if(userService.findUserTeacher(pEmail) !== false){
-        var userFounded = userService.findUserTeacher(pEmail);
+      if(userService.findUserTeacher(pId) !== false){
+        var userFounded = userService.findUserTeacher(pId);
         userFounded.userType = 'Profesor';
-        userFounded.newUser = 1;
-        userService.updateTeacher(userFounded);
+        if(userFounded.newUser == undefined || userFounded.newUser !== 0){
+          userFounded.newUser = 1;
+          userService.updateTeacher(userFounded);
+        }
+      }
+      if(userService.searchUser(pId) !== false){
+        var userFounded = userService.searchUser(pId);
+        userFounded.userType = 'Competidor';
+        if(userFounded.newUser == undefined || userFounded.newUser !== 0){
+          userFounded.newUser = 1;
+          userService.updateUsers(userFounded);
+        }
       }
       /*if(userService.searchUser(pEmail) !== false){
         var userFounded = userService.searchUser(pEmail);
-        userFounded.userType = 'Competidor';
+        userFounded.userType = 'Administrador';
+        userFounded.newUser = 1;
+        userService.updateUsers(userFounded);
+      }
+      if(userService.searchUser(pEmail) !== false){
+        var userFounded = userService.searchUser(pEmail);
+        userFounded.userType = 'Representante';
+        userFounded.newUser = 1;
+        userService.updateUsers(userFounded);
+      }
+      if(userService.searchUser(pEmail) !== false){
+        var userFounded = userService.searchUser(pEmail);
+        userFounded.userType = 'Asistente';
         userFounded.newUser = 1;
         userService.updateUsers(userFounded);
       }*/
 
+
+
       if(userFounded.length == 0){
         $location.path('/');
       }
-      _validateFields(pEmail, pPassword, userFounded);
-      $cookies.put('currentUserActive',userFounded.email);
+      _validateFields(pId, pPassword, userFounded);
+      $cookies.put('currentUserActive',userFounded.id);
     }
     function _destroyAuthCredentials(){
       var currentUser = $cookies.get('currentUserActive');
@@ -41,8 +65,8 @@
       $cookies.remove('currentUserActive');
       _redirectTo(false);
     }
-    function _validateFields(pUserField, pPassField, userFound){
-      if(userFound.email == pUserField /*&& userFound.password == pPassField*/){
+    function _validateFields(pUserId, pPassField, userFound){
+      if(userFound.id == pUserId && userFound.password == pPassField){
         _redirectTo(userFound);
       }
       else {

@@ -4,7 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
+  function adminCtrl($scope,$mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
 
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -22,6 +22,8 @@
     vm.weights = estabInfoService.getWeight();
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
+    vm.updateDisable = true;
+    vm.nameSponsorEdit = false;
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.originatorEv;
@@ -122,7 +124,13 @@
       // Funciones para guardar patrocinadores
 
     vm.saveSponsor= function(pNewSponsor) {
-      sponsorService.setSponsors(pNewSponsor);
+      if(sponsorService.findSponsor(pNewSponsor.sponsorName) !== false){
+
+      }
+      else{
+        sponsorService.setSponsors(pNewSponsor);
+        vm.showSponsorAlert();
+      }
       vm.error = false;
       /*if (vm.error === true) {
         document.querySelector('.ErrorMessage').innerHTML = 'El patrocinador ya existe';
@@ -162,14 +170,16 @@
       vm.sponsor.sponsorCompany = pSponsor.sponsorCompany,
       vm.sponsor.sponsorType = pSponsor.sponsorType,
       vm.sponsor.sponsorMoney = pSponsor.sponsorMoney,
-      vm.sponsor.sponsorDescription = pSponsor.sponsorDescription
+      vm.sponsor.description = pSponsor.description,
+      vm.sponsor.photo = pSponsor.photo
 
       vm.selected = 5;
       vm.imageActive = true;
+      vm.nameSponsorEdit = true;
 
 
-      $scope.updateDisable = false;
-      $scope.submitDisable = true;
+      vm.updateDisable = false;
+      vm.submitDisable = true;
     }
 
     vm.updateSponsor = function(){
@@ -178,15 +188,32 @@
       sponsorCompany : vm.sponsor.sponsorCompany,
       sponsorType : vm.sponsor.sponsorType,
       sponsorMoney : vm.sponsor.sponsorMoney,
-      sponsorDescription : vm.sponsor.sponsorDescription,
+      description : vm.sponsor.description,
+      photo : vm.sponsor.photo
       }
 
-      $scope.submitDisable = false;
-      $scope.updateDisable = true;
+      vm.submitDisable = false;
+      vm.updateDisable = true;
       sponsorService.updateSponsor(modSponsor);
       init();
       clean();
     }
+
+    vm.showSponsorAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('This is an alert title')
+        .textContent('You can specify some description text in here.')
+        .ariaLabel('Alert Dialog Demo')
+        .ok('Got it!')
+        .targetEvent()
+    );
+  };
 
     // Función para imprimir datos en el formulario
     vm.getInfo = function(pEvent) {
@@ -328,8 +355,6 @@
       vm.teacher.academy = teacher.academy;
       vm.teacher.grade = teacher.grade;
       vm.teacher.photo = teacher.photo;
-
-      init()
     }
 
     // Función para limpiar campos
@@ -396,8 +421,23 @@
     vm.logOut = function(){
       AuthService.logOut();
     }
+
+    vm.presaveStudent = function(pNewStudent) {
+        console.log(pNewStudent);
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewStudent.photo = data.url;
+          })
+          .catch(function(error){
+            console.log(error);
+          })
+          vm.createStudent(pNewStudent);
+      }
+
+
     //funcion para guardar informacion del alumno
-    vm.createStudent = function(){
+    vm.createStudent = function(pNewStudent){
       var newUser = {
         id: vm.id,
         birthday: vm.birthday,
@@ -416,7 +456,8 @@
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins
+        tournamentsWins: vm.tournamentsWins,
+        photo: vm.photo
       };
       console.log(newUser);
       userService.setUsers(newUser);
@@ -500,17 +541,12 @@
       var newCompetition = {
         competitionNumber: vm.competitionNumber,
         eventBelongs: vm.eventBelongs,
+        competitionAge : vm.competitionAge,
         competitionGenre: vm.competitionGenre,
         competitionBelt: vm.competitionBelt,
         competitionWeight: vm.competitionWeight,
-        arrayObject : [vm.competitors]
       }
       newCompetition.competitors = [];
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['0']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['1']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['2']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['3']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['4']);
       console.log(newCompetition);
       console.log(newCompetition.competitors)
       eventService.setCompetitions(newCompetition);
