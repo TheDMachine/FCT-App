@@ -1,6 +1,6 @@
-/*Inicio estilos de espcio reservas de tiquetes*/
+/*Inicio estilos de espacio reservas y cancelación de tiquetes*/
 
-#reserveSection{
+#reserveSection, #cancelSection{
   background: #fff;
 }
 
@@ -17,12 +17,57 @@
   margin-top: 30px;
 }
 
-#reserveSection h3{
+#reserveSection h3, #cancelSection h3{
   font-family: 'Montserrat';
   font-size: 1.571em;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
-/*Fin estilos de espacio de reservas de tiquetes*/
+
+#lastInputs{
+  margin-bottom: 60px;
+}
+#reserveSection .md-button, #cancelSection .md-button{
+  width: 100%;
+  background: #00978f;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+#reserveSection .messages{
+  text-align: center;
+  color: #cd3d3e;
+  margin-bottom: 20px;
+}
+
+#information, #cxlRSpace{
+  background: #f4f1eb;
+  border-radius: 7px;
+  margin-bottom: 40px;
+}
+
+#information div, #cxlRSpace div{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#information div p{
+  color: #242629;
+  line-height: 2;
+}
+
+#searchSpace{
+  margin-bottom: 60px;
+}
+
+#cxlRSpace .contenedor a{
+   background: #fcb132;
+   color: #fff;
+   width: 100%;
+
+}
+
+
+/*Fin estilos de espacio de reservas y cancelación de tiquetes*/
 
 /*Inicio de estilos de historial de competencias*/
 

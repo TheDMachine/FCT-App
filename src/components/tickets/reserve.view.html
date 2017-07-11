@@ -2,7 +2,7 @@
 	<div class="row">
 		<div id="topSpace" class="col-xs-12">
 			<div class="col-xs-2 imageLogo"><img src="images/logFCT.png" width="75px" height="75px"></div>
-			<div class="col-xs-offset-9 col-xs-1"><span class="fa fa-times quitX"></span></div>
+			<div class="col-xs-offset-9 col-xs-1"><a ng-click="vm.return($event)"><span class="fa fa-times quitX"></span></a></div>
 		</div>
 	</div>
 	<div class="row">
@@ -11,7 +11,7 @@
 			<form name="frmTktsReservations" autocomplete="off">
 
 				<div class="col-xs-12">
-					<div class="col-md-6">
+					<div class="col-sm-6">
 
 						<!-- Escoge el evento -->
 						<md-input-container>
@@ -26,7 +26,7 @@
 							</div>
 						</md-input-container>
 					</div>
-					<div class="col-md-6">
+					<div class="col-sm-6">
 
 						<!-- Campo cantidad de entradas -->
 						<md-input-container flex-offset>
@@ -42,7 +42,7 @@
 					
 				</div>
 				<div class="col-xs-12">
-					<div class="col-md-6">
+					<div class="col-sm-6">
 
 						<!-- Campo correo electrónico -->
 						<md-input-container flex-offset>
@@ -55,7 +55,7 @@
 							</div>
 						</md-input-container>
 					</div>
-					<div class="col-md-6">
+					<div class="col-sm-6">
 
 						<!-- Campo nombre evento -->
 						<md-input-container flex-offset>
@@ -69,8 +69,8 @@
 						</md-input-container>
 					</div>
 				</div>
-				<div class="col-xs-12">
-					<div class="col-md-6">
+				<div id="lastInputs" class="col-xs-12">
+					<div class="col-sm-6">
 						<!-- Campo nombre evento -->
 						<md-input-container flex-offset>
 							<label>Cédula</label>
@@ -82,10 +82,10 @@
 							</div>
 						</md-input-container>
 					</div>
-					<div class="col-md-4">
+					<div class="col-sm-4">
 						<!-- Campo nombre evento -->
 						<md-input-container flex-offset>
-							<label>Número de tarjeta</label>
+							<label>Número de tarjeta (Visa/MasterCard)</label>
 							<input name="card" ng-model="vm.reservation.card" ng-pattern="/^[0-9]{16}$/" maxlength="16" md-maxlength="16" placeholder="4198876545679876" required>
 
 							<!-- Mensaje de retroalimentacion -->
@@ -94,7 +94,7 @@
 							</div>
 						</md-input-container>
 					</div>
-					<div class="col-md-2">
+					<div class="col-sm-2">
 						
 						<!-- Campo nombre evento -->
 						<md-input-container flex-offset>
@@ -108,27 +108,26 @@
 						</md-input-container>
 					</div>
 				</div>
-				
-				
+				<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
 
-				
-				
+					<!-- Botón para ingresar reserva -->
+					<md-button type="submit" class="md-raised" ng-disabled="frmTktsReservations.$invalid" ng-click="vm.saveReservation(vm.reservation)">Reservar</md-button>
+				</div>
+				<div class="col-xs-12 messages" >
 
-				
-
-				
-
-				
-
-				
-				
-				<!-- Botón para ingresar reserva -->
-				<md-button type="submit" class="md-raised" ng-disabled="frmTktsReservations.$invalid" ng-click="vm.saveReservation(vm.reservation)">Reservar</md-button>	
+					<!-- Mensajes de error o éxito del registro -->
+					<p class="ErrorMessage"></p>
+					<p class="SuccessMessage"></p>	
+				</div>
 			</form>	
-
-			<!-- Mensajes de error o éxito del registro -->
-			<p class="ErrorMessage"></p>
-			<p class="SuccessMessage"></p>
+		</div>
+		<div id="information" class="col-md-offset-1 col-md-10">
+			<div class="col-xs-12">
+				<p>Información importante:</p>
+				<p>1. La tarejta (crédito / débito) solicitada será utilizada como respaldo de la reservación para las entradas, las mismas se cancelarán el día del evento.</p>
+				<p>2. Las entradas reservadas se retiran en la entrada principal de las instalaciones el día del evento.</p>
+				<p>3. Puede cancelar la reservación en el momento que desee sin ningún costo.</p>
+			</div>
 		</div>
 	</div>
 </section>

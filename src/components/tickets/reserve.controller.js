@@ -3,7 +3,7 @@
   angular
   .module('app')
   .controller('reserveCtrl', reserveCtrl);
-  function reserveCtrl($scope, eventService, ticketService) {
+  function reserveCtrl($scope, eventService, ticketService, $location) {
   var vm = this;
   vm.reservation = {};
 
@@ -13,8 +13,13 @@
       vm.reservations = ticketService.getsReservations();
       }init();
 
-    // funciones para guardar reservaciones
+    // Función para devolverse al landing
+    vm.return = function(event){
+        event.preventDefault();
+        $location.path('/landing');
+       };
 
+    // funciones para guardar reservaciones
     vm.saveReservation = function(pReservation) {
       var newRsv = {
         event : vm.reservation.event,
@@ -40,7 +45,7 @@
         clean();
         init();
       }else{
-        document.querySelector('.ErrorMessage').innerHTML = 'La cantidad de entradas solicitadas excede las entradas disponibles, hay ' + vm.availableTkts + ' entradas disponibles';
+        document.querySelector('.ErrorMessage').innerHTML = 'La cantidad de entradas solicitadas excede las entradas disponibles, hay ' + vm.availableTkts + ' entradas disponibles para este evento.';
       }
     };
 
