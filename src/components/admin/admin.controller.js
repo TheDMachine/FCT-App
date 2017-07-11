@@ -22,6 +22,7 @@
     vm.weights = estabInfoService.getWeight();
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
+    vm.updateDisable = true;
 
     function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.originatorEv;
@@ -162,14 +163,15 @@
       vm.sponsor.sponsorCompany = pSponsor.sponsorCompany,
       vm.sponsor.sponsorType = pSponsor.sponsorType,
       vm.sponsor.sponsorMoney = pSponsor.sponsorMoney,
-      vm.sponsor.sponsorDescription = pSponsor.sponsorDescription
+      vm.sponsor.description = pSponsor.description,
+      vm.sponsor.photo = pSponsor.photo
 
       vm.selected = 5;
       vm.imageActive = true;
 
 
-      $scope.updateDisable = false;
-      $scope.submitDisable = true;
+      vm.updateDisable = false;
+      vm.submitDisable = true;
     }
 
     vm.updateSponsor = function(){
@@ -178,11 +180,12 @@
       sponsorCompany : vm.sponsor.sponsorCompany,
       sponsorType : vm.sponsor.sponsorType,
       sponsorMoney : vm.sponsor.sponsorMoney,
-      sponsorDescription : vm.sponsor.sponsorDescription,
+      description : vm.sponsor.description,
+      photo : vm.sponsor.photo
       }
 
-      $scope.submitDisable = false;
-      $scope.updateDisable = true;
+      vm.submitDisable = false;
+      vm.updateDisable = true;
       sponsorService.updateSponsor(modSponsor);
       init();
       clean();

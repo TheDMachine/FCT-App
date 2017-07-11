@@ -676,3 +676,179 @@ md-card md-card-title md-card-title-text{
 .contact-info{
   margin: 0.75% 0;
 }
+
+/*Estilos competiciones y competidores*/
+
+.avatar{
+  width: 30%;
+  position: absolute;
+  z-index: 4;
+  top: 8.5%;
+  left: 34%;
+  border: 3px solid #fff;
+  border-radius: 50%;
+
+}
+
+.card-icon{
+  font-size: 2.8rem;
+}
+
+.card-icon{
+  font-size: 2.8rem;
+}
+
+.avatar-test{
+  top: 23.5%;
+}
+md-card md-card-title md-card-title-text:only-child .md-subhead{
+  padding: 0;
+}
+
+md-card md-card-title{
+  padding: 12.5% 2.5% 9%;
+}
+
+.user-card{
+  position: relative;
+}
+
+.avatar img{
+  width: 100%;
+}
+
+/* Base styles */
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+  background-color: #0082c8;
+}
+
+.name{
+  margin: 10% 0 7.5%;
+}
+
+.name-test{
+  margin-bottom: 13%;
+  padding: 0.5%  2.25%;
+}
+
+.sub-header-test{
+  font-size: 1.2rem;
+  padding: 0 2.25%;
+}
+
+.material-icons.card-icon{
+  line-height: 1.85;
+  margin-right: 1.5%;
+}
+
+i.side-icons{
+  font-size: 3.4rem;
+  line-height: 0;
+  margin: 0;
+}
+
+md-list-item > md-icon:first-child:not(.md-avatar-icon), md-list-item .md-list-item-inner > md-icon:first-child:not(.md-avatar-icon){
+  margin: 0;
+}
+span.menu-button{
+  margin-left: 5%;
+}
+
+md-list{
+  padding: 0;
+}
+
+.layout-column > .flex{
+  height: 100%;
+}
+
+.body-app{
+  min-height: 758px;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar).red{
+  height: 0;
+  background: #252830;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 4.5% 5.5% 35%;
+}
+
+md-toolbar h1{
+  margin: 0;
+}
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar).tool-icons{
+  padding: 0.5% 0;
+  background: rgba(0,0,0,0.1);
+  height: 0;
+  padding: 0;
+}
+
+.user-nav-icons{
+  color: #252830;
+}
+
+md-list-item._md-button-wrap{
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+md-list-item > p, md-list-item > .md-list-item-inner > p, md-list-item .md-list-item-inner > p, md-list-item .md-list-item-inner > .md-list-item-inner > p{
+  font-weight: 500;
+}
+
+.points{
+  width: 37.5px;
+  height: 37.5px;
+  border-radius: 50%;
+  background: #1ca8dd;
+  color: #fff;
+}
+
+.fa-star{
+  color: #fbb03b;
+  font-size: 1.5rem;
+  margin-left: 8%;
+}
+
+.person-points{
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.container-competition{
+  padding: 5% 0;
+}
+
+.container-competition h2{
+  padding: 3% 0;
+}
+
+.fa-trophy{
+  margin-left: 1.5%;
+  font-size: 1.8rem;
+  color: #fbb03b;
+}
+.logo-nav{
+  margin: 0 auto;
+  width: 70%;
+}
+
+.logo-nav img{
+  width: 100%;
+}
+
+.star-icon{
+  color: #0082c8;
+}
+
+.weight-icon{
+  color: #242629;
+}
+
+.won-icon{
+  color: #ffd034;
+}
+
+md-card md-card-title.no-padding{
+  padding: 0;
+}

@@ -27,6 +27,12 @@
     vm.categories = estabInfoService.getCategories();
     vm.acceptedEvents = [];
     vm.userActive = false;
+    vm.showCompetition = false;
+    vm.competitionsToShow = [];
+    vm.fights = [];
+    vm.pairFights = [];
+    vm.ready = false;
+
 
   function init() {
     vm.currentUser = userService.findUserTeacher(userService.getCookie());
@@ -130,13 +136,20 @@
         vm.competitor;
         for(var i = 0; i < vm.competitions.length; i++){
           if(competition == vm.competitions[i].competitionNumber){
-            vm.competitions[i].competitors.push(vm.competitor);
-            eventService.updateCompetition(vm.competitions[i]);
-            return;
+            for(var j = 0; j < vm.competitions[i].competitors.length; j++){
+              if(vm.competitor.attendAcademy == vm.competitions[i].competitors[j].attendAcademy){
+                var duplicate = true;
+              }
+            }
+            if(duplicate !== true){
+              vm.competitions[i].competitors.push(vm.competitor);
+              eventService.updateCompetition(vm.competitions[i]);
+              return;
+            }
           }
-        }
         console.log(eventService.getCompetitions());
       }
+    }
 
       vm.changeViews = function(){
         vm.userActive = true;
@@ -256,6 +269,64 @@
             }
           }
         }
+      }
+    }
+
+    vm.showCompetition = function(competition){
+      for(var i = 0; i < vm.competitions.length; i++){
+        if(competition.competitionNumber == vm.competitions[i].competitionNumber){
+          vm.competitionsToShow.push(competition);
+          for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
+            vm.competitionsToShow[i].competitors[j].points = 0;
+          }
+        }
+      }
+      for(var i = 0; i < vm.competitionsToShow.length; i++){
+        for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
+          kLoop:
+          for(var k = 0; k < 4; k++){
+            vm.pairFights = [];
+            vm.pairFights.push(vm.competitionsToShow[i].competitors[j]);
+            vm.pairFights.push(vm.competitionsToShow[i].competitors[k + 1])
+            if(vm.pairFights.length == 2){
+              if(vm.fights.length == 0){
+                vm.fights.push(vm.pairFights);
+              }
+              if(vm.pairFights.length == 2){
+                for(var x = 0; x < vm.fights.length; x++){
+                  if(vm.pairFights == vm.fights[x]){
+                    continue kLoop;
+                  }
+                }
+                for(var x = 0; x < vm.fights.length; x++){
+                  if((vm.pairFights[0] == vm.fights[x][1]) && (vm.pairFights[1] == vm.fights[x][0])){
+                    continue kLoop;
+                  }
+                }
+                for(var x = 0; x < vm.fights.length; x++){
+                  if((vm.pairFights[0] == vm.pairFights[1])){
+                    continue kLoop;
+                  }
+                }
+                vm.fights.push(vm.pairFights);
+                if(vm.fights.length == 20){
+                  break;
+                }
+              }
+            }
+          }
+        }
+        vm.competitionsToShow[i].fights = vm.fights;
+      }
+      console.log(vm.fights);
+      vm.selected = 8;
+    }
+
+    vm.updatePoints = function(competitor, $index){
+      if(competitor.points == 5){
+        return
+      }else{
+        competitor.points += 1;
       }
     }
   };

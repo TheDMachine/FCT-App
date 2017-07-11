@@ -795,7 +795,7 @@
 
 								  <div class="hint" ng-if="showHints">Ingrese el nombre del patrocinador</div>
 
-								  <div ng-messages="sponsorForm.name.$error" ng-if="!showHints">
+								  <div ng-messages="sponsorForm.name.$error">
 								    <div ng-message="required">El primer nombre es requerido.</div>
 								    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
 								  </div>
@@ -841,7 +841,7 @@
 							<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
 								<md-input-container flex="90">
 									<label>Descripción</label>
-									<textarea></textarea ng-model="vm.sponsor.description" required>
+									<textarea ng-model="vm.sponsor.description" required></textarea>
 								</md-input-container>
 							</div>
 							<!-- Subir logo -->
@@ -850,8 +850,8 @@
 								</label>
 							 	 <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.sponsor.photo">
 								<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
-									<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" ng-click="vm.reset()">Submit</md-button>
-									<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
+									<md-button ng-disabled="sponsorForm.$invalid || vm.submitDisable" type="submit" ng-click="vm.reset()">Submit</md-button>
+									<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || vm.updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
 								</div>
 			          	</form>
 			        </md-content>
