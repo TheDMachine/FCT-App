@@ -265,13 +265,11 @@
     // Función para filtrar la tabla de consulta de eventos
     function acceptedEvents() {
       vm.events = eventService.getEvents();
-      // && vm.events[i].date1 => new Date()
         for (var i = 0; i < vm.events.length; i++) {
           if (vm.events[i].eventState === 'aprobado') {
             vm.acceptedEvents.push(vm.events[i]);
           }
         }
-        // return vm.acceptedEvents;
       }
 
     vm.createNewConsult = function(pNewConsul){

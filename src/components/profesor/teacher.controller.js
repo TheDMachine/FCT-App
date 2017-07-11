@@ -4,17 +4,21 @@
   .module('app')
   .controller('teacherCtrl', teacherCtrl);
 
-  function teacherCtrl ($scope, AuthService, $location, $cookies, userService, $mdDialog) {
+  function teacherCtrl ($scope, AuthService, $location, $cookies, eventService, userService, $mdDialog) {
   	/*Sidenav functionality*/
  	var originatorEv;
   var vm = this;
   vm.newPassword = false;
   vm.currentUser = '';
   vm.selected = 0;
+  vm.today = new Date();
+  vm.acceptedEvents = [];
 
   function init() {
     vm.currentUser = userService.findUserTeacher(userService.getCookie());
     console.log(vm.currentUser);
+    vm.events = eventService.getEvents();
+    acceptedEvents();
   }init();
 
     $scope.showPrompt = function() {
@@ -76,5 +80,16 @@
     vm.logOut = function() {
       AuthService.logOut();
     }
+
+    // Función para filtrar la tabla de consulta de eventos
+    function acceptedEvents() {
+      vm.events = eventService.getEvents();
+        for (var i = 0; i < vm.events.length; i++) {
+          if (vm.events[i].eventState === 'aprobado') {
+            vm.acceptedEvents.push(vm.events[i]);
+          }
+        }
+      }
+
   };
 })();

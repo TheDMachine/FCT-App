@@ -41,7 +41,7 @@
 }
 
 #tableSpace{
-  margin-bottom: 200px;
+  margin-bottom: 400px;
 }
 
 
@@ -765,6 +765,7 @@ button.button-selected{
 .body {
   background: url('../components/login/background-event2.jpg') center center;
   background-size: cover;
+
   /*background: #254B62;*/
 }
 
