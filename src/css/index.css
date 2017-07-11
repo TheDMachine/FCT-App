@@ -63,9 +63,12 @@
    background: #fcb132;
    color: #fff;
    width: 100%;
-
 }
 
+#cxlRSpace .SuccessMessage{
+  text-align: center;
+  color: #cd3d3e;
+}
 
 /*Fin estilos de espacio de reservas y cancelación de tiquetes*/
 

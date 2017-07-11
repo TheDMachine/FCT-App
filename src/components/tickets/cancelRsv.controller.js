@@ -62,7 +62,11 @@
   
     // Función para limpiar campos
     function clean() {
-      vm.reservations = '';
+      vm.reservation.confNum = '';
+      vm.reservation.id = '';
+      vm.reservation.fullName = '';
+      vm.reservation.event = '';
+      vm.reservation.tktsQuantity = '';
       vm.rsv = '';
     }
 
