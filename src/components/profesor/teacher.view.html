@@ -5,15 +5,15 @@
 			<md-list>
 				<md-list-item>
 					<figure class="logo-nav">
-					<img src="images/logo.png">
+					<img src="images/logoSideNav.png">
 				</figure>
 				</md-list-item>
-				<md-list-item layout="column">
+				<!--<md-list-item layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 1" ng-style="vm.selected == 1 ? {'background' : 'rgba(27,201,142,0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons home-icon" ng-style="vm.selected == 1 ? {'color': '#fff'} : {'color': '#1bc98e'} ">&#xE88A;</i>
 						<p class="menu-button">Home</p>
 					</md-button>
-				</md-list-item>
+				</md-list-item>-->
 				<md-list-item layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 2" ng-style="vm.selected == 2 ? {'background' : 'rgba(0,130,200,0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 2 ? {'color': '#fff'} : {'color': '#1a80a8'} ">&#xE853;</i>
@@ -26,12 +26,12 @@
 						<p class="menu-button">Eventos</p>
 					</md-button>
 				</md-list-item>
-				<md-list-item  layout="column">
+				<!--<md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 4" ng-style="vm.selected == 4 ? {'background' : 'rgba(252, 177, 50, 0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 4 ? {'color': '#fff'} : {'color': '#fcb132'} ">&#xEB3F;</i>
 						<p class="menu-button">Patrocinadores</p>
 					</md-button>
-				</md-list-item>
+				</md-list-item>-->
 				<md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 5" ng-style="vm.selected == 5 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons register-icon" ng-style="vm.selected == 5 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
@@ -40,7 +40,7 @@
 				</md-list-item>
 				<md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 6" ng-style="vm.selected == 6 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
-						<i class="side-icons fa fa-trophy" ng-style="vm.selected == 6 ? {'color': '#fff'} : {'color': '#46B7B9'} "></i>
+						<i class="side-icons fa fa-trophy" ng-style="vm.selected == 6 ? {'color': '#fff'} : {'color': '#fcb132'} "></i>
 						<p class="menu-button">Competencias</p>
 					</md-button>
 				</md-list-item>
@@ -226,7 +226,7 @@
 					          </p>
 					        </md-card-content>
 				        <md-card-actions layout="row" layout-align="end">
-				        	<md-button ng-click="vm.showCompetition(item)">Ver competencia</md-button>
+				        	<md-button ng-click="vm.showCompetition(item, $index)">Ver competencia</md-button>
 				          <md-button ng-click="vm.changeViews()">Registrar alumno</md-button>
 				        </md-card-actions>
 			      </md-card>
