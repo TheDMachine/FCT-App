@@ -37,6 +37,7 @@
 
   function init() {
     vm.currentUser = userService.findUserTeacher(userService.getCookie());
+    vm.selected = 2;
     console.log(vm.currentUser);
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();

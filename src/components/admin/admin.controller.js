@@ -32,6 +32,7 @@
 
     function init(){ 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
+        vm.selected = 1;
         vm.currentUser = userService.searchAdmin(userService.getCookie());
         console.log(vm.currentUser);
         vm.originatorEv;
@@ -107,6 +108,7 @@
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
+        vm.showEventAlert();
         document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
         clean();
         init();
@@ -214,6 +216,22 @@
         .clickOutsideToClose(true)
         .title('Registro correcto!')
         .textContent('Registro de patrocinador correcto!')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+  vm.showEventAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Registro correcto!')
+        .textContent('Registro de evento correcto!')
         .ariaLabel()
         .ok('Gracias!')
         .targetEvent()

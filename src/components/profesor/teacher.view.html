@@ -15,13 +15,13 @@
 					</md-button>
 				</md-list-item>-->
 				<md-list-item layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 2" ng-style="vm.selected == 2 ? {'background' : 'rgba(0,130,200,0.7)'} : {'background' : 'inherit'} ">
+					<md-button class="button-selected" ng-click="vm.selected = 2">
 						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 2 ? {'color': '#fff'} : {'color': '#1a80a8'} ">&#xE853;</i>
 						<p class="menu-button">Perfil</p>
 					</md-button>
 				</md-list-item>
 				<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 3" ng-style="vm.selected == 3 ? {'background' : 'rgba(230,71,89,0.7)'} : {'background' : 'inherit'} ">
+					<md-button class="button-selected" ng-click="vm.selected = 3">
 						<i class="material-icons side-icons events-icon" ng-style="vm.selected == 3 ? {'color': '#fff'} : {'color': '#e64759'} ">&#xE878;</i>
 						<p class="menu-button">Eventos</p>
 					</md-button>
@@ -33,13 +33,13 @@
 					</md-button>
 				</md-list-item>-->
 				<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 5" ng-style="vm.selected == 5 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
+					<md-button class="button-selected" ng-click="vm.selected = 5" >
 						<i class="material-icons side-icons register-icon" ng-style="vm.selected == 5 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
 						<p class="menu-button">Registros</p>
 					</md-button>
 				</md-list-item>
 				<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 6" ng-style="vm.selected == 6 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
+					<md-button class="button-selected" ng-click="vm.selected = 6" >
 						<i class="side-icons fa fa-trophy" ng-style="vm.selected == 6 ? {'color': '#fff'} : {'color': '#fcb132'} "></i>
 						<p class="menu-button">Competencias</p>
 					</md-button>
@@ -609,6 +609,125 @@
 			        </md-card-actions>
 			      </md-card>
   				</div>
+				<!-- Visualización de los cinturones -->
+				<div id="homeSection" class="container-fluid">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xs-12">
+								<h1 class="md-display-2">CINTURONES</h1>
+							</div>
+						</div>
+						<div class="row">
+							<div id="beltNum1" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA BLANCA</h3>
+									<p><span>Nombre de la Cinta:</span> Jin-Ti</p>
+									<p><span>Simbolismo:</span> Pureza / Inocencia</p>
+									<p><span>Significado:</span> Esta cinta representa la pureza, el portador del mismo es una persona que comienza en la práctica del Arte Marcial, busca comprender el sentido y orden de su Micro Universo interno y comienza a entender que se debe trabajar duro para conseguir las metas propuestas.</p>
+								</div>
+							</div>
+							<div id="beltNum2" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA AMARILLA</h3>
+									<p><span>Nombre de la Cinta:</span> Norang-Ti</p>
+									<p><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
+									<p><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
+									<p><span>Requisitos:</span> para ascender del cinturón blanco al amarillo debe tener como mínimo 3 torneos participados.</p>
+								</div>
+							</div>
+							<div id="beltNum3" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA VERDE</h3>
+									<p><span>Nombre de la Cinta:</span> Chorok-Ti</p>
+									<p><span>Simbolismo:</span> Naturaleza, fe y esperanza</p>
+									<p><span>Significado:</span> La cinta verde representa el florecimiento de una nueva vida. En este color se demuestra que el practicante del Arte Marcial comienza a meterse dentro de la práctica y empieza a desarrollar destrezas.</p>
+									<p><span>Requisitos:</span> para ascender del cinturón amarillo al verde debe tener como mínimo 4 torneos participados.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="lastSectBelt" class="container-fluid">
+						<div class="row">
+							<div id="beltNum4" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA AZUL</h3>
+									<p><span>Nombre de la Cinta:</span> Parang-Ti</p>
+									<p><span>Simbolismo:</span> Atardecer / Fruto maduro</p>
+									<p><span>Significado:</span> La cinta roja es considerada uno de los grados más dificiles, ya que en este el practicante del Arte Marcial debe alcanzar la fuerza, el arrojo, la valentía y lo que es más importante la humildad necesaria para poder llegar al grado de cinta negra. El color rojo representa el esfuerzo realizado a través de los años para llegar a ese nivel.</p>
+									<p><span>Requisitos:</span> para ascender del cinturón verde al azul debe tener como mínimo 5 torneos participados.</p>
+								</div>
+							</div>
+							<div id="beltNum5" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA ROJA</h3>
+									<p><span>Nombre de la Cinta:</span> Palgang-Ti</p>
+									<p><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
+									<p><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
+									<p><span>Requisitos:</span> para ascender del cinturón azul al rojo debe tener como mínimo 6 torneos participados.</p>
+								</div>
+							</div>
+							<div id="beltNum6" class="col-md-4">
+								<div class="col-xs-offset-1 col-xs-10">
+									<h3>CINTA NEGRA</h3>
+									<p><span>Nombre de la Cinta:</span> Conjon-Ti</p>
+									<p><span>Simbolismo:</span> Idealismo y Pureza</p>
+									<p><span>Significado:</span> El trayecto transcurrido entre la "Cinta blanca y la "Cinta negra" solo representa un proceso de preparación del practicante de Tae Kwon Do, pero solo al llegar a "cinta negra" es capaz de empezar a recorrer el camino para aprender a disfrutarlo. La "cinta negra" es también, símbolo de habilidad y madurez, el saber aceptar y ejercer esta responsabilidad siempre van juntas, son inseparables.</p>
+									<p><span>Requisitos:</span> para ascender del cinturón rojo al negro debe tener como mínimo 7 torneos participados y 3 exhibiciones.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Visualizar pesos y categorías -->
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-6 tableContainer">
+							<div class="col-xs-12">
+								<h1 class="md-display-2">PESOS</h1>
+							</div>
+								<table>
+								    <thead>
+								      	<tr>
+								      		<th>Peso</th>
+								      		<th>Alias</th>
+									        <th>Kg min</th>
+									        <th>Kg max</th>
+								      	</tr>
+								    </thead>
+								    <tbody>
+								      	<tr ng-repeat="weight in vm.weights track by $index">
+								      		<td>{{weight.weightName}}</td>
+								      		<td>{{weight.aliasName}}</td>
+								      		<td>{{weight.minweightRange}}</td>
+									        <td>{{weight.maxweightRange}}</td>
+								      	</tr>
+								    </tbody>
+								</table>
+							</div>
+							<div class="col-md-6 tableContainer">
+							<div class="col-xs-12">
+								<h1 class="md-display-2">CATEGORÍAS</h1>
+							</div>
+								<table>
+								    <thead>
+								      	<tr>
+								      		<th>Categoría</th>
+									        <th>Min edad</th>
+									        <th>Max edad</th>
+								      	</tr>
+								    </thead>
+								    <tbody>
+								      	<tr ng-repeat="categ in vm.categories track by $index">
+								      		<td>{{categ.categorieName}}</td>
+								      		<td>{{categ.minAgeRange}}</td>
+									        <td>{{categ.maxAgeRange}}</td>
+								      	</tr>
+								    </tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
   			</div>
 		<!--<div ng-if="status" id="status">
     <b layout="row" layout-align="center center" class="md-padding">
