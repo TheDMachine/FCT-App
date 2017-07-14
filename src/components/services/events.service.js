@@ -13,7 +13,6 @@
       updateEvent : _updateEvent,
       setCompetitions : _setCompetitions,
       getCompetitions : _getCompetitions,
-      updateCompetition : _updateCompetition
       //updateCompetition : _updateCompetition
     };
     return publicAPI; // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
@@ -61,17 +60,6 @@
         competitionsList = competitions;
       }
       return competitionsList;
-    }
-
-    function _updateCompetition(pModCompetition){
-      var competitionsList = _getCompetitions();
-      for(var i = 0; i < competitionsList.length; i++){
-        if(competitionsList[i].competitionNumber == pModCompetition.competitionNumber){
-          competitionsList[i] = pModCompetition;
-        }
-      }
-      console.log(competitionsList);
-      localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));
     }
   }
 

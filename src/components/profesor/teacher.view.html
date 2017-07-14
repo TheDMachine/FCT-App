@@ -1,48 +1,42 @@
 <!-- Sidenav view -->
-<div class="body-app md-menu-demo" layout="column" ng-cloak ng-init="selected = 0">
+<div class="body-app md-menu-demo" layout="column" ng-cloak ng-init="vm.selected = 0">
 	<div class="side-content-container" layout="row" flex>
-		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10" flex-sm="15" flex-xs="20">
+		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10">
 			<md-list>
 				<md-list-item>
 					<figure class="logo-nav">
-					<img src="images/logoSideNav.png">
+					<img src="images/logo.png">
 				</figure>
 				</md-list-item>
-				<!--<md-list-item layout="column">
+				<md-list-item layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 1" ng-style="vm.selected == 1 ? {'background' : 'rgba(27,201,142,0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons home-icon" ng-style="vm.selected == 1 ? {'color': '#fff'} : {'color': '#1bc98e'} ">&#xE88A;</i>
 						<p class="menu-button">Home</p>
 					</md-button>
-				</md-list-item>-->
+				</md-list-item>
 				<md-list-item layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 2">
+					<md-button class="button-selected" ng-click="vm.selected = 2" ng-style="vm.selected == 2 ? {'background' : 'rgba(0,130,200,0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 2 ? {'color': '#fff'} : {'color': '#1a80a8'} ">&#xE853;</i>
 						<p class="menu-button">Perfil</p>
 					</md-button>
 				</md-list-item>
 				<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 3">
+					<md-button class="button-selected" ng-click="vm.selected = 3" ng-style="vm.selected == 3 ? {'background' : 'rgba(230,71,89,0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons events-icon" ng-style="vm.selected == 3 ? {'color': '#fff'} : {'color': '#e64759'} ">&#xE878;</i>
 						<p class="menu-button">Eventos</p>
 					</md-button>
 				</md-list-item>
-				<!--<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 4" ng-style="vm.selected == 4 ? {'background' : 'rgba(252, 177, 50, 0.7)'} : {'background' : 'inherit'} ">
-						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 4 ? {'color': '#fff'} : {'color': '#fcb132'} ">&#xEB3F;</i>
-						<p class="menu-button">Patrocinadores</p>
-					</md-button>
-				</md-list-item>-->
 				<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 5" >
-						<i class="material-icons side-icons register-icon" ng-style="vm.selected == 5 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
-						<p class="menu-button">Registros</p>
-					</md-button>
+					<md-button class="button-selected" ng-click="vm.selected = 4" ng-style="vm.selected == 4 ? {'background' : 'rgba(251,176,59,0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons help-icon" ng-style="selected == 4 ? {'color': '#fff'} : {'color': '#fbb03b'} ">&#xEB3F;</i>
+						<p class="menu-button">Patrocinadores</p>
+					</md-button>	
 				</md-list-item>
 				<md-list-item  layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 6" >
-						<i class="side-icons fa fa-trophy" ng-style="vm.selected == 6 ? {'color': '#fff'} : {'color': '#fcb132'} "></i>
-						<p class="menu-button">Competencias</p>
-					</md-button>
+					<md-button class="button-selected" ng-click="selected = 5" ng-style="selected == 5 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
+						<i class="material-icons side-icons register-icon" ng-style="selected == 5 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
+						<p class="menu-button">Registros</p>
+					</md-button>	
 				</md-list-item>
 			</md-list>
 		</md-sidenav>
@@ -54,11 +48,11 @@
   				</md-list-item>
     			<div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
     				<div class="icons-profile-container">
-	      				<md-icon flex>
+    					      				<md-icon flex>
       						<i class="material-icons user-nav-icons">&#xE7F4;</i>
       					</md-icon>
     				 <md-menu>
-				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="vm.openMenu($mdMenu, $event)">
+				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
 				        <md-icon md-menu-origin>
 				        	<i class="material-icons user-nav-icons">&#xE8B8;</i>
 				        </md-icon>
@@ -71,7 +65,7 @@
 				        </md-menu-item>
 				        <md-menu-item>
 				          <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
-
+				            
 				            Recuperar contraseña
 				          </md-button>
 				        </md-menu-item>
@@ -86,501 +80,14 @@
     				</div>
     			</div>
   			</md-toolbar>
-  			<!-- Poner la vista aquí
+  			<!-- Poner la vista aquí 
+
   			!!-->
-  			<!-- Vista de editar profesor-->
-  			<div ng-show="vm.editTeacherProfile">
-
-              <!-- Campo contraseña -->
-              <md-input-container flex-offset>
-                <label>Contraseña</label>
-                <input name="password" ng-model="vm.currentUser.password" ng-pattern="/^[a-zA-Z0-9]*$/" type="password" required>
-                <!-- Mensaje de retroalimentacion -->
-                <div ng-messages="frmModInfo.password.$error">
-                  <div ng-messages-include="components/includes/messages.html"></div>
-                </div>
-              </md-input-container>
-
-              <!-- Campo teléfono -->
-              <md-input-container flex-offset>
-                <label>Teléfono</label>
-                <input name="phone" ng-model="vm.currentUser.phone" ng-pattern="/^[0-9]{8}$/" required>
-                <!-- Mensaje de retroalimentacion -->
-                <div ng-messages="frmModInfo.phone.$error">
-                  <div ng-messages-include="components/includes/messages.html"></div>
-                </div>
-              </md-input-container>
-
-              <!-- Campo Contacto de emergencia -->
-              <md-input-container flex-offset>
-                <label>Contacto de emergencia</label>
-                <input name="emergContact" ng-model="vm.currentUser.email" type="text" required>
-                <!-- Mensaje de retroalimentacion -->
-                <div ng-messages="frmModInfo.emergContact.$error">
-                  <div ng-messages-include="components/includes/messages.html"></div>
-                </div>
-              </md-input-container>
-
-              <br>
-
-              <!-- Campo fotografía -->
-
-              <button class="btn btn-primary buttonForm" type="submit" ng-click="vm.updateCurrentTeacher()" ng-disabled="frmModInfo.$invalid">Actualizar</button>
-            </form>
-  			</div>
-  			<!--Vista de competencias y competidores -->
-  			<div ng-show="vm.selected == 8">
-  				<div ng-repeat="item in vm.competitionsToShow track by $index" flex>
-  					<h1>Competencia {{item.competitionNumber}}</h1>
-  					<h2 class="text-center">Competidores</h2>
-					<div class="competitors-info-container" layout="row">
-						<div flex-xs flex-gt-xs="20" ng-repeat="competitor in item.competitors">
-						      <md-card class="user-card">
-						          <md-card-avatar class="avatar avatar-test">
-						            <!--<img src="{{competitor.photo}}">-->
-						          </md-card-avatar>
-						          <md-toolbar class="red">
-						          	<p class="md-headline name-test" layout="column" layout-align="start">{{competitor.firstName}} {{competitor.firstLastName}}</p>
-						          	<p class="md-subhead sub-header-test">Academia: Pros</p>
-						          </md-toolbar>
-						        <md-card-title>
-						          <md-card-title-text layout="row">
-						            <div layout="column" flex="32" class="text-center">
-						              <i class="material-icons card-icon star-icon">&#xE838;</i>
-						              <span class="md-subhead">Categoría: {{competitor.category}}</span>
-						            </div>
-						            <div layout="column" flex="32" class="text-center">
-						            <i class="material-icons card-icon weight-icon">&#xEB43;</i>
-						              <span class="md-subhead">Peso: {{competitor.weight}}</span>
-						            </div>
-						            <div layout="column" flex="32" class="text-center">
-						              <i class="material-icons card-icon won-icon">&#xE3E7;</i>
-						              <span class="md-subhead">Torneos ganados: {{competitor.tournamentsWins}}</span>
-						            </div>
-						          </md-card-title-text>
-						        </md-card-title>
-							</md-card>
-						</div>
-					</div>
-					<div class="container container-competition">
-							<h2 style="text-align: left;">Tabla de posiciones</h2>
-							<md-list flex="90">
-								<md-list-item ng-repeat="competitor in item.competitors" ng-click="goToPerson(person.name, $event)" class="noright">
-			    					<img ng-src="{{ comp.img }}" class="md-avatar" />
-			    					<span class="person-points">{{ competitor.firstName }}</span>
-									<i class="material-icons fa fa-trophy" ng-if="$index == 0"></i>
-			    					<div class="points md-secondary">
-			    					<i class="fa fa-star"></i>
-			    					<span class="person-points">{{competitor.points}}</span>
-			    					</div>
-			 					 </md-list-item>
-							</md-list>
-						</div>
-						<div class="container container-competition">
-							<h2 layout="row" layout-align="start">Peleas</h2>
-							<div ng-repeat="fight in item.fights track by $index" layout="row" layout-align="center center">
-								<div flex-xs flex-gt-xs="25" ng-repeat="pairFight in fight track by $index">
-								      <md-card class="user-card">
-								          <md-card-avatar class="avatar avatar-test">
-								            <img src="{{competitor.photo}}">
-								          </md-card-avatar>
-								          <md-toolbar class="red">
-								          	<p class="md-headline name-test" layout="column" layout-align="start">{{pairFight.firstName}} {{pairFight.firstLastName}}</p>
-								          	<p class="md-subhead sub-header-test">Academia: Pros</p>
-								          </md-toolbar>
-								          <md-button ng-click="vm.updatePoints(pairFight); vm.ready = true">
-								          	<i class="material-icons fa fa-trophy"></i>
-								          </md-button>
-									</md-card>
-								</div>
-								<span ng-show="vm.ready">Pelea realizada</span>
-							</div>
-						</div>
-  				</div>
-  			</div>
-  			<!--Vista competiciones-->
-  			<div ng-show="vm.selected == 6">
-  					<md-card ng-repeat="item in vm.competitions track by $index" flex="20">
-				        <md-card-title>
-				          <md-card-title-text>
-				            <span class="md-headline">Competencia {{item.competitionNumber}}</span>
-				            <span class="md-subhead">Evento: {{item.eventBelongs}}</span>
-				          </md-card-title-text>
-				        </md-card-title>
-				        <div layout="row">
-				        	<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
-					        	<i class="material-icons">&#xE227;</i>
-					        </md-icon>
-					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Equipo'">
-					        	<i class="material-icons">&#xE903;</i>
-					        </md-icon>
-					        <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Comida'">
-					        	<i class="material-icons">&#xE8CC;</i>
-					        </md-icon>
-					        <p class="sponsor-p-type">{{item.sponsorType}}</p>
-				        </div>
-				        	<md-card-content>
-					          <p>
-					            {{item.description}}
-					          </p>
-					        </md-card-content>
-				        <md-card-actions layout="row" layout-align="end">
-				        	<md-button ng-click="vm.showCompetition(item, $index)">Ver competencia</md-button>
-				          <md-button ng-click="vm.changeViews()">Registrar alumno</md-button>
-				        </md-card-actions>
-			      </md-card>
-  			</div>
-  			<div ng-show="vm.selected == 5" flex="" ng-cloak>
-			  <md-content>
-			    <md-tabs md-dynamic-height md-border-bottom>
-
-				<!--Registro de alumnos-->
-				<md-tab label="Registro de alumnos">
-							<md-content class="md-padding">
-								<h1 class="md-display-2">Registro de alumnos</h1>
-								<div class="container-fluid row">
-									<div class="col-xs-12">
-										<form name="frmStudent" novalidate autocomplete="off">
-
-											<!-- input de cedula -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Cédula</label>
-													<input name="id" ng-model="vm.id" ng-pattern="/^[0-9]{9}$/" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-											          <div ng-messages="frmStudent.id.$error">
-											            <div ng-message="pattern">######### - Ingrese un número de identificación válido.</div>
-											          </div>
-												</md-input-container>
-											</div>
-
-											<!-- input de  Fecha de nacimiento -->
-											<div class="col-xs-12 col-sm-6">
-										        <md-input-container flex-gt-xs flex="20">
-										          <label>Fecha de nacimiento</label>
-										          <md-datepicker ng-model="vm.birthday" md-current-view="year" md-placeholder="Enter date"></md-datepicker>
-										        </md-input-container>
-											</div>
-
-											<!-- input de primer nombre -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Primer nombre</label>
-													<input name="firstName" type="text" ng-model="vm.firstName" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.firstName.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de  segundo nombre-->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Segundo nombre</label>
-													<input name="secondName" type="text" ng-model="vm.secondName" />
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.secondName.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de primer apellido -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Primer apellido</label>
-													<input name="firstLastName" type="text" ng-model="vm.firstLastName" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.firstLastName.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de  segundo apellido -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Segundo apellido</label>
-													<input name="secondLastName" type="text" ng-model="vm.secondLastName" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.secondLastName.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de género -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Género</label>
-													<md-select name="genre" ng-model="vm.genre" required>
-								            <md-option value="masculino">Masculino</md-option>
-								            <md-option value="femenino">Femenino</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.genre.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de peso -->
-											<div class="col-xs-12 col-sm-3">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Peso</label>
-													<input name="weight" type="number" ng-model="vm.weight" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.weight.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de altura -->
-											<div class="col-xs-12 col-sm-3">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Altura</label>
-													<input name="height" type="number" ng-model="vm.height" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.height.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de nacionalidad -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Nacionalidad</label>
-													<input name="nationality" type="text" ng-model="vm.nationality" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.nationality.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de télefono -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Télefono</label>
-													<input name="phone" type="text" ng-model="vm.phone" ng-pattern="/^[0-9]{8}$/" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-										          <div ng-messages="frmStudent.phone.$error">
-										            <div ng-message="pattern">######### - Ingrese un número de teléfono válido.</div>
-										          </div>
-												</md-input-container>
-											</div>
-
-											<!-- input de email -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Email</label>
-													<input name="email" type="text" ng-model="vm.email" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-										          <div ng-messages="frmStudent.emergContact.$error" ng-hide="showHints">
-										            <div ng-message="pattern">
-										              Your email must be between 10 and 100 characters long and look like an e-mail address.
-										            </div>
-										          </div>
-												</md-input-container>
-											</div>
-
-											<!-- input de academia -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Academia</label>
-													<md-select name="attendAcademy" ng-model="vm.attendAcademy" required>
-								            <md-option ng-repeat="academy in vm.academy" ng-value="academy.name">{{academy.name}}</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.attendAcademy.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de profesor -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Profesor</label>
-													<md-select name="teacher" ng-model="vm.teacher" required>
-								            <md-option ng-repeat="teacher in vm.teachers" ng-value="teacher.id">{{teacher.firstName}} {{teacher.firstLastName}}</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.teacher.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de cinta -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Cinta</label>
-													<md-select name="belt" ng-model="vm.belt" required>
-								            <md-option ng-repeat="belt in vm.belts" ng-value="belt.belt">{{belt.belt}}</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.belt.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de categoría -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Categoría</label>
-													<md-select name="category" ng-model="vm.category" required>
-								            <md-option ng-repeat="category in vm.categoriesAge" ng-value="category.categorieName">{{category.categorieName}}</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.category.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de torneos participaddos -->
-											<div class="col-xs-12 col-sm-3">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Torneos participaddos</label>
-													<input name="tournaments" type="number" ng-model="vm.tournaments" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.tournaments.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de torneos ganados -->
-											<div class="col-xs-12 col-sm-3">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Torneos ganados</label>
-													<input name="tournamentsWins" type="number" ng-model="vm.tournamentsWins" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.tournamentsWins.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- boton para guardar -->
-											<md-button ng-click="vm.createStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Agregar Alumno</md-button>
-
-											<!-- boton para editar -->
-											<md-button ng-click="vm.updateStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Editar Alumno</md-button>
-										</form>
-									</div>
-								</div>
-
-								<!-- filtro por nombre -->
-								<div class="col-xs-12 col-sm-4 pull-right">
-									<md-input-container flex-offset class="md-block">
-										<label for="">Filtrar por nombre</label>
-										<input type="text" name="studentFilter" ng-model="vm.studentFilter"/>
-									</md-input-container>
-								</div>
-
-								<!-- tabla -->
-									<div class="container-fluid row">
-										<div class="col-xs-12">
-											<table class="table col-xs-12">
-												<thead>
-													<tr>
-														<th>Cédula</th>
-														<th>Nombre completo</th>
-														<th>Profesor</th>
-														<th>Cinta</th>
-														<th>Categoria</th>
-														<th>Email</th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr ng-repeat="student in vm.users | filter:{firstName:vm.studentFilter}">
-														<td>{{student.id}}</td>
-														<td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
-														<td>{{student.teacher}}</td>
-														<td>{{student.belt}}</td>
-														<td>{{student.category}}</td>
-														<td>{{student.email}}</td>
-														<td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-							</md-content>
-						</md-tab>
-					<md-tab label="Registro de alumno en competencia" md-active="vm.userActive">
-							<md-content class="md-padding">
-								<h1 class="md-display-2">Registro de alumno en competencias</h1>
-								<div class="container-fluid row">
-									<div class="col-xs-12">
-										<form name="frmCompetition" novalidate autocomplete="off">
-
-											<!-- input de competidor 1 -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-												<label>Competición</label>
-												<md-select ng-model="vm.competitionNumber" ng-change="vm.updateOptions(vm.competitionNumber)">
-													<md-option ng-repeat="competition in vm.competitions track by $index" ng-value="competition.competitionNumber">{{competition.competitionNumber}}</md-option>
-												</md-select>
-												</md-input-container>
-												<md-input-container>
-													<label for="">Competidor</label>
-													<md-select name="competitor" ng-model="vm.competitor">
-														<md-option ng-repeat="competitor in vm.competitorsEvent" ng-value="competitor">{{competitor.firstName}} {{competitor.firstLastName}}</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmCompetition.competitor1.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- contenedor de botones -->
-											<div class="col-xs-12">
-
-												<!-- boton para guardar -->
-												<md-button ng-click="vm.registerUsersCompetitions(vm.competitionNumber)" class="md-raised" ng-disabled="frmCompetition.$invalid">Agregar competidor</md-button>
-											</div>
-										</form>
-									</div>
-								</div>
-							</md-content>
-						</md-tab>
-
-
-	    </md-tabs>
-	    </md-content>
-	</div>
   			<div ng-show="vm.selected == 2">
   				<h2 layout="row" layout-align="start">Perfil</h2>
   				<div flex-xs flex-gt-xs="100" layout="column">
 			      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-			        <md-card-title class="no-padding">
+			        <md-card-title>
 			          <md-card-title-media flex="35">
 			            <div class="md-media-lg card-media profile-picture">
 			            	<img ng-src="{{vm.currentUser.photo}}">
@@ -599,204 +106,23 @@
 			            </div>
 			            <div layout="row" class="contact-info">
 		            		<i class="material-icons">&#xE0BE;</i>
-			            	<p class="profile-info phone-info"><span>Email:</span> {{vm.currentUser.email}}</p>
+			            	<p class="profile-info phone-info"><span>Email:</span> {{vm.currentUser.phone}}</p>
 			            </div>
 			          </md-card-title-text>
 			        </md-card-title>
 			        <md-card-actions layout="row" layout-align="end center">
-			          <md-button ng-click="vm.getCurrentTeacher(vm.currentUser)">Editar</md-button>
+			          <md-button>Editar</md-button>
 			        </md-card-actions>
 			      </md-card>
   				</div>
-				<!-- Visualización de los cinturones -->
-				<div id="homeSection" class="container-fluid">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-xs-12">
-								<h1 class="md-display-2">CINTURONES</h1>
-							</div>
-						</div>
-						<div class="row">
-							<div id="beltNum1" class="col-md-4">
-								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA BLANCA</h3>
-									<p><span>Nombre de la Cinta:</span> Jin-Ti</p>
-									<p><span>Simbolismo:</span> Pureza / Inocencia</p>
-									<p><span>Significado:</span> Esta cinta representa la pureza, el portador del mismo es una persona que comienza en la práctica del Arte Marcial, busca comprender el sentido y orden de su Micro Universo interno y comienza a entender que se debe trabajar duro para conseguir las metas propuestas.</p>
-								</div>
-							</div>
-							<div id="beltNum2" class="col-md-4">
-								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA AMARILLA</h3>
-									<p><span>Nombre de la Cinta:</span> Norang-Ti</p>
-									<p><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
-									<p><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
-									<p><span>Requisitos:</span> para ascender del cinturón blanco al amarillo debe tener como mínimo 3 torneos participados.</p>
-								</div>
-							</div>
-							<div id="beltNum3" class="col-md-4">
-								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA VERDE</h3>
-									<p><span>Nombre de la Cinta:</span> Chorok-Ti</p>
-									<p><span>Simbolismo:</span> Naturaleza, fe y esperanza</p>
-									<p><span>Significado:</span> La cinta verde representa el florecimiento de una nueva vida. En este color se demuestra que el practicante del Arte Marcial comienza a meterse dentro de la práctica y empieza a desarrollar destrezas.</p>
-									<p><span>Requisitos:</span> para ascender del cinturón amarillo al verde debe tener como mínimo 4 torneos participados.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="lastSectBelt" class="container-fluid">
-						<div class="row">
-							<div id="beltNum4" class="col-md-4">
-								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA AZUL</h3>
-									<p><span>Nombre de la Cinta:</span> Parang-Ti</p>
-									<p><span>Simbolismo:</span> Atardecer / Fruto maduro</p>
-									<p><span>Significado:</span> La cinta roja es considerada uno de los grados más dificiles, ya que en este el practicante del Arte Marcial debe alcanzar la fuerza, el arrojo, la valentía y lo que es más importante la humildad necesaria para poder llegar al grado de cinta negra. El color rojo representa el esfuerzo realizado a través de los años para llegar a ese nivel.</p>
-									<p><span>Requisitos:</span> para ascender del cinturón verde al azul debe tener como mínimo 5 torneos participados.</p>
-								</div>
-							</div>
-							<div id="beltNum5" class="col-md-4">
-								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA ROJA</h3>
-									<p><span>Nombre de la Cinta:</span> Palgang-Ti</p>
-									<p><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
-									<p><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
-									<p><span>Requisitos:</span> para ascender del cinturón azul al rojo debe tener como mínimo 6 torneos participados.</p>
-								</div>
-							</div>
-							<div id="beltNum6" class="col-md-4">
-								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA NEGRA</h3>
-									<p><span>Nombre de la Cinta:</span> Conjon-Ti</p>
-									<p><span>Simbolismo:</span> Idealismo y Pureza</p>
-									<p><span>Significado:</span> El trayecto transcurrido entre la "Cinta blanca y la "Cinta negra" solo representa un proceso de preparación del practicante de Tae Kwon Do, pero solo al llegar a "cinta negra" es capaz de empezar a recorrer el camino para aprender a disfrutarlo. La "cinta negra" es también, símbolo de habilidad y madurez, el saber aceptar y ejercer esta responsabilidad siempre van juntas, son inseparables.</p>
-									<p><span>Requisitos:</span> para ascender del cinturón rojo al negro debe tener como mínimo 7 torneos participados y 3 exhibiciones.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Visualizar pesos y categorías -->
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-6 tableContainer">
-							<div class="col-xs-12">
-								<h1 class="md-display-2">PESOS</h1>
-							</div>
-								<table>
-								    <thead>
-								      	<tr>
-								      		<th>Peso</th>
-								      		<th>Alias</th>
-									        <th>Kg min</th>
-									        <th>Kg max</th>
-								      	</tr>
-								    </thead>
-								    <tbody>
-								      	<tr ng-repeat="weight in vm.weights track by $index">
-								      		<td>{{weight.weightName}}</td>
-								      		<td>{{weight.aliasName}}</td>
-								      		<td>{{weight.minweightRange}}</td>
-									        <td>{{weight.maxweightRange}}</td>
-								      	</tr>
-								    </tbody>
-								</table>
-							</div>
-							<div class="col-md-6 tableContainer">
-							<div class="col-xs-12">
-								<h1 class="md-display-2">CATEGORÍAS</h1>
-							</div>
-								<table>
-								    <thead>
-								      	<tr>
-								      		<th>Categoría</th>
-									        <th>Min edad</th>
-									        <th>Max edad</th>
-								      	</tr>
-								    </thead>
-								    <tbody>
-								      	<tr ng-repeat="categ in vm.categories track by $index">
-								      		<td>{{categ.categorieName}}</td>
-								      		<td>{{categ.minAgeRange}}</td>
-									        <td>{{categ.maxAgeRange}}</td>
-								      	</tr>
-								    </tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
   			</div>
 		<!--<div ng-if="status" id="status">
     <b layout="row" layout-align="center center" class="md-padding">
       {{status}}
     </b>
   </div>-->
-
-  			<!-- Sección de consulta, modificación, eliminar y listar eventos -->
-			<div ng-show="vm.selected == 3">
-				<md-content>
-				    <md-tabs md-dynamic-height md-border-bottom>
-
-				    	<!-- Tab consultar de eventos -->
-				      	<md-tab label="Consultar Eventos">
-					        <md-content id="table1" class="md-padding">
-					        <h3>CONSULTAR EVENTOS</h3>
-
-							<!-- Filtro por fecha -->
-							<p>Filtre por fechas: </p>
-							<br>
-							<md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
-					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker>
-
-					        	<!-- Tabla de info eventos -->
-						        <div>
-						          	<table class="table-responsive">
-									    <thead>
-									      	<tr>
-									      		<th>Evento</th>
-										        <th>invitado</th>
-										        <th>Fecha/inicio</th>
-										        <th>Hora/inicio</th>
-										        <th>Fecha/Fin</th>
-										        <th>Hora/Fin</th>
-										        <th>Academias</th>
-										        <th>Categorías</th>
-										        <th>Inscripción</th>
-										        <th>Lugar</th>
-										        <th>Ubicación</th>
-										        <th>Para:</th>
-										        <th>Org/Beneficiada</th>
-										        <th>Logo/evento</th>
-									      	</tr>
-									    </thead>
-									    <tbody>
-									      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to" >
-									      		<td>{{event.eventName}}</td>
-									      		<td>{{event.invitedName}}</td>
-										        <td>{{event.date1 | date : "shortDate"}}</td>
-										        <td>{{event.time1 | date : "shortTime"}}</td>
-										        <td>{{event.date2 | date : "shortDate"}}</td>
-										        <td>{{event.time2 | date : "shortTime"}}</td>
-										        <td>{{event.selectAcademies}}</td>
-										        <td>{{event.selectCategories}}</td>
-										        <td>{{event.costInsc}}</td>
-										        <td>{{event.placeName}}</td>
-										        <td>{{event.location}}</td>
-										        <td>{{event.charityEvent}}</td>
-										        <td>{{event.orgName}}</td>
-										        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
-									      	</tr>
-									    </tbody>
-								  	</table>
-						        </div>
-					        </md-content>
-				      	</md-tab>
-			  	</md-content>
-			</div>
-
-
+  			
+  			
 
 		</md-content>
 

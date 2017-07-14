@@ -30,21 +30,21 @@
 					<md-button class="button-selected" ng-click="selected = 4" ng-style="selected == 4 ? {'background' : 'rgba(251,176,59,0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons help-icon" ng-style="selected == 4 ? {'color': '#fff'} : {'color': '#fbb03b'} ">&#xEB3F;</i>
 						<p class="menu-button">Patrocinadores</p>
-					</md-button>
+					</md-button>	
 				</md-list-item>
 				<md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="selected = 5" ng-style="selected == 5 ? {'background' : 'rgba(70, 183, 185, 0.7)'} : {'background' : 'inherit'} ">
 						<i class="material-icons side-icons register-icon" ng-style="selected == 5 ? {'color': '#fff'} : {'color': '#46B7B9'} ">&#xE873;</i>
 						<p class="menu-button">Registros</p>
-					</md-button>
+					</md-button>	
 				</md-list-item>
 			</md-list>
 		</md-sidenav>
 		<md-content id="content" flex>
 	  		<md-toolbar class="tool-icons md-whiteframe-3dp" layout="row">
 	  			<md-list-item class="noright" flex="20">
-    				<img alt="{{ person.name }}" ng-src="{{ vm.currentUser.photo }}" class="md-avatar" />
-    				<p>{{vm.currentUser.email}}</p>
+    				<img alt="{{ person.name }}" ng-src="{{ person.img }}" class="md-avatar" />
+    				<p>Person name{{person.name}}</p>
   				</md-list-item>
     			<div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
     				<div class="icons-profile-container">
@@ -52,7 +52,7 @@
       						<i class="material-icons user-nav-icons">&#xE7F4;</i>
       					</md-icon>
     				 <md-menu>
-				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="vm.openMenu($mdMenu, $event)">
+				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
 				        <md-icon md-menu-origin>
 				        	<i class="material-icons user-nav-icons">&#xE8B8;</i>
 				        </md-icon>
@@ -65,13 +65,13 @@
 				        </md-menu-item>
 				        <md-menu-item>
 				          <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
-
+				            
 				            Recuperar contraseña
 				          </md-button>
 				        </md-menu-item>
 				        <md-menu-divider></md-menu-divider>
 				        <md-menu-item>
-				          <md-button ng-click="vm.logOut()">
+				          <md-button ng-click="ctrl.toggleNotifications()">
 				            Cerrar sesión
 				          </md-button>
 				        </md-menu-item>
@@ -80,12 +80,13 @@
     				</div>
     			</div>
   			</md-toolbar>
-  			<!-- Poner la vista aquí
+  			<!-- Poner la vista aquí 
+
   			!!-->
 
+  			
 
-
-
+  			
 
 		</md-content>
 

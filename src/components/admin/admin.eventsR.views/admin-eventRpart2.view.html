@@ -1,66 +1,50 @@
-<div id="secondPart" class="row">
-	<div class="col-md-offset-2 col-md-4">
+<!-- Campo de fecha inicio  -->
+<md-input-container flex-offset>
+	<md-datepicker name="frmEventInfo.date1"  ng-model="vm.event.date1"  md-placeholder="Fecha inicio" required></md-datepicker>
 
-		<!-- Campo de fecha inicio  -->
-		<md-input-container flex-offset>
-			<md-datepicker name="frmEventInfo.date1"  ng-model="vm.event.date1"  md-placeholder="Fecha inicio" md-min-date="vm.today" required></md-datepicker>
+	<!-- Mensaje de retroalimentacion -->
+ 	<div ng-messages="frmEventInfo.date1.$error">
+   		<div ng-messages-include="components/includes/messages.html"></div>
+ 	</div>
+</md-input-container>
 
-			<!-- Mensaje de retroalimentacion -->
-		 	<div ng-messages="frmEventInfo.$error">
-		   		<div ng-messages-include="components/includes/messages.html"></div>
-		 	</div>
-		</md-input-container>
-	</div>
-	<div class="col-md-6">
+<!-- Campo para la hora de inicio -->
+<div>
+	<label>Hora Inicio</label>
+	<input type="time" name="frmEventInfo.time1" ng-model="vm.event.time1" required>
 
-		<!-- Campo de Fecha fin -->
-		<md-input-container flex-offset>
-			<md-datepicker name="frmEventInfo.date2"  ng-model="vm.event.date2"  md-placeholder="Fecha fin" md-min-date="vm.today" required></md-datepicker>
-
-			<!-- Mensaje de retroalimentacion -->
-		 	<div ng-messages="frmEventInfo.$error">
-		   		<div ng-messages-include="components/includes/messages.html"></div>
-		 	</div>
-		</md-input-container>
-	</div>
+	<!-- Mensaje de retroalimentacion -->
+ 	<div ng-messages="frmEventInfo.time1.$error">
+   		<div ng-messages-include="components/includes/messages.html"></div>
+ 	</div>
 </div>
-<div id="last2Part" class="row">
-	<div class="col-md-offset-2 col-md-4">
 
-		<!-- Campo para la hora de inicio -->
-		<div>
-			<label>Hora Inicio: </label>
-			<input type="time" name="frmEventInfo.time1" ng-model="vm.event.time1" required>
+<!-- Campo de Fecha fin -->
+<md-input-container flex-offset>
+	<md-datepicker name="frmEventInfo.date2"  ng-model="vm.event.date2"  md-placeholder="Fecha fin" required></md-datepicker>
 
-			<!-- Mensaje de retroalimentacion -->
-		 	<div ng-messages="frmEventInfo.$error">
-		   		<div ng-messages-include="components/includes/messages.html"></div>
-		 	</div>
-		</div>
-	</div>
-	<div class="col-md-6">
+	<!-- Mensaje de retroalimentacion -->
+ 	<div ng-messages="frmEventInfo.date2.$error">
+   		<div ng-messages-include="components/includes/messages.html"></div>
+ 	</div>
+</md-input-container>
 
-		<!-- Campo para la hora de fin -->
-		<div>
-			<label>Hora fin: </label>
-			<input type="time" name="frmEventInfo.time2" ng-model="vm.event.time2" required>
+<!-- Campo para la hora de fin -->
+<div>
+	<label>Hora fin</label>
+	<input type="time" name="frmEventInfo.time2" ng-model="vm.event.time2" required>
 
-			<!-- Mensaje de retroalimentacion -->
-		 	<div ng-messages="frmEventInfo.$error">
-		   		<div ng-messages-include="components/includes/messages.html"></div>
-		 	</div>
-		</div>
-	</div>
+	<!-- Mensaje de retroalimentacion -->
+ 	<div ng-messages="frmEventInfo.time2.$error">
+   		<div ng-messages-include="components/includes/messages.html"></div>
+ 	</div>
 </div>
-<div class="row">
-	<div class="col-md-2">
 
-		<!-- Botón Anterior -->
-		<a ui-sref="admin.part1" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
-	</div>
-	<div class="col-md-offset-8 col-md-2">
 
-		<!-- Botón siguiente -->
-		<a ui-sref="admin.part3" class="btn btn-info" ng-disabled="frmEventInfo.$invalid">Siguiente<span class="glyphicon glyphicon-circle-arrow-right"></span></a>
-	</div>
-</div>
+<!-- Botón Anterior -->
+<a ui-sref="admin.part1" class="btn btn-info">Anterior <span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+
+<!-- Botón siguiente -->
+<a ui-sref="admin.part3" class="btn btn-info" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+
+
