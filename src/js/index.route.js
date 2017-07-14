@@ -71,6 +71,15 @@
       url : '/part5', //ruta del url del estado
       templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart5.view.html'//vista que se va a cargar para este estado
     })
+    .state('admin.sponsorPartOne', {
+      url : '/sponsorPartOne',
+      templateUrl : 'components/admin/sponsor.register.views/admin-sponsor1.view.html'
+    })
+    .state('admin.sponsorPartTwo', {
+      url : '/sponsorPartTwo',
+      templateUrl : 'components/admin/sponsor.register.views/admin-sponsor2.view.html'
+    })
+
     // Fin de las vistas hojas del formualrio de registro del administrador.
 
     //Inicio de las vistas hijas del formulario de registro del profesor
@@ -160,7 +169,43 @@
       controller: 'landingCtrl',
       controllerAs: 'vm'
     })
+        .state('reserve',{
+      url : '/reserve', //ruta del url del estado
+      templateUrl : 'components/noRegisterUser/reserve.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/noRegisterUser/reserve.controller.js')
+        }]
+      },
+      controller: 'reserveCtrl',
+      controllerAs: 'vm'
+    })
+        .state('cancelRsv',{
+      url : '/cancelRsv', //ruta del url del estado
+      templateUrl : 'components/noRegisterUser/cancelRsv.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/noRegisterUser/cancelRsv.controller.js')
+        }]
+      },
+      controller: 'cancelRsvCtrl',
+      controllerAs: 'vm'
+    })
+        .state('events',{
+      url : '/events', //ruta del url del estado
+      templateUrl : 'components/noRegisterUser/events.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/noRegisterUser/events.controller.js')
+        }]
+      },
+      controller: 'eventsCtrl',
+      controllerAs: 'vm'
+    })
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/landing');
   }
 })();

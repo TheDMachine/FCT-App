@@ -6,7 +6,7 @@ angular.module('app')
       vm.email = '';
       vm.password = '';
     }init();
-    $scope.login = function(){
-      AuthService.getCredencials(vm.email,vm.password);
+    vm.login = function(){
+      AuthService.getCredencials(vm.id,vm.password);
     }
   };

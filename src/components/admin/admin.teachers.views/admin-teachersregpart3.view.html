@@ -5,7 +5,8 @@
     <md-input-container flex-offset>
       <label>Seleccione el género</label>
       <md-select id="sltGender" ng-model="vm.teacher.gender">
-        <md-option value="genero">Academia</md-option>
+        <md-option value="masculino">Masculino</md-option>
+        <md-option value="femenino">Femenino</md-option>
       </md-select>
     </md-input-container>
 
@@ -16,8 +17,6 @@
         <md-option ng-repeat='country in vm.countries' value="{{country}}">{{country}}</md-option>
       </md-select>
     </md-input-container>
-
-
 
     <!-- Select para seleccionar academia -->
     <md-input-container flex-offset>
@@ -31,21 +30,32 @@
     <md-input-container flex-offset>
       <label>Seleccione el grado</label>
       <md-select id="sltGrade" ng-model="vm.teacher.grade">
-        <md-option value="grado">Grado1</md-option>
+        <md-option ng-repeat="categories in vm.categories" ng-value="categories.categorieName">{{categories.categorieName}}</md-option>
       </md-select>
     </md-input-container>
 
-
-    <div>
-      <label class="btn btn-default btn-file" for="photo">
-        Adjuntar logo
-      </label>
-       <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.teacher.photo">  
+    <!-- botón para cambiar el estado del profesor -->
+    <div class="inset form-group col-xs-12 col-md-4 floating-label-form-group control" ng-cloak>
+      <md-switch ng-model="vm.teacher.status" aria-label="Switch 2" ng-true-value="'Activo'" ng-false-value="'Inactivo'" class="md-warn">
+        Estado: {{vm.teacher.status}}
+      </md-switch>
     </div>
 
-    <button type="submit" ng-disabled="frmRegTeacher.$invalid || submitDisable" ng-click="vm.reset()">Registrar</button>
-    <!-- Botón Anterior -->
-    <a ui-sref="admin.teachpart2" class="btn btn-info">Anterior <span class="glyphicon 	glyphicon-circle-arrow-left"></span></a>
-  </div>
-</div>
+    <!-- botón para adjuntar archivo -->
+    <div>
+      <label class="btn btn-default btn-file" for="photo">
+        Adjuntar foto
+      </label>
+      <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.teacher.photo">
+    </div>
 
+    <!-- botón para guardar datos actualizados -->
+    <md-button type="submit" ng-disabled="frmRegTeacher.$invalid" ng-click="vm.updateTeacher()">Actualizar</md-button>
+
+    <!-- botón para registrar -->
+    <md-button type="submit" ng-disabled="frmRegTeacher.$invalid" class="md-raised" ng-click="vm.reset()">Registrar</md-button>
+
+    <!-- Botón Anterior -->
+    <a ui-sref="admin.teachpart2" class="btn btn-info">Anterior <span class="glyphicon  glyphicon-circle-arrow-left"></span></a>
+  </div>
+  </div>
