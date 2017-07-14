@@ -1,0 +1,34 @@
+{
+  "name": "fct app",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "authors": [
+    "Luis Bianco"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "font-awesome": "^4.7.0",
+    "bootstrap-material-design": "v0.5.9",
+    "angular-messages": "^1.5.3",
+    "angular-ui-router": "^1.0.4",
+    "angular-cookies": "*",
+    "oclazyload": "^1.1.0",
+    "angular-material": "^1.1.4",
+    "ng-file-upload": "^12.2.13",
+    "angular-bootstrap": "^1.3.3",
+    "angular-animate": "^1.5.7",
+    "lf-ng-md-file-input": "^1.5.2"
+  }
+}
