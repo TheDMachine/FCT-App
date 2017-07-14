@@ -36,40 +36,66 @@
         getUsers: _getUsers,
         updateUsers: _updateUsers,
         searchUser : _searchUser,
+        searchAdmin : _searchAdmin,
         updateConsul: _updateUsersConsul,
         updateWeigth: _findAndSetUserToWeigth
     };
     return publicAPI;
 
+    //Busca y actualiza el peso del competiddor
+    function _findAndSetUserToWeigth(pUserToUpdateWeigth) {
+      console.log(pUserToUpdateWeigth);
+    }
+
     //Guardar alumno
     function _setUsers(newUser){
       var usersList = _getUsers();
-      var position = searchUser(newUser);
-      if (position == -1) {
-        usersList.push(newUser);
-        localStorage.setItem('lsUsersList', JSON.stringify(usersList));
+      newUser.password = _generatePassword();
+      var error = false;
+      for (var i = 0; i < usersList.length; i++) {
+        if (usersList[i].email == newUser.email) {
+          error = true;
+          return;
+        }
       }
+      usersList.push(newUser);
+      localStorage.setItem('lsUsersList', JSON.stringify(usersList));
+      console.log(_getUsers());
     }
 
     //buscar si la cédula se repite
     function _searchUser(newUser){
       var usersList = _getUsers();
      for (var i = 0; i < usersList.length; i++) {
-       if(usersList[i].email == pUsernameToFind){
+       if(usersList[i].email == newUser){
          return usersList[i];
        }
      }
      return false;
    }
-    function _findAndSetUserToWeigth(pUserToSearch) {
-      var users = _getUsers();
-      for (var i = 0; i < users.length; i++) {
-        if(users[i].firstName == pUserToSearch.firstName) {
-          user[i].weigth = pUserToSearch.weigth;
-          _updateUsers(user[i]);
-        }
+
+   //buscar administrador
+
+     function _searchAdmin(newAdmin){
+      var admin = {
+        id : '123456789',
+        firstName : 'Administrador',
+        firstLastName : 'FCT',
+        bornhDate : '30',
+        nationality : 'Costarricense',
+        phone : '87456321',
+        email : 'adminFCT@hotmail.com',
+        password : 'admin123',
+        photo : 'admin.jpg'
       }
-    }
+      if(admin.id == newAdmin){
+        return admin;
+      }
+      else{
+        return false;
+      }
+   }
+
     //muestra la informacion mas actual
     function _getUsers(){
       var usersList = JSON.parse(localStorage.getItem('lsUsersList'));
@@ -100,25 +126,30 @@
     }
     // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
+    //función para pushear objeto profesores
     function _setTeachers(pTeacher){
       var teachersList = _getTeachers();
-
+      pTeacher.password = _generatePassword();
       teachersList.push(pTeacher);
+      console.log(teachersList);
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
     }
-    function _getTeachers(){
+
+    //función para obtener a los profesores actualizados
+    function _getTeachers() {
       var teachersList = JSON.parse(localStorage.getItem('lsTeachersList'));
       if(teachersList == null){
         teachersList = teachers;
       }
       return teachersList;
     }
-    function _updateTeacher(pobjUsuario){
+
+    //editar la informacion del profesor
+    function _updateTeacher(pEditTeacher) {
       var teachersList = _getTeachers();
       for(var i = 0; i < teachersList.length; i++){
-        if(teachersList[i].id == pobjUsuario.id){
-          teachersList[i] = pobjUsuario;
-          return false;
+        if(teachersList[i].id == pEditTeacher.id){
+          teachersList[i] = pEditTeacher;
         }
       }
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
@@ -128,7 +159,7 @@
     function _findUserTeacher(pUsernameToFind){
       var userStorage = _getTeachers();
      for (var i = 0; i < userStorage.length; i++) {
-       if(userStorage[i].email == pUsernameToFind){
+       if(userStorage[i].id == pUsernameToFind){
          return userStorage[i];
        }
      }
@@ -160,14 +191,15 @@
    function _getCookie(){
     return $cookies.get('currentUserActive');
    }
-   function _generatePassword() {
+
+      function _generatePassword() {
      var a = [];
      var chars = ['#', '%', '£', '!', '?', '&', ';', '(', ')', '=', '+', '$'];
      for (var i = 97; i <= 122; i++) {
-    	    a[a.length] = String.fromCharCode(i).toUpperCase();
+          a[a.length] = String.fromCharCode(i).toUpperCase();
 
           // create random letters.
-    	     var one = a[Math.floor(Math.random() * a.length)];
+           var one = a[Math.floor(Math.random() * a.length)];
            var two = a[Math.floor(Math.random() * a.length)];
            var three = a[Math.floor(Math.random() * a.length)];
            var four = a[Math.floor(Math.random() * a.length)];
@@ -187,7 +219,7 @@
 
            // create variable moving all letters, numbers and characters together.
            var c = one + two + three + four + five + six + seven + eight + ints + randChar;
- 		    }
+        }
         return c;
       }
   }

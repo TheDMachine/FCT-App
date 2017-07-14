@@ -3,7 +3,7 @@
   angular
   .module('app')
   .controller('cancelRsvCtrl', cancelRsvCtrl);
-  function cancelRsvCtrl($scope, ticketService, eventService) {
+  function cancelRsvCtrl($scope, ticketService, eventService, $location) {
   var vm = this;
   vm.reservation = {};
 
@@ -13,8 +13,13 @@
       vm.reservations = ticketService.getsReservations();
       }init();
 
-    // obtiene reserva a buscar
+    // Función para devolverse al landing
+    vm.return = function(event){
+        event.preventDefault();
+        $location.path('/landing');
+       };
 
+    // obtiene reserva a buscar
     vm.searchRsv = function(pRsv) {
       vm.reservations = ticketService.getsReservations();
       var InfoRsv = {
@@ -27,9 +32,9 @@
         }
       }
       sendInfo(vm.rsvToCxl);
-      clean();
     };
 
+    // Devueñve la información de la reserva a cancelar
     function sendInfo(pRsvToCxl) {
       vm.reservation.confNum = pRsvToCxl.confirmationNum;
       vm.reservation.id = pRsvToCxl.id;
@@ -38,6 +43,7 @@
       vm.reservation.tktsQuantity = pRsvToCxl.tktsQuantity;
     }
 
+    // Cambia el estado de la reserva a cancelada
     vm.cancelRsv = function(pCxlRsv) {
       console.log(pCxlRsv);
       vm.reservations = ticketService.getsReservations();
@@ -54,9 +60,12 @@
    
   
     // Función para limpiar campos
-
     function clean() {
-      vm.reservations = '';
+      vm.reservation.confNum = '';
+      vm.reservation.id = '';
+      vm.reservation.fullName = '';
+      vm.reservation.event = '';
+      vm.reservation.tktsQuantity = '';
       vm.rsv = '';
     }
 

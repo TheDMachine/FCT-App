@@ -58,7 +58,9 @@
       }
       return categoriesList;
     }
-      function _getCountries() {
+
+    //Función para select countries
+    function _getCountries() {
       return $http.get('http://api.population.io:80/1.0/countries');
     }
   }

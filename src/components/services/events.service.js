@@ -14,6 +14,7 @@
       updateEvent : _updateEvent,
       setCompetitions : _setCompetitions,
       getCompetitions : _getCompetitions,
+      updateCompetition : _updateCompetition,
       //updateCompetition : _updateCompetition
       setPropose: _setProposeEvent,
       getPropose: _getProposeEvent,
@@ -95,6 +96,17 @@
         competitionsList = competitions;
       }
       return competitionsList;
+    }
+
+    function _updateCompetition(pModCompetition){
+      var competitionsList = _getCompetitions();
+      for(var i = 0; i < competitionsList.length; i++){
+        if(competitionsList[i].competitionNumber == pModCompetition.competitionNumber){
+          competitionsList[i] = pModCompetition;
+        }
+      }
+      console.log(competitionsList);
+      localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));
     }
   }
 

@@ -43,8 +43,8 @@
 		<md-content id="content" flex>
 	  		<md-toolbar class="tool-icons md-whiteframe-3dp" layout="row">
 	  			<md-list-item class="noright" flex="20">
-    				<img alt="{{ person.name }}" ng-src="{{ person.img }}" class="md-avatar" />
-    				<p>Person name{{person.name}}</p>
+    				<img alt="{{ person.name }}" ng-src="{{ vm.currentUser.photo }}" class="md-avatar" />
+    				<p>{{vm.currentUser.email}}</p>
   				</md-list-item>
     			<div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
     				<div class="icons-profile-container">
@@ -52,7 +52,7 @@
       						<i class="material-icons user-nav-icons">&#xE7F4;</i>
       					</md-icon>
     				 <md-menu>
-				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdMenu, $event)">
+				      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="vm.openMenu($mdMenu, $event)">
 				        <md-icon md-menu-origin>
 				        	<i class="material-icons user-nav-icons">&#xE8B8;</i>
 				        </md-icon>
@@ -71,7 +71,7 @@
 				        </md-menu-item>
 				        <md-menu-divider></md-menu-divider>
 				        <md-menu-item>
-				          <md-button ng-click="ctrl.toggleNotifications()">
+				          <md-button ng-click="vm.logOut()">
 				            Cerrar sesión
 				          </md-button>
 				        </md-menu-item>
