@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
 
     <!-- Select para seleccionar academia -->
     <md-input-container flex-offset>
@@ -9,7 +9,9 @@
         <md-option value="femenino">Femenino</md-option>
       </md-select>
     </md-input-container>
+    </div>
 
+<div class="col-md-6">
     <!-- Select para seleccionar grado -->
     <md-input-container flex-offset>
       <label>Seleccione la nacionalidad</label>
@@ -17,7 +19,9 @@
         <md-option ng-repeat='country in vm.countries' value="{{country}}">{{country}}</md-option>
       </md-select>
     </md-input-container>
+    </div>
 
+<div class="col-md-6">
     <!-- Select para seleccionar academia -->
     <md-input-container flex-offset>
       <label>Seleccione una academia</label>
@@ -25,7 +29,9 @@
         <md-option ng-repeat="academy in vm.academy" value="{{academy.name}}">{{academy.name}}</md-option>
       </md-select>
     </md-input-container>
+    </div>
 
+<div class="col-md-6">
     <!-- Select para seleccionar grado -->
     <md-input-container flex-offset>
       <label>Seleccione el grado</label>
@@ -33,20 +39,25 @@
         <md-option ng-repeat="categories in vm.categories" ng-value="categories.categorieName">{{categories.categorieName}}</md-option>
       </md-select>
     </md-input-container>
+    </div>
 
+<div class="col-md-6">
     <!-- botón para cambiar el estado del profesor -->
     <div class="inset form-group col-xs-12 col-md-4 floating-label-form-group control" ng-cloak>
       <md-switch ng-model="vm.teacher.status" aria-label="Switch 2" ng-true-value="'Activo'" ng-false-value="'Inactivo'" class="md-warn">
         Estado: {{vm.teacher.status}}
       </md-switch>
     </div>
+    </div>
 
+<div class="col-md-6">
     <!-- botón para adjuntar archivo -->
     <div>
       <label class="btn btn-default btn-file" for="photo">
         Adjuntar foto
       </label>
       <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.teacher.photo">
+    </div>
     </div>
 
     <!-- botón para guardar datos actualizados -->
@@ -57,5 +68,4 @@
 
     <!-- Botón Anterior -->
     <a ui-sref="admin.teachpart2" class="btn btn-info">Anterior <span class="glyphicon  glyphicon-circle-arrow-left"></span></a>
-  </div>
   </div>
