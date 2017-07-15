@@ -1,35 +1,47 @@
-(function () {
-    'use strict'
-    angular
-      .module('app')
-      .controller('adminCtrl', adminCtrl);
-    //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-    function adminCtrl($scope, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
+(function() {
+  'use strict'
+  angular
+  .module('app')
+  .controller('adminCtrl', adminCtrl);
+  //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
+  function adminCtrl($scope,$mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
 
-      var vm = this;
-      vm.cloudObj = imageService.getConfiguration();
-      vm.selected = 0;
-      vm.updateDisable = true;
-      vm.submitDisable = false;
-      vm.stepTwoConsult = false;
-      vm.stepThreeConsult = false;
-      vm.stepOneConsult = true;
-      vm.user = {};
-      vm.log = {};
-      vm.imageActive = false;
-      vm.cloudObj = imageService.getConfiguration();
-      vm.events = eventService.getEvents();
-      vm.weights = estabInfoService.getWeight();
-      vm.categories = estabInfoService.getCategories();
-      vm.acceptedEvents = [];
+    var vm = this;
+    vm.cloudObj = imageService.getConfiguration();
+    vm.selected = 0;
+    vm.updateDisable = true;
+    vm.submitDisable = false;
+    vm.stepTwoConsult = false;
+    vm.stepThreeConsult = false;
+    vm.stepOneConsult = true;
+    vm.user = {};
+    vm.log = {};
+    vm.imageActive = false;
+    vm.cloudObj = imageService.getConfiguration();
+    vm.weights = estabInfoService.getWeight();
+    vm.categories = estabInfoService.getCategories();
+    vm.acceptedEvents = [];
+    vm.updateDisable = true;
+    vm.nameSponsorEdit = false;
+    vm.showCompetition = false;
+    vm.competitionsToShow = [];
+    vm.fights = [];
+    vm.pairFights = [];
+    vm.ready = false;
+    vm.today = new Date();
 
-      function init() { // función que se llama así misma para indicar que sea lo primero que se ejecute
+    function init(){ 
+    // función que se llama así misma para indicar que sea lo primero que se ejecute
+        vm.selected = 1;
+        vm.currentUser = userService.searchAdmin(userService.getCookie());
+        console.log(vm.currentUser);
         vm.originatorEv;
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
+        console.log(vm.events);
         vm.competitions = eventService.getCompetitions();
-        aceptedEvents();
+        acceptedEvents();
         vm.event = {};
         vm.sponsors = sponsorService.getSponsors();
         vm.teacher = {};
@@ -44,13 +56,13 @@
         vm.categoriesAge = estabInfoService.getCategories();
         estabInfoService.getCountries().then(function (data) {vm.countries = data.data.countries;});
         vm.teacher.status = "Activo";
-      }
-    init();
+        vm.userActive = false;
+      }init();
 
 
     /*Sidenav*/
     vm.openMenu = function ($mdMenu, ev) {
-      originatorEv = ev;
+      vm.originatorEv = ev;
       $mdMenu.open(ev);
     };
 
@@ -96,7 +108,8 @@
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
-        document.querySelector('.ErrorMessage').innerHTML = 'El evento se registró exitosamente';
+        vm.showEventAlert();
+        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
         clean();
         init();
       } else {
@@ -115,20 +128,25 @@
         }
       }
     };
+      // Funciones para guardar patrocinadores
 
-    // Funciones para guardar patrocinadores
-
-    vm.saveSponsor = function (pNewSponsor) {
+    vm.saveSponsor= function(pNewSponsor) {
+      if(sponsorService.findSponsor(pNewSponsor.sponsorName) !== false){
+        vm.showSponsorDuplicateAlert();
+      }
+      else{
         sponsorService.setSponsors(pNewSponsor);
-        vm.error = false;
-        /*if (vm.error === true) {
-          document.querySelector('.ErrorMessage').innerHTML = 'El patrocinador ya existe';
-          }else{
-          document.querySelector('.SuccessMessage').innerHTML = 'El patrocinador se registró exitosamente';
-        }*/
-        console.log(sponsorService.getSponsors());
-        clean();
-        init();
+        vm.showSponsorAlert();
+      }
+      vm.error = false;
+      /*if (vm.error === true) {
+        document.querySelector('.ErrorMessage').innerHTML = 'El patrocinador ya existe';
+        }else{
+        document.querySelector('.SuccessMessage').innerHTML = 'El patrocinador se registró exitosamente';
+      }*/
+      console.log(sponsorService.getSponsors());
+      clean();
+      init();
 
       }
       // Función para guardar
@@ -154,36 +172,119 @@
     }
 
     // Función para imprimir datos en el formulario de patrocinadores
-    vm.getSponsorInfo = function (pSponsor) {
+    vm.getSponsorInfo = function(pSponsor) {
       vm.sponsor.sponsorName = pSponsor.sponsorName,
-        vm.sponsor.sponsorCompany = pSponsor.sponsorCompany,
-        vm.sponsor.sponsorType = pSponsor.sponsorType,
-        vm.sponsor.sponsorMoney = pSponsor.sponsorMoney,
-        vm.sponsor.sponsorDescription = pSponsor.sponsorDescription
+      vm.sponsor.sponsorCompany = pSponsor.sponsorCompany,
+      vm.sponsor.sponsorType = pSponsor.sponsorType,
+      vm.sponsor.sponsorMoney = pSponsor.sponsorMoney,
+      vm.sponsor.description = pSponsor.description,
+      vm.sponsor.photo = pSponsor.photo
 
-      vm.selected = 5;
+      vm.selected = 2;
       vm.imageActive = true;
+      vm.nameSponsorEdit = true;
 
 
-      $scope.updateDisable = false;
-      $scope.submitDisable = true;
+      vm.updateDisable = false;
+      vm.submitDisable = true;
     }
 
     vm.updateSponsor = function () {
       var modSponsor = {
-        sponsorName: vm.sponsor.sponsorName,
-        sponsorCompany: vm.sponsor.sponsorCompany,
-        sponsorType: vm.sponsor.sponsorType,
-        sponsorMoney: vm.sponsor.sponsorMoney,
-        sponsorDescription: vm.sponsor.sponsorDescription,
+      sponsorName : vm.sponsor.sponsorName,
+      sponsorCompany : vm.sponsor.sponsorCompany,
+      sponsorType : vm.sponsor.sponsorType,
+      sponsorMoney : vm.sponsor.sponsorMoney,
+      description : vm.sponsor.description,
+      photo : vm.sponsor.photo
       }
 
-      $scope.submitDisable = false;
-      $scope.updateDisable = true;
+      vm.submitDisable = false;
+      vm.updateDisable = true;
       sponsorService.updateSponsor(modSponsor);
       init();
       clean();
     }
+
+    vm.showSponsorAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Registro correcto!')
+        .textContent('Registro de patrocinador correcto!')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+  vm.showEventAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Registro correcto!')
+        .textContent('Registro de evento correcto!')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+    vm.showProfesorAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Registro correcto!')
+        .textContent('Registro de profesor correcto!')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+    vm.showProfesorDuplicateAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Profesor ya existe')
+        .textContent('El profesor ya existe, porfavor ingrese otro')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+    vm.showSponsorDuplicateAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Patrocinador ya existe')
+        .textContent('El patrocinador ya existe, porfavor ingrese otro')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
 
     // Función para imprimir datos en el formulario
     vm.getInfo = function (pEvent) {
@@ -212,10 +313,8 @@
       vm.event.orgType = pEvent.orgType;
       vm.event.orgName = pEvent.orgName;
       vm.event.description = pEvent.description;
-
-      vm.updateDisable = false;
-      vm.submitDisable = true;
-    }
+      $scope.updateDisable = false;
+    };
 
     // Función para actualizar datos de evento
     vm.updateEvent = function () {
@@ -246,9 +345,7 @@
         orgType: vm.event.orgType,
         description: vm.event.description
       }
-
-      vm.submitDisable = false;
-      vm.updateDisable = true;
+      $scope.updateDisable = true;
       eventService.updateEvent(modEvent);
       init();
       clean();
@@ -258,17 +355,18 @@
       pEvent.eventState = 'cancelado';
       eventService.updateEvent(pEvent);
       init();
-      aceptedEvents();
+      acceptedEvents();
     };
 
-    function aceptedEvents() {
-      // && vm.events[i].date1 => new Date()
-      for (var i = 0; i < vm.events.length; i++) {
-        if (vm.events[i].eventState === 'aprobado') {
-          vm.acceptedEvents.push(vm.events[i]);
+    // Función para filtrar la tabla de consulta de eventos
+    function acceptedEvents() {
+      vm.events = eventService.getEvents();
+        for (var i = 0; i < vm.events.length; i++) {
+          if (vm.events[i].eventState === 'aprobado') {
+            vm.acceptedEvents.push(vm.events[i]);
+          }
         }
       }
-    }
 
     vm.createNewConsult = function (pNewConsul) {
       console.log("El objeto con imagen es %o", pNewConsul);
@@ -304,27 +402,14 @@
 
     // Función para guardar profesores
     vm.createNewTeacher = function (pNewTeacher) {
-      var bError = false;
-      console.log(pNewTeacher.id);
-      if (vm.teacher.length == 0) {
+      if(userService.findUserTeacher(pNewTeacher.id) !== false){
+        vm.showProfesorDuplicateAlert();
+      }
+      else{
         userService.setTeachers(pNewTeacher);
-        document.querySelector('.SuccessMessage').innerHTML = 'El profesor se registró exitosamente';
-        clean();
+        vm.showProfesorAlert();
         init();
-      } else {
-        for (var i = 0; i < vm.teachers.length; i++) {
-          if (pNewTeacher.id == vm.teachers[i].id) {
-            bError = true;
-          }
-        }
-        if (bError == false) {
-          userService.setTeachers(pNewTeacher);
-          document.querySelector('#SuccessMessage').innerHTML = 'El profesor se registró exitosamente';
-          clean();
-          init();
-        } else {
-          document.querySelector('#ErrorMessage').innerHTML = 'El profesor ya existe';
-        }
+        clean();
       }
     }
 
@@ -428,11 +513,26 @@
       cleanAcademy();
     }
 
-    vm.logOut = function () {
-        AuthService.logOut();
+    vm.logOut = function(){
+      AuthService.logOut();
+    }
+
+    vm.presaveStudent = function(pNewStudent) {
+        console.log(pNewStudent);
+        vm.cloudObj.data.file = document.getElementById("photoStudent").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewStudent.photo = data.url;
+          })
+          .catch(function(error){
+            console.log(error);
+          })
+          vm.createStudent(pNewStudent);
       }
-      //funcion para guardar informacion del alumno
-    vm.createStudent = function () {
+
+
+    //funcion para guardar informacion del alumno
+    vm.createStudent = function(pNewStudent){
       var newUser = {
         id: vm.id,
         birthday: vm.birthday,
@@ -452,6 +552,7 @@
         category: vm.category,
         tournaments: vm.tournaments,
         tournamentsWins: vm.tournamentsWins,
+        photo: vm.photo,
         status : vm.status
       };
       console.log(newUser);
@@ -539,22 +640,110 @@
       var newCompetition = {
         competitionNumber: vm.competitionNumber,
         eventBelongs: vm.eventBelongs,
+        competitionAge : vm.competitionAge,
         competitionGenre: vm.competitionGenre,
         competitionBelt: vm.competitionBelt,
         competitionWeight: vm.competitionWeight,
-        arrayObject: [vm.competitors]
       }
       newCompetition.competitors = [];
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['0']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['1']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['2']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['3']);
-      newCompetition.competitors.push(newCompetition.arrayObject[0]['4']);
       console.log(newCompetition);
       console.log(newCompetition.competitors)
       eventService.setCompetitions(newCompetition);
       cleanStudent();
       init();
+    }
+
+      vm.changeViews = function(){
+        vm.userActive = true;
+        vm.selected = 2;
+      }
+
+    //Registrar alumnos en competencia
+
+      vm.registerUsersCompetitions = function(competition){
+        vm.competitor;
+        for(var i = 0; i < vm.competitions.length; i++){
+          if(competition == vm.competitions[i].competitionNumber){
+            for(var j = 0; j < vm.competitions[i].competitors.length; j++){
+              if(vm.competitor.attendAcademy == vm.competitions[i].competitors[j].attendAcademy){
+                var duplicate = true;
+              }
+            }
+            if(duplicate !== true){
+              vm.competitions[i].competitors.push(vm.competitor);
+              eventService.updateCompetition(vm.competitions[i]);
+              return;
+            }
+          }
+        console.log(eventService.getCompetitions());
+      }
+    }
+
+    vm.showCompetition = function(competition){
+      for(var i = 0; i < vm.competitions.length; i++){
+        if(competition.competitionNumber == vm.competitions[i].competitionNumber){
+          vm.competitionsToShow.push(competition);
+          for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
+            vm.competitionsToShow[i].competitors[j].points = 0;
+          }
+        }
+      }
+      for(var i = 0; i < vm.competitionsToShow.length; i++){
+        for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
+          kLoop:
+          for(var k = 0; k < 4; k++){
+            vm.pairFights = [];
+            vm.pairFights.push(vm.competitionsToShow[i].competitors[j]);
+            vm.pairFights.push(vm.competitionsToShow[i].competitors[k + 1])
+            if(vm.pairFights.length == 2){
+              if(vm.fights.length == 0){
+                vm.fights.push(vm.pairFights);
+              }
+              if(vm.pairFights.length == 2){
+                for(var x = 0; x < vm.fights.length; x++){
+                  if(vm.pairFights == vm.fights[x]){
+                    continue kLoop;
+                  }
+                }
+                for(var x = 0; x < vm.fights.length; x++){
+                  if((vm.pairFights[0] == vm.fights[x][1]) && (vm.pairFights[1] == vm.fights[x][0])){
+                    continue kLoop;
+                  }
+                }
+                for(var x = 0; x < vm.fights.length; x++){
+                  if((vm.pairFights[0] == vm.pairFights[1])){
+                    continue kLoop;
+                  }
+                }
+                vm.fights.push(vm.pairFights);
+                if(vm.fights.length == 20){
+                  break;
+                }
+              }
+            }
+          }
+        }
+        vm.competitionsToShow[i].fights = vm.fights;
+      }
+      console.log(vm.fights);
+      vm.selected = 8;
+    }
+
+    vm.updateOptions = function(competition){
+      vm.competitorsEvent = [];
+      for(var i = 0; i < vm.competitions.length; i++){
+        if(competition == vm.competitions[i].competitionNumber){
+          for(var j = 0; j < vm.users.length; j++){
+            if(vm.currentUser.id == vm.users[j].teacher){
+              if(vm.users[j].category == vm.competitions[i].competitionAge){
+                if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+                  vm.competitorsEvent.push(vm.users[j]);
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
   }

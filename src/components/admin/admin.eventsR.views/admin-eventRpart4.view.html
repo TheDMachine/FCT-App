@@ -1,50 +1,70 @@
-<!-- Campo nombre del lugar -->
-<md-input-container flex-offset>
-	<label>Nombre del lugar </label>
-	<input type="text" name="frmEventInfo.placeName" ng-model="vm.event.placeName" maxlength="40" md-maxlength="40" required>
+<div class="row">
+	<div class="col-md-12">
+		<!-- Campo nombre del lugar -->
+		<md-input-container flex-offset>
+			<label>Nombre del lugar </label>
+			<input type="text" name="frmEventInfo.placeName" ng-model="vm.event.placeName" maxlength="30" md-maxlength="30" required>
 
-	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.$error">
-		<div ng-messages-include="components/includes/messages.html"></div>
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
 	</div>
-</md-input-container>
+	
+	
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<!-- Campo latitud -->
+		<md-input-container flex-offset>
+			<label>Latitud</label>
+			<input type="text" name="frmEventInfo.latitude" ng-model="vm.event.latitude" maxlength="15" md-maxlength="15" placeholder="9,9331" required>
 
-<!-- Campo latitud -->
-<md-input-container flex-offset>
-	<label>Latitud</label>
-	<input type="text" name="frmEventInfo.latitude" ng-model="vm.event.latitude" required>
-
-	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.$error">
-		<div ng-messages-include="components/includes/messages.html"></div>
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
 	</div>
-</md-input-container>
+	<div class="col-md-6">
+		<!-- Campo longitud -->
+		<md-input-container flex-offset>
+			<label>Logitud</label>
+			<input type="text" name="frmEventInfo.length" ng-model="vm.event.length" placeholder="-84,0986" maxlength="20" md-maxlength="20" required>
 
-<!-- Campo longitud -->
-<md-input-container flex-offset>
-	<label>Logitud</label>
-	<input type="text" name="frmEventInfo.length" ng-model="vm.event.length" required>
-
-	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.$error">
-		<div ng-messages-include="components/includes/messages.html"></div>
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
 	</div>
-</md-input-container>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<!-- Campo para descripción de la organización -->
+		<md-input-container class="md-block" flex-gt-sm>
+			<label>Ubicación</label>
+			<textarea name="frmEventInfo.location" ng-model="vm.event.location" maxlength="40" md-maxlength="50" rows="5" md-select-on-focus required></textarea>
 
-<!-- Campo para descripción de la organización -->
-<md-input-container class="md-block" flex-gt-sm>
-	<label>Ubicación</label>
-	<textarea name="frmEventInfo.location" ng-model="vm.event.location" maxlength="150" md-maxlength="150" rows="5" md-select-on-focus required></textarea>
-
-	<!-- Mensaje de retroalimentacion -->
-	<div ng-messages="frmEventInfo.$error">
-		<div ng-messages-include="components/includes/messages.html"></div>
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
 	</div>
-</md-input-container>
+</div>
+<div class="row">
+	<div class="col-md-2">
+		<!-- Botón Anterior -->
+		<a ui-sref="admin.part3" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
+	</div>
+	<div class="col-md-offset-8 col-md-2">
+		<!-- Botón siguiente -->
+		<a ui-sref="admin.part5" class="btn btn-info" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+	</div>
+</div>
 
-<!-- Botón Anterior -->
-<a ui-sref="admin.part3" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
 
-<!-- Botón siguiente -->
-<a ui-sref="admin.part5" class="btn btn-info" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+
 
