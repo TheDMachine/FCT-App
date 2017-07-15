@@ -79,8 +79,27 @@
       url : '/sponsorPartTwo',
       templateUrl : 'components/admin/sponsor.register.views/admin-sponsor2.view.html'
     })
-    
+
     // Fin de las vistas hojas del formualrio de registro del administrador.
+
+    //Inicio de las vistas hijas del formulario de registro del alumno
+    .state('admin.alumnopart1',{
+      url : '/alumnopart1', //ruta del url del estado
+      templateUrl : 'components/admin/admin.alumnoR.views/admin-alumnopart1.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.alumnopart2',{
+      url : '/alumnopart2', //ruta del url del estado
+      templateUrl : 'components/admin/admin.alumnoR.views/admin-alumnopart2.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.alumnopart3',{
+      url : '/alumnopart3', //ruta del url del estado
+      templateUrl : 'components/admin/admin.alumnoR.views/admin-alumnopart3.view.html'//vista que se va a cargar para este estado
+    })
+    .state('admin.alumnopart4',{
+      url : '/alumnopart4', //ruta del url del estado
+      templateUrl : 'components/admin/admin.alumnoR.views/admin-alumnopart4.view.html'//vista que se va a cargar para este estado
+    })
+    // Fin de las vistas hojas del formualrio de registro del alumno.
 
     //Inicio de las vistas hijas del formulario de registro del profesor
     .state('admin.teachpart1',{

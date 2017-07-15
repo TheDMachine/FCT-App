@@ -30,7 +30,7 @@
     vm.ready = false;
     vm.today = new Date();
 
-    function init(){ 
+    function init(){
     // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.selected = 1;
         vm.currentUser = userService.searchAdmin(userService.getCookie());
@@ -519,7 +519,7 @@
 
     vm.presaveStudent = function(pNewStudent) {
         console.log(pNewStudent);
-        vm.cloudObj.data.file = document.getElementById("photoStudent").files[0];
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
         Upload.upload(vm.cloudObj)
           .success(function(data){
             pNewStudent.photo = data.url;
@@ -628,7 +628,7 @@
         category: vm.category,
         tournaments: vm.tournaments,
         tournamentsWins: vm.tournamentsWins,
-        status : vm.status 
+        status : vm.status
       }
       userService.updateUsers(editstudent);
       init();
@@ -749,4 +749,3 @@
   }
 
 })();
-

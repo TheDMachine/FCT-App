@@ -1,3 +1,48 @@
+/*Inicio estilos de tabla de academias*/
+#tableAcaademy h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 60px;
+}
+
+#tableAcaademy table{
+  width: 95%;
+  margin: 0 2.5%;
+}
+
+#tableAcaademy thead, #tableAcaademy tbody{
+  width: 95%;
+  margin: 0 2.5%;
+}
+
+#tableAcaademy tbody{
+  text-align: center;
+}
+
+#tableAcaademy tr th{
+  width: 100px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: #85c8dd;
+  color: #fff;
+}
+
+#tableAcaademy tr:hover{
+  background: rgba(133, 200, 221, 0.1);
+}
+
+#tableAcaademy tbody td{
+  width: 100px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/*Fin estilos de tabla de academias*/
+
 /*Inicio estilos de pasos formulario profesoresbuttonTeacher*/
 
 #buttonTeacher div{
@@ -42,7 +87,7 @@
 
 #eventsTable thead, #eventsTable tbody{
   width: 100%;
-} 
+}
 
 #eventsTable tbody{
   text-align: center;
@@ -165,7 +210,7 @@
 
 #categHist thead, #categHist tbody{
   width: 100%;
-} 
+}
 
 #categHist tbody{
   text-align: center;
@@ -243,7 +288,7 @@
   background-color: #fcb132;
   color: #fff;
   position: absolute;
-  top: 50%; 
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -282,7 +327,7 @@
 
 #table1 thead, #table1 tbody, #table2 thead, #table2 tbody{
   width: 100%;
-} 
+}
 
 #table1 tbody, #table2 tbody{
   text-align: center;
@@ -519,7 +564,7 @@ md-input-container{
 
 #modTable thead, #modTable tbody{
   width: 100%;
-} 
+}
 
 #modTable tbody{
   text-align: center;
