@@ -26,6 +26,7 @@
   <md-input-container layout="column">
     <label>Segundo Nombre</label>
     <input type="text" name="secondName" ng-model="vm.user.secondName" pattern="[^a-zA-Z]+">
+
     <!-- Mesaje de retroalimentación -->
     <div ng-messages="frmRegisterConsul.secondName.$error">
     <div ng-messages-include="components/includes/messages.html"></div>
@@ -59,12 +60,14 @@
   <!-- Campo de fecha de nacimiento -->
   <md-input-container flex-offset>
     <md-datepicker name="bornDate"  ng-model="vm.user.bornDate"  md-placeholder="Fecha de nacimiento" required></md-datepicker>
+
     <!-- Mensaje de retroalimentacion -->
     <div ng-messages="frmRegisterConsul.$error">
         <div ng-messages-include="components/includes/messages.html"></div>
     </div>
   </md-input-container>
 </div>
+
 <!-- Boton de siguiente centrado -->
 <div class="col-xs-6 col-xs-offset-3">
     <a ui-sref="admin.partTwo" class="btn btn-block btn-info" ng-disabled="frmRegisterConsul.$invalid">
