@@ -226,7 +226,7 @@
 									    <tbody>
 									    <!-- | filter:{stateFilter:vm.stateFilter} -->
 									      	<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
-									      	
+
 									      		<td>{{event.date1 | date : "shortDate"}}</td>
 									      		<td>{{event.eventName}}</td>
 									      		<td>{{event.eventState}}</td>
@@ -306,7 +306,7 @@
 						        <md-card-actions layout="row" layout-align="end">
 						          <md-button ng-click="vm.getSponsorInfo(item)">Editar</md-button>
 						        </md-card-actions>
-					      </md-card>	
+					      </md-card>
   					</div>
   				</md-content>
   			</div>
@@ -594,7 +594,7 @@
 				        	</div>
 				        	<div ui-sref-active="active" ui-sref=".part5">
 				        		<a >5</a>
-				        	</div>	
+				        	</div>
 				        </div>
 
 				        <div class="row">
@@ -617,7 +617,7 @@
 							<br>
 							<md-datepicker name="from"  ng-model="vm.from3" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
 					    	<md-datepicker name="to"  ng-model="vm.to3" md-placeholder="Fecha fin"></md-datepicker>
-							
+
 				        	<!-- Tabla de info eventos -->
 					        <div>
 					          	<table class="table-responsive">
@@ -630,7 +630,7 @@
 								      	</tr>
 								    </thead>
 								    <tbody>
-								      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from3:vm.to3" > 
+								      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from3:vm.to3" >
 								      		<td>{{event.eventName}}</td>
 									        <td>{{event.date1 | date : "shortDate"}}</td>
 
@@ -1187,7 +1187,7 @@
 				           <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
 
 	                				 <form name="frmRegTeacher" autocomplete="off"  ng-submit="vm.presaveTeacher(vm.teacher)">
-	                			
+
 	                			<!-- Espacio para mostrar vistas del registro -->
 			          			<div id="form-views" ui-view></div>
 				          	</form>
@@ -1201,6 +1201,7 @@
 								        <th>Cedula</th>
 								        <th>Primer nombre</th>
 								        <th>Primer apellido</th>
+												<th>Estado</th>
 							      	</tr>
 							    </thead>
 							    <tbody>
@@ -1208,6 +1209,7 @@
 								        <td>{{teacher.id}}</td>
 								        <td>{{teacher.firstName}}</td>
 								        <td>{{teacher.firstLastName}}</td>
+												<td>{{teacher.status}}</td>
 								        <td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
 								    	<!-- Botones para editar profesores -->
 								        <td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)"></td>
@@ -1236,7 +1238,7 @@
 							<br>
 							<md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
 					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker>
-							
+
 					        	<!-- Tabla de info eventos -->
 						        <div>
 						          	<table class="table-responsive">
@@ -1270,7 +1272,7 @@
 									      	</tr>
 									    </thead>
 									    <tbody>
-									      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to" > 
+									      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to" >
 									      		<td>{{event.eventName}}</td>
 									      		<td>{{event.eventType}}</td>
 									      		<td>{{event.eventState}}</td>
@@ -1324,7 +1326,7 @@
 								        <md-option value="cancelado">Cancelado</md-option>
 								    </md-select>
 								</md-input-container>
-								
+
 
 					        	<!-- Tabla historial de eventos -->
 						        <div>
@@ -1340,7 +1342,7 @@
 									    <tbody>
 									    <!-- | filter:{stateFilter:vm.stateFilter} -->
 									      	<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
-									      	
+
 									      		<td>{{event.date1 | date : "shortDate"}}</td>
 									      		<td>{{event.eventName}}</td>
 									      		<td>{{event.eventState}}</td>
@@ -1352,6 +1354,4 @@
 					        </md-content>
 				      	</md-tab>
 			  	</md-content>
-			</div>	
-
-		
+			</div>

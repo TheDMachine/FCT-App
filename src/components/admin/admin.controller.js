@@ -30,7 +30,7 @@
     vm.ready = false;
     vm.today = new Date();
 
-    function init(){ 
+    function init(){
     // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.selected = 1;
         vm.currentUser = userService.searchAdmin(userService.getCookie());
@@ -230,10 +230,10 @@
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('Registro correcto!')
-        .textContent('Registro de evento correcto!')
+        .title('¡Registro correcto!')
+        .textContent('¡Registro de evento correcto!')
         .ariaLabel()
-        .ok('Gracias!')
+        .ok('¡Gracias!')
         .targetEvent()
     );
   };
@@ -246,10 +246,10 @@
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('Registro correcto!')
-        .textContent('Registro de profesor correcto!')
+        .title('¡Registro correcto!')
+        .textContent('¡Registro de profesor correcto!')
         .ariaLabel()
-        .ok('Gracias!')
+        .ok('¡Gracias!')
         .targetEvent()
     );
   };
@@ -265,7 +265,7 @@
         .title('Profesor ya existe')
         .textContent('El profesor ya existe, porfavor ingrese otro')
         .ariaLabel()
-        .ok('Gracias!')
+        .ok('¡Gracias!')
         .targetEvent()
     );
   };
@@ -281,7 +281,7 @@
         .title('Patrocinador ya existe')
         .textContent('El patrocinador ya existe, porfavor ingrese otro')
         .ariaLabel()
-        .ok('Gracias!')
+        .ok('¡Gracias!')
         .targetEvent()
     );
   };
@@ -395,9 +395,6 @@
           pNewTeacher.photo = data.url;
           vm.createNewTeacher(pNewTeacher);
         })
-        .catch(function (error) {
-          console.log(error);
-        })
     }
 
     // Función para guardar profesores
@@ -409,7 +406,7 @@
         userService.setTeachers(pNewTeacher);
         vm.showProfesorAlert();
         init();
-        clean();
+        cleanTeacher();
       }
     }
 
@@ -431,11 +428,26 @@
       vm.teacher.status = pTeacher.status;
     }
 
+     function cleanTeacher() {
+      vm.teacher.id = '';
+      vm.teacher.firstName = '';
+      vm.teacher.secondName = '';
+      vm.teacher.firstLastName = '';
+      vm.teacher.secondLastName = '';
+      vm.teacher.phone = '';
+      vm.teacher.email = '';
+      vm.teacher.bornDate = '';
+      vm.teacher.gender = '';
+      vm.teacher.nationality = '';
+      vm.teacher.academy = '';
+      vm.teacher.grade = '';
+      vm.teacher.photo = '';
+      vm.teacher.status = '';
+    }
     // Función para limpiar campos
 
     function clean() {
       vm.event = '';
-      vm.teacher = '';
     }
 
       // Función para actualizar datos del profesor
@@ -458,7 +470,7 @@
       }
       userService.updateTeacher(editTeacher);
       init();
-      clean();
+      cleanTeacher();
     };
 
     //funcion para guardar informacion de academia
@@ -628,7 +640,7 @@
         category: vm.category,
         tournaments: vm.tournaments,
         tournamentsWins: vm.tournamentsWins,
-        status : vm.status 
+        status : vm.status
       }
       userService.updateUsers(editstudent);
       init();
@@ -749,4 +761,3 @@
   }
 
 })();
-

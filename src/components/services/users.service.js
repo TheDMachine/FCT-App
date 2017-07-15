@@ -1,4 +1,4 @@
-  
+
 (function() {
   'use strict';
   angular
@@ -34,7 +34,7 @@
         searchAdmin : _searchAdmin
     };
     return publicAPI;
-    
+
     //Guardar alumno
     function _setUsers(newUser){
       var usersList = _getUsers();
@@ -123,11 +123,11 @@
     }
 
     //editar la informacion del profesor
-    function _updateTeacher(pEditTeacher) {
+    function _updateTeacher(editTeacher) {
       var teachersList = _getTeachers();
       for(var i = 0; i < teachersList.length; i++){
-        if(teachersList[i].id == pEditTeacher.id){
-          teachersList[i] = pEditTeacher;
+        if(teachersList[i].id == editTeacher.id){
+          teachersList[i] = editTeacher;
         }
       }
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));

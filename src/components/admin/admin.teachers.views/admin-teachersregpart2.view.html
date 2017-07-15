@@ -25,7 +25,7 @@
 
     <!-- Calendario Fecha Nacimiento -->
     <md-input-container flex-offset>
-      <md-datepicker name="teacherBornDate" ng-model="vm.teacher.bornhDate" md-placeholder="Ingrese una fecha" required></md-datepicker>
+      <md-datepicker name="teacherBornDate" ng-model="vm.teacher.bornDate" md-placeholder="Ingrese una fecha" required></md-datepicker>
 
       <!-- Mensaje de retroalimentacion -->
       <div ng-messages="frmRegTeacher.teacherBornDate.$error">
@@ -39,4 +39,3 @@
     <a ui-sref="admin.teachpart3" class="btn btn-info" ng-disabled="frmRegTeacher.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
   </div>
 </div>
-
