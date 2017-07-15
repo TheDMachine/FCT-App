@@ -25,13 +25,13 @@
 </div>
 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-offset-5">
   <div>
-    <label class="btn btn-default btn-file">
-      Adjuntar Foto <input id="photo" name="photo" type="file" style="display: none;" ng-model="vm.event.photo">
+    <label for="photo" class="btn btn-default btn-file">
+      Adjuntar Foto <input id="photo" name="photo" type="file" style="display: none;" ng-model="vm.user.photo">
     </label>
   </div>
 </div>
 </div>
 <div class="col-xs-6 col-xs-offset-3">
-  <button type="submit" class="btn btn-success" ng-click="reset()">Registrar</button>
-  <span class=bg-danger" id="feedbackMesage"></span>
+  <button type="submit" class="btn btn-success" ng-click="vm.reset()">Registrar</button>
+  <span class="bg-danger" id="feedbackMesage"></span>
 </div>

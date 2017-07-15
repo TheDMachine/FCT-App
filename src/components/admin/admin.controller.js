@@ -349,7 +349,7 @@
           document.querySelector('#ErrorMessage').innerHTML = 'El profesor ya existe';
         }
       }
-    }
+    };
 
     // Función para imprimir datos del profesor en la lista
     vm.getInfoTeacher = function (pTeacher) {
@@ -455,44 +455,18 @@
       AuthService.logOut();
     }
 
-    vm.presaveStudent = function(pNewStudent) {
-        console.log(pNewStudent);
-        vm.cloudObj.data.file = document.getElementById("photo").files[0];
-        Upload.upload(vm.cloudObj)
-          .success(function(data){
-            pNewStudent.photo = data.url;
-          })
-          .catch(function(error){
-            console.log(error);
-          })
+    vm.presaveStudent = function (pNewStudent) {
+      console.log(pNewStudent);
+      vm.cloudObj.data.file = document.getElementById("photo").files[0];
+      Upload.upload(vm.cloudObj)
+        .success(function (data) {
+          pNewStudent.photo = data.url;
           vm.createStudent(pNewStudent);
-      }
-
+        });
+    };
 
     //funcion para guardar informacion del alumno
     vm.createStudent = function(pNewStudent){
-      var newUser = {
-        id: vm.id,
-        birthday: vm.birthday,
-        firstName: vm.firstName,
-        secondName: vm.secondName,
-        firstLastName: vm.firstLastName,
-        secondLastName: vm.secondLastName,
-        genre: vm.genre,
-        weight: vm.weight,
-        height: vm.height,
-        nationality: vm.nationality,
-        phone: vm.phone,
-        email: vm.email,
-        attendAcademy: vm.attendAcademy,
-        teacher: vm.teacher,
-        belt: vm.belt,
-        category: vm.category,
-        tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins,
-        photo: vm.photo,
-        status : vm.status
-      };
       console.log(newUser);
       userService.setUsers(newUser);
       cleanStudent();
