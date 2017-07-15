@@ -1,28 +1,35 @@
-<h1 class="md-display-2">Crea tu propuesta de un evento</h1>
-
-<!-- links de cada paso del formulario -->
-<div class="text-center statusButtons">
-	<a ui-sref-active="active" ui-sref=".proposeOne">
-		<span>1</span>
-	</a>
-	<a ui-sref-active="active" ui-sref=".proposeTwo">
-		<span>2</span>
-	</a>
-	<a ui-sref-active="active" ui-sref=".proposeThree">
-		<span>3</span>
-	</a>
-	<a ui-sref-active="active" ui-sref=".proposeFourth">
-		<span>4</span>
-	</a>
-	<a ui-sref-active="active" ui-sref=".proposeFive">
-		<span>5</span>
-	</a>
-	<a ui-sref-active="active" ui-sref=".proposeSix">
-		<span>6</span>
-	</a>
+<div class="row">
+	<div id="topSpace" class="col-xs-12">
+		<div class="col-xs-2 imageLogo"><img src="images/logFCT.png" width="75px" height="75px">
+		</div>
+		<div class="col-xs-offset-7 col-xs-1 col-sm-offset-9 col-sm-1"><a ui-sref="/"><span class="fa fa-times quitX"></span></a></div>
+	</div>
+<div class="text-center">
+	<h1 class="md-display-2">Propuesta de un evento<h1>
 </div>
-
-				    <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
+</div>
+<!-- links de cada paso del formulario de registro de eventos -->
+<div class="text-center genericButtonsSteps" layout="row" layout-align="center center">
+<div ui-sref-active="active" ui-sref=".proposeOne">
+	<a>1</a>
+</div>
+<div ui-sref-active="active" ui-sref=".proposeTwo">
+	<a>2</a>
+</div>
+<div ui-sref-active="active" ui-sref=".proposeThree">
+	<a>3</a>
+</div>
+<div ui-sref-active="active" ui-sref=".proposeFourth">
+	<a>4</a>
+</div>
+<div ui-sref-active="active" ui-sref=".proposeFive">
+	<a>5</a>
+</div>
+<div ui-sref-active="active" ui-sref=".proposeSix">
+	<a>6</a>
+</div>
+</div>
+<div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
 
 				      <!-- Formulario para registro de eventos -->
 				      <form id="sign-form" name="frmProposeRegister" autocomplete="off" ng-submit="vm.presavePropose(vm.propose)">
@@ -30,3 +37,4 @@
 				        <div id="form-views" ui-view></div>
 				      </form>
 				    </div>
+</div>

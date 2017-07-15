@@ -1134,7 +1134,8 @@ md-card md-card-title.no-padding{
 
 /*Inicia represetante de consejo*/
 
-[name="frmRegisterConsul"] {
+[name="frmRegisterConsul"],
+[name="frmProposeRegister"] {
   padding-top:5%;
 }
 

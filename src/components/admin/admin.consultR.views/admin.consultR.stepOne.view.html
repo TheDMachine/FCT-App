@@ -3,7 +3,7 @@
 <!-- Campo de cédula que es requerido -->
   <md-input-container layout="column">
     <label>Cédula</label>
-    <input type="text" name="id" ng-model="vm.user.id" required pattern="[0-9]+">
+    <input type="text" name="id" ng-model="vm.user.id" required ng-pattern="/^[0-9]{9}$/">
 
     <!-- Mesaje de retroalimentación -->
     <div ng-messages="frmRegisterConsul.id.$error">
@@ -14,7 +14,7 @@
   <!-- Campo de primer nombre que es requerido -->
   <md-input-container layout="column">
     <label>Primer Nombre</label>
-    <input type="text" name="firstName" ng-model="vm.user.firstName" required pattern="[^a-zA-Z]+">
+    <input type="text" name="firstName" ng-model="vm.user.firstName" required ng-pattern="/^[a-zA-Z_-]{3,30}$/">
 
     <!-- Mesaje de retroalimentación -->
     <div ng-messages="frmRegisterConsul.firstName.$error">
@@ -25,7 +25,7 @@
   <!-- Campo de segundo nombre que no requerido -->
   <md-input-container layout="column">
     <label>Segundo Nombre</label>
-    <input type="text" name="secondName" ng-model="vm.user.secondName" pattern="[^a-zA-Z]+">
+    <input type="text" name="secondName" ng-model="vm.user.secondName" ng-pattern="/^[a-zA-Z_-]{3,30}$/">
 
     <!-- Mesaje de retroalimentación -->
     <div ng-messages="frmRegisterConsul.secondName.$error">
@@ -38,7 +38,7 @@
   <!-- Campo de primer apellido que es requerido  -->
   <md-input-container layout="column">
     <label>Primer Apellido</label>
-    <input type="text" name="surname" ng-model="vm.user.surname" required pattern="[^a-zA-Z]+">
+    <input type="text" name="surname" ng-model="vm.user.surname" required ng-pattern="/^[a-zA-Z_-]{3,30}$/">
 
     <!-- Mesaje de retroalimentación -->
     <div ng-messages="frmRegisterConsul.surname.$error">
@@ -49,7 +49,7 @@
   <!--Campo de segundo apellido que no es requerido  -->
   <md-input-container layout="column">
     <label>Segundo Apellido</label>
-    <input type="text" name="secondSurname" ng-model="vm.user.secondSurname" pattern="[^a-zA-Z]+">
+    <input type="text" name="secondSurname" ng-model="vm.user.secondSurname" ng-pattern="/^[a-zA-Z_-]{3,30}$/">
 
     <!-- Mesaje de retroalimentación -->
     <div ng-messages="frmRegisterConsul.secondLastName.$error">

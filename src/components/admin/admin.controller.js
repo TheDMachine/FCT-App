@@ -287,6 +287,23 @@
     );
   };
 
+  //Modald para cargar el Modald
+  vm.showConsulAlert = function(pMessage, pFeedback) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title(pFeedback)
+        .textContent(pMessage)
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
     // Función para imprimir datos en el formulario
     vm.getInfo = function (pEvent) {
       vm.event.eventName = pEvent.eventName;
@@ -379,11 +396,11 @@
         //te manda a la página uno del registro.
         $state.go('admin.partOne');
         var tempDataOne = 'fallo al crear a ' + pNewConsul.firstName;
+        vm.showConsulAlert('!Registro fallido!','¡Registro de representante de consejo fallida!');
         logService.createLog(false, temDataZero, tempDataOne);
       } else {
-        var tempDataOne = 'Creado con exito ' + pNewConsul.firstName;
+        vm.showConsulAlert('!Registro exitoso!','¡Registro de representante de consejo exitosamente!');
         logService.createLog(0, temDataZero, tempDataOne);
-        document.getElementById('feedbackMesage').innerHTML = 'El represesante ha sido creado exitoxamente';
       }
     }
 
