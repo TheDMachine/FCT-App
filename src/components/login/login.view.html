@@ -11,7 +11,7 @@
         </md-icon>
           <md-input-container class="md-block" flex="80">
         <label>ID</label>
-        <input required name="clientEmail" ng-model="vm.id"
+        <input class="id-email" required name="clientEmail" ng-model="vm.id"
                minlength="9" maxlength="100" ng-pattern="/^[0-9]{9}$/" />
 
         <div ng-messages="projectForm.clientEmail.$error" role="alert">
@@ -27,7 +27,7 @@
         </md-icon>
           <md-input-container flex="80">
             <label class="md-primary">Contraseña</label>
-            <input ng-model="vm.password" name="password" type="password" required />
+            <input class="id-email" ng-model="vm.password" name="password" type="password" required />
 
             <div class="hint" ng-if="showHints">xyz08 OR abcd78</div>
 

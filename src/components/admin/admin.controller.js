@@ -23,9 +23,18 @@
     vm.acceptedEvents = [];
     vm.updateDisable = true;
     vm.nameSponsorEdit = false;
+    vm.showCompetition = false;
+    vm.competitionsToShow = [];
+    vm.fights = [];
+    vm.pairFights = [];
+    vm.ready = false;
     vm.today = new Date();
 
-    function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
+    function init(){ 
+    // función que se llama así misma para indicar que sea lo primero que se ejecute
+        vm.selected = 1;
+        vm.currentUser = userService.searchAdmin(userService.getCookie());
+        console.log(vm.currentUser);
         vm.originatorEv;
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
@@ -47,12 +56,13 @@
         vm.categoriesAge = estabInfoService.getCategories();
         estabInfoService.getCountries().then(function (data) {vm.countries = data.data.countries;});
         vm.teacher.status = "Activo";
+        vm.userActive = false;
       }init();
 
 
     /*Sidenav*/
     vm.openMenu = function ($mdMenu, ev) {
-      originatorEv = ev;
+      vm.originatorEv = ev;
       $mdMenu.open(ev);
     };
 
@@ -98,6 +108,7 @@
       console.log(pNewEvent.time1);
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
+        vm.showEventAlert();
         document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
         clean();
         init();
@@ -121,7 +132,7 @@
 
     vm.saveSponsor= function(pNewSponsor) {
       if(sponsorService.findSponsor(pNewSponsor.sponsorName) !== false){
-
+        vm.showSponsorDuplicateAlert();
       }
       else{
         sponsorService.setSponsors(pNewSponsor);
@@ -169,7 +180,7 @@
       vm.sponsor.description = pSponsor.description,
       vm.sponsor.photo = pSponsor.photo
 
-      vm.selected = 5;
+      vm.selected = 2;
       vm.imageActive = true;
       vm.nameSponsorEdit = true;
 
@@ -203,10 +214,74 @@
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('This is an alert title')
-        .textContent('You can specify some description text in here.')
-        .ariaLabel('Alert Dialog Demo')
-        .ok('Got it!')
+        .title('Registro correcto!')
+        .textContent('Registro de patrocinador correcto!')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+  vm.showEventAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Registro correcto!')
+        .textContent('Registro de evento correcto!')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+    vm.showProfesorAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Registro correcto!')
+        .textContent('Registro de profesor correcto!')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+    vm.showProfesorDuplicateAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Profesor ya existe')
+        .textContent('El profesor ya existe, porfavor ingrese otro')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+    vm.showSponsorDuplicateAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Patrocinador ya existe')
+        .textContent('El patrocinador ya existe, porfavor ingrese otro')
+        .ariaLabel()
+        .ok('Gracias!')
         .targetEvent()
     );
   };
@@ -327,27 +402,14 @@
 
     // Función para guardar profesores
     vm.createNewTeacher = function (pNewTeacher) {
-      var bError = false;
-      console.log(pNewTeacher.id);
-      if (vm.teacher.length == 0) {
+      if(userService.findUserTeacher(pNewTeacher.id) !== false){
+        vm.showProfesorDuplicateAlert();
+      }
+      else{
         userService.setTeachers(pNewTeacher);
-        document.querySelector('.SuccessMessage').innerHTML = 'El profesor se registró exitosamente';
-        clean();
+        vm.showProfesorAlert();
         init();
-      } else {
-        for (var i = 0; i < vm.teachers.length; i++) {
-          if (pNewTeacher.id == vm.teachers[i].id) {
-            bError = true;
-          }
-        }
-        if (bError == false) {
-          userService.setTeachers(pNewTeacher);
-          document.querySelector('#SuccessMessage').innerHTML = 'El profesor se registró exitosamente';
-          clean();
-          init();
-        } else {
-          document.querySelector('#ErrorMessage').innerHTML = 'El profesor ya existe';
-        }
+        clean();
       }
     };
 
@@ -455,14 +517,17 @@
       AuthService.logOut();
     }
 
-    vm.presaveStudent = function (pNewStudent) {
-      console.log(pNewStudent);
-      vm.cloudObj.data.file = document.getElementById("photo").files[0];
-      Upload.upload(vm.cloudObj)
-        .success(function (data) {
-          pNewStudent.photo = data.url;
+    vm.presaveStudent = function(pNewStudent) {
+        console.log(pNewStudent);
+        vm.cloudObj.data.file = document.getElementById("photoStudent").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data){
+            pNewStudent.photo = data.url;
+          })
+          .catch(function(error){
+            console.log(error);
+          })
           vm.createStudent(pNewStudent);
-        });
     };
 
     //funcion para guardar informacion del alumno
@@ -563,6 +628,99 @@
       eventService.setCompetitions(newCompetition);
       cleanStudent();
       init();
+    }
+
+      vm.changeViews = function(){
+        vm.userActive = true;
+        vm.selected = 2;
+      }
+
+    //Registrar alumnos en competencia
+
+      vm.registerUsersCompetitions = function(competition){
+        vm.competitor;
+        for(var i = 0; i < vm.competitions.length; i++){
+          if(competition == vm.competitions[i].competitionNumber){
+            for(var j = 0; j < vm.competitions[i].competitors.length; j++){
+              if(vm.competitor.attendAcademy == vm.competitions[i].competitors[j].attendAcademy){
+                var duplicate = true;
+              }
+            }
+            if(duplicate !== true){
+              vm.competitions[i].competitors.push(vm.competitor);
+              eventService.updateCompetition(vm.competitions[i]);
+              return;
+            }
+          }
+        console.log(eventService.getCompetitions());
+      }
+    }
+
+    vm.showCompetition = function(competition){
+      for(var i = 0; i < vm.competitions.length; i++){
+        if(competition.competitionNumber == vm.competitions[i].competitionNumber){
+          vm.competitionsToShow.push(competition);
+          for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
+            vm.competitionsToShow[i].competitors[j].points = 0;
+          }
+        }
+      }
+      for(var i = 0; i < vm.competitionsToShow.length; i++){
+        for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
+          kLoop:
+          for(var k = 0; k < 4; k++){
+            vm.pairFights = [];
+            vm.pairFights.push(vm.competitionsToShow[i].competitors[j]);
+            vm.pairFights.push(vm.competitionsToShow[i].competitors[k + 1])
+            if(vm.pairFights.length == 2){
+              if(vm.fights.length == 0){
+                vm.fights.push(vm.pairFights);
+              }
+              if(vm.pairFights.length == 2){
+                for(var x = 0; x < vm.fights.length; x++){
+                  if(vm.pairFights == vm.fights[x]){
+                    continue kLoop;
+                  }
+                }
+                for(var x = 0; x < vm.fights.length; x++){
+                  if((vm.pairFights[0] == vm.fights[x][1]) && (vm.pairFights[1] == vm.fights[x][0])){
+                    continue kLoop;
+                  }
+                }
+                for(var x = 0; x < vm.fights.length; x++){
+                  if((vm.pairFights[0] == vm.pairFights[1])){
+                    continue kLoop;
+                  }
+                }
+                vm.fights.push(vm.pairFights);
+                if(vm.fights.length == 20){
+                  break;
+                }
+              }
+            }
+          }
+        }
+        vm.competitionsToShow[i].fights = vm.fights;
+      }
+      console.log(vm.fights);
+      vm.selected = 8;
+    }
+
+    vm.updateOptions = function(competition){
+      vm.competitorsEvent = [];
+      for(var i = 0; i < vm.competitions.length; i++){
+        if(competition == vm.competitions[i].competitionNumber){
+          for(var j = 0; j < vm.users.length; j++){
+            if(vm.currentUser.id == vm.users[j].teacher){
+              if(vm.users[j].category == vm.competitions[i].competitionAge){
+                if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+                  vm.competitorsEvent.push(vm.users[j]);
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
   }

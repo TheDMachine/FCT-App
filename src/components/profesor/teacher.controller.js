@@ -37,6 +37,7 @@
 
   function init() {
     vm.currentUser = userService.findUserTeacher(userService.getCookie());
+    vm.selected = 2;
     console.log(vm.currentUser);
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
@@ -277,7 +278,7 @@
       }
     }
 
-    vm.showCompetition = function(competition){
+    vm.showCompetition = function(competition, $index){
       for(var i = 0; i < vm.competitions.length; i++){
         if(competition.competitionNumber == vm.competitions[i].competitionNumber){
           vm.competitionsToShow.push(competition);

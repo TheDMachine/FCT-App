@@ -31,12 +31,11 @@
           userService.updateUsers(userFounded);
         }
       }
-      /*if(userService.searchUser(pEmail) !== false){
-        var userFounded = userService.searchUser(pEmail);
+      if(userService.searchAdmin(pId) !== false){
+        var userFounded = userService.searchAdmin(pId);
         userFounded.userType = 'Administrador';
-        userFounded.newUser = 1;
-        userService.updateUsers(userFounded);
       }
+      /*
       if(userService.searchUser(pEmail) !== false){
         var userFounded = userService.searchUser(pEmail);
         userFounded.userType = 'Representante';

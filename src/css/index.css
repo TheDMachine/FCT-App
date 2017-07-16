@@ -755,7 +755,7 @@ md-content{
 .logo-nav{
   padding:0;
   margin: 0;
-  width: 87.5%;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -916,6 +916,10 @@ md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-c
 md-card md-card-title md-card-title-media .md-media-lg{
   width: 75%;
   height: 20%;
+}
+
+input.id-email{
+  color: #fff;
 }
 
 span.md-headline.name-profile{
@@ -1105,7 +1109,7 @@ md-list-item > p, md-list-item > .md-list-item-inner > p, md-list-item .md-list-
 }
 .logo-nav{
   margin: 0 auto;
-  width: 70%;
+  width: 85%;
 }
 
 .logo-nav img{

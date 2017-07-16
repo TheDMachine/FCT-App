@@ -32,7 +32,6 @@
         }
       }
       sendInfo(vm.rsvToCxl);
-      clean();
     };
 
     // Devueñve la información de la reserva a cancelar
