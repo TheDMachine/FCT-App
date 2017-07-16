@@ -1,4 +1,4 @@
-  
+
 (function() {
   'use strict';
   angular
@@ -34,28 +34,21 @@
         searchAdmin : _searchAdmin
     };
     return publicAPI;
-    
+
     //Guardar alumno
     function _setUsers(newUser){
       var usersList = _getUsers();
       newUser.password = _generatePassword();
-      var error = false;
-      for (var i = 0; i < usersList.length; i++) {
-        if (usersList[i].email == newUser.email) {
-          error = true;
-          return;
-        }
-      }
       usersList.push(newUser);
       localStorage.setItem('lsUsersList', JSON.stringify(usersList));
       console.log(_getUsers());
     }
 
     //buscar si la cédula se repite
-    function _searchUser(newUser){
+    function _searchUser(newUserId){
       var usersList = _getUsers();
      for (var i = 0; i < usersList.length; i++) {
-       if(usersList[i].email == newUser){
+       if(usersList[i].id == newUserId){
          return usersList[i];
        }
      }

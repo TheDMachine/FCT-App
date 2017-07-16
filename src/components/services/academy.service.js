@@ -8,29 +8,25 @@
     var publicAPI = {
       setAcademy: _setAcademy,
       getAcademy: _getAcademy,
-      updateAcademy : _updateAcademy
+      updateAcademy : _updateAcademy,
+      searchAcademy: _searchAcademy
     };
     return publicAPI;
     //Guardar academia
     function _setAcademy(newAcademy){
       var academyList = _getAcademy();
-      var position = searchAcademy(newAcademy);
-      if (position == -1) {
         academyList.push(newAcademy);
         localStorage.setItem('lsAcademyList', JSON.stringify(academyList));
-      }
     }
     //buscar si la academia se repite
-    function searchAcademy(newAcademy){
+    function _searchAcademy(nameAcademy){
       var academyList = _getAcademy();
-      var position = -1;
-
       for (var i = 0; i < academyList.length; i++) {
-        if (newAcademy.name == academyList[i].name) {
-          position = i;
+        if (nameAcademy == academyList[i].name) {
+          return academyList[i];
         }
       }
-      return position;
+      return false;
     }
     //muestra la informacion mas actual
     function _getAcademy(){

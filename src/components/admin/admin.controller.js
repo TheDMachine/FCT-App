@@ -286,6 +286,72 @@
     );
   };
 
+  //Alertas de Registro de alumnos
+  vm.studentAlert = function() {
+  // Appending dialog to document.body to cover sidenav in docs app
+  // Modal dialogs should fully cover application
+  // to prevent interaction outside of dialog
+  $mdDialog.show(
+    $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Registo correcto')
+      .textContent('¡Registro de alumno realizado')
+      .ariaLabel()
+      .ok('¡Gracias!')
+      .targetEvent()
+    );
+  };
+
+  vm.studentDuplicateAlert = function() {
+  // Appending dialog to document.body to cover sidenav in docs app
+  // Modal dialogs should fully cover application
+  // to prevent interaction outside of dialog
+  $mdDialog.show(
+    $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Alumno ya existe')
+      .textContent('El alumno ya existe, registre otro')
+      .ariaLabel()
+      .ok('¡Gracias!')
+      .targetEvent()
+    );
+  };
+
+  //Alertas de Registro de academias
+  vm.academyAlert = function() {
+  // Appending dialog to document.body to cover sidenav in docs app
+  // Modal dialogs should fully cover application
+  // to prevent interaction outside of dialog
+  $mdDialog.show(
+    $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Registo correcto')
+      .textContent('¡Registro de academia realizado')
+      .ariaLabel()
+      .ok('¡Gracias!')
+      .targetEvent()
+    );
+  };
+
+  vm.academyDuplicateAlert = function() {
+  // Appending dialog to document.body to cover sidenav in docs app
+  // Modal dialogs should fully cover application
+  // to prevent interaction outside of dialog
+  $mdDialog.show(
+    $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('La academia ya existe')
+      .textContent('La academia ya existe, registre otra')
+      .ariaLabel()
+      .ok('¡Gracias!')
+      .targetEvent()
+    );
+  };
+
     // Función para imprimir datos en el formulario
     vm.getInfo = function (pEvent) {
       vm.event.eventName = pEvent.eventName;
@@ -473,9 +539,14 @@
         email: vm.email
       };
       console.log(newAcademy);
-      academyServices.setAcademy(newAcademy);
-      cleanAcademy();
-      init();
+      if (academyServices.searchAcademy(newAcademy.name) !== false) {
+        vm.academyDuplicateAlert();
+      }else {
+        academyServices.setAcademy(newAcademy);
+        vm.academyAlert();
+        cleanAcademy();
+        init();
+      }
     }
 
     //funcion para limpiar los input  de academia
@@ -533,10 +604,15 @@
 
     //funcion para guardar informacion del alumno
     vm.createStudent = function(pNewStudent){
-      console.log(pNewStudent);
-      userService.setUsers(pNewStudent);
-      cleanStudent();
-      init();
+      if (userService.searchUser(pNewStudent.id) !== false) {
+        vm.studentDuplicateAlert();
+      }else {
+        console.log(pNewStudent);
+        userService.setUsers(pNewStudent);
+        vm.studentAlert();
+        cleanStudent();
+        init();
+      }
     }
 
     //funcion para limpiar los input del alumno
