@@ -626,7 +626,7 @@
 								<div class="row">
 				        <div class="col-md-offset-1 col-md-10">
 				        	<!-- Formulario para registro de alumnos -->
-									<form name="frmStudent" novalidate ng-submit="vm.presaveStudent(vm)" autocomplete="off">
+									<form name="frmStudent" novalidate ng-submit="vm.presaveStudent(vm.student)" autocomplete="off">
 
 			          			<!-- Espacio para mostrar vistas del registro -->
 			          			<div ui-view></div>
@@ -932,7 +932,7 @@
 										<input type="text" name="studentFilter" ng-model="vm.studentFilter"/>
 									</md-input-container>
 								</div>
-								
+
 								<!-- tabla de alumnos-->
 								<div class="container-fluid row">
 									<div class="col-xs-12">
@@ -955,7 +955,7 @@
 													<td>{{student.teacher}}</td>
 													<td>{{student.belt}}</td>
 													<td>{{student.category}}</td>
-													<td>{{student.email}}</td>
+													<td><img ng-src="{{student.photo}}" alt="Description" width="60px" height="60px"/></td>
 													<td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
 												</tr>
 											</tbody>

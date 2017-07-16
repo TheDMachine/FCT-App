@@ -3,7 +3,7 @@
   <div class="col-xs-12 col-sm-6">
     <md-input-container flex-offset class="md-block">
       <label for="">Cinta</label>
-      <md-select name="belt" ng-model="vm.belt" required>
+      <md-select name="belt" ng-model="vm.student.belt" required>
         <md-option ng-repeat="belt in vm.belts" ng-value="belt.belt">{{belt.belt}}</md-option>
       </md-select>
 
@@ -18,7 +18,7 @@
   <div class="col-xs-12 col-sm-6">
     <md-input-container flex-offset class="md-block">
       <label for="">Categoría</label>
-      <md-select name="category" ng-model="vm.category" required>
+      <md-select name="category" ng-model="vm.student.category" required>
         <md-option ng-repeat="category in vm.categoriesAge" ng-value="category.categorieName">{{category.categorieName}}</md-option>
       </md-select>
 
@@ -35,7 +35,7 @@
   <div class="col-xs-12 col-sm-3">
     <md-input-container flex-offset class="md-block">
       <label for="">Torneos participaddos</label>
-      <input name="tournaments" type="number" ng-model="vm.tournaments" required/>
+      <input name="tournaments" type="number" ng-model="vm.student.tournaments" required/>
 
       <!-- Mensaje de retroalimentacion -->
       <div ng-messages="frmStudent.tournaments.$error">
@@ -48,7 +48,7 @@
   <div class="col-xs-12 col-sm-3">
     <md-input-container flex-offset class="md-block">
       <label for="">Torneos ganados</label>
-      <input name="tournamentsWins" type="number" ng-model="vm.tournamentsWins" required/>
+      <input name="tournamentsWins" type="number" ng-model="vm.student.tournamentsWins" required/>
 
       <!-- Mensaje de retroalimentacion -->
       <div ng-messages="frmStudent.tournamentsWins.$error">
@@ -61,7 +61,7 @@
   <div class="col-xs-12 col-sm-3">
     <md-input-container flex-offset class="md-block">
       <label for="">Peso</label>
-      <input name="weight" type="number" ng-model="vm.weight" required/>
+      <input name="weight" type="number" ng-model="vm.student.weight" required/>
 
       <!-- Mensaje de retroalimentacion -->
       <div ng-messages="frmStudent.weight.$error">
@@ -74,7 +74,7 @@
   <div class="col-xs-12 col-sm-3">
     <md-input-container flex-offset class="md-block">
       <label for="">Altura</label>
-      <input name="height" type="number" ng-model="vm.height" required/>
+      <input name="height" type="number" ng-model="vm.student.height" required/>
 
       <!-- Mensaje de retroalimentacion -->
       <div ng-messages="frmStudent.height.$error">
@@ -88,10 +88,9 @@
   <!-- Botón Anterior -->
   <a ui-sref="admin.alumnopart2" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
   <!-- Subir logo -->
-    <label class="btn btn-default btn-file" for="photoStudent">
-      Adjuntar foto
+    <label class="btn btn-default btn-file" for="photo">
+      Adjuntar foto <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.student.photo">
     </label>
-    <input id="photoStudent" name="photoStudent" type="file" style="display: none" ng-model="vm.photo">
   <!-- boton para guardar -->
   <md-button ng-click="vm.reset()" type="submit" class="md-raised" ng-disabled="frmStudent.$invalid">Registrar</md-button>
 
