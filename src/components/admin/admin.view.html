@@ -21,10 +21,28 @@
 					</md-button>
 				</md-list-item>
 				<md-list-item layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 3">
-						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 3 ? {'color': '#fff'} : {'color': '#00a652'} ">&#xE853;</i>
+						<md-button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i><br>
 						<p class="menu-button">Usuarios</p>
-					</md-button>
+						</md-button>
+						<div class="dropdown-menu">
+							<ul>
+								<li>
+					    			<md-button class="button-selected" ng-click="vm.selected = 9">R/Consejo
+		          					</md-button>
+		          				</li>
+		          				<li>
+							    	<md-button class="button-selected" ng-click="vm.selected = 10">
+				            			<p>Profesor</p>
+				          			</md-button>
+							    </li>
+							    <li>
+							    	<md-button class="button-selected" ng-click="vm.selected = 11">
+				            			<p>Alumno</p>
+				          			</md-button>
+		          				</li>
+							</ul>
+						</div>
 				</md-list-item>
 				<md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 4">
@@ -46,7 +64,7 @@
 				</md-list-item>
 				<md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 7">
-						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#fcb132'} ">&#xEB3F;</i>
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xEB3F;</i>
 						<p class="menu-button">Patrocinadores</p>
 					</md-button>
 				</md-list-item>
@@ -95,7 +113,7 @@
   			<!-- Poner la vista aquí
 
   			!!-->
-  			  			<!--Vista de competencias y competidores -->
+  			<!--Vista de competencias y competidores -->
   			<div ng-show="vm.selected == 8">
   				<div ng-repeat="item in vm.competitionsToShow track by $index" flex>
   					<h1>Competencia {{item.competitionNumber}}</h1>
@@ -899,7 +917,7 @@
 													Adjuntar logo
 												</label>
 												<input id="photoStudent" name="photoStudent" type="file" style="display: none" ng-model="vm.photo">
-												
+
 											<!-- boton para guardar -->
 											<md-button ng-click="vm.reset()" type="submit" class="md-raised" ng-disabled="frmStudent.$invalid">Agregar Alumno</md-button>
 
@@ -1355,5 +1373,11 @@
 				      	</md-tab>
 			  	</md-content>
 			</div>	
+	
 
+				
+
+			
+
+									
 		
