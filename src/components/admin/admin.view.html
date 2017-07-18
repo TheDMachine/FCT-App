@@ -1,5 +1,5 @@
 <!-- Sidenav view -->
-<div class="body-app md-menu-demo" layout="column" ng-cloak ng-init="selected = 0">
+<div class="body-app md-menu-demo" layout="column" ng-cloak ng-init="vm.selected = 1">
 	<div class="side-content-container" layout="row" flex>
 		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10" flex-sm="15" flex-xs="20">
 			<md-list>
@@ -14,17 +14,41 @@
 						<p class="menu-button">Perfil</p>
 					</md-button>
 				</md-list-item>
-				<md-list-item  layout="column">
+				<!-- <md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 2">
 						<i class="material-icons side-icons register-icon" ng-style="vm.selected == 2 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE873;</i>
 						<p class="menu-button">Registros</p>
 					</md-button>
-				</md-list-item>
+				</md-list-item> -->
 				<md-list-item layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 3">
-						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 3 ? {'color': '#fff'} : {'color': '#00a652'} ">&#xE853;</i>
-						<p class="menu-button">Usuarios</p>
+					<md-button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i>
+						<br>Usuarios
 					</md-button>
+					<div class="dropdown-menu">
+						<ul>
+							<li>
+								<md-button class="button-selected" ng-click="vm.selected = 9">
+									<p>R/Consejo</p>
+								</md-button>
+							</li>
+							<li>
+								<md-button class="button-selected" ng-click="vm.selected = 10">
+									<p>Profesor</p>
+								</md-button>
+							</li>
+							<li>
+								<md-button class="button-selected" ng-click="vm.selected = 11">
+									<p>Alumno</p>
+								</md-button>
+							</li>
+							<li>
+								<md-button class="button-selected" ng-click="vm.selected = 12">
+									<p>Inacitvar</p>
+								</md-button>
+							</li>
+						</ul>
+					</div>
 				</md-list-item>
 				<md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 4">
@@ -55,7 +79,7 @@
 		<md-content id="content" flex>
 	  		<md-toolbar class="tool-icons md-whiteframe-3dp" layout="row">
 	  			<md-list-item class="noright" flex="20">
-    				<img src="components/admin/admin.jpg" class="md-avatar" />
+    				<img src="components/admin/avatar.png" class="md-avatar" />
     				<p>{{vm.currentUser.email}}</p>
   				</md-list-item>
     			<div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
@@ -71,8 +95,8 @@
 				      </md-button>
 				      <md-menu-content width="4">
 				        <md-menu-item>
-				          <md-button ng-click="ctrl.redial($event)">
-				            Edit profile
+				          <md-button ng-click="vm.getCurrentAdmin(vm.currentUser)">
+				            Editar perfil
 				          </md-button>
 				        </md-menu-item>
 				        <md-menu-item>
@@ -167,28 +191,79 @@
   			</div>
   			<!-- Vista de perfil administrador-->
   			<div ng-show="vm.selected == 1">
-  				<h2 layout="row" layout-align="start">Perfil</h2>
   				<div flex-xs flex-gt-xs="100" layout="column">
+
+						<!-- formulario para editar perfil -->
+						<div ng-show="vm.editAdminProfile" id="adminEdit">
+							<form name="frmEditAdmin">
+								<div class="row container-fluid">
+									<!-- input de télefono -->
+								  <div class="col-xs-12 col-sm-6">
+								    <md-input-container flex-offset class="md-block">
+								      <label for="">Télefono</label>
+								      <input name="phone" type="text" ng-model="vm.currentUser.phone" ng-pattern="/^[0-9]{8}$/" required/>
+
+								      <!-- Mensaje de retroalimentacion -->
+								          <div ng-messages="frmEditAdmin.phone.$error">
+								            <div ng-message="pattern">######### - Ingrese un número de teléfono válido.</div>
+								          </div>
+								    </md-input-container>
+								  </div>
+
+									<!-- input de email -->
+									<div class="col-xs-12 col-sm-6">
+										<md-input-container flex-offset class="md-block">
+											<label for="">Email</label>
+											<input name="email" type="text" ng-model="vm.currentUser.email" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/" required/>
+
+											<!-- Mensaje de retroalimentacion -->
+													<div ng-messages="frmEditAdmin.email.$error">
+														<div ng-message="pattern">
+															ejemplo@ejemplo.com - Ingrese un email válido.
+														</div>
+													</div>
+										</md-input-container>
+									</div>
+								</div>
+
+								<div class="row container-fluid">
+									<div class="col-xs-12 col-sm-6">
+										<!-- Campo contraseña -->
+			              <md-input-container flex-offset>
+			                <label>Contraseña</label>
+			                <input name="password" ng-model="vm.currentUser.password" ng-pattern="/^[a-zA-Z0-9]*$/" type="password" required>
+			                <!-- Mensaje de retroalimentacion -->
+			                <div ng-messages="frmModInfo.password.$error">
+			                  <div ng-messages-include="components/includes/messages.html"></div>
+			                </div>
+			              </md-input-container>
+									</div>
+								</div>
+
+								<div class="row container-fluid">
+									<div class="col-xs-12">
+										<!-- boton para actualizar -->
+										<md-button type="submit" class="md-raised" ng-click="vm.editAdmin()">actualizar</md-button>
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<!-- Datos del perfil -->
 			      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
 			        <md-card-title class="no-padding">
-			          <md-card-title-media flex="35">
-			            <div class="md-media-lg card-media profile-picture">
-			            	<img src="components/admin/admin.jpg">
+			          <md-card-title-media flex="30">
+			            <div class="md-media-lg card-media profile-picture" id="img-avatar">
+			            	<img src="components/admin/avatar.png" class="img-circle">
 			            </div>
 			          </md-card-title-media>
 			          <md-card-title-text>
 			            <span class="md-headline name-profile">{{vm.currentUser.firstName}}  {{vm.currentUser.firstLastName}}</span>
-			            <p class="profile-info"><span>ID:</span> {{vm.currentUser.id}}</p>
+			            <p class="profile-info"><span>Cédula:</span> {{vm.currentUser.id}}</p>
 			            <p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
 			            <p class="profile-info"><span>Edad:</span> {{vm.currentUser.bornhDate}}</p>
-			            <div layout="row" class="contact-info">
-		            		<i class="material-icons">&#xE0CD;</i>
-			            	<p class="profile-info phone-info"><span>Teléfono:</span> {{vm.currentUser.phone}}</p>
-			            </div>
-			            <div layout="row" class="contact-info">
-		            		<i class="material-icons">&#xE0BE;</i>
-			            	<p class="profile-info phone-info"><span>Email:</span> {{vm.currentUser.email}}</p>
-			            </div>
+		            	<p class="profile-info "><span>Teléfono:</span> {{vm.currentUser.phone}}</p>
+		            	<p class="profile-info "><span>Email:</span> {{vm.currentUser.email}}</p>
 			          </md-card-title-text>
 			        </md-card-title>
 			        <md-card-actions layout="row" layout-align="end center">
@@ -438,103 +513,6 @@
 			<!-- Sección de Registros -->
   			<div ng-show="vm.selected == 2" flex="" ng-cloak>
 			  <md-content>
-			    <md-tabs md-dynamic-height md-border-bottom>
-			      	<md-tab label="Academias">
-				        <md-content class="md-padding">
-				          	<h1 class="md-display-2">Academias</h1>
-								<div class="container-fluid row">
-									<div class="col-xs-12">
-										<form name="frmAcademy" novalidate autocomplete="off">
-
-											<!-- input nombre de acdemia -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Nombre de academia</label>
-													<input name="name" type="text" ng-model="vm.name" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmAcademy.name.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de direcion -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Dirección</label>
-													<input type="text" ng-model="vm.address" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmAcademy.name.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de encargado -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Nombre del encargado</label>
-													<input type="text" ng-model="vm.manager" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmAcademy.name.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de cantidad de competidores -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Cantidad de competidores</label>
-													<input type="number" ng-model="vm.competitors" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmAcademy.name.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de telefono -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Teléfono</label>
-													<input type="text" ng-model="vm.phone" ng-pattern="/^[0-9]{8}$/" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmAcademy.name.$error">
-														<div ng-message="pattern">######### - Ingrese un número de teléfono válido.</div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de email -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Email</label>
-													<input type="text" ng-model="vm.email" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmAcademy.name.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- boton para guardar -->
-											<md-button ng-click="vm.createAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Registrar</md-button>
-
-											<!-- boton para editar -->
-											<md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Actializar</md-button>
-										</form>
-									</div>
-								</div>
-
-							</md-content>
-			      		</md-tab>
 
 			    <!-- Tab de Eventos -->
 			    <md-tab id="events" label="Eventos" ui-sref=".part1">
@@ -964,54 +942,194 @@
 								</div>
 							</md-content>
 						</md-tab>
+
+						<!-- tabla para inactivar -->
+						<md-tab label="Inactivar">
+							<md-content class="md-padding">
+
+								<!-- filtro por nombre -->
+								<!-- <div class="col-xs-12 col-sm-4 pull-right">
+									<md-input-container flex-offset class="md-block">
+										<label for="">Filtrar por nombre</label>
+										<input type="text" name="studentFilter" ng-model="vm.studentFilter"/>
+									</md-input-container>
+								</div> -->
+
+								<!-- tabla de usuarios-->
+								<div class="container-fluid row">
+									<div class="col-xs-12">
+										<table class="table col-xs-12">
+											<thead>
+												<tr>
+													<th>Cédula</th>
+													<th>Nombre completo</th>
+													<th>Estado</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="user in vm.users  | filter:{firstName:vm.studentFilter}">
+													<td>{{user.id}}</td>
+													<td>{{user.firstName}} {{user.secondName}} {{user.firstLastName}} {{user.secondLastName}}</td>
+													<td><md-button ng-click="vm.state(user)" class="md-raised">{{user.status}}</md-button></td>
+												</tr>
+												<tr ng-repeat="user in vm.teachers">
+													<td>{{user.id}}</td>
+													<td>{{user.firstName}} {{user.secondName}} {{user.firstLastName}} {{user.secondLastName}}</td>
+													<td><md-button ng-click="vm.state(user)" class="md-raised">{{user.status}}</md-button></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</md-content>
+						</md-tab>
 					</md-tabs>
 			</md-content>
 			</div>
 
 			<!-- Seccion de consultar academias -->
 			<div ng-show="vm.selected == 4">
-				<md-content id="tableAcaademy">
-					<div class="container-fluid">
-						<div class="row">
-							<!-- filtro por nombre -->
-							<div class="col-xs-12 col-sm-4 pull-right">
-								<md-input-container flex-offset class="md-block">
-									<label for="">Filtrar por nombre</label>
-									<input type="text" name="academyFilter" ng-model="vm.academyFilter"/>
-								</md-input-container>
-							</div>
-						</div>
+				<md-tabs md-dynamic-height md-border-bottom>
+						<md-tab label="Registro">
+							<md-content class="md-padding">
+							<h1 class="md-display-2 col-xs-12 text-center">Registro de academias</h1>
+							<div class="container-fluid row">
+								<div class="col-xs-12">
+									<form name="frmAcademy" novalidate autocomplete="off">
 
-						<!-- tabla de academias-->
-						<div class="row">
-							<table class="table col-xs-12">
-								<thead>
-									<tr>
-										<th>Nombre de la academia</th>
-										<th>Dirección</th>
-										<th>Encargado</th>
-										<th>Cantidad de competidores</th>
-										<th>teléfono</th>
-										<th>Email</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="academy in vm.academy | filter:{name:vm.academyFilter}">
-										<td>{{academy.name}}</td>
-										<td>{{academy.address}}</td>
-										<td>{{academy.manager}}</td>
-										<td>{{academy.competitors}}</td>
-										<td>{{academy.phone}}</td>
-										<td>{{academy.email}}</td>
-										<td><md-button ng-click="vm.getAcademy(academy)" class="md-raised">Editar</md-button></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</md-content>
-			</div>
+										<!-- input nombre de acdemia -->
+										<div class="col-xs-12 col-sm-6">
+											<md-input-container flex-offset class="md-block">
+												<label for="">Nombre de academia</label>
+												<input name="name" type="text" ng-model="vm.name" required/>
+
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
+											</md-input-container>
+										</div>
+
+										<!-- input de direcion -->
+										<div class="col-xs-12 col-sm-6">
+											<md-input-container flex-offset class="md-block">
+												<label for="">Dirección</label>
+												<input type="text" ng-model="vm.address" required/>
+
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
+											</md-input-container>
+										</div>
+
+										<!-- input de encargado -->
+										<div class="col-xs-12 col-sm-6">
+											<md-input-container flex-offset class="md-block">
+												<label for="">Nombre del encargado</label>
+												<input type="text" ng-model="vm.manager" required/>
+
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
+											</md-input-container>
+										</div>
+
+										<!-- input de cantidad de competidores -->
+										<div class="col-xs-12 col-sm-6">
+											<md-input-container flex-offset class="md-block">
+												<label for="">Cantidad de competidores</label>
+												<input type="number" ng-model="vm.competitors" required/>
+
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
+											</md-input-container>
+										</div>
+
+										<!-- input de telefono -->
+										<div class="col-xs-12 col-sm-6">
+											<md-input-container flex-offset class="md-block">
+												<label for="">Teléfono</label>
+												<input type="text" ng-model="vm.phone" ng-pattern="/^[0-9]{8}$/" required/>
+
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-message="pattern">######### - Ingrese un número de teléfono válido.</div>
+												</div>
+											</md-input-container>
+										</div>
+
+										<!-- input de email -->
+										<div class="col-xs-12 col-sm-6">
+											<md-input-container flex-offset class="md-block">
+												<label for="">Email</label>
+												<input type="text" ng-model="vm.email" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/" required/>
+
+												<!-- Mensaje de retroalimentacion -->
+												<div ng-messages="frmAcademy.name.$error">
+													<div ng-messages-include="components/includes/messages.html"></div>
+												</div>
+											</md-input-container>
+										</div>
+
+										<!-- boton para guardar -->
+										<md-button ng-click="vm.createAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Registrar</md-button>
+
+										<!-- boton para editar -->
+										<md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Actializar</md-button>
+									</form>
+								</div>
+							</div>
+
+						</md-content>
+					</md-tab>
+					<md-tab label="Lista">
+						<md-content id="tableAcaademy">
+							<div class="container-fluid">
+								<div class="row">
+									<!-- filtro por nombre -->
+									<div class="col-xs-12 col-sm-4 pull-right">
+										<md-input-container flex-offset class="md-block">
+											<label for="">Filtrar por nombre</label>
+											<input type="text" name="academyFilter" ng-model="vm.academyFilter"/>
+										</md-input-container>
+									</div>
+								</div>
+
+								<!-- tabla de academias-->
+								<div class="row">
+									<table class="table col-xs-12">
+										<thead>
+											<tr>
+												<th>Nombre de la academia</th>
+												<th>Dirección</th>
+												<th>Encargado</th>
+												<th>Cantidad de competidores</th>
+												<th>teléfono</th>
+												<th>Email</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="academy in vm.academy | filter:{name:vm.academyFilter}">
+												<td>{{academy.name}}</td>
+												<td>{{academy.address}}</td>
+												<td>{{academy.manager}}</td>
+												<td>{{academy.competitors}}</td>
+												<td>{{academy.phone}}</td>
+												<td>{{academy.email}}</td>
+												<td><md-button ng-click="vm.getAcademy(academy)" class="md-raised">Editar</md-button></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</md-content>
+					</md-tab>
+				</div>
 
 			<!-- Sección de consulta, modificación, eliminar y listar eventos -->
 			<div ng-show="vm.selected == 5">
@@ -1144,4 +1262,38 @@
 					        </md-content>
 				      	</md-tab>
 			  	</md-content>
+			</div>
+
+			<!-- vista de alumnos -->
+			<div ng-show="vm.selected == 11">
+				<md-content>
+					<md-tabs md-dynamic-height md-border-bottom>
+					<md-tab ui-sref=".alumnopart1" label="Registro">
+						<md-content class="md-padding">
+							<h1 class="md-display-2">Alumnos</h1>
+							<div id="buttonForm" class="text-center" layout="row" layout-align="center center">
+			        	<div ui-sref-active="active" ui-sref=".alumnopart1">
+			        		<a>1</a>
+			        	</div>
+			        	<div ui-sref-active="active" ui-sref=".alumnopart2">
+			        		<a>2</a>
+			        	</div>
+			        	<div ui-sref-active="active" ui-sref=".alumnopart3">
+			        		<a>3</a>
+			        	</div>
+			        </div>
+
+							<div class="row">
+			        <div class="col-md-offset-1 col-md-10">
+			        	<!-- Formulario para registro de alumnos -->
+								<form name="frmStudent" novalidate ng-submit="vm.presaveStudent(vm.student)" autocomplete="off">
+
+		          			<!-- Espacio para mostrar vistas del registro -->
+		          			<div ui-view></div>
+			          	</form>
+			        </div>
+		          </div>
+						</md-content>
+					</md-tab>
+				</md-content>
 			</div>

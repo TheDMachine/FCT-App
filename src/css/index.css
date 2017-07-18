@@ -1176,3 +1176,24 @@ md-list-item > p, md-list-item > .md-list-item-inner > p, md-list-item .md-list-
 md-card md-card-title.no-padding{
   padding: 0;
 }
+
+.dropdown-menu{
+  background: #252830;
+  color: #fff;
+}
+
+.dropdown-menu ul{
+  margin: 0;
+  padding: 0;
+  align-content: left;
+}
+
+/*avatar del administrador*/
+#img-avatar{
+  margin-top: 5%;
+  margin-left: 5%;
+}
+
+#adminEdit{
+  margin-top: 2%;
+}

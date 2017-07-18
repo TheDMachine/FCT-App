@@ -32,7 +32,6 @@
 
     function init(){
     // función que se llama así misma para indicar que sea lo primero que se ejecute
-        vm.selected = 1;
         vm.currentUser = userService.searchAdmin(userService.getCookie());
         console.log(vm.currentUser);
         vm.originatorEv;
@@ -296,7 +295,7 @@
       .parent(angular.element(document.querySelector('#popupContainer')))
       .clickOutsideToClose(true)
       .title('Registo correcto')
-      .textContent('¡Registro de alumno realizado')
+      .textContent('¡Registro de alumno realizado!')
       .ariaLabel()
       .ok('¡Gracias!')
       .targetEvent()
@@ -502,6 +501,7 @@
     function clean() {
       vm.event = '';
       vm.teacher = '';
+      vm.student = '';
     }
 
       // Función para actualizar datos del profesor
@@ -610,33 +610,11 @@
         console.log(pNewStudent);
         userService.setUsers(pNewStudent);
         vm.studentAlert();
-        cleanStudent();
+        clean();
         init();
       }
     }
 
-    //funcion para limpiar los input del alumno
-    function cleanStudent() {
-      vm.id = '',
-        vm.birthday = '',
-        vm.firstName = '',
-        vm.secondName = '',
-        vm.firstLastName = '',
-        vm.secondLastName = '',
-        vm.genre = '',
-        vm.weight = '',
-        vm.height = '',
-        vm.nationality = '',
-        vm.phone = '',
-        vm.email = '',
-        vm.attendAcademy = '',
-        vm.teacher = '',
-        vm.belt = '',
-        vm.category = '',
-        vm.tournaments = '',
-        vm.tournamentsWins = '',
-        vm.status = ''
-    }
 
     //funcion para editar alumno
     vm.getStudent = function (student) {
@@ -686,7 +664,7 @@
       }
       userService.updateUsers(editstudent);
       init();
-      cleanStudent();
+      clean();
     }
 
     //funcion para guardar competencia
@@ -703,7 +681,7 @@
       console.log(newCompetition);
       console.log(newCompetition.competitors)
       eventService.setCompetitions(newCompetition);
-      cleanStudent();
+      clean();
       init();
     }
 
@@ -798,6 +776,87 @@
           }
         }
       }
+    }
+
+    //cambiar estado del usuario
+    vm.state = function(user) {
+      if (user.status == 'activo' ) {
+        user.status = 'inactivo';
+        userService.updateUsers(user);
+        userService.updateTeacher(user)
+        vm.stateInactive(user);
+        init();
+      }else {
+        user.status = 'activo';
+        userService.updateUsers(user);
+        userService.updateTeacher(user)
+        vm.stateActive(user);
+        init();
+      }
+    }
+
+    //mensaje de inactivar
+    vm.stateInactive = function() {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('Control de usuarios')
+          .textContent('El usuario ha sido inactivado')
+          .ariaLabel()
+          .ok('Aceptar')
+          .targetEvent()
+      );
+    }
+
+    //mensaje de activar
+    vm.stateActive = function() {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('Control de usuarios')
+          .textContent('El usuario ha sido activado')
+          .ariaLabel()
+          .ok('Aceptar')
+          .targetEvent()
+      );
+    }
+
+    //editar admin en perfil
+    vm.getCurrentAdmin = function(admin){
+      vm.editAdminProfile = true;
+      vm.currentUser.phone = admin.phone;
+    }
+
+    vm.editAdmin = function(){
+      var editAdmin = {
+        id : vm.currentUser.id,
+        firstName : vm.currentUser.firstName,
+        firstLastName :  vm.currentUser.firstLastName,
+        bornhDate : vm.currentUser.bornhDate,
+        nationality : vm.currentUser.nationality,
+        phone : vm.currentUser.phone,
+        email : vm.currentUser.email,
+        password : vm.currentUser.password,
+        photo : vm.currentUser.photo
+      }
+      //userService.updateAdmin(editAdmin);
+      init();
+      vm.editAdminProfile = false;
+      cleanAdmin();
+    }
+
+    function cleanAdmin(){
+      vm.currentUser.id = '';
+      vm.currentUser.firstName = '';
+      vm.currentUser.firstLastName = '';
+      vm.currentUser.bornhDate = '';
+      vm.currentUser.nationality = '';
+      vm.currentUser.phone = '';
+      vm.currentUser.email = '';
+      vm.currentUser.password = '';
+      vm.currentUser.photo = '';
     }
 
   }

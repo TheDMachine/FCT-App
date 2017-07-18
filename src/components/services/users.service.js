@@ -39,6 +39,7 @@
     function _setUsers(newUser){
       var usersList = _getUsers();
       newUser.password = _generatePassword();
+      newUser.status = 'activo';
       usersList.push(newUser);
       localStorage.setItem('lsUsersList', JSON.stringify(usersList));
       console.log(_getUsers());
