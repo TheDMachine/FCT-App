@@ -270,7 +270,7 @@
 /*Fin estilos del landing*/
 
 /*Inicio estilo de tablas de consulta e historial eventos*/
-#table1 h3, #table2 h3{
+#table1 h3, #table2 h3, #registerEvents h3{
   font-family: 'Montserrat';
   font-size: 1.571em;
   margin-bottom: 60px;

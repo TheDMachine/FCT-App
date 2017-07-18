@@ -29,7 +29,7 @@
     vm.pairFights = [];
     vm.ready = false;
     vm.today = new Date();
-
+    
 
     function init(){ 
     // función que se llama así misma para indicar que sea lo primero que se ejecute

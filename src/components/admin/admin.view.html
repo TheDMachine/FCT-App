@@ -223,33 +223,70 @@
 					    <md-tab label="Historial de competencias">
 					        <md-content id="categHist" class="md-padding">
 					        	<h3>HISTORIAL DE COMPETENCIAS</h3>
-					        	<md-input-container>
-								    <label>Evento</label>
-								    <md-select name="event" ng-model="vm.event.eventName">
-								    	<md-option ng-repeat="event in vm.events" value="{{event.eventName}}">{{event.eventName}}</md-option>
-								    </md-select>
-								</md-input-container>
+					        	<p>Filtre por:</p>
+
+					        	<!-- Filtros -->
+					        	<div class="col-xs-12">
+					        		<div class="col-md-6">
+					        			<md-input-container>
+								    		<label>Seleccione el evento</label>
+								    		<md-select name="eventFilter" ng-model="vm.eventFilter">
+								    			<md-option ng-repeat="event in vm.events" value="{{event.eventName}}">{{event.eventName}}</md-option>
+								    		</md-select>
+										</md-input-container>
+					        		</div>
+					        		<div class="col-md-6">
+					        			<md-input-container>
+										    <label>Seleccione la categoría</label>
+										    <md-select name="catFilter" ng-model="vm.catFilter">
+										    	<md-option ng-repeat="categ in vm.categories" value="{{categ.categorieName}}">{{categ.categorieName}} ({{categ.minAgeRange}} - {{categ.maxAgeRange}})</md-option>
+										    </md-select>
+										</md-input-container>
+					        		</div>
+					        		<div class="col-md-4">
+					        			<md-input-container>
+										    <label>Seleccione el peso</label>
+										    <md-select name="weightFilter" ng-model="vm.weightFilter">
+										    	<md-option ng-repeat="weigth in vm.weights" value="{{weigth.weightName}}">{{weigth.weightName}} / {{weigth.aliasName}} ({{weigth.minweightRange}} kg - {{weigth.maxweightRange}} kg)</md-option>
+										    </md-select>
+										</md-input-container>
+					        		</div>
+					        		<div class="col-md-4">
+					        			<md-input-container>
+										    <label>Seleccione el género</label>
+										    <md-select name="genreFilter" ng-model="vm.genreFilter">
+										    	<md-option value="masculino">Masculino</md-option>
+										    	<md-option value="femenino">Femenino</md-option>
+										    </md-select>
+										</md-input-container>
+					        		</div>
+					        		<div class="col-md-4">
+					        			<md-input-container>
+										    <label>Seleccione el cinturón</label>
+										    <md-select name="beltFilter" ng-model="vm.beltFilter">
+										    	<md-option ng-repeat="belt in vm.belts" value="{{belt.belt}}">{{belt.belt}}</md-option>
+										    </md-select>
+										</md-input-container>
+					        		</div>
+					        	</div>
+
 								<!-- Tabla historial de eventos -->
 						        <div>
 						          	<table class="table-responsive">
 									    <thead>
 									      	<tr>
 									      		<th>Número de competencia</th>
-									      		<th>Categoría</th>
-										        <th>Peso</th>
-										        <th>Género</th>
 										        <th>Competidores</th>
+										        <th>Ganador</th>
 									      	</tr>
 									    </thead>
 									    <tbody>
 									    <!-- | filter:{stateFilter:vm.stateFilter} -->
-									      	<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
+									      	<tr ng-repeat="item in vm.competitions | filter:{eventBelongs:vm.eventFilter} | filter:{competitionAge:vm.catFilter} | filter:{competitionWeight:vm.weightFilter} | filter:{competitionGenre:vm.genreFilter} | filter:{competitionBelt:vm.beltFilter}">
 									      	
-									      		<td>{{event.date1 | date : "shortDate"}}</td>
-									      		<td>{{event.eventName}}</td>
-									      		<td>{{event.eventState}}</td>
-										        <td>{{event.placeName}}</td>
-										        <td>{{event.placeName}}</td>
+									      		<td>{{item.competitionNumber}}</td>
+										        <td>{{item.competitors}}</td>
+										        <td></td>
 									      	</tr>
 									    </tbody>
 								  	</table>
@@ -590,79 +627,7 @@
 								</div>
 							</md-content>
 			      		</md-tab>
-
-			    <!-- Tab de Eventos -->
-			    <md-tab id="events" label="Eventos" ui-sref=".part1">
-			        <md-content class="md-padding">
-			          	<h3 class="md-display-2">Eventos</h3>
-
-			          	<!-- links de cada paso del formulario de registro de eventos -->
-				        <div id="buttonForm" class="text-center" layout="row" layout-align="center center">
-				        	<div ui-sref-active="active" ui-sref=".part1">
-				        		<a>1</a>
-				        	</div>
-				        	<div ui-sref-active="active" ui-sref=".part2">
-				        		<a>2</a>
-				        	</div>
-				        	<div ui-sref-active="active" ui-sref=".part3">
-				        		<a >3</a>
-				        	</div>
-				        	<div ui-sref-active="active" ui-sref=".part4">
-				        		<a >4</a>
-				        	</div>
-				        	<div ui-sref-active="active" ui-sref=".part5">
-				        		<a >5</a>
-				        	</div>	
-				        </div>
-
-				        <div class="row">
-				        <div class="col-md-offset-1 col-md-10">
-				        	<!-- Formulario para registro de eventos -->
-				          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
-
-			          			<!-- Espacio para mostrar vistas del registro -->
-			          			<div id="form-views" ui-view></div>
-				          	</form>
-				        </div>
-			          </div>
-
-			          <div id="modTable" class="row">
-			          	<div class="col-md-offset-1 col-md-10">
-			          		<h3>MODIFICAR EVENTOS</h3>
-
-							<!-- Filtro por fecha -->
-							<p>Filtre por fechas: </p>
-							<br>
-							<md-datepicker name="from"  ng-model="vm.from3" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
-					    	<md-datepicker name="to"  ng-model="vm.to3" md-placeholder="Fecha fin"></md-datepicker>
-							
-				        	<!-- Tabla de info eventos -->
-					        <div>
-					          	<table class="table-responsive">
-								    <thead>
-								      	<tr>
-								      		<th>Nombre del evento</th>
-									        <th>Fecha inicio</th>
-									        <th></th>
-									        <th></th>
-								      	</tr>
-								    </thead>
-								    <tbody>
-								      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from3:vm.to3" > 
-								      		<td>{{event.eventName}}</td>
-									        <td>{{event.date1 | date : "shortDate"}}</td>
-
-									    	<!-- Botones para editar y cancelar eventos -->
-									        <td><md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)">Editar</md-button></td>
-									        <td><md-button class="md-raised editCxlB" ng-click="vm.cancelEvent(event)">Cancelar</md-button></td>
-								      	</tr>
-								    </tbody>
-							  	</table>
-					        </div>
-			          	</div>
-			          </div>
-			        </md-content>
-			    </md-tab>
+				<!-- Registro de alumnos -->
 				<md-tab label="Registro de alumnos">
 							<md-content class="md-padding">
 								<h1 class="md-display-2">Registro de alumnos</h1>
@@ -1241,10 +1206,87 @@
 	    	</md-content>
 			</div>
 
-			<!-- Sección de consulta, modificación, eliminar y listar eventos -->
+			<!-- Sección de eventos -->
 			<div ng-show="vm.selected == 5">
 				<md-content>
 				    <md-tabs md-dynamic-height md-border-bottom>
+
+				    	<!-- Tab de Eventos -->
+					    <md-tab id="events" label="Registrar evento" ui-sref=".part1">
+					        <md-content class="md-padding">
+					        	<div class="row">
+					        		<div id="registerEvents" class="col-md-offset-1 col-md-10">
+					        			<h3>REGISTRAR EVENTO</h3>
+					        		</div>
+					        	</div>
+
+					          	<!-- links de cada paso del formulario de registro de eventos -->
+						        <div id="buttonForm" class="text-center" layout="row" layout-align="center center">
+						        	<div ui-sref-active="active" ui-sref=".part1">
+						        		<a>1</a>
+						        	</div>
+						        	<div ui-sref-active="active" ui-sref=".part2">
+						        		<a>2</a>
+						        	</div>
+						        	<div ui-sref-active="active" ui-sref=".part3">
+						        		<a >3</a>
+						        	</div>
+						        	<div ui-sref-active="active" ui-sref=".part4">
+						        		<a >4</a>
+						        	</div>
+						        	<div ui-sref-active="active" ui-sref=".part5">
+						        		<a >5</a>
+						        	</div>	
+						        </div>
+
+						        <div class="row">
+						        <div class="col-md-offset-1 col-md-10">
+						        	<!-- Formulario para registro de eventos -->
+						          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
+
+					          			<!-- Espacio para mostrar vistas del registro -->
+					          			<div id="form-views" ui-view></div>
+						          	</form>
+						        </div>
+					          </div>
+
+					          <div id="modTable" class="row">
+					          	<div class="col-md-offset-1 col-md-10">
+					          		<h3>MODIFICAR EVENTOS</h3>
+
+									<!-- Filtro por fecha -->
+									<p>Filtre por fechas: </p>
+									<br>
+									<md-datepicker name="from"  ng-model="vm.from3" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
+							    	<md-datepicker name="to"  ng-model="vm.to3" md-placeholder="Fecha fin"></md-datepicker>
+									
+						        	<!-- Tabla de info eventos -->
+							        <div>
+							          	<table class="table-responsive">
+										    <thead>
+										      	<tr>
+										      		<th>Nombre del evento</th>
+											        <th>Fecha inicio</th>
+											        <th></th>
+											        <th></th>
+										      	</tr>
+										    </thead>
+										    <tbody>
+										      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from3:vm.to3" > 
+										      		<td>{{event.eventName}}</td>
+											        <td>{{event.date1 | date : "shortDate"}}</td>
+
+											    	<!-- Botones para editar y cancelar eventos -->
+											        <td><md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)">Editar</md-button></td>
+											        <td><md-button class="md-raised editCxlB" ng-click="vm.cancelEvent(event)">Cancelar</md-button></td>
+										      	</tr>
+										    </tbody>
+									  	</table>
+							        </div>
+					          	</div>
+					          </div>
+					        </md-content>
+					    </md-tab>
 
 				    	<!-- Tab consultar de eventos -->
 				      	<md-tab label="Consultar Eventos">

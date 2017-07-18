@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-sm-6">
 
 		<!-- Campo nombre evento -->
 		<md-input-container flex-offset>
@@ -12,7 +12,7 @@
 			</div>
 		</md-input-container>
 	</div>
-	<div class="col-md-6">
+	<div class="col-sm-6">
 
 		<!-- Campo Tipo de evento -->
 		<md-input-container>
@@ -57,14 +57,20 @@
 	</div>
 </div>
 <div id="botonRadio" class="row">
+	<div class="col-xs-6 col-sm-4 col-md-3">
+		<p>Evento de beneficencia:</p>
+	</div>
 
 	<!-- Campo de seleccionar evento beneficencia -->
-	<md-radio-group layout="row" layout-align="start center" ng-model="vm.event.charityEvent">
-		<md-radio-button name="frmEventInfo.charityEvent" value="Beneficencia" class="md-primary">Evento de beneficencia</md-radio-button>
-	</md-radio-group>
+	<div class="col-xs-6 col-sm-8 col-md-9">
+		<md-radio-group layout="row" layout-align="start center" ng-model="vm.event.charityEvent">
+			<md-radio-button name="frmEventInfo.charityEvent" value="Beneficencia" class="md-primary">Si</md-radio-button>
+			<md-radio-button name="frmEventInfo.charityEvent" value="no beneficia" class="md-primary">No</md-radio-button>
+		</md-radio-group>
+	</div>
 </div>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-sm-6">
 
 		<!-- Campo nombre de organización -->
 		<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
@@ -72,7 +78,7 @@
 			<input type="text" name="frmEventInfo.orgName" ng-model="vm.event.orgName" maxlength="30" md-maxlength="30" >
 		</md-input-container>
 	</div>
-	<div class="col-md-6">
+	<div class="col-sm-6">
 
 		<!-- Campo tipo de organización -->
 		<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
