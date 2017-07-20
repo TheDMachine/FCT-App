@@ -1297,171 +1297,94 @@
 							        </div>
 					          	</div>
 					          </div>
-
-
-
-
-					        <!-- <h3>CONSULTAR EVENTOS</h3> -->
-
-							<!-- Filtro por fecha -->
-							<!-- <p>Filtre por fechas: </p>
-							<br>
-							<md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
-					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker> -->
-							
-					        	<!-- Tabla de info eventos -->
-						        <!-- <div>
-						          	<table class="table-responsive">
-									    <thead>
-									      	<tr>
-									      		<th>Evento</th>
-										        <th>Tipo</th>
-										        <th>Estado</th>
-										        <th>invitado</th>
-										        <th>Fecha/inicio</th>
-										        <th>Hora/inicio</th>
-										        <th>Fecha/Fin</th>
-										        <th>Hora/Fin</th>
-										        <th>Academias</th>
-										        <th>Categorías</th>
-										        <th>Inscripción</th>
-										        <th>Patrocinadores</th>
-										        <th>Lugar</th>
-										        <th>Latitud</th>
-										        <th>Longitud</th>
-										        <th>Ubicación</th>
-										        <th>Asientos</th>
-										        <th>Entradas</th>
-										        <th>Contacto</th>
-										        <th>Tel/Cont</th>
-										        <th>Para:</th>
-										        <th>Org/Beneficiada</th>
-										        <th>Tipo/Org</th>
-										        <th>Descripción/Org</th>
-										        <th>Logo/evento</th>
-									      	</tr>
-									    </thead>
-									    <tbody>
-									      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to" > 
-									      		
-									      		
-									      		
-									      		
-										        
-										        
-										        
-										        
-										       
-										       
-										        
-										        
-										        
-										        
-										        <td>{{event.location}}</td>
-										        <td>{{event.seats}}</td>
-										        <td>{{event.tickets}}</td>
-										        <td>{{event.contactName}}</td>
-										        <td>{{event.contactPhone}}</td>
-										        <td>{{event.charityEvent}}</td>
-										        <td>{{event.orgName}}</td>
-										        <td>{{event.orgType}}</td>
-										        <td>{{event.description}}</td>
-										        
-									      	</tr>
-									    </tbody>
-								  	</table>
-						        </div> -->
 					        </md-content>
 				      	</md-tab>
 
 				      	<!-- Tab historial de eventos -->
 				      	<md-tab label="Consulta e Historial de eventos">
 					        <md-content id="table2" class="md-padding">
-					        	<h3>CONSULTA E HISTORIAL DE EVENTOS</h3>
+					        	<div class="col-md-offset-1 col-md-10">
+					        		<h3>CONSULTA E HISTORIAL DE EVENTOS</h3>
 
-					        	<!-- Filtros -->
-								<!-- Filtro por fecha -->
-								<p>Filtre por fechas: </p>
-								<br>
-								<md-datepicker name="from"  ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
-						    	<md-datepicker name="to"  ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
-
-						    	<!-- Filtro por estado -->
-						    	<p>Filtre por estado: </p>
-								<md-input-container>
-								    <label>Seleccione el estado</label>
-								    <md-select name="stateFilter" ng-model="vm.stateFilter">
-								    	<md-option value="{{aprobado && cancelado}}">Todos</md-option>
-								    	<md-option value="aprobado">Aprobado</md-option>
-								        <md-option value="cancelado">Cancelado</md-option>
-								    </md-select>
-								</md-input-container>
-								
-								<div class="container">
+						        	<!-- Filtros -->
+						        	<div class="col-xs-12">
+						        		<div class="col-sm-6">
+						        			<!-- Filtro por fecha -->
+											<p>Filtre por fechas: </p>
+											<br>
+											<md-datepicker name="from"  ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
+									    	<md-datepicker name="to"  ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
+						        		</div>
+						        		<div class="col-sm-6">
+						        			<!-- Filtro por estado -->
+									    	<p>Filtre por estado: </p>
+											<md-input-container>
+											    <label>Seleccione el estado</label>
+											    <md-select name="stateFilter" ng-model="vm.stateFilter">
+											    	<md-option value="{{aprobado && cancelado}}">Todos</md-option>
+											    	<md-option value="aprobado">Aprobado</md-option>
+											        <md-option value="cancelado">Cancelado</md-option>
+											    </md-select>
+											</md-input-container>
+						        		</div>
+						        	</div>
 
 									<!-- Tabla historial de eventos -->
-							       
-							          	<table class="table-responsive">
-										    <thead>
-										      	<tr>
-										      		<th>Fecha</th>
-										      		<th>Nombre del evento</th>
-											        <th>Estado</th>
-										      	</tr>
-										    </thead>
-										    <tbody>
-										      	<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
-										      	
-										      		<td>{{event.date1 | date : "shortDate"}}</td>
-										      		<td><md-button class="md-primary md-raised" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button></td>
-										      		<td>{{event.eventState}}</td>
-										      	</tr>
-										    </tbody>
-									  	</table>
+						          	<table id="histTable" class="table-responsive">
+									    <thead>
+									      	<tr>
+									      		<th>Fecha</th>
+									      		<th>Nombre del evento</th>
+										        <th>Estado</th>
+									      	</tr>
+									    </thead>
+									    <tbody>
+									      	<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
+									      		<td>{{event.date1 | date : "shortDate"}}</td>
+									      		<td><md-button class="md-raised" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button></td>
+									      		<td>{{event.eventState}}</td>
+									      	</tr>
+									    </tbody>
+								  	</table>
 							        	
-							        	<div style="visibility: hidden">
-										    <div class="md-dialog-container" id="myDialog">
-										      <md-dialog layout-padding>
-										      	<div class="col-xs-offset-10 col-xs-2">
-										      		<md-button type="button" ng-click="vm.cancel()">
-										    			<i class="material-icons">clear</i>
-													</md-button>
-										      	</div>
-										      	
-												<div class="col-xs-12">
-													<h3>{{vm.consultEvent.eventName}}</h3>
-													<img ng-src="{{vm.consultEvent.photo}}" alt="Description" width="70px" height="70px" />
-										        	<p>Tipo de evento: {{vm.consultEvent.eventType}}</p>
-										        	<p>Estado: {{vm.consultEvent.eventState}}</p>
-										        	<p>Invitado especial: {{vm.consultEvent.invitedName}}</p>
-										        	<p>Fecha de inicio: {{vm.consultEvent.date1 | date : "shortDate"}}</p>
-										        	<p>Hora de inicio: {{vm.consultEvent.time1 | date : "shortTime"}}</p>
-										        	<p>Fecha de finalización: {{vm.consultEvent.date2 | date : "shortDate"}}</p>
-										        	<p>Hora de finalización:  {{vm.consultEvent.time2 | date : "shortTime"}}</p>
-										        	<p>Academias invitadas: {{vm.consultEvent.selectAcademies}}</p>
-										        	<p>Categoría que participan: {{vm.consultEvent.selectCategories}}</p>
-										        	<p>Costo de inscripción por alumno: {{vm.consultEvent.costInsc}} colones</p>
-										        	<p>Parocinadores: {{vm.consultEvent.selectSponsors}}</p>
-										        	<p>Latitud: {{vm.consultEvent.latitude}}</p>
-										        	<p>Longitud: {{vm.consultEvent.length}}</p>
-										        	<p>Dirección: {{vm.consultEvent.location}}</p>
-										        	<p>Cantidad de sientos en el lugar: {{vm.consultEvent.seats}}</p>
-										        	<p>Cantidad de entradas a vender: {{vm.consultEvent.tickets}}</p>
-										        	<p>Nombre del contacto: {{vm.consultEvent.contactName}}</p>
-										        	<p>Teléfono del contacto: {{vm.consultEvent.contactPhone}}</p>
-										        	<p>El evento es de: {{vm.consultEvent.charityEvent}}</p>
-										        	<p>Nombre de la organización beneficiada: {{vm.consultEvent.orgName}}</p>
-										        	<p>Tipo de organización beneficiada: {{vm.consultEvent.orgType}}</p>
-										        	<p>Descripción de la organización: {{vm.consultEvent.description}}</p>
-										        	
+						        	<!-- modal para consulta de eventos -->
+						        	<div style="visibility: hidden">
+									    <div class="md-dialog-container" id="myDialog">
+									      <md-dialog layout-padding>
 
-												</div>
-										        
-										      </md-dialog>
-										    </div>
-										  </div>
-							        	
-								</div>
+									      <!-- encabezado de la información del evento -->
+									      	<div id="eventName" class="col-xs-12 md-whiteframe-3dp">
+									      		<img ng-src="{{vm.consultEvent.photo}}" alt="Description" width="60px" height="60px" />
+									      		<h3>{{vm.consultEvent.eventName}}</h3>
+									      	</div>
+
+									      	<!-- cuerpo de la información -->
+											<div id="eventInfo" class="col-xs-12">
+									        	<p><span>Tipo de evento:</span> {{vm.consultEvent.eventType}}</p>
+									        	<p><span>Invitado especial:</span> {{vm.consultEvent.invitedName}}</p>
+									        	<p><span>Fecha y hora de inicio:</span> {{vm.consultEvent.date1 | date : "shortDate"}} {{vm.consultEvent.time1 | date : "shortTime"}}</p>
+									        	<p><span>Fecha y hora de fin:</span> {{vm.consultEvent.date2 | date : "shortDate"}} {{vm.consultEvent.time2 | date : "shortTime"}}</p>
+									        	<p><span>Academias invitadas:</span> {{vm.consultEvent.selectAcademies}}</p>
+									        	<p><span>Categorías que participan:</span> {{vm.consultEvent.selectCategories}}</p>
+									        	<p><span>Costo de inscripción:</span> {{vm.consultEvent.costInsc}} colones</p>
+									        	<p><span>Patrocinadores:</span> {{vm.consultEvent.selectSponsors}}</p>
+									        	<p><span>Latitud:</span> {{vm.consultEvent.latitude}}  <span>Longitud:</span> {{vm.consultEvent.length}}</p>
+									        	<p><span>Dirección:</span> {{vm.consultEvent.location}}</p>
+									        	<p><span>Asientos:</span> {{vm.consultEvent.seats}} <span>Entradas a vender:</span> {{vm.consultEvent.tickets}}</p>
+									        	<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
+									        	<p><span>El evento es de:</span> {{vm.consultEvent.charityEvent}}</p>
+									        	<p><span>Organización beneficiada:</span> {{vm.consultEvent.orgName}}</p>
+									        	<p><span>Descripción de la org.:</span> {{vm.consultEvent.description}}</p>
+											</div>
+
+											<!-- botón para salir del modal -->
+											<div id="buttonInfoEvent" class="col-xs-12">
+									      		<md-button class="md-raised" type="button"  ng-click="vm.cancel()">Salir</md-button>
+									      	</div>
+									      </md-dialog>
+									    </div>
+									</div>
+					        	</div>
 					        </md-content>
 				      	</md-tab>
 			  	</md-content>

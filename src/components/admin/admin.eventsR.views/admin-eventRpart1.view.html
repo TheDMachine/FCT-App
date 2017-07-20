@@ -19,7 +19,7 @@
 		    <label>Tipo de evento</label>
 		    <md-select name="frmEventInfo.eventType" ng-model="vm.event.eventType" required>
 		    	<md-option value="torneo">Torneo</md-option>
-		    	<md-option value="exhibicion">Exhibición</md-option>
+		    	<md-option value="exhibición">Exhibición</md-option>
 		        <md-option value="fogueo">Fogueo</md-option>
 		    </md-select>
 
@@ -50,7 +50,7 @@
 	<div class="col-md-6">
 
 		<!-- Campo Nombre del invitado-->
-		<md-input-container flex-gt-sm ng-show="vm.event.eventType == 'exhibicion'">
+		<md-input-container flex-gt-sm ng-show="vm.event.eventType == 'exhibición'">
 			<label>Nombre completo del invitado (opcional)</label>
 			<input type="text" name="frmEventInfo.invitedName" ng-model="vm.event.invitedName" maxlength="30" md-maxlength="30" placeholder="Andrían García Mora">
 		</md-input-container>
