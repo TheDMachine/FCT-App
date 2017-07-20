@@ -55,6 +55,7 @@
         vm.log = logService.showLog();
         vm.belts = estabInfoService.getBelts();
         vm.to = new Date();
+        console.log(vm.to);
         vm.to2 = new Date();
         vm.weights = estabInfoService.getWeight();
         vm.categoriesAge = estabInfoService.getCategories();
@@ -105,10 +106,12 @@
       });
     };
 
+    // funcion para salir del modal de consulta de eventos
     vm.cancel = function() {
       $mdDialog.cancel();
     };
 
+    // función para imprimir el evento a consultar
     function checkConsultEvent(pEvent) {
      vm.consultEvent = {
       eventName: pEvent.eventName,
@@ -410,6 +413,7 @@
 
     // Función para filtrar la tabla de consulta de eventos
     function acceptedEvents() {
+      var today = new Date();
       vm.events = eventService.getEvents();
         for (var i = 0; i < vm.events.length; i++) {
           if (vm.events[i].eventState === 'aprobado') {
