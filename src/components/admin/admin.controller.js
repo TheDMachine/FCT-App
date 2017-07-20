@@ -4,7 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope,$mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
+  function adminCtrl($scope,$mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, $location) {
 
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -29,6 +29,9 @@
     vm.pairFights = [];
     vm.ready = false;
     vm.today = new Date();
+    vm.consultEvent = {};
+    vm.customFullscreen = false;
+
     
 
     function init(){ 
@@ -91,6 +94,51 @@
     };
     /*Final sidenav*/
 
+    // Función para mostrar la consulta de eventos
+    vm.showEventConsult = function(pEvent, ev) {
+      checkConsultEvent(pEvent);
+      $mdDialog.show({
+        contentElement: '#myDialog',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+      });
+    };
+
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    function checkConsultEvent(pEvent) {
+     vm.consultEvent = {
+      eventName: pEvent.eventName,
+      invitedName: pEvent.invitedName,
+      eventType: pEvent.eventType,
+      eventState: pEvent.eventState,
+      photo: pEvent.photo,
+      date1: pEvent.date1,
+      time1: pEvent.time1,
+      date2: pEvent.date2,
+      time2: pEvent.time2,
+      selectAcademies: pEvent.selectAcademies.toString(),
+      selectCategories: pEvent.selectCategories.toString(),
+      costInsc: pEvent.costInsc,
+      selectSponsors: pEvent.selectSponsors.toString(),
+      placeName: pEvent.placeName,
+      location: pEvent.location,
+      latitude: pEvent.latitude,
+      length: pEvent.length,
+      seats: pEvent.seats,
+      tickets: pEvent.tickets,
+      contactName: pEvent.contactName,
+      contactPhone: pEvent.contactPhone,
+      charityEvent: pEvent.charityEvent,
+      orgName: pEvent.orgName,
+      orgType: pEvent.orgType,
+      description: pEvent.description
+     }
+    }
+
     // Función para pre guardar datos del evento
 
     vm.presaveEvent = function (pNewEvent) {
@@ -129,6 +177,7 @@
         }
       }
     };
+
       // Funciones para guardar patrocinadores
 
     vm.saveSponsor= function(pNewSponsor) {

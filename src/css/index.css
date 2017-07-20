@@ -433,7 +433,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid #0082c8;
+  border: 1px solid #ee334e;
   text-align: center;
   margin: 0 1%;
   font-weight: 500;
@@ -442,14 +442,14 @@
 }
 
 #buttonForm div a{
-  color: #0082c8;
+  color: #ee334e;
   line-height: 2.7;
   text-decoration: none;
   padding: 1.5%;
 }
 
 #buttonForm div.active{
-  background: #0082c8;
+  background: #ee334e;
   color: #fff;
 }
 
@@ -491,7 +491,7 @@ md-input-container{
 }
 
 #buttonLogo{
-  background: #0082c8;
+  background: #cb3e42;
   border-radius: 7px;
   text-align: center;
   color: #fff;
