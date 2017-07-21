@@ -3,7 +3,7 @@
   angular
   .module('app')
   .controller('reserveCtrl', reserveCtrl);
-  function reserveCtrl($scope, eventService, ticketService, $location) {
+  function reserveCtrl($scope, eventService, ticketService, $location, $mdDialog) {
   var vm = this;
   vm.reservation = {};
 
@@ -41,13 +41,44 @@
       }
       if (vm.Error === false) {
         ticketService.setReservations(newRsv);
-        document.querySelector('.SuccessMessage').innerHTML = 'La confirmación de su reserva es: ' + newRsv.confirmationNum;
+        vm.showReservationAlert(newRsv.confirmationNum);
         clean();
         init();
       }else{
-        document.querySelector('.ErrorMessage').innerHTML = 'La cantidad de entradas solicitadas excede las entradas disponibles, hay ' + vm.availableTkts + ' entradas disponibles para este evento.';
+        vm.showRsvErrorAlert(vm.availableTkts);
+        clean();
+        init();
       }
     };
+
+    // Función para mensaje de registro de entrada satisfactorio
+    vm.showReservationAlert = function(pConf) {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Registro correcto!')
+        .textContent('La confirmación de su reserva es: ' + pConf)
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+    // Función para mensaje de entradas agotadas
+    vm.showRsvErrorAlert = function(pAvailTicks) {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡Entradas agotadas!')
+        .textContent('La cantidad de entradas solicitadas excede las entradas disponibles, quedan ' + pAvailTicks + ' entradas disponibles para este evento.')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
 
       // Función para generar el número de confirmación
       function conNum() {

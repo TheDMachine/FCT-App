@@ -1,6 +1,6 @@
 <section id="eventsViewSection" class="container-fluid">
 	<div class="row">
-		<div id="topSpace" class="col-xs-12">
+		<div id="topSpace" class="col-xs-12 md-whiteframe-3dp">
 			<div class="col-xs-2 imageLogo"><img src="images/logFCT.png" width="75px" height="75px"></div>
 			<div class="col-xs-offset-7 col-xs-1 col-sm-offset-9 col-sm-1"><a ng-click="vm.return($event)"><span class="fa fa-times quitX"></span></a></div>
 		</div>
@@ -13,12 +13,12 @@
 				<p>Filtre por fechas: </p>
 				<br>
 				<md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
-		    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker>
+		    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin" md-min-date="vm.today"></md-datepicker>
 
 	        	<!-- Tabla historial de eventos -->
 		        <div id="tableSpace" >
-		          	<table class="table-responsive">
-					    <thead>
+		          	<table class="table-responsive md-whiteframe-3dp">
+					    <thead class="md-whiteframe-3dp">
 					      	<tr>
 					      		<th>Nombre del evento</th>
 					      		<th>Fecha</th>

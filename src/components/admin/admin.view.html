@@ -1227,19 +1227,19 @@
 
 					          	<!-- links de cada paso del formulario de registro de eventos -->
 						        <div id="buttonForm" class="text-center" layout="row" layout-align="center center">
-						        	<div ui-sref-active="active" ui-sref=".part1">
+						        	<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part1">
 						        		<a>1</a>
 						        	</div>
-						        	<div ui-sref-active="active" ui-sref=".part2">
+						        	<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part2">
 						        		<a>2</a>
 						        	</div>
-						        	<div ui-sref-active="active" ui-sref=".part3">
+						        	<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part3">
 						        		<a >3</a>
 						        	</div>
-						        	<div ui-sref-active="active" ui-sref=".part4">
+						        	<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part4">
 						        		<a >4</a>
 						        	</div>
-						        	<div ui-sref-active="active" ui-sref=".part5">
+						        	<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part5">
 						        		<a >5</a>
 						        	</div>	
 						        </div>
@@ -1274,8 +1274,8 @@
 									
 						        	<!-- Tabla de info eventos -->
 							        <div>
-							          	<table class="table-responsive">
-										    <thead>
+							          	<table class="table-responsive md-whiteframe-3dp">
+										    <thead class="md-whiteframe-3dp">
 										      	<tr>
 										      		<th>Nombre del evento</th>
 											        <th>Fecha inicio</th>
@@ -1289,7 +1289,7 @@
 											        <td>{{event.date1 | date : "shortDate"}}</td>
 
 											    	<!-- Botones para editar y cancelar eventos -->
-											        <td><md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)">Editar</md-button></td>
+											        <td><md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button></td>
 											        <td><md-button class="md-raised editCxlB" ng-click="vm.cancelEvent(event)">Cancelar</md-button></td>
 										      	</tr>
 										    </tbody>
@@ -1330,8 +1330,8 @@
 						        	</div>
 
 									<!-- Tabla historial de eventos -->
-						          	<table id="histTable" class="table-responsive">
-									    <thead>
+						          	<table id="histTable" class="table-responsive md-whiteframe-3dp">
+									    <thead class="md-whiteframe-3dp">
 									      	<tr>
 									      		<th>Fecha</th>
 									      		<th>Nombre del evento</th>

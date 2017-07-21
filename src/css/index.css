@@ -124,7 +124,7 @@
   margin-bottom: 40px;
 }
 
-#information div, #cxlRSpace div{
+#information div, #cxlRSpace .contFrm{
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -573,12 +573,12 @@ md-input-container{
   margin: 0 auto;
   padding: 20px 10px;
   font-size: 1.143em;
-  background-color: #0082c8;
+  background-color: #cb3e42;
   color: #fff;
 }
 
 #modTable tr:hover{
-  background: rgba(0, 130, 200,0.1);
+  background: rgba(203, 62, 66,0.1);
 }
 
 #modTable tbody td{

@@ -3,7 +3,7 @@
   angular
   .module('app')
   .controller('cancelRsvCtrl', cancelRsvCtrl);
-  function cancelRsvCtrl($scope, ticketService, eventService, $location) {
+  function cancelRsvCtrl($scope, ticketService, eventService, $location, $mdDialog) {
   var vm = this;
   vm.reservation = {};
 
@@ -22,14 +22,18 @@
     // obtiene reserva a buscar
     vm.searchRsv = function(pRsv) {
       vm.reservations = ticketService.getsReservations();
+      var bError =  false;
       var InfoRsv = {
         confNum : vm.rsv.confNum
       };
-      
       for (var i = 0; i < vm.reservations.length; i++) {
         if (vm.reservations[i].confirmationNum === pRsv.confNum) {
           vm.rsvToCxl = vm.reservations[i];
+          bError = true;
         }
+      }
+      if (bError === false) {
+        vm.showErrorCxlAlert();
       }
       sendInfo(vm.rsvToCxl);
     };
@@ -50,13 +54,41 @@
       for (var i = 0; i < vm.reservations.length; i++) {
         if (vm.reservations[i].confirmationNum === pCxlRsv.confNum) {
           vm.reservations[i].state = 'cancelado';
-          document.querySelector('.SuccessMessage').innerHTML = 'Su reserva ha sido cancelada';
+          vm.showCxlSuccessAlert();
         }
       }
       ticketService.updateReservation(vm.reservations[i]);
       init();
       clean();
     };
+
+    // Función para mensaje cancelacion de reserva satisfactoria
+    vm.showCxlSuccessAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡Cancelación exitosa!')
+        .textContent('La reservación bajo su nombre fue cancelada.')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+  // Función para mensaje de que reserva a cancelar no existe
+    vm.showErrorCxlAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡No existe ese número de reservación!')
+        .textContent('Por favor ingrese nuevamente el número de reserva que desea cancelar.')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
    
   
     // Función para limpiar campos

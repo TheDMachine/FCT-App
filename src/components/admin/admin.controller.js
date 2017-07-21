@@ -4,7 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope,$mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, $location) {
+  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, $location) {
 
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -36,7 +36,7 @@
 
     function init(){ 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
-        vm.selected = 1;
+        // vm.selected = 1;
         vm.currentUser = userService.searchAdmin(userService.getCookie());
         console.log(vm.currentUser);
         vm.originatorEv;
@@ -161,7 +161,6 @@
       if (vm.events.length == 0) {
         eventService.setEvents(pNewEvent);
         vm.showEventAlert();
-        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
         clean();
         init();
       } else {
@@ -172,14 +171,42 @@
         }
         if (bError == false) {
           eventService.setEvents(pNewEvent);
-          document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+          vm.showEventAlert();
           clean();
           init();
         } else {
-          document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+          vm.showEventDuplicateAlert();
         }
       }
     };
+
+    // Función para mensaje de registro de evento satisfactorio
+    vm.showEventAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡Registro correcto!')
+        .textContent('¡El evento se registró exitosamente!')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
+
+    // Función para mensaje de evento duplicado
+    vm.showEventDuplicateAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡El Evento ya existe!')
+        .textContent('Por favor ingrese otro')
+        .ariaLabel()
+        .ok('Gracias!')
+        .targetEvent()
+    );
+  };
 
       // Funciones para guardar patrocinadores
 
@@ -267,24 +294,8 @@
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('Registro correcto!')
-        .textContent('Registro de patrocinador correcto!')
-        .ariaLabel()
-        .ok('Gracias!')
-        .targetEvent()
-    );
-  };
-
-  vm.showEventAlert = function() {
-    // Appending dialog to document.body to cover sidenav in docs app
-    // Modal dialogs should fully cover application
-    // to prevent interaction outside of dialog
-    $mdDialog.show(
-      $mdDialog.alert()
-        .parent(angular.element(document.querySelector('#popupContainer')))
-        .clickOutsideToClose(true)
-        .title('Registro correcto!')
-        .textContent('Registro de evento correcto!')
+        .title('¡Registro correcto!')
+        .textContent('¡Registro de patrocinador correcto!')
         .ariaLabel()
         .ok('Gracias!')
         .targetEvent()
@@ -299,8 +310,8 @@
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('Registro correcto!')
-        .textContent('Registro de profesor correcto!')
+        .title('¡Registro correcto!')
+        .textContent('¡Registro de profesor correcto!')
         .ariaLabel()
         .ok('Gracias!')
         .targetEvent()
