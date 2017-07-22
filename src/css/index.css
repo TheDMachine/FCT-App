@@ -1197,3 +1197,19 @@ md-card md-card-title.no-padding{
 #adminEdit{
   margin-top: 2%;
 }
+
+/*card de academias*/
+.academyCard{
+  font-weight: normal;
+  font-size: 1.2em;
+  padding: 5px 0;
+}
+
+.academyCardtxt{
+  font-weight: lighter;
+  font-size: 1em;
+}
+
+.sizeCard{
+  padding: 0 1.5%;
+}

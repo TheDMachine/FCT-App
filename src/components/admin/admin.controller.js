@@ -617,26 +617,25 @@
 
 
     //funcion para editar alumno
-    vm.getStudent = function (student) {
-      vm.id = student.id,
-        vm.birthday = student.birthday,
-        vm.firstName = student.firstName,
-        vm.secondName = student.secondName,
-        vm.firstLastName = student.firstLastName,
-        vm.secondLastName = student.secondLastName,
-        vm.genre = student.genre,
-        vm.weight = student.weight,
-        vm.height = student.height,
-        vm.nationality = student.nationality,
-        vm.phone = student.phone,
-        vm.email = student.email,
-        vm.attendAcademy = student.attendAcademy,
-        vm.teacher = student.teacher,
-        vm.belt = student.belt,
-        vm.category = student.category,
-        vm.tournaments = student.tournaments,
-        vm.tournamentsWins = student.tournamentsWins,
-        vm.status = student.status
+    vm.getStudent = function(user) {
+      vm.student.id = user.id;
+      vm.student.birthday = user.birthday;
+      vm.student.firstName = user.firstName;
+      vm.student.secondName = user.secondName;
+      vm.student.firstLastName = user.firstLastName;
+      vm.student.secondLastName = user.secondLastName;
+      vm.student.genre = user.genre;
+      vm.student.weight = user.weight;
+      vm.student.height = user.height;
+      vm.student.nationality = user.nationality;
+      vm.student.phone = user.phone;
+      vm.student.email = user.email;
+      vm.student.attendAcademy = user.attendAcademy;
+      vm.student.teacher = user.teacher;
+      vm.student.belt = user.belt;
+      vm.student.category = user.category;
+      vm.student.tournaments = user.tournaments;
+      vm.student.tournamentsWins = user.tournamentsWins;
     }
 
     //funcion para guardar alumno editada
@@ -670,13 +669,13 @@
     //funcion para guardar competencia
     vm.createCompetition = function () {
       var newCompetition = {
-        competitionNumber: vm.competitionNumber,
         eventBelongs: vm.eventBelongs,
         competitionAge : vm.competitionAge,
         competitionGenre: vm.competitionGenre,
         competitionBelt: vm.competitionBelt,
         competitionWeight: vm.competitionWeight,
       }
+      newCompetition.name = newCompetition.competitionWeight + ' ' + newCompetition.competitionAge + ' ' + newCompetition.competitionBelt + ' ' + newCompetition.competitionGenre;
       newCompetition.competitors = [];
       console.log(newCompetition);
       console.log(newCompetition.competitors)
