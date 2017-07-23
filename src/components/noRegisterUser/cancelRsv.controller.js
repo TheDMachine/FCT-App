@@ -23,17 +23,16 @@
     vm.searchRsv = function(pRsv) {
       vm.reservations = ticketService.getsReservations();
       var bError =  false;
-      var InfoRsv = {
-        confNum : vm.rsv.confNum
-      };
       for (var i = 0; i < vm.reservations.length; i++) {
         if (vm.reservations[i].confirmationNum === pRsv.confNum) {
           vm.rsvToCxl = vm.reservations[i];
           bError = true;
+          cleanRsv();
         }
       }
       if (bError === false) {
         vm.showErrorCxlAlert();
+        cleanRsv();
       }
       sendInfo(vm.rsvToCxl);
     };
@@ -55,11 +54,11 @@
         if (vm.reservations[i].confirmationNum === pCxlRsv.confNum) {
           vm.reservations[i].state = 'cancelado';
           vm.showCxlSuccessAlert();
+          ticketService.updateReservation(vm.reservations[i]);
+          init();
+          clean();
         }
       }
-      ticketService.updateReservation(vm.reservations[i]);
-      init();
-      clean();
     };
 
     // Función para mensaje cancelacion de reserva satisfactoria
@@ -90,6 +89,11 @@
     );
   };
    
+    // Función para limpiar campos
+    function cleanRsv() {
+      vm.rsv = '';
+      
+    }
   
     // Función para limpiar campos
     function clean() {
@@ -98,7 +102,6 @@
       vm.reservation.fullName = '';
       vm.reservation.event = '';
       vm.reservation.tktsQuantity = '';
-      vm.rsv = '';
     }
 
    }

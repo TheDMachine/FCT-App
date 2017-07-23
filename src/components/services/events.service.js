@@ -7,6 +7,7 @@
   function eventService(){
     var events = [];
     var competitions = [];
+    var reservations = [];
     var publicAPI = {
       setEvents : _setEvents,
       getEvents : _getEvents,
@@ -73,6 +74,7 @@
       console.log(competitionsList);
       localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));
     }
+
   }
 
 })();

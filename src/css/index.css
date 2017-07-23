@@ -148,6 +148,12 @@
   text-align: center;
   color: #cd3d3e;
 }
+#ticketPrice {
+  font-weight: bold;
+}
+#ticketPrice span{
+  color: #cd3d3e;
+}
 
 /*Fin estilos de espacio de reservas y cancelación de tiquetes*/
 
@@ -547,27 +553,27 @@ md-input-container{
 
 /*Fin estilos de pasos formulario eventos*/
 
-/*Inicio estilos de tabla modificar*/
+/*Inicio estilos de tabla modificar y tabla de reservaciones*/
 
-#modTable h3{
+#modTable h3, #reservationsList h3{
   font-family: 'Montserrat';
   font-size: 1.571em;
   margin-bottom: 60px;
 }
 
-#modTable table{
+#modTable table, #reservationsList table{
   width: 100%;
 }
 
-#modTable thead, #modTable tbody{
+#modTable thead, #modTable tbody, #reservationsList thead, #reservationsList tbody{
   width: 100%;
 } 
 
-#modTable tbody{
+#modTable tbody, #reservationsList tbody{
   text-align: center;
 }
 
-#modTable tr th{
+#modTable tr th, #reservationsList tr th{
   width: 60px;
   text-align: center;
   margin: 0 auto;
@@ -577,11 +583,11 @@ md-input-container{
   color: #fff;
 }
 
-#modTable tr:hover{
+#modTable tr:hover, #reservationsList tr:hover{
   background: rgba(203, 62, 66,0.1);
 }
 
-#modTable tbody td{
+#modTable tbody td, #reservationsList tbody td{
   width: 60px;
   margin: 0 auto;
   border-bottom: 0.1px solid #242629;

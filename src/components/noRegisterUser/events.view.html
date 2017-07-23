@@ -20,23 +20,48 @@
 		          	<table class="table-responsive md-whiteframe-3dp">
 					    <thead class="md-whiteframe-3dp">
 					      	<tr>
-					      		<th>Nombre del evento</th>
+					      		<th>Evento</th>
 					      		<th>Fecha</th>
-						        <th>Nombre del lugar</th>
-						        <th>Dirección</th>
+						        <th>Tipo</th>
 					      	</tr>
 					    </thead>
 					    <tbody>
-					    <!-- | dateRange:vm.from:vm.to | filter:{eventState:vm.stateFilter} -->
-					      	<tr ng-repeat="event in vm.events | dateRange:vm.from:vm.to">
-					      		<td>{{event.eventName}}</td>
+					      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to">
+					      		<td><md-button type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button></td>
 					      		<td>{{event.date1 | date : "shortDate"}}</td>
-						        <td>{{event.placeName}}</td>
-						        <td>{{event.location}}</td>
+						        <td>{{event.eventType}}</td>
 					      	</tr>
 					    </tbody>
 				  	</table>
 		        </div>
+
+		        <!-- modal para consulta de eventos -->
+	        	<div style="visibility: hidden">
+				    <div class="md-dialog-container" id="myDialog">
+				      <md-dialog layout-padding>
+
+				      <!-- encabezado de la información del evento -->
+				      	<div id="eventName" class="col-xs-12 md-whiteframe-3dp">
+				      		<img ng-src="{{vm.consultEvent.photo}}" alt="Description" width="60px" height="60px" />
+				      		<h3>{{vm.consultEvent.eventName}}</h3>
+				      	</div>
+
+				      	<!-- cuerpo de la información -->
+						<div id="eventInfo" class="col-xs-12">
+				        	<p><span>Hora de inicio:</span> {{vm.consultEvent.time1 | date : "shortTime"}}</p>
+				        	<p><span>Lugar: </span> {{vm.consultEvent.placeName}}</p>
+				        	<p><span>Dirección:</span> {{vm.consultEvent.location}}</p>
+				        	<p><span>Costo de la entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
+				        	<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
+						</div>
+
+						<!-- botón para salir del modal -->
+						<div id="buttonInfoEvent" class="col-xs-12">
+				      		<md-button class="md-raised" type="button"  ng-click="vm.cancel()">Salir</md-button>
+				      	</div>
+				      </md-dialog>
+				    </div>
+				</div>
 				
 		</div>
 	</div>

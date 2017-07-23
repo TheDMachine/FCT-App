@@ -11,12 +11,12 @@
 			<form name="frmTktsReservations" autocomplete="off">
 
 				<div class="col-xs-12">
-					<div class="col-sm-6">
+					<div class="col-sm-3">
 
 						<!-- Escoge el evento -->
 						<md-input-container>
 						    <label>Selecciona el evento</label>
-						    <md-select name="event" ng-model="vm.reservation.event" required>
+						    <md-select name="event" ng-model="vm.reservation.event" ng-change="vm.checkPrice(vm.reservation.event)" required>
 						    	<md-option ng-repeat="event in vm.events" value="{{event.eventName}}">{{event.eventName}}</md-option>
 						    </md-select>
 
@@ -25,6 +25,13 @@
 								<div ng-messages-include="components/includes/messages.html"></div>
 							</div>
 						</md-input-container>
+					</div>
+					<div class="col-sm-3">
+
+						<!-- Precio de la entrada -->
+						<br>
+						<br>
+						<p id="ticketPrice">Precio de la entrada:  <span>{{vm.eventTicketPrice.ticketPrice}}</span> colones</p>
 					</div>
 					<div class="col-sm-6">
 

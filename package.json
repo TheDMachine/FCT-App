@@ -1,35 +1,25 @@
 {
-  "name": "FTC App",
-  "version": "0.1.0",
-  "description": "Material design app",
-  "main": "server.js",
+  "name": "fctapp",
+  "version": "1.0.0",
+  "description": "fctapp",
+  "main": "src/js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node start server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tilwinjoy/angular-bootstrap-material.git"
+    "url": "git+https://github.com/TheDMachine/FCT-App.git"
   },
-  "keywords": [
-    "angularjs",
-    "bootstrap",
-    "material",
-    "design"
-  ],
-  "author": "Luis Bianco",
-  "license": "MIT",
+  "author": "Rebeca",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tilwinjoy/angular-bootstrap-material/issues"
+    "url": "https://github.com/TheDMachine/FCT-App/issues"
   },
-  "homepage": "http://tilwinjoy.github.io/angular-bootstrap-material/",
-  "devDependencies": {
-    "karma": "^1.7.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-firefox-launcher": "^1.0.1"
-  },
+  "homepage": "https://github.com/TheDMachine/FCT-App#readme",
   "dependencies": {
-    "express": "^4.15.3",
-    "mongoose": "^4.11.0"
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-nodemon": "^2.2.1",
+    "nib": "^1.1.2"
   }
 }

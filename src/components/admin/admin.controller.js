@@ -4,7 +4,7 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
   //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, $location) {
+  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, $location, ticketService) {
 
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -62,6 +62,7 @@
         estabInfoService.getCountries().then(function (data) {vm.countries = data.data.countries;});
         vm.teacher.status = "Activo";
         vm.userActive = false;
+        vm.reservations = ticketService.getsReservations();
       }init();
 
 
@@ -133,6 +134,7 @@
       length: pEvent.length,
       seats: pEvent.seats,
       tickets: pEvent.tickets,
+      ticketPrice: pEvent.ticketPrice,
       contactName: pEvent.contactName,
       contactPhone: pEvent.contactPhone,
       charityEvent: pEvent.charityEvent,
@@ -157,20 +159,23 @@
     // Función para guardar
     vm.createNewEvent = function (pNewEvent) {
       var bError = false;
-      console.log(pNewEvent.time1);
+      var newEvent = pNewEvent;
+      // newEvent.map = createMap(newEvent.latitude, newEvent.length);
+      // console.log(newEvent);
+
       if (vm.events.length == 0) {
-        eventService.setEvents(pNewEvent);
+        eventService.setEvents(newEvent);
         vm.showEventAlert();
         clean();
         init();
       } else {
         for (var i = 0; i < vm.events.length; i++) {
-          if (pNewEvent.eventName == vm.events[i].eventName) {
+          if (newEvent.eventName == vm.events[i].eventName) {
             bError = true;
           }
         }
         if (bError == false) {
-          eventService.setEvents(pNewEvent);
+          eventService.setEvents(newEvent);
           vm.showEventAlert();
           clean();
           init();
@@ -179,6 +184,11 @@
         }
       }
     };
+
+    // Función para crear mapa
+    // function createMap(pLat, pLeng) {
+
+    // }
 
     // Función para mensaje de registro de evento satisfactorio
     vm.showEventAlert = function() {
@@ -371,13 +381,14 @@
       vm.event.length = pEvent.length;
       vm.event.seats = pEvent.seats;
       vm.event.tickets = pEvent.tickets;
+      vm.event.ticketPrice = pEvent.ticketPrice;
       vm.event.contactName = pEvent.contactName;
       vm.event.contactPhone = pEvent.contactPhone;
       vm.event.charityEvent = pEvent.charityEvent;
       vm.event.orgType = pEvent.orgType;
       vm.event.orgName = pEvent.orgName;
       vm.event.description = pEvent.description;
-      $scope.updateDisable = false;
+      vm.updateDisable = false;
     };
 
     // Función para actualizar datos de evento
@@ -402,6 +413,7 @@
         length: vm.event.length,
         seats: vm.event.seats,
         tickets: vm.event.tickets,
+        ticketPrice: vm.event.ticketPrice,
         contactName: vm.event.contactName,
         contactPhone: vm.event.contactPhone,
         charityEvent: vm.event.charityEvent,

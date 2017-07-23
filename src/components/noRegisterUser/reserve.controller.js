@@ -6,6 +6,7 @@
   function reserveCtrl($scope, eventService, ticketService, $location, $mdDialog) {
   var vm = this;
   vm.reservation = {};
+  vm.eventTicketPrice = {};
 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
     function init() { 
@@ -18,6 +19,17 @@
         event.preventDefault();
         $location.path('/landing');
        };
+
+    // Función para ver precio de la entrada del evento
+    vm.checkPrice = function(pEvent) {
+      for (var i = 0; i < vm.events.length; i++) {
+        if (vm.events[i].eventName === pEvent) {
+          vm.eventTicketPrice = {
+            ticketPrice: vm.events[i].ticketPrice
+          }
+        }
+      }
+    };
 
     // funciones para guardar reservaciones
     vm.saveReservation = function(pReservation) {
@@ -57,7 +69,7 @@
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('Registro correcto!')
+        .title('¡Registro correcto!')
         .textContent('La confirmación de su reserva es: ' + pConf)
         .ariaLabel()
         .ok('Gracias!')

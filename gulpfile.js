@@ -1,40 +1,50 @@
+'use strict';
 var gulp = require('gulp'),
-  concat = require('gulp-concat'),
-  prettify = require('gulp-jsbeautifier'),
-  uglify = require('gulp-uglify'),
-  rename = require('gulp-rename'),
-  templateCache = require('gulp-angular-templatecache');
-var merge2 = require('merge2');
+    nib = require('nib'),
+    // nodemon = require('gulp-nodemon'),
+    connect = require('gulp-connect');
 
-// beautify task
-gulp.task('beautify', function () {
-  return gulp.src(['src/scripts/**/*.js',
-                   'src/templates/**/*.html',
-                   'demos/scripts/**/*.js',
-                  'demos/scripts/**/*.css',
-                   'demos/scripts/**/*.css'], {
-      base: './'
-    })
-    .pipe(prettify({
-      debug: true
-    }))
-    .pipe(gulp.dest('./'));
-});
+gulp.task('connect', function () {
+  connect.server({
+    root:'./src/',
+    port: 8000,
+    livereload: true
+  });
+  // nodemon();
+})
+//  reload css
+gulp.task('css', function () {
+  gulp.src('./src/css/*.css')
+  .pipe(connect.reload())
+})
+//  reload html
+gulp.task('html', function () {
+  gulp.src('./src/components/**/*.html')
+  .pipe(connect.reload())
+})
+//  reload js
+gulp.task('js', function () {
+  gulp.src('./src/components/*.js')
+  .pipe(connect.reload())
+})
+//  Watch changes on css, html and js
+gulp.task('watch', function () {
+  gulp.watch([
+    './src/*.css',
+    './src/css/**/*.css'
+  ], ['css']);
 
+  gulp.watch([
+    './src/*.js',
+    './src/components/**/*.js',
+    './src/components/**/**/*.js'     
+  ], ['js']);
 
-//Below task combines the templateCache stream and source files and outputs concatinated file
-gulp.task('default', ['beautify'], function () {
-  return merge2(gulp.src('src/scripts/**/*.js'),
-      gulp.src('src/templates/**/*.html')
-      .pipe(templateCache({
-        module: 'angularBootstrapMaterial',
-        transformUrl: function (url) {
-          return 'templates/' + url;
-        }
-      })))
-    .pipe(concat('angular-bootstrap-material.js'))
-    .pipe(gulp.dest('dist/'))
-    .pipe(uglify())
-    .pipe(rename('angular-bootstrap-material.min.js'))
-    .pipe(gulp.dest('dist/'));
-});
+  gulp.watch([
+    './src/*.html',
+    './src/components/**/*.html',
+    './src/components/**/**/*.html'    
+  ], ['html']);
+})
+// Task name
+gulp.task('FCT', ['connect','css','html','js','watch']);
