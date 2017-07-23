@@ -1,4 +1,57 @@
-/*Inicio estilos de pasos formulario profesoresbuttonTeacher*/
+/*Inicio estilos para la tabla de profesoresr*/
+#tblTeacher h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 60px;
+}
+
+#tblTeacher table{
+  width: 100%;
+}
+
+#tblTeacher thead, #tblTeacher tbody{
+  width: 100%;
+}
+
+#tblTeacher tbody{
+  text-align: center;
+}
+
+#tblTeacher tr th{
+  width: 60px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: #0082c8;;
+  color: #fff;
+}
+
+#tblTeacher tr:hover{
+  background: rgba(0, 130, 200,0.1);
+}
+
+#tblTeacher tbody td{
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+
+#tblTeacher .editCxlB{
+  background-color: rgba(252, 177, 50, 0.8);
+  color: #fff;
+}
+
+#tblTeacher .editCxlB:not([disabled]):hover {
+    background-color: #fcb132;
+    transition: 0.3s;
+}
+
+/*fIN estilos para la tabla de profesoresr*/
+
+/*Inicio estilos de pasos formulario profesoresr*/
 
 #buttonTeacher div{
   width: 40px;
@@ -42,7 +95,7 @@
 
 #eventsTable thead, #eventsTable tbody{
   width: 100%;
-} 
+}
 
 #eventsTable tbody{
   text-align: center;
@@ -165,7 +218,7 @@
 
 #categHist thead, #categHist tbody{
   width: 100%;
-} 
+}
 
 #categHist tbody{
   text-align: center;
@@ -243,7 +296,7 @@
   background-color: #fcb132;
   color: #fff;
   position: absolute;
-  top: 50%; 
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -282,7 +335,7 @@
 
 #table1 thead, #table1 tbody, #table2 thead, #table2 tbody{
   width: 100%;
-} 
+}
 
 #table1 tbody, #table2 tbody{
   text-align: center;
@@ -519,7 +572,7 @@ md-input-container{
 
 #modTable thead, #modTable tbody{
   width: 100%;
-} 
+}
 
 #modTable tbody{
   text-align: center;

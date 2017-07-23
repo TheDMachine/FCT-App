@@ -423,7 +423,6 @@
       vm.teacher.gender = pTeacher.gender;
       vm.teacher.nationality = pTeacher.nationality;
       vm.teacher.academy = pTeacher.academy;
-      vm.teacher.grade = pTeacher.grade;
       vm.teacher.photo = pTeacher.photo;
       vm.teacher.status = pTeacher.status;
     }
@@ -438,9 +437,8 @@
       vm.teacher.email = '';
       vm.teacher.bornDate = '';
       vm.teacher.gender = '';
-      vm.teacher.nationality = '';
+      vm.teacher.nationality= '';
       vm.teacher.academy = '';
-      vm.teacher.grade = '';
       vm.teacher.photo = '';
       vm.teacher.status = '';
     }
@@ -464,7 +462,6 @@
         gender: vm.teacher.gender,
         nationality: vm.teacher.nationality,
         academy: vm.teacher.academy,
-        grade: vm.teacher.grade,
         photo: vm.teacher.photo,
         status: vm.teacher.status
       }

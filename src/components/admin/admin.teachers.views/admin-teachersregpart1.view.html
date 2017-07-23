@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-md-6">
 
     <!--Campo para la cédula -->
     <md-input-container flex-offset>
@@ -11,8 +11,10 @@
         <div ng-messages-include="components/includes/messages.html"></div>
       </div>
     </md-input-container>
+  </div>
 
-    <!-- Campo para el primer nombre -->
+  <!-- Campo para el primer nombre -->
+  <div class="col-md-6">
     <md-input-container flex-offset>
       <label>Primer nombre</label>
       <input name="teacherFirstName" ng-model="vm.teacher.firstName" ng-pattern="/^[a-zA-Z_-]{3,30}$/" required>
@@ -22,14 +24,19 @@
         <div ng-messages-include="components/includes/messages.html"></div>
       </div>
     </md-input-container>
-
-    <!-- Campo para el segundo nombre -->
+  </div>
+</div>
+<div class="row">
+  <!-- Campo para el segundo nombre -->
+  <div class="col-md-6">
     <md-input-container flex-offset>
       <label>Segundo nombre</label>
       <input name="teacherSecondName" ng-model="vm.teacher.secondName" ng-pattern="/^[a-zA-Z_-]{3,30}$/">
     </md-input-container>
+  </div>
 
-    <!-- Campo para el primer Apellido -->
+  <!-- Campo para el primer Apellido -->
+  <div class="col-md-6">
     <md-input-container flex-offset>
       <label>Primer apellido</label>
       <input name="teacherFirstLastName" ng-model="vm.teacher.firstLastName" ng-pattern="/^[a-zA-Z_-]{3,30}$/" required>
@@ -39,17 +46,34 @@
         <div ng-messages-include="components/includes/messages.html"></div>
       </div>
     </md-input-container>
-
-    <!-- Campo para el segundo apellido -->
+  </div>
+</div>
+<div class="row">
+  <!-- Campo para el segundo apellido -->
+  <div class="col-md-6">
     <md-input-container flex-offset>
       <label>Segundo apellido</label>
       <input name="teacherSecondLastName" ng-model="vm.teacher.secondLastName" ng-pattern="/^[a-zA-Z_-]{3,30}$/">
     </md-input-container>
+  </div>
 
-    <!-- Botón siguiente -->
-    <a ui-sref="admin.teachpart2" class="btn btn-info" ng-disabled="frmRegTeacher.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+  <div class="col-md-6">
+    <!-- Campo para telefono -->
+    <md-input-container flex-offset>
+      <label>Télefono</label>
+      <input name="teacherPhone" ng-model="vm.teacher.phone" ng-pattern="/^[0-9]{8}$/" required>
 
-
+      <!-- Mensaje de retroalimentacion -->
+      <div ng-messages="frmRegTeacher.teacherPhone.$error">
+        <div ng-messages-include="components/includes/messages.html"></div>
+      </div>
+    </md-input-container>
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-offset-10 col-md-2">
+    <!-- Botón siguiente -->
+    <a ui-sref="admin.teachpart2" class="btn btn-info" ng-disabled="frmRegTeacher.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+  </div>
+</div>
