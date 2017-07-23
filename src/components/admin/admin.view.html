@@ -904,54 +904,61 @@
 													Adjuntar logo
 												</label>
 											<input id="photoStudent" name="photoStudent" type="file" style="display: none" ng-model="vm.photo">
-											<!-- boton para guardar -->
-											<md-button ng-click="vm.reset()" type="submit" class="md-raised" ng-disabled="frmStudent.$invalid">Agregar Alumno</md-button>
 
-											<!-- boton para editar -->
-											<md-button ng-click="vm.updateStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Editar Alumno</md-button>
+											<!-- botón para cambiar el estado del alumno -->
+											<div class="inset form-group col-xs-12 col-md-4 floating-label-form-group control" ng-cloak>
+												<md-switch ng-model="vm.status" aria-label="Switch 2" ng-true-value="'Activo'" ng-false-value="'Inactivo'" class="md-warn">
+													Estado: {{vm.status}}
+												</md-switch>
+												<!-- boton para guardar -->
+												<md-button ng-click="vm.reset()" type="submit" class="md-raised" ng-disabled="frmStudent.$invalid">Agregar Alumno</md-button>
+
+												<!-- boton para editar -->
+												<md-button ng-click="vm.updateStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Editar Alumno</md-button>
 										</form>
+										</div>
 									</div>
-								</div>
 
-								<!-- filtro por nombre -->
-								<div class="col-xs-12 col-sm-4 pull-right">
-									<md-input-container flex-offset class="md-block">
-										<label for="">Filtrar por nombre</label>
-										<input type="text" name="studentFilter" ng-model="vm.studentFilter" />
-									</md-input-container>
-								</div>
-
-								<!-- tabla de alumnos-->
-								<div class="container-fluid row">
-									<div class="col-xs-12">
-										<table class="table col-xs-12">
-											<thead>
-												<tr>
-													<th>Cédula</th>
-													<th>Nombre completo</th>
-													<th>Profesor</th>
-													<th>Cinta</th>
-													<th>Categoria</th>
-													<th>Email</th>
-													<th></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr ng-repeat="student in vm.users | filter:{firstName:vm.studentFilter}">
-													<td>{{student.id}}</td>
-													<td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
-													<td>{{student.teacher}}</td>
-													<td>{{student.belt}}</td>
-													<td>{{student.category}}</td>
-													<td>{{student.email}}</td>
-													<td>
-														<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+									<!-- filtro por nombre -->
+									<div class="col-xs-12 col-sm-4 pull-right">
+										<md-input-container flex-offset class="md-block">
+											<label for="">Filtrar por nombre</label>
+											<input type="text" name="studentFilter" ng-model="vm.studentFilter" />
+										</md-input-container>
 									</div>
-								</div>
+
+									<!-- tabla de alumnos-->
+									<div class="container-fluid row">
+										<div class="col-xs-12">
+											<table class="table col-xs-12">
+												<thead>
+													<tr>
+														<th>Cédula</th>
+														<th>Nombre completo</th>
+														<th>Profesor</th>
+														<th>Cinta</th>
+														<th>Categoria</th>
+														<th>Email</th>
+														<th>Estado</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="student in vm.users | filter:{firstName:vm.studentFilter}">
+														<td>{{student.id}}</td>
+														<td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
+														<td>{{student.teacher}}</td>
+														<td>{{student.belt}}</td>
+														<td>{{student.category}}</td>
+														<td>{{student.email}}</td>
+														<td>{{student.status}}</td>
+														<td>
+															<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
 							</md-content>
 						</md-tab>
 
@@ -1236,135 +1243,135 @@
 					</md-tabs>
 				</md-content>
 
-			<!-- Sección de consulta, modificación, eliminar y listar eventos -->
-			<div ng-show="vm.selected == 5">
-				<md-content>
-					<md-tabs md-dynamic-height md-border-bottom>
+				<!-- Sección de consulta, modificación, eliminar y listar eventos -->
+				<div ng-show="vm.selected == 5">
+					<md-content>
+						<md-tabs md-dynamic-height md-border-bottom>
 
-						<!-- Tab consultar de eventos -->
-						<md-tab label="Consultar Eventos">
-							<md-content id="table1" class="md-padding">
-								<h3>CONSULTAR EVENTOS</h3>
+							<!-- Tab consultar de eventos -->
+							<md-tab label="Consultar Eventos">
+								<md-content id="table1" class="md-padding">
+									<h3>CONSULTAR EVENTOS</h3>
 
-								<!-- Filtro por fecha -->
-								<p>Filtre por fechas: </p>
-								<br>
-								<md-datepicker name="from" ng-model="vm.from" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
-								<md-datepicker name="to" ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker>
+									<!-- Filtro por fecha -->
+									<p>Filtre por fechas: </p>
+									<br>
+									<md-datepicker name="from" ng-model="vm.from" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
+									<md-datepicker name="to" ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker>
 
-								<!-- Tabla de info eventos -->
-								<div>
-									<table class="table-responsive">
-										<thead>
-											<tr>
-												<th>Evento</th>
-												<th>Tipo</th>
-												<th>Estado</th>
-												<th>invitado</th>
-												<th>Fecha/inicio</th>
-												<th>Hora/inicio</th>
-												<th>Fecha/Fin</th>
-												<th>Hora/Fin</th>
-												<th>Academias</th>
-												<th>Categorías</th>
-												<th>Inscripción</th>
-												<th>Patrocinadores</th>
-												<th>Lugar</th>
-												<th>Latitud</th>
-												<th>Longitud</th>
-												<th>Ubicación</th>
-												<th>Asientos</th>
-												<th>Entradas</th>
-												<th>Contacto</th>
-												<th>Tel/Cont</th>
-												<th>Para:</th>
-												<th>Org/Beneficiada</th>
-												<th>Tipo/Org</th>
-												<th>Descripción/Org</th>
-												<th>Logo/evento</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to">
-												<td>{{event.eventName}}</td>
-												<td>{{event.eventType}}</td>
-												<td>{{event.eventState}}</td>
-												<td>{{event.invitedName}}</td>
-												<td>{{event.date1 | date : "shortDate"}}</td>
-												<td>{{event.time1 | date : "shortTime"}}</td>
-												<td>{{event.date2 | date : "shortDate"}}</td>
-												<td>{{event.time2 | date : "shortTime"}}</td>
-												<td>{{event.selectAcademies}}</td>
-												<td>{{event.selectCategories}}</td>
-												<td>{{event.costInsc}}</td>
-												<td>{{event.selectSponsors}}</td>
-												<td>{{event.placeName}}</td>
-												<td>{{event.latitude}}</td>
-												<td>{{event.length}}</td>
-												<td>{{event.location}}</td>
-												<td>{{event.seats}}</td>
-												<td>{{event.tickets}}</td>
-												<td>{{event.contactName}}</td>
-												<td>{{event.contactPhone}}</td>
-												<td>{{event.charityEvent}}</td>
-												<td>{{event.orgName}}</td>
-												<td>{{event.orgType}}</td>
-												<td>{{event.description}}</td>
-												<td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</md-content>
-						</md-tab>
+									<!-- Tabla de info eventos -->
+									<div>
+										<table class="table-responsive">
+											<thead>
+												<tr>
+													<th>Evento</th>
+													<th>Tipo</th>
+													<th>Estado</th>
+													<th>invitado</th>
+													<th>Fecha/inicio</th>
+													<th>Hora/inicio</th>
+													<th>Fecha/Fin</th>
+													<th>Hora/Fin</th>
+													<th>Academias</th>
+													<th>Categorías</th>
+													<th>Inscripción</th>
+													<th>Patrocinadores</th>
+													<th>Lugar</th>
+													<th>Latitud</th>
+													<th>Longitud</th>
+													<th>Ubicación</th>
+													<th>Asientos</th>
+													<th>Entradas</th>
+													<th>Contacto</th>
+													<th>Tel/Cont</th>
+													<th>Para:</th>
+													<th>Org/Beneficiada</th>
+													<th>Tipo/Org</th>
+													<th>Descripción/Org</th>
+													<th>Logo/evento</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to">
+													<td>{{event.eventName}}</td>
+													<td>{{event.eventType}}</td>
+													<td>{{event.eventState}}</td>
+													<td>{{event.invitedName}}</td>
+													<td>{{event.date1 | date : "shortDate"}}</td>
+													<td>{{event.time1 | date : "shortTime"}}</td>
+													<td>{{event.date2 | date : "shortDate"}}</td>
+													<td>{{event.time2 | date : "shortTime"}}</td>
+													<td>{{event.selectAcademies}}</td>
+													<td>{{event.selectCategories}}</td>
+													<td>{{event.costInsc}}</td>
+													<td>{{event.selectSponsors}}</td>
+													<td>{{event.placeName}}</td>
+													<td>{{event.latitude}}</td>
+													<td>{{event.length}}</td>
+													<td>{{event.location}}</td>
+													<td>{{event.seats}}</td>
+													<td>{{event.tickets}}</td>
+													<td>{{event.contactName}}</td>
+													<td>{{event.contactPhone}}</td>
+													<td>{{event.charityEvent}}</td>
+													<td>{{event.orgName}}</td>
+													<td>{{event.orgType}}</td>
+													<td>{{event.description}}</td>
+													<td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</md-content>
+							</md-tab>
 
-						<!-- Tab historial de eventos -->
-						<md-tab label="Historial de eventos">
-							<md-content id="table2" class="md-padding">
-								<h3>HISTORIAL DE EVENTOS</h3>
+							<!-- Tab historial de eventos -->
+							<md-tab label="Historial de eventos">
+								<md-content id="table2" class="md-padding">
+									<h3>HISTORIAL DE EVENTOS</h3>
 
-								<!-- Filtros -->
-								<!-- Filtro por fecha -->
-								<p>Filtre por fechas: </p>
-								<br>
-								<md-datepicker name="from" ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
-								<md-datepicker name="to" ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
+									<!-- Filtros -->
+									<!-- Filtro por fecha -->
+									<p>Filtre por fechas: </p>
+									<br>
+									<md-datepicker name="from" ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
+									<md-datepicker name="to" ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
 
-								<!-- Filtro por estado -->
-								<p>Filtre por estado: </p>
-								<md-input-container>
-									<label>Seleccione el estado</label>
-									<md-select name="stateFilter" ng-model="vm.stateFilter">
-										<md-option value="aprobado">Aceptado</md-option>
-										<md-option value="cancelado">Cancelado</md-option>
-									</md-select>
-								</md-input-container>
+									<!-- Filtro por estado -->
+									<p>Filtre por estado: </p>
+									<md-input-container>
+										<label>Seleccione el estado</label>
+										<md-select name="stateFilter" ng-model="vm.stateFilter">
+											<md-option value="aprobado">Aceptado</md-option>
+											<md-option value="cancelado">Cancelado</md-option>
+										</md-select>
+									</md-input-container>
 
 
-								<!-- Tabla historial de eventos -->
-								<div>
-									<table class="table-responsive">
-										<thead>
-											<tr>
-												<th>Fecha</th>
-												<th>Nombre del evento</th>
-												<th>Estado</th>
-												<th>Nombre del lugar</th>
-											</tr>
-										</thead>
-										<tbody>
-											<!-- | filter:{stateFilter:vm.stateFilter} -->
-											<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
+									<!-- Tabla historial de eventos -->
+									<div>
+										<table class="table-responsive">
+											<thead>
+												<tr>
+													<th>Fecha</th>
+													<th>Nombre del evento</th>
+													<th>Estado</th>
+													<th>Nombre del lugar</th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- | filter:{stateFilter:vm.stateFilter} -->
+												<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
 
-												<td>{{event.date1 | date : "shortDate"}}</td>
-												<td>{{event.eventName}}</td>
-												<td>{{event.eventState}}</td>
-												<td>{{event.placeName}}</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</md-content>
-						</md-tab>
-				</md-content>
-			</div>
+													<td>{{event.date1 | date : "shortDate"}}</td>
+													<td>{{event.eventName}}</td>
+													<td>{{event.eventState}}</td>
+													<td>{{event.placeName}}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</md-content>
+							</md-tab>
+					</md-content>
+				</div>

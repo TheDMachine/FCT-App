@@ -57,6 +57,7 @@
         estabInfoService.getCountries().then(function (data) {vm.countries = data.data.countries;});
         vm.teacher.status = "Activo";
         vm.userActive = false;
+        vm.status = "Activo"
       }init();
 
 
