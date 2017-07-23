@@ -680,8 +680,17 @@
       console.log(newCompetition);
       console.log(newCompetition.competitors)
       eventService.setCompetitions(newCompetition);
-      clean();
+      cleanCompetation();
       init();
+    }
+
+    //limpiar formulario de competencias
+    function cleanCompetation(){
+      vm.eventBelongs = '';
+      vm.competitionAge = '';
+      vm.competitionGenre = '';
+      vm.competitionBelt = '';
+      vm.competitionWeight = '';
     }
 
       vm.changeViews = function(){

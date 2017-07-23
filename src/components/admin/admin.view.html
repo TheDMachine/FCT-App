@@ -42,6 +42,11 @@
 									<p>Alumno</p>
 								</md-button>
 							</li>
+							<li>
+								<md-button class="button-selected" ng-click="vm.selected = 12">
+									<p>Inactivar</p>
+								</md-button>
+							</li>
 						</ul>
 					</div>
 				</md-list-item>
@@ -370,7 +375,7 @@
 															<md-button ng-click="vm.createCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Agregar competición</md-button>
 
 															<!-- boton para editar -->
-															<md-button ng-click="vm.updateCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Editar competición</md-button>
+															<!-- <md-button ng-click="vm.updateCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Editar competición</md-button> -->
 														</div>
 													</div>
 												</form>
@@ -1161,12 +1166,13 @@
 
 							<div class="row">
 			        <div class="col-md-offset-1 col-md-10">
+								
 			        	<!-- Formulario para registro de alumnos -->
 								<form name="frmStudent" novalidate ng-submit="vm.presaveStudent(vm.student)" autocomplete="off">
 
-		          			<!-- Espacio para mostrar vistas del registro -->
-		          			<div ui-view></div>
-			          	</form>
+	          			<!-- Espacio para mostrar vistas del registro -->
+	          			<div ui-view></div>
+			          </form>
 			        </div>
 		          </div>
 						</md-content>
@@ -1185,21 +1191,19 @@
 							<!-- tabla de alumnos-->
 							<div class="container-fluid row">
 								<div class="col-xs-12">
-									<table class="table col-xs-12">
+									<table class="table-responsive col-xs-12" id="tableUser">
 										<thead>
 											<tr>
 												<th>Cédula</th>
 												<th>Nombre completo</th>
 												<th>Estado</th>
-												<th></th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr ng-repeat="user in vm.users | filter:{firstName:vm.studentFilter}">
-												<td>{{user.id}}</td>
-												<td>{{user.firstName}} {{user.secondName}} {{user.firstLastName}} {{user.secondLastName}}</td>
-												<td><md-button ng-click="vm.state(user)" class="md-raised">{{user.status}}</md-button></td>
-												<td><md-button ng-click="vm.getStudent(user)" class="md-raised">actualizar</md-button></td>
+											<tr ng-repeat="student in vm.users | filter:{firstName:vm.studentFilter}">
+												<td>{{student.id}}</td>
+												<td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
+												<td><md-button ng-click="vm.getStudent(student)" class="md-raised">actualizar</md-button></td>
 											</tr>
 										</tbody>
 									</table>
@@ -1207,5 +1211,47 @@
 							</div>
 						</md-content>
 					</md-tab>
+				</md-content>
+			</div>
+
+			<div ng-show="vm.selected == 12">
+				<md-content class="md-padding">
+					<div class="row container-fluid">
+
+						<!-- filtro por nombre -->
+						<div class="col-xs-12 col-sm-4 pull-right">
+							<md-input-container flex-offset class="md-block">
+								<label for="">Filtrar por nombre</label>
+								<input type="text" name="studentFilter" ng-model="vm.statusName"/>
+							</md-input-container>
+						</div>
+
+						<!-- tabla de alumnos-->
+						<div class="container-fluid row">
+							<div class="col-xs-12">
+								<table class="col-xs-12" id="tableUser">
+									<thead>
+										<tr>
+											<th>Cédula</th>
+											<th>Nombre completo</th>
+											<th>Estado</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="user in vm.users | filter:{firstName:vm.statusName}">
+											<td>{{user.id}}</td>
+											<td>{{user.firstName}} {{user.secondName}} {{user.firstLastName}} {{user.secondLastName}}</td>
+											<td><md-button ng-click="vm.state(user)" class="md-raised">{{user.status}}</md-button></td>
+										</tr>
+										<tr ng-repeat="user in vm.teachers | filter:{firstName:vm.statusName}">
+											<td>{{user.id}}</td>
+											<td>{{user.firstName}} {{user.secondName}} {{user.firstLastName}} {{user.secondLastName}}</td>
+											<td><md-button ng-click="vm.state(user)" class="md-raised">{{user.status}}</md-button></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 				</md-content>
 			</div>
