@@ -58,7 +58,6 @@
         init();
       }else{
         vm.showRsvErrorAlert(vm.availableTkts);
-        clean();
         init();
       }
     };
@@ -69,7 +68,7 @@
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('¡Registro correcto!')
+        .title('¡Reserva exitosa!')
         .textContent('La confirmación de su reserva es: ' + pConf)
         .ariaLabel()
         .ok('Gracias!')
