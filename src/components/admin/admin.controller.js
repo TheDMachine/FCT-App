@@ -199,7 +199,7 @@
         .title('¡Registro correcto!')
         .textContent('¡El evento se registró exitosamente!')
         .ariaLabel()
-        .ok('Gracias!')
+        .ok('¡Gracias!')
         .targetEvent()
     );
   };
@@ -213,7 +213,7 @@
         .title('¡El Evento ya existe!')
         .textContent('Por favor ingrese otro')
         .ariaLabel()
-        .ok('Gracias!')
+        .ok('¡Gracias!')
         .targetEvent()
     );
   };
