@@ -4,13 +4,8 @@
   .module('app')
   .service('settingsService', settingsService);
   function settingsService(logService) {
-    var publicApi = {
-      setSetting:_setSettings,
-      getSettings:_getSettings,
-      updateDirect:_updateDirect
-    };
-    return publicApi;
-    var _globalFieldSettings = [{
+
+    var globalFieldSettings = {
       address:'Pavas, San José, Costa Rica',
       phone:'22314308',
       idJ:'3-002-660565',
@@ -29,28 +24,46 @@ position:'Secretario',
 email:'prosema@racsa.co.cr',
 phone:'88561919'}
       ]
-    }];
+    };
+
+    var publicApi = {
+      setSetting:_setSettings,
+      getSettings:_getSettings,
+      updateDirect:_updateDirect
+    };
+    return publicApi;
+
+    //funcion para actualizar información de un
+    //integrante de la junta directiva
     function _updateDirect(pnewDirect){
       var directList = _getSettings();
-      for (var i = 0; i < directList.length; i++) {
-        for (var j = 0; j < directList.direct.length; j++) {
-          if(directList[i].direct[j].name == pnewDirect.name) {
-            directList[i].direct[j].push(pnewDirect);
+        for (var i = 0; i < directList.direct.length; i++) {
+          if(directList.direct[i].name === pnewDirect.name) {
+            directList.direct[i]= pnewDirect;
             localStorage.setItem('LSSettingsValues',JSON.stringify(directList));
+            return false;
           }
         }
-      }
+        directList.direct.push(pnewDirect);
+        localStorage.setItem('LSSettingsValues',JSON.stringify(directList));
     }
+
     //functionn para actualizar algo
     function _setSettings(pNewSetting) {
+      console.log(pNewSetting);
       var settingsList = _getSettings();
-      settingsList.push(pNewSetting);
+      for (var index in settingsList) {
+        console.log(settingsList[index]);
+
+        }
+      localStorage.setItem('LSSettingsValues',JSON.stringify(settingsList));
     }
+
     //function para obtener los parametros de configuración del sistema
     function _getSettings() {
       var settingsList = JSON.parse(localStorage.getItem('LSSettingsValues'));
       if(settingsList == null) {
-        settingsList = _globalFieldSettings;
+        settingsList = globalFieldSettings;
       }
       return settingsList;
 

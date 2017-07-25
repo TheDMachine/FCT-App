@@ -4,7 +4,7 @@
 		<!-- Campo nombre evento -->
 		<md-input-container flex-offset>
 			<label>Nombre de evento</label>
-			<input name="proposeName" ng-model="vm.propose.proposeName" required>
+			<input name="proposeName" ng-model="vm.propose.proposeName" ng-pattern="/^[a-zA-Z_-]{3,30}$/" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmProposeRegister.proposeName.$error">
@@ -29,7 +29,7 @@
 		<!-- Campo de persona que propone evento -->
 		<md-input-container flex-offset>
 			<label>Nombre de proponiente</label>
-			<input name="respPerson" ng-model="vm.propose.respPerson" required>
+			<input name="respPerson" ng-model="vm.propose.respPerson" ng-pattern="/^[a-zA-Z_-]{3,30}$/" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmProposeRegister.respPerson.$error">

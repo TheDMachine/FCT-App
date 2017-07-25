@@ -1,7 +1,7 @@
 <!-- Campo nombre del lugar -->
 <md-input-container flex-offset>
 	<label>Cantidad de asientos</label>
-	<input name="seats" ng-model="vm.propose.seats" required>
+	<input name="seats" ng-model="vm.propose.seats" ng-pattern="/^[0-9]{9}$/" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmProposeRegister.seats.$error">
@@ -12,7 +12,7 @@
 <!-- Campo cantidad de entradas -->
 <md-input-container flex-offset>
 	<label>Cantidad de entradas a vender</label>
-	<input name="tickets" ng-model="vm.propose.tickets" required>
+	<input name="tickets" ng-model="vm.propose.tickets" ng-pattern="/^[0-9]{2,9}$/" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmProposeRegister.tickets.$error">
@@ -23,7 +23,7 @@
 <!-- Campo nombre de contacto -->
 <md-input-container flex-offset>
 	<label>Nombre de contacto</label>
-	<input name="contactName" ng-model="vm.propose.contactName" required>
+	<input name="contactName" ng-model="vm.propose.contactName" ng-pattern="/^[a-zA-Z_-]{3,30}$/" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmProposeRegister.contactName.$error">
@@ -34,12 +34,21 @@
 <!-- Campo teléfono de contacto -->
 <md-input-container flex-offset>
 	<label>Teléfono de contacto</label>
-	<input name="contactPhone" ng-model="vm.propose.contactPhone" required>
+	<input name="contactPhone" ng-model="vm.propose.contactPhone" ng-pattern="/^[0-9]{9}$/" required>
 
 	<!-- Mensaje de retroalimentacion -->
 	<div ng-messages="frmProposeRegister.contactPhone.$error">
 		<div ng-messages-include="components/includes/messages.html"></div>
 	</div>
 </md-input-container>
-<!-- Botón siguiente -->
-<a ui-sref="proposes.proposeSix" ng-disabled="frmProposeRegister.$invalid" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+
+
+<!-- Subir logo -->
+<div>
+	<label class="btn btn-default btn-file" for="photo">
+    Adjuntar logo <input id="photo" name="photo" type="file" style="display: none;" ng-model="vm.propose.photo">
+	</label>
+</div>
+
+<!-- botón para guardar datos -->
+<button type="submit" ng-disabled="frmProposeRegister.$invalid" class="btn btn-danger" ng-disabled="frmProposeRegister.$invalid || submitDisable" ng-click="vm.reset()">Ingresar</button>

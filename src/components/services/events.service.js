@@ -31,15 +31,15 @@
     }
     //Functión para crear una propouesta de evento
     function _setProposeEvent(pObject) {
-      var proposesStorage = _getProposeEvent();
-      for (var i = 0; i < proposesStorage.length; i++) {
-        if(proposesStorage[i].eventName == pObject.eventName) {
-            logService.createLog(false, 'Usuario no registrado', 'Propuesta de evento ' +oObject.eventName + 'repetida.');
+      var proposeStorage = _getProposeEvent();
+      for (var i = 0; i < proposeStorage.length; i++) {
+        if(proposeStorage[i].proposeName == pObject.proposeName) {
+            logService.createLog(false, 'Usuario no registrado', 'Propuesta de evento ' +oObject.proposeName + 'repetida.');
             return true;
         } else {
-          proposesStorage.push(pObject);
-          localStorage.setItem('lsProposeEvents', JSON.stringify(proposesStorage));
-          logService.createLog(0, 'Usuario no registrado', 'Propuesta de evento ' +oObject.eventName);
+          proposeStorage.push(pObject);
+          localStorage.setItem('lsProposeEvents', JSON.stringify(proposeStorage));
+          logService.createLog(0, 'Usuario no registrado', 'Propuesta de evento ' +oObject.proposeName);
           return false;
         }
       }

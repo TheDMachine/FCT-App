@@ -1,16 +1,12 @@
 <md-card>
-  <md-card-title>
-    <md-card-title-text>
-      <span class="md-headline">Configuración del sistema</span>
-    </md-card-title-text>
-  </md-card-title>
   <md-card-content>
-    <p>Dirreción fisica: {{vm.stt.address}}</p>
-    <p>Teléfono: {{vm.stt.phone}}</p>
-    <p>Cédula juridica: {{vm.stt.idJ}}</p>
-    <p>Correo de notificaciónes: {{vm.stt.emailNotifications}}</p>
+    <span class="md-headline">Configuración del sistema</span>
+    <p class="md-headline">Dirreción fisica: {{vm.stt.address}}</p>
+    <p class="md-headline">Teléfono: {{vm.stt.phone}}</p>
+    <p class="md-headline">Cédula juridica: {{vm.stt.idJ}}</p>
+    <p class="md-headline">Correo de notificaciónes: {{vm.stt.emailNotifications}}</p>
     <md-button ng-click="vm.addNewDirect()">Agregar nuevo miembro de junta</md-button>
-    <table class="table table-responsive table-striped">
+    <table id="tblMembers" class="table table-responsive table-striped">
       <thead>
         <th>Nombre</th>
         <th>Puesto</th>
@@ -19,35 +15,56 @@
         <th>Actualizar</th>
       </thead>
       <tbody>
-        <tr ng-repeat="direct in vm.stt.direct">
+        <tr ng-repeat="direct in vm.stt.direct track by $index">
+          <td>{{$index}}</td>
           <td>{{direct.name}}</td>
           <td>{{direct.position}}</td>
           <td>{{direct.email}}</td>
           <td>{{direct.phone | telFilter}}</td>
-          <td><md-button data-toggle="collapse" data-target="#directModif" ng-click="vm.updateDirect(direct)">Actualizar</md-button></td>
+          <td><md-button ng-click="vm.editMember(direct)">Actualizar</md-button></td>
         </tr>
       </tbody>
     </table>
-    <div id="directModif">
+    <div id="directModif" ng-show="vm.modDisplay">
+      <form name="frmEdit">
       <md-input-container>
         <label>Nombre de miembro de junta directiva</label>
-        <input type="text" ng-model="vm.directMod.name" name="directModifName"/>
+        <input type="text" ng-model="vm.editMem.name" name="directModifName" ng-pattern="/^([A-Z])\w+ ([A-Z])\w+ ([A-Z])\w+$/" required/>
+
+        <!-- Mesaje de retroalimentación -->
+        <div ng-messages="frmEdit.directModifName.$error">
+        <div ng-messages-include="components/includes/messages.html"></div>
+        </div>
       </md-input-container>
       <md-input-container>
         <label>Cargo de miembro de junta directiva</label>
-        <input type="text" ng-model="vm.directMod.position" name="directModifPosition"/>
+        <input type="text" ng-model="vm.editMem.position" name="directModifPosition" required ng-pattern="/^([A-Z])\w+$/" />
+
+        <!-- Mesaje de retroalimentación -->
+        <div ng-messages="frmEdit.directModifPosition.$error">
+        <div ng-messages-include="components/includes/messages.html"></div>
+        </div>
       </md-input-container>
       <md-input-container>
         <label>Correo electrónico de miembro de junta directiva</label>
-        <input type="text" ng-model="vm.directMod.email" name="directModidEmail"/>
+        <input type="text" ng-model="vm.editMem.email" name="directModidEmail" required ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"/>
+
+        <!-- Mesaje de retroalimentación -->
+        <div ng-messages="frmEdit.directModidEmail.$error">
+        <div ng-messages-include="components/includes/messages.html"></div>
+        </div>
       </md-input-container>
       <md-input-container>
         <label>Teléfono del miembro de junta directiva</label>
-        <input type="text" ng-model="vm.directMod.phone" name="directModifPhone"/>
+        <input type="text" ng-model="vm.editMem.phone" name="directModifPhone"/>
+
+        <!-- Mesaje de retroalimentación -->
+        <div ng-messages="frmEdit.directModifPhone.$error">
+        <div ng-messages-include="components/includes/messages.html"></div>
+        </div>
       </md-input-container>
+      <md-button ng-show="vm.isEdit" ng-click="vm.updateMember(vm.editMem)">Actualizar Miembro</md-button>
+      <md-button ng-show="vm.isNew" ng-click="vm.createMember(vm.editMem)">Crear nuevo miembro</md-button>
     </div>
-  </md-card-content>
-  <md-card-actions layout="row" layout-align="end center">
-    <md-button ui-sref="profile.editProfile">Modificar Perfil</md-button>
-  </md-card-actions>
+  </form>
 </md-card>

@@ -31,7 +31,7 @@
   <!-- Campo para escribir el correo electrónico de la persona  -->
   <md-input-container layout="column">
     <label>Correo electrónico</label>
-    <input type="email" name="email" ng-model="vm.user.email" required ng-pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+    <input type="email" name="email" ng-model="vm.user.email" required ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
 
     <!-- Mesaje de retroalimentación -->
     <div ng-messages="frmRegisterConsul.email.$error">
