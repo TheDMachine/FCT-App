@@ -528,11 +528,6 @@ md-input-container{
   margin-bottom: 60px;
 }
 
-#last2Part input{
-  border: none;
-  background: inherit;
-}
-
 #last2Part label{
   font-size: 1em;
   margin-right: 40px;

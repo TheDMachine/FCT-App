@@ -3,8 +3,10 @@
   angular
   .module('app')
   .controller('adminCtrl', adminCtrl);
-  //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, $location, ticketService) {
+
+  adminCtrl.$inject = ['$scope', '$mdDialog', '$http', '$state', '$cookies','$location', 'eventService', 'imageService', 'Upload', 'academyServices', 'logService', 'userService', 'sponsorService', 'AuthService', 'estabInfoService', 'ticketService'];
+
+  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService,ticketService) {
 
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -64,8 +66,6 @@
         vm.userActive = false;
         vm.reservations = ticketService.getsReservations();
       }init();
-
-
     /*Sidenav*/
     vm.openMenu = function ($mdMenu, ev) {
       vm.originatorEv = ev;
@@ -196,8 +196,8 @@
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('¡Registro correcto!')
-        .textContent('¡El evento se registró exitosamente!')
+        .title('¡Registro exitoso!')
+        .textContent('¡El evento se registró correctamente!')
         .ariaLabel()
         .ok('¡Gracias!')
         .targetEvent()
@@ -368,9 +368,9 @@
       vm.event.eventState = pEvent.eventState;
       vm.event.photo = pEvent.photo;
       vm.event.date1 = pEvent.date1;
-      vm.event.time1 = pEvent.time1;
+      vm.event.time1 = new Date(pEvent.time1);
       vm.event.date2 = pEvent.date2;
-      vm.event.time2 = pEvent.time2;
+      vm.event.time2 = new Date(pEvent.time2);
       vm.event.selectAcademies = pEvent.selectAcademies;
       vm.event.selectCategories = pEvent.selectCategories;
       vm.event.costInsc = pEvent.costInsc;
@@ -423,16 +423,47 @@
       }
       $scope.updateDisable = true;
       eventService.updateEvent(modEvent);
+      vm.showEditEventAlert();
       init();
       clean();
     };
 
+    // Función para mensaje de registro de evento satisfactorio
+    vm.showEditEventAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡Actualización exitosa!')
+        .textContent('¡El evento se actualizó correctamente!')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+    );
+  };
+
+    // Función para cancelar un evento
     vm.cancelEvent = function (pEvent) {
       pEvent.eventState = 'cancelado';
       eventService.updateEvent(pEvent);
-      init();
+      vm.showCxlEventAlert();
       acceptedEvents();
+      init();
     };
+
+    // Función para mensaje de registro de evento satisfactorio
+    vm.showCxlEventAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡Cancelación exitosa!')
+        .textContent('¡El evento se canceló correctamente!')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+    );
+  };
 
     // Función para filtrar la tabla de consulta de eventos
     function acceptedEvents() {

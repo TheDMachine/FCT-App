@@ -227,7 +227,7 @@
 
 					        	<!-- Filtros -->
 					        	<div class="col-xs-12">
-					        		<div class="col-md-6">
+					        		<div class="col-md-4">
 					        			<md-input-container>
 								    		<label>Seleccione el evento</label>
 								    		<md-select name="eventFilter" ng-model="vm.eventFilter">
@@ -236,13 +236,19 @@
 								    		</md-select>
 										</md-input-container>
 					        		</div>
-					        		<div class="col-md-6">
+					        		<div class="col-md-4">
 					        			<md-input-container>
 										    <label>Seleccione la categoría</label>
 										    <md-select name="catFilter" ng-model="vm.catFilter">
 										    	<md-option value="{{categ.vm.categories}}">Todas</md-option>
 										    	<md-option ng-repeat="categ in vm.categories" value="{{categ.categorieName}}">{{categ.categorieName}} ({{categ.minAgeRange}} - {{categ.maxAgeRange}})</md-option>
 										    </md-select>
+										</md-input-container>
+					        		</div>
+					        		<div class="col-md-4">
+					        			<md-input-container>
+										    <label>Nombre de competidor</label>
+										    <input type="text" name="competidorNameFilter" ng-model="vm.competidorNameFilter"/>
 										</md-input-container>
 					        		</div>
 					        		<div class="col-md-4">
@@ -287,8 +293,7 @@
 									    </thead>
 									    <tbody>
 									    <!-- | filter:{stateFilter:vm.stateFilter} -->
-									      	<tr ng-repeat="item in vm.competitions | filter:{eventBelongs:vm.eventFilter} | filter:{competitionAge:vm.catFilter} | filter:{competitionWeight:vm.weightFilter} | filter:{competitionGenre:vm.genreFilter} | filter:{competitionBelt:vm.beltFilter}">
-									      	
+									      	<tr ng-repeat="item in vm.competitions | filter:{eventBelongs:vm.eventFilter} | filter:{competitionAge:vm.catFilter} | filter:{competitionWeight:vm.weightFilter} | filter:{competitionGenre:vm.genreFilter} | filter:{competitionBelt:vm.beltFilter} | filter:{competitors:vm.competidorNameFilter}">
 									      		<td>{{item.competitionNumber}}</td>
 										        <td>{{item.competitors}}</td>
 										        <td></td>
@@ -333,7 +338,7 @@
   				<md-content layout="column">
   					<div layout="row">
   						<md-input-container flex-offset class="md-block" flex="100">
-						<label for="">Filtrar por nombre</label>
+							<label for="">Filtrar por nombre</label>
 							<input type="text" name="sponsorFilter" ng-model="vm.sponsorFilter"/>
 						</md-input-container>
   					</div>
@@ -1258,13 +1263,13 @@
 					    </md-tab>
 
 				    	<!-- Tab consultar de eventos -->
-				      	<md-tab label="Modificar Evento">
+				      	<md-tab label="Modificar o cancelar Evento">
 					        <md-content id="table1" class="md-padding">
 
 					        <!-- Tabla para modificar eventos -->
 					        <div id="modTable" class="row">
 					          	<div class="col-md-offset-1 col-md-10">
-					          		<h3>MODIFICAR EVENTOS</h3>
+					          		<h3>MODIFICAR O CANCELAR EVENTOS</h3>
 
 									<!-- Filtro por fecha -->
 									<p>Filtre por fechas: </p>
@@ -1273,28 +1278,47 @@
 							    	<md-datepicker name="to"  ng-model="vm.to3" md-placeholder="Fecha fin" md-min-date="vm.today"></md-datepicker>
 									
 						        	<!-- Tabla de info eventos -->
-							        <div>
-							          	<table class="table-responsive md-whiteframe-3dp">
-										    <thead class="md-whiteframe-3dp">
-										      	<tr>
-										      		<th>Nombre del evento</th>
-											        <th>Fecha inicio</th>
-											        <th></th>
-											        <th></th>
-										      	</tr>
-										    </thead>
-										    <tbody>
-										      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from3:vm.to3" > 
-										      		<td>{{event.eventName}}</td>
-											        <td>{{event.date1 | date : "shortDate"}}</td>
+						        	<div>
+						        		<table class="table-responsive md-whiteframe-3dp">
+						        			<thead class="md-whiteframe-3dp">
+						        				<tr>
+						        					<th>Evento</th>
+						        					<th>Inicio</th>
+						        					<th></th>
+						        					<th></th>
+						        				</tr>
+						        			</thead>
+						        			<tbody>
+						        				<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from3:vm.to3" > 
+						        					<td>{{event.eventName}}</td>
+						        					<td>{{event.date1 | date : "shortDate"}}</td>
 
-											    	<!-- Botones para editar y cancelar eventos -->
-											        <td><md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button></td>
-											        <td><md-button class="md-raised editCxlB" ng-click="vm.cancelEvent(event)">Cancelar</md-button></td>
-										      	</tr>
-										    </tbody>
-									  	</table>
+						        					<!-- Botones para editar y cancelar eventos -->
+						        					<td><md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button></td>
+						        					<td><md-button href="#!/admin#ventana1" class="md-raised editCxlB" data-toggle="modal">Cancelar</md-button></td>
+						        				</tr>
+						        			</tbody>
+						        		</table>
+						        	</div>
+
+							        <!-- Modal-->
+							        <div class="col-md-8 col-md-offset-4">  
+							        	<div class="modal fade" id="ventana1" role="dialog">
+							        		<div class="modal-dialog">
+							        			<div class="modal-content">
+							        				<div class="modal-header">
+							        					<h5>¿Desea cancelar el evento?</h5>
+							        					<button type="button" class="close" id="thex" data-dismiss="modal"><i class="fa fa-times"></i></button>
+							        				</div>
+							        				<div class="modal-body">
+							        					<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+							        					<button type="submit" class="btn btn-primary" ng-click="vm.cancelEvent(event)" data-dismiss="modal">SI</button>    
+							        				</div>
+							        			</div>
+							        		</div>
+							        	</div>
 							        </div>
+							        
 					          	</div>
 					          </div>
 					        </md-content>
@@ -1423,7 +1447,7 @@
 						        		</div>
 
 
-					        			<!-- Tabla historial de competencias -->
+					        			<!-- Tabla historial de reservaciones -->
 								        <div>
 								          	<table class="table-responsive md-whiteframe-3dp">
 											    <thead class="md-whiteframe-3dp">

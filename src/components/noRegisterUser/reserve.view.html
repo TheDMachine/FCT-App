@@ -17,7 +17,7 @@
 						<md-input-container>
 						    <label>Selecciona el evento</label>
 						    <md-select name="event" ng-model="vm.reservation.event" ng-change="vm.checkPrice(vm.reservation.event)" required>
-						    	<md-option ng-repeat="event in vm.events" value="{{event.eventName}}">{{event.eventName}}</md-option>
+						    	<md-option ng-repeat="event in vm.events | eventFrom" value="{{event.eventName}}">{{event.eventName}}</md-option>
 						    </md-select>
 
 							<!-- Mensaje de retroalimentacion -->
