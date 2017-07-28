@@ -122,7 +122,7 @@
       // This never happens.
     };
     /*End sidenav functionality
-    -->>*/   
+    -->>*/
 
     vm.logOut = function() {
       AuthService.logOut();
@@ -336,7 +336,7 @@
       vm.currentUser.phone = teacher.phone;
     }
 
-    //funcion para guardar alumno editada
+    //funcion para guardar profesor editada
     vm.updateCurrentTeacher = function(){
       var editTeacher = {
       password : vm.currentUser.password,

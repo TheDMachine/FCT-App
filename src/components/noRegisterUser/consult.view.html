@@ -1,0 +1,78 @@
+<section class="container-fluid">
+	<div class="row">
+		<div>
+			<form name="frmGetRsv" autocomplete="off">
+
+				<!-- Campo nombre evento -->
+				<md-input-container flex-offset>
+					<label>Número de confirmación de la reserva:</label>
+					<input name="confirmationNum" ng-model="vm.rsv.confNum" maxlength="6" md-maxlength="6" required>
+
+					<!-- Mensaje de retroalimentacion -->
+					<div ng-messages="frmGetRsv.confirmationNum.$error">
+						<div ng-messages-include="components/includes/messages.html"></div>
+					</div>
+				</md-input-container>
+
+				<!-- Botón para ingresar reserva -->
+				<md-button type="submit" class="md-raised" ng-disabled="frmGetRsv.$invalid" ng-click="vm.searchRsv(vm.rsv)">Buscar reserva</md-button>
+			</form>
+		</div>
+
+		<div>
+			<form name="frmCancelRsv" autocomplete="off">
+				<h4>La reserva a cancelar es:</h4>
+
+				<!-- Campo nombre evento -->
+				<md-input-container flex-offset>
+					<label>Número de confirmación de la reserva:</label>
+					<input name="confirmationNum" ng-model="vm.reservation.confNum" disabled="disabled">
+				</md-input-container>
+
+				<!-- Campo cédula del cliente -->
+				<md-input-container flex-offset>
+					<label>Cédula</label>
+					<input name="id" ng-model="vm.reservation.id" disabled="disabled">
+				</md-input-container>
+
+				<!-- Campo nombre evento -->
+				<md-input-container flex-offset>
+					<label>Nombre completo</label>
+					<input type="text" name="fullName" ng-model="vm.reservation.fullName" disabled="disabled">
+				</md-input-container>
+
+				<!-- Campo nombre evento -->
+				<md-input-container flex-offset>
+					<label>Evento</label>
+					<input name="id" ng-model="vm.reservation.event" disabled="disabled">
+				</md-input-container>
+
+
+				<!-- Campo cantidad de entradas -->
+				<md-input-container flex-offset>
+					<label>Cantidad de entradas</label>
+					<input type="number" name="tktsQuantity" ng-model="vm.reservation.tktsQuantity" disabled="disabled">
+				</md-input-container>
+
+				<div class="container">
+					<a href="#!/cancelRsv#ventana1" class="btn btn-primary btn-lg" data-toggle="modal">Cancelar reservación</a>
+
+					<div class="modal fade" id="ventana1">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">¿Desea cancelar la reservación?</h5>
+								</div>
+								<div class="modal-body">
+									<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+									<button type="submit" class="btn btn-primary" ng-click="vm.cancelRsv(vm.reservation)" data-dismiss="modal">SI</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<p class="SuccessMessage"></p>
+		</div>
+	</div>
+</section>

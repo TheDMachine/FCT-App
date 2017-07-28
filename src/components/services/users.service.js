@@ -69,7 +69,7 @@
         id : '123456789',
         firstName : 'Administrador',
         firstLastName : 'FCT',
-        bornhDate : '30',
+        borhDate : '30',
         nationality : 'Costarricense',
         phone : '87456321',
         email : 'adminFCT@hotmail.com',
