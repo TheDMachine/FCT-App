@@ -31,11 +31,13 @@ gulp.task('js', function () {
 gulp.task('watch', function () {
   gulp.watch([
     './src/*.css',
+    './src/css/*.css',
     './src/css/**/*.css'
   ], ['css']);
 
   gulp.watch([
     './src/*.js',
+    './src/js/*.js',
     './src/components/**/*.js',
     './src/components/**/**/*.js'     
   ], ['js']);
