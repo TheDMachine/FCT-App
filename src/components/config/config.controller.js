@@ -20,6 +20,29 @@
           .targetEvent()
       );
     };
+    vm.editParam= function(pParamToEdit) {
+      vm.showPrompt(pParamToEdit);
+    }
+
+    vm.showPrompt = function(pParamToEdit) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('!Actualización de parametro del sistema!')
+      .textContent('Actualizando de ' +pParamToEdit)
+      .placeholder('Escribe la nueva dirreción')
+      .ariaLabel(pParamToEdit)
+      .ok('Actualizar')
+      .cancel('Cancelar');
+
+    $mdDialog.show(confirm).then(function(result) {
+      //settingsService.e
+      console.log(result);
+      settingsService.editParamToSystem(pParamToEdit, result);
+      init();
+    }, function() {
+      vm.status = 'You didn\'t name your dog.';
+    });
+  };
     function init() {
       vm.stt = settingsService.getSettings();
       vm.editMem = {};
@@ -55,9 +78,6 @@
       vm.showAlert('El miembro llamado '+ pNewMember.name+' ha sido creado exitosamente.','¡Nuevo miembro de la junta directiva!');
       init();
       clearForm(vm.editMem);
-    }
-    vm.editParams = function() {
-
     }
     vm.updateMember = function(pMemberToUpdate) {
       settingsService.updateDirect(pMemberToUpdate);

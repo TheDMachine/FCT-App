@@ -29,16 +29,33 @@ phone:'88561919'}
     var publicApi = {
       setSetting:_setSettings,
       getSettings:_getSettings,
-      updateDirect:_updateDirect
+      updateDirect:_updateDirect,
+      editParamToSystem: _editParamToSystem
     };
     return publicApi;
+
+    //Función para actualizar los parametros del sistema
+    function _editParamToSystem(pOldParam, pNewParam) {
+      var data = _getSettings();
+      for (var index in data) {
+        if (data[index] === pOldParam) {
+          data[index] = pNewParam;
+          localStorage.setItem('LSSettingsValues', JSON.stringify(data));
+          return;
+        }
+      }
+    }
+
+
+
+
 
     //funcion para actualizar información de un
     //integrante de la junta directiva
     function _updateDirect(pnewDirect){
       var directList = _getSettings();
         for (var i = 0; i < directList.direct.length; i++) {
-          if(directList.direct[i].name === pnewDirect.name) {
+          if(directList.direct[i].name === pnewDirect.name || directList.direct[i].position === pnewDirect.position || directList.direct[i].email === pnewDirect.email || directList.direct[i].phone === pnewDirect.phone) {
             directList.direct[i]= pnewDirect;
             localStorage.setItem('LSSettingsValues',JSON.stringify(directList));
             return false;

@@ -18,6 +18,9 @@ function init() {
   vm.proposes = eventService.getPropose();
   vm.propose = {};
   vm.categoriesAge = estabInfoService.getCategories();
+  if(vm.proposes.length === 0) {
+    vm.messageToHave = 'No existen propuestas de eventos para revisar';
+  }
 }init();
 //Modald para cargar el Modald
 vm.showAlertPropose = function(pMessage, pFeedback) {
@@ -65,6 +68,9 @@ vm.showAlertPropose = function(pMessage, pFeedback) {
 
     //Funcion para aceptar la propuesta
     vm.aceptedPropose = function(pAcceptedPropose) {
+      // console.log("La propuesta del evento es %o", pAcceptedPropose);
+
+      //Objeto para mandar el nuevo evento.
       var newEvent = {
         eventName: pAcceptedPropose.proposeName,
         eventType: pAcceptedPropose.proposeType,
@@ -86,8 +92,38 @@ vm.showAlertPropose = function(pMessage, pFeedback) {
         status: 'Habilitado'
 
       };
-      eventService.setEvents(newEvent);
+      // console.log("El evento nuevo a de ser %o", newEvent);
+
+      //Función para crear un nuevo evento.
+      eventService.updateProposeToEvent(newEvent);
       init();
+    }
+    vm.showPrompt = function(pObjectToAddResult) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('!Propuesta rechazada!')
+      .textContent('La propuesta rechazada es: ' +pObjectToAddResult.promoseName)
+      .placeholder('Razón del rechazo.')
+      .ariaLabel('Propuesta rechazada')
+      .ok('Justificar rechazo')
+      .cancel('Cancelar');
+
+    $mdDialog.show(confirm).then(function(result) {
+      //settingsService.e
+      pObjectToAddResult.motivationRejected = result;
+      console.log(result);
+      vm.rejectedPropose(pObjectToAddResult);
+      init();
+    }, function() {
+      vm.status = 'Mensaje no valido.';
+    });
+    };
+    //Función para rechazar la propuesta.
+    vm.rejectedPropose= function(pRejectedPropose) {
+      pRejectedPropose.status ="Rechazada";
+      eventService.updateReject(pRejectedPropose);
+      init();
+      console.log(pRejectedPropose);
     }
    }
 })();

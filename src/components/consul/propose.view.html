@@ -1,27 +1,31 @@
-<h2>Propuestas a revisar</h2>
-{{vm.proposes}}
-<md-card ng-repeat="prop in vm.proposes" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch>
+<div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-4">
+<h3>Propuestas a revisar</h3>
+<h4>{{vm.messageToHave}}</h4>
+</div>
+<md-content ng-hide="vm.proposes.length == 0" class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="90" layout="row">
+      <md-card ng-repeat="prop in vm.proposes track by $index">
+        <img ng-src="{{prop.photo}}" class="md-card-image" alt="{{prop.photo}}">
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline">Nombre del evento: {{prop.proposeName}}</span>
-            <span class="md-subhead">Promovido por: {{prop.respPerson}}</span>
-            <span class="md-subhead">Fecha del evento: {{prop.date1}}</span>
-            <span class="md-subhead">Tipo de evento: {{prop.proposeType}}</span>
+            <span class="md-headline">Propuesta de evento</span>
           </md-card-title-text>
         </md-card-title>
-        <md-card-content layout="row" layout-align="space-between">
-          <div class="md-media-xl card-media"></div>
-
-          <md-card-actions layout="column">
-            <md-button ng-click="vm.proposeAproved(prop.proposeName, true)" class="md-icon-button" aria-label="Favorite">
-              <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
-            </md-button>
-            <md-button ng-click="vm.proposeRejected(prop.proposeName, false)" class="md-icon-button" aria-label="Settings">
-              <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Share">
-              <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
-            </md-button>
-          </md-card-actions>
+        <md-card-content>
+          <p class="md-subhead">Nombre del evento: {{prop.proposeName}} [{{prop.status}}]</p>
+          <p class="md-subhead">Tipo de evento: {{prop.proposeType}}</p>
+          <p class="md-subhead">Fecha del evento: {{prop.date1 | date:"dd/MM/yyyy"}}</p>
+          <p class="md-subhead">Responsable del evento: {{prop.respPerson}}</p>
+          <p class="md-subhead">Lugar: {{prop.placeName +", " +prop.location}}</p>
+          <p class="md-subhead">Persona de contacto: {{prop.contactName}}</p>
+          <p class="md-subhead">Número de contacto: {{prop.contactPhone}}</p>
+          <p class="md-subhead">Categorias a participar: <ul><li class="md-subhead" ng-repeat="ct in prop.selectCategories">{{ct}}</li></ul></P>
         </md-card-content>
-</md-card>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-click="vm.aceptedPropose(prop)">Aceptar propuesta</md-button>
+          <md-button ng-click="vm.showPrompt(prop)">Rechazar propuesta</md-button>
+        </md-card-actions>
+      </md-card>
+      <md-card>
+      </div>
+  </md-content>

@@ -248,6 +248,17 @@
       controller: 'consulCtrl',
       controllerAs:'vm'
     })
+    .state('meetings',{
+      url:'/createMeetingConsult',
+      templateUrl:'components/meetingConsul/meetingConsult.view.html',
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/meetingConsul/meetingConsult.controller.js')
+        }]
+      },
+      controller: 'meetingCtrl',
+      controllerAs:'vm'
+    })
 
     $urlRouterProvider.otherwise('/');
   }

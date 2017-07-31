@@ -1137,6 +1137,7 @@ md-card md-card-title.no-padding{
 [name="frmRegisterConsul"],
 [name="frmProposeRegister"] {
   padding-top:5%;
+  width:80%;
 }
 
 /*Final represetante de consejo*/
