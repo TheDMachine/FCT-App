@@ -3,7 +3,7 @@
   angular
   .module('app')
   .controller('consultRsvCtrl', consultRsvCtrl);
-  function consultRsvCtrl($scope, ticketService, eventService, $location) {
+  function consultRsvCtrl($scope, $mdDialog, ticketService, eventService, $location) {
   var vm = this;
   vm.reservation = {};
 
@@ -30,7 +30,7 @@
       if (vm.reservations[i].id === pRsv.id) {
         vm.rsvToCxl = vm.reservations[i];
       }else{
-        document.querySelector('.errorMessage').innerHTML = 'No existen reservas';
+        vm.showNoExistReservationAlert();
       }
     }
     sendInfo(vm.rsvToCxl);
@@ -45,5 +45,21 @@
     vm.reservation.tktsQuantity = pRsvToCxl.tktsQuantity;
   }
 
+
+  vm.showNoExistReservationAlert = function() {
+  // Appending dialog to document.body to cover sidenav in docs app
+  // Modal dialogs should fully cover application
+  // to prevent interaction outside of dialog
+  $mdDialog.show(
+    $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Sin Reservas')
+      .textContent('No existen reservas para la cédula suministrada')
+      .ariaLabel()
+      .ok('¡Gracias!')
+      .targetEvent()
+  );
+};
  }
 })();
