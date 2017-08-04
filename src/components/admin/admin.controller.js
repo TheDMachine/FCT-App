@@ -543,7 +543,6 @@
 
     function clean() {
       vm.event = '';
-      vm.teacher = '';
     }
 
       // Función para actualizar datos del profesor

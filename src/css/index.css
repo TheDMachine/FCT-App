@@ -1185,3 +1185,10 @@ md-list-item > p, md-list-item > .md-list-item-inner > p, md-list-item .md-list-
 md-card md-card-title.no-padding{
   padding: 0;
 }
+
+
+
+
+#map {
+        height: 100%;
+      }

@@ -1,36 +1,67 @@
 (function(){
   angular
-    .module('app')
-    .controller('eventsCtrl', eventsCtrl);
-    function eventsCtrl($scope, $location, eventService,  $mdDialog){ //se inyecta el service userService en el controlador para que se tenga acceso
+  .module('app')
+  .controller('eventsCtrl', eventsCtrl);
+
+  eventsCtrl.$inject = ['$scope', '$location', '$mdDialog','eventService', 'NgMap'];
+
+    function eventsCtrl($scope, $location, $mdDialog, eventService, NgMap){ //se inyecta el service userService en el controlador para que se tenga acceso
       //controlador
       var vm = this; //binding del controlador con el html, solo en el controlador
       vm.today = new Date();
       vm.acceptedEvents=[];
       console.log(vm.acceptedEvents);
+      vm.infowindow;
       
       function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.events = eventService.getEvents();
         console.log(vm.events);
         acceptedEvents();
         vm.to = new Date();
-       }init();
+      }init();
+
+      // funcion p el mapa
+      vm.placeChanged = function() {
+        vm.place = this.getPlace();
+        console.log(vm.place);
+        vm.map.setCenter(vm.place.geometry.location);
+        vm.map.setZoom(18);
+      }
+      NgMap.getMap().then(function(map) {
+        vm.map = map;
+        console.log(vm.map);
+        createMarker(vm.map);
+      });
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location,
+          title: "Posición actual"
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
 
        // Función para devolverse al landing
-        vm.return = function(event){
+       vm.return = function(event){
         event.preventDefault();
         $location.path('/landing');
-       };
+      };
 
        // Función para filtrar la tabla de consulta de eventos
-      function acceptedEvents() {
+       function acceptedEvents() {
         vm.events = eventService.getEvents();
-          for (var i = 0; i < vm.events.length; i++) {
-            if (vm.events[i].eventState === 'aprobado') {
-              vm.acceptedEvents.push(vm.events[i]);
-            }
+        for (var i = 0; i < vm.events.length; i++) {
+          if (vm.events[i].eventState === 'aprobado') {
+            vm.acceptedEvents.push(vm.events[i]);
           }
         }
+      }
 
       // Función para mostrar la consulta de eventos
       vm.showEventConsult = function(pEvent, ev) {
@@ -77,10 +108,10 @@
         orgName: pEvent.orgName,
         orgType: pEvent.orgType,
         description: pEvent.description
-       }
       }
     }
+  }
 
      //se establece un objeto de angular normal
 
-})();
+   })();
