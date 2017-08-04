@@ -1,5 +1,59 @@
 /*Inicio estilos para la tabla de profesoresr*/
 
+#tblReservation table{
+  width: 100%;
+}
+
+#tblReservation thead, #tblTeacher tbody{
+  width: 100%;
+}
+
+#tblReservation tbody{
+  text-align: center;
+}
+
+#tblReservation tr th{
+  text-align: center;
+  width: 60px;
+  font-size: 1.143em;
+  font-size: 1.143em;
+  margin: 0 auto;
+  padding: 20px 10px;
+  color: #fff;
+  background-color: #00978f;;
+}
+
+#tblReservation tr:hover{
+  background: rgba(0, 130, 200,0.1);
+}
+
+#tblReservation tbody td{
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+}
+#tblReservation h3{
+  margin-bottom: 60px;
+  font-size: 1.571em;
+  font-family: 'Montserrat';
+}
+#tblReservation .editCxlB{
+  background-color: rgba(252, 177, 50, 0.8);
+  color: #fff;
+}
+
+#tblReservation .editCxlB:not([disabled]):hover {
+    background-color: #fcb132;
+    transition: 0.3s;
+}
+
+/*fIN estilos para la tabla de profesoresr*/
+
+/*Inicio estilos para la tabla de profesoresr*/
+
 
 #tblTeacher table{
   width: 100%;
