@@ -3,8 +3,10 @@
   angular
   .module('app')
   .controller('adminCtrl', adminCtrl);
-  //adminCtrl.$inyector = ['eventService','imageService','Upload','userService','academyServices'];
-  function adminCtrl($scope,$mdDialog, $http, $state, $cookies, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService) {
+
+  adminCtrl.$inject = ['$scope', '$mdDialog', '$http', '$state', '$cookies','$location', 'eventService', 'imageService', 'Upload', 'academyServices', 'logService', 'userService', 'sponsorService', 'AuthService', 'estabInfoService', 'ticketService'];
+
+  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService,ticketService) {
 
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -29,10 +31,14 @@
     vm.pairFights = [];
     vm.ready = false;
     vm.today = new Date();
+    vm.consultEvent = {};
+    vm.customFullscreen = false;
+
+    
 
     function init(){ 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
-        vm.selected = 1;
+        // vm.selected = 1;
         vm.currentUser = userService.searchAdmin(userService.getCookie());
         console.log(vm.currentUser);
         vm.originatorEv;
@@ -51,15 +57,15 @@
         vm.log = logService.showLog();
         vm.belts = estabInfoService.getBelts();
         vm.to = new Date();
+        console.log(vm.to);
         vm.to2 = new Date();
         vm.weights = estabInfoService.getWeight();
         vm.categoriesAge = estabInfoService.getCategories();
         estabInfoService.getCountries().then(function (data) {vm.countries = data.data.countries;});
         vm.teacher.status = "Activo";
         vm.userActive = false;
+        vm.reservations = ticketService.getsReservations();
       }init();
-
-
     /*Sidenav*/
     vm.openMenu = function ($mdMenu, ev) {
       vm.originatorEv = ev;
@@ -90,6 +96,54 @@
     };
     /*Final sidenav*/
 
+    // Función para mostrar la consulta de eventos
+    vm.showEventConsult = function(pEvent, ev) {
+      checkConsultEvent(pEvent);
+      $mdDialog.show({
+        contentElement: '#myDialog',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+      });
+    };
+
+    // funcion para salir del modal de consulta de eventos
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    // función para imprimir el evento a consultar
+    function checkConsultEvent(pEvent) {
+     vm.consultEvent = {
+      eventName: pEvent.eventName,
+      invitedName: pEvent.invitedName,
+      eventType: pEvent.eventType,
+      eventState: pEvent.eventState,
+      photo: pEvent.photo,
+      date1: pEvent.date1,
+      time1: pEvent.time1,
+      date2: pEvent.date2,
+      time2: pEvent.time2,
+      selectAcademies: pEvent.selectAcademies.toString(),
+      selectCategories: pEvent.selectCategories.toString(),
+      costInsc: pEvent.costInsc,
+      selectSponsors: pEvent.selectSponsors.toString(),
+      placeName: pEvent.placeName,
+      location: pEvent.location,
+      latitude: pEvent.latitude,
+      length: pEvent.length,
+      seats: pEvent.seats,
+      tickets: pEvent.tickets,
+      ticketPrice: pEvent.ticketPrice,
+      contactName: pEvent.contactName,
+      contactPhone: pEvent.contactPhone,
+      charityEvent: pEvent.charityEvent,
+      orgName: pEvent.orgName,
+      orgType: pEvent.orgType,
+      description: pEvent.description
+     }
+    }
+
     // Función para pre guardar datos del evento
 
     vm.presaveEvent = function (pNewEvent) {
@@ -105,29 +159,65 @@
     // Función para guardar
     vm.createNewEvent = function (pNewEvent) {
       var bError = false;
-      console.log(pNewEvent.time1);
+      var newEvent = pNewEvent;
+      // newEvent.map = createMap(newEvent.latitude, newEvent.length);
+      // console.log(newEvent);
+
       if (vm.events.length == 0) {
-        eventService.setEvents(pNewEvent);
+        eventService.setEvents(newEvent);
         vm.showEventAlert();
-        document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
         clean();
         init();
       } else {
         for (var i = 0; i < vm.events.length; i++) {
-          if (pNewEvent.eventName == vm.events[i].eventName) {
+          if (newEvent.eventName == vm.events[i].eventName) {
             bError = true;
           }
         }
         if (bError == false) {
-          eventService.setEvents(pNewEvent);
-          document.querySelector('.SuccessMessage').innerHTML = 'El evento se registró exitosamente';
+          eventService.setEvents(newEvent);
+          vm.showEventAlert();
           clean();
           init();
         } else {
-          document.querySelector('.ErrorMessage').innerHTML = 'El evento ya existe';
+          vm.showEventDuplicateAlert();
         }
       }
     };
+
+    // Función para crear mapa
+    // function createMap(pLat, pLeng) {
+
+    // }
+
+    // Función para mensaje de registro de evento satisfactorio
+    vm.showEventAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡Registro exitoso!')
+        .textContent('¡El evento se registró correctamente!')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+    );
+  };
+
+    // Función para mensaje de evento duplicado
+    vm.showEventDuplicateAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡El Evento ya existe!')
+        .textContent('Por favor ingrese otro')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+    );
+  };
+
       // Funciones para guardar patrocinadores
 
     vm.saveSponsor= function(pNewSponsor) {
@@ -214,24 +304,8 @@
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('Registro correcto!')
-        .textContent('Registro de patrocinador correcto!')
-        .ariaLabel()
-        .ok('Gracias!')
-        .targetEvent()
-    );
-  };
-
-  vm.showEventAlert = function() {
-    // Appending dialog to document.body to cover sidenav in docs app
-    // Modal dialogs should fully cover application
-    // to prevent interaction outside of dialog
-    $mdDialog.show(
-      $mdDialog.alert()
-        .parent(angular.element(document.querySelector('#popupContainer')))
-        .clickOutsideToClose(true)
-        .title('Registro correcto!')
-        .textContent('Registro de evento correcto!')
+        .title('¡Registro correcto!')
+        .textContent('¡Registro de patrocinador correcto!')
         .ariaLabel()
         .ok('Gracias!')
         .targetEvent()
@@ -246,8 +320,8 @@
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('#popupContainer')))
         .clickOutsideToClose(true)
-        .title('Registro correcto!')
-        .textContent('Registro de profesor correcto!')
+        .title('¡Registro correcto!')
+        .textContent('¡Registro de profesor correcto!')
         .ariaLabel()
         .ok('Gracias!')
         .targetEvent()
@@ -294,9 +368,9 @@
       vm.event.eventState = pEvent.eventState;
       vm.event.photo = pEvent.photo;
       vm.event.date1 = pEvent.date1;
-      vm.event.time1 = pEvent.time1;
+      vm.event.time1 = new Date(pEvent.time1);
       vm.event.date2 = pEvent.date2;
-      vm.event.time2 = pEvent.time2;
+      vm.event.time2 = new Date(pEvent.time2);
       vm.event.selectAcademies = pEvent.selectAcademies;
       vm.event.selectCategories = pEvent.selectCategories;
       vm.event.costInsc = pEvent.costInsc;
@@ -307,13 +381,14 @@
       vm.event.length = pEvent.length;
       vm.event.seats = pEvent.seats;
       vm.event.tickets = pEvent.tickets;
+      vm.event.ticketPrice = pEvent.ticketPrice;
       vm.event.contactName = pEvent.contactName;
       vm.event.contactPhone = pEvent.contactPhone;
       vm.event.charityEvent = pEvent.charityEvent;
       vm.event.orgType = pEvent.orgType;
       vm.event.orgName = pEvent.orgName;
       vm.event.description = pEvent.description;
-      $scope.updateDisable = false;
+      vm.updateDisable = false;
     };
 
     // Función para actualizar datos de evento
@@ -338,6 +413,7 @@
         length: vm.event.length,
         seats: vm.event.seats,
         tickets: vm.event.tickets,
+        ticketPrice: vm.event.ticketPrice,
         contactName: vm.event.contactName,
         contactPhone: vm.event.contactPhone,
         charityEvent: vm.event.charityEvent,
@@ -347,19 +423,51 @@
       }
       $scope.updateDisable = true;
       eventService.updateEvent(modEvent);
+      vm.showEditEventAlert();
       init();
       clean();
     };
 
+    // Función para mensaje de registro de evento satisfactorio
+    vm.showEditEventAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡Actualización exitosa!')
+        .textContent('¡El evento se actualizó correctamente!')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+    );
+  };
+
+    // Función para cancelar un evento
     vm.cancelEvent = function (pEvent) {
       pEvent.eventState = 'cancelado';
       eventService.updateEvent(pEvent);
-      init();
+      vm.showCxlEventAlert();
       acceptedEvents();
+      init();
     };
+
+    // Función para mensaje de registro de evento satisfactorio
+    vm.showCxlEventAlert = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡Cancelación exitosa!')
+        .textContent('¡El evento se canceló correctamente!')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+    );
+  };
 
     // Función para filtrar la tabla de consulta de eventos
     function acceptedEvents() {
+      var today = new Date();
       vm.events = eventService.getEvents();
         for (var i = 0; i < vm.events.length; i++) {
           if (vm.events[i].eventState === 'aprobado') {
@@ -411,7 +519,7 @@
         init();
         clean();
       }
-    }
+    };
 
     // Función para imprimir datos del profesor en la lista
     vm.getInfoTeacher = function (pTeacher) {
@@ -435,7 +543,6 @@
 
     function clean() {
       vm.event = '';
-      vm.teacher = '';
     }
 
       // Función para actualizar datos del profesor
@@ -528,33 +635,10 @@
             console.log(error);
           })
           vm.createStudent(pNewStudent);
-      }
-
+    };
 
     //funcion para guardar informacion del alumno
     vm.createStudent = function(pNewStudent){
-      var newUser = {
-        id: vm.id,
-        birthday: vm.birthday,
-        firstName: vm.firstName,
-        secondName: vm.secondName,
-        firstLastName: vm.firstLastName,
-        secondLastName: vm.secondLastName,
-        genre: vm.genre,
-        weight: vm.weight,
-        height: vm.height,
-        nationality: vm.nationality,
-        phone: vm.phone,
-        email: vm.email,
-        attendAcademy: vm.attendAcademy,
-        teacher: vm.teacher,
-        belt: vm.belt,
-        category: vm.category,
-        tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins,
-        photo: vm.photo,
-        status : vm.status
-      };
       console.log(newUser);
       userService.setUsers(newUser);
       cleanStudent();

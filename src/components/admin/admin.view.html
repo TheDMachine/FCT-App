@@ -21,10 +21,28 @@
 					</md-button>
 				</md-list-item>
 				<md-list-item layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 3">
-						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 3 ? {'color': '#fff'} : {'color': '#00a652'} ">&#xE853;</i>
+						<md-button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i><br>
 						<p class="menu-button">Usuarios</p>
-					</md-button>
+						</md-button>
+						<div class="dropdown-menu">
+							<ul>
+								<li>
+					    			<md-button class="button-selected" ng-click="vm.selected = 9">R/Consejo
+		          					</md-button>
+		          				</li>
+		          				<li>
+							    	<md-button class="button-selected" ng-click="vm.selected = 10">
+				            			<p>Profesor</p>
+				          			</md-button>
+							    </li>
+							    <li>
+							    	<md-button class="button-selected" ng-click="vm.selected = 11">
+				            			<p>Alumno</p>
+				          			</md-button>
+		          				</li>
+							</ul>
+						</div>
 				</md-list-item>
 				<md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 4">
@@ -46,7 +64,7 @@
 				</md-list-item>
 				<md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 7">
-						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#fcb132'} ">&#xEB3F;</i>
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xEB3F;</i>
 						<p class="menu-button">Patrocinadores</p>
 					</md-button>
 				</md-list-item>
@@ -95,7 +113,7 @@
   			<!-- Poner la vista aquí
 
   			!!-->
-  			  			<!--Vista de competencias y competidores -->
+  			<!--Vista de competencias y competidores -->
   			<div ng-show="vm.selected == 8">
   				<div ng-repeat="item in vm.competitionsToShow track by $index" flex>
   					<h1>Competencia {{item.competitionNumber}}</h1>
@@ -205,33 +223,80 @@
 					    <md-tab label="Historial de competencias">
 					        <md-content id="categHist" class="md-padding">
 					        	<h3>HISTORIAL DE COMPETENCIAS</h3>
-					        	<md-input-container>
-								    <label>Evento</label>
-								    <md-select name="event" ng-model="vm.event.eventName">
-								    	<md-option ng-repeat="event in vm.events" value="{{event.eventName}}">{{event.eventName}}</md-option>
-								    </md-select>
-								</md-input-container>
-								<!-- Tabla historial de eventos -->
+					        	<p>Filtre por:</p>
+
+					        	<!-- Filtros -->
+					        	<div class="col-xs-12">
+					        		<div class="col-md-4">
+					        			<md-input-container>
+								    		<label>Seleccione el evento</label>
+								    		<md-select name="eventFilter" ng-model="vm.eventFilter">
+								    			<md-option value="{{event.vm.events}}">Todos</md-option>
+								    			<md-option ng-repeat="event in vm.events" value="{{event.eventName}}">{{event.eventName}}</md-option>
+								    		</md-select>
+										</md-input-container>
+					        		</div>
+					        		<div class="col-md-4">
+					        			<md-input-container>
+										    <label>Seleccione la categoría</label>
+										    <md-select name="catFilter" ng-model="vm.catFilter">
+										    	<md-option value="{{categ.vm.categories}}">Todas</md-option>
+										    	<md-option ng-repeat="categ in vm.categories" value="{{categ.categorieName}}">{{categ.categorieName}} ({{categ.minAgeRange}} - {{categ.maxAgeRange}})</md-option>
+										    </md-select>
+										</md-input-container>
+					        		</div>
+					        		<div class="col-md-4">
+					        			<md-input-container>
+										    <label>Nombre de competidor</label>
+										    <input type="text" name="competidorNameFilter" ng-model="vm.competidorNameFilter"/>
+										</md-input-container>
+					        		</div>
+					        		<div class="col-md-4">
+					        			<md-input-container>
+										    <label>Seleccione el peso</label>
+										    <md-select name="weightFilter" ng-model="vm.weightFilter">
+										    	<md-option value="{{weigth.vm.weights}}">Todos</md-option>
+										    	<md-option ng-repeat="weigth in vm.weights" value="{{weigth.weightName}}">{{weigth.weightName}} / {{weigth.aliasName}} ({{weigth.minweightRange}} kg - {{weigth.maxweightRange}} kg)</md-option>
+										    </md-select>
+										</md-input-container>
+					        		</div>
+					        		<div class="col-md-4">
+					        			<md-input-container>
+										    <label>Seleccione el género</label>
+										    <md-select name="genreFilter" ng-model="vm.genreFilter">
+										    	<md-option value="{{masculino && femenino}}">Todos</md-option>
+										    	<md-option value="masculino">Masculino</md-option>
+										    	<md-option value="femenino">Femenino</md-option>
+										    </md-select>
+										</md-input-container>
+					        		</div>
+					        		<div class="col-md-4">
+					        			<md-input-container>
+										    <label>Seleccione el cinturón</label>
+										    <md-select name="beltFilter" ng-model="vm.beltFilter">
+										    	<md-option value="{{belt.vm.belts}}">Todos</md-option>
+										    	<md-option ng-repeat="belt in vm.belts" value="{{belt.belt}}">{{belt.belt}}</md-option>
+										    </md-select>
+										</md-input-container>
+					        		</div>
+					        	</div>
+
+								<!-- Tabla historial de competencias -->
 						        <div>
 						          	<table class="table-responsive">
 									    <thead>
 									      	<tr>
 									      		<th>Número de competencia</th>
-									      		<th>Categoría</th>
-										        <th>Peso</th>
-										        <th>Género</th>
 										        <th>Competidores</th>
+										        <th>Ganador</th>
 									      	</tr>
 									    </thead>
 									    <tbody>
 									    <!-- | filter:{stateFilter:vm.stateFilter} -->
-									      	<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
-									      	
-									      		<td>{{event.date1 | date : "shortDate"}}</td>
-									      		<td>{{event.eventName}}</td>
-									      		<td>{{event.eventState}}</td>
-										        <td>{{event.placeName}}</td>
-										        <td>{{event.placeName}}</td>
+									      	<tr ng-repeat="item in vm.competitions | filter:{eventBelongs:vm.eventFilter} | filter:{competitionAge:vm.catFilter} | filter:{competitionWeight:vm.weightFilter} | filter:{competitionGenre:vm.genreFilter} | filter:{competitionBelt:vm.beltFilter} | filter:{competitors:vm.competidorNameFilter}">
+									      		<td>{{item.competitionNumber}}</td>
+										        <td>{{item.competitors}}</td>
+										        <td></td>
 									      	</tr>
 									    </tbody>
 								  	</table>
@@ -273,7 +338,7 @@
   				<md-content layout="column">
   					<div layout="row">
   						<md-input-container flex-offset class="md-block" flex="100">
-						<label for="">Filtrar por nombre</label>
+							<label for="">Filtrar por nombre</label>
 							<input type="text" name="sponsorFilter" ng-model="vm.sponsorFilter"/>
 						</md-input-container>
   					</div>
@@ -325,7 +390,7 @@
 						<div class="row">
 							<div id="beltNum1" class="col-md-4">
 								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA BLANCA</h3>
+									<h3 class="md-whiteframe-3dp">CINTA BLANCA</h3>
 									<p><span>Nombre de la Cinta:</span> Jin-Ti</p>
 									<p><span>Simbolismo:</span> Pureza / Inocencia</p>
 									<p><span>Significado:</span> Esta cinta representa la pureza, el portador del mismo es una persona que comienza en la práctica del Arte Marcial, busca comprender el sentido y orden de su Micro Universo interno y comienza a entender que se debe trabajar duro para conseguir las metas propuestas.</p>
@@ -333,7 +398,7 @@
 							</div>
 							<div id="beltNum2" class="col-md-4">
 								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA AMARILLA</h3>
+									<h3 class="md-whiteframe-3dp">CINTA AMARILLA</h3>
 									<p><span>Nombre de la Cinta:</span> Norang-Ti</p>
 									<p><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
 									<p><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
@@ -342,7 +407,7 @@
 							</div>
 							<div id="beltNum3" class="col-md-4">
 								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA VERDE</h3>
+									<h3 class="md-whiteframe-3dp">CINTA VERDE</h3>
 									<p><span>Nombre de la Cinta:</span> Chorok-Ti</p>
 									<p><span>Simbolismo:</span> Naturaleza, fe y esperanza</p>
 									<p><span>Significado:</span> La cinta verde representa el florecimiento de una nueva vida. En este color se demuestra que el practicante del Arte Marcial comienza a meterse dentro de la práctica y empieza a desarrollar destrezas.</p>
@@ -355,7 +420,7 @@
 						<div class="row">
 							<div id="beltNum4" class="col-md-4">
 								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA AZUL</h3>
+									<h3 class="md-whiteframe-3dp">CINTA AZUL</h3>
 									<p><span>Nombre de la Cinta:</span> Parang-Ti</p>
 									<p><span>Simbolismo:</span> Atardecer / Fruto maduro</p>
 									<p><span>Significado:</span> La cinta roja es considerada uno de los grados más dificiles, ya que en este el practicante del Arte Marcial debe alcanzar la fuerza, el arrojo, la valentía y lo que es más importante la humildad necesaria para poder llegar al grado de cinta negra. El color rojo representa el esfuerzo realizado a través de los años para llegar a ese nivel.</p>
@@ -364,7 +429,7 @@
 							</div>
 							<div id="beltNum5" class="col-md-4">
 								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA ROJA</h3>
+									<h3 class="md-whiteframe-3dp">CINTA ROJA</h3>
 									<p><span>Nombre de la Cinta:</span> Palgang-Ti</p>
 									<p><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
 									<p><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
@@ -373,7 +438,7 @@
 							</div>
 							<div id="beltNum6" class="col-md-4">
 								<div class="col-xs-offset-1 col-xs-10">
-									<h3>CINTA NEGRA</h3>
+									<h3 class="md-whiteframe-3dp">CINTA NEGRA</h3>
 									<p><span>Nombre de la Cinta:</span> Conjon-Ti</p>
 									<p><span>Simbolismo:</span> Idealismo y Pureza</p>
 									<p><span>Significado:</span> El trayecto transcurrido entre la "Cinta blanca y la "Cinta negra" solo representa un proceso de preparación del practicante de Tae Kwon Do, pero solo al llegar a "cinta negra" es capaz de empezar a recorrer el camino para aprender a disfrutarlo. La "cinta negra" es también, símbolo de habilidad y madurez, el saber aceptar y ejercer esta responsabilidad siempre van juntas, son inseparables.</p>
@@ -390,8 +455,8 @@
 							<div class="col-xs-12">
 								<h1 class="md-display-2">PESOS</h1>
 							</div>
-								<table>
-								    <thead>
+								<table class="table-responsive md-whiteframe-3dp">
+								    <thead class="md-whiteframe-3dp">
 								      	<tr>
 								      		<th>Peso</th>
 								      		<th>Alias</th>
@@ -413,8 +478,8 @@
 							<div class="col-xs-12">
 								<h1 class="md-display-2">CATEGORÍAS</h1>
 							</div>
-								<table>
-								    <thead>
+								<table class="table-responsive md-whiteframe-3dp">
+								    <thead class="md-whiteframe-3dp">
 								      	<tr>
 								      		<th>Categoría</th>
 									        <th>Min edad</th>
@@ -572,85 +637,13 @@
 								</div>
 							</md-content>
 			      		</md-tab>
-
-			    <!-- Tab de Eventos -->
-			    <md-tab id="events" label="Eventos" ui-sref=".part1">
-			        <md-content class="md-padding">
-			          	<h3 class="md-display-2">Eventos</h3>
-
-			          	<!-- links de cada paso del formulario de registro de eventos -->
-				        <div id="buttonForm" class="text-center" layout="row" layout-align="center center">
-				        	<div ui-sref-active="active" ui-sref=".part1">
-				        		<a>1</a>
-				        	</div>
-				        	<div ui-sref-active="active" ui-sref=".part2">
-				        		<a>2</a>
-				        	</div>
-				        	<div ui-sref-active="active" ui-sref=".part3">
-				        		<a >3</a>
-				        	</div>
-				        	<div ui-sref-active="active" ui-sref=".part4">
-				        		<a >4</a>
-				        	</div>
-				        	<div ui-sref-active="active" ui-sref=".part5">
-				        		<a >5</a>
-				        	</div>	
-				        </div>
-
-				        <div class="row">
-				        <div class="col-md-offset-1 col-md-10">
-				        	<!-- Formulario para registro de eventos -->
-				          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
-
-			          			<!-- Espacio para mostrar vistas del registro -->
-			          			<div id="form-views" ui-view></div>
-				          	</form>
-				        </div>
-			          </div>
-
-			          <div id="modTable" class="row">
-			          	<div class="col-md-offset-1 col-md-10">
-			          		<h3>MODIFICAR EVENTOS</h3>
-
-							<!-- Filtro por fecha -->
-							<p>Filtre por fechas: </p>
-							<br>
-							<md-datepicker name="from"  ng-model="vm.from3" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
-					    	<md-datepicker name="to"  ng-model="vm.to3" md-placeholder="Fecha fin"></md-datepicker>
-							
-				        	<!-- Tabla de info eventos -->
-					        <div>
-					          	<table class="table-responsive">
-								    <thead>
-								      	<tr>
-								      		<th>Nombre del evento</th>
-									        <th>Fecha inicio</th>
-									        <th></th>
-									        <th></th>
-								      	</tr>
-								    </thead>
-								    <tbody>
-								      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from3:vm.to3" > 
-								      		<td>{{event.eventName}}</td>
-									        <td>{{event.date1 | date : "shortDate"}}</td>
-
-									    	<!-- Botones para editar y cancelar eventos -->
-									        <td><md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)">Editar</md-button></td>
-									        <td><md-button class="md-raised editCxlB" ng-click="vm.cancelEvent(event)">Cancelar</md-button></td>
-								      	</tr>
-								    </tbody>
-							  	</table>
-					        </div>
-			          	</div>
-			          </div>
-			        </md-content>
-			    </md-tab>
+				<!-- Registro de alumnos -->
 				<md-tab label="Registro de alumnos">
 							<md-content class="md-padding">
 								<h1 class="md-display-2">Registro de alumnos</h1>
 								<div class="container-fluid row">
 									<div class="col-xs-12">
-										<form name="frmStudent" novalidate ng-submit="vm.presaveStudent(vm)" autocomplete="off">
+										<form name="frmStudent" novalidate ng-submit="vm.presaveStudent(vm.student)" autocomplete="off">
 
 											<!-- input de cedula -->
 											<div class="col-xs-12 col-sm-6">
@@ -677,7 +670,7 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Primer nombre</label>
-													<input name="firstName" type="text" ng-model="vm.firstName" required/>
+													<input name="firstName" type="text" ng-model="vm.student.firstName" required/>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.firstName.$error">
@@ -690,7 +683,7 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Segundo nombre</label>
-													<input name="secondName" type="text" ng-model="vm.secondName" />
+													<input name="secondName" type="text" ng-model="vm.student.secondName" />
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.secondName.$error">
@@ -703,7 +696,7 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Primer apellido</label>
-													<input name="firstLastName" type="text" ng-model="vm.firstLastName" required/>
+													<input name="firstLastName" type="text" ng-model="vm.student.firstLastName" required/>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.firstLastName.$error">
@@ -716,7 +709,7 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Segundo apellido</label>
-													<input name="secondLastName" type="text" ng-model="vm.secondLastName" required/>
+													<input name="secondLastName" type="text" ng-model="vm.student.secondLastName" required/>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.secondLastName.$error">
@@ -729,7 +722,7 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Género</label>
-													<md-select name="genre" ng-model="vm.genre" required>
+													<md-select name="genre" ng-model="vm.student.genre" required>
 								            <md-option value="masculino">Masculino</md-option>
 								            <md-option value="femenino">Femenino</md-option>
 													</md-select>
@@ -745,7 +738,7 @@
 											<div class="col-xs-12 col-sm-3">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Peso</label>
-													<input name="weight" type="number" ng-model="vm.weight" required/>
+													<input name="weight" type="number" ng-model="vm.student.weight" required/>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.weight.$error">
@@ -758,7 +751,7 @@
 											<div class="col-xs-12 col-sm-3">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Altura</label>
-													<input name="height" type="number" ng-model="vm.height" required/>
+													<input name="height" type="number" ng-model="vm.student.height" required/>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.height.$error">
@@ -771,7 +764,7 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Nacionalidad</label>
-													<input name="nationality" type="text" ng-model="vm.nationality" required/>
+													<input name="nationality" type="text" ng-model="vm.student.nationality" required/>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.nationality.$error">
@@ -812,7 +805,7 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Academia</label>
-													<md-select name="attendAcademy" ng-model="vm.attendAcademy" required>
+													<md-select name="attendAcademy" ng-model="vm.student.attendAcademy" required>
 								            <md-option ng-repeat="academy in vm.academy" ng-value="academy.name">{{academy.name}}</md-option>
 													</md-select>
 
@@ -842,7 +835,7 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Cinta</label>
-													<md-select name="belt" ng-model="vm.belt" required>
+													<md-select name="belt" ng-model="vm.student.belt" required>
 								            <md-option ng-repeat="belt in vm.belts" ng-value="belt.belt">{{belt.belt}}</md-option>
 													</md-select>
 
@@ -857,7 +850,7 @@
 											<div class="col-xs-12 col-sm-6">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Categoría</label>
-													<md-select name="category" ng-model="vm.category" required>
+													<md-select name="category" ng-model="vm.student.category" required>
 								            <md-option ng-repeat="category in vm.categoriesAge" ng-value="category.categorieName">{{category.categorieName}}</md-option>
 													</md-select>
 
@@ -872,7 +865,7 @@
 											<div class="col-xs-12 col-sm-3">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Torneos participaddos</label>
-													<input name="tournaments" type="number" ng-model="vm.tournaments" required/>
+													<input name="tournaments" type="number" ng-model="vm.student.tournaments" required/>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.tournaments.$error">
@@ -885,7 +878,7 @@
 											<div class="col-xs-12 col-sm-3">
 												<md-input-container flex-offset class="md-block">
 													<label for="">Torneos ganados</label>
-													<input name="tournamentsWins" type="number" ng-model="vm.tournamentsWins" required/>
+													<input name="tournamentsWins" type="number" ng-model="vm.student.tournamentsWins" required/>
 
 													<!-- Mensaje de retroalimentacion -->
 													<div ng-messages="frmStudent.tournamentsWins.$error">
@@ -893,11 +886,13 @@
 													</div>
 												</md-input-container>
 											</div>
+
 											<!-- Subir logo -->
 												<label class="btn btn-default btn-file" for="photoStudent">
 													Adjuntar logo
 												</label>
 												<input id="photoStudent" name="photoStudent" type="file" style="display: none" ng-model="vm.photo">
+
 											<!-- boton para guardar -->
 											<md-button ng-click="vm.reset()" type="submit" class="md-raised" ng-disabled="frmStudent.$invalid">Agregar Alumno</md-button>
 
@@ -1221,137 +1216,268 @@
 	    	</md-content>
 			</div>
 
-			<!-- Sección de consulta, modificación, eliminar y listar eventos -->
+			<!-- Sección de eventos -->
 			<div ng-show="vm.selected == 5">
 				<md-content>
 				    <md-tabs md-dynamic-height md-border-bottom>
 
-				    	<!-- Tab consultar de eventos -->
-				      	<md-tab label="Consultar Eventos">
-					        <md-content id="table1" class="md-padding">
-					        <h3>CONSULTAR EVENTOS</h3>
+				    	<!-- Tab de Eventos -->
+					    <md-tab id="events" label="Registrar evento" ui-sref=".part1">
+					        <md-content class="md-padding">
+					        	<div class="row">
+					        		<div id="registerEvents" class="col-md-offset-1 col-md-10">
+					        			<h3>REGISTRAR EVENTO</h3>
+					        		</div>
+					        	</div>
 
-							<!-- Filtro por fecha -->
-							<p>Filtre por fechas: </p>
-							<br>
-							<md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
-					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker>
-							
-					        	<!-- Tabla de info eventos -->
-						        <div>
-						          	<table class="table-responsive">
-									    <thead>
-									      	<tr>
-									      		<th>Evento</th>
-										        <th>Tipo</th>
-										        <th>Estado</th>
-										        <th>invitado</th>
-										        <th>Fecha/inicio</th>
-										        <th>Hora/inicio</th>
-										        <th>Fecha/Fin</th>
-										        <th>Hora/Fin</th>
-										        <th>Academias</th>
-										        <th>Categorías</th>
-										        <th>Inscripción</th>
-										        <th>Patrocinadores</th>
-										        <th>Lugar</th>
-										        <th>Latitud</th>
-										        <th>Longitud</th>
-										        <th>Ubicación</th>
-										        <th>Asientos</th>
-										        <th>Entradas</th>
-										        <th>Contacto</th>
-										        <th>Tel/Cont</th>
-										        <th>Para:</th>
-										        <th>Org/Beneficiada</th>
-										        <th>Tipo/Org</th>
-										        <th>Descripción/Org</th>
-										        <th>Logo/evento</th>
-									      	</tr>
-									    </thead>
-									    <tbody>
-									      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to" > 
-									      		<td>{{event.eventName}}</td>
-									      		<td>{{event.eventType}}</td>
-									      		<td>{{event.eventState}}</td>
-									      		<td>{{event.invitedName}}</td>
-										        <td>{{event.date1 | date : "shortDate"}}</td>
-										        <td>{{event.time1 | date : "shortTime"}}</td>
-										        <td>{{event.date2 | date : "shortDate"}}</td>
-										        <td>{{event.time2 | date : "shortTime"}}</td>
-										        <td>{{event.selectAcademies}}</td>
-										        <td>{{event.selectCategories}}</td>
-										        <td>{{event.costInsc}}</td>
-										        <td>{{event.selectSponsors}}</td>
-										        <td>{{event.placeName}}</td>
-										        <td>{{event.latitude}}</td>
-										        <td>{{event.length}}</td>
-										        <td>{{event.location}}</td>
-										        <td>{{event.seats}}</td>
-										        <td>{{event.tickets}}</td>
-										        <td>{{event.contactName}}</td>
-										        <td>{{event.contactPhone}}</td>
-										        <td>{{event.charityEvent}}</td>
-										        <td>{{event.orgName}}</td>
-										        <td>{{event.orgType}}</td>
-										        <td>{{event.description}}</td>
-										        <td><img ng-src="{{event.photo}}" alt="Description" width="60px" height="60px" /></td>
-									      	</tr>
-									    </tbody>
-								  	</table>
+					          	<!-- links de cada paso del formulario de registro de eventos -->
+						        <div id="buttonForm" class="text-center" layout="row" layout-align="center center">
+						        	<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part1">
+						        		<a>1</a>
+						        	</div>
+						        	<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part2">
+						        		<a>2</a>
+						        	</div>
+						        	<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part3">
+						        		<a >3</a>
+						        	</div>
+						        	<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part4">
+						        		<a >4</a>
+						        	</div>
+						        	<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part5">
+						        		<a >5</a>
+						        	</div>	
 						        </div>
+
+						        <div class="row">
+						        <div class="col-md-offset-1 col-md-10">
+						        	<!-- Formulario para registro de eventos -->
+						          	<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
+
+					          			<!-- Espacio para mostrar vistas del registro -->
+					          			<div id="form-views" ui-view></div>
+						          	</form>
+						        </div>
+					          </div>
+					        </md-content>
+					    </md-tab>
+
+				    	<!-- Tab consultar de eventos -->
+				      	<md-tab label="Modificar o cancelar Evento">
+					        <md-content id="table1" class="md-padding">
+
+					        <!-- Tabla para modificar eventos -->
+					        <div id="modTable" class="row">
+					          	<div class="col-md-offset-1 col-md-10">
+					          		<h3>MODIFICAR O CANCELAR EVENTOS</h3>
+
+									<!-- Filtro por fecha -->
+									<p>Filtre por fechas: </p>
+									<br>
+									<md-datepicker name="from"  ng-model="vm.from3" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
+							    	<md-datepicker name="to"  ng-model="vm.to3" md-placeholder="Fecha fin" md-min-date="vm.today"></md-datepicker>
+									
+						        	<!-- Tabla de info eventos -->
+						        	<div>
+						        		<table class="table-responsive md-whiteframe-3dp">
+						        			<thead class="md-whiteframe-3dp">
+						        				<tr>
+						        					<th>Evento</th>
+						        					<th>Inicio</th>
+						        					<th></th>
+						        					<th></th>
+						        				</tr>
+						        			</thead>
+						        			<tbody>
+						        				<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from3:vm.to3" > 
+						        					<td>{{event.eventName}}</td>
+						        					<td>{{event.date1 | date : "shortDate"}}</td>
+
+						        					<!-- Botones para editar y cancelar eventos -->
+						        					<td><md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button></td>
+						        					<td><md-button href="#!/admin#ventana1" class="md-raised editCxlB" data-toggle="modal">Cancelar</md-button></td>
+						        				</tr>
+						        			</tbody>
+						        		</table>
+						        	</div>
+
+							        <!-- Modal-->
+							        <div class="col-md-8 col-md-offset-4">  
+							        	<div class="modal fade" id="ventana1" role="dialog">
+							        		<div class="modal-dialog">
+							        			<div class="modal-content">
+							        				<div class="modal-header">
+							        					<h5>¿Desea cancelar el evento?</h5>
+							        					<button type="button" class="close" id="thex" data-dismiss="modal"><i class="fa fa-times"></i></button>
+							        				</div>
+							        				<div class="modal-body">
+							        					<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+							        					<button type="submit" class="btn btn-primary" ng-click="vm.cancelEvent(event)" data-dismiss="modal">SI</button>    
+							        				</div>
+							        			</div>
+							        		</div>
+							        	</div>
+							        </div>
+							        
+					          	</div>
+					          </div>
 					        </md-content>
 				      	</md-tab>
 
 				      	<!-- Tab historial de eventos -->
-				      	<md-tab label="Historial de eventos">
+				      	<md-tab label="Consulta e Historial de eventos">
 					        <md-content id="table2" class="md-padding">
-					        	<h3>HISTORIAL DE EVENTOS</h3>
+					        	<div class="col-md-offset-1 col-md-10">
+					        		<h3>CONSULTA E HISTORIAL DE EVENTOS</h3>
 
-					        	<!-- Filtros -->
-								<!-- Filtro por fecha -->
-								<p>Filtre por fechas: </p>
-								<br>
-								<md-datepicker name="from"  ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
-						    	<md-datepicker name="to"  ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
+						        	<!-- Filtros -->
+						        	<div class="col-xs-12">
+						        		<div class="col-sm-6">
+						        			<!-- Filtro por fecha -->
+											<p>Filtre por fechas: </p>
+											<br>
+											<md-datepicker name="from"  ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
+									    	<md-datepicker name="to"  ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
+						        		</div>
+						        		<div class="col-sm-6">
 
-						    	<!-- Filtro por estado -->
-						    	<p>Filtre por estado: </p>
-								<md-input-container>
-								    <label>Seleccione el estado</label>
-								    <md-select name="stateFilter" ng-model="vm.stateFilter">
-								    	<md-option value="aprobado">Aceptado</md-option>
-								        <md-option value="cancelado">Cancelado</md-option>
-								    </md-select>
-								</md-input-container>
-								
+						        			<!-- Filtro por estado -->
+									    	<p>Filtre por estado: </p>
+											<md-input-container>
+											    <label>Seleccione el estado</label>
+											    <md-select name="stateFilter" ng-model="vm.stateFilter">
+											    	<md-option value="{{aprobado && cancelado}}">Todos</md-option>
+											    	<md-option value="aprobado">Aprobado</md-option>
+											        <md-option value="cancelado">Cancelado</md-option>
+											    </md-select>
+											</md-input-container>
+						        		</div>
+						        	</div>
 
-					        	<!-- Tabla historial de eventos -->
-						        <div>
-						          	<table class="table-responsive">
-									    <thead>
+									<!-- Tabla historial de eventos -->
+						          	<table id="histTable" class="table-responsive md-whiteframe-3dp">
+									    <thead class="md-whiteframe-3dp">
 									      	<tr>
 									      		<th>Fecha</th>
-									      		<th>Nombre del evento</th>
+									      		<th>Evento</th>
 										        <th>Estado</th>
-										        <th>Nombre del lugar</th>
 									      	</tr>
 									    </thead>
 									    <tbody>
-									    <!-- | filter:{stateFilter:vm.stateFilter} -->
-									      	<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
-									      	
+									    <!-- | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter} -->
+									      	<tr ng-repeat="event in vm.events track by $index">
 									      		<td>{{event.date1 | date : "shortDate"}}</td>
-									      		<td>{{event.eventName}}</td>
+									      		<td><md-button class="md-raised" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button></td>
 									      		<td>{{event.eventState}}</td>
-										        <td>{{event.placeName}}</td>
 									      	</tr>
 									    </tbody>
 								  	</table>
-						        </div>
+							        	
+						        	<!-- modal para consulta de eventos -->
+						        	<div style="visibility: hidden">
+									    <div class="md-dialog-container" id="myDialog">
+									      <md-dialog layout-padding>
+
+									      <!-- encabezado de la información del evento -->
+									      	<div id="eventName" class="col-xs-12 md-whiteframe-3dp">
+									      		<img ng-src="{{vm.consultEvent.photo}}" alt="Description" width="60px" height="60px" />
+									      		<h3>{{vm.consultEvent.eventName}} ({{vm.consultEvent.eventType}})</h3>
+									      	</div>
+
+									      	<!-- cuerpo de la información -->
+											<div id="eventInfo" class="col-xs-12">
+									        	<p><span>Lugar: </span> {{vm.consultEvent.placeName}} <span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
+									        	<p><span>Dirección:</span> {{vm.consultEvent.location}}</p>
+									        	<p><span>Inicio:</span> {{vm.consultEvent.date1 | date : "shortDate"}} {{vm.consultEvent.time1 | date : "shortTime"}}</p>
+									        	<p><span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} {{vm.consultEvent.time2 | date : "shortTime"}}</p>
+									        	<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
+									        	<p><span>Invitado especial:</span> {{vm.consultEvent.invitedName}}</p>
+									        	<p><span>Academias invitadas:</span> {{vm.consultEvent.selectAcademies}}</p>
+									        	<p><span>Categorías que participan:</span> {{vm.consultEvent.selectCategories}}</p>
+									        	<p><span>Costo de inscripción:</span> {{vm.consultEvent.costInsc}} colones</p>
+									        	<p><span>Asientos:</span> {{vm.consultEvent.seats}} <span>Cant de entradas:</span> {{vm.consultEvent.tickets}}</p>
+									        	<p><span>El evento es de:</span> {{vm.consultEvent.charityEvent}}</p>
+									        	<p><span>Beneficia a:</span> {{vm.consultEvent.orgName}}</p>
+									        	<p><span>Descripción de la org.:</span> {{vm.consultEvent.description}}</p>
+									        	<p><span>Patrocinadores:</span> {{vm.consultEvent.selectSponsors}}</p>
+									        	<p><span>Latitud:</span> {{vm.consultEvent.latitude}}  <span>Longitud:</span> {{vm.consultEvent.length}}</p>
+											</div>
+
+											<!-- botón para salir del modal -->
+											<div id="buttonInfoEvent" class="col-xs-12">
+									      		<md-button class="md-raised" type="button"  ng-click="vm.cancel()">Salir</md-button>
+									      	</div>
+									      </md-dialog>
+									    </div>
+									</div>
+					        	</div>
 					        </md-content>
 				      	</md-tab>
+
+				      	<!-- Tab de reservas de eventos -->
+					    <md-tab id="reservations" label="Reservas de eventos">
+					        <md-content class="md-padding">
+					        	<div class="row">
+					        		<div id="reservationsList" class="col-md-offset-1 col-md-10">
+					        			<h3>RESERVACIONES DE EVENTOS</h3>
+
+										<!-- Filtro por evento -->
+					        			<div class="col-md-6">
+					        				<p>Filtre por evento: </p>
+						        			<md-input-container>
+									    		<label>Seleccione el evento</label>
+									    		<md-select name="evntFilter" ng-model="vm.evntFilter">
+									    			<md-option value="{{event.vm.events}}">Todos</md-option>
+									    			<md-option ng-repeat="event in vm.events track by $index" value="{{event.eventName}}">{{event.eventName}}</md-option>
+									    		</md-select>
+											</md-input-container>
+					        			</div>
+					        		
+					        			<!-- Filtro por estado -->
+						        		<div class="col-md-4">
+						        			<p>Filtre por estado: </p>
+						        			<md-input-container>
+											    <label>Seleccione el estado</label>
+											    <md-select name="stateRsvFilter" ng-model="vm.stateRsvFilter">
+											    	<md-option value="{{activo && cancelado}}">Todos</md-option>
+											    	<md-option value="activo">Activo</md-option>
+											    	<md-option value="cancelado">Cancelado</md-option>
+											    </md-select>
+											</md-input-container>
+						        		</div>
+
+
+					        			<!-- Tabla historial de reservaciones -->
+								        <div>
+								          	<table class="table-responsive md-whiteframe-3dp">
+											    <thead class="md-whiteframe-3dp">
+											      	<tr>
+											      		<th>Confirmación</th>
+												        <th>Cantidad</th>
+												        <th>Nombre</th>
+											      	</tr>
+											    </thead>
+											    <tbody>
+											      	<tr ng-repeat="item in vm.reservations | filter:{event:vm.evntFilter} |  filter:{state:vm.stateRsvFilter}">
+											      	
+											      		<td>{{item.confirmationNum}}</td>
+												        <td>{{item.tktsQuantity}}</td>
+												        <td>{{item.fullName}}</td>
+											      	</tr>
+											    </tbody>
+										  	</table>
+								        </div>
+					        		</div>
+					        	</div>
+					        </md-content>
+					    </md-tab>
 			  	</md-content>
 			</div>	
+	
 
+				
+
+			
+
+									
 		
