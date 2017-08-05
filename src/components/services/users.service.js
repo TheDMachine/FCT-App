@@ -88,7 +88,7 @@
    //buscar administrador
 
      function _searchAssistant(newAssistant){
-      var asistant = {
+      var assistant = {
         id : '987654321',
         firstName : 'Asistente',
         firstLastName : 'FCT',
@@ -97,10 +97,10 @@
         phone : '87456321',
         email : 'assistantFCT@hotmail.com',
         password : 'admin123',
-        photo : 'admin.jpg'
+        photo : 'assistant.jpg'
       }
-      if(asistant.id == newAssistant){
-        return asistant;
+      if(assistant.id == newAssistant){
+        return assistant;
       }
       else{
         return false;

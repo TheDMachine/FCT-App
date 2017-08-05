@@ -1,0 +1,78 @@
+<div class="row">
+	<div class="col-md-6">
+		<!-- Campo academias invitadas -->
+		<md-input-container>
+			<label>Academias invitadas</label>
+			<md-select name="frmEventInfo.academies" ng-model="vm.event.selectAcademies" multiple required>
+				<md-optgroup>
+					<md-option ng-repeat="academy in vm.academy" value="{{academy.name}}">{{academy.name}}</md-option>
+				</md-optgroup>
+			</md-select>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+	</div>
+	<div class="col-md-6">
+		<!-- Campo de categorías por participar -->
+		<md-input-container>
+			<label>Categorías por participar</label>
+			<md-select name="frmEventInfo.categories" ng-model="vm.event.selectCategories" multiple required>
+				<md-optgroup>
+					<md-option ng-repeat="category in vm.categories" value="{{category.categorieName}}">{{category.categorieName}}</md-option>
+				</md-optgroup>
+			</md-select>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<!-- Campo costo de inscripción -->
+		<md-input-container flex-offset>
+			<label>Costo de inscripción en colones</label>
+			<input name="frmEventInfo.costInsc" type="number" ng-model="vm.event.costInsc" min="0" required>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+	</div>
+	<div class="col-md-6">
+		<!-- Campo de Patrocinadores -->
+		<md-input-container>
+			<label>Patrocinadores</label>
+			<md-select name="frmEventInfo.sponsors" ng-model="vm.event.selectSponsors" multiple required>
+				<md-optgroup>
+					<md-option ng-repeat="sponsor in vm.sponsors" value="{{sponsor.sponsorName}}">{{sponsor.sponsorName}}</md-option>
+				</md-optgroup>
+			</md-select>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-2">
+		<!-- Botón Anterior -->
+		<a ui-sref="admin.part2" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
+	</div>
+	<div class="col-md-offset-8 col-md-2">
+		<!-- Botón siguiente -->
+		<a ui-sref="admin.part4" class="btn btn-info" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+	</div>
+</div>
+
+
+
+
