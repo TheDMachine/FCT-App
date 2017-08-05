@@ -31,7 +31,8 @@
         getUsers: _getUsers,
         updateUsers: _updateUsers,
         searchUser : _searchUser,
-        searchAdmin : _searchAdmin
+        searchAdmin : _searchAdmin,
+        searchAssistant : _searchAssistant
     };
     return publicAPI;
 
@@ -69,7 +70,7 @@
         id : '123456789',
         firstName : 'Administrador',
         firstLastName : 'FCT',
-        borhDate : '30',
+        bornDate : '30',
         nationality : 'Costarricense',
         phone : '87456321',
         email : 'adminFCT@hotmail.com',
@@ -78,6 +79,28 @@
       }
       if(admin.id == newAdmin){
         return admin;
+      }
+      else{
+        return false;
+      }
+   }
+
+   //buscar administrador
+
+     function _searchAssistant(newAssistant){
+      var asistant = {
+        id : '987654321',
+        firstName : 'Asistente',
+        firstLastName : 'FCT',
+        bornDate : '30',
+        nationality : 'Costarricense',
+        phone : '87456321',
+        email : 'assistantFCT@hotmail.com',
+        password : 'admin123',
+        photo : 'admin.jpg'
+      }
+      if(asistant.id == newAssistant){
+        return asistant;
       }
       else{
         return false;

@@ -77,7 +77,7 @@
 				        </md-menu-item>
 				        <md-menu-item>
 				          <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
-				            
+
 				            Recuperar contraseña
 				          </md-button>
 				        </md-menu-item>
@@ -92,11 +92,41 @@
     				</div>
     			</div>
   			</md-toolbar>
-  			<!-- Poner la vista aquí 
+  			<!-- Poner la vista aquí
 
-  			!!-->
-  			
-  			
+  			!!--><!-- Vista de perfil administrador-->
+				<div ng-show="vm.selected == 1">
+					<h2 layout="row" layout-align="start">Perfil</h2>
+					<div flex-xs flex-gt-xs="100" layout="column">
+						<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+							<md-card-title class="no-padding">
+								<md-card-title-media flex="35">
+									<div class="md-media-lg card-media profile-picture">
+										<img src="components/admin/admin.jpg">
+									</div>
+								</md-card-title-media>
+								<md-card-title-text>
+									<span class="md-headline name-profile">{{vm.currentUser.firstName}}  {{vm.currentUser.firstLastName}}</span>
+									<p class="profile-info"><span>ID:</span> {{vm.currentUser.id}}</p>
+									<p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
+									<p class="profile-info"><span>Edad:</span> {{vm.currentUser.bornDate}}</p>
+									<div layout="row" class="contact-info">
+										<i class="material-icons">&#xE0CD;</i>
+										<p class="profile-info phone-info"><span>Teléfono:</span> {{vm.currentUser.phone}}</p>
+									</div>
+									<div layout="row" class="contact-info">
+										<i class="material-icons">&#xE0BE;</i>
+										<p class="profile-info phone-info"><span>Email:</span> {{vm.currentUser.email}}</p>
+									</div>
+								</md-card-title-text>
+							</md-card-title>
+							<md-card-actions layout="row" layout-align="end center">
+							</md-card-actions>
+						</md-card>
+					</div>
+				</div>
+
+
 
 		</md-content>
 

@@ -8,7 +8,7 @@
       getCookie : _getCookie
     }
     function _getAuthCredencials(pId,pPassword){
-      /*var user = 
+      /*var user =
         { 'email' : 'luisbianco28@hotmail.com',
           'password' : '123',
           'userType' : 'Profesor',
@@ -34,6 +34,11 @@
       if(userService.searchAdmin(pId) !== false){
         var userFounded = userService.searchAdmin(pId);
         userFounded.userType = 'Administrador';
+      }
+
+      if(userService.searchAssistant(pId) !== false){
+        var userFounded = userService.searchAssistant(pId);
+        userFounded.userType = 'Asistente';
       }
       /*
       if(userService.searchUser(pEmail) !== false){
