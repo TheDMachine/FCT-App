@@ -180,7 +180,7 @@
 						<div class="container container-competition">
 							<h2 layout="row" layout-align="start">Peleas</h2>
 							<div ng-repeat="fight in item.fights track by $index" layout="row" layout-align="center center">
-								<div flex-xs flex-gt-xs="25" ng-repeat="pairFight in fight track by $index">
+								<div flex-xs flex-gt-xs="25" ng-repeat="pairFight in fight track by $index" ng-if="pairFight !== true">
 								      <md-card class="user-card">
 								          <md-card-avatar class="avatar avatar-test">
 								            <img src="{{competitor.photo}}">
@@ -189,12 +189,12 @@
 								          	<p class="md-headline name-test" layout="column" layout-align="start">{{pairFight.firstName}} {{pairFight.firstLastName}}</p>
 								          	<p class="md-subhead sub-header-test">Academia: Pros</p>
 								          </md-toolbar>
-								          <md-button ng-click="vm.updatePoints(pairFight); vm.ready = true">
+								          <md-button ng-click="vm.updatePoints(pairFight, $parent.$parent.$index);" ng-disabled="fight[2] == true">
 								          	<i class="material-icons fa fa-trophy"></i>
 								          </md-button>
 									</md-card>
 								</div>
-								<span ng-show="vm.ready">Pelea realizada</span>
+								<span ng-if="fight[2] == true">Pelea realizada</span>
 							</div>
 						</div>
   				</div>
