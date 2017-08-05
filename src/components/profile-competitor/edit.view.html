@@ -1,8 +1,9 @@
-<form ng-submit="vm.updateProfile(vm.currentUser)" name="frmEditProfile">
+<form ng-submit="vm.updateProfile(vm.editUser)" name="frmEditProfile">
 <md-card>
   <div>
   	<label for="photo" class="btn btn-default btn-file">
-      Actualiza la foto<input id="photo" name="frmEditProfile.photo" type="file" style="display: none;" ng-model="vm.editUser.photo">
+      Actualiza la foto
+      <input id="photo" name="frmEditProfile.photo" type="file" style="display: none;" ng-model="vm.editUser.photo">
   	</label>
   </div>
         <md-card-title>
@@ -12,13 +13,12 @@
         </md-card-title>
         <md-card-content>
           <md-input-container>
-            <label></label>
-            <input type="text" name="" value="">
-
+            <label>Teléfono:</label>
+            <input type="text" ng-model="vm.editUser.phone">
           </md-input-container>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button ui-sref="profile.editProfile">Modificar Perfil</md-button>
+          <md-button type="submit">Modificar Perfil</md-button>
         </md-card-actions>
 </md-card>
 </form>

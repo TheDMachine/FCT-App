@@ -1,10 +1,9 @@
-<form ng-submit="vm.updateProfile(vm.currentUser)" name="frmEditProfile">
-
-</form>
+<form ng-submit="vm.updateProfile(vm.editUser)" name="frmEditProfile">
 <md-card>
   <div>
   	<label for="photo" class="btn btn-default btn-file">
-      Actualiza la foto<input id="photo" name="frmEditProfile.photo" type="file" style="display: none;" ng-model="vm.editUser.photo">
+      Actualiza la foto
+      <input id="photo" name="frmEditProfile.photo" type="file" style="display: none;" ng-model="vm.editUser.photo">
   	</label>
   </div>
         <md-card-title>
@@ -15,22 +14,11 @@
         <md-card-content>
           <md-input-container>
             <label>Teléfono:</label>
-            <input type="text" name="phone" ng-model="vm.editUser.phone" ng-pattern="/^[0-9]{6,10}$/">
-            <!-- Mesaje de retroalimentación -->
-            <div ng-messages="frmEditProfile.phone.$error">
-            <div ng-messages-include="components/includes/messages.html"></div>
-            </div>
-          </md-input-container>
-          <md-input-container>
-            <label>Correo electrónico:</label>
-            <input type="email" name="email" ng-model="vm.editUser.email"  ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
-            <!-- Mesaje de retroalimentación -->
-            <div ng-messages="frmEditProfile.email.$error">
-            <div ng-messages-include="components/includes/messages.html"></div>
-            </div>
+            <input type="text" ng-model="vm.editUser.phone">
           </md-input-container>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
           <md-button type="submit">Modificar Perfil</md-button>
         </md-card-actions>
-      </md-card>
+</md-card>
+</form>

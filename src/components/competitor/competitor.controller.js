@@ -73,9 +73,7 @@
       AuthService.logOut();
     }
 
-    -->>*/
-    vm.updateWeigth = function(pWeigthUser) {
-      userService.updateWeigth(pWeigthUser);
-    }
+    -->
+
    }
 })();
