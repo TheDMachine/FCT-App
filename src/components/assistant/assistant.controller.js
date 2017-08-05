@@ -27,7 +27,7 @@
       vm.pairFights = [];
       vm.ready = false;
       vm.today = new Date();
-      vm.editAssistantProfile = true;
+      vm.editAssistantProfile = false;
 
       function init(){
       // función que se llama así misma para indicar que sea lo primero que se ejecute
@@ -490,7 +490,6 @@
       }
       userService.updateAssistant(editAssistant);
       init();
-      cleanAssistant();
     };
 
     //funcion para guardar asistente editado
@@ -519,9 +518,9 @@
 
     vm.getCurrentAssistant = function(assistant){
       vm.editAssistantProfile = true;
-      vm.currentUser.password = teacher.password;
-      vm.currentUser.email = teacher.email;
-      vm.currentUser.phone = teacher.phone;
+      vm.currentUser.password = assistant.password;
+      vm.currentUser.email = assistant.email;
+      vm.currentUser.phone = assistant.phone;
     }
       //funcion para guardar informacion de academia
 

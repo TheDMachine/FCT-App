@@ -27,7 +27,7 @@
 				<div class="col-xs-12 col-sm-4 col-md-5">
 
 					<!-- Botón para ingresar reserva -->
-					<md-button type="submit" class="md-raised" ng-disabled="frmSearchRsv.$invalid" ng-click="vm.searchRsv(vm.rsv)">Buscar reserva</md-button>
+					<md-button type="submit" class="md-raised" ng-disabled="frmSearchRsv.$invalid" ng-click="vm.searchRsvs(vm.rsv)">Buscar reserva</md-button>
 				</div>
 			</form>
 
@@ -45,10 +45,10 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="reservation in vm.reservations track by $index">
-									<td>{{vm.reservation.confNum}}</td>
-									<td>{{vm.reservation.event}}</td>
-									<td>{{vm.reservation.tktsQuantity}}</td>
+								<tr ng-repeat="item in vm.myRsvs track by $index">
+									<td>{{item.confirmationNum}}</td>
+									<td>{{item.event}}</td>
+									<td>{{item.tktsQuantity}}</td>
 								</tr>
 							</tbody>
 						</table>

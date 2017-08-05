@@ -6,6 +6,7 @@
   function consultRsvCtrl($scope, $mdDialog, ticketService, eventService, $location) {
   var vm = this;
   vm.reservation = {};
+  vm.myRsvs =[];
 
   // función que se llama así misma para indicar que sea lo primero que se ejecute
   function init() {
@@ -20,30 +21,28 @@
      };
 
   // obtiene reserva a buscar
-  vm.searchRsv = function(pRsv) {
-    vm.reservations = ticketService.getsReservations();
-    var informationRsv = {
-      idRsv : vm.rsv.id
-    };
+  vm.searchRsvs = function(pClientName) {
+        vm.reservations = ticketService.getsReservations();
+        var error = false;
+        for (var i = 0; i < vm.reservations.length; i++) {
+          if (pClientName.id === vm.reservations[i].id) {
+            vm.myRsvs.push(vm.reservations[i]);
+            continue;
+          }else{
+            error = true;
+            break;
+          }
+        }
 
-    for (var i = 0; i < vm.reservations.length; i++) {
-      if (vm.reservations[i].id === pRsv.id) {
-        vm.rsvToCxl = vm.reservations[i];
-      }else{
-        vm.showNoExistReservationAlert();
+        if(error){
+            vm.showNoExistReservationAlert();
+        }
+        return vm.myRsvs;
       }
-    }
-    sendInfo(vm.rsvToCxl);
-  };
 
-  // Devuelve la informacion de la reserva consultada
-  function sendInfo(pRsvToCxl) {
-    vm.reservation.confNum = pRsvToCxl.confirmationNum;
-    vm.reservation.id = pRsvToCxl.id;
-    vm.reservation.fullName = pRsvToCxl.fullName;
-    vm.reservation.event = pRsvToCxl.event;
-    vm.reservation.tktsQuantity = pRsvToCxl.tktsQuantity;
-  }
+
+
+
 
 
   vm.showNoExistReservationAlert = function() {

@@ -95,7 +95,7 @@
 			<!-- Poner la vista aquí
 
   			!!-->
-				<!-- Vista de editar profesor-->
+				<!-- Vista de editar asistente-->
   			<div ng-show="vm.editAssistantProfile">
 
               <!-- Campo contraseña -->
@@ -132,7 +132,7 @@
 
               <!-- Campo fotografía -->
 
-              <button class="btn btn-primary buttonForm" type="submit" ng-click="vm.updateCurrentAssistant()" ng-disabled="frmModInfo.$invalid">Actualizar</button>
+              <button class="btn btn-primary buttonForm" type="submit" ng-click="vm.updateCurrentAssistant(); vm.editAssistantProfile = false;" ng-disabled="frmModInfo.$invalid">Actualizar</button>
             </form>
   			</div>
 			<!--Vista de competencias y competidores -->
@@ -233,6 +233,7 @@
 			        </md-card-title-text>
 			      </md-card-title>
 			      <md-card-actions layout="row" layout-align="end center">
+							<md-button ng-click="vm.getCurrentAssistant(vm.currentUser)">Editar</md-button>
 			      </md-card-actions>
 			    </md-card>
 			  </div>

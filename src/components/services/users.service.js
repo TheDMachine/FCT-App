@@ -9,6 +9,7 @@
     function userService($cookies){
       var teachers = [];
        var users = [];
+       var assistants = [];
       //EL usuario quemado de represetante de consejo.
       var _UsersConsult = [{"nationality":"costarricense"
       ,"email":"daniel.camposarce@gmail.com"
@@ -32,7 +33,10 @@
         updateUsers: _updateUsers,
         searchUser : _searchUser,
         searchAdmin : _searchAdmin,
-        searchAssistant : _searchAssistant
+        searchAssistant : _searchAssistant,
+        setassistants : _setassistants,
+        getAssistants : _getAssistants,
+        updateAssistant : _updateAssistant
     };
     return publicAPI;
 
@@ -154,6 +158,35 @@
         }
       }
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
+    }
+
+    //función para pushear objeto asistente
+    function _setassistants(pAssistant){
+      var assistantsList = _getAssistants();
+      pAssistant.password = _generatePassword();
+      teachersList.push(pAssistant);
+      console.log(assistantsList);
+      localStorage.setItem('lsAssistantsList', JSON.stringify(assistantsList));
+    }
+
+    //función para obtener a los asistente actualizados
+    function _getAssistants() {
+      var assistantsList = JSON.parse(localStorage.getItem('lsAssistansList'));
+      if(assistantsList == null){
+        assistantsList = assistants;
+      }
+      return assistantsList;
+    }
+
+    //editar la informacion del asistente
+    function _updateAssistant(editAssistant) {
+      var assistantsList = _getAssistants();
+      for(var i = 0; i < assistantsList.length; i++){
+        if(assistantsList[i].id == editAssistant.id){
+          assistantsList[i] = editAssistant;
+        }
+      }
+      localStorage.setItem('lsAssistantsList', JSON.stringify(assistantsList));
     }
 
     //encontrar usuario profesor para agarrar información
