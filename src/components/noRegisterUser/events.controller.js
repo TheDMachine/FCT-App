@@ -30,22 +30,9 @@
       NgMap.getMap().then(function(map) {
         vm.map = map;
         console.log(vm.map);
-        createMarker(vm.map);
       });
 
-      function createMarker(place) {
-        var placeLoc = place.geometry.location;
-        var marker = new google.maps.Marker({
-          map: map,
-          position: place.geometry.location,
-          title: "Posición actual"
-        });
-
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
-          infowindow.open(map, this);
-        });
-      }
+      
 
        // Función para devolverse al landing
        vm.return = function(event){
