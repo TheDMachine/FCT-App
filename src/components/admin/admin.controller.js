@@ -709,34 +709,36 @@
       }
       for(var i = 0; i < vm.competitionsToShow.length; i++){
         for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
-          kLoop:
-          for(var k = 0; k < 4; k++){
-            vm.pairFights = [];
-            vm.pairFights.push(vm.competitionsToShow[i].competitors[j]);
-            vm.pairFights.push(vm.competitionsToShow[i].competitors[k + 1])
-            if(vm.pairFights.length == 2){
-              if(vm.fights.length == 0){
-                vm.fights.push(vm.pairFights);
-              }
+          if(vm.competitionsToShow[i].competitors.length == 5){
+            kLoop:
+            for(var k = 0; k < 5; k++){
+              vm.pairFights = [];
+              vm.pairFights.push(vm.competitionsToShow[i].competitors[j]);
+              vm.pairFights.push(vm.competitionsToShow[i].competitors[k + 1])
               if(vm.pairFights.length == 2){
-                for(var x = 0; x < vm.fights.length; x++){
-                  if(vm.pairFights == vm.fights[x]){
-                    continue kLoop;
-                  }
+                if(vm.fights.length == 0){
+                  vm.fights.push(vm.pairFights);
                 }
-                for(var x = 0; x < vm.fights.length; x++){
-                  if((vm.pairFights[0] == vm.fights[x][1]) && (vm.pairFights[1] == vm.fights[x][0])){
-                    continue kLoop;
+                if(vm.pairFights.length == 2){
+                  for(var x = 0; x < vm.fights.length; x++){
+                    if(vm.pairFights == vm.fights[x]){
+                      continue kLoop;
+                    }
                   }
-                }
-                for(var x = 0; x < vm.fights.length; x++){
-                  if((vm.pairFights[0] == vm.pairFights[1])){
-                    continue kLoop;
+                  for(var x = 0; x < vm.fights.length; x++){
+                    if((vm.pairFights[0] == vm.fights[x][1]) && (vm.pairFights[1] == vm.fights[x][0])){
+                      continue kLoop;
+                    }
                   }
-                }
-                vm.fights.push(vm.pairFights);
-                if(vm.fights.length == 20){
-                  break;
+                  for(var x = 0; x < vm.fights.length; x++){
+                    if((vm.pairFights[0] == vm.pairFights[1])){
+                      continue kLoop;
+                    }
+                  }
+                  vm.fights.push(vm.pairFights);
+                  if(vm.fights.length == 20){
+                    break;
+                  }
                 }
               }
             }
