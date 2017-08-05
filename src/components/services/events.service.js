@@ -7,6 +7,7 @@
   function eventService(logService){
     var events = [];
     var competitions = [];
+    var reservations = [];
     var proposes = [];
     var publicAPI = {
       setEvents : _setEvents,
@@ -153,6 +154,7 @@
       console.log(competitionsList);
       localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));
     }
+
   }
 
 })();

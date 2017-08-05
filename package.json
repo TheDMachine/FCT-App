@@ -1,41 +1,25 @@
 {
-  "name": "FTC App",
-  "version": "0.1.0",
-  "description": "Material design app",
-  "main": "server.js",
+  "name": "fctapp",
+  "version": "1.0.0",
+  "description": "fctapp",
+  "main": "src/js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "runApp":"nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thedmachine/fct-app.git"
+    "url": "git+https://github.com/TheDMachine/FCT-App.git"
   },
-  "keywords": [
-    "angularjs",
-    "bootstrap",
-    "material",
-    "design"
-  ],
-  "author": "Luis Bianco",
-  "license": "MIT",
+  "author": "Rebeca",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thedmachine/fct-app.git/issues"
+    "url": "https://github.com/TheDMachine/FCT-App/issues"
   },
-  "homepage": "https://github.com/thedmachine/fct-app/",
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-cli": "^1.3.0",
-    "gulp-connect": "^5.0.0",
-    "karma": "^1.7.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-firefox-launcher": "^1.0.1"
-  },
+  "homepage": "https://github.com/TheDMachine/FCT-App#readme",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3",
-    "http-server": "^0.10.0",
-    "mongoose": "^4.11.0",
-    "socket.io": "^2.0.3"
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-nodemon": "^2.2.1",
+    "nib": "^1.1.2"
   }
 }

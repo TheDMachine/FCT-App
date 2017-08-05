@@ -115,6 +115,8 @@
       url : '/part5', //ruta del url del estado
       templateUrl : 'components/admin/admin.eventsR.views/admin-eventRpart5.view.html'//vista que se va a cargar para este estado
     })
+
+    // vistas de patrocinadores
     .state('admin.sponsorPartOne', {
       url : '/sponsorPartOne',
       templateUrl : 'components/admin/sponsor.register.views/admin-sponsor1.view.html'

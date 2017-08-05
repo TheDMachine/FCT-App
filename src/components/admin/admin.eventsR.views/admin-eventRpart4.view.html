@@ -45,7 +45,7 @@
 		<!-- Campo para descripción de la organización -->
 		<md-input-container class="md-block" flex-gt-sm>
 			<label>Ubicación</label>
-			<textarea name="frmEventInfo.location" ng-model="vm.event.location" maxlength="40" md-maxlength="50" rows="5" md-select-on-focus required></textarea>
+			<textarea name="frmEventInfo.location" ng-model="vm.event.location" maxlength="35" md-maxlength="35" rows="5" md-select-on-focus required></textarea>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">
@@ -57,11 +57,11 @@
 <div class="row">
 	<div class="col-md-2">
 		<!-- Botón Anterior -->
-		<a ui-sref="admin.part3" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
+		<a ui-sref="admin.part3" class="btn btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
 	</div>
 	<div class="col-md-offset-8 col-md-2">
 		<!-- Botón siguiente -->
-		<a ui-sref="admin.part5" class="btn btn-info" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+		<a ui-sref="admin.part5" class="btn btn-primary" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
 	</div>
 </div>
 

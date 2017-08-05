@@ -124,7 +124,7 @@
   margin-bottom: 40px;
 }
 
-#information div, #cxlRSpace div{
+#information div, #cxlRSpace .contFrm{
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -146,6 +146,12 @@
 
 #cxlRSpace .SuccessMessage{
   text-align: center;
+  color: #cd3d3e;
+}
+#ticketPrice {
+  font-weight: bold;
+}
+#ticketPrice span{
   color: #cd3d3e;
 }
 
@@ -269,8 +275,8 @@
 
 /*Fin estilos del landing*/
 
-/*Inicio estilo de tablas de consulta e historial eventos*/
-#table1 h3, #table2 h3{
+/*Inicio estilo de modal de consulta y tabla de historial eventos*/
+#table1 h3, #table2 h3, #registerEvents h3{
   font-family: 'Montserrat';
   font-size: 1.571em;
   margin-bottom: 60px;
@@ -294,12 +300,12 @@
   margin: 0 auto;
   padding: 20px 10px;
   font-size: 1.143em;
-  background-color: #cd3d3e;
+  background-color: #cb3e42;
   color: #fff;
 }
 
 #table1 tr:hover, #table2 tr:hover{
-  background: rgba(205, 61, 62,0.1);
+  background: rgba(203, 62, 66,0.1);
 }
 
 #table1 tbody td, #table2 tbody td{
@@ -310,7 +316,49 @@
   padding: 10px 0;
 }
 
-/*Fin estils de tablas de consulta e historial eventos*/
+#histTable tbody tr td .md-button{
+  color: #fff;
+  background: #00978f;
+}
+
+#eventName{
+  background: #cb3e42;
+  text-align: center;
+}
+
+#eventName img{
+  border-radius: 50%;
+  border: 0.5px solid #fff;
+}
+
+#eventName h3{
+  color: #fff;
+  font-weight: bold;
+  display: inline;
+  font-size: 1.571em;
+  font-family: 'Montserrat';
+}
+
+#eventInfo{
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+#eventInfo p{
+  padding-bottom: 5px;
+  line-height: 1;
+}
+
+#eventInfo p span{
+  font-weight: bold;
+}
+
+#buttonInfoEvent .md-button{
+  color: #fff;
+  background: #00978f;
+}
+
+/*Fin estilo de modal de consulta y tabla de historial eventos*/
 
 /*Inicio estilos de cinturones*/
 #homeSection div h1{
@@ -433,7 +481,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid #0082c8;
+  border: 1px solid #ee334e;
   text-align: center;
   margin: 0 1%;
   font-weight: 500;
@@ -441,15 +489,15 @@
   margin-right: 8%;
 }
 
-#buttonForm div a,.genericButtonsSteps div a{
-  color: #0082c8;
+#buttonForm div a{
+  color: #ee334e;
   line-height: 2.7;
   text-decoration: none;
   padding: 1.5%;
 }
 
 #buttonForm div.active{
-  background: #0082c8;
+  background: #ee334e;
   color: #fff;
 }
 
@@ -480,18 +528,13 @@ md-input-container{
   margin-bottom: 60px;
 }
 
-#last2Part input{
-  border: none;
-  background: inherit;
-}
-
 #last2Part label{
   font-size: 1em;
   margin-right: 40px;
 }
 
 #buttonLogo{
-  background: #0082c8;
+  background: #cb3e42;
   border-radius: 7px;
   text-align: center;
   color: #fff;
@@ -505,41 +548,41 @@ md-input-container{
 
 /*Fin estilos de pasos formulario eventos*/
 
-/*Inicio estilos de tabla modificar*/
+/*Inicio estilos de tabla modificar y tabla de reservaciones*/
 
-#modTable h3{
+#modTable h3, #reservationsList h3{
   font-family: 'Montserrat';
   font-size: 1.571em;
   margin-bottom: 60px;
 }
 
-#modTable table{
+#modTable table, #reservationsList table{
   width: 100%;
 }
 
-#modTable thead, #modTable tbody{
+#modTable thead, #modTable tbody, #reservationsList thead, #reservationsList tbody{
   width: 100%;
 }
 
-#modTable tbody{
+#modTable tbody, #reservationsList tbody{
   text-align: center;
 }
 
-#modTable tr th{
+#modTable tr th, #reservationsList tr th{
   width: 60px;
   text-align: center;
   margin: 0 auto;
   padding: 20px 10px;
   font-size: 1.143em;
-  background-color: #0082c8;;
+  background-color: #cb3e42;
   color: #fff;
 }
 
-#modTable tr:hover{
-  background: rgba(0, 130, 200,0.1);
+#modTable tr:hover, #reservationsList tr:hover{
+  background: rgba(203, 62, 66,0.1);
 }
 
-#modTable tbody td{
+#modTable tbody td, #reservationsList tbody td{
   width: 60px;
   margin: 0 auto;
   border-bottom: 0.1px solid #242629;
@@ -644,7 +687,7 @@ p{
 
 .side-nav md-list md-list-item{
   cursor: pointer;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
   padding: 14.75% 0;
   box-sizing: border-box;
 }
@@ -660,10 +703,10 @@ p{
 md-sidenav.md-locked-open, md-sidenav.md-locked-open.md-closed, md-sidenav.md-locked-open.md-closed.md-sidenav-left, md-sidenav.md-locked-open.md-closed, md-sidenav.md-locked-open.md-closed.md-sidenav-right{
   /*background: #303841;*/
   color: #fff;
-  background: #252830;
+  background: #242629;
 }
 
-.home-icon{
+/*.home-icon{
   color: #1bc98e;
 }
 
@@ -681,15 +724,26 @@ md-sidenav.md-locked-open, md-sidenav.md-locked-open.md-closed, md-sidenav.md-lo
 
 .register-icon{
   color: #46B7B9;
-}
+}*/
 
 /*.side-nav md-list md-list-item:hover{
   background: rgba(255,255,255,0.1);
 }*/
 
+.dropdown-menu{
+  background: #242629;
+  color: #fff;
+}
+
+.dropdown-menu ul{
+  margin: 0;
+  padding: 0;
+  align-content: left;
+}
+
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
   height: 0;
-  background: #252830;
+  background: #242629;
   border-bottom: 1px solid rgba(255,255,255,0.1);
   padding: 4.5% 7.5%;
 }
@@ -704,7 +758,7 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 }
 
 .user-nav-icons{
-  color: #252830;
+  color: #242629;
 }
 
 md-list-item._md-button-wrap{
@@ -1132,12 +1186,9 @@ md-card md-card-title.no-padding{
   padding: 0;
 }
 
-/*Inicia represetante de consejo*/
 
-[name="frmRegisterConsul"],
-[name="frmProposeRegister"] {
-  padding-top:5%;
-  width:80%;
-}
 
-/*Final represetante de consejo*/
+
+#map {
+        height: 100%;
+      }
