@@ -3,7 +3,7 @@
 <!-- Campo de cédula que es requerido -->
   <md-input-container layout="column">
     <label>Cédula</label>
-    <input type="text" name="id" ng-model="vm.user.id" required ng-pattern="/^[0-9]{9}$/">
+    <input type="text" name="id" ng-model="vm.user.id" required ng-pattern="/^[0-9]{3,9}$/">
 
     <!-- Mesaje de retroalimentación -->
     <div ng-messages="frmRegisterConsul.id.$error">

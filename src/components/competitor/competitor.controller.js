@@ -75,7 +75,7 @@
 
     -->>*/
     vm.updateWeigth = function(pWeigthUser) {
-      userService.update(pWeigthUser);
+      userService.updateWeigth(pWeigthUser);
     }
    }
 })();

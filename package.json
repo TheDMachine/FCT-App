@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node start server.js"
+    "runApp":"nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -24,12 +24,18 @@
   },
   "homepage": "http://tilwinjoy.github.io/angular-bootstrap-material/",
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.3.0",
+    "gulp-connect": "^5.0.0",
     "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.0.1"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "mongoose": "^4.11.0"
+    "http-server": "^0.10.0",
+    "mongoose": "^4.11.0",
+    "socket.io": "^2.0.3"
   }
 }

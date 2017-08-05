@@ -45,6 +45,7 @@
     //Busca y actualiza el peso del competiddor
     function _findAndSetUserToWeigth(pUserToUpdateWeigth) {
       console.log(pUserToUpdateWeigth);
+      _updateUsers(pUserToUpdateWeigth);
     }
 
     //Guardar alumno

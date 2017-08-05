@@ -12,7 +12,7 @@
       vm.currentUser = $stateParams.cuser;
    }init();
    vm.updateProfile = function (vmUserToUpdate) {
-    var fotoEdit = document.querySelect('#photo').files[0];
+    var fotoEdit = document.getElementById('#photo').files[0];
      if(fotoEdit == undefined && fotoEdit ==  null){
        vmUserToUpdate.photo = vm.currentUser.photo;
      }

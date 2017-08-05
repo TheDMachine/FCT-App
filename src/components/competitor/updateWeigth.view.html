@@ -1,6 +1,6 @@
 <form name="frmUpdateWeigth" ng-submit="vm.updateWeigth(vm.userWeigth)">
   <input type="hidden" ng-model="vm.userWeigth.firstName" value="vm.userWeigth.name">
-  <h2>{{vm.name + vm.firstName + vm.lastName}}</h2>
+  <h2>Actualizando: {{vm.name + vm.firstName + vm.lastName}}</h2>
   <md-input-container>
     <label>Peso</label>
     <input type="text" name="weigth" ng-model="vm.userWeigth.weigth" required/>

@@ -14,12 +14,23 @@
         </md-card-title>
         <md-card-content>
           <md-input-container>
-            <label></label>
-            <input type="text" name="" value="">
-
+            <label>Teléfono:</label>
+            <input type="text" name="phone" ng-model="vm.editUser.phone" ng-pattern="/^[0-9]{6,10}$/">
+            <!-- Mesaje de retroalimentación -->
+            <div ng-messages="frmEditProfile.phone.$error">
+            <div ng-messages-include="components/includes/messages.html"></div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+            <label>Correo electrónico:</label>
+            <input type="email" name="email" ng-model="vm.editUser.email"  ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
+            <!-- Mesaje de retroalimentación -->
+            <div ng-messages="frmEditProfile.email.$error">
+            <div ng-messages-include="components/includes/messages.html"></div>
+            </div>
           </md-input-container>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button ui-sref="profile.editProfile">Modificar Perfil</md-button>
+          <md-button type="submit">Modificar Perfil</md-button>
         </md-card-actions>
       </md-card>
