@@ -27,6 +27,7 @@
       vm.pairFights = [];
       vm.ready = false;
       vm.today = new Date();
+      vm.editAssistantProfile = true;
 
       function init(){
       // función que se llama así misma para indicar que sea lo primero que se ejecute
@@ -469,6 +470,59 @@
         cleanTeacher();
       };
 
+
+      // Función para actualizar datos del asistente
+    vm.updateAssistant = function () {
+      var editAssistant = {
+        id: vm.assistant.id,
+        firstName: vm.assistant.firstName,
+        secondName: vm.assistant.secondName,
+        firstLastName: vm.assistant.firstLastName,
+        secondLastName: vm.assistant.secondLastName,
+        phone: vm.assistant.phone,
+        email: vm.assistant.email,
+        bornDate: vm.assistant.bornDate,
+        gender: vm.assistant.gender,
+        nationality: vm.assistant.nationality,
+        academy: vm.assistant.academy,
+        photo: vm.assistant.photo,
+        status: vm.assistant.status
+      }
+      userService.updateAssistant(editAssistant);
+      init();
+      cleanAssistant();
+    };
+
+    //funcion para guardar asistente editado
+    vm.updateCurrentAssistant = function(){
+      var editAssistant = {
+      password : vm.currentUser.password,
+      id : vm.currentUser.id,
+      firstName : vm.currentUser.firstName,
+      secondName : vm.currentUser.secondName,
+      firstLastName : vm.currentUser.firstLastName,
+      bornhDate : vm.currentUser.bornhDate,
+      gender : vm.currentUser.gender,
+      nationality : vm.currentUser.nationality,
+      academy : vm.currentUser.academy,
+      grade : vm.currentUser.grade,
+      phone : vm.currentUser.phone,
+      email : vm.currentUser.email,
+      photo : vm.currentUser.photo,
+      newUser : vm.currentUser.newUser
+      }
+      userService.updateAssistant(editAssistant);
+      init();
+      vm.editAssistantProfile = false;
+      cleanAssistant();
+    }
+
+    vm.getCurrentAssistant = function(assistant){
+      vm.editAssistantProfile = true;
+      vm.currentUser.password = teacher.password;
+      vm.currentUser.email = teacher.email;
+      vm.currentUser.phone = teacher.phone;
+    }
       //funcion para guardar informacion de academia
 
       vm.createAcademy = function () {
