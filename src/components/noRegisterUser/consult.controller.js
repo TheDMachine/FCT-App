@@ -7,6 +7,7 @@
   var vm = this;
   vm.reservation = {};
   vm.myRsvs =[];
+  console.log(vm.myRsvs);
 
   // función que se llama así misma para indicar que sea lo primero que se ejecute
   function init() {
