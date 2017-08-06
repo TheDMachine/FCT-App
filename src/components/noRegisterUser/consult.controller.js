@@ -27,14 +27,11 @@
         for (var i = 0; i < vm.reservations.length; i++) {
           if (pClientName.id === vm.reservations[i].id) {
             vm.myRsvs.push(vm.reservations[i]);
-            continue;
-          }else{
             error = true;
-            break;
           }
         }
 
-        if(error){
+        if(error === false){
             vm.showNoExistReservationAlert();
         }
         return vm.myRsvs;
