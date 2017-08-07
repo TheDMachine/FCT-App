@@ -2,7 +2,7 @@
   "name": "fctapp",
   "version": "1.0.0",
   "description": "fctapp",
-  "main": "src/js/index.js",
+  "main": "api/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,9 +17,19 @@
   },
   "homepage": "https://github.com/TheDMachine/FCT-App#readme",
   "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
     "gulp": "^3.9.1",
+    "gulp-cli": "^1.4.0",
     "gulp-connect": "^5.0.0",
     "gulp-nodemon": "^2.2.1",
-    "nib": "^1.1.2"
+    "http-server": "^0.10.0",
+    "mongoose": "^4.11.5",
+    "morgan": "^1.8.2",
+    "nib": "^1.1.2",
+    "nodemailer": "^4.0.1",
+    "pug": "^2.0.0-rc.3",
+    "socket.io": "^2.0.3"
   }
 }

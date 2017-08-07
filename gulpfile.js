@@ -1,7 +1,7 @@
 'use strict';
 var gulp = require('gulp'),
     nib = require('nib'),
-    // nodemon = require('gulp-nodemon'),
+    nodemon = require('gulp-nodemon'),
     connect = require('gulp-connect');
 
 gulp.task('connect', function () {
@@ -10,7 +10,7 @@ gulp.task('connect', function () {
     port: 8000,
     livereload: true
   });
-  // nodemon();
+  nodemon();
 })
 //  reload css
 gulp.task('css', function () {

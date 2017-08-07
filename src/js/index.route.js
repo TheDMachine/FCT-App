@@ -264,6 +264,9 @@
     .state('competitorProfile',{
       url:'/profile-competitor',
       templateUrl:'components/profile-competitor/profile.view.html',
+      params:{
+        cuser:'No encontrado el competidor'
+      },
       resolve:{
         load: ['$ocLazyLoad', function($ocLazyLoad){
           return $ocLazyLoad.load('components/profile-competitor/profile.controller.js')
@@ -279,6 +282,9 @@
     .state('consulProfile',{
       url:'/profile-consul',
       templateUrl:'components/profile-consul/profile.view.html',
+      params:{
+        cuser:'No encontado el consultor'
+      },
       resolve:{
         load: ['$ocLazyLoad', function($ocLazyLoad){
           return $ocLazyLoad.load('components/profile-consul/profile.controller.js')
