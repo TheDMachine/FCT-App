@@ -1,6 +1,6 @@
 var express = require('express');
 var http = require('http');
-// var io = require('socketio');
+// var io = require('socket.io');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -8,7 +8,6 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var port = "3000";
 // var notification = require('./emailNotification');
-console.log(notification.mailOpts );
 var db = mongoose.connection;
 var mlabServer = "mongodb://thedmachine:thedmachine@ds111922.mlab.com:11922/db_fct";
 mongoose.connect(mlabServer);
@@ -24,13 +23,14 @@ app.use( function(req, res, next){
   next();
 });
 db.on('error', console.error.bind(console, 'error de conexión:'));
-db.on('open', function(){
+db.on('open', function(d){
   console.log('Se ha logrado conectar a la base de datos');
 })
-
+// obtención de rutas
+var indexRouting = require('./index');
 
 // Falta el routing
-
+app.use('/',indexRouting);
 // Aranca el servidor
 app.listen(port, _serverInfo);
 
