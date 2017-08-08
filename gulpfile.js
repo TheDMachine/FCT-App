@@ -1,7 +1,7 @@
 'use strict';
 var gulp = require('gulp'),
     nib = require('nib'),
-    // nodemon = require('gulp-nodemon'),
+    nodemon = require('gulp-nodemon'),
     connect = require('gulp-connect');
 
 gulp.task('connect', function () {
@@ -10,7 +10,7 @@ gulp.task('connect', function () {
     port: 8000,
     livereload: true
   });
-  // nodemon();
+  nodemon();
 })
 //  reload css
 gulp.task('css', function () {
@@ -39,13 +39,13 @@ gulp.task('watch', function () {
     './src/*.js',
     './src/js/*.js',
     './src/components/**/*.js',
-    './src/components/**/**/*.js'     
+    './src/components/**/**/*.js'
   ], ['js']);
 
   gulp.watch([
     './src/*.html',
     './src/components/**/*.html',
-    './src/components/**/**/*.html'    
+    './src/components/**/**/*.html'
   ], ['html']);
 })
 // Task name

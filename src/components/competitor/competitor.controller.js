@@ -9,7 +9,7 @@
 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
     function init() {
-      vm.currentUser = userService.searchUser(userService.getCookie()); 
+      vm.currentUser = userService.searchUser(userService.getCookie());
       vm.originatorEv = '';
       }init();
 
@@ -67,11 +67,13 @@
       // This never happens.
     };
     /*End sidenav functionality
-    -->>*/   
+    -->>*/
 
     vm.logOut = function() {
       AuthService.logOut();
     }
+
+    -->
 
    }
 })();

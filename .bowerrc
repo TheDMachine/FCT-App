@@ -1,3 +1,4 @@
 {
-	"directory": "src/bower_components"
+	"cwd":"./src",
+	"directory": "bower_components"
 }

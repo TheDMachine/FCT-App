@@ -3,7 +3,7 @@
   .module('app')
   .service('academyServices', academyServices);
 
-  function academyServices() {
+  function academyServices(logService, AuthService) {
     var academy = [];
     var publicAPI = {
       setAcademy: _setAcademy,
@@ -18,6 +18,7 @@
       if (position == -1) {
         academyList.push(newAcademy);
         localStorage.setItem('lsAcademyList', JSON.stringify(academyList));
+        //logService.createLog(0, )
       }
     }
     //buscar si la academia se repite

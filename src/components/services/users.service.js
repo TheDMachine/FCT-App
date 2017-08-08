@@ -1,4 +1,4 @@
-  
+
 (function() {
   'use strict';
   angular
@@ -11,14 +11,19 @@
        var users = [];
        var assistants = [];
       //EL usuario quemado de represetante de consejo.
-      var _UsersConsult = [{"nationality":"costarricense"
-      ,"email":"daniel.camposarce@gmail.com"
-      ,"id":"402220554"
-      ,"firstName":"Daniel"
-      ,"secondName":"Jose"
-      ,"firstLastName":"Campos"
-      ,"secondLastName":"Arce"
-      ,"birthday":"1994-03-13T06:00:00.000Z"}];
+      var _UsersConsult = [
+        {
+          "nationality":"costarricense"
+          ,"email":"daniel.camposarce@gmail.com"
+          ,"id":"402220554"
+          ,"firstName":"Daniel"
+          ,"secondName":"Jose"
+          ,"LastName":"Campos"
+          ,"LastName2":"Arce"
+          ,"birthday":"1994-03-13T06:00:00.000Z"
+        }
+      ];
+
       //Se publica el api para acceso al servicio.
       var publicAPI = {
         createConsul:_setNewConsul,
@@ -36,9 +41,17 @@
         searchAssistant : _searchAssistant,
         setassistants : _setassistants,
         getAssistants : _getAssistants,
-        updateAssistant : _updateAssistant
+        updateAssistant : _updateAssistant,
+        updateConsul: _updateUsersConsul,
+        updateWeigth: _findAndSetUserToWeigth
     };
     return publicAPI;
+
+    //Busca y actualiza el peso del competiddor
+    function _findAndSetUserToWeigth(pUserToUpdateWeigth) {
+      console.log(pUserToUpdateWeigth);
+      _updateUsers(pUserToUpdateWeigth);
+    }
 
     //Guardar alumno
     function _setUsers(newUser){
@@ -119,7 +132,6 @@
       }
       return usersList;
     }
-
     //editar la informacion del alumno ya registrada
     function _updateUsers(editUser){
       var usersList = _getUsers();
@@ -129,7 +141,18 @@
         }
       }
       localStorage.setItem('lsUsersList', JSON.stringify(usersList));
-    } // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
+    }
+
+    function _updateUsersConsul(editUser) {
+      var usersList = _getUsers();
+      for(var i = 0; i < usersList.length; i++){
+        if(usersList[i].id == editUser.id){
+          usersList[i] = editUser;
+        }
+      }
+      localStorage.setItem('lsConsulUsers', JSON.stringify(usersList));
+    }
+    // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
     //función para pushear objeto profesores
     function _setTeachers(pTeacher){
@@ -211,9 +234,10 @@
       function _setNewConsul(pNewObjConsult){
         var consulList = _getUserConsult();
         for (var i = 0; i < consulList.length; i++) {
-          if (consulList[i].name == pNewObjConsult.name) {
+          if (consulList[i].id == pNewObjConsult.id) {
             return false;
           }else{
+            pNewObjConsult.password = _generatePassword();
             consulList.push(pNewObjConsult);
             localStorage.setItem('lsConsulUsers', JSON.stringify(consulList));
             return true;

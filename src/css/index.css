@@ -152,7 +152,7 @@
 
 #eventsTable thead, #eventsTable tbody{
   width: 100%;
-} 
+}
 
 #eventsTable tbody{
   text-align: center;
@@ -281,7 +281,7 @@
 
 #categHist thead, #categHist tbody{
   width: 100%;
-} 
+}
 
 #categHist tbody{
   text-align: center;
@@ -587,7 +587,7 @@
 
 /*Inicio estilos de pasos formulario eventos*/
 
-#buttonForm div{
+#buttonForm div,.genericButtonsSteps div{
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -679,7 +679,7 @@ md-input-container{
 
 #modTable thead, #modTable tbody, #reservationsList thead, #reservationsList tbody{
   width: 100%;
-} 
+}
 
 #modTable tbody, #reservationsList tbody{
   text-align: center;

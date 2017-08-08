@@ -1,0 +1,46 @@
+<div class="row">
+	<div class="col-xs-12">
+
+		<!-- Campo nombre evento -->
+		<md-input-container flex-offset>
+			<label>Nombre de evento</label>
+			<input name="proposeName" ng-model="vm.propose.proposeName" ng-pattern="/^[a-zA-Z_-]{3,30}$/" required>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmProposeRegister.proposeName.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+
+		<!-- Campo Tipo de evento -->
+		<md-input-container>
+		    <label>Tipo de evento</label>
+		    <md-select name="proposeType" ng-model="vm.propose.proposeType" required>
+		    	<md-option value="exhibicion">Exhicibición</md-option>
+		        <md-option value="torneo">Torneo</md-option>
+		    </md-select>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmProposeRegister.proposeType.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+
+		<!-- Campo de persona que propone evento -->
+		<md-input-container flex-offset>
+			<label>Nombre de proponiente</label>
+			<input name="respPerson" ng-model="vm.propose.respPerson" ng-pattern="/^[a-zA-Z_-]{3,30}$/" required>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmProposeRegister.respPerson.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+	</div>
+
+	<div class="col-xs-12">
+
+		<!-- Botón siguiente -->
+		<a ui-sref="proposes.proposeTwo" ng-disabled="frmProposeRegister.$invalid" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+	</div>
+</div>

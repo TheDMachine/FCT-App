@@ -19,6 +19,39 @@
       },
       controller: 'validationDemoCtrl'
     })*/
+    .state('proposes',{
+      url : '/proposes', //ruta del url del estado
+      templateUrl : 'components/consul/consul.view.html',//vista que se va a cargar para este estado
+        // El resolve sirve para el controlador junto con la vista
+        resolve: {
+          load: ['$ocLazyLoad', function($ocLazyLoad){
+            return $ocLazyLoad.load('components/consul/consul.controller.js')
+          }]
+        },
+        controller: 'consulCtrl',
+        controllerAs:'vm'
+      })
+      .state('proposes.proposeOne',{
+        url:'/proposeOne',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart1.view.html'
+      })
+      .state('proposes.proposeTwo',{
+        url:'/proposeTwo',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart2.view.html'
+      })
+      .state('proposes.proposeThree',{
+        url:'/proposeThree',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart3.view.html'
+      })
+      .state('proposes.proposeFourth',{
+        url:'/proposeFourth',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart4.view.html'
+      })
+      .state('proposes.proposeFive',{
+        url:'/proposeFive',
+        templateUrl:'components/consul/consul.eventsR.views/consul-eventRpart5.view.html'
+      })
+
     .state('admin',{
       url : '/admin', //ruta del url del estado
       templateUrl : 'components/admin/admin.view.html',//vista que se va a cargar para este estado
@@ -41,6 +74,18 @@
         }
       }
     })
+    .state('settings',{
+      url:'/settings',
+      templateUrl : 'components/config/config.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/config/config.controller.js')
+        }]
+      },
+      controller: 'globalConfigCtrl',
+      controllerAs:'vm'
+    })
     .state('admin.partOne',{
       url:'/new-consult-part1',
       templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepOne.view.html'
@@ -49,7 +94,6 @@
       url:'/new-consult-part2',
       templateUrl:'components/admin/admin.consultR.views/admin.consultR.stepTwo.view.html'
     })
-
     //Inicio de las vistas hijas del formulario de registro del administrador
     .state('admin.part1',{
       url : '/part1', //ruta del url del estado
@@ -123,18 +167,6 @@
       controller: 'competitorCtrl',
       controllerAs: 'vm'
     })
-    .state('consul',{
-      url : '/consul', //ruta del url del estado
-      templateUrl : 'components/consul/consul.view.html',//vista que se va a cargar para este estado
-      // El resolve sirve para el controlador junto con la vista
-      resolve: {
-        load: ['$ocLazyLoad', function($ocLazyLoad){
-          return $ocLazyLoad.load('components/consul/consul.controller.js')
-        }]
-      },
-      controller: 'consulCtrl',
-      controllerAs: 'vm'
-    })
     .state('teacher',{
       url : '/teacher', //ruta del url del estado
       templateUrl : 'components/profesor/teacher.view.html',//vista que se va a cargar para este estado
@@ -160,7 +192,7 @@
       controllerAs: 'vm'
     })
         .state('landing',{
-      url : '/landing', //ruta del url del estado
+      url : '/', //ruta del url del estado
       templateUrl : 'components/landing/landing.view.html',//vista que se va a cargar para este estado
       // El resolve sirve para el controlador junto con la vista
       resolve: {
@@ -220,6 +252,64 @@
       },
       controller: 'eventsCtrl',
       controllerAs: 'vm'
+    })
+    .state('displayProposes',{
+      url:'/displayProposes',
+      templateUrl:'components/consul/propose.view.html',
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/consul/consul.controller.js')
+        }]
+      },
+      controller: 'consulCtrl',
+      controllerAs:'vm'
+    })
+    .state('meetings',{
+      url:'/createMeetingConsult',
+      templateUrl:'components/meetingConsul/meetingConsult.view.html',
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/meetingConsul/meetingConsult.controller.js')
+        }]
+      },
+      controller: 'meetingCtrl',
+      controllerAs:'vm'
+    })
+    .state('competitorProfile',{
+      url:'/profile-competitor',
+      templateUrl:'components/profile-competitor/profile.view.html',
+      params:{
+        cuser:'No encontrado el competidor'
+      },
+      resolve:{
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/profile-competitor/profile.controller.js')
+        }]
+      },
+      controller:'profileCtrl',
+      controllerAs:'vm'
+    })
+    .state('competitorProfile.edit', {
+      url:'/edit-profile-competitor',
+      templateUrl:'components/profile-competitor/edit.view.html'
+    })
+    .state('consulProfile',{
+      url:'/profile-consul',
+      templateUrl:'components/profile-consul/profile.view.html',
+      params:{
+        cuser:'No encontado el consultor'
+      },
+      resolve:{
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/profile-consul/profile.controller.js')
+        }]
+      },
+      controller:'profileCtrl',
+      controllerAs:'vm'
+    })
+    .state('consulProfile.edit', {
+      url:'/edit-profile-consul',
+      templateUrl:'components/profile-consul/edit.view.html'
     })
 
     $urlRouterProvider.otherwise('/landing');
