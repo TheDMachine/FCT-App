@@ -1,4 +1,114 @@
-/*Inicio estilos de pasos formulario profesoresbuttonTeacher*/
+
+/*Inicio estilos para la tabla de profesoresr*/
+
+#tblReservation table{
+  width: 100%;
+}
+
+#tblReservation thead, #tblTeacher tbody{
+  width: 100%;
+}
+
+#tblReservation tbody{
+  text-align: center;
+}
+
+#tblReservation tr th{
+  text-align: center;
+  width: 60px;
+  font-size: 1.143em;
+  font-size: 1.143em;
+  margin: 0 auto;
+  padding: 20px 10px;
+  color: #fff;
+  background-color: #00978f;;
+}
+
+#tblReservation tr:hover{
+  background: rgba(0, 130, 200,0.1);
+}
+
+#tblReservation tbody td{
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+}
+#tblReservation h3{
+  margin-bottom: 60px;
+  font-size: 1.571em;
+  font-family: 'Montserrat';
+}
+#tblReservation .editCxlB{
+  background-color: rgba(252, 177, 50, 0.8);
+  color: #fff;
+}
+
+#tblReservation .editCxlB:not([disabled]):hover {
+    background-color: #fcb132;
+    transition: 0.3s;
+}
+
+/*fIN estilos para la tabla de profesoresr*/
+
+/*Inicio estilos para la tabla de profesoresr*/
+
+
+#tblTeacher table{
+  width: 100%;
+}
+
+#tblTeacher thead, #tblTeacher tbody{
+  width: 100%;
+}
+
+#tblTeacher tbody{
+  text-align: center;
+}
+
+#tblTeacher tr th{
+  text-align: center;
+  width: 60px;
+  font-size: 1.143em;
+  font-size: 1.143em;
+  margin: 0 auto;
+  padding: 20px 10px;
+  color: #fff;
+  background-color: #0082c8;;
+}
+
+#tblTeacher tr:hover{
+  background: rgba(0, 130, 200,0.1);
+}
+
+#tblTeacher tbody td{
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 60px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+}
+#tblTeacher h3{
+  margin-bottom: 60px;
+  font-size: 1.571em;
+  font-family: 'Montserrat';
+}
+#tblTeacher .editCxlB{
+  background-color: rgba(252, 177, 50, 0.8);
+  color: #fff;
+}
+
+#tblTeacher .editCxlB:not([disabled]):hover {
+    background-color: #fcb132;
+    transition: 0.3s;
+}
+
+/*fIN estilos para la tabla de profesoresr*/
+
+/*Inicio estilos de pasos formulario profesoresr*/
 
 #buttonTeacher div{
   width: 40px;
@@ -249,7 +359,7 @@
   background-color: #fcb132;
   color: #fff;
   position: absolute;
-  top: 50%; 
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -288,7 +398,7 @@
 
 #table1 thead, #table1 tbody, #table2 thead, #table2 tbody{
   width: 100%;
-} 
+}
 
 #table1 tbody, #table2 tbody{
   text-align: center;
@@ -528,6 +638,11 @@ md-input-container{
   margin-bottom: 60px;
 }
 
+#last2Part input{
+  border: none;
+  background: inherit;
+}
+
 #last2Part label{
   font-size: 1em;
   margin-right: 40px;
@@ -535,6 +650,7 @@ md-input-container{
 
 #buttonLogo{
   background: #cb3e42;
+  background: #0082c8;
   border-radius: 7px;
   text-align: center;
   color: #fff;
@@ -551,6 +667,7 @@ md-input-container{
 /*Inicio estilos de tabla modificar y tabla de reservaciones*/
 
 #modTable h3, #reservationsList h3{
+
   font-family: 'Montserrat';
   font-size: 1.571em;
   margin-bottom: 60px;
@@ -569,6 +686,18 @@ md-input-container{
 }
 
 #modTable tr th, #reservationsList tr th{
+  width: 100%;
+}
+
+#modTable thead, #modTable tbody{
+  width: 100%;
+}
+
+#modTable tbody{
+  text-align: center;
+}
+
+#modTable tr th{
   width: 60px;
   text-align: center;
   margin: 0 auto;
@@ -583,6 +712,15 @@ md-input-container{
 }
 
 #modTable tbody td, #reservationsList tbody td{
+  background-color: #0082c8;;
+  color: #fff;
+}
+
+#modTable tr:hover{
+  background: rgba(0, 130, 200,0.1);
+}
+
+#modTable tbody td{
   width: 60px;
   margin: 0 auto;
   border-bottom: 0.1px solid #242629;
@@ -1185,9 +1323,6 @@ md-list-item > p, md-list-item > .md-list-item-inner > p, md-list-item .md-list-
 md-card md-card-title.no-padding{
   padding: 0;
 }
-
-
-
 
 #map {
         height: 100%;

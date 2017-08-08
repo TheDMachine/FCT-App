@@ -35,6 +35,11 @@
         var userFounded = userService.searchAdmin(pId);
         userFounded.userType = 'Administrador';
       }
+
+      if(userService.searchAssistant(pId) !== false){
+        var userFounded = userService.searchAssistant(pId);
+        userFounded.userType = 'Asistente';
+      }
       /*
       if(userService.searchUser(pEmail) !== false){
         var userFounded = userService.searchUser(pEmail);

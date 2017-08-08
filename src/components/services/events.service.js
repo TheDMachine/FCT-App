@@ -74,7 +74,6 @@
       console.log(competitionsList);
       localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));
     }
-
   }
 
 })();

@@ -81,7 +81,7 @@
       url : '/sponsorPartTwo',
       templateUrl : 'components/admin/sponsor.register.views/admin-sponsor2.view.html'
     })
-    
+
     // Fin de las vistas hojas del formualrio de registro del administrador.
 
     //Inicio de las vistas hijas del formulario de registro del profesor
@@ -183,6 +183,20 @@
       controller: 'reserveCtrl',
       controllerAs: 'vm'
     })
+
+        .state('consultRsv',{
+      url : '/consultRsv', //ruta del url del estado
+      templateUrl : 'components/noRegisterUser/consult.view.html',//vista que se va a cargar para este estado
+      // El resolve sirve para el controlador junto con la vista
+      resolve: {
+        load: ['$ocLazyLoad', function($ocLazyLoad){
+          return $ocLazyLoad.load('components/noRegisterUser/consult.controller.js')
+        }]
+      },
+      controller: 'consultRsvCtrl',
+      controllerAs: 'vm'
+    })
+
         .state('cancelRsv',{
       url : '/cancelRsv', //ruta del url del estado
       templateUrl : 'components/noRegisterUser/cancelRsv.view.html',//vista que se va a cargar para este estado
@@ -207,8 +221,6 @@
       controller: 'eventsCtrl',
       controllerAs: 'vm'
     })
-
-
 
     $urlRouterProvider.otherwise('/landing');
   }

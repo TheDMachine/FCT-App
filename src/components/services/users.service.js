@@ -9,6 +9,7 @@
     function userService($cookies){
       var teachers = [];
        var users = [];
+       var assistants = [];
       //EL usuario quemado de represetante de consejo.
       var _UsersConsult = [{"nationality":"costarricense"
       ,"email":"daniel.camposarce@gmail.com"
@@ -31,10 +32,14 @@
         getUsers: _getUsers,
         updateUsers: _updateUsers,
         searchUser : _searchUser,
-        searchAdmin : _searchAdmin
+        searchAdmin : _searchAdmin,
+        searchAssistant : _searchAssistant,
+        setassistants : _setassistants,
+        getAssistants : _getAssistants,
+        updateAssistant : _updateAssistant
     };
     return publicAPI;
-    
+
     //Guardar alumno
     function _setUsers(newUser){
       var usersList = _getUsers();
@@ -84,6 +89,28 @@
       }
    }
 
+   //buscar administrador
+
+     function _searchAssistant(newAssistant){
+      var assistant = {
+        id : '987654321',
+        firstName : 'Asistente',
+        firstLastName : 'FCT',
+        bornDate : '30',
+        nationality : 'Costarricense',
+        phone : '87456321',
+        email : 'assistantFCT@hotmail.com',
+        password : 'admin123',
+        photo : 'assistant.jpg'
+      }
+      if(assistant.id == newAssistant){
+        return assistant;
+      }
+      else{
+        return false;
+      }
+   }
+
     //muestra la informacion mas actual
     function _getUsers(){
       var usersList = JSON.parse(localStorage.getItem('lsUsersList'));
@@ -123,14 +150,43 @@
     }
 
     //editar la informacion del profesor
-    function _updateTeacher(pEditTeacher) {
+    function _updateTeacher(editTeacher) {
       var teachersList = _getTeachers();
       for(var i = 0; i < teachersList.length; i++){
-        if(teachersList[i].id == pEditTeacher.id){
-          teachersList[i] = pEditTeacher;
+        if(teachersList[i].id == editTeacher.id){
+          teachersList[i] = editTeacher;
         }
       }
       localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
+    }
+
+    //función para pushear objeto asistente
+    function _setassistants(pAssistant){
+      var assistantsList = _getAssistants();
+      pAssistant.password = _generatePassword();
+      teachersList.push(pAssistant);
+      console.log(assistantsList);
+      localStorage.setItem('lsAssistantsList', JSON.stringify(assistantsList));
+    }
+
+    //función para obtener a los asistente actualizados
+    function _getAssistants() {
+      var assistantsList = JSON.parse(localStorage.getItem('lsAssistansList'));
+      if(assistantsList == null){
+        assistantsList = assistants;
+      }
+      return assistantsList;
+    }
+
+    //editar la informacion del asistente
+    function _updateAssistant(editAssistant) {
+      var assistantsList = _getAssistants();
+      for(var i = 0; i < assistantsList.length; i++){
+        if(assistantsList[i].id == editAssistant.id){
+          assistantsList[i] = editAssistant;
+        }
+      }
+      localStorage.setItem('lsAssistantsList', JSON.stringify(assistantsList));
     }
 
     //encontrar usuario profesor para agarrar información

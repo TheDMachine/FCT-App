@@ -144,6 +144,7 @@
 						            </div>
 						          </md-card-title-text>
 						        </md-card-title>
+
 							</md-card>
 						</div>
 					</div>
@@ -922,7 +923,7 @@
 														<th>Cinta</th>
 														<th>Categoria</th>
 														<th>Email</th>
-														<th></th>
+														<th>Estado</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -933,7 +934,10 @@
 														<td>{{student.belt}}</td>
 														<td>{{student.category}}</td>
 														<td>{{student.email}}</td>
-														<td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
+														<td>{{student.status}}</td>
+														<td>
+															<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
+														</td>
 													</tr>
 												</tbody>
 											</table>
@@ -1473,11 +1477,3 @@
 					    </md-tab>
 			  	</md-content>
 			</div>	
-	
-
-				
-
-			
-
-									
-		

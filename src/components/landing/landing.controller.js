@@ -7,7 +7,7 @@
       var vm = this; //binding del controlador con el html, solo en el controlador
 
       function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
-        
+
        }init();
 
        vm.logIn = function(event){
@@ -18,6 +18,11 @@
        vm.reserve = function(event){
         event.preventDefault();
         $location.path('/reserve');
+       }
+
+       vm.consult = function(event){
+        event.preventDefault();
+        $location.path('/consultRsv');
        }
 
        vm.cancel = function(event){

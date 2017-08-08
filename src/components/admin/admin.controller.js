@@ -65,7 +65,9 @@
         vm.teacher.status = "Activo";
         vm.userActive = false;
         vm.reservations = ticketService.getsReservations();
+        vm.status = "Activo"
       }init();
+
     /*Sidenav*/
     vm.openMenu = function ($mdMenu, ev) {
       vm.originatorEv = ev;
@@ -184,6 +186,7 @@
         }
       }
     };
+      // Funciones para guardar patrocinadores
 
     // Función para crear mapa
     // function createMap(pLat, pLeng) {
@@ -312,6 +315,22 @@
     );
   };
 
+  vm.showEventAlert = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('¡Registro correcto!')
+        .textContent('¡Registro de evento correcto!')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+    );
+  };
+
     vm.showProfesorAlert = function() {
     // Appending dialog to document.body to cover sidenav in docs app
     // Modal dialogs should fully cover application
@@ -323,7 +342,7 @@
         .title('¡Registro correcto!')
         .textContent('¡Registro de profesor correcto!')
         .ariaLabel()
-        .ok('Gracias!')
+        .ok('¡Gracias!')
         .targetEvent()
     );
   };
@@ -339,7 +358,7 @@
         .title('Profesor ya existe')
         .textContent('El profesor ya existe, porfavor ingrese otro')
         .ariaLabel()
-        .ok('Gracias!')
+        .ok('¡Gracias!')
         .targetEvent()
     );
   };
@@ -355,7 +374,7 @@
         .title('Patrocinador ya existe')
         .textContent('El patrocinador ya existe, porfavor ingrese otro')
         .ariaLabel()
-        .ok('Gracias!')
+        .ok('¡Gracias!')
         .targetEvent()
     );
   };
@@ -503,9 +522,6 @@
           pNewTeacher.photo = data.url;
           vm.createNewTeacher(pNewTeacher);
         })
-        .catch(function (error) {
-          console.log(error);
-        })
     }
 
     // Función para guardar profesores
@@ -517,7 +533,7 @@
         userService.setTeachers(pNewTeacher);
         vm.showProfesorAlert();
         init();
-        clean();
+        cleanTeacher();
       }
     };
 
@@ -534,11 +550,25 @@
       vm.teacher.gender = pTeacher.gender;
       vm.teacher.nationality = pTeacher.nationality;
       vm.teacher.academy = pTeacher.academy;
-      vm.teacher.grade = pTeacher.grade;
       vm.teacher.photo = pTeacher.photo;
       vm.teacher.status = pTeacher.status;
     }
 
+     function cleanTeacher() {
+      vm.teacher.id = '';
+      vm.teacher.firstName = '';
+      vm.teacher.secondName = '';
+      vm.teacher.firstLastName = '';
+      vm.teacher.secondLastName = '';
+      vm.teacher.phone = '';
+      vm.teacher.email = '';
+      vm.teacher.bornDate = '';
+      vm.teacher.gender = '';
+      vm.teacher.nationality= '';
+      vm.teacher.academy = '';
+      vm.teacher.photo = '';
+      vm.teacher.status = '';
+    }
     // Función para limpiar campos
 
     function clean() {
@@ -559,13 +589,12 @@
         gender: vm.teacher.gender,
         nationality: vm.teacher.nationality,
         academy: vm.teacher.academy,
-        grade: vm.teacher.grade,
         photo: vm.teacher.photo,
         status: vm.teacher.status
       }
       userService.updateTeacher(editTeacher);
       init();
-      clean();
+      cleanTeacher();
     };
 
     //funcion para guardar informacion de academia
@@ -635,10 +664,33 @@
             console.log(error);
           })
           vm.createStudent(pNewStudent);
-    };
+      }
+
 
     //funcion para guardar informacion del alumno
     vm.createStudent = function(pNewStudent){
+      var newUser = {
+        id: vm.id,
+        birthday: vm.birthday,
+        firstName: vm.firstName,
+        secondName: vm.secondName,
+        firstLastName: vm.firstLastName,
+        secondLastName: vm.secondLastName,
+        genre: vm.genre,
+        weight: vm.weight,
+        height: vm.height,
+        nationality: vm.nationality,
+        phone: vm.phone,
+        email: vm.email,
+        attendAcademy: vm.attendAcademy,
+        teacher: vm.teacher,
+        belt: vm.belt,
+        category: vm.category,
+        tournaments: vm.tournaments,
+        tournamentsWins: vm.tournamentsWins,
+        photo: vm.photo,
+        status : vm.status
+      };
       console.log(newUser);
       userService.setUsers(newUser);
       cleanStudent();
@@ -712,7 +764,7 @@
         category: vm.category,
         tournaments: vm.tournaments,
         tournamentsWins: vm.tournamentsWins,
-        status : vm.status 
+        status : vm.status
       }
       userService.updateUsers(editstudent);
       init();
@@ -835,4 +887,3 @@
   }
 
 })();
-
