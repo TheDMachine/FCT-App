@@ -4,7 +4,7 @@ var router = express.Router();
 var path = require('path');
 // Se establece la conexion de datos con el front-end
 router.get('*', function(req, res,next){
-  res.sendFile(path.join(__dirname + '../src/index.html'));
+  res.sendFile(path.join(__dirname + './../src/index.html'));
 })
 // Exporta la conexión y la almacena dentro de express, variable que se usará dentro del server.js
 module.exports = router;

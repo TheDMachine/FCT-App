@@ -1,13 +1,18 @@
 var pug = require('pug');
 var nodemailer = require('nodemailer');
+var googleapis = require('googleapis');
 var  transporter = nodemailer.createTransport({
-    host: 'mail.google.com',
+    host: 'smtp.gmail.com',
     port: 465,
     secure: true, // secure:true for port 465, secure:false for port 587
     auth: {
-        user: 'dcamposa@ucenfotec.ac.cr',
-        pass:'dibblesmileplaygoer'
+      XOAuth2: {
+              user: "wiziarce@gmail.com",
+              clientId: "99490669044-mpcngkciqg7fgl9507v7plf9a7733clt.apps.googleusercontent.com",
+              clientSecret: "vDVJXQiHqxOKYvdFokRm3E3r",
+              refreshToken: "1/xEoDL4iW3cxlI7yDbSRFYNG01kVKM2C-259HOF2aQbI"
     }
+  }
 });
 // verify connection configuration
 transporter.verify(function(error, success) {

@@ -3,3 +3,4 @@
 .DS_Store
 src/bower_components/
 node_modules/
+console_google_auth.json
