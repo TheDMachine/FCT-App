@@ -1,4 +1,4 @@
-<!--<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
     <md-input-container flex="50">
       <label>Tipo de patrocinio</label>
       <md-select name="idType" ng-model="vm.sponsor.sponsorType" required>
@@ -22,15 +22,9 @@
 </div>
  Subir logo
 <div>
-    Adjuntar logo <input id="photoSponsor" name="photoSponsor" type="file" ng-model="vm.sponsor.photo">	
+    Adjuntar logo <input id="photo" name="photo" type="file" ng-model="vm.sponsor.photo">	
 </div>
 	<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
-		<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit" onclick="testingButton()">Submit</md-button>
+		<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit">Submit</md-button>
 		<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
 	</div>
-
-	<script type="text/javascript">
-		function testingButton(e){
-			console.log(document.querySelector('#photoSponsor').files);
-		}
-	</script>-->
