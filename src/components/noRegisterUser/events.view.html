@@ -1,0 +1,91 @@
+<section id="eventsViewSection" class="container-fluid">
+	<div class="row">
+		<div id="topSpace" class="col-xs-12 md-whiteframe-3dp">
+			<div class="col-xs-2 imageLogo"><img src="images/logFCT.png" width="75px" height="75px"></div>
+			<div class="col-xs-offset-7 col-xs-1 col-sm-offset-9 col-sm-1"><a ng-click="vm.return($event)"><span class="fa fa-times quitX"></span></a></div>
+		</div>
+	</div>
+	<div class="row">
+		<div id="eventsTable" class="col-md-offset-1 col-md-10">
+			<h3>CONSULTAR EVENTOS</h3>
+			<!-- Filtro por fecha -->
+			<p>Filtre por fechas: </p>
+			<br>
+			<md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
+			<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin" md-min-date="vm.today"></md-datepicker>
+
+			<!-- Tabla historial de eventos -->
+			<div id="tableSpace" >
+				<table class="table-responsive md-whiteframe-3dp">
+					<thead class="md-whiteframe-3dp">
+						<tr>
+							<th>Evento</th>
+							<th>Fecha</th>
+							<th>Tipo</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to">
+							<td><md-button type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button></td>
+							<td>{{event.date1 | date : "shortDate"}}</td>
+							<td>{{event.eventType}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+
+<!-- 
+			<input type="text"  ng-map-autocomplete ng-model="autocomplete" options="options" details="details"/>
+			<div class="col-xs-6">
+				<map center="[10.0000000,-84.0000000]" zoom="8" />
+			</div> -->
+
+			<!-- modal para consulta de eventos -->
+			<div style="visibility: hidden">
+				<div class="md-dialog-container" id="myDialog">
+					<md-dialog layout-padding>
+
+						<!-- encabezado de la información del evento -->
+						<div id="eventName" class="col-xs-12 md-whiteframe-3dp">
+							<img ng-src="{{vm.consultEvent.photo}}" alt="Description" width="60px" height="60px" />
+							<h3>{{vm.consultEvent.eventName}}</h3>
+						</div>
+
+						<!-- cuerpo de la información -->
+						<div id="eventInfo" class="col-xs-12">
+							<p><span>Hora de inicio:</span> {{vm.consultEvent.time1 | date : "shortTime"}}</p>
+							<p><span>Lugar: </span> {{vm.consultEvent.placeName}}</p>
+							<p><span>Dirección:</span> {{vm.consultEvent.location}}</p>
+							<p><span>Costo de la entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
+							<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
+						</div>
+
+						<!-- botón para salir del modal -->
+						<div id="buttonInfoEvent" class="col-xs-12">
+							<md-button class="md-raised" type="button"  ng-click="vm.cancel()">Salir</md-button>
+						</div>
+					</md-dialog>
+				</div>
+			</div>
+
+			<ng-map zoom="7" center=[9.6226648,-84.0572906]>
+                <marker ng-show="vm.place" position="{{vm.event.address}}" ></marker>
+            </ng-map>
+            <div ng-show="vm.place">
+              <!-- Address = {{vm.place.formatted_address}} <br/> -->
+              Coordenadas: {{vm.place.geometry.location}}<br/>
+            </div>
+			<div class="form-group">
+              <label class="control-label">Nombre del lugar</label>
+              <input  places-auto-complete="true"
+                      placeholder="Ej. Polideportivo Cartago" 
+                      size=80
+                      ng-model="vm.event.place.address" 
+                      component-restrictions="{country:'cr'}"
+                      on-place-changed="vm.placeChanged()"
+              maxlength="100" type="text" class="form-control" name="location" /> <!-- ng-model="vm.event.location" -->
+            </div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,127 @@
+<div class="row">
+	<div class="col-sm-6">
+
+		<!-- Campo nombre evento -->
+		<md-input-container flex-offset>
+			<label>Nombre de evento</label>
+			<input type="text" id="hello" name="frmEventInfo.eventName" ng-model="vm.event.eventName" maxlength="30" md-maxlength="30" required>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+	</div>
+	<div class="col-sm-6">
+
+		<!-- Campo Tipo de evento -->
+		<md-input-container>
+			<label>Tipo de evento</label>
+			<md-select name="frmEventInfo.eventType" ng-model="vm.event.eventType" required>
+				<md-option value="torneo">Torneo</md-option>
+				<md-option value="exhibición">Exhibición</md-option>
+				<md-option value="fogueo">Fogueo</md-option>
+			</md-select>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+
+		<!-- Estado de evento -->
+		<md-input-container>
+			<label>Estado del evento</label>
+			<md-select name="frmEventInfo.eventState" ng-model="vm.event.eventState" required>
+				<md-option value="aprobado">Aprobado</md-option>
+				<md-option value="cancelado">Cancelado</md-option>
+			</md-select>
+
+			<!-- Mensaje de retroalimentacion -->
+			<div ng-messages="frmEventInfo.$error">
+				<div ng-messages-include="components/includes/messages.html"></div>
+			</div>
+		</md-input-container>
+	</div>
+	<div class="col-md-6">
+
+		<!-- Campo Nombre del invitado-->
+		<md-input-container flex-gt-sm ng-show="vm.event.eventType == 'exhibición'">
+			<label>Nombre completo del invitado (opcional)</label>
+			<input type="text" name="frmEventInfo.invitedName" ng-model="vm.event.invitedName" maxlength="30" md-maxlength="30" placeholder="Andrían García Mora">
+		</md-input-container>
+	</div>
+</div>
+<div id="botonRadio" class="row">
+	<div class="col-xs-6 col-sm-4 col-md-3">
+		<p>Evento de beneficencia:</p>
+	</div>
+
+	<!-- Campo de seleccionar evento beneficencia -->
+	<div class="col-xs-6 col-sm-8 col-md-9">
+		<md-radio-group layout="row" layout-align="start center" ng-model="vm.event.charityEvent">
+			<md-radio-button name="frmEventInfo.charityEvent" value="Beneficencia" class="md-primary">Si</md-radio-button>
+			<md-radio-button name="frmEventInfo.charityEvent" value="no beneficencia" class="md-primary">No</md-radio-button>
+		</md-radio-group>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6">
+
+		<!-- Campo nombre de organización -->
+		<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
+			<label>Nombre de la organización</label>
+			<input type="text" name="frmEventInfo.orgName" ng-model="vm.event.orgName" maxlength="30" md-maxlength="30" >
+		</md-input-container>
+	</div>
+	<div class="col-sm-6">
+
+		<!-- Campo tipo de organización -->
+		<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
+			<label>Tipo de organización</label>
+			<input type="text" name="frmEventInfo.orgType" ng-model="vm.event.orgType" maxlength="15" md-maxlength="15">
+		</md-input-container>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12"> 
+
+		<!-- Campo para descripción de la organización -->
+		<md-input-container class="md-block" flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
+			<label>Descripción de la organización</label>
+			<textarea name="frmEventInfo.description" ng-model="vm.event.description" maxlength="30" md-maxlength="30" rows="5" md-select-on-focus></textarea>
+		</md-input-container>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-offset-10 col-md-2">
+
+		<!-- Botón siguiente -->
+		<a ui-sref="admin.part2" class="btn btn-primary" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+	</div>
+</div>
+
+	
+	
+	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

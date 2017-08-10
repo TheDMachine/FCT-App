@@ -1,0 +1,19 @@
+<table class="table table-striped">
+  <thead>
+    <th>
+      <td>Acción</td>
+      <td>Agente ejecutador</td>
+      <td>Resultado de la acción</td>
+      <td>Hora de realización</td>
+  </th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="logRegister in vm.log">
+      <th>{{$index}}</th>
+      <td>{{logRegister.action}}</td>
+      <td>{{logRegister.actionBy}}</td>
+      <td>{{logRegister.resultAction}}</td>
+      <td>{{logRegister.timestamp | date:"dd/MM/yyyy 'a las' h:mma"}}</td>
+    </tr>
+  </tbody>
+</table>

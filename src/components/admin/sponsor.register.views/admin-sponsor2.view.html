@@ -1,0 +1,30 @@
+<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+    <md-input-container flex="50">
+      <label>Tipo de patrocinio</label>
+      <md-select name="idType" ng-model="vm.sponsor.sponsorType" required>
+        <md-option value="money">Dinero</md-option>
+        <md-option value="equipo">Equipo</md-option>
+        <md-option value="food">Alimento</md-option>
+      </md-select>
+    </md-input-container>
+	
+	<md-input-container class="md-block" flex-gt-sm>
+	  <label>Equivalente en dinero</label>
+	  <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorMoney" />
+
+	  <div class="hint" ng-if="showHints">Ingrese el nombre de la compañía</div>
+
+	  <div ng-messages="sponsorForm.company.$error" ng-if="!showHints">
+	    <div ng-message="required">El primer nombre es requerido.</div>
+	    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
+	  </div>
+	</md-input-container>
+</div>
+ Subir logo
+<div>
+    Adjuntar logo <input id="photo" name="photo" type="file" ng-model="vm.sponsor.photo">	
+</div>
+	<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
+		<md-button ng-disabled="sponsorForm.$invalid || submitDisable" type="submit">Submit</md-button>
+		<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
+	</div>
