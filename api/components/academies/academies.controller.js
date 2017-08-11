@@ -1,0 +1,1 @@
+var academies = require('./academies.model.js');

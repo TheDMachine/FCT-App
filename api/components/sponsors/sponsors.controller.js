@@ -1,0 +1,1 @@
+var sponsor = require('./sponsors.controller.js');

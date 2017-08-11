@@ -6,46 +6,53 @@ var gulp = require('gulp'),
 
 gulp.task('connect', function () {
   connect.server({
-    root:'./src/',
+    root:'public',
     port: 8000,
     livereload: true
   });
   nodemon();
-})
+});
+
 //  reload css
 gulp.task('css', function () {
-  gulp.src('./src/css/*.css')
+  gulp.src('./public/css/*.css')
   .pipe(connect.reload())
 })
 //  reload html
 gulp.task('html', function () {
-  gulp.src('./src/components/**/*.html')
+  gulp.src('./public/components/*.html')
   .pipe(connect.reload())
 })
 //  reload js
 gulp.task('js', function () {
-  gulp.src('./src/components/*.js')
+  gulp.src('./public/components/*.js')
+  gulp.src('./api/*.js')
   .pipe(connect.reload())
 })
+
 //  Watch changes on css, html and js
 gulp.task('watch', function () {
   gulp.watch([
-    './src/*.css',
-    './src/css/*.css',
-    './src/css/**/*.css'
+    './public/*.css',
+    './public/css/*.css',
+    './public/css/**/*.css'
   ], ['css']);
 
   gulp.watch([
-    './src/*.js',
-    './src/js/*.js',
-    './src/components/**/*.js',
-    './src/components/**/**/*.js'
+    './public/*.js',
+    './public/components/*.js',
+    './public/components/**/*.js',
+    './public/components/**/**/*.js',
+    './api/*.js',
+    './api/components/*.js',
+    './api/components/**/*.js',
+    './api/components/**/**/*.js'
   ], ['js']);
 
   gulp.watch([
-    './src/*.html',
-    './src/components/**/*.html',
-    './src/components/**/**/*.html'
+    './public/*.html',
+    './public/components/**/*.html',
+    './public/components/**/**/*.html'
   ], ['html']);
 })
 // Task name

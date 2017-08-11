@@ -1,20 +1,34 @@
-var express = require('express');
-var http = require('http');
-// var io = require('socket.io');
-var app = express();
-var path = require('path');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var morgan = require('morgan');
-var port = "3000";
-// var notification = require('./emailNotification');
-var db = mongoose.connection;
-var mlabServer = "mongodb://thedmachine:thedmachine@ds111922.mlab.com:11922/db_fct";
-mongoose.connect(mlabServer);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(morgan('dev'));
+// Se establecen las dependencias que Node va a utilizar
+var express = require('express'),
+    app = express(),
+    path = require('path'),
+    bodyParser = require('body-parser'),
+    morgan = require('morgan'),
+    mongoose = require('mongoose');
+
+// Se establece una conexión con mongoose por medio de las siguientes variables
+var db = mongoose.connection,
+    dburl = 'mongodb://root:root@ds145868.mlab.com:45868/user_test',
+    port = 3000;
+// se le indica al servidor la tarea a ejecutar
+var server = app.listen(port,_server());
+
+// Se define la conexion con mongoose
+mongoose.connect(dburl);
+// Se define las respuestas del servidor
+db.on('error', console.error.bind(console, 'error de conexion:'));
+db.on('open', function(){
+  console.log('Base de datos conectada correctamente');
+})
+// Por medio de express se genera la conexión entre el index.js, server.js y el front-end
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Se indica que el formato en el que se reciben los datos va a ser JSON
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(morgan('dev'));
+
+// Se definen los verbos que express va a reconocer como parte de la petición que se realiza desde el front-end (public)
 app.use( function(req, res, next){
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -22,19 +36,24 @@ app.use( function(req, res, next){
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
-db.on('error', console.error.bind(console, 'error de conexión:'));
-db.on('open', function(d){
-  console.log('Se ha logrado conectar a la base de datos');
-})
-// obtención de rutas
-var indexRouting = require('./index');
+// Se definen las rutas que van estar ligadas a toda la funcionalidad de la aplicacion
+var index = require('./index'),
+    userRoutes = require('./components/users/users.route'),
+    eventRoutes = require('./components/events/events.route'),
+    academiesRoutes = require('./components/academies/academies.route'),
+    sponsorsRoutes = require('./components/sponsors/sponsors.route');
 
-// Falta el routing
-app.use('/',indexRouting);
-// Aranca el servidor
-app.listen(port, _serverInfo);
 
-function _serverInfo(){
-  console.log('Server corriento en '+ port);
-}
+app.use('/', index);
+app.use('/api', userRoutes);
+app.use('/api', eventRoutes);
+app.use('/api', academiesRoutes);
+app.use('/api', sponsorsRoutes);
+
+// Se guarda todo lo que se ha realizado
 module.exports = app;
+
+
+function _server(){
+  console.log('Conexion establecida en el puerto ' + port);
+}
