@@ -4,7 +4,7 @@
   .module('app')
   .service('sponsorService', sponsorService);
 
-  function sponsorService(){
+  function sponsorService($http){
     var sponsors = [];
     var publicAPI = {
       setSponsors : _setSponsors,
@@ -25,16 +25,17 @@
         }
       }
       sponsorsList.push(pSponsor);
-      localStorage.setItem('lsSponsorsList', JSON.stringify(sponsorsList));
+      //localStorage.setItem('lsSponsorsList', JSON.stringify(sponsorsList));
+      return $http.post('http://localhost:3000/api/save_sponsor',pSponsor)
     }
 
     // Función para extraer información de patrocinadores
     function _getSponsors(){
-      var sponsorsList = JSON.parse(localStorage.getItem('lsSponsorsList'));
-      if(sponsorsList == null || sponsorsList == undefined){
-        sponsorsList = sponsors;
-      }
-      return sponsorsList;
+      //var sponsorsList = JSON.parse(localStorage.getItem('lsSponsorsList'));
+      //if(sponsorsList == null || sponsorsList == undefined){
+        //sponsorsList = sponsors;
+      //}
+      return $http.get('http://localhost:3000/api/get_all_sponsors');
     }
 
     // Función para guardar modificación de información de patrocinadores

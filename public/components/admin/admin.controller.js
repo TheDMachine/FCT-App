@@ -49,7 +49,10 @@
         vm.competitions = eventService.getCompetitions();
         acceptedEvents();
         vm.event = {};
-        vm.sponsors = sponsorService.getSponsors();
+        sponsorService.getSponsors().then(function(response) {
+          vm.sponsors = response.data;
+        });
+        console.log(vm.sponsors);
         vm.teacher = {};
         vm.teachers = userService.getTeachers();
         vm.sponsor = {};
