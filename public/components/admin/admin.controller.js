@@ -825,6 +825,7 @@
         vm.studentDuplicateAlert();
       }else {
         console.log(pNewStudent);
+        pNewStudent.role = 'Competidor';
         userService.setUsers(pNewStudent);
         vm.studentAlert();
         clean();
@@ -853,6 +854,7 @@
       vm.student.category = user.category;
       vm.student.tournaments = user.tournaments;
       vm.student.tournamentsWins = user.tournamentsWins;
+      vm.student.role = user.role;
     }
 
     //funcion para guardar alumno editada
@@ -876,7 +878,8 @@
         category: vm.category,
         tournaments: vm.tournaments,
         tournamentsWins: vm.tournamentsWins,
-        status : vm.status
+        status : vm.status,
+        role : vm.role
       }
       userService.updateUsers(editstudent);
       init();
