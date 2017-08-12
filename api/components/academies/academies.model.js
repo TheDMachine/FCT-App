@@ -1,7 +1,13 @@
 var mongoose = require('mongoose');
 
 var AcademySchema = new mongoose.Schema({
-  // Aqui va el modelo de academias
+  name: 	   {type: String, required: true, unique: true},
+  address:     {type: String, required: true},
+  manager:     {type: String, required: true},
+  competitors: {type: String, required: true},
+  phone:       {type: String, required: true, unique: true},
+  email:       {type: String, required: true, unique: true},
+  status:      {type: String, required: true}
 });
 
 module.exports = mongoose.model('academies', AcademySchema);

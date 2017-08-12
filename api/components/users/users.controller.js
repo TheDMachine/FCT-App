@@ -1,2 +1,2 @@
-var user = require('./users.model.js');
+var user = require('./users.model');
 var bcrypt = require('bcrypt');
