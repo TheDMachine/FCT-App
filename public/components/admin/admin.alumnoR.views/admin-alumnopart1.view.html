@@ -1,0 +1,85 @@
+<div class="row">
+  <!-- input de cedula -->
+  <div class="col-xs-12 col-sm-6">
+    <md-input-container flex-offset class="md-block">
+      <label for="">Cédula</label>
+      <input name="id" ng-model="vm.student.id" required/>
+
+      <!-- Mensaje de retroalimentacion -->
+            <div ng-messages="frmStudent.id.$error">
+              <div ng-message="pattern">######### - Ingrese un número de identificación válido.</div>
+            </div>
+    </md-input-container>
+  </div>
+
+  <!-- input de  Fecha de nacimiento -->
+  <div class="col-xs-12 col-sm-6">
+        <md-input-container flex-gt-xs>
+          <label>Fecha de nacimiento</label>
+          <md-datepicker ng-model="vm.student.birthday" md-current-view="year" md-placeholder="Enter date" required></md-datepicker>
+        </md-input-container>
+  </div>
+</div>
+
+<div class="row">
+  <!-- input de primer nombre -->
+  <div class="col-xs-12 col-sm-6">
+    <md-input-container flex-offset class="md-block">
+      <label for="">Primer nombre</label>
+      <input name="firstName" type="text" ng-model="vm.student.firstName" required/>
+
+      <!-- Mensaje de retroalimentacion -->
+      <div ng-messages="frmStudent.firstName.$error">
+        <div ng-messages-include="components/includes/messages.html"></div>
+      </div>
+    </md-input-container>
+  </div>
+
+  <!-- input de  segundo nombre-->
+  <div class="col-xs-12 col-sm-6">
+    <md-input-container flex-offset class="md-block">
+      <label for="">Segundo nombre</label>
+      <input name="secondName" type="text" ng-model="vm.student.secondName" />
+
+      <!-- Mensaje de retroalimentacion -->
+      <div ng-messages="frmStudent.secondName.$error">
+        <div ng-messages-include="components/includes/messages.html"></div>
+      </div>
+    </md-input-container>
+  </div>
+</div>
+
+<div class="row">
+  <!-- input de primer apellido -->
+  <div class="col-xs-12 col-sm-6">
+    <md-input-container flex-offset class="md-block">
+      <label for="">Primer apellido</label>
+      <input name="firstLastName" type="text" ng-model="vm.student.firstLastName" required/>
+
+      <!-- Mensaje de retroalimentacion -->
+      <div ng-messages="frmStudent.firstLastName.$error">
+        <div ng-messages-include="components/includes/messages.html"></div>
+      </div>
+    </md-input-container>
+  </div>
+
+  <!-- input de  segundo apellido -->
+  <div class="col-xs-12 col-sm-6">
+    <md-input-container flex-offset class="md-block">
+      <label for="">Segundo apellido</label>
+      <input name="secondLastName" type="text" ng-model="vm.student.secondLastName" required/>
+
+      <!-- Mensaje de retroalimentacion -->
+      <div ng-messages="frmStudent.secondLastName.$error">
+        <div ng-messages-include="components/includes/messages.html"></div>
+      </div>
+    </md-input-container>
+  </div>
+</div>
+
+<div class="row">
+	<div class="col-md-offset-10 col-md-2">
+		<!-- Botón siguiente -->
+		<a ui-sref="admin.alumnopart2" class="btn btn-info" ng-disabled="frmStudent.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+	</div>
+</div>
