@@ -1,7 +1,7 @@
-var sponsor = require('./sponsors.controller.js');
+var sponsor = require('./sponsors.model');
 
 module.exports.save = function(req, res){
-  var newSponsor = new Sponsor({
+  var newSponsor = new sponsor({
     sponsorName: req.body.sponsorName,
     sponsorCompany : req.body.sponsorCompany,
     sponsorType : req.body.sponsorType,
@@ -20,7 +20,13 @@ module.exports.save = function(req, res){
 }
 
 module.exports.findAll = function(req,res){
-  Sponsor.find().then(function(sponsors){
+  sponsor.find().then(function(sponsors){
     res.send(sponsors);
   })
+};
+
+module.exports.update = function(req,res){
+  sponsor.update(req.body.name).then(function(sponsor){
+    res.send(sponsor);
+  });
 };

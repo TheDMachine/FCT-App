@@ -8,7 +8,7 @@ var express = require('express'),
 
 // Se establece una conexión con mongoose por medio de las siguientes variables
 var db = mongoose.connection,
-    dburl = 'mongodb://<dbuser>:<dbpassword>@ds139761.mlab.com:39761/db_fct',
+    dburl = 'mongodb://admin:dmachine2017@ds139761.mlab.com:39761/db_fct',
     port = 3000;
 // se le indica al servidor la tarea a ejecutar
 var server = app.listen(port,_server());

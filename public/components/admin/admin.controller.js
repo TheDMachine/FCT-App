@@ -232,7 +232,16 @@
         vm.showSponsorDuplicateAlert();
       }
       else{
-        sponsorService.setSponsors(pNewSponsor);
+        sponsorService.setSponsors(pNewSponsor)
+        .then(function(response){
+          var responseObj = response;
+          console.log(response);
+          sponsorService.getSponsors().then(function(response) {
+            vm.sponsors = response.data;
+          });
+        }).catch(function(err){
+          console.log(err);
+        });
         vm.showSponsorAlert();
       }
       vm.error = false;
@@ -241,7 +250,6 @@
         }else{
         document.querySelector('.SuccessMessage').innerHTML = 'El patrocinador se registró exitosamente';
       }*/
-      console.log(sponsorService.getSponsors());
       clean();
       init();
 
@@ -298,7 +306,10 @@
 
       vm.submitDisable = false;
       vm.updateDisable = true;
-      sponsorService.updateSponsor(modSponsor);
+      sponsorService.updateSponsor(modSponsor).
+      then(function(response){
+        
+      })
       init();
       clean();
     }

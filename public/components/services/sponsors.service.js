@@ -16,7 +16,7 @@
 
     // Función para guardar patrocinadores
     function _setSponsors(pSponsor){
-      var sponsorsList = _getSponsors();
+      /*var sponsorsList = _getSponsors();
       var error = false;
 
       for (var i = 0; i < sponsorsList.length; i++) {
@@ -25,7 +25,7 @@
         }
       }
       sponsorsList.push(pSponsor);
-      //localStorage.setItem('lsSponsorsList', JSON.stringify(sponsorsList));
+      //localStorage.setItem('lsSponsorsList', JSON.stringify(sponsorsList));*/
       return $http.post('http://localhost:3000/api/save_sponsor',pSponsor)
     }
 
@@ -40,13 +40,13 @@
 
     // Función para guardar modificación de información de patrocinadores
     function _updateSponsor(pModSponsor){
-      var sponsorsList = _getSponsors();
+      /*var sponsorsList = _getSponsors();
       for(var i = 0; i < sponsorsList.length; i++){
         if(sponsorsList[i].sponsorName == pModSponsor.sponsorName){
           sponsorsList[i] = pModSponsor;
         }
-      }
-      localStorage.setItem('lsSponsorsList', JSON.stringify(sponsorsList));
+      }*/
+      return $http.put('http://localhost:3000/api/get_all_sponsors', pModSponsor);
     }
 
     function _findSponsor(pSponsorName){
