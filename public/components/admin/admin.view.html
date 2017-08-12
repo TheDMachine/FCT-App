@@ -785,54 +785,6 @@
 								<div ui-view="log-sistem"></div>
 			        </md-content>
 			    </md-tab>-->
-
-			    <md-tab ui-sref=".teachpart1" label="Profesores">
-			    	<md-content class="md-padding">
-			    		<h1 class="md-display-2">Profesores</h1>
-			    		<div class="text-center" id="buttonTeacher" layout="row" layout-align="center center">
-			    			<div ui-sref-active="active" ui-sref=".teachpart1">
-			    				<a>1</a>
-			    			</div>
-			    			<div ui-sref-active="active" ui-sref=".teachpart2">
-			    				<a>2</a>
-			    			</div>
-			    			<div ui-sref-active="active" ui-sref=".teachpart3">
-			    				<a>3</a>
-			    			</div>
-			    		</div>
-			    		<div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
-
-			    			<form name="frmRegTeacher" autocomplete="off"  ng-submit="vm.presaveTeacher(vm.teacher)">
-
-			    				<!-- Espacio para mostrar vistas del registro -->
-			    				<div id="form-views" ui-view></div>
-			    			</form>
-			    		</div>
-
-			    		<!-- Tabla para listar profesores -->
-			    		<div>
-			    			<table>
-			    				<thead>
-			    					<tr>
-			    						<th>Cedula</th>
-			    						<th>Primer nombre</th>
-			    						<th>Primer apellido</th>
-			    					</tr>
-			    				</thead>
-			    				<tbody>
-			    					<tr ng-repeat="teacher in vm.teachers track by $index">
-			    						<td>{{teacher.id}}</td>
-			    						<td>{{teacher.firstName}}</td>
-			    						<td>{{teacher.firstLastName}}</td>
-			    						<td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
-			    						<!-- Botones para editar profesores -->
-			    						<td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)"></td>
-			    					</tr>
-			    				</tbody>
-			    			</table>
-			    		</div>
-			    	</md-content>
-			    </md-tab>
 			</md-tabs>
 		</md-content>
 	</div>
@@ -1307,13 +1259,15 @@
                         <th>Cédula</th>
                         <th>Nombre completo</th>
                         <th>Estado</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="student in vm.users | filter:{firstName:vm.studentFilter}">
                         <td>{{student.id}}</td>
                         <td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
-                        <td><md-button ng-click="vm.getStudent(student)" class="md-raised">actualizar</md-button></td>
+                        <td>{{student.status}}</td>
+                        <td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1365,3 +1319,69 @@
           </div>
         </md-content>
       </div>
+
+  <div ng-show="vm.selected == 10">
+        <md-content>
+          <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab ui-sref=".teachpart1" label="Profesores">
+              <md-content class="md-padding">
+                <h1 class="md-display-2">Profesores</h1>
+                <div class="text-center" id="buttonTeacher" layout="row" layout-align="center center">
+                  <div ui-sref-active="active" ui-sref=".teachpart1">
+                    <a>1</a>
+                  </div>
+                  <div ui-sref-active="active" ui-sref=".teachpart2">
+                    <a>2</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-offset-1 col-md-10">
+
+                    <form name="frmRegTeacher" autocomplete="off" ng-submit="vm.presaveTeacher(vm.teacher)">
+
+                      <!-- Espacio para mostrar vistas del registro -->
+                      <div id="form-views" ui-view></div>
+                    </form>
+                  </div>
+                </div>
+              </md-content>
+            </md-tab>
+          <md-tab label="Lista">
+            <md-content class="md-padding">
+
+              <!-- Tabla para listar profesores -->
+
+                <div id="tblTeacher" class="row">
+                  <div class="col-md-offset-1 col-md-10">
+                    <div>
+                      <h3>Lista de Profesores</h3>
+                      <table class="table-responsive">
+                        <thead>
+                          <tr>
+                            <th>Cedula</th>
+                            <th>Primer nombre</th>
+                            <th>Primer apellido</th>
+                            <th>Estado</th>
+                            <th>Foto</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="teacher in vm.teachers track by $index">
+                            <td>{{teacher.id}}</td>
+                            <td>{{teacher.firstName}}</td>
+                            <td>{{teacher.firstLastName}}</td>
+                            <td>{{teacher.status}}</td>
+                            <td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
+                            <!-- Botones para editar profesores -->
+                            <td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            </md-content>
+          </md-tab>
+        </md-content>
+      </div>
+
