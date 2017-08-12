@@ -1,4 +1,90 @@
+/*Inicio Estilos de tablas usuarios*/
+#tableUser h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 60px;
+}
 
+#tableUser table{
+  width: 95%;
+  margin: 0 2.5%;
+}
+
+#tableUser thead, #tableUser tbody{
+  width: 95%;
+  margin: 0 2.5%;
+}
+
+#tableUser tbody{
+  text-align: center;
+}
+
+#tableUser tr th{
+  width: 100px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: #00a652;
+  color: #fff;
+}
+
+#tableUser tr:hover{
+  background: rgba(0, 166, 82, 0.1);
+}
+
+#tableUser tbody td{
+  width: 100px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #00978f;
+  text-align: center;
+  padding: 10px 0;
+}
+/*Fin Estilos de tablas usuarios*/
+
+/*Inicio estilos de tabla de academias*/
+#tableAcaademy h3{
+  font-family: 'Montserrat';
+  font-size: 1.571em;
+  margin-bottom: 60px;
+}
+
+#tableAcaademy table{
+  width: 95%;
+  margin: 0 2.5%;
+}
+
+#tableAcaademy thead, #tableAcaademy tbody{
+  width: 95%;
+  margin: 0 2.5%;
+}
+
+#tableAcaademy tbody{
+  text-align: center;
+}
+
+#tableAcaademy tr th{
+  width: 100px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 10px;
+  font-size: 1.143em;
+  background-color: #85c8dd;
+  color: #fff;
+}
+
+#tableAcaademy tr:hover{
+  background: rgba(133, 200, 221, 0.1);
+}
+
+#tableAcaademy tbody td{
+  width: 100px;
+  margin: 0 auto;
+  border-bottom: 0.1px solid #242629;
+  text-align: center;
+  padding: 10px 0;
+}
+/*Fin estilos de tabla de academias*/
 /*Inicio estilos para la tabla de profesoresr*/
 
 #tblReservation table{
@@ -587,7 +673,7 @@
 
 /*Inicio estilos de pasos formulario eventos*/
 
-#buttonForm div,.genericButtonsSteps div{
+#buttonForm div{
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -638,11 +724,6 @@ md-input-container{
   margin-bottom: 60px;
 }
 
-#last2Part input{
-  border: none;
-  background: inherit;
-}
-
 #last2Part label{
   font-size: 1em;
   margin-right: 40px;
@@ -650,7 +731,6 @@ md-input-container{
 
 #buttonLogo{
   background: #cb3e42;
-  background: #0082c8;
   border-radius: 7px;
   text-align: center;
   color: #fff;
@@ -667,7 +747,6 @@ md-input-container{
 /*Inicio estilos de tabla modificar y tabla de reservaciones*/
 
 #modTable h3, #reservationsList h3{
-
   font-family: 'Montserrat';
   font-size: 1.571em;
   margin-bottom: 60px;
@@ -679,25 +758,13 @@ md-input-container{
 
 #modTable thead, #modTable tbody, #reservationsList thead, #reservationsList tbody{
   width: 100%;
-}
+} 
 
 #modTable tbody, #reservationsList tbody{
   text-align: center;
 }
 
 #modTable tr th, #reservationsList tr th{
-  width: 100%;
-}
-
-#modTable thead, #modTable tbody{
-  width: 100%;
-}
-
-#modTable tbody{
-  text-align: center;
-}
-
-#modTable tr th{
   width: 60px;
   text-align: center;
   margin: 0 auto;
@@ -712,15 +779,6 @@ md-input-container{
 }
 
 #modTable tbody td, #reservationsList tbody td{
-  background-color: #0082c8;;
-  color: #fff;
-}
-
-#modTable tr:hover{
-  background: rgba(0, 130, 200,0.1);
-}
-
-#modTable tbody td{
   width: 60px;
   margin: 0 auto;
   border-bottom: 0.1px solid #242629;

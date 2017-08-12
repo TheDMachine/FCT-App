@@ -113,6 +113,116 @@
       });
     };
 
+    //Alertas de Registro de alumnos
+  vm.studentAlert = function() {
+  // Appending dialog to document.body to cover sidenav in docs app
+  // Modal dialogs should fully cover application
+  // to prevent interaction outside of dialog
+  $mdDialog.show(
+    $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Registo correcto')
+      .textContent('¡Registro de alumno realizado!')
+      .ariaLabel()
+      .ok('¡Gracias!')
+      .targetEvent()
+    );
+  };
+
+  //cambiar estado del usuario
+    vm.state = function(user) {
+      if (user.status == 'activo' ) {
+        user.status = 'inactivo';
+        userService.updateUsers(user);
+        userService.updateTeacher(user)
+        vm.stateInactive(user);
+        init();
+      }else {
+        user.status = 'activo';
+        userService.updateUsers(user);
+        userService.updateTeacher(user)
+        vm.stateActive(user);
+        init();
+      }
+    }
+
+  //mensaje de inactivar
+    vm.stateInactive = function() {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('Control de usuarios')
+          .textContent('El usuario ha sido inactivado')
+          .ariaLabel()
+          .ok('Aceptar')
+          .targetEvent()
+      );
+    }
+
+    //mensaje de activar
+    vm.stateActive = function() {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('Control de usuarios')
+          .textContent('El usuario ha sido activado')
+          .ariaLabel()
+          .ok('Aceptar')
+          .targetEvent()
+      );
+    }
+  //Alertas de Registro de academias
+  vm.academyAlert = function() {
+  // Appending dialog to document.body to cover sidenav in docs app
+  // Modal dialogs should fully cover application
+  // to prevent interaction outside of dialog
+  $mdDialog.show(
+    $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Registo correcto')
+      .textContent('¡Registro de academia realizado')
+      .ariaLabel()
+      .ok('¡Gracias!')
+      .targetEvent()
+    );
+  };
+
+  vm.academyDuplicateAlert = function() {
+  // Appending dialog to document.body to cover sidenav in docs app
+  // Modal dialogs should fully cover application
+  // to prevent interaction outside of dialog
+  $mdDialog.show(
+    $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('La academia ya existe')
+      .textContent('La academia ya existe, registre otra')
+      .ariaLabel()
+      .ok('¡Gracias!')
+      .targetEvent()
+    );
+  };
+
+  vm.studentDuplicateAlert = function() {
+  // Appending dialog to document.body to cover sidenav in docs app
+  // Modal dialogs should fully cover application
+  // to prevent interaction outside of dialog
+  $mdDialog.show(
+    $mdDialog.alert()
+      .parent(angular.element(document.querySelector('#popupContainer')))
+      .clickOutsideToClose(true)
+      .title('Alumno ya existe')
+      .textContent('El alumno ya existe, registre otro')
+      .ariaLabel()
+      .ok('¡Gracias!')
+      .targetEvent()
+    );
+  };
+
     // funcion para salir del modal de consulta de eventos
     vm.cancel = function() {
       $mdDialog.cancel();
@@ -686,94 +796,55 @@
       AuthService.logOut();
     }
 
+    // funcion para presave de alumno
     vm.presaveStudent = function(pNewStudent) {
         console.log(pNewStudent);
-        vm.cloudObj.data.file = document.getElementById("photoStudent").files[0];
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
         Upload.upload(vm.cloudObj)
           .success(function(data){
             pNewStudent.photo = data.url;
+            vm.createStudent(pNewStudent);
           })
           .catch(function(error){
             console.log(error);
           })
-          vm.createStudent(pNewStudent);
       }
 
 
     //funcion para guardar informacion del alumno
     vm.createStudent = function(pNewStudent){
-      var newUser = {
-        id: vm.id,
-        birthday: vm.birthday,
-        firstName: vm.firstName,
-        secondName: vm.secondName,
-        firstLastName: vm.firstLastName,
-        secondLastName: vm.secondLastName,
-        genre: vm.genre,
-        weight: vm.weight,
-        height: vm.height,
-        nationality: vm.nationality,
-        phone: vm.phone,
-        email: vm.email,
-        attendAcademy: vm.attendAcademy,
-        teacher: vm.teacher,
-        belt: vm.belt,
-        category: vm.category,
-        tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins,
-        photo: vm.photo,
-        status : vm.status
-      };
-      console.log(newUser);
-      userService.setUsers(newUser);
-      cleanStudent();
-      init();
+      if (userService.searchUser(pNewStudent.id) !== false) {
+        vm.studentDuplicateAlert();
+      }else {
+        console.log(pNewStudent);
+        userService.setUsers(pNewStudent);
+        vm.studentAlert();
+        clean();
+        init();
+      }
     }
 
-    //funcion para limpiar los input del alumno
-    function cleanStudent() {
-      vm.id = '',
-        vm.birthday = '',
-        vm.firstName = '',
-        vm.secondName = '',
-        vm.firstLastName = '',
-        vm.secondLastName = '',
-        vm.genre = '',
-        vm.weight = '',
-        vm.height = '',
-        vm.nationality = '',
-        vm.phone = '',
-        vm.email = '',
-        vm.attendAcademy = '',
-        vm.teacher = '',
-        vm.belt = '',
-        vm.category = '',
-        vm.tournaments = '',
-        vm.tournamentsWins = '',
-        vm.status = ''
-    }
 
     //funcion para editar alumno
-    vm.getStudent = function (student) {
-      vm.id = student.id,
-        vm.birthday = student.birthday,
-        vm.firstName = student.firstName,
-        vm.secondName = student.secondName,
-        vm.firstLastName = student.firstLastName,
-        vm.secondLastName = student.secondLastName,
-        vm.genre = student.genre,
-        vm.weight = student.weight,
-        vm.height = student.height,
-        vm.nationality = student.nationality,
-        vm.phone = student.phone,
-        vm.email = student.email,
-        vm.attendAcademy = student.attendAcademy,
-        vm.teacher = student.teacher,
-        vm.belt = student.belt,
-        vm.category = student.category,
-        vm.tournaments = student.tournaments,
-        vm.tournamentsWins = student.tournamentsWins,
-        vm.status = student.status
+    vm.getStudent = function(user) {
+      vm.student.id = user.id;
+      vm.student.birthday = user.birthday;
+      vm.student.firstName = user.firstName;
+      vm.student.secondName = user.secondName;
+      vm.student.firstLastName = user.firstLastName;
+      vm.student.secondLastName = user.secondLastName;
+      vm.student.genre = user.genre;
+      vm.student.weight = user.weight;
+      vm.student.height = user.height;
+      vm.student.nationality = user.nationality;
+      vm.student.phone = user.phone;
+      vm.student.email = user.email;
+      vm.student.attendAcademy = user.attendAcademy;
+      vm.student.teacher = user.teacher;
+      vm.student.belt = user.belt;
+      vm.student.category = user.category;
+      vm.student.tournaments = user.tournaments;
+      vm.student.tournamentsWins = user.tournamentsWins;
     }
 
     //funcion para guardar alumno editada
@@ -801,8 +872,9 @@
       }
       userService.updateUsers(editstudent);
       init();
-      cleanStudent();
+      clean();
     }
+
 
     //funcion para guardar competencia
     vm.createCompetition = function () {
