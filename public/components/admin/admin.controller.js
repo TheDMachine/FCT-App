@@ -388,6 +388,7 @@
 
     // Función para imprimir datos en el formulario de patrocinadores
     vm.getSponsorInfo = function(pSponsor) {
+      vm.sponsor.id = pSponsor._id,
       vm.sponsor.sponsorName = pSponsor.sponsorName,
       vm.sponsor.sponsorCompany = pSponsor.sponsorCompany,
       vm.sponsor.sponsorType = pSponsor.sponsorType,
@@ -406,6 +407,7 @@
 
     vm.updateSponsor = function () {
       var modSponsor = {
+      _id : vm.sponsor.id,
       sponsorName : vm.sponsor.sponsorName,
       sponsorCompany : vm.sponsor.sponsorCompany,
       sponsorType : vm.sponsor.sponsorType,
@@ -416,9 +418,15 @@
 
       vm.submitDisable = false;
       vm.updateDisable = true;
-      sponsorService.updateSponsor(modSponsor).
-      then(function(response){
-        
+      sponsorService.updateSponsor(modSponsor)
+      .then(function(response){
+        console.log(response);
+        sponsorService.getSponsors().then(function(response) {
+          vm.sponsors = response.data;
+        });
+      })
+      .catch(function(err){
+        console.log(err);
       })
       init();
       clean();

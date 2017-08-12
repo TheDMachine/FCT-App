@@ -46,7 +46,7 @@
           sponsorsList[i] = pModSponsor;
         }
       }*/
-      return $http.put('http://localhost:3000/api/get_all_sponsors', pModSponsor);
+      return $http.put('http://localhost:3000/api/update_sponsor',pModSponsor);
     }
 
     function _findSponsor(pSponsorName){

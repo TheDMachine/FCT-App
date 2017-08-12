@@ -26,7 +26,8 @@ module.exports.findAll = function(req,res){
 };
 
 module.exports.update = function(req,res){
-  sponsor.update(req.body.name).then(function(sponsor){
-    res.send(sponsor);
+  console.log(req.body.id);
+  sponsor.findByIdAndUpdate(req.body._id, {$set:req.body}).then(function(data){
+    res.json({success:true,msg:'Se ha actualizado correctamente.'});
   });
-};
+}
