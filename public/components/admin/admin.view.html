@@ -14,12 +14,12 @@
 						<p class="menu-button">Perfil</p>
 					</md-button>
 				</md-list-item>
-				<md-list-item  layout="column">
+				<!-- <md-list-item  layout="column">
 					<md-button class="button-selected" ng-click="vm.selected = 2">
 						<i class="material-icons side-icons register-icon" ng-style="vm.selected == 2 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE873;</i>
 						<p class="menu-button">Registros</p>
 					</md-button>
-				</md-list-item>
+				</md-list-item> -->
 				<md-list-item layout="column">
 					<md-button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i><br>
@@ -281,6 +281,116 @@
         <div ng-show="vm.selected == 6">
           <md-content>
            <md-tabs md-dynamic-height md-border-bottom>
+           <md-tab label="Registro de competencias">
+    <md-content class="md-padding">
+     <h1 class="md-display-2">Registro de competencias</h1>
+     <div class="container-fluid row">
+      <div class="col-xs-12">
+       <form name="frmCompetition" novalidate autocomplete="off">
+
+        <!-- input nombre de la competencia -->
+        <div class="col-xs-12 col-sm-6">
+         <md-input-container flex-offset class="md-block">
+          <label for="">Numero de la competencia</label>
+          <input name="competitionName" type="number" ng-model="vm.competitionNumber" required/>
+
+          <!-- Mensaje de retroalimentacion -->
+          <div ng-messages="frmCompetition.competitionName.$error">
+           <div ng-messages-include="components/includes/messages.html"></div>
+         </div>
+       </md-input-container>
+     </div>
+
+     <!-- input del evento que pertenece -->
+     <div class="col-xs-12 col-sm-6">
+       <md-input-container flex-offset class="md-block">
+        <label for="">Evento al que pertenece</label>
+        <md-select name="eventBelongs" ng-model="vm.eventBelongs" required>
+         <md-option ng-repeat="event in vm.events track by $index" ng-value="event.eventName">{{event.eventName}}</md-option>
+       </md-select>
+
+       <!-- Mensaje de retroalimentacion -->
+       <div ng-messages="frmCompetition.eventBelongs.$error">
+         <div ng-messages-include="components/includes/messages.html"></div>
+       </div>
+     </md-input-container>
+   </div>
+
+   <!-- categoria de genero -->
+   <div class="col-xs-12 col-sm-6">
+     <md-input-container flex-offset class="md-block">
+      <label for="">Categoria por género</label>
+      <md-select name="competitionGenre" ng-model="vm.competitionGenre" required>
+       <md-option value="masculino">Masculino</md-option>
+       <md-option value="femenino">Femenino</md-option>
+     </md-select>
+
+     <!-- Mensaje de retroalimentacion -->
+     <div ng-messages="frmCompetition.competitionGenre.$error">
+       <div ng-messages-include="components/includes/messages.html"></div>
+     </div>
+   </md-input-container>
+ </div>
+
+ <!-- categoria de edad* -->
+ <div class="col-xs-12 col-sm-6">
+   <md-input-container flex-offset class="md-block">
+    <label for="">Categoria por edad</label>
+    <md-select name="competitionAge" ng-model="vm.competitionAge" required>
+     <md-option ng-repeat="age in vm.categoriesAge" ng-value="age.categorieName">{{age.categorieName}}</md-option>
+   </md-select>
+
+   <!-- Mensaje de retroalimentacion -->
+   <div ng-messages="frmCompetition.competitionGenre.$error">
+     <div ng-messages-include="components/includes/messages.html"></div>
+   </div>
+ </md-input-container>
+</div>
+
+<!-- categoria de cinta -->
+<div class="col-xs-12 col-sm-6">
+ <md-input-container flex-offset class="md-block">
+  <label for="">Categoria por cinta</label>
+  <md-select name="competitionBelt" ng-model="vm.competitionBelt" required>
+   <md-option ng-repeat="belt in vm.belts" ng-value="belt.belt">{{belt.belt}}</md-option>
+ </md-select>
+
+ <!-- Mensaje de retroalimentacion -->
+ <div ng-messages="frmCompetition.competitionBelt.$error">
+   <div ng-messages-include="components/includes/messages.html"></div>
+ </div>
+</md-input-container>
+</div>
+
+<!-- categoria de peso -->
+<div class="col-xs-12 col-sm-6">
+ <md-input-container flex-offset class="md-block">
+  <label for="">Categoria por peso</label>
+  <md-select name="competitionWeight" ng-model="vm.competitionWeight" required>
+   <md-option ng-repeat="weight in vm.weights" ng-value="weight.weightName">{{weight.aliasName}}</md-option>
+ </md-select>
+
+ <!-- Mensaje de retroalimentacion -->
+ <div ng-messages="frmCompetition.competitionWeight.$error">
+   <div ng-messages-include="components/includes/messages.html"></div>
+ </div>
+</md-input-container>
+</div>
+
+<!-- contenedor de botones -->
+<div class="col-xs-12">
+
+ <!-- boton para guardar -->
+ <md-button ng-click="vm.createCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Agregar competición</md-button>
+
+ <!-- boton para editar -->
+ <md-button ng-click="vm.updateCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Editar competición</md-button>
+</div>
+</form>
+</div>
+</div>
+</md-content>
+</md-tab>
 
             <!-- Tab historial de competencias -->
             <md-tab label="Historial de competencias">
@@ -366,8 +476,12 @@
 </div>
 </md-content>
 </md-tab>
-</md-content>
-<md-card ng-repeat="item in vm.competitions track by $index" flex="20">
+<md-tab label="Competencias">
+            <md-content class="md-padding">
+              <h1 class="md-display-2">Competencias</h1>
+              <h2 id="errorConsul"></h2>
+
+              <md-card ng-repeat="item in vm.competitions track by $index" flex="20">
   <md-card-title>
    <md-card-title-text>
     <span class="md-headline">Competencia {{item.competitionNumber}}</span>
@@ -395,49 +509,12 @@
  <md-button ng-click="vm.showCompetition(item)">Ver competencia</md-button>
 </md-card-actions>
 </md-card>
-</div>
-<!--Vista patrocinadores-->
-<div ng-show="vm.selected == 7" ng-cloak>
- <md-content layout="column">
-  <div layout="row">
-   <md-input-container flex-offset class="md-block" flex="100">
-    <label for="">Filtrar por nombre</label>
-    <input type="text" name="sponsorFilter" ng-model="vm.sponsorFilter"/>
-  </md-input-container>
-</div>
-<div layout="row">
- <md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="20">
-  <img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
-  <md-card-title>
-   <md-card-title-text>
-    <span class="md-headline">ID: {{item.sponsorName}}</span>
-    <span class="md-subhead">{{item.sponsorCompany}}</span>
-  </md-card-title-text>
-</md-card-title>
-<div layout="row">
- <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
-  <i class="material-icons">&#xE227;</i>
-</md-icon>
-<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Equipo'">
-  <i class="material-icons">&#xE903;</i>
-</md-icon>
-<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Comida'">
-  <i class="material-icons">&#xE8CC;</i>
-</md-icon>
-<p class="sponsor-p-type">{{item.sponsorType}}</p>
-</div>
-<md-card-content>
- <p>
-  {{item.description}}
-</p>
-</md-card-content>
-<md-card-actions layout="row" layout-align="end">
- <md-button ng-click="vm.getSponsorInfo(item)">Editar</md-button>
-</md-card-actions>
-</md-card>
-</div>
+            </md-content>
+          </md-tab>
 </md-content>
+
 </div>
+
 
 <!-- Sección de home -->
 <div ng-show="vm.selected == 1">
@@ -563,415 +640,209 @@
 </div>
 </div>
 
-<!-- Sección de Registros -->
-<div ng-show="vm.selected == 2" flex="" ng-cloak>
- <md-content>
+
+<!-- Seccion de academias -->
+<div ng-show="vm.selected == 4">
   <md-tabs md-dynamic-height md-border-bottom>
-   
-   <!-- Tab de patrocinadores -->
-   <md-tab label="Patrocinadores" md-active="vm.imageActive" ui-sref=".sponsorPartOne">
-    <md-content class="md-padding">
-     <h1 class="md-display-2">Patrocinadores</h1>
+    <md-tab label="Registro">
+      <md-content class="md-padding">
+        <h1 class="md-display-2 col-xs-12 text-center">Registro de academias</h1>
+        <div class="container-fluid row">
+          <div class="col-xs-12">
+            <form name="frmAcademy" novalidate autocomplete="off">
 
- 			          <!--<div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
- 			          	<div ui-sref-active="active" ui-sref=".sponsorPartOne">
- 			          		<a>1</a>
- 			          	</div>
- 			          	<div ui-sref-active="active" ui-sref=".sponsorPartTwo">
- 			          		<a>2</a>
- 			          	</div>
- 			          </div>-->
- 			          <form id="spon-form" name="sponsorForm" autocomplete="off" ng-submit="vm.presaveSponsor(vm.sponsor)">
-
- 			          	<!-- Espacio para mostrar vistas del registro -->
- 			          	<!--<div id="form-views" ui-view></div>-->
- 			          	<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
- 			          		<md-input-container class="md-block" flex-gt-sm >
- 			          			<label>Nombre del patrocinador</label>
- 			          			<input md-maxlength="30" required name="name" ng-model="vm.sponsor.sponsorName" ng-disabled="vm.nameSponsorEdit" />
-
- 			          			<div class="hint" ng-if="showHints">Ingrese el nombre del patrocinador</div>
-
- 			          			<div ng-messages="sponsorForm.name.$error">
- 			          				<div ng-message="required">El primer nombre es requerido.</div>
- 			          				<div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
- 			          			</div>
- 			          		</md-input-container>
-
- 			          		<md-input-container class="md-block" flex-gt-sm>
- 			          			<label>Nombre de la compañía</label>
- 			          			<input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorCompany" />
-
- 			          			<div class="hint" ng-if="showHints">Ingrese el nombre de la compañía</div>
-
- 			          			<div ng-messages="sponsorForm.company.$error" ng-if="!showHints">
- 			          				<div ng-message="required">El primer nombre es requerido.</div>
- 			          				<div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
- 			          			</div>
- 			          		</md-input-container>
- 			          	</div>
-							<!--<div flex="90" layout="row" layout-align="end">
-								<a ui-sref="admin.sponsorPartTwo" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
-							</div>-->
-							<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
-								<md-input-container flex="50">
-									<label>Tipo de patrocinio</label>
-									<md-select name="idType" ng-model="vm.sponsor.sponsorType" required>
-										<md-option value="Dinero">Dinero</md-option>
-										<md-option value="Equipo">Equipo</md-option>
-										<md-option value="Comida">Alimento</md-option>
-									</md-select>
-								</md-input-container>
-
-								<md-input-container class="md-block" flex-gt-sm>
-									<label>Equivalente en dinero en colones</label>
-									<input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorMoney" />
-
-									<div class="hint" ng-if="showHints">Ingrese el nombre de la compañía</div>
-
-									<div ng-messages="sponsorForm.company.$error" ng-if="!showHints">
-										<div ng-message="required">El primer nombre es requerido.</div>
-										<div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
-									</div>
-								</md-input-container>
-							</div>
-							<div class="sponsor-form" flex="80" layout-align="center center" layout="row">
-								<md-input-container flex="90">
-									<label>Descripción</label>
-									<textarea ng-model="vm.sponsor.description" required></textarea>
-								</md-input-container>
-							</div>
-							<!-- Subir logo -->
-							<label class="btn btn-default btn-file" for="photo">
-								Adjuntar logo
-							</label>
-							<input id="photo" name="photo" type="file" style="display: none" ng-model="vm.sponsor.photo">
-							<div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
-								<md-button ng-disabled="sponsorForm.$invalid || vm.submitDisable" type="submit" ng-click="vm.reset()">Submit</md-button>
-								<button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || vm.updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
-							</div>
-								<!--<div flex="90" layout="row" layout-align="end">
-									<a ui-sref="admin.sponsorPartTwo" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
-								</div>-->
-							</form>
-						</md-content>
-					</md-tab>
-					<md-tab label="Registro de competencias">
-						<md-content class="md-padding">
-							<h1 class="md-display-2">Registro de competencias</h1>
-							<div class="container-fluid row">
-								<div class="col-xs-12">
-									<form name="frmCompetition" novalidate autocomplete="off">
-
-										<!-- input nombre de la competencia -->
-										<div class="col-xs-12 col-sm-6">
-											<md-input-container flex-offset class="md-block">
-												<label for="">Numero de la competencia</label>
-												<input name="competitionName" type="number" ng-model="vm.competitionNumber" required/>
-
-												<!-- Mensaje de retroalimentacion -->
-												<div ng-messages="frmCompetition.competitionName.$error">
-													<div ng-messages-include="components/includes/messages.html"></div>
-												</div>
-											</md-input-container>
-										</div>
-
-										<!-- input del evento que pertenece -->
-										<div class="col-xs-12 col-sm-6">
-											<md-input-container flex-offset class="md-block">
-												<label for="">Evento al que pertenece</label>
-												<md-select name="eventBelongs" ng-model="vm.eventBelongs" required>
-													<md-option ng-repeat="event in vm.events track by $index" ng-value="event.eventName">{{event.eventName}}</md-option>
-												</md-select>
-
-												<!-- Mensaje de retroalimentacion -->
-												<div ng-messages="frmCompetition.eventBelongs.$error">
-													<div ng-messages-include="components/includes/messages.html"></div>
-												</div>
-											</md-input-container>
-										</div>
-
-										<!-- categoria de genero -->
-										<div class="col-xs-12 col-sm-6">
-											<md-input-container flex-offset class="md-block">
-												<label for="">Categoria por género</label>
-												<md-select name="competitionGenre" ng-model="vm.competitionGenre" required>
-													<md-option value="masculino">Masculino</md-option>
-													<md-option value="femenino">Femenino</md-option>
-												</md-select>
-
-												<!-- Mensaje de retroalimentacion -->
-												<div ng-messages="frmCompetition.competitionGenre.$error">
-													<div ng-messages-include="components/includes/messages.html"></div>
-												</div>
-											</md-input-container>
-										</div>
-
-										<!-- categoria de edad* -->
-										<div class="col-xs-12 col-sm-6">
-											<md-input-container flex-offset class="md-block">
-												<label for="">Categoria por edad</label>
-												<md-select name="competitionAge" ng-model="vm.competitionAge" required>
-													<md-option ng-repeat="age in vm.categoriesAge" ng-value="age.categorieName">{{age.categorieName}}</md-option>
-												</md-select>
-
-												<!-- Mensaje de retroalimentacion -->
-												<div ng-messages="frmCompetition.competitionGenre.$error">
-													<div ng-messages-include="components/includes/messages.html"></div>
-												</div>
-											</md-input-container>
-										</div>
-
-										<!-- categoria de cinta -->
-										<div class="col-xs-12 col-sm-6">
-											<md-input-container flex-offset class="md-block">
-												<label for="">Categoria por cinta</label>
-												<md-select name="competitionBelt" ng-model="vm.competitionBelt" required>
-													<md-option ng-repeat="belt in vm.belts" ng-value="belt.belt">{{belt.belt}}</md-option>
-												</md-select>
-
-												<!-- Mensaje de retroalimentacion -->
-												<div ng-messages="frmCompetition.competitionBelt.$error">
-													<div ng-messages-include="components/includes/messages.html"></div>
-												</div>
-											</md-input-container>
-										</div>
-
-										<!-- categoria de peso -->
-										<div class="col-xs-12 col-sm-6">
-											<md-input-container flex-offset class="md-block">
-												<label for="">Categoria por peso</label>
-												<md-select name="competitionWeight" ng-model="vm.competitionWeight" required>
-													<md-option ng-repeat="weight in vm.weights" ng-value="weight.weightName">{{weight.aliasName}}</md-option>
-												</md-select>
-
-												<!-- Mensaje de retroalimentacion -->
-												<div ng-messages="frmCompetition.competitionWeight.$error">
-													<div ng-messages-include="components/includes/messages.html"></div>
-												</div>
-											</md-input-container>
-										</div>
-
-										<!-- contenedor de botones -->
-										<div class="col-xs-12">
-
-											<!-- boton para guardar -->
-											<md-button ng-click="vm.createCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Agregar competición</md-button>
-
-											<!-- boton para editar -->
-											<md-button ng-click="vm.updateCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Editar competición</md-button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</md-content>
-					</md-tab>
-       </md-tabs>
-     </md-content>
-   </div>
-
-   <!-- Seccion de academias -->
-   <div ng-show="vm.selected == 4">
-    <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab label="Registro">
-        <md-content class="md-padding">
-          <h1 class="md-display-2 col-xs-12 text-center">Registro de academias</h1>
-          <div class="container-fluid row">
-            <div class="col-xs-12">
-              <form name="frmAcademy" novalidate autocomplete="off">
-
-                <!-- input nombre de acdemia -->
-                <div class="col-xs-12 col-sm-6">
-                  <md-input-container flex-offset class="md-block">
-                    <label for="">Nombre de academia</label>
-                    <input name="name" type="text" ng-model="vm.name" required/>
-
-                    <!-- Mensaje de retroalimentacion -->
-                    <div ng-messages="frmAcademy.name.$error">
-                      <div ng-messages-include="components/includes/messages.html"></div>
-                    </div>
-                  </md-input-container>
-                </div>
-
-                <!-- input de direcion -->
-                <div class="col-xs-12 col-sm-6">
-                  <md-input-container flex-offset class="md-block">
-                    <label for="">Dirección</label>
-                    <input type="text" ng-model="vm.address" required/>
-
-                    <!-- Mensaje de retroalimentacion -->
-                    <div ng-messages="frmAcademy.name.$error">
-                      <div ng-messages-include="components/includes/messages.html"></div>
-                    </div>
-                  </md-input-container>
-                </div>
-
-                <!-- input de encargado -->
-                <div class="col-xs-12 col-sm-6">
-                  <md-input-container flex-offset class="md-block">
-                    <label for="">Nombre del encargado</label>
-                    <input type="text" ng-model="vm.manager" required/>
-
-                    <!-- Mensaje de retroalimentacion -->
-                    <div ng-messages="frmAcademy.name.$error">
-                      <div ng-messages-include="components/includes/messages.html"></div>
-                    </div>
-                  </md-input-container>
-                </div>
-
-                <!-- input de cantidad de competidores -->
-                <div class="col-xs-12 col-sm-6">
-                  <md-input-container flex-offset class="md-block">
-                    <label for="">Cantidad de competidores</label>
-                    <input type="number" ng-model="vm.competitors" required/>
-
-                    <!-- Mensaje de retroalimentacion -->
-                    <div ng-messages="frmAcademy.name.$error">
-                      <div ng-messages-include="components/includes/messages.html"></div>
-                    </div>
-                  </md-input-container>
-                </div>
-
-                <!-- input de telefono -->
-                <div class="col-xs-12 col-sm-6">
-                  <md-input-container flex-offset class="md-block">
-                    <label for="">Teléfono</label>
-                    <input type="text" ng-model="vm.phone" ng-pattern="/^[0-9]{8}$/" required/>
-
-                    <!-- Mensaje de retroalimentacion -->
-                    <div ng-messages="frmAcademy.name.$error">
-                      <div ng-message="pattern">######### - Ingrese un número de teléfono válido.</div>
-                    </div>
-                  </md-input-container>
-                </div>
-
-                <!-- input de email -->
-                <div class="col-xs-12 col-sm-6">
-                  <md-input-container flex-offset class="md-block">
-                    <label for="">Email</label>
-                    <input type="text" ng-model="vm.email" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/" required/>
-
-                    <!-- Mensaje de retroalimentacion -->
-                    <div ng-messages="frmAcademy.name.$error">
-                      <div ng-messages-include="components/includes/messages.html"></div>
-                    </div>
-                  </md-input-container>
-                </div>
-
-                <!-- boton para guardar -->
-                <md-button ng-click="vm.createAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Registrar</md-button>
-
-                <!-- boton para editar -->
-                <md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Actializar</md-button>
-              </form>
-            </div>
-          </div>
-
-        </md-content>
-      </md-tab>
-      <md-tab label="Lista">
-        <md-content id="tableAcaademy">
-          <div class="container-fluid">
-            <div class="row">
-              <!-- filtro por nombre -->
-              <div class="col-xs-12 col-sm-4 pull-right">
+              <!-- input nombre de acdemia -->
+              <div class="col-xs-12 col-sm-6">
                 <md-input-container flex-offset class="md-block">
-                  <label for="">Filtrar por nombre</label>
-                  <input type="text" name="academyFilter" ng-model="vm.academyFilter"/>
+                  <label for="">Nombre de academia</label>
+                  <input name="name" type="text" ng-model="vm.name" required/>
+
+                  <!-- Mensaje de retroalimentacion -->
+                  <div ng-messages="frmAcademy.name.$error">
+                    <div ng-messages-include="components/includes/messages.html"></div>
+                  </div>
                 </md-input-container>
               </div>
-            </div>
 
-            <!-- tabla de academias-->
-            <div class="row">
-              <table class="table col-xs-12">
-                <thead>
-                  <tr>
-                    <th>Nombre de la academia</th>
-                    <th>Encargado</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="academy in vm.academy | filter:{name:vm.academyFilter}">
-                    <td>{{academy.name}}</td>
-                    <td>{{academy.manager}}</td>
-                    <td><md-button ng-click="vm.getAcademy(academy)" class="md-raised">Editar</md-button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+              <!-- input de direcion -->
+              <div class="col-xs-12 col-sm-6">
+                <md-input-container flex-offset class="md-block">
+                  <label for="">Dirección</label>
+                  <input type="text" ng-model="vm.address" required/>
+
+                  <!-- Mensaje de retroalimentacion -->
+                  <div ng-messages="frmAcademy.name.$error">
+                    <div ng-messages-include="components/includes/messages.html"></div>
+                  </div>
+                </md-input-container>
+              </div>
+
+              <!-- input de encargado -->
+              <div class="col-xs-12 col-sm-6">
+                <md-input-container flex-offset class="md-block">
+                  <label for="">Nombre del encargado</label>
+                  <input type="text" ng-model="vm.manager" required/>
+
+                  <!-- Mensaje de retroalimentacion -->
+                  <div ng-messages="frmAcademy.name.$error">
+                    <div ng-messages-include="components/includes/messages.html"></div>
+                  </div>
+                </md-input-container>
+              </div>
+
+              <!-- input de cantidad de competidores -->
+              <div class="col-xs-12 col-sm-6">
+                <md-input-container flex-offset class="md-block">
+                  <label for="">Cantidad de competidores</label>
+                  <input type="number" ng-model="vm.competitors" required/>
+
+                  <!-- Mensaje de retroalimentacion -->
+                  <div ng-messages="frmAcademy.name.$error">
+                    <div ng-messages-include="components/includes/messages.html"></div>
+                  </div>
+                </md-input-container>
+              </div>
+
+              <!-- input de telefono -->
+              <div class="col-xs-12 col-sm-6">
+                <md-input-container flex-offset class="md-block">
+                  <label for="">Teléfono</label>
+                  <input type="text" ng-model="vm.phone" ng-pattern="/^[0-9]{8}$/" required/>
+
+                  <!-- Mensaje de retroalimentacion -->
+                  <div ng-messages="frmAcademy.name.$error">
+                    <div ng-message="pattern">######### - Ingrese un número de teléfono válido.</div>
+                  </div>
+                </md-input-container>
+              </div>
+
+              <!-- input de email -->
+              <div class="col-xs-12 col-sm-6">
+                <md-input-container flex-offset class="md-block">
+                  <label for="">Email</label>
+                  <input type="text" ng-model="vm.email" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/" required/>
+
+                  <!-- Mensaje de retroalimentacion -->
+                  <div ng-messages="frmAcademy.name.$error">
+                    <div ng-messages-include="components/includes/messages.html"></div>
+                  </div>
+                </md-input-container>
+              </div>
+
+              <!-- boton para guardar -->
+              <md-button ng-click="vm.createAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Registrar</md-button>
+
+              <!-- boton para editar -->
+              <md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Actializar</md-button>
+            </form>
           </div>
-        </md-content>
-      </md-tab>
-      <md-tab label="mostrar">
-        <md-content layout="column">
-          <div layout="row">
-            <md-card ng-repeat="academy in vm.academy" flex="25" class="sizeCard">
-              <md-card-title>
-                <md-card-title-text>
-                  <span class="md-headline">{{academy.name}}</span>
-                  <span class="md-subhead">Encargado: {{academy.manager}}</span>
-                </md-card-title-text>
-              </md-card-title>
-              <md-card-content>
-                <p class="academyCard">Dirección: <span class="academyCardtxt">{{academy.address}}</span></p>
-                <p class="academyCard">Teléfono: <span class="academyCardtxt">{{academy.phone}}</span></p>
-                <p class="academyCard">Email: <span class="academyCardtxt">{{academy.email}}</span></p>
-                <p class="academyCard">Cant/ competidores: <span class="academyCardtxt">{{academy.competitors}}</span></p>
-              </md-card-content>
-              <md-card-actions layout="row" layout-align="end">
-              </md-card-actions>
-            </md-card>
-          </div>
-        </md-content>
-      </md-tab>
-    </div>
+        </div>
 
-    <!-- Sección de eventos -->
-    <div ng-show="vm.selected == 5">
-      <md-content>
-       <md-tabs md-dynamic-height md-border-bottom>
-
-        <!-- Tab de Eventos -->
-        <md-tab id="events" label="Registrar evento" ui-sref=".part1">
-         <md-content class="md-padding">
+      </md-content>
+    </md-tab>
+    <md-tab label="Lista">
+      <md-content id="tableAcaademy">
+        <div class="container-fluid">
           <div class="row">
-           <div id="registerEvents" class="col-md-offset-1 col-md-10">
-            <h3>REGISTRAR EVENTO</h3>
+            <!-- filtro por nombre -->
+            <div class="col-xs-12 col-sm-4 pull-right">
+              <md-input-container flex-offset class="md-block">
+                <label for="">Filtrar por nombre</label>
+                <input type="text" name="academyFilter" ng-model="vm.academyFilter"/>
+              </md-input-container>
+            </div>
+          </div>
+
+          <!-- tabla de academias-->
+          <div class="row">
+            <table class="table col-xs-12">
+              <thead>
+                <tr>
+                  <th>Nombre de la academia</th>
+                  <th>Encargado</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="academy in vm.academy | filter:{name:vm.academyFilter}">
+                  <td>{{academy.name}}</td>
+                  <td>{{academy.manager}}</td>
+                  <td><md-button ng-click="vm.getAcademy(academy)" class="md-raised">Editar</md-button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
+      </md-content>
+    </md-tab>
+    <md-tab label="mostrar">
+      <md-content layout="column">
+        <div layout="row">
+          <md-card ng-repeat="academy in vm.academy" flex="25" class="sizeCard">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{academy.name}}</span>
+                <span class="md-subhead">Encargado: {{academy.manager}}</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p class="academyCard">Dirección: <span class="academyCardtxt">{{academy.address}}</span></p>
+              <p class="academyCard">Teléfono: <span class="academyCardtxt">{{academy.phone}}</span></p>
+              <p class="academyCard">Email: <span class="academyCardtxt">{{academy.email}}</span></p>
+              <p class="academyCard">Cant/ competidores: <span class="academyCardtxt">{{academy.competitors}}</span></p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end">
+            </md-card-actions>
+          </md-card>
+        </div>
+      </md-content>
+    </md-tab>
+  </div>
 
-        <!-- links de cada paso del formulario de registro de eventos -->
-        <div id="buttonForm" class="text-center" layout="row" layout-align="center center">
-         <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part1">
-          <a>1</a>
-        </div>
-        <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part2">
-          <a>2</a>
-        </div>
-        <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part3">
-          <a >3</a>
-        </div>
-        <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part4">
-          <a >4</a>
-        </div>
-        <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part5">
-          <a >5</a>
+  <!-- Sección de eventos -->
+  <div ng-show="vm.selected == 5">
+    <md-content>
+     <md-tabs md-dynamic-height md-border-bottom>
+
+      <!-- Tab de Eventos -->
+      <md-tab id="events" label="Registrar evento" ui-sref=".part1">
+       <md-content class="md-padding">
+        <div class="row">
+         <div id="registerEvents" class="col-md-offset-1 col-md-10">
+          <h3>REGISTRAR EVENTO</h3>
         </div>
       </div>
 
-      <div class="row">
-       <div class="col-md-offset-1 col-md-10">
-        <!-- Formulario para registro de eventos -->
-        <form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
+      <!-- links de cada paso del formulario de registro de eventos -->
+      <div id="buttonForm" class="text-center" layout="row" layout-align="center center">
+       <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part1">
+        <a>1</a>
+      </div>
+      <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part2">
+        <a>2</a>
+      </div>
+      <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part3">
+        <a >3</a>
+      </div>
+      <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part4">
+        <a >4</a>
+      </div>
+      <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part5">
+        <a >5</a>
+      </div>
+    </div>
 
-         <!-- Espacio para mostrar vistas del registro -->
-         <div id="form-views" ui-view></div>
-       </form>
-     </div>
+    <div class="row">
+     <div class="col-md-offset-1 col-md-10">
+      <!-- Formulario para registro de eventos -->
+      <form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
+
+       <!-- Espacio para mostrar vistas del registro -->
+       <div id="form-views" ui-view></div>
+     </form>
    </div>
- </md-content>
+ </div>
+</md-content>
 </md-tab>
 
 <!-- Tab consultar de eventos -->
@@ -1209,7 +1080,7 @@
 
           <div class="row">
             <div class="col-md-offset-1 col-md-10">
-              
+
               <!-- Formulario para registro de alumnos -->
               <form name="frmStudent" novalidate ng-submit="vm.presaveStudent(vm.student)" autocomplete="off">
 
@@ -1500,3 +1371,140 @@
          </md-tab>
        </md-tabs>
      </div>
+
+     <!-- Patrocinadores  -->
+     <div ng-show="vm.selected == 7">
+      <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <!-- Tab de patrocinadores -->
+          <md-tab label="Patrocinadores" md-active="vm.imageActive" ui-sref=".sponsorPartOne">
+            <md-content class="md-padding">
+             <h1 class="md-display-2">Patrocinadores</h1>
+
+                <!--<div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
+                  <div ui-sref-active="active" ui-sref=".sponsorPartOne">
+                    <a>1</a>
+                  </div>
+                  <div ui-sref-active="active" ui-sref=".sponsorPartTwo">
+                    <a>2</a>
+                  </div>
+                </div>-->
+                <form id="spon-form" name="sponsorForm" autocomplete="off" ng-submit="vm.presaveSponsor(vm.sponsor)">
+
+                  <!-- Espacio para mostrar vistas del registro -->
+                  <!--<div id="form-views" ui-view></div>-->
+                  <div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+                    <md-input-container class="md-block" flex-gt-sm >
+                      <label>Nombre del patrocinador</label>
+                      <input md-maxlength="30" required name="name" ng-model="vm.sponsor.sponsorName" ng-disabled="vm.nameSponsorEdit" />
+
+                      <div class="hint" ng-if="showHints">Ingrese el nombre del patrocinador</div>
+
+                      <div ng-messages="sponsorForm.name.$error">
+                        <div ng-message="required">El primer nombre es requerido.</div>
+                        <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Nombre de la compañía</label>
+                      <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorCompany" />
+
+                      <div class="hint" ng-if="showHints">Ingrese el nombre de la compañía</div>
+
+                      <div ng-messages="sponsorForm.company.$error" ng-if="!showHints">
+                        <div ng-message="required">El primer nombre es requerido.</div>
+                        <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
+                      </div>
+                    </md-input-container>
+                  </div>
+              <!--<div flex="90" layout="row" layout-align="end">
+                <a ui-sref="admin.sponsorPartTwo" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+              </div>-->
+              <div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+                <md-input-container flex="50">
+                  <label>Tipo de patrocinio</label>
+                  <md-select name="idType" ng-model="vm.sponsor.sponsorType" required>
+                    <md-option value="Dinero">Dinero</md-option>
+                    <md-option value="Equipo">Equipo</md-option>
+                    <md-option value="Comida">Alimento</md-option>
+                  </md-select>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                  <label>Equivalente en dinero en colones</label>
+                  <input md-maxlength="30" required name="company" ng-model="vm.sponsor.sponsorMoney" />
+
+                  <div class="hint" ng-if="showHints">Ingrese el nombre de la compañía</div>
+
+                  <div ng-messages="sponsorForm.company.$error" ng-if="!showHints">
+                    <div ng-message="required">El primer nombre es requerido.</div>
+                    <div ng-message="md-maxlength">El primer nombre tiene que ser menor a 30 caracteres.</div>
+                  </div>
+                </md-input-container>
+              </div>
+              <div class="sponsor-form" flex="80" layout-align="center center" layout="row">
+                <md-input-container flex="90">
+                  <label>Descripción</label>
+                  <textarea ng-model="vm.sponsor.description" required></textarea>
+                </md-input-container>
+              </div>
+              <!-- Subir logo -->
+              <label class="btn btn-default btn-file" for="photo">
+                Adjuntar logo
+              </label>
+              <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.sponsor.photo">
+              <div layout-gt-sm="row" layout="row" flex="90" layout-align="end">
+                <md-button ng-disabled="sponsorForm.$invalid || vm.submitDisable" type="submit" ng-click="vm.reset()">Submit</md-button>
+                <button type="submit" class="btn btn-danger" ng-disabled="frmEventInfo.$invalid || vm.updateDisable" ng-click="vm.updateSponsor()">Actualizar</button>
+              </div>
+                <!--<div flex="90" layout="row" layout-align="end">
+                  <a ui-sref="admin.sponsorPartTwo" class="btn btn-info">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                </div>-->
+              </form>
+            </md-content>
+          </md-tab>
+          <md-tab label="Listar">
+            <md-content class="md-padding">
+              <div layout="row">
+               <md-input-container flex-offset class="md-block" flex="100">
+                <label for="">Filtrar por nombre</label>
+                <input type="text" name="sponsorFilter" ng-model="vm.sponsorFilter"/>
+              </md-input-container>
+            </div>
+            <div layout="row">
+             <md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="20">
+              <img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
+              <md-card-title>
+               <md-card-title-text>
+                <span class="md-headline">ID: {{item.sponsorName}}</span>
+                <span class="md-subhead">{{item.sponsorCompany}}</span>
+              </md-card-title-text>
+            </md-card-title>
+            <div layout="row">
+             <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
+              <i class="material-icons">&#xE227;</i>
+            </md-icon>
+            <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Equipo'">
+              <i class="material-icons">&#xE903;</i>
+            </md-icon>
+            <md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Comida'">
+              <i class="material-icons">&#xE8CC;</i>
+            </md-icon>
+            <p class="sponsor-p-type">{{item.sponsorType}}</p>
+          </div>
+          <md-card-content>
+           <p>
+            {{item.description}}
+          </p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end">
+         <md-button ng-click="vm.getSponsorInfo(item)">Editar</md-button>
+       </md-card-actions>
+     </md-card>
+   </div>
+ </md-content>
+</md-tab>
+</md-content>
+</div>
+
