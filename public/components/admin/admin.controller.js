@@ -4,9 +4,9 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
 
-  adminCtrl.$inject = ['$scope', '$mdDialog', '$http', '$state', '$cookies','$location', 'eventService', 'imageService', 'Upload', 'academyServices', 'logService', 'userService', 'sponsorService', 'AuthService', 'estabInfoService', 'ticketService'];
+  adminCtrl.$inject = ['$scope', '$mdDialog', '$http', '$state', '$cookies','$location', 'eventService', 'imageService', 'Upload', 'academyServices', 'logService', 'userService', 'sponsorService', 'AuthService', 'estabInfoService', 'ticketService', 'settingsService'];
 
-  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService,ticketService) {
+  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService,ticketService, settingsService) {
 
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -38,7 +38,13 @@
 
     function init(){
     // función que se llama así misma para indicar que sea lo primero que se ejecute
-        // vm.selected = 1;
+        // Inicio Daniel
+        vm.stt = settingsService.getSettings();
+        vm.editMem = {};
+        vm.modDisplay = false;
+        vm.isEdit = false;
+        vm.isNew = false;
+        // Fin Daniel
         vm.currentUser = userService.searchAdmin(userService.getCookie());
         console.log(vm.currentUser);
         vm.originatorEv;
@@ -227,6 +233,45 @@
     vm.cancel = function() {
       $mdDialog.cancel();
     };
+
+    vm.showAlertEditParams= function(pMessage, pFeedback) {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title(pFeedback)
+          .textContent(pMessage)
+          .ariaLabel()
+          .ok('Gracias!')
+          .targetEvent()
+      );
+    };
+    vm.editParam= function(pParamToEdit) {
+      vm.showPrompt(pParamToEdit);
+    }
+
+    vm.showPrompt = function(pParamToEdit) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('!Actualización de parametro del sistema!')
+      .textContent('Actualizando de ' +pParamToEdit)
+      .placeholder('Escribe la nueva dirreción')
+      .ariaLabel(pParamToEdit)
+      .ok('Actualizar')
+      .cancel('Cancelar');
+
+    $mdDialog.show(confirm).then(function(result) {
+      //settingsService.e
+      console.log(result);
+      settingsService.editParamToSystem(pParamToEdit, result);
+      init();
+    }, function() {
+      vm.status = 'You didn\'t name your dog.';
+    });
+  }
 
     // función para imprimir el evento a consultar
     function checkConsultEvent(pEvent) {
@@ -999,6 +1044,46 @@
         }
       }
     }
+
+    // Inicia Daniel
+
+vm.editMember = function(pMemberToEdit) {
+  console.log(pMemberToEdit);
+  console.log(vm);
+  vm.editMem.name = pMemberToEdit.name;
+  vm.editMem.position = pMemberToEdit.position;
+  vm.editMem.email = pMemberToEdit.email;
+  vm.editMem.phone = pMemberToEdit.phone;
+  vm.isEdit = true;
+  vm.modDisplay = true;
+}
+//Limpia el formulario de actualización y /o creación de miembro
+function clearForm(pObjectToFrm) {
+  for (var index in pObjectToFrm) {
+    pObjectToFrm[index] = '';
+  }
+}
+//Abre el formulario
+vm.addNewDirect = function() {
+  vm.modDisplay = true;
+  vm.isNew = true;
+}
+//crea el miembro nuevo de la junta directiva
+vm.createMember = function(pNewMember) {
+  settingsService.updateDirect(pNewMember);
+  vm.showAlertEditParams('El miembro llamado '+ pNewMember.name+' ha sido creado exitosamente.','¡Nuevo miembro de la junta directiva!');
+  init();
+  vm.modDisplay = false;
+  clearForm(vm.editMem);
+}
+vm.updateMember = function(pMemberToUpdate) {
+  settingsService.updateDirect(pMemberToUpdate);
+  vm.showAlertEditParams('El miembro llamado '+ pMemberToUpdate.name+' ha sido actualizado exitosamente.','¡Actualización de miembro en la junta directiva!');
+  init();
+  vm.modDisplay= false;
+  clearForm(vm.editMem);
+}
+// Termina dANIEL
 
   }
 
