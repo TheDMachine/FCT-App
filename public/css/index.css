@@ -229,7 +229,44 @@ body,html{
 
 /*Inicio de estilos de eventos de no registrado*/
 
-#eventsTable h3{
+#eventsSpace{
+  margin-bottom: 150px;
+}
+#eventsSelect{
+  margin-bottom: 60px;
+}
+#infoCard{
+  border-radius: 7px;
+}
+#infoCard .headerCard{
+  background: #cd3d3e;
+  margin-top: 20px;
+}
+#infoCard .headerCard h3{
+  color: #fff;
+  display: inline-block;
+  font-weight: 400;
+}
+#infoCard .headerCard img{
+  border-radius: 50%;
+  border-radius: 1px solid #fff;
+  display: inline-block;
+}
+.strongLetter{
+  font-weight: bold;
+}
+#headerSpace{
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+#infoCard p{
+  text-align: center;
+  line-height: 2;
+}
+#mapSpace{
+  margin-top: 70px;
+}
+/*#eventsTable h3{
   font-family: 'Montserrat';
   font-size: 1.571em;
   margin-bottom: 60px;
@@ -271,7 +308,7 @@ body,html{
 
 #tableSpace{
   margin-bottom: 400px;
-}
+}*/
 
 
 /*Fin estilos de eventos no registrado*/

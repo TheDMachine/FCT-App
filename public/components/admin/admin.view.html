@@ -566,9 +566,10 @@
       </tr>
     </thead>
     <tbody>
-     <tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from3:vm.to3" >
+    <!-- | dateRange:vm.from3:vm.to3 -->
+     <tr ng-repeat="event in vm.acceptedEvents track by $index" >
       <td>{{event.eventName}}</td>
-      <td>{{event.date1 | date : "shortDate"}}</td>
+      <td>{{event.date.date1 | date : "shortDate"}}</td>
 
       <!-- Botones para editar y cancelar eventos -->
       <td><md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button></td>
@@ -643,7 +644,7 @@
 <tbody>
  <!-- | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter} -->
  <tr ng-repeat="event in vm.events track by $index">
-  <td>{{event.date1 | date : "shortDate"}}</td>
+  <td>{{event.date.date1 | date : "shortDate"}}</td>
   <td><md-button class="md-raised" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button></td>
   <td>{{event.eventState}}</td>
 </tr>
@@ -657,14 +658,13 @@
 
     <!-- encabezado de la información del evento -->
     <div id="eventName" class="col-xs-12 md-whiteframe-3dp">
-     <img ng-src="{{vm.consultEvent.photo}}" alt="Description" width="60px" height="60px" />
+     <img class="md-whiteframe-3dp" ng-src="{{vm.consultEvent.photo}}" alt="Description" width="60px" height="60px" />
      <h3>{{vm.consultEvent.eventName}} ({{vm.consultEvent.eventType}})</h3>
    </div>
 
    <!-- cuerpo de la información -->
    <div id="eventInfo" class="col-xs-12">
      <p><span>Lugar: </span> {{vm.consultEvent.placeName}} <span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
-     <p><span>Dirección:</span> {{vm.consultEvent.location}}</p>
      <p><span>Inicio:</span> {{vm.consultEvent.date1 | date : "shortDate"}} {{vm.consultEvent.time1 | date : "shortTime"}}</p>
      <p><span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} {{vm.consultEvent.time2 | date : "shortTime"}}</p>
      <p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
@@ -677,7 +677,7 @@
      <p><span>Beneficia a:</span> {{vm.consultEvent.orgName}}</p>
      <p><span>Descripción de la org.:</span> {{vm.consultEvent.description}}</p>
      <p><span>Patrocinadores:</span> {{vm.consultEvent.selectSponsors}}</p>
-     <p><span>Latitud:</span> {{vm.consultEvent.latitude}}  <span>Longitud:</span> {{vm.consultEvent.length}}</p>
+     <p><span>Latitud y longitud:</span> {{vm.consultEvent.coords}}</p>
    </div>
 
    <!-- botón para salir del modal -->
