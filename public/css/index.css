@@ -1389,20 +1389,18 @@ md-card md-card-title.no-padding{
         height: 100%;
 }
 .genericButtonsSteps div{
-  width: 35px;
-  height: 35px;
+  margin-left:30px;
+  width: 45px;
+  height: 45px;
   border-radius: 100%;
-  margin-left:20px;
-  color:#ffff;
+  line-height: 3.1;
 }
 .genericButtonsSteps div:first-child{
   margin-left: 0;
 }
 .genericButtonsSteps div.active{
-  /*background-color: #00A652;*/
   background-color: #00A652;
 }
-.genericButtonsSteps a{
-  line-height: 2.7;
-  text-decoration: none;
+.genericButtonsSteps div.active a{
+  color:white;
 }
