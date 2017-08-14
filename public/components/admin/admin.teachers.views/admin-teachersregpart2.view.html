@@ -58,22 +58,25 @@
       </div>
     </md-input-container>
   </div>
+</div>
 
-
-  <div class="col-md-3">
+<div class="row">
+  <div class="col-md-12">
     <!-- botón para adjuntar archivo -->
     <div>
-      <label class="btn btn-default btn-file" for="photo">
+      <label class="btn btn-default btn-file" for="photo" id="buttonPhoto">
         Adjuntar foto
       </label>
       <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.teacher.photo">
     </div>
   </div>
-  <div class="col-md-2">
+</div>
+<div class="row">
+  <div class="col-md-offset-8 col-md-4">
     <!-- botón para guardar datos actualizados -->
-    <md-button type="submit" ng-disabled="frmRegTeacher.$invalid" ng-click="vm.updateTeacher()">Actualizar</md-button>
-  </div>
-  <div class="col-md-2">
+    <md-button class="md-raised" type="submit" ng-disabled="frmRegTeacher.$invalid" ng-click="vm.updateTeacher()">Actualizar</md-button>
+
+
     <!-- botón para registrar -->
     <md-button type="submit" ng-disabled="frmRegTeacher.$invalid" class="md-raised" ng-click="vm.reset()">Registrar</md-button>
   </div>
@@ -81,6 +84,6 @@
 <div class="row">
   <div class="col-md-3">
     <!-- Botón Anterior -->
-    <a ui-sref="admin.teachpart1" class="btn btn-info">Anterior <span class="glyphicon  glyphicon-circle-arrow-left"></span></a>
+    <a ui-sref="admin.teachpart1" class="btn btn-primary">Anterior <span class="glyphicon  glyphicon-circle-arrow-left"></span></a>
   </div>
 </div>

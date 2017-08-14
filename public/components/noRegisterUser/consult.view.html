@@ -15,7 +15,7 @@
 					<!-- Campo cédula del cliente -->
 					<md-input-container flex-offset>
 						<label>Ingrese el número de cédula con la que se hizo la reserva:</label>
-						<input name="id" ng-model="vm.rsv.id" placeholder="101230456">
+						<input name="id" ng-model="vm.rsv.id" placeholder="101230456" ng-pattern="/^[0-9]{9}$/" maxlength="9" md-maxlength="9"  required>
 					</md-input-container>
 
 					<!-- Mensaje de retroalimentacion -->
