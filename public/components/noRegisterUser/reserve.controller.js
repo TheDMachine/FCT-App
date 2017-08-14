@@ -25,7 +25,7 @@
       for (var i = 0; i < vm.events.length; i++) {
         if (vm.events[i].eventName === pEvent) {
           vm.eventTicketPrice = {
-            ticketPrice: vm.events[i].ticketPrice
+            ticketPrice: vm.events[i].place.ticketPrice
           }
         }
       }
@@ -123,7 +123,7 @@
 
       for (var i = 0; i < vm.events.length; i++) {
         if (pNewRsv.event === vm.events[i].eventName) {
-          vm.availableTkts = vm.events[i].tickets - vm.reservedTkts;
+          vm.availableTkts = vm.events[i].place.tickets - vm.reservedTkts;
         }
       }
       return vm.availableTkts;

@@ -12,6 +12,7 @@
       vm.acceptedEvents=[];
       console.log(vm.acceptedEvents);
       vm.infowindow;
+      vm.consultEvent = {};
       
       function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
         vm.events = eventService.getEvents();
@@ -26,13 +27,22 @@
         console.log(vm.place);
         vm.map.setCenter(vm.place.geometry.location);
         vm.map.setZoom(18);
+        console.log(vm.place.name);
+        console.log(vm.place.geometry);
       }
       NgMap.getMap().then(function(map) {
         vm.map = map;
         console.log(vm.map);
       });
 
-      
+      vm.checkInfoEvent = function(pEvent){
+        for (var i = 0; i < vm.events.length; i++) {
+          if (vm.events[i].eventName === pEvent) {
+            vm.consultEvent = vm.events[i];
+          }
+        }
+        // vm.event.place = vm.consultEvent.place.eventName;
+      };
 
        // Función para devolverse al landing
        vm.return = function(event){
@@ -50,53 +60,11 @@
         }
       }
 
-      // Función para mostrar la consulta de eventos
-      vm.showEventConsult = function(pEvent, ev) {
-        checkConsultEvent(pEvent);
-        $mdDialog.show({
-          contentElement: '#myDialog',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose: true,
-        });
-      };
-
       // funcion para salir del modal de consulta de eventos
       vm.cancel = function() {
         $mdDialog.cancel();
       };
 
-      // función para imprimir el evento a consultar
-      function checkConsultEvent(pEvent) {
-       vm.consultEvent = {
-        eventName: pEvent.eventName,
-        invitedName: pEvent.invitedName,
-        eventType: pEvent.eventType,
-        eventState: pEvent.eventState,
-        photo: pEvent.photo,
-        date1: pEvent.date1,
-        time1: pEvent.time1,
-        date2: pEvent.date2,
-        time2: pEvent.time2,
-        selectAcademies: pEvent.selectAcademies.toString(),
-        selectCategories: pEvent.selectCategories.toString(),
-        costInsc: pEvent.costInsc,
-        selectSponsors: pEvent.selectSponsors.toString(),
-        placeName: pEvent.placeName,
-        location: pEvent.location,
-        latitude: pEvent.latitude,
-        length: pEvent.length,
-        seats: pEvent.seats,
-        tickets: pEvent.tickets,
-        ticketPrice: pEvent.ticketPrice,
-        contactName: pEvent.contactName,
-        contactPhone: pEvent.contactPhone,
-        charityEvent: pEvent.charityEvent,
-        orgName: pEvent.orgName,
-        orgType: pEvent.orgType,
-        description: pEvent.description
-      }
-    }
   }
 
      //se establece un objeto de angular normal

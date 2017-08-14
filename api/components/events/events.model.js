@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var states = ['aprobado','cancelado','banned'];
+var states = ['aprobado','cancelado', 'activo', 'cancelado','banned'];
 
 var EventSchema = new mongoose.Schema({
 	eventName :      	{type: String, required: true},
@@ -35,9 +35,7 @@ var EventSchema = new mongoose.Schema({
 	place: 				[
 						{
 							placeName:    {type: String, required: true},
-							latitude:     {type: String, required: true},
-							length:       {type: String, required: true},
-							location:     {type: String, required: true},
+							coords:     {type: String, required: true},
 							seats:        {type: String, required: true},
 							tickets:      {type: String, required: true},
 							ticketPrice:  {type: String, required: true},
@@ -45,7 +43,6 @@ var EventSchema = new mongoose.Schema({
 							contactPhone: {type: String, required: true},
 						}
 						]
-	}
 });
 
 module.exports = mongoose.model('events', EventSchema);
