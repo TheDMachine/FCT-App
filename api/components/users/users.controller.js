@@ -54,14 +54,8 @@ module.exports.updateTeacher = function(req,res){
   //   res.json({success:true,msg:'Se ha actualizado correctamente.' + res});
   // });
 
-  User.findByIdAndUpdate(req.body._id, { $set: req.body}, function (err, user) {
-    if (err){
-      res.json({success:true,msg:'No se ha actualizado.' + err});
-
-    } else{
-      res.json({success:true,msg:'Se ha actualizado correctamente.' + res});
-    }
-
+  User.findByIdAndUpdate(req.body._id, { $set: req.body}).then(function(data){
+    res.json({success:true,msg:'Se ha actualizado correctamente.'});
   });
 
 
