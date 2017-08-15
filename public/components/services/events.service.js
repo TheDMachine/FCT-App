@@ -4,7 +4,7 @@
   .module('app')
   .service('eventService', eventService);
 
-  function eventService(logService){
+  function eventService(logService, $http){
     var events = [];
     var competitions = [];
     var reservations = [];
@@ -13,6 +13,7 @@
       setEvents : _setEvents,
       getEvents : _getEvents,
       updateEvent : _updateEvent,
+      findEvent: _findEvent,
       setCompetitions : _setCompetitions,
       getCompetitions : _getCompetitions,
       updateCompetition : _updateCompetition,
@@ -105,6 +106,7 @@
       eventsList.push(pEvent);
       localStorage.setItem('lsEventsList', JSON.stringify(eventsList));
       console.log(eventsList);
+      // return $http.post('http://localhost:3000/api/save_events',pEvent);
     }
 
     // Función para extraer información de eventos
@@ -114,6 +116,7 @@
         eventsList = events;
       }
       return eventsList;
+      // return $http.get('http://localhost:3000/api/get_all_events');
     }
 
     // Función para guardar modificación de información de eventos
@@ -126,7 +129,21 @@
       }
       console.log(eventsList);
       localStorage.setItem('lsEventsList', JSON.stringify(eventsList));
+      // return $http.put('http://localhost:3000/api/update_events',pModEvent);
     }
+
+    // Función para encontrar el evento
+    function _findEvent(pEventName){
+      var eventsList = _getEvents();
+     for (var i = 0; i < eventsList.length; i++) {
+       if(eventsList[i].eventName == pEventName){
+         return eventsList[i];
+       }
+     }
+     return false;
+   }
+
+
 
     //funcion para guardar competencias
     function _setCompetitions(newCompetition){

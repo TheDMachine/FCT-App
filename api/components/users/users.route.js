@@ -24,5 +24,24 @@ router.route('/users')
   .put(function(req, res){
     userController.update(req,res);
  	});
+  router.route('/save_teacher')
+    .post(function(req, res){
+      userController.saveTeacher(req,res);
+   	});
+
+    router.route('/get_all_teachers')
+      .get(function(req,res){
+        userController.findAllTeachers(req,res);
+      });
+
+      router.route('/update_teacher')
+        .put(function(req, res){
+          userController.updateTeacher(req,res);
+       	});
+
+  router.route('/update_belt')
+    .put(function(req, res){
+      userController.updateBelt(req,res);
+   	});
 
 module.exports = router;

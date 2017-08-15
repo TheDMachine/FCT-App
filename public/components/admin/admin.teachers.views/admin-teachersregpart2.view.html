@@ -4,7 +4,7 @@
     <!-- Select para seleccionar academia -->
     <md-input-container flex-offset>
       <label>Seleccione el género</label>
-      <md-select id="sltGender" ng-model="vm.teacher.gender">
+      <md-select id="sltGender" ng-model="vm.teacher.genre">
         <md-option value="masculino">Masculino</md-option>
         <md-option value="femenino">Femenino</md-option>
       </md-select>
@@ -38,7 +38,7 @@
     <!-- Select para seleccionar academia -->
     <md-input-container flex-offset>
       <label>Seleccione una academia</label>
-      <md-select id="sltAcademia" ng-model="vm.teacher.academy" required>
+      <md-select id="sltAcademia" ng-model="vm.teacher.academy" >
         <md-option ng-repeat="academy in vm.academy" value="{{academy.name}}">{{academy.name}}</md-option>
       </md-select>
     </md-input-container>
@@ -50,30 +50,33 @@
 <div class="row">
   <div class="col-md-4">
     <md-input-container flex-offset>
-      <md-datepicker name="teacherBornDate" ng-model="vm.teacher.bornDate" md-placeholder="Ingrese una fecha" md-max-date="vm.today" required></md-datepicker>
+      <md-datepicker name="teacherBornDate" ng-model="vm.teacher.birthday" md-placeholder="Ingrese una fecha" md-max-date="vm.today" required></md-datepicker>
 
       <!-- Mensaje de retroalimentacion -->
-      <div ng-messages="frmRegTeacher.teacherBornDate.$error">
+      <div ng-messages="frmRegTeacher.teacherbirthday.$error">
         <div ng-messages-include="components/includes/messages.html"></div>
       </div>
     </md-input-container>
   </div>
+</div>
 
-
-  <div class="col-md-3">
+<div class="row">
+  <div class="col-md-12">
     <!-- botón para adjuntar archivo -->
     <div>
-      <label class="btn btn-default btn-file" for="photo">
+      <label class="btn btn-default btn-file" for="photo" id="buttonPhoto">
         Adjuntar foto
       </label>
       <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.teacher.photo">
     </div>
   </div>
-  <div class="col-md-2">
+</div>
+<div class="row">
+  <div class="col-md-offset-8 col-md-4">
     <!-- botón para guardar datos actualizados -->
-    <md-button type="submit" ng-disabled="frmRegTeacher.$invalid" ng-click="vm.updateTeacher()">Actualizar</md-button>
-  </div>
-  <div class="col-md-2">
+    <md-button class="md-raised" type="submit" ng-disabled="frmRegTeacher.$invalid" ng-click="vm.updateTeacher()">Actualizar</md-button>
+
+
     <!-- botón para registrar -->
     <md-button type="submit" ng-disabled="frmRegTeacher.$invalid" class="md-raised" ng-click="vm.reset()">Registrar</md-button>
   </div>
@@ -81,6 +84,6 @@
 <div class="row">
   <div class="col-md-3">
     <!-- Botón Anterior -->
-    <a ui-sref="admin.teachpart1" class="btn btn-info">Anterior <span class="glyphicon  glyphicon-circle-arrow-left"></span></a>
+    <a ui-sref="admin.teachpart1" class="btn btn-primary">Anterior <span class="glyphicon  glyphicon-circle-arrow-left"></span></a>
   </div>
 </div>

@@ -17,7 +17,7 @@ module.exports.save = function(req, res){
      "email": req.body.email,
      "photo": req.body.photo,
      "role": req.body.role,
-     "password": req.body.password = hash
+     "password": req.body.password
    });
    mUser.save(function(err){
      if(err){
