@@ -36,7 +36,8 @@
     vm.acceptedEvents = [];
 
   function init() {
-    vm.currentUser = userService.findUserTeacher(userService.getCookie());
+    vm.currentUser = $cookies.get('currentUserActive');
+    vm.currentUser = JSON.parse(vm.currentUser);
     vm.selected = 2;
     console.log(vm.currentUser);
         vm.academy = academyServices.getAcademy();
@@ -87,9 +88,9 @@
     });
   };
 
-  if(vm.currentUser.newUser == 1) {
+ /* if(vm.currentUser.newUser == 1) {
     $scope.showPrompt();
-  }
+  }*/
 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
 
