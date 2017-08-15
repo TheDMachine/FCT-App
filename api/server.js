@@ -6,10 +6,6 @@ var express = require('express'),
     morgan = require('morgan'),
     mongoose = require('mongoose');
 
-    // SocketIo Set, ready , gooo.
-// });
-
-    // End SocketIo
 // Se establece una conexión con mongoose por medio de las siguientes variables
 var db = mongoose.connection,
     dburl = 'mongodb://admin:dmachine2017@ds139761.mlab.com:39761/db_fct',
@@ -45,6 +41,7 @@ var index = require('./index'),
     userRoutes = require('./components/users/users.route'),
     eventRoutes = require('./components/events/events.route'),
     academiesRoutes = require('./components/academies/academies.route'),
+    loginRoutes = require('./components/login/login.route');
     sponsorsRoutes = require('./components/sponsors/sponsors.route'),
     reservationsRoutes = require('./components/reservations/reservations.route');
 
@@ -54,6 +51,7 @@ app.use('/api', userRoutes);
 app.use('/api', eventRoutes);
 app.use('/api', academiesRoutes);
 app.use('/api', sponsorsRoutes);
+app.use('/api', loginRoutes);
 app.use('/api', reservationsRoutes);
 
 // Se guarda todo lo que se ha realizado
@@ -63,5 +61,3 @@ module.exports = app;
 function _server(){
   console.log('Conexion establecida en el puerto ' + port);
 }
-// var email = require('./components/notifications/email');
-// email.sEmail('newPassword', 'dcamposa@ucenfotec.ac.cr', 'Mensaje de prueba', {name:'Daniel',newPassword:'3123122'});

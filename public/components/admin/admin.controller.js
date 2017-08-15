@@ -371,7 +371,7 @@ vm.teachers = response.data;
 
       var bError = false;
       var newEvent = pNewEvent;
-
+      
       if (vm.events.length == 0) {
         eventService.setEvents(newEvent);
         vm.showEventAlert();
@@ -1111,68 +1111,6 @@ vm.teachers = response.data;
 
     // Inicia Daniel
 
-vm.editMember = function(pMemberToEdit) {
-  console.log(pMemberToEdit);
-  console.log(vm);
-  vm.editMem.name = pMemberToEdit.name;
-  vm.editMem.position = pMemberToEdit.position;
-  vm.editMem.email = pMemberToEdit.email;
-  vm.editMem.phone = pMemberToEdit.phone;
-  vm.isEdit = true;
-  vm.modDisplay = true;
-}
-//Limpia el formulario de actualización y /o creación de miembro
-function clearForm(pObjectToFrm) {
-  for (var index in pObjectToFrm) {
-    pObjectToFrm[index] = '';
-  }
-}
-//Abre el formulario
-vm.addNewDirect = function() {
-  vm.modDisplay = true;
-  vm.isNew = true;
-}
-//crea el miembro nuevo de la junta directiva
-vm.createMember = function(pNewMember) {
-  settingsService.updateDirect(pNewMember);
-  vm.showAlertEditParams('El miembro llamado '+ pNewMember.name+' ha sido creado exitosamente.','¡Nuevo miembro de la junta directiva!');
-  init();
-  vm.modDisplay = false;
-  clearForm(vm.editMem);
-}
-vm.updateMember = function(pMemberToUpdate) {
-  settingsService.updateDirect(pMemberToUpdate);
-  vm.showAlertEditParams('El miembro llamado '+ pMemberToUpdate.name+' ha sido actualizado exitosamente.','¡Actualización de miembro en la junta directiva!');
-  init();
-  vm.modDisplay= false;
-  clearForm(vm.editMem);
-}
-// Termina dANIEL
-// Iniciar el actualizar peso
-vm.showUpdateWeight = function(pParamToEdit) {
-// Appending dialog to document.body to cover sidenav in docs app
-var confirm = $mdDialog.prompt()
-  .title('!Actualizando el peso!')
-  .textContent('Actualizando el usuario: ' +pParamToEdit.name)
-  .placeholder('Escribe el nuevo peso.')
-  .ariaLabel(pParamToEdit.name)
-  .ok('Actualizar')
-  .cancel('Cancelar');
-
-$mdDialog.show(confirm).then(function(result) {
-  //settingsService.e
-  console.log(result);
-  pParamToEdit.weight= result;
-  vm.updateWeigth(result);
-  init();
-}, function() {
-  vm.status = 'Noo Hubo un problema.';
-});
-};
-//Función para actualizar el peso
-vm.updateWeigth = function(pUserToWeight) {
-  userService.updateWeigth(pUserToWeight);
-}
     vm.editMember = function(pMemberToEdit) {
       console.log(pMemberToEdit);
       console.log(vm);
@@ -1268,7 +1206,6 @@ vm.updateWeigth = function(pUserToWeight) {
       }
 
 
-// Termina el actualizar peso
   }
 }
 

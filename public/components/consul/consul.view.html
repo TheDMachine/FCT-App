@@ -1,34 +1,34 @@
 <div class="row">
-	<div id="topSpace" class="col-xs-12 md-whiteframe-3dp">
+	<div id="topSpace" class="col-xs-12">
 		<div class="col-xs-2 imageLogo"><img src="images/logFCT.png" width="75px" height="75px"></div>
-		<div class="col-xs-offset-7 col-xs-1 col-sm-offset-9 col-sm-1"><a ui-sref-active="active" ui-sref="landing"><span class="fa fa-times quitX"></span></a></div>
+		<div class="col-xs-offset-7 col-xs-1 col-sm-offset-9 col-sm-1"><a><span ui-sref="/" class="fa fa-times quitX"></span></a></div>
 	</div>
 </div>
-<div class="col-md-18 col-md-offset-2 md-padding">
+<div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-4">
 	<h3>PROPUESTAS DE EVENTOS</h3>
 	<!-- links de cada paso del formulario de registro de eventos -->
 <div id="buttonForm" class="text-center genericButtonsSteps" layout="row" layout-align="center center">
-		<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".proposeOne">
+		<div ui-sref-active="active" ui-sref=".proposeOne">
 			<a>1</a>
 		</div>
-		<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".proposeTwo">
+		<div ui-sref-active="active" ui-sref=".proposeTwo">
 			<a>2</a>
 		</div>
-		<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".proposeThree">
+		<div ui-sref-active="active" ui-sref=".proposeThree">
 			<a >3</a>
 		</div>
-		<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".proposeFourth">
+		<div ui-sref-active="active" ui-sref=".proposeFourth">
 			<a >4</a>
 		</div>
-		<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".proposeFive">
+		<div ui-sref-active="active" ui-sref=".proposeFive">
 			<a >5</a>
 		</div>
 	</div>
-<div>
+</div>
+<div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-8">
 	<!-- Formulario para registro de eventos -->
 	<form id="sign-form" name="frmProposeRegister" autocomplete="off" ng-submit="vm.presavePropose(vm.propose)">
 		<!-- Espacio para mostrar vistas del registro -->
 		<div id="form-views" ui-view></div>
 	</form>
-</div>
 </div>

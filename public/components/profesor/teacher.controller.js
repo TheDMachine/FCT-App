@@ -36,9 +36,9 @@
     vm.acceptedEvents = [];
 
   function init() {
-    vm.currentUser = userService.findUserTeacher(userService.getCookie());
+        vm.currentUser = $cookies.get('currentUserActive');
+    vm.currentUser = JSON.parse(vm.currentUser);
     vm.selected = 2;
-    console.log(vm.currentUser);
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
@@ -87,9 +87,9 @@
     });
   };
 
-  if(vm.currentUser.newUser == 1) {
+ /* if(vm.currentUser.newUser == 1) {
     $scope.showPrompt();
-  }
+  }*/
 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
 
@@ -340,6 +340,7 @@
 
     vm.updateCurrentTeacher = function(){
       var editTeacher = {
+      _id : vm.currentUser._id,
       password : vm.currentUser.password,
       id : vm.currentUser.id,
       firstName : vm.currentUser.firstName,
@@ -355,10 +356,27 @@
       photo : vm.currentUser.photo,
       newUser : vm.currentUser.newUser
       }
-      userService.updateTeacher(editTeacher);
-      init();
+      userService.updateTeacher(editTeacher)
+      .then(function(response){
+        console.log(response);
+        $http.get('http://localhost:3000/api/get_all_teachers')
+        .then(function(response){
+          for(var i = 0; i < response.data.length; i++){
+            if(response.data[i].id == vm.currentUser.id){
+              $cookies.putObject('currentUserActive', response.data[i]);
+              vm.currentUser = $cookies.get('currentUserActive');
+              vm.currentUser = JSON.parse(vm.currentUser);
+            }
+          }
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+      })
+      .catch(function(err){
+        console.log(err);
+      });
       vm.editTeacherProfile = false;
-      cleanTeacher();
     }
 
     vm.updatePoints = function(competitor, $index){

@@ -1,13 +1,46 @@
 (function() {
   angular.module('app')
   .service('AuthService',AuthService);
-  function AuthService($cookies,$location, userService){
+  function AuthService($cookies,$location, userService, $http){
     return {
       getCredencials:_getAuthCredencials,
       logOut : _destroyAuthCredentials,
       getCookie : _getCookie
     }
     function _getAuthCredencials(pId,pPassword){
+      $http.post('http://localhost:3000/api/find_user', {id : pId, password : pPassword})
+      .then(function(response){
+        console.log(response);
+        var role = response.data.response[0].role; 
+
+        switch (role) {
+        case 'Administrador':
+          $location.path('/admin');
+          break;
+        case 'teacher':
+          $location.path('/teacher');
+          break;
+        case 'Competidor':
+          $location.path('/competitor');
+          break;
+        case 'Representante':
+          $location.path('/consul');
+          break;
+        case 'Asistente':
+          $location.path('/assistant');
+          break;
+        default:
+          $location.path('/');
+          break;
+
+      }
+        var userLogged = response.data.response[0];
+        $cookies.putObject('currentUserActive', userLogged);
+
+      })
+      .catch(function(err){
+        console.log(err);
+      })
       /*var user = 
         { 'email' : 'luisbianco28@hotmail.com',
           'password' : '123',
@@ -15,7 +48,7 @@
           'newUser' : 1
         };*/
       //console.log("Yass work correctly auth service. The user is %s and the password is %s",pUsername,pPassword);
-      if(userService.findUserTeacher(pId) !== false){
+      /*if(userService.findUserTeacher(pId) !== false){
         var userFounded = userService.findUserTeacher(pId);
         userFounded.userType = 'Profesor';
         if(userFounded.newUser == undefined || userFounded.newUser !== 0){
@@ -56,11 +89,11 @@
 
 
 
-      if(userFounded.length == 0){
+      /*if(userFounded.length == 0){
         $location.path('/');
       }
       _validateFields(pId, pPassword, userFounded);
-      $cookies.put('currentUserActive',userFounded.id);
+      $cookies.put('currentUserActive',userFounded.id);*/
     }
     function _destroyAuthCredentials(){
       var currentUser = $cookies.get('currentUserActive');

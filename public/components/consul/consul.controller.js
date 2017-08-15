@@ -15,7 +15,6 @@
     }
   }
 function init() {
-  vm.selected = 1;
   vm.proposes = eventService.getPropose();
   vm.propose = {};
   vm.categoriesAge = estabInfoService.getCategories();
