@@ -17,19 +17,19 @@ var EventSchema = new mongoose.Schema({
 						{
 							orgName:      {type: String},
 							orgType:      {type: String},
-							description:  {type: String},
+							description:  {type: String}
 						}
 						],
 	date : 				[
 						{
 							date1:        {type: Date, required: true},
-							date2:        {type: Date, required: true},
+							date2:        {type: Date, required: true}
 						}
 						],
 	time : 				[
 						{
 							time1:        {type: Date, required: true},
-							time2:        {type: Date, required: true},
+							time2:        {type: Date, required: true}
 						}
 						],
 	place: 				[
@@ -40,9 +40,9 @@ var EventSchema = new mongoose.Schema({
 							tickets:      {type: String, required: true},
 							ticketPrice:  {type: String, required: true},
 							contactName:  {type: String, required: true},
-							contactPhone: {type: String, required: true},
+							contactPhone: {type: String, required: true}
 						}
 						]
 });
 
-module.exports = mongoose.model('events', EventSchema);
+module.exports = mongoose.model('event', EventSchema);

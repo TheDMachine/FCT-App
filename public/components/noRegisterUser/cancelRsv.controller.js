@@ -40,7 +40,7 @@
     // Devueñve la información de la reserva a cancelar
     function sendInfo(pRsvToCxl) {
       vm.reservation.confNum = pRsvToCxl.confirmationNum;
-      vm.reservation.id = pRsvToCxl.id;
+      vm.reservation.ced = pRsvToCxl.ced;
       vm.reservation.fullName = pRsvToCxl.fullName;
       vm.reservation.event = pRsvToCxl.event;
       vm.reservation.tktsQuantity = pRsvToCxl.tktsQuantity;
@@ -98,7 +98,7 @@
     // Función para limpiar campos
     function clean() {
       vm.reservation.confNum = '';
-      vm.reservation.id = '';
+      vm.reservation.ced = '';
       vm.reservation.fullName = '';
       vm.reservation.event = '';
       vm.reservation.tktsQuantity = '';
