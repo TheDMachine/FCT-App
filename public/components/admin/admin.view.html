@@ -32,7 +32,7 @@
 								</md-button>
 							</li>
 							<li>
-								<md-button class="button-selected" ng-click="vm.selected = 10">
+								<md-button class="button-selected" ng-click="vm.selected = 10" ui-sref=".teachpart1">
 									<p>Profesor</p>
 								</md-button>
 							</li>
@@ -124,7 +124,7 @@
   			<!-- Poner la vista aquí
 
   			!!-->
-  			
+
   			<!-- Vista de perfil administrador-->
         <div ng-show="vm.selected == 1">
           <div flex-xs flex-gt-xs="100" layout="column">
@@ -207,7 +207,7 @@
             </md-card>
           </div>
         </div>
-        
+
 
 
         <!-- Sección de home -->
@@ -749,7 +749,7 @@
 </md-content>
 </md-tab>
 </md-content>
-</div>	
+</div>
 
 <!--Vista competiciones-->
 <div ng-show="vm.selected == 6">
@@ -1231,10 +1231,10 @@
           <md-content class="md-padding">
             <h1 class="md-display-2">Profesores</h1>
             <div class="text-center" id="buttonTeacher" layout="row" layout-align="center center">
-              <div ui-sref-active="active" ui-sref=".teachpart1">
+              <div ui-sref-active="active" ui-sref=".teachpart1" class="md-whiteframe-3dp" >
                 <a>1</a>
               </div>
-              <div ui-sref-active="active" ui-sref=".teachpart2">
+              <div ui-sref-active="active" ui-sref=".teachpart2" class="md-whiteframe-3dp">
                 <a>2</a>
               </div>
             </div>
@@ -1259,22 +1259,25 @@
               <div class="col-md-offset-1 col-md-10">
                 <div>
                   <h3>Lista de Profesores</h3>
-                  <table class="table-responsive">
-                    <thead>
+                  <table class="table-responsive md-whiteframe-3dp">
+                    <thead class= "md-whiteframe-3dp">
                       <tr>
                         <th>Cedula</th>
                         <th>Primer nombre</th>
                         <th>Primer apellido</th>
                         <th>Estado</th>
+												<th>Teléfono</th>
                         <th>Foto</th>
+												<th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="teacher in vm.teachers track by $index">
                         <td>{{teacher.id}}</td>
+                        <td>{{teacher.name}}</td>
                         <td>{{teacher.firstName}}</td>
-                        <td>{{teacher.firstLastName}}</td>
                         <td>{{teacher.status}}</td>
+												<td>{{teacher.phone}}</td>
                         <td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
                         <!-- Botones para editar profesores -->
                         <td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)"></td>
@@ -1351,7 +1354,8 @@
                         <td>{{student.id}}</td>
                         <td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
                         <td>{{student.status}}</td>
-                        <td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
+												<td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
+												<td><md-button ng-click="vm.updateBelt(student)" class="md-raised">Promover grado</md-button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1406,8 +1410,8 @@
 
 
 
-      
-      
+
+
       <!-- Espacio de mantenimiento -->
       <div ng-show="vm.selected == 13">
        <md-tabs md-dynamic-height md-border-bottom>
@@ -1515,6 +1519,3 @@
          </md-tab>
        </md-tabs>
      </div>
-
-     
-
