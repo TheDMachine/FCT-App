@@ -75,8 +75,9 @@
 </md-list-item>
 <md-list-item  layout="column">
   <md-button class="button-selected" ng-click="vm.selected = 13">
-    <i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xEB3F;</i>
-    <p class="menu-button">Mantening</p>
+		<!--<i class="material-icons">&#xE869;</i>  -->
+    <i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE869;</i>
+    <p class="menu-button">Mantenimiento</p>
   </md-button>
 </md-list-item>
 </md-list>
@@ -990,11 +991,17 @@
 
 <md-tab label="Actualizar pesaje">
 	<md-content class="col-md-10 col-offset-1">
-		<h2>A ver si sta vesh gunfiona.</h2>
+		<!-- <h2>A ver si sta vesh gunfiona.</h2> -->
+		<md-input-container>
+			<md-select ng-model="vm.userToUpWeight">
+				<md-option ng-repeat="uw in vm.users" value="{{uw.name}}">{{uw.name}}</md-option>
+			</md-selected>
+		</md-input-container>
+		<md-button ng-click="vm.showUpdateWeight(vm.userToUpWeight)">Actualizar Peso</md-button>
 	</md-content>
 </md-tab>
 
-<!-- Termina el Tab de actualizar pejsae -->
+<!-- Termina el Tab de actualizar pesaje -->
 </md-tabs>
 </md-content>
 </div>
