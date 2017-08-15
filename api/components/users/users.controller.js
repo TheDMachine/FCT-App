@@ -42,8 +42,8 @@ module.exports.saveTeacher = function(req, res){
   });
 }
 module.exports.findAllTeachers = function(req,res){
-  User.find({'role': 'teacher'}).then(function(pets){
-    res.send(pets);
+  User.find({'role': 'teacher'}).then(function(teacher){
+    res.send(teacher);
   })
 };
 
