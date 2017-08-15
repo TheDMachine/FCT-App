@@ -38,9 +38,11 @@
         tktsQuantity : vm.reservation.tktsQuantity,
         email : vm.reservation.email,
         fullName : vm.reservation.fullName,
-        id : vm.reservation.id,
-        card : vm.reservation.card,
-        expCard : vm.reservation.expCard,
+        ced : vm.reservation.ced,
+        card : {
+            number: vm.reservation.card.number,
+            expiration: vm.reservation.card.expiration
+        },
         confirmationNum : conNum(),
         state : 'activo'
       };
