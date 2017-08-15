@@ -6,6 +6,10 @@ var express = require('express'),
     morgan = require('morgan'),
     mongoose = require('mongoose');
 
+    // SocketIo Set, ready , gooo.
+// });
+
+    // End SocketIo
 // Se establece una conexión con mongoose por medio de las siguientes variables
 var db = mongoose.connection,
     dburl = 'mongodb://admin:dmachine2017@ds139761.mlab.com:39761/db_fct',
@@ -57,3 +61,5 @@ module.exports = app;
 function _server(){
   console.log('Conexion establecida en el puerto ' + port);
 }
+// var email = require('./components/notifications/email');
+// email.sEmail('newPassword', 'dcamposa@ucenfotec.ac.cr', 'Mensaje de prueba', {name:'Daniel',newPassword:'3123122'});
