@@ -281,7 +281,7 @@
     vm.showCompetition = function(competition, $index){
       for(var i = 0; i < vm.competitions.length; i++){
         if(competition.competitionNumber == vm.competitions[i].competitionNumber){
-          vm.competitionsToShow.push(competition);
+          vm.competitionsToShow[$index] = competition;
           for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
             vm.competitionsToShow[i].competitors[j].points = 0;
           }

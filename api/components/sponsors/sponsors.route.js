@@ -22,7 +22,4 @@ router.route('/update_sponsor')
     sponsorsController.update(req,res);
  	});
 
-
-
-
 module.exports = router;
