@@ -41,7 +41,8 @@ var index = require('./index'),
     userRoutes = require('./components/users/users.route'),
     eventRoutes = require('./components/events/events.route'),
     academiesRoutes = require('./components/academies/academies.route'),
-    sponsorsRoutes = require('./components/sponsors/sponsors.route');
+    sponsorsRoutes = require('./components/sponsors/sponsors.route'),
+    reservationsRoutes = require('./components/reservations/reservations.route');
 
 
 app.use('/', index);
@@ -49,6 +50,7 @@ app.use('/api', userRoutes);
 app.use('/api', eventRoutes);
 app.use('/api', academiesRoutes);
 app.use('/api', sponsorsRoutes);
+app.use('/api', reservationsRoutes);
 
 // Se guarda todo lo que se ha realizado
 module.exports = app;
