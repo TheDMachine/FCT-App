@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var roles = ['admin','assistant','teacher','student'],
-    states = ['active','inactive','banned'];
+    states = ['activo','inactivo','banned'];
 
 var UserSchema = new mongoose.Schema({
   id :            {type: String, required: true, unique: true, minlength:9,maxlength:13},

@@ -28,6 +28,7 @@ module.exports.saveTeacher = function(req, res){
     phone: req.body.phone,
     email : req.body.email,
     photo: req.body.photo,
+    status: req.body.status,
     role : req.body.role,
     password : req.body.password,
     academy : req.body.academy

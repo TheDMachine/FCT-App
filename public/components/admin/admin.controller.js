@@ -82,10 +82,10 @@ vm.teachers = response.data;
         estabInfoService.getCountries().then(function(data) {
           vm.countries = data.data.countries;
         });
-        vm.teacher.status = "Activo";
+        vm.teacher.status = "activo";
         vm.userActive = false;
         vm.reservations = ticketService.getsReservations();
-        vm.status = "Activo"
+        vm.status = "activo"
       }
       init();
 
@@ -789,7 +789,7 @@ vm.teachers = response.data;
 
         //vm.showProfesorDuplicateAlert();
         pNewTeacher.role = 'teacher';
-        pNewTeacher.status = 'active';
+        pNewTeacher.status = 'activo';
         userService.setTeachers(pNewTeacher);
         vm.showProfesorAlert();
         init();
