@@ -12,6 +12,9 @@
     function init() { 
       vm.events = eventService.getEvents();
       vm.reservations = ticketService.getsReservations();
+      ticketService.getsReservations().then(function(response) {
+          vm.tickets = response.data;
+        });
       }init();
 
     // Función para devolverse al landing
@@ -54,6 +57,19 @@
         vm.Error = true;
       }
       if (vm.Error === false) {
+        
+        // ticketService.setReservations(newRsv)
+        // .then(function(response){
+        //   var responseObj = response;
+        //   console.log(response);
+        //   ticketService.getsReservations().then(function(response){
+        //     vm.tickets = response.data;
+        //   });
+        // }).catch(function(err){
+        //   console.log(err);
+        // });
+        // vm.showReservationAlert(newRsv.confirmationNum);
+
         ticketService.setReservations(newRsv);
         vm.showReservationAlert(newRsv.confirmationNum);
         clean();
@@ -62,6 +78,8 @@
         vm.showRsvErrorAlert(vm.availableTkts);
         init();
       }
+      // clean();
+      //   init();
     };
 
     // Función para mensaje de registro de entrada satisfactorio

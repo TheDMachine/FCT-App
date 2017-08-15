@@ -4,7 +4,7 @@
   .module('app')
   .service('ticketService', ticketService);
 
-  function ticketService(){
+  function ticketService($http){
     var reservations = [];
     var publicAPI = {
       setReservations : _setReservations,
@@ -19,6 +19,7 @@
       reservationsList.push(pReservation);
       localStorage.setItem('lsReservationsList', JSON.stringify(reservationsList));
       console.log(reservationsList);
+      // return $http.post('http://localhost:3000/api/save_reservations',pReservation);
     }
 
     // Función para extraer información de eventos
@@ -28,6 +29,7 @@
         reservationsList = reservations;
       }
       return reservationsList;
+      // return $http.get('http://localhost:3000/api/get_all_reservations');
     }
 
     // Función para guardar modificación de información de eventos
@@ -40,6 +42,7 @@
       }
       console.log(reservationsList);
       localStorage.setItem('lsReservationsList', JSON.stringify(reservationsList));
+      // return $http.put('http://localhost:3000/api/update_reservations',pCxlRsv);
     }
     
   }

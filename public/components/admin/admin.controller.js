@@ -60,6 +60,10 @@
           vm.sponsors = response.data;
         });
         console.log(vm.sponsors);
+        // eventService.getEvents().then(function(response) {
+        //   vm.events = response.data;
+        // });
+        console.log(vm.sponsors);
         vm.teacher = {};
         vm.teachers = userService.getTeachers();
         vm.sponsor = {};
@@ -333,47 +337,29 @@
 
     // Función para guardar
     vm.createNewEvent = function (pNewEvent) {
+      // if (eventService.findEvent(pNewEvent.eventName) != false) {
+      //   vm.showEventDuplicateAlert();
+      // }
+      // else{
+      //   eventService.setEvents(newEvent)
+      //   .then(function(response){
+      //     var responseObj = response;
+      //     console.log(response);
+      //     eventService.getEvents().then(function(response){
+      //       vm.events = response.data;
+      //     });
+      //   }).catch(function(err){
+      //     console.log(err);
+      //   });
+      //   vm.showEventAlert();
+      // }
+      // vm.error = false;
+      // clean();
+      // init();
+
       var bError = false;
       var newEvent = pNewEvent;
-      // var newEvent = {
-      //   eventName: pNewEvent.eventName,
-      //   invitedName: pNewEvent.invitedName,
-      //   eventType: pNewEvent.eventType,
-      //   eventState: pNewEvent.eventState,
-      //   photo: pNewEvent.photo,
-      //   date:{
-      //     date1: pNewEvent.date.date1,
-      //     date2: pNewEvent.date.date2
-      //   },
-      //   time:{
-      //     time1: pNewEvent.time.time1,
-      //     time2: pNewEvent.time.time2
-      //   },
-      //   selectAcademies: pNewEvent.selectAcademies,
-      //   selectCategories: pNewEvent.selectCategories,
-      //   costInsc: pNewEvent.costInsc,
-      //   selectSponsors: pNewEvent.selectSponsors,
-      //   place: {
-      //     placeName: pNewEvent.place.placeName,
-      //     location: pNewEvent.place.location,
-      //     latitude: pNewEvent.place.latitude,
-      //     length: pNewEvent.place.length,
-      //     seats: pNewEvent.place.seats,
-      //     tickets: pNewEvent.place.tickets,
-      //     ticketPrice: pNewEvent.place.ticketPrice,
-      //     contactName: pNewEvent.place.contactName,
-      //     contactPhone: pNewEvent.place.contactPhone
-      //   },
-      //   charityEvent: pNewEvent.charityEvent,
-      //   org:{
-      //     orgName: pNewEvent.org.orgName,
-      //     orgType: pNewEvent.org.orgType,
-      //     description: pNewEvent.org.description
-      //   }
-      // }
-      // newEvent.map = createMap(newEvent.latitude, newEvent.length);
-      // console.log(newEvent);
-
+      
       if (vm.events.length == 0) {
         eventService.setEvents(newEvent);
         vm.showEventAlert();
@@ -689,11 +675,24 @@
           description: vm.event.org.description
         }
       }
-      $scope.updateDisable = true;
+      vm.updateDisable = true;
       eventService.updateEvent(modEvent);
       vm.showEditEventAlert();
       init();
       clean();
+
+      // eventService.updateEvent(modEvent)
+      // .then(function(response){
+      //   console.log(response);
+      //   eventService.getEvents().then(function(response) {
+      //     vm.events = response.data;
+      //   });
+      // }).catch(function(err){
+      //   console.log(err);
+      // });
+      // vm.showEditEventAlert();
+      // clean();
+      // init();
     };
 
     // Función para mensaje de registro de evento satisfactorio
