@@ -1266,15 +1266,18 @@
                         <th>Primer nombre</th>
                         <th>Primer apellido</th>
                         <th>Estado</th>
+												<th>Teléfono</th>
                         <th>Foto</th>
+												<th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="teacher in vm.teachers track by $index">
                         <td>{{teacher.id}}</td>
+                        <td>{{teacher.name}}</td>
                         <td>{{teacher.firstName}}</td>
-                        <td>{{teacher.firstLastName}}</td>
                         <td>{{teacher.status}}</td>
+												<td>{{teacher.phone}}</td>
                         <td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
                         <!-- Botones para editar profesores -->
                         <td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)"></td>
@@ -1351,7 +1354,8 @@
                         <td>{{student.id}}</td>
                         <td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
                         <td>{{student.status}}</td>
-                        <td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
+												<td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
+												<td><md-button ng-click="vm.updateBelt(student)" class="md-raised">Promover grado</md-button></td>
                       </tr>
                     </tbody>
                   </table>
