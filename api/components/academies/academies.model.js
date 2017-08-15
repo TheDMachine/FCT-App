@@ -10,4 +10,4 @@ var AcademySchema = new mongoose.Schema({
   status:      {type: String, required: true}
 });
 
-module.exports = mongoose.model('academies', AcademySchema);
+module.exports = mongoose.model('Academy', AcademySchema);

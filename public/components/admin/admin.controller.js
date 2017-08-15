@@ -34,8 +34,10 @@
     vm.consultEvent = {};
     vm.customFullscreen = false;
     vm.infowindow;
+    vm.academies = {};
+    loadAcademies();
 
-    
+
 
     function init(){
     // función que se llama así misma para indicar que sea lo primero que se ejecute
@@ -49,7 +51,6 @@
         vm.currentUser = userService.searchAdmin(userService.getCookie());
         console.log(vm.currentUser);
         vm.originatorEv;
-        vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
         console.log(vm.events);
@@ -860,8 +861,19 @@
       };
       console.log(newAcademy);
       academyServices.setAcademy(newAcademy);
-      cleanAcademy();
-      init();
+      // .then(function(response){
+      //   loadAcademies();
+        //cleanAcademy();
+        //init();
+    //});
+    }
+
+    //funcion para traer la lista
+    function loadAcademies(){
+      academyServices.getAcademy()
+      .then(function(response){
+        vm.academies = response.data;
+      });
     }
 
     //funcion para limpiar los input  de academia

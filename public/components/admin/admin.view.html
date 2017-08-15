@@ -124,7 +124,7 @@
   			<!-- Poner la vista aquí
 
   			!!-->
-  			
+
   			<!-- Vista de perfil administrador-->
         <div ng-show="vm.selected == 1">
           <div flex-xs flex-gt-xs="100" layout="column">
@@ -207,7 +207,7 @@
             </md-card>
           </div>
         </div>
-        
+
 
 
         <!-- Sección de home -->
@@ -458,7 +458,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="academy in vm.academy | filter:{name:vm.academyFilter}">
+                <tr ng-repeat="academy in vm.academies | filter:{name:vm.academyFilter}">
                   <td>{{academy.name}}</td>
                   <td>{{academy.manager}}</td>
                   <td><md-button ng-click="vm.getAcademy(academy)" class="md-raised">Editar</md-button></td>
@@ -472,7 +472,7 @@
     <md-tab label="mostrar">
       <md-content layout="column">
         <div layout="row">
-          <md-card ng-repeat="academy in vm.academy" flex="25" class="sizeCard">
+          <md-card ng-repeat="academy in vm.academies" flex="25" class="sizeCard">
             <md-card-title>
               <md-card-title-text>
                 <span class="md-headline">{{academy.name}}</span>
@@ -749,7 +749,7 @@
 </md-content>
 </md-tab>
 </md-content>
-</div>	
+</div>
 
 <!--Vista competiciones-->
 <div ng-show="vm.selected == 6">
@@ -1406,8 +1406,8 @@
 
 
 
-      
-      
+
+
       <!-- Espacio de mantenimiento -->
       <div ng-show="vm.selected == 13">
        <md-tabs md-dynamic-height md-border-bottom>
@@ -1515,6 +1515,3 @@
          </md-tab>
        </md-tabs>
      </div>
-
-     
-
