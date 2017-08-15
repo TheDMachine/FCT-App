@@ -26,7 +26,7 @@
         vm.reservations = ticketService.getsReservations();
         var error = false;
         for (var i = 0; i < vm.reservations.length; i++) {
-          if (pClientName.id === vm.reservations[i].id) {
+          if (pClientName.ced === vm.reservations[i].ced) {
             vm.myRsvs.push(vm.reservations[i]);
             error = true;
           }

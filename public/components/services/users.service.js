@@ -6,7 +6,8 @@
     //Inicia servicio de usuarios
     //que maneja todos los usuarios y sus formas.
     .service('userService',userService);
-    function userService($cookies){
+  //  userService.$inject=['$http'];
+    function userService($http,$cookies){
       var teachers = [];
        var users = [];
        var assistants = [];
@@ -43,7 +44,8 @@
         getAssistants : _getAssistants,
         updateAssistant : _updateAssistant,
         updateConsul: _updateUsersConsul,
-        updateWeigth: _findAndSetUserToWeigth
+        updateWeigth: _findAndSetUserToWeigth,
+        updateBelt : _updateBelt
     };
     return publicAPI;
 
@@ -156,31 +158,19 @@
 
     //función para pushear objeto profesores
     function _setTeachers(pTeacher){
-      var teachersList = _getTeachers();
       pTeacher.password = _generatePassword();
-      teachersList.push(pTeacher);
-      console.log(teachersList);
-      localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
+      return $http.post('http://localhost:3000/api/save_teacher',pTeacher);
+
     }
 
     //función para obtener a los profesores actualizados
     function _getTeachers() {
-      var teachersList = JSON.parse(localStorage.getItem('lsTeachersList'));
-      if(teachersList == null){
-        teachersList = teachers;
-      }
-      return teachersList;
+        return $http.get('http://localhost:3000/api/get_all_teachers');
     }
 
     //editar la informacion del profesor
-    function _updateTeacher(editTeacher) {
-      var teachersList = _getTeachers();
-      for(var i = 0; i < teachersList.length; i++){
-        if(teachersList[i].id == editTeacher.id){
-          teachersList[i] = editTeacher;
-        }
-      }
-      localStorage.setItem('lsTeachersList', JSON.stringify(teachersList));
+    function _updateTeacher(pEditTeacher) {
+      return $http.put('http://localhost:3000/api/update_teacher',pEditTeacher);
     }
 
     //función para pushear objeto asistente
@@ -278,6 +268,10 @@
            var c = one + two + three + four + five + six + seven + eight + ints + randChar;
         }
         return c;
+      }
+      //editar la informacion del asistente
+      function _updateBelt(pStudent) {
+        return $http.put('http://localhost:3000/api/update_belt',pStudent);
       }
   }
 })();
