@@ -2,12 +2,11 @@ var pug = require('pug');
 var nodemailer = require('nodemailer');
 var mg = require('nodemailer-mailgun-transport');
 var path = require('path');
-
-// This is your API key that you retrieve from www.mailgun.com/cp (free up to 10K monthly emails)
+var mailSt = require('./mailgun.json');
 var auth = {
   auth: {
-    api_key: 'key-972648c2a88564dc16906fbb94aa405b',
-    domain: 'sandbox1cd1aa440d914f8e8f3b4289f88fac35.mailgun.org'
+    key:mailSt.api_key,
+    domain:mailSt.domain
   }
 }
 
