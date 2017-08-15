@@ -371,7 +371,7 @@ vm.teachers = response.data;
 
       var bError = false;
       var newEvent = pNewEvent;
-      
+
       if (vm.events.length == 0) {
         eventService.setEvents(newEvent);
         vm.showEventAlert();
@@ -1111,7 +1111,6 @@ vm.teachers = response.data;
 
     // Inicia Daniel
 
-<<<<<<< HEAD
 vm.editMember = function(pMemberToEdit) {
   console.log(pMemberToEdit);
   console.log(vm);
@@ -1174,7 +1173,6 @@ $mdDialog.show(confirm).then(function(result) {
 vm.updateWeigth = function(pUserToWeight) {
   userService.updateWeigth(pUserToWeight);
 }
-=======
     vm.editMember = function(pMemberToEdit) {
       console.log(pMemberToEdit);
       console.log(vm);
@@ -1269,7 +1267,6 @@ vm.updateWeigth = function(pUserToWeight) {
 
       }
 
->>>>>>> 38a03ab17098aaeaa76530583d5b172c92e7f201
 
 // Termina el actualizar peso
   }
