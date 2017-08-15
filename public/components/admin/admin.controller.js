@@ -373,17 +373,17 @@ vm.teachers = response.data;
       var newEvent = pNewEvent;
       
       if (vm.events.length == 0) {
-          eventService.setEvents(newEvent);
-          vm.showEventAlert();
-          clean();
-          init();
-        } else {
-          for (var i = 0; i < vm.events.length; i++) {
-            if (newEvent.eventName == vm.events[i].eventName) {
-              bError = true;
-            }
+        eventService.setEvents(newEvent);
+        vm.showEventAlert();
+        clean();
+        init();
+      } else {
+        for (var i = 0; i < vm.events.length; i++) {
+          if (newEvent.eventName == vm.events[i].eventName) {
+            bError = true;
           }
-          if (bError == false) {
+        }
+        if (bError == false) {
             eventService.setEvents(newEvent);
             vm.showEventAlert();
             clean();
@@ -686,13 +686,11 @@ vm.teachers = response.data;
             description: vm.event.org.description
           }
         }
-      }
       vm.updateDisable = true;
       eventService.updateEvent(modEvent);
       vm.showEditEventAlert();
       init();
       clean();
-
       // eventService.updateEvent(modEvent)
       // .then(function(response){
       //   console.log(response);
@@ -1209,6 +1207,6 @@ vm.teachers = response.data;
 
 
   }
-};
+}
 
 })();

@@ -12,9 +12,9 @@
     function init() { 
       vm.events = eventService.getEvents();
       vm.reservations = ticketService.getsReservations();
-      ticketService.getsReservations().then(function(response) {
-          vm.tickets = response.data;
-        });
+      // ticketService.getsReservations().then(function(response) {
+      //     vm.tickets = response.data;
+      //   });
       }init();
 
     // Función para devolverse al landing
