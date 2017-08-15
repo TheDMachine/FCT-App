@@ -1,7 +1,4 @@
 /*Inicio Estilos de tablas usuarios*/
-body,html{
-  background-color: #fff;
-}
 #tableUser h3{
   font-family: 'Montserrat';
   font-size: 1.571em;
@@ -1450,20 +1447,4 @@ md-card md-card-title.no-padding{
 
 #map {
         height: 100%;
-}
-.genericButtonsSteps div{
-  margin-left:30px;
-  width: 45px;
-  height: 45px;
-  border-radius: 100%;
-  line-height: 3.1;
-}
-.genericButtonsSteps div:first-child{
-  margin-left: 0;
-}
-.genericButtonsSteps div.active{
-  background-color: #00A652;
-}
-.genericButtonsSteps div.active a{
-  color:white;
-}
+      }

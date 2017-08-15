@@ -28,7 +28,7 @@
 					<div class="dropdown-menu">
 						<ul>
 							<li>
-								<md-button class="button-selected" ui-sref="admin.partOne" ng-click="vm.selected = 9">R/Consejo
+								<md-button class="button-selected" ng-click="vm.selected = 9">R/Consejo
 								</md-button>
 							</li>
 							<li>
@@ -75,9 +75,8 @@
 </md-list-item>
 <md-list-item  layout="column">
   <md-button class="button-selected" ng-click="vm.selected = 13">
-		<!--<i class="material-icons">&#xE869;</i>  -->
-    <i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE869;</i>
-    <p class="menu-button">Mantenimiento</p>
+    <i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xEB3F;</i>
+    <p class="menu-button">Mantening</p>
   </md-button>
 </md-list-item>
 </md-list>
@@ -986,24 +985,8 @@
 </md-card>
 </md-content>
 </md-tab>
-
-<!-- Actualizar el peso del competidor -->
-
-<md-tab label="Actualizar pesaje">
-	<md-content class="col-md-10 col-offset-1">
-		<!-- <h2>A ver si sta vesh gunfiona.</h2> -->
-		<md-input-container>
-			<md-select ng-model="vm.userToUpWeight">
-				<md-option ng-repeat="uw in vm.users" value="{{uw.name}}">{{uw.name}}</md-option>
-			</md-selected>
-		</md-input-container>
-		<md-button ng-click="vm.showUpdateWeight(vm.userToUpWeight)">Actualizar Peso</md-button>
-	</md-content>
-</md-tab>
-
-<!-- Termina el Tab de actualizar pesaje -->
-</md-tabs>
 </md-content>
+
 </div>
 
 <!-- Patrocinadores  -->
@@ -1219,16 +1202,16 @@
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Representante de consejo" ui-sref="admin.partOne">
-        <md-content class="col-md-10 col-md-offset-1 md-padding">
-          <h1 class="md-display-1">Registro de representante de consejo</h1>
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Registro de representante de consejo</h1>
           <h2 id="errorConsul"></h2>
 
           <!-- links de cada paso del formulario de registro de eventos -->
           <div class="text-center genericButtonsSteps" layout="row" layout-align="center center">
-            <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".partOne">
+            <div ui-sref-active="active" ui-sref=".partOne">
               <a>1</a>
             </div>
-            <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".partTwo">
+            <div ui-sref-active="active" ui-sref=".partTwo">
               <a>2</a>
             </div>
           </div>
