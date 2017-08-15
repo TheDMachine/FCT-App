@@ -371,7 +371,7 @@ vm.teachers = response.data;
 
       var bError = false;
       var newEvent = pNewEvent;
-      
+
       if (vm.events.length == 0) {
         eventService.setEvents(newEvent);
         vm.showEventAlert();
@@ -853,7 +853,16 @@ vm.teachers = response.data;
         photo: vm.teacher.photo,
         status: vm.teacher.status
       }
-      userService.updateTeacher(editTeacher);
+      userService.updateTeacher(editTeacher)
+      .then(function(response){
+        $http.get('http://localhost:3000/api/get_all_teachers')
+        .then(function(response){
+          vm.teachers = response.data
+        })
+      })
+      .catch(function(err) {
+        console.log(err);
+      })
       init();
       cleanTeacher();
     };
