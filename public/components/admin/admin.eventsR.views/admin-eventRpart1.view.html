@@ -75,7 +75,7 @@
 		<!-- Campo nombre de organización -->
 		<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
 			<label>Nombre de la organización</label>
-			<input type="text" name="frmEventInfo.orgName" ng-model="vm.event.orgName" maxlength="30" md-maxlength="30" >
+			<input type="text" name="frmEventInfo.orgName" ng-model="vm.event.org.orgName" maxlength="30" md-maxlength="30" >
 		</md-input-container>
 	</div>
 	<div class="col-sm-6">
@@ -83,7 +83,7 @@
 		<!-- Campo tipo de organización -->
 		<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
 			<label>Tipo de organización</label>
-			<input type="text" name="frmEventInfo.orgType" ng-model="vm.event.orgType" maxlength="15" md-maxlength="15">
+			<input type="text" name="frmEventInfo.orgType" ng-model="vm.event.org.orgType" maxlength="15" md-maxlength="15">
 		</md-input-container>
 	</div>
 </div>
@@ -93,7 +93,7 @@
 		<!-- Campo para descripción de la organización -->
 		<md-input-container class="md-block" flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
 			<label>Descripción de la organización</label>
-			<textarea name="frmEventInfo.description" ng-model="vm.event.description" maxlength="30" md-maxlength="30" rows="5" md-select-on-focus></textarea>
+			<textarea name="frmEventInfo.description" ng-model="vm.event.org.description" maxlength="30" md-maxlength="30" rows="5" md-select-on-focus></textarea>
 		</md-input-container>
 	</div>
 </div>

@@ -4,9 +4,9 @@
   .module('app')
   .controller('adminCtrl', adminCtrl);
 
-  adminCtrl.$inject = ['$scope', '$mdDialog', '$http', '$state', '$cookies','$location', 'eventService', 'imageService', 'Upload', 'academyServices', 'logService', 'userService', 'sponsorService', 'AuthService', 'estabInfoService', 'ticketService'];
+  adminCtrl.$inject = ['$scope', '$mdDialog', '$http', '$state', '$cookies','$location', 'eventService', 'imageService', 'Upload', 'academyServices', 'logService', 'userService', 'sponsorService', 'AuthService', 'estabInfoService', 'ticketService', 'settingsService', 'NgMap'];
 
-  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService,ticketService) {
+  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService,ticketService, settingsService, NgMap) {
 
     var vm = this;
     vm.cloudObj = imageService.getConfiguration();
@@ -33,12 +33,19 @@
     vm.today = new Date();
     vm.consultEvent = {};
     vm.customFullscreen = false;
+    vm.infowindow;
 
     
 
     function init(){
     // función que se llama así misma para indicar que sea lo primero que se ejecute
-        // vm.selected = 1;
+        // Inicio Daniel
+        vm.stt = settingsService.getSettings();
+        vm.editMem = {};
+        vm.modDisplay = false;
+        vm.isEdit = false;
+        vm.isNew = false;
+        // Fin Daniel
         vm.currentUser = userService.searchAdmin(userService.getCookie());
         console.log(vm.currentUser);
         vm.originatorEv;
@@ -101,6 +108,21 @@
     };
     /*Final sidenav
     -->>*/
+
+    // funcion p el mapa
+      vm.placeChanged = function() {
+        vm.place = this.getPlace();
+        console.log(vm.place);
+        vm.map.setCenter(vm.place.geometry.location);
+        vm.map.setZoom(18);
+        console.log(vm.place.name);
+        console.log(vm.place.geometry);
+        vm.event.place.coords = vm.place.geometry.location;
+      }
+      NgMap.getMap().then(function(map) {
+        vm.map = map;
+        console.log(vm.map);
+      });
 
     // Función para mostrar la consulta de eventos
     vm.showEventConsult = function(pEvent, ev) {
@@ -228,6 +250,45 @@
       $mdDialog.cancel();
     };
 
+    vm.showAlertEditParams= function(pMessage, pFeedback) {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title(pFeedback)
+          .textContent(pMessage)
+          .ariaLabel()
+          .ok('Gracias!')
+          .targetEvent()
+      );
+    };
+    vm.editParam= function(pParamToEdit) {
+      vm.showPrompt(pParamToEdit);
+    }
+
+    vm.showPrompt = function(pParamToEdit) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('!Actualización de parametro del sistema!')
+      .textContent('Actualizando de ' +pParamToEdit)
+      .placeholder('Escribe la nueva dirreción')
+      .ariaLabel(pParamToEdit)
+      .ok('Actualizar')
+      .cancel('Cancelar');
+
+    $mdDialog.show(confirm).then(function(result) {
+      //settingsService.e
+      console.log(result);
+      settingsService.editParamToSystem(pParamToEdit, result);
+      init();
+    }, function() {
+      vm.status = 'You didn\'t name your dog.';
+    });
+  }
+
     // función para imprimir el evento a consultar
     function checkConsultEvent(pEvent) {
      vm.consultEvent = {
@@ -236,27 +297,25 @@
       eventType: pEvent.eventType,
       eventState: pEvent.eventState,
       photo: pEvent.photo,
-      date1: pEvent.date1,
-      time1: pEvent.time1,
-      date2: pEvent.date2,
-      time2: pEvent.time2,
+      date1: pEvent.date.date1,
+      time1: pEvent.time.time1,
+      date2: pEvent.date.date2,
+      time2: pEvent.time.time2,
       selectAcademies: pEvent.selectAcademies.toString(),
       selectCategories: pEvent.selectCategories.toString(),
       costInsc: pEvent.costInsc,
       selectSponsors: pEvent.selectSponsors.toString(),
-      placeName: pEvent.placeName,
-      location: pEvent.location,
-      latitude: pEvent.latitude,
-      length: pEvent.length,
-      seats: pEvent.seats,
-      tickets: pEvent.tickets,
-      ticketPrice: pEvent.ticketPrice,
-      contactName: pEvent.contactName,
-      contactPhone: pEvent.contactPhone,
+      placeName: pEvent.place.placeName,
+      coords: pEvent.place.coords,
+      seats: pEvent.place.seats,
+      tickets: pEvent.place.tickets,
+      ticketPrice: pEvent.place.ticketPrice,
+      contactName: pEvent.place.contactName,
+      contactPhone: pEvent.place.contactPhone,
       charityEvent: pEvent.charityEvent,
-      orgName: pEvent.orgName,
-      orgType: pEvent.orgType,
-      description: pEvent.description
+      orgName: pEvent.org.orgName,
+      orgType: pEvent.org.orgType,
+      description: pEvent.org.description
      }
     }
 
@@ -276,6 +335,42 @@
     vm.createNewEvent = function (pNewEvent) {
       var bError = false;
       var newEvent = pNewEvent;
+      // var newEvent = {
+      //   eventName: pNewEvent.eventName,
+      //   invitedName: pNewEvent.invitedName,
+      //   eventType: pNewEvent.eventType,
+      //   eventState: pNewEvent.eventState,
+      //   photo: pNewEvent.photo,
+      //   date:{
+      //     date1: pNewEvent.date.date1,
+      //     date2: pNewEvent.date.date2
+      //   },
+      //   time:{
+      //     time1: pNewEvent.time.time1,
+      //     time2: pNewEvent.time.time2
+      //   },
+      //   selectAcademies: pNewEvent.selectAcademies,
+      //   selectCategories: pNewEvent.selectCategories,
+      //   costInsc: pNewEvent.costInsc,
+      //   selectSponsors: pNewEvent.selectSponsors,
+      //   place: {
+      //     placeName: pNewEvent.place.placeName,
+      //     location: pNewEvent.place.location,
+      //     latitude: pNewEvent.place.latitude,
+      //     length: pNewEvent.place.length,
+      //     seats: pNewEvent.place.seats,
+      //     tickets: pNewEvent.place.tickets,
+      //     ticketPrice: pNewEvent.place.ticketPrice,
+      //     contactName: pNewEvent.place.contactName,
+      //     contactPhone: pNewEvent.place.contactPhone
+      //   },
+      //   charityEvent: pNewEvent.charityEvent,
+      //   org:{
+      //     orgName: pNewEvent.org.orgName,
+      //     orgType: pNewEvent.org.orgType,
+      //     description: pNewEvent.org.description
+      //   }
+      // }
       // newEvent.map = createMap(newEvent.latitude, newEvent.length);
       // console.log(newEvent);
 
@@ -536,27 +631,25 @@
       vm.event.eventType = pEvent.eventType;
       vm.event.eventState = pEvent.eventState;
       vm.event.photo = pEvent.photo;
-      vm.event.date1 = pEvent.date1;
-      vm.event.time1 = new Date(pEvent.time1);
-      vm.event.date2 = pEvent.date2;
-      vm.event.time2 = new Date(pEvent.time2);
+      vm.event.date.date1 = pEvent.date.date1;
+      vm.event.time.time1 = new Date(pEvent.time.time1);
+      vm.event.date.date2 = pEvent.date.date2;
+      vm.event.time.time2 = new Date(pEvent.time.time2);
       vm.event.selectAcademies = pEvent.selectAcademies;
       vm.event.selectCategories = pEvent.selectCategories;
       vm.event.costInsc = pEvent.costInsc;
       vm.event.selectSponsors = pEvent.selectSponsors;
-      vm.event.placeName = pEvent.placeName;
-      vm.event.location = pEvent.location;
-      vm.event.latitude = pEvent.latitude;
-      vm.event.length = pEvent.length;
-      vm.event.seats = pEvent.seats;
-      vm.event.tickets = pEvent.tickets;
-      vm.event.ticketPrice = pEvent.ticketPrice;
-      vm.event.contactName = pEvent.contactName;
-      vm.event.contactPhone = pEvent.contactPhone;
+      vm.event.place.placeName = pEvent.place.placeName;
+      vm.event.place.coords = pEvent.place.coords;
+      vm.event.place.seats = pEvent.place.seats;
+      vm.event.place.tickets = pEvent.place.tickets;
+      vm.event.place.ticketPrice = pEvent.place.ticketPrice;
+      vm.event.place.contactName = pEvent.place.contactName;
+      vm.event.place.contactPhone = pEvent.place.contactPhone;
       vm.event.charityEvent = pEvent.charityEvent;
-      vm.event.orgType = pEvent.orgType;
-      vm.event.orgName = pEvent.orgName;
-      vm.event.description = pEvent.description;
+      vm.event.org.orgType = pEvent.org.orgType;
+      vm.event.org.orgName = pEvent.org.orgName;
+      vm.event.org.description = pEvent.org.description;
       vm.updateDisable = false;
     };
 
@@ -568,27 +661,33 @@
         eventType: vm.event.eventType,
         eventState: vm.event.eventState,
         photo: vm.event.photo,
-        date1: vm.event.date1,
-        time1: vm.event.time1,
-        date2: vm.event.date2,
-        time2: vm.event.time2,
+        date:{
+          date1: vm.event.date.date1,
+          date2: vm.event.date.date2
+        },
+        time:{
+          time1: vm.event.time.time1,
+          time2: vm.event.time.time2
+        },
         selectAcademies: vm.event.selectAcademies,
         selectCategories: vm.event.selectCategories,
         costInsc: vm.event.costInsc,
         selectSponsors: vm.event.selectSponsors,
-        placeName: vm.event.placeName,
-        location: vm.event.location,
-        latitude: vm.event.latitude,
-        length: vm.event.length,
-        seats: vm.event.seats,
-        tickets: vm.event.tickets,
-        ticketPrice: vm.event.ticketPrice,
-        contactName: vm.event.contactName,
-        contactPhone: vm.event.contactPhone,
+        place: {
+          placeName: vm.event.place.placeName,
+          coords: vm.event.place.coords,
+          seats: vm.event.place.seats,
+          tickets: vm.event.place.tickets,
+          ticketPrice: vm.event.place.ticketPrice,
+          contactName: vm.event.place.contactName,
+          contactPhone: vm.event.place.contactPhone
+        },
         charityEvent: vm.event.charityEvent,
-        orgName: vm.event.orgName,
-        orgType: vm.event.orgType,
-        description: vm.event.description
+        org:{
+          orgName: vm.event.org.orgName,
+          orgType: vm.event.org.orgType,
+          description: vm.event.org.description
+        }
       }
       $scope.updateDisable = true;
       eventService.updateEvent(modEvent);
@@ -999,6 +1098,46 @@
         }
       }
     }
+
+    // Inicia Daniel
+
+vm.editMember = function(pMemberToEdit) {
+  console.log(pMemberToEdit);
+  console.log(vm);
+  vm.editMem.name = pMemberToEdit.name;
+  vm.editMem.position = pMemberToEdit.position;
+  vm.editMem.email = pMemberToEdit.email;
+  vm.editMem.phone = pMemberToEdit.phone;
+  vm.isEdit = true;
+  vm.modDisplay = true;
+}
+//Limpia el formulario de actualización y /o creación de miembro
+function clearForm(pObjectToFrm) {
+  for (var index in pObjectToFrm) {
+    pObjectToFrm[index] = '';
+  }
+}
+//Abre el formulario
+vm.addNewDirect = function() {
+  vm.modDisplay = true;
+  vm.isNew = true;
+}
+//crea el miembro nuevo de la junta directiva
+vm.createMember = function(pNewMember) {
+  settingsService.updateDirect(pNewMember);
+  vm.showAlertEditParams('El miembro llamado '+ pNewMember.name+' ha sido creado exitosamente.','¡Nuevo miembro de la junta directiva!');
+  init();
+  vm.modDisplay = false;
+  clearForm(vm.editMem);
+}
+vm.updateMember = function(pMemberToUpdate) {
+  settingsService.updateDirect(pMemberToUpdate);
+  vm.showAlertEditParams('El miembro llamado '+ pMemberToUpdate.name+' ha sido actualizado exitosamente.','¡Actualización de miembro en la junta directiva!');
+  init();
+  vm.modDisplay= false;
+  clearForm(vm.editMem);
+}
+// Termina dANIEL
 
   }
 
