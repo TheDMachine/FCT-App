@@ -1,8 +1,80 @@
-<div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-offset-4">
-<h3>Propuestas a revisar</h3>
-<h4>{{vm.messageToHave}}</h4>
+<!-- Sidenav -->
+<div class="body-app md-menu-demo" layout="column" ng-cloak ng-init="selected = 0">
+	<div class="side-content-container" layout="row" flex>
+		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10" flex-sm="15" flex-xs="20">
+			<md-list>
+				<md-list-item>
+					<figure class="logo-nav">
+						<img src="images/logoSideNav.png">
+					</figure>
+				</md-list-item>
+				<md-list-item layout="column">
+					<md-button class="button-selected" ng-click="vm.selected = 1">
+						<i class="material-icons side-icons home-icon" ng-style="vm.selected == 1 ? {'color': '#fff'} : {'color': '#00978f'} ">&#xE88A;</i>
+						<p class="menu-button">Propuestas</p>
+					</md-button>
+				</md-list-item>
+				<md-list-item>
+					<md-button class="button-seletected" ng-click="vm.selected = 2">
+						<i class="material-icons side-icons home-icon" ng-style="vm.selected == 2 ? {'color':'#fff'}: {'color':'#00978f'}">&#xE8B5;</i>
+						<p class="menu-button">Reuniones</p>
+					</md-button>
+				</md-list-item>
+				<!-- <md-list-item  layout="column">
+					<md-button class="button-selected" ng-click="vm.selected = 2">
+						<i class="material-icons side-icons register-icon" ng-style="vm.selected == 2 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE873;</i>
+						<p class="menu-button">Registros</p>
+					</md-button>
+				</md-list-item> -->
+</md-list>
+</md-sidenav>
+<md-content id="content" flex>
+ <md-toolbar class="tool-icons md-whiteframe-3dp" layout="row">
+  <md-list-item class="noright" flex="20">
+   <img src="components/admin/admin.jpg" class="md-avatar" />
+   <p>{{vm.currentUser.email}}</p>
+ </md-list-item>
+ <div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
+   <div class="icons-profile-container">
+    <md-icon flex>
+     <i class="material-icons user-nav-icons">&#xE7F4;</i>
+   </md-icon>
+   <md-menu>
+     <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="vm.openMenu($mdMenu, $event)">
+      <md-icon md-menu-origin>
+       <i class="material-icons user-nav-icons">&#xE8B8;</i>
+     </md-icon>
+   </md-button>
+   <md-menu-content width="4">
+    <md-menu-item>
+      <md-button ng-click="vm.getCurrentAdmin(vm.currentUser)">
+        Editar perfil
+      </md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+
+        Recuperar contraseña
+      </md-button>
+    </md-menu-item>
+    <md-menu-divider></md-menu-divider>
+    <md-menu-item>
+      <md-button ng-click="vm.logOut()">
+        Cerrar sesión
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>
 </div>
-<md-content ng-hide="vm.proposes.length == 0" class="md-padding" layout-xs="column" layout="row">
+</div>
+</md-toolbar>
+<!-- Inicia las vistas -->
+<div ng-show="vm.selected == 1">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-1 col-md-offset-1">
+      <h3>Propuestas a revisar</h3>
+      <h4>{{vm.messageToHave}}</h4>
+  </div>
+  <md-content ng-hide="vm.proposes.length == 0" class="md-padding" layout-xs="column" layout="row">
     <div flex-xs flex-gt-xs="90" layout="row">
       <md-card ng-repeat="prop in vm.proposes track by $index">
         <img ng-src="{{prop.photo}}" class="md-card-image" alt="{{prop.photo}}">
@@ -29,3 +101,40 @@
       <md-card>
       </div>
   </md-content>
+</div>
+<!-- Inicio vista #2 -->
+<div ng-show="vm.selected == 2">
+	<div class="col-md-offset-1 col-md-10 md-padding" layout-xs="column" layout="column">
+		<h3>Agendar una reunión</h3>
+	<form name="frmNewMeeting" ng-submit="vm.newAppointment(vm.appt)">
+	  <!-- Campo para escoger la fecha -->
+	  <md-input-container>
+	    <md-datepicker name="dateToMeet"  ng-model="vm.appt.dateToMeet"  md-placeholder="Fecha de la reunión" required></md-datepicker>
+
+	    <!-- Mensaje de retroalimentacion -->
+	   	<div ng-messages="frmNewMeeting.dateToMeet.$error">
+	     		<div ng-messages-include="components/includes/messages.html"></div>
+	   	</div>
+	  </md-input-container>
+
+	  <!-- Campo Tipo de evento -->
+	  <md-input-container>
+	      <label>Seleciona la propuesta a evaluar</label>
+	      <md-select name="proposeType" ng-model="vm.appt.proposeName" required>
+	        <md-option ng-repeat="apt in vm.propList track by $index" value="{{apt}}">{{apt}}</md-option>
+	      </md-select>
+
+	    <!-- Mensaje de retroalimentacion -->
+	    <div ng-messages="frmNewMeeting.proposeType.$error">
+	      <div ng-messages-include="components/includes/messages.html"></div>
+	    </div>
+	  </md-input-container>
+	  <md-button type="submit">Agendar cita</md-button>
+	</form>
+</div>
+</div>
+
+<!-- Fin de todo -->
+</md-content>
+</div>
+</div>
