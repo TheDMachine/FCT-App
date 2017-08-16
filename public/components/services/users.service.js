@@ -57,19 +57,17 @@
 
     //Guardar alumno
     function _setUsers(newUser){
-      var usersList = _getUsers();
+    //  var usersList = _getUsers();
       newUser.password = _generatePassword();
-      var error = false;
-      for (var i = 0; i < usersList.length; i++) {
-        if (usersList[i].email == newUser.email) {
-          error = true;
-          return;
-        }
+      //var error = false;
+      // (var i = 0; i < usersList.length; i++) {
+      //  if (usersList[i].email == newUser.email) {
+      //    error = true;
+      //    return;
+      //  }
+        return $http.get('http://localhost:3000/api/save_student',newUser);
       }
-      usersList.push(newUser);
-      localStorage.setItem('lsUsersList', JSON.stringify(usersList));
-      console.log(_getUsers());
-    }
+    
 
     //buscar si la cédula se repite
     function _searchUser(newUser){
@@ -128,11 +126,11 @@
 
     //muestra la informacion mas actual
     function _getUsers(){
-      var usersList = JSON.parse(localStorage.getItem('lsUsersList'));
-      if(usersList == null){
-        usersList = users;
-      }
-      return usersList;
+    // var usersList = JSON.parse(localStorage.getItem('lsUsersList'));
+      //if(usersList == null){
+    //    usersList = users; }
+      //return usersList;
+        return $http.get('http://localhost:3000/api/get_all_students');
     }
     //editar la informacion del alumno ya registrada
     function _updateUsers(editUser){

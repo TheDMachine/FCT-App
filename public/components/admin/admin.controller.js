@@ -971,17 +971,17 @@
 
     //funcion para guardar informacion del alumno
     vm.createStudent = function(pNewStudent) {
-      if (userService.searchUser(pNewStudent.id) !== false) {
-        vm.studentDuplicateAlert();
-      } else {
-        console.log(pNewStudent);
-        pNewStudent.role = 'Competidor';
-        userService.setUsers(pNewStudent);
-        vm.studentAlert();
-        clean();
-        init();
-      }
-    }
+    //   if (userService.searchUser(pNewStudent.id) !== false) {
+    //     vm.studentDuplicateAlert();
+    //   } else {
+    //     console.log(pNewStudent);
+    //     pNewStudent.role = 'student';
+    //     userService.setUsers(pNewStudent);
+    //     vm.studentAlert();
+    //     clean();
+    //     init();
+    //   }
+     }
 
 
     //funcion para editar alumno
