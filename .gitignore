@@ -3,3 +3,4 @@
 .DS_Store
 public/bower_components/
 node_modules/
+api/components/notifications/mailgun.json
