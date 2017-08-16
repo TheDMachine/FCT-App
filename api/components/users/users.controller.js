@@ -14,8 +14,10 @@ module.exports.update = function(req,res){
   });
 
 }
+
 // Funciones Josué
 //Backend Profesor
+
 module.exports.saveTeacher = function(req, res){
   var newUser = new User({
     id: req.body.id,

@@ -6,8 +6,7 @@ var AcademySchema = new mongoose.Schema({
   manager:     {type: String, required: true},
   competitors: {type: String, required: true},
   phone:       {type: String, required: true, unique: true},
-  email:       {type: String, required: true, unique: true},
-  status:      {type: String, required: true}
+  email:       {type: String, required: true, unique: true}
 });
 
 module.exports = mongoose.model('academies', AcademySchema);
