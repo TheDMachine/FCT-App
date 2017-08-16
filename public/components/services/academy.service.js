@@ -3,23 +3,24 @@
   .module('app')
   .service('academyServices', academyServices);
 
-  function academyServices(logService, AuthService) {
+  function academyServices($http,logService, AuthService) {
     var academy = [];
     var publicAPI = {
       setAcademy: _setAcademy,
       getAcademy: _getAcademy,
-      updateAcademy : _updateAcademy
+      updateAcademy : _updateAcademy,
+      findAcademy: _findAcademy
     };
     return publicAPI;
     //Guardar academia
     function _setAcademy(newAcademy){
-      var academyList = _getAcademy();
-      var position = searchAcademy(newAcademy);
-      if (position == -1) {
-        academyList.push(newAcademy);
-        localStorage.setItem('lsAcademyList', JSON.stringify(academyList));
-        //logService.createLog(0, )
-      }
+      // var academyList = _getAcademy();
+      // var position = searchAcademy(newAcademy);
+      // if (position == -1) {
+      //   academyList.push(newAcademy);
+      //   localStorage.setItem('lsAcademyList', JSON.stringify(academyList));
+      // }
+      return $http.post('http://localhost:3000/api/save_academy',newAcademy)
     }
     //buscar si la academia se repite
     function searchAcademy(newAcademy){
@@ -35,21 +36,33 @@
     }
     //muestra la informacion mas actual
     function _getAcademy(){
-      var academyList = JSON.parse(localStorage.getItem('lsAcademyList'));
-      if(academyList == null){
-        academyList = academy;
-      }
-      return academyList;
+      // var academyList = JSON.parse(localStorage.getItem('lsAcademyList'));
+      // if(academyList == null){
+      //   academyList = academy;
+      // }
+      // return academyList;
+      return $http.get('http://localhost:3000/api/get_all_academies');
     }
     //editar la informacion de la academian ya registrada
     function _updateAcademy(editAcademy){
-      var academyList = _getAcademy();
-      for(var i = 0; i < academyList.length; i++){
-        if(academyList[i].name == editAcademy.name){
-          academyList[i] = editAcademy;
-        }
-      }
-      localStorage.setItem('lsAcademyList', JSON.stringify(academyList));
+      // var academyList = _getAcademy();
+      // for(var i = 0; i < academyList.length; i++){
+      //   if(academyList[i].name == editAcademy.name){
+      //     academyList[i] = editAcademy;
+      //   }
+      // }
+      // localStorage.setItem('lsAcademyList', JSON.stringify(academyList));
+      return $http.put('http://localhost:3000/api/update_academy',editAcademy);
     }
+
+     function _findAcademy(pAcademyName){
+      var academyList = _getAcademy();
+     for (var i = 0; i < academyList.length; i++) {
+       if(academyList[i].name == pAcademyName){
+         return academyList[i];
+       }
+     }
+     return false;
+   }
   }
 })();

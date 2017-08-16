@@ -459,7 +459,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="academy in vm.academy | filter:{name:vm.academyFilter}">
+                <tr ng-repeat="academy in vm.academies | filter:{name:vm.academyFilter}">
                   <td>{{academy.name}}</td>
                   <td>{{academy.manager}}</td>
                   <td><md-button ng-click="vm.getAcademy(academy)" class="md-raised">Editar</md-button></td>
