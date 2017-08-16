@@ -36,9 +36,9 @@
     vm.acceptedEvents = [];
 
   function init() {
-    vm.currentUser = userService.findUserTeacher(userService.getCookie());
+    vm.currentUser = $cookies.get('currentUserActive');
+    vm.currentUser = JSON.parse(vm.currentUser);
     vm.selected = 2;
-    console.log(vm.currentUser);
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
@@ -81,13 +81,19 @@
     $mdDialog.show(confirm).then(function(result) {
       vm.currentUser.password =  result;
       vm.currentUser.newUser = 0;
-      userService.updateTeacher(vm.currentUser);
+      userService.updateTeacher(vm.currentUser)
+      .then(function(response){
+        console.log(response);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
     }, function() {
       $scope.status = 'You didn\'t name your dog.';
     });
   };
 
-  if(vm.currentUser.newUser == 1) {
+ if(vm.currentUser.newUser == 1) {
     $scope.showPrompt();
   }
 
@@ -281,7 +287,7 @@
     vm.showCompetition = function(competition, $index){
       for(var i = 0; i < vm.competitions.length; i++){
         if(competition.competitionNumber == vm.competitions[i].competitionNumber){
-          vm.competitionsToShow.push(competition);
+          vm.competitionsToShow[$index] = competition;
           for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
             vm.competitionsToShow[i].competitors[j].points = 0;
           }
@@ -340,6 +346,7 @@
 
     vm.updateCurrentTeacher = function(){
       var editTeacher = {
+      _id : vm.currentUser._id,
       password : vm.currentUser.password,
       id : vm.currentUser.id,
       firstName : vm.currentUser.firstName,
@@ -355,10 +362,27 @@
       photo : vm.currentUser.photo,
       newUser : vm.currentUser.newUser
       }
-      userService.updateTeacher(editTeacher);
-      init();
+      userService.updateTeacher(editTeacher)
+      .then(function(response){
+        console.log(response);
+        $http.get('http://localhost:3000/api/get_all_teachers')
+        .then(function(response){
+          for(var i = 0; i < response.data.length; i++){
+            if(response.data[i].id == vm.currentUser.id){
+              $cookies.putObject('currentUserActive', response.data[i]);
+              vm.currentUser = $cookies.get('currentUserActive');
+              vm.currentUser = JSON.parse(vm.currentUser);
+            }
+          }
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+      })
+      .catch(function(err){
+        console.log(err);
+      });
       vm.editTeacherProfile = false;
-      cleanTeacher();
     }
 
     vm.updatePoints = function(competitor, $index){

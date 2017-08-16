@@ -28,11 +28,11 @@
 					<div class="dropdown-menu">
 						<ul>
 							<li>
-								<md-button class="button-selected" ng-click="vm.selected = 9">R/Consejo
+								<md-button class="button-selected" ui-sref="admin.partOne" ng-click="vm.selected = 9">R/Consejo
 								</md-button>
 							</li>
 							<li>
-								<md-button class="button-selected" ng-click="vm.selected = 10">
+								<md-button class="button-selected" ng-click="vm.selected = 10" ui-sref=".teachpart1">
 									<p>Profesor</p>
 								</md-button>
 							</li>
@@ -75,8 +75,9 @@
 </md-list-item>
 <md-list-item  layout="column">
   <md-button class="button-selected" ng-click="vm.selected = 13">
-    <i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xEB3F;</i>
-    <p class="menu-button">Mantening</p>
+		<!--<i class="material-icons">&#xE869;</i>  -->
+    <i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE869;</i>
+    <p class="menu-button">Mantenimiento</p>
   </md-button>
 </md-list-item>
 </md-list>
@@ -985,6 +986,20 @@
 </md-card>
 </md-content>
 </md-tab>
+<!-- Actualizar el peso del competidor -->
+
+<md-tab label="Actualizar pesaje">
+	<md-content class="col-md-10 col-offset-1">
+		<!-- <h2>A ver si sta vesh gunfiona.</h2> -->
+		<md-input-container>
+			<md-select ng-model="vm.userToUpWeight">
+				<md-option ng-repeat="uw in vm.users" value="{{uw.name}}">{{uw.name}}</md-option>
+			</md-selected>
+		</md-input-container>
+		<md-button ng-click="vm.showUpdateWeight(vm.userToUpWeight)">Actualizar Peso</md-button>
+	</md-content>
+</md-tab>
+</md-tabs>
 </md-content>
 
 </div>
@@ -1196,22 +1211,21 @@
     </div>
   </div>
 </div>
-
 <!-- Representante de consejo  -->
 <div ng-show="vm.selected == 9">
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Representante de consejo" ui-sref="admin.partOne">
-        <md-content class="md-padding">
-          <h1 class="md-display-2">Registro de representante de consejo</h1>
+        <md-content class="col-md-10 col-md-offset-1 md-padding">
+          <h1 class="md-display-1">Registro de representante de consejo</h1>
           <h2 id="errorConsul"></h2>
 
           <!-- links de cada paso del formulario de registro de eventos -->
           <div class="text-center genericButtonsSteps" layout="row" layout-align="center center">
-            <div ui-sref-active="active" ui-sref=".partOne">
+            <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".partOne">
               <a>1</a>
             </div>
-            <div ui-sref-active="active" ui-sref=".partTwo">
+            <div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".partTwo">
               <a>2</a>
             </div>
           </div>
@@ -1222,7 +1236,6 @@
       </md-tab>
     </md-content>
   </div>
-
   <!-- Espacio de profesores -->
   <div ng-show="vm.selected == 10">
     <md-content>
@@ -1231,10 +1244,10 @@
           <md-content class="md-padding">
             <h1 class="md-display-2">Profesores</h1>
             <div class="text-center" id="buttonTeacher" layout="row" layout-align="center center">
-              <div ui-sref-active="active" ui-sref=".teachpart1">
+              <div ui-sref-active="active" ui-sref=".teachpart1" class="md-whiteframe-3dp" >
                 <a>1</a>
               </div>
-              <div ui-sref-active="active" ui-sref=".teachpart2">
+              <div ui-sref-active="active" ui-sref=".teachpart2" class="md-whiteframe-3dp">
                 <a>2</a>
               </div>
             </div>
@@ -1259,22 +1272,25 @@
               <div class="col-md-offset-1 col-md-10">
                 <div>
                   <h3>Lista de Profesores</h3>
-                  <table class="table-responsive">
-                    <thead>
+                  <table class="table-responsive md-whiteframe-3dp">
+                    <thead class= "md-whiteframe-3dp">
                       <tr>
                         <th>Cedula</th>
                         <th>Primer nombre</th>
                         <th>Primer apellido</th>
                         <th>Estado</th>
+												<th>Teléfono</th>
                         <th>Foto</th>
+												<th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr ng-repeat="teacher in vm.teachers track by $index">
                         <td>{{teacher.id}}</td>
+                        <td>{{teacher.name}}</td>
                         <td>{{teacher.firstName}}</td>
-                        <td>{{teacher.firstLastName}}</td>
                         <td>{{teacher.status}}</td>
+												<td>{{teacher.phone}}</td>
                         <td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
                         <!-- Botones para editar profesores -->
                         <td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)"></td>
@@ -1351,7 +1367,8 @@
                         <td>{{student.id}}</td>
                         <td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
                         <td>{{student.status}}</td>
-                        <td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
+												<td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
+												<td><md-button ng-click="vm.updateBelt(student)" class="md-raised">Promover grado</md-button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1409,7 +1426,7 @@
 
 
       <!-- Espacio de mantenimiento -->
-      <div ng-show="vm.selected == 13">
+			<div ng-show="vm.selected == 13">
        <md-tabs md-dynamic-height md-border-bottom>
          <md-tab label="Bitacora del Sistema">
            <md-content class="md-padding col-md-offset-1 col-md-10">

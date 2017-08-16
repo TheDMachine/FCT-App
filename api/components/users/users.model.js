@@ -1,31 +1,32 @@
 var mongoose = require('mongoose');
 
 var roles = ['admin','assistant','teacher','student'],
-    states = ['active','inactive','banned'];
+    states = ['activo','inactivo','banned'];
 
 var UserSchema = new mongoose.Schema({
   id :            {type: String, required: true, unique: true, minlength:9,maxlength:13},
   name:           {type: String, required: true},
-  surName:        {type: String},
+  surName:        {type: String, required: false},
   firstName:      {type: String, required: true},
-  lastName:       {type: String},
+  lastName:       {type: String, required: false},
   genre:          {type: String, required: true},
   birthday:       {type: Date, required: true},
   nationality:    {type: String, required: true},
   phone:          {type: String, required: true},
   email:          {type: String, required: true},
   photo:          {type: String, required: true},
-  status:         {type: String, required: true, em:states},
-  role:           {type: String, required: true, em:roles },
-  weight:         {type: String},
-  height:         {type: String},
-  attendAcademy:  {type: String},
-  teacher:        {type: String},
-  belt:           {type: String},
-  category:       {type: String},
-  tournaments:    {type: String},
-  tournamentsWins:{type: String},
-  password:       {type: String}
+  status:         {type: String, required: false},
+  role:           {type: String, required: true},
+  weight:         {type: String, required: false},
+  height:         {type: String, required: false},
+  attendAcademy:  {type: String, required: false},
+  teacher:        {type: String, required: false},
+  belt:           {type: String, required: false},
+  category:       {type: String, required: false},
+  tournaments:    {type: String, required: false},
+  tournamentsWins:{type: String, required: false},
+  password:       {type: String, required: true},
+  newUser:        {type: Number, required: true}
 });
 
 module.exports = mongoose.model('users', UserSchema);

@@ -13,15 +13,17 @@ module.exports.saveAcademy = function(req, res){
 
   newAcademy.save(function(err){
     if(err){
+
       res.json({success:false, msg:'No se pudo registrar el academia' + err});
     }else{
       res.json({success:true, msg:'Se registró el academia correctamente'});
+
     }
   });
 }
 
 module.exports.findAllAcademies = function(req,res){
-  Academy.find().then(function(academies){
+  academy.find().then(function(academies){
     res.send(academies);
   })
 };
