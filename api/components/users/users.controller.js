@@ -34,7 +34,8 @@ module.exports.saveTeacher = function(req, res){
     status: req.body.status,
     role : req.body.role,
     password : req.body.password,
-    academy : req.body.academy
+    academy : req.body.academy,
+    newUser : req.body.newUser
   });
 
   newUser.save(function(err){
