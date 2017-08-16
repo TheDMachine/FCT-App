@@ -1,46 +1,50 @@
 (function() {
-  'use strict'
-  angular
-  .module('app')
-  .controller('adminCtrl', adminCtrl);
+    'use strict'
+    angular
+      .module('app')
+      .controller('adminCtrl', adminCtrl);
 
-  adminCtrl.$inject = ['$scope', '$mdDialog', '$http', '$state', '$cookies','$location', 'eventService', 'imageService', 'Upload', 'academyServices', 'logService', 'userService', 'sponsorService', 'AuthService', 'estabInfoService', 'ticketService', 'settingsService', 'NgMap'];
+    adminCtrl.$inject = ['$scope', '$mdDialog', '$http', '$state', '$cookies', '$location', 'eventService', 'imageService', 'Upload', 'academyServices', 'logService', 'userService', 'sponsorService', 'AuthService', 'estabInfoService', 'ticketService', 'settingsService', 'NgMap'];
 
-  function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService,ticketService, settingsService, NgMap) {
+    function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, ticketService, settingsService, NgMap) {
 
-    var vm = this;
-    vm.cloudObj = imageService.getConfiguration();
-    vm.selected = 0;
-    vm.updateDisable = true;
-    vm.submitDisable = false;
-    vm.stepTwoConsult = false;
-    vm.stepThreeConsult = false;
-    vm.stepOneConsult = true;
-    vm.user = {};
-    vm.log = {};
-    vm.imageActive = false;
-    vm.cloudObj = imageService.getConfiguration();
-    vm.weights = estabInfoService.getWeight();
-    vm.categories = estabInfoService.getCategories();
-    vm.acceptedEvents = [];
-    vm.updateDisable = true;
-    vm.nameSponsorEdit = false;
-    vm.showCompetition = false;
-    vm.competitionsToShow = [];
-    vm.fights = [];
-    vm.pairFights = [];
-    vm.ready = false;
-    vm.today = new Date();
-    vm.consultEvent = {};
-    vm.customFullscreen = false;
-    vm.infowindow;
-    vm.academies = {};
-    loadAcademies();
+      var vm = this;
+      vm.cloudObj = imageService.getConfiguration();
+      vm.selected = 0;
+      vm.updateDisable = true;
+      vm.submitDisable = false;
+      vm.stepTwoConsult = false;
+      vm.stepThreeConsult = false;
+      vm.stepOneConsult = true;
+      vm.user = {};
+      vm.log = {};
+      vm.imageActive = false;
+      vm.cloudObj = imageService.getConfiguration();
+      vm.weights = estabInfoService.getWeight();
+      vm.categories = estabInfoService.getCategories();
+      vm.acceptedEvents = [];
+      vm.updateDisable = true;
+      vm.nameSponsorEdit = false;
+      vm.showCompetition = false;
+      vm.competitionsToShow = [];
+      vm.fights = [];
+      vm.pairFights = [];
+      vm.ready = false;
+      vm.today = new Date();
+      vm.consultEvent = {};
+      vm.customFullscreen = false;
+      vm.infowindow;
+      vm.teachers = {};
+      loadTeachers();
 
+      function loadTeachers(){
+        userService.getTeachers().then(function (response) {
+          vm.teachers = response.data;
 
-
-    function init(){
-    // función que se llama así misma para indicar que sea lo primero que se ejecute
+          });
+          }
+      function init() {
+        // función que se llama así misma para indicar que sea lo primero que se ejecute
         // Inicio Daniel
         vm.stt = settingsService.getSettings();
         vm.editMem = {};
