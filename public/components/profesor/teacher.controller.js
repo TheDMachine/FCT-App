@@ -36,7 +36,7 @@
     vm.acceptedEvents = [];
 
   function init() {
-        vm.currentUser = $cookies.get('currentUserActive');
+    vm.currentUser = $cookies.get('currentUserActive');
     vm.currentUser = JSON.parse(vm.currentUser);
     vm.selected = 2;
         vm.academy = academyServices.getAcademy();
@@ -81,15 +81,21 @@
     $mdDialog.show(confirm).then(function(result) {
       vm.currentUser.password =  result;
       vm.currentUser.newUser = 0;
-      userService.updateTeacher(vm.currentUser);
+      userService.updateTeacher(vm.currentUser)
+      .then(function(response){
+        console.log(response);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
     }, function() {
       $scope.status = 'You didn\'t name your dog.';
     });
   };
 
- /* if(vm.currentUser.newUser == 1) {
+ if(vm.currentUser.newUser == 1) {
     $scope.showPrompt();
-  }*/
+  }
 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
 

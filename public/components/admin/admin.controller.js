@@ -789,6 +789,7 @@ vm.teachers = response.data;
         //vm.showProfesorDuplicateAlert();
         pNewTeacher.role = 'teacher';
         pNewTeacher.status = 'activo';
+        pNewTeacher.newUser = 1;
         userService.setTeachers(pNewTeacher);
         vm.showProfesorAlert();
         init();

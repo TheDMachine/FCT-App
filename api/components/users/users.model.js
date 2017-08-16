@@ -25,7 +25,8 @@ var UserSchema = new mongoose.Schema({
   category:       {type: String, required: false},
   tournaments:    {type: String, required: false},
   tournamentsWins:{type: String, required: false},
-  password:       {type: String, required: true}
+  password:       {type: String, required: true},
+  newUser:        {type: Number, required: true}
 });
 
 module.exports = mongoose.model('users', UserSchema);
