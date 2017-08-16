@@ -38,14 +38,11 @@
       loadTeachers();
 
       function loadTeachers(){
-userService.getTeachers().then(function (response) {
-vm.teachers = response.data;
+        userService.getTeachers().then(function (response) {
+          vm.teachers = response.data;
 
-});
-}
-
-
-
+          });
+          }
       function init() {
         // función que se llama así misma para indicar que sea lo primero que se ejecute
         // Inicio Daniel
@@ -58,7 +55,6 @@ vm.teachers = response.data;
         vm.currentUser = userService.searchAdmin(userService.getCookie());
         console.log(vm.currentUser);
         vm.originatorEv;
-        vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
         console.log(vm.events);
@@ -69,10 +65,13 @@ vm.teachers = response.data;
           vm.sponsors = response.data;
         });
         console.log(vm.sponsors);
+        academyServices.getAcademy().then(function(response) {
+          vm.academies = response.data;
+        });
         // eventService.getEvents().then(function(response) {
         //   vm.events = response.data;
         // });
-        console.log(vm.sponsors);
+        // console.log(vm.events);
         vm.teacher = {};
         vm.sponsor = {};
         vm.users = userService.getUsers();
@@ -870,9 +869,27 @@ vm.teachers = response.data;
         email: vm.email
       };
       console.log(newAcademy);
-      academyServices.setAcademy(newAcademy);
-      cleanAcademy();
-      init();
+      // academyServices.setAcademy(newAcademy);
+      // cleanAcademy();
+      // init();
+
+      if (academyServices.findAcademy(newAcademy.name) !== false) {
+          vm.academyDuplicateAlert();
+        } else {
+          academyServices.setAcademy(newAcademy)
+            .then(function(response) {
+              var responseObj = response;
+              console.log(response);
+              academyServices.getSponsors().then(function(response) {
+                vm.academies = response.data;
+              });
+            }).catch(function(err) {
+              console.log(err);
+            });
+          vm.academyAlert();
+        }
+        cleanAcademy();
+        init();
     }
 
     //funcion para limpiar los input  de academia
@@ -887,6 +904,7 @@ vm.teachers = response.data;
 
     //funcion para editar academia
     vm.getAcademy = function(academy) {
+      vm._id = academy._id;
       vm.name = academy.name;
       vm.address = academy.address;
       vm.manager = academy.manager;
@@ -898,6 +916,7 @@ vm.teachers = response.data;
     //funcion para guardar la academia editada
     vm.updateAcademy = function() {
       var editAcademy = {
+        _id: vm._id,
         name: vm.name,
         address: vm.address,
         manager: vm.manager,
@@ -905,7 +924,19 @@ vm.teachers = response.data;
         phone: vm.phone,
         email: vm.email
       }
-      academyServices.updateAcademy(editAcademy);
+
+      academyServices.updateAcademy(editAcademy)
+      .then(function(response){
+        console.log(response);
+        academyServices.getAcademy().then(
+          function(response){
+            vm.academies = response.data;
+          });
+      })
+      .catch(function(err){
+        console.log(err);
+      })
+      vm.academyAlert();
       init();
       cleanAcademy();
     }
