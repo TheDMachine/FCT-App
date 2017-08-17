@@ -792,10 +792,10 @@
 													<div class="col-xs-12 col-sm-6">
 														<md-input-container flex-offset class="md-block">
 															<label for="">Evento al que pertenece</label>
-															<input name="eventBelongs" type="text" ng-model="vm.eventBelongs" required/>
-															<!-- <md-select name="eventBelongs" ng-model="vm.eventBelongs" required>
-																<md-option ng-repeat="event in vm.events track by $index" ng-value="event.eventName">{{event.eventName}}</md-option>
-															</md-select> -->
+															<!-- <input name="eventBelongs" type="text" ng-model="vm.eventBelongs" required/> -->
+															<md-select name="eventBelongs" ng-model="vm.eventBelongs" required>
+																<md-option ng-repeat="event in vm.events" ng-value="event.eventName">{{event.eventName}}</md-option>
+															</md-select>
 
 															<!-- Mensaje de retroalimentacion -->
 															<div ng-messages="frmCompetition.eventBelongs.$error">

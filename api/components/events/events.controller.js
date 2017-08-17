@@ -53,6 +53,12 @@ module.exports.findAll = function(req, res){
 	})
 };
 
+module.exports.update = function(req, res){
+	console.log(req.body.id);
+	event.findByIdAndUpdate(req.body._id, {$set:req.body}).then(function(data){
+			res.json({succes:true,msg:'Se ha actualizado el evento correctamente.'});
+		});
+}
 
 module.exports.saveCompetition = function(req, res){
   var newCompetition = new competition({
@@ -78,10 +84,3 @@ module.exports.findAllCompetitions = function(req,res){
     res.send(competitions);
   })
 };
-
-module.exports.update = function(req, res){
-	console.log(req.body.id);
-	event.findByIdAndUpdate(req.body._id, {$set:req.body}).then(function(data){
-			res.json({succes:true,msg:'Se ha actualizado el evento correctamente.'});
-		});
-}
