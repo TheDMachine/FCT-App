@@ -102,34 +102,34 @@
 
     // Función para guardar eventos
     function _setEvents(pEvent){
-      var eventsList = _getEvents();
-      eventsList.push(pEvent);
-      localStorage.setItem('lsEventsList', JSON.stringify(eventsList));
-      console.log(eventsList);
-      // return $http.post('http://localhost:3000/api/save_events',pEvent);
+      // var eventsList = _getEvents();
+      // eventsList.push(pEvent);
+      // localStorage.setItem('lsEventsList', JSON.stringify(eventsList));
+      // console.log(eventsList);
+      return $http.post('http://localhost:3000/api/save_events',pEvent);
     }
 
     // Función para extraer información de eventos
     function _getEvents(){
-      var eventsList = JSON.parse(localStorage.getItem('lsEventsList'));
-      if(eventsList == null){
-        eventsList = events;
-      }
-      return eventsList;
-      // return $http.get('http://localhost:3000/api/get_all_events');
+      // var eventsList = JSON.parse(localStorage.getItem('lsEventsList'));
+      // if(eventsList == null){
+      //   eventsList = events;
+      // }
+      // return eventsList;
+      return $http.get('http://localhost:3000/api/get_all_events');
     }
 
     // Función para guardar modificación de información de eventos
     function _updateEvent(pModEvent){
-      var eventsList = _getEvents();
-      for(var i = 0; i < eventsList.length; i++){
-        if(eventsList[i].eventName == pModEvent.eventName){
-          eventsList[i] = pModEvent;
-        }
-      }
-      console.log(eventsList);
-      localStorage.setItem('lsEventsList', JSON.stringify(eventsList));
-      // return $http.put('http://localhost:3000/api/update_events',pModEvent);
+      // var eventsList = _getEvents();
+      // for(var i = 0; i < eventsList.length; i++){
+      //   if(eventsList[i].eventName == pModEvent.eventName){
+      //     eventsList[i] = pModEvent;
+      //   }
+      // }
+      // console.log(eventsList);
+      // localStorage.setItem('lsEventsList', JSON.stringify(eventsList));
+      return $http.put('http://localhost:3000/api/update_events',pModEvent);
     }
 
     // Función para encontrar el evento

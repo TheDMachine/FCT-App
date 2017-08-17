@@ -572,7 +572,8 @@
 												</thead>
 												<tbody>
 													<!-- | dateRange:vm.from3:vm.to3 -->
-													<tr ng-repeat="event in vm.acceptedEvents track by $index">
+													<!-- ng-repeat="event in vm.acceptedEvents track by $index" -->
+													<tr ng-repeat="event in vm.events ">
 														<td>{{event.eventName}}</td>
 														<td>{{event.date.date1 | date : "shortDate"}}</td>
 

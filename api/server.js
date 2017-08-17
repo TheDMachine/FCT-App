@@ -42,7 +42,7 @@ var index = require('./index'),
     userRoutes = require('./components/users/users.route'),
     eventRoutes = require('./components/events/events.route'),
     academiesRoutes = require('./components/academies/academies.route'),
-    loginRoutes = require('./components/login/login.route');
+    loginRoutes = require('./components/login/login.route'),
     sponsorsRoutes = require('./components/sponsors/sponsors.route'),
     reservationsRoutes = require('./components/reservations/reservations.route');
 
