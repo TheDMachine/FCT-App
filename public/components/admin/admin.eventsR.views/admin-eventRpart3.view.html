@@ -5,7 +5,7 @@
 			<label>Academias invitadas</label>
 			<md-select name="frmEventInfo.academies" ng-model="vm.event.selectAcademies" multiple required>
 				<md-optgroup>
-					<md-option ng-repeat="academy in vm.academy" value="{{academy.name}}">{{academy.name}}</md-option>
+					<md-option ng-repeat="academy in vm.academies" value="{{academy.name}}">{{academy.name}}</md-option>
 				</md-optgroup>
 			</md-select>
 
@@ -72,7 +72,3 @@
 		<a ui-sref="admin.part4" class="btn btn-primary" ng-disabled="frmEventInfo.$invalid">Siguiente <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
 	</div>
 </div>
-
-
-
-
