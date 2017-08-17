@@ -1,9 +1,7 @@
 (function(){
-  'use strict';
   angular
   .module('app')
   .service('academyServices', academyServices);
-  academyServices.$inject=['$http'];
 
   function academyServices($http,logService, AuthService) {
     var academy = [];
@@ -67,5 +65,4 @@
      return false;
    }
   }
-
 })();

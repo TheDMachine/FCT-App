@@ -9,4 +9,4 @@ var AcademySchema = new mongoose.Schema({
   email:       {type: String, required: true, unique: true}
 });
 
-module.exports = mongoose.model('Academy', AcademySchema);
+module.exports = mongoose.model('academies', AcademySchema);
