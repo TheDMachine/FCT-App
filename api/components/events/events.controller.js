@@ -1,4 +1,5 @@
 var event = require('./events.model.js');
+var competition = require('./competitions.model.js');
 
 // module.exports.save = function(req, res){
 // 	var newEvent = new event({
@@ -66,3 +67,28 @@ var event = require('./events.model.js');
 // 			res.json({succes:true,msg:'Se ha actualizado el evento correctamente.'});
 // 		});
 // }
+
+module.exports.saveCompetition = function(req, res){
+  var newCompetition = new competition({
+    competitionNumber: req.body.competitionNumber,
+    eventBelongs: req.body.eventBelongs,
+    competitionGenre: req.body.competitionGenre,
+    competitionAge: req.body.competitionAge,
+    competitionWeight: req.body.competitionWeight,
+    competitors: req.body.competitors
+  });
+
+  newCompetition.save(function(err){
+    if(err){
+      res.json({success:false, msg:'No se pudo registrar la competencia' + err});
+    }else{
+      res.json({success:true, msg:'Se registró la competencia correctamente'});
+    }
+  });
+}
+
+module.exports.findAllCompetitions = function(req,res){
+  competition.find().then(function(competitions){
+    res.send(competitions);
+  })
+};

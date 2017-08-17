@@ -67,7 +67,9 @@
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
         console.log(vm.events);
-        vm.competitions = eventService.getCompetitions();
+        eventService.getCompetitions().then(function(response){
+          vm.competitions = response.data;
+        });
         acceptedEvents();
         vm.event = {};
         sponsorService.getSponsors().then(function(response) {
@@ -1061,10 +1063,14 @@
         competitionWeight: vm.competitionWeight,
       }
       newCompetition.competitors = [];
-      console.log(newCompetition);
-      console.log(newCompetition.competitors)
-      eventService.setCompetitions(newCompetition);
-      cleanStudent();
+      eventService.setCompetitions(newCompetition)
+        .then(function(response){
+          var responseObj = response;
+          console.log(response);
+          eventService.getCompetitions().then(function(response){
+            vm.competitions = response.data;
+          });
+        })
       init();
     }
 

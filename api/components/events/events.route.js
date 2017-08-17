@@ -22,5 +22,14 @@ router.route('/update_events')
     eventsController.update(req,res);
  	});
 
+router.route('/save_competition')
+  .post(function(req, res){
+    eventsController.saveCompetition(req, res);
+  });
+
+router.route('/get_all_competitions')
+  .get(function(req, res){
+    eventsController.findAllCompetitions(req, res);
+  });
 
 module.exports = router;

@@ -147,18 +147,20 @@
 
     //funcion para guardar competencias
     function _setCompetitions(newCompetition){
-      var competitionsList = _getCompetitions();
-      competitionsList.push(newCompetition);
-      localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));
+      // var competitionsList = _getCompetitions();
+      // competitionsList.push(newCompetition);
+      // localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));
+      return $http.post('http://localhost:3000/api/save_competition',newCompetition)
     }
 
     //funcion para mostrar competencia acatuales
     function _getCompetitions(){
-      var competitionsList = JSON.parse(localStorage.getItem('lsCompetitionsList'));
-      if(competitionsList == null){
-        competitionsList = competitions;
-      }
-      return competitionsList;
+      // var competitionsList = JSON.parse(localStorage.getItem('lsCompetitionsList'));
+      // if(competitionsList == null){
+      //   competitionsList = competitions;
+      // }
+      // return competitionsList;
+      return $http.get('http://localhost:3000/api/get_all_competitions');
     }
 
     function _updateCompetition(pModCompetition){
