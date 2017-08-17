@@ -5,7 +5,7 @@ var path = require('path');
 var mailSt = require('./mailgun.json');
 var auth = {
   auth: {
-    key:mailSt.api_key,
+    api_key:mailSt.api_key,
     domain:mailSt.domain
   }
 }
@@ -25,7 +25,7 @@ nodemailerMailgun.sendMail({
   }
 }, function (err, info) {
   if (err) {
-    console.log('Error: ' + err);
+    console.log('Error Mierda: ' + err);
   }
   else {
     console.log('Response: ' + info);
