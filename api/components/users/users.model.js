@@ -19,7 +19,7 @@ var UserSchema = new mongoose.Schema({
   role:           {type: String, required: true},
   weight:         {type: String, required: false},
   height:         {type: String, required: false},
-  attendAcademy:  {type: String, required: false},
+  academy:        {type: String, required: false},
   teacher:        {type: String, required: false},
   belt:           {type: String, required: false},
   category:       {type: String, required: false},

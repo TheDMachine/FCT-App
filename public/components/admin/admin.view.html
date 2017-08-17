@@ -1361,9 +1361,9 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr ng-repeat="student in vm.users | filter:{firstName:vm.studentFilter}">
+												<tr ng-repeat="student in vm.students | filter:{name:vm.studentFilter}">
 													<td>{{student.id}}</td>
-													<td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
+													<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
 													<td>{{student.status}}</td>
 													<td>
 														<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>

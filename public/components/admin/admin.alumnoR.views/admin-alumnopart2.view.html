@@ -66,7 +66,7 @@
     <md-input-container flex-offset class="md-block">
       <label for="">Academia</label>
       <md-select name="attendAcademy" ng-model="vm.student.academy" >
-        <md-option ng-repeat="academy in vm.academy" ng-value="academy.name">{{academy.name}}</md-option>
+        <md-option ng-repeat="academy in vm.academies" ng-value="academy.name">{{academy.name}}</md-option>
       </md-select>
 
       <!-- Mensaje de retroalimentacion -->

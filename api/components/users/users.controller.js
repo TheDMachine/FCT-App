@@ -1,7 +1,7 @@
 var User = require('./users.model');
 var bcrypt = require('bcrypt');
 
-module.exports.update = function(req,res){
+module.exports.updateBelt = function(req,res){
 
   User.findByIdAndUpdate(req.body._id, { $set: {'belt': req.body.belt}}, function (err, user) {
     if (err){
@@ -88,7 +88,8 @@ module.exports.saveStudent = function(req, res){
     height : req.body.height,
     tournaments : req.body.tournaments,
     tournamentsWins : req.body.tournamentsWins,
-    category : req.body.category
+    category : req.body.category,
+    teacher : req.body.teacher
   });
 
   newUser.save(function(err){
@@ -100,8 +101,8 @@ module.exports.saveStudent = function(req, res){
   });
 }
 module.exports.findAllStudents = function(req,res){
-  User.find({'role': 'teacher'}).then(function(teacher){
-    res.send(teacher);
+  User.find({'role': 'student'}).then(function(student){
+    res.send(student);
   })
 };
 

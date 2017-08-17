@@ -56,18 +56,18 @@
     }
 
     //Guardar alumno
-    function _setUsers(newUser){
+    function _setUsers(pNewStudent){
     //  var usersList = _getUsers();
-      newUser.password = _generatePassword();
+      pNewStudent.password = _generatePassword();
       //var error = false;
       // (var i = 0; i < usersList.length; i++) {
       //  if (usersList[i].email == newUser.email) {
       //    error = true;
       //    return;
       //  }
-        return $http.get('http://localhost:3000/api/save_student',newUser);
+        return $http.post('http://localhost:3000/api/save_student',pNewStudent);
       }
-    
+
 
     //buscar si la cédula se repite
     function _searchUser(newUser){
