@@ -5,7 +5,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     morgan = require('morgan'),
     mongoose = require('mongoose');
-var mail = require('./components/notifications/email');
+//var mail = require('./components/notifications/email');
 
 // Se establece una conexión con mongoose por medio de las siguientes variables
 var db = mongoose.connection,
