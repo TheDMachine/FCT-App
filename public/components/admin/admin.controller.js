@@ -17,6 +17,7 @@
       vm.stepThreeConsult = false;
       vm.stepOneConsult = true;
       vm.user = {};
+      vm.students = {};
       vm.log = {};
       vm.imageActive = false;
       vm.cloudObj = imageService.getConfiguration();
@@ -36,6 +37,7 @@
       vm.infowindow;
       vm.teachers = {};
       loadTeachers();
+      loadStudents();
 
       function loadTeachers(){
         userService.getTeachers().then(function (response) {
@@ -43,6 +45,13 @@
 
           });
           }
+          function loadStudents(){
+            userService.getUsers().then(function (response) {
+              vm.students = response.data;
+
+              });
+              }
+
       function init() {
         // función que se llama así misma para indicar que sea lo primero que se ejecute
         // Inicio Daniel
@@ -74,7 +83,7 @@
         // console.log(vm.events);
         vm.teacher = {};
         vm.sponsor = {};
-        vm.users = userService.getUsers();
+
         vm.log = logService.showLog();
         vm.belts = estabInfoService.getBelts();
         vm.to = new Date();
@@ -972,17 +981,20 @@
 
     //funcion para guardar informacion del alumno
     vm.createStudent = function(pNewStudent) {
-      if (userService.searchUser(pNewStudent.id) !== false) {
-        vm.studentDuplicateAlert();
-      } else {
-        console.log(pNewStudent);
-        pNewStudent.role = 'Competidor';
-        userService.setUsers(pNewStudent);
-        vm.studentAlert();
-        clean();
-        init();
-      }
-    }
+    //   if (userService.searchUser(pNewStudent.id) !== false) {
+    //     vm.studentDuplicateAlert();
+    //   } else {
+    //     console.log(pNewStudent);
+    //     pNewStudent.role = 'student';
+    //     userService.setUsers(pNewStudent);
+    pNewStudent.role = 'student';
+    pNewStudent.status = 'activo';
+    userService.setUsers(pNewStudent);
+         vm.studentAlert();
+         clean();
+         init();
+    //   }
+     }
 
 
     //funcion para editar alumno
@@ -999,7 +1011,7 @@
       vm.student.nationality = user.nationality;
       vm.student.phone = user.phone;
       vm.student.email = user.email;
-      vm.student.attendAcademy = user.attendAcademy;
+      vm.student.academy = user.academy;
       vm.student.teacher = user.teacher;
       vm.student.belt = user.belt;
       vm.student.category = user.category;
@@ -1023,7 +1035,7 @@
         nationality: vm.nationality,
         phone: vm.phone,
         email: vm.email,
-        attendAcademy: vm.attendAcademy,
+        attendAcademy: vm.academy,
         teacher: vm.teacher,
         belt: vm.belt,
         category: vm.category,
@@ -1243,7 +1255,7 @@
       if (bError == true) {
         //mostrar mensaje
       } else {
-
+        userService.updateBelt(pStudent);
       }
 
 
