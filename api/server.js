@@ -62,5 +62,5 @@ module.exports = app;
 function _server(){
   console.log('Conexion establecida en el puerto ' + port);
 }
-
-mail.sEmail('recoveryPassword', 'dcamposa@ucenfotec.ac.cr','Recuperación de contraseña', {name:'Daniel Campos Arce', linkToClear:'http://localhost:8000'});
+// 
+// mail.sEmail('recoveryPassword', 'dcamposa@ucenfotec.ac.cr','Recuperación de contraseña', {name:'Daniel Campos Arce', linkToClear:'http://localhost:8000'});
