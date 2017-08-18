@@ -65,9 +65,10 @@
         console.log(vm.currentUser);
         vm.originatorEv;
         vm.weights = estabInfoService.getWeight();
-        vm.events = eventService.getEvents();
         console.log(vm.events);
-        vm.competitions = eventService.getCompetitions();
+        eventService.getCompetitions().then(function(response){
+          vm.competitions = response.data;
+        });
         acceptedEvents();
         vm.event = {};
         sponsorService.getSponsors().then(function(response) {
@@ -77,10 +78,10 @@
         academyServices.getAcademy().then(function(response) {
           vm.academies = response.data;
         });
-        // eventService.getEvents().then(function(response) {
-        //   vm.events = response.data;
-        // });
-        // console.log(vm.events);
+        eventService.getEvents().then(function(response) {
+          vm.events = response.data;
+        });
+        console.log(vm.events);
         vm.teacher = {};
         vm.sponsor = {};
 
@@ -357,49 +358,54 @@
 
     // Función para guardar
     vm.createNewEvent = function (pNewEvent) {
-      // if (eventService.findEvent(pNewEvent.eventName) != false) {
-      //   vm.showEventDuplicateAlert();
-      // }
-      // else{
-      //   eventService.setEvents(newEvent)
-      //   .then(function(response){
-      //     var responseObj = response;
-      //     console.log(response);
-      //     eventService.getEvents().then(function(response){
-      //       vm.events = response.data;
-      //     });
-      //   }).catch(function(err){
-      //     console.log(err);
-      //   });
-      //   vm.showEventAlert();
-      // }
-      // vm.error = false;
-      // clean();
-      // init();
+      if(pNewEvent.org == undefined){
+        pNewEvent.org.orgName = '';
+        pNewEvent.org.orgType = '';
+        pNewEvent.org.description = '';
+      }
 
-      var bError = false;
-      var newEvent = pNewEvent;
-
-      if (vm.events.length == 0) {
-        eventService.setEvents(newEvent);
+      if (eventService.findEvent(pNewEvent.eventName) != false) {
+        vm.showEventDuplicateAlert();
+      }
+      else{
+        eventService.setEvents(pNewEvent)
+        .then(function(response){
+          var responseObj = response;
+          console.log(response);
+          eventService.getEvents().then(function(response){
+            vm.events = response.data;
+          });
+        }).catch(function(err){
+          console.log(err);
+        });
         vm.showEventAlert();
-        clean();
-        init();
-      } else {
-        for (var i = 0; i < vm.events.length; i++) {
-          if (newEvent.eventName == vm.events[i].eventName) {
-            bError = true;
-          }
-        }
-        if (bError == false) {
-            eventService.setEvents(newEvent);
-            vm.showEventAlert();
-            clean();
-            init();
-          } else {
-            vm.showEventDuplicateAlert();
-          }
-        }
+      }
+      clean();
+      init();
+
+      // var bError = false;
+      // var newEvent = pNewEvent;
+
+      // if (vm.events.length == 0) {
+      //   eventService.setEvents(newEvent);
+      //   vm.showEventAlert();
+      //   clean();
+      //   init();
+      // } else {
+      //   for (var i = 0; i < vm.events.length; i++) {
+      //     if (newEvent.eventName == vm.events[i].eventName) {
+      //       bError = true;
+      //     }
+      //   }
+      //   if (bError == false) {
+      //       eventService.setEvents(newEvent);
+      //       vm.showEventAlert();
+      //       clean();
+      //       init();
+      //     } else {
+      //       vm.showEventDuplicateAlert();
+      //     }
+      //   }
       };
       // Funciones para guardar patrocinadores
 
@@ -631,14 +637,16 @@
 
       // Función para imprimir datos en el formulario
       vm.getInfo = function(pEvent) {
+        vm.event._id = pEvent._id;
         vm.event.eventName = pEvent.eventName;
         vm.event.invitedName = pEvent.invitedName;
         vm.event.eventType = pEvent.eventType;
         vm.event.eventState = pEvent.eventState;
         vm.event.photo = pEvent.photo;
-        vm.event.date.date1 = pEvent.date.date1;
+        var fecha = new Date(pEvent.date.date1);
+        vm.event.date1 =new Date(fecha.getFullYear(),fecha.getMonth()-2, fecha.getDate());
         vm.event.time.time1 = new Date(pEvent.time.time1);
-        vm.event.date.date2 = pEvent.date.date2;
+        vm.event.date.date2 = new Date(pEvent.date.date2);
         vm.event.time.time2 = new Date(pEvent.time.time2);
         vm.event.selectAcademies = pEvent.selectAcademies;
         vm.event.selectCategories = pEvent.selectCategories;
@@ -661,6 +669,7 @@
       // Función para actualizar datos de evento
       vm.updateEvent = function() {
         var modEvent = {
+          _id: vm._id,
           eventName: vm.event.eventName,
           invitedName: vm.event.invitedName,
           eventType: vm.event.eventType,
@@ -1061,10 +1070,14 @@
         competitionWeight: vm.competitionWeight,
       }
       newCompetition.competitors = [];
-      console.log(newCompetition);
-      console.log(newCompetition.competitors)
-      eventService.setCompetitions(newCompetition);
-      cleanStudent();
+      eventService.setCompetitions(newCompetition)
+        .then(function(response){
+          var responseObj = response;
+          console.log(response);
+          eventService.getCompetitions().then(function(response){
+            vm.competitions = response.data;
+          });
+        })
       init();
     }
 

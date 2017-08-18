@@ -572,7 +572,8 @@
 												</thead>
 												<tbody>
 													<!-- | dateRange:vm.from3:vm.to3 -->
-													<tr ng-repeat="event in vm.acceptedEvents track by $index">
+													<!-- ng-repeat="event in vm.acceptedEvents track by $index" -->
+													<tr ng-repeat="event in vm.events ">
 														<td>{{event.eventName}}</td>
 														<td>{{event.date.date1 | date : "shortDate"}}</td>
 
@@ -772,94 +773,100 @@
 								<div class="container-fluid row">
 									<div class="col-xs-12">
 										<form name="frmCompetition" novalidate autocomplete="off">
+											<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+												<div class="row">
+													<!-- input nombre de la competencia -->
+													<div class="col-xs-12 col-sm-6">
+														<md-input-container flex-offset class="md-block">
+															<label for="">Numero de la competencia</label>
+															<input name="competitionNumber" type="number" ng-model="vm.competitionNumber" required/>
 
-											<!-- input nombre de la competencia -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Numero de la competencia</label>
-													<input name="competitionName" type="number" ng-model="vm.competitionNumber" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmCompetition.competitionName.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
+															<!-- Mensaje de retroalimentacion -->
+															<div ng-messages="frmCompetition.competitionNumber.$error">
+																<div ng-messages-include="components/includes/messages.html"></div>
+															</div>
+														</md-input-container>
 													</div>
-												</md-input-container>
-											</div>
 
-											<!-- input del evento que pertenece -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Evento al que pertenece</label>
-													<md-select name="eventBelongs" ng-model="vm.eventBelongs" required>
-														<md-option ng-repeat="event in vm.events track by $index" ng-value="event.eventName">{{event.eventName}}</md-option>
-													</md-select>
+													<!-- input del evento que pertenece -->
+													<div class="col-xs-12 col-sm-6">
+														<md-input-container flex-offset class="md-block">
+															<label for="">Evento al que pertenece</label>
+															<!-- <input name="eventBelongs" type="text" ng-model="vm.eventBelongs" required/> -->
+															<md-select name="eventBelongs" ng-model="vm.eventBelongs" required>
+																<md-option ng-repeat="event in vm.events" ng-value="event.eventName">{{event.eventName}}</md-option>
+															</md-select>
 
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmCompetition.eventBelongs.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
+															<!-- Mensaje de retroalimentacion -->
+															<div ng-messages="frmCompetition.eventBelongs.$error">
+																<div ng-messages-include="components/includes/messages.html"></div>
+															</div>
+														</md-input-container>
 													</div>
-												</md-input-container>
-											</div>
+												</div>
+												<div class="row">
+													<!-- categoria de genero -->
+													<div class="col-xs-12 col-sm-6">
+														<md-input-container flex-offset class="md-block">
+															<label for="">Categoria por género</label>
+															<md-select name="competitionGenre" ng-model="vm.competitionGenre" required>
+																<md-option value="masculino">Masculino</md-option>
+																<md-option value="femenino">Femenino</md-option>
+															</md-select>
 
-											<!-- categoria de genero -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Categoria por género</label>
-													<md-select name="competitionGenre" ng-model="vm.competitionGenre" required>
-														<md-option value="masculino">Masculino</md-option>
-														<md-option value="femenino">Femenino</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmCompetition.competitionGenre.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
+															<!-- Mensaje de retroalimentacion -->
+															<div ng-messages="frmCompetition.competitionGenre.$error">
+																<div ng-messages-include="components/includes/messages.html"></div>
+															</div>
+														</md-input-container>
 													</div>
-												</md-input-container>
-											</div>
 
-											<!-- categoria de edad* -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Categoria por edad</label>
-													<md-select name="competitionAge" ng-model="vm.competitionAge" required>
-														<md-option ng-repeat="age in vm.categoriesAge" ng-value="age.categorieName">{{age.categorieName}}</md-option>
-													</md-select>
+													<!-- categoria de edad* -->
+													<div class="col-xs-12 col-sm-6">
+														<md-input-container flex-offset class="md-block">
+															<label for="">Categoria por edad</label>
+															<md-select name="competitionAge" ng-model="vm.competitionAge" required>
+																<md-option ng-repeat="age in vm.categoriesAge" ng-value="age.categorieName">{{age.categorieName}}</md-option>
+															</md-select>
 
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmCompetition.competitionGenre.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
+															<!-- Mensaje de retroalimentacion -->
+															<div ng-messages="frmCompetition.competitionGenre.$error">
+																<div ng-messages-include="components/includes/messages.html"></div>
+															</div>
+														</md-input-container>
 													</div>
-												</md-input-container>
-											</div>
+												</div>
+												<div class="row">
+													<!-- categoria de cinta -->
+													<div class="col-xs-12 col-sm-6">
+														<md-input-container flex-offset class="md-block">
+															<label for="">Categoria por cinta</label>
+															<md-select name="competitionBelt" ng-model="vm.competitionBelt" required>
+																<md-option ng-repeat="belt in vm.belts" ng-value="belt.belt">{{belt.belt}}</md-option>
+															</md-select>
 
-											<!-- categoria de cinta -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Categoria por cinta</label>
-													<md-select name="competitionBelt" ng-model="vm.competitionBelt" required>
-														<md-option ng-repeat="belt in vm.belts" ng-value="belt.belt">{{belt.belt}}</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmCompetition.competitionBelt.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
+															<!-- Mensaje de retroalimentacion -->
+															<div ng-messages="frmCompetition.competitionBelt.$error">
+																<div ng-messages-include="components/includes/messages.html"></div>
+															</div>
+														</md-input-container>
 													</div>
-												</md-input-container>
-											</div>
 
-											<!-- categoria de peso -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Categoria por peso</label>
-													<md-select name="competitionWeight" ng-model="vm.competitionWeight" required>
-														<md-option ng-repeat="weight in vm.weights" ng-value="weight.weightName">{{weight.aliasName}}</md-option>
-													</md-select>
+													<!-- categoria de peso -->
+													<div class="col-xs-12 col-sm-6">
+														<md-input-container flex-offset class="md-block">
+															<label for="">Categoria por peso</label>
+															<md-select name="competitionWeight" ng-model="vm.competitionWeight" required>
+																<md-option ng-repeat="weight in vm.weights" ng-value="weight.weightName">{{weight.aliasName}}</md-option>
+															</md-select>
 
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmCompetition.competitionWeight.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
+															<!-- Mensaje de retroalimentacion -->
+															<div ng-messages="frmCompetition.competitionWeight.$error">
+																<div ng-messages-include="components/includes/messages.html"></div>
+															</div>
+														</md-input-container>
 													</div>
-												</md-input-container>
+												</div>
 											</div>
 
 											<!-- contenedor de botones -->
@@ -1242,10 +1249,10 @@
 							<md-content class="md-padding">
 								<h1 class="md-display-2">Profesores</h1>
 								<div class="text-center" id="buttonTeacher" layout="row" layout-align="center center">
-									<div ui-sref-active="active" ui-sref=".teachpart1" class="md-whiteframe-3dp">
+									<div ui-sref-active="active" ui-sref=".teachpart1" class="md-whiteframe-3dp" id="boton1">
 										<a>1</a>
 									</div>
-									<div ui-sref-active="active" ui-sref=".teachpart2" class="md-whiteframe-3dp">
+									<div ui-sref-active="active" ui-sref=".teachpart2" class="md-whiteframe-3dp" id="boton2">
 										<a>2</a>
 									</div>
 								</div>
@@ -1357,6 +1364,7 @@
 													<th>Cédula</th>
 													<th>Nombre completo</th>
 													<th>Estado</th>
+													<th></th>
 													<th></th>
 												</tr>
 											</thead>
