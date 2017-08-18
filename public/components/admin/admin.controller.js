@@ -570,6 +570,23 @@
         );
       };
 
+      // Mnesaje para promover de grado a un alumno
+      vm.showStudentUpdateBelt = function() {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('¡Grado ascendido!')
+          .textContent('¡Se ha ascendido el grado del alumno correctamente!')
+          .ariaLabel()
+          .ok('¡Gracias!')
+          .targetEvent()
+        );
+      };
+
       vm.showProfesorAlert = function() {
         // Appending dialog to document.body to cover sidenav in docs app
         // Modal dialogs should fully cover application
@@ -1253,7 +1270,7 @@
           }
           break;
         case 'rojo':
-          if (pStudent.tournaments >= 6) {
+          if (pStudent.tournaments >= 7) {
             pStudent.belt = 'negro';
           } else {
             // Mensaje de retroalimentacion
@@ -1269,6 +1286,7 @@
         //mostrar mensaje
       } else {
         userService.updateBelt(pStudent);
+        vm.showStudentUpdateBelt ();
       }
 
 
