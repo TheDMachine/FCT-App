@@ -12,16 +12,6 @@
     </md-input-container>
   </div>
 
-  <!-- input de  Fecha de nacimiento -->
-  <div class="col-xs-12 col-sm-6">
-        <md-input-container flex-gt-xs>
-          <label>Fecha de nacimiento</label>
-          <md-datepicker ng-model="vm.student.birthday" md-current-view="year" md-placeholder="Enter date" required></md-datepicker>
-        </md-input-container>
-  </div>
-</div>
-
-<div class="row">
   <!-- input de primer nombre -->
   <div class="col-xs-12 col-sm-6">
     <md-input-container flex-offset class="md-block">
@@ -34,7 +24,9 @@
       </div>
     </md-input-container>
   </div>
+</div>
 
+<div class="row">
   <!-- input de  segundo nombre-->
   <div class="col-xs-12 col-sm-6">
     <md-input-container flex-offset class="md-block">
@@ -47,9 +39,7 @@
       </div>
     </md-input-container>
   </div>
-</div>
 
-<div class="row">
   <!-- input de primer apellido -->
   <div class="col-xs-12 col-sm-6">
     <md-input-container flex-offset class="md-block">
@@ -62,12 +52,14 @@
       </div>
     </md-input-container>
   </div>
+</div>
 
+<div class="row">
   <!-- input de  segundo apellido -->
   <div class="col-xs-12 col-sm-6">
     <md-input-container flex-offset class="md-block">
       <label for="">Segundo apellido</label>
-      <input name="lastName" type="text" ng-model="vm.student.lastName" required/>
+      <input name="lastName" type="text" ng-model="vm.student.lastName"/>
 
       <!-- Mensaje de retroalimentacion -->
       <div ng-messages="frmStudent.lastName.$error">
@@ -75,6 +67,15 @@
       </div>
     </md-input-container>
   </div>
+
+  <!-- input de  Fecha de nacimiento -->
+  <div class="col-xs-12 col-sm-6">
+        <md-input-container flex-gt-xs>
+          <label>Fecha de nacimiento</label>
+          <md-datepicker ng-model="vm.student.birthday" md-current-view="year" md-placeholder="Enter date" required></md-datepicker>
+        </md-input-container>
+  </div>
+</div>
 </div>
 
 <div class="row">

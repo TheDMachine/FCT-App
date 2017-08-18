@@ -85,15 +85,21 @@
 </div>
 
 <div class="row">
-  <!-- Botón Anterior -->
-  <a ui-sref="admin.alumnopart2" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
   <!-- Subir logo -->
-    <label class="btn btn-default btn-file" for="photo">
+    <label class="btn btn-default btn-file col-xs-12 text-center" id="buttonPhoto" for="photo">
       Adjuntar foto <input id="photo" name="photo" type="file" style="display: none" ng-model="vm.student.photo">
     </label>
+</div>
+
+<div class="row col-xs-12 text-right">
   <!-- boton para guardar -->
   <md-button ng-click="vm.reset()" type="submit" class="md-raised" ng-disabled="frmStudent.$invalid">Registrar</md-button>
 
   <!-- boton para editar -->
   <md-button ng-click="vm.updateStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Actualizar</md-button>
+</div>
+
+<div class="row">
+  <!-- Botón Anterior -->
+  <a ui-sref="admin.alumnopart2" class="btn btn-info"><span class="glyphicon glyphicon-circle-arrow-left"></span> Anterior</a>
 </div>

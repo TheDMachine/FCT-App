@@ -538,7 +538,7 @@ html,body{
 /*Fin estilos del landing*/
 
 /*Inicio estilo de modal de consulta y tabla de historial eventos*/
-#table1 h3, #table2 h3, #registerEvents h3{
+#table1 h3, #table2 h3, #registerEvents h3, #titleR{
   font-family: 'Montserrat';
   font-size: 1.571em;
   margin-bottom: 60px;

@@ -343,9 +343,9 @@
 				<md-tabs md-dynamic-height md-border-bottom>
 					<md-tab label="Registro">
 						<md-content class="md-padding">
-							<h1 class="md-display-2 col-xs-12 text-center">Registro de academias</h1>
+							<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">REGISTRO DE ACADEMIAS</h3>
 							<div class="container-fluid row">
-								<div class="col-xs-12">
+								<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 									<form name="frmAcademy" novalidate autocomplete="off">
 
 										<!-- input nombre de acdemia -->
@@ -426,11 +426,13 @@
 											</md-input-container>
 										</div>
 
-										<!-- boton para guardar -->
-										<md-button ng-click="vm.createAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Registrar</md-button>
+										<div class="row text-right">
+											<!-- boton para guardar -->
+											<md-button ng-click="vm.createAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Registrar</md-button>
 
-										<!-- boton para editar -->
-										<md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Actializar</md-button>
+											<!-- boton para editar -->
+											<md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Actializar</md-button>
+										</div>
 									</form>
 								</div>
 							</div>
@@ -451,9 +453,9 @@
 								</div>
 
 								<!-- tabla de academias-->
-								<div class="row">
-									<table class="table col-xs-12">
-										<thead>
+								<div class="row col-md-offset-1 col-md-10">
+									<table class="table col-xs-12 md-whiteframe-3dp">
+										<thead class="md-whiteframe-3dp">
 											<tr>
 												<th>Nombre de la academia</th>
 												<th>Encargado</th>
@@ -769,7 +771,7 @@
 					<md-tabs md-dynamic-height md-border-bottom>
 						<md-tab label="Registro de competencias">
 							<md-content class="md-padding">
-								<h1 class="md-display-2">Registro de competencias</h1>
+								<h1 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">REGISTRO DE COMPETENCIAS</h1>
 								<div class="container-fluid row">
 									<div class="col-xs-12">
 										<form name="frmCompetition" novalidate autocomplete="off">
@@ -870,7 +872,7 @@
 											</div>
 
 											<!-- contenedor de botones -->
-											<div class="col-xs-12">
+											<div class="col-xs-12 col-sm-10 col-sm-offset-1 text-right">
 
 												<!-- boton para guardar -->
 												<md-button ng-click="vm.createCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Agregar competición</md-button>
@@ -1317,9 +1319,9 @@
 						<md-tab label="Registro" ui-sref=".alumnopart1">
 							<md-content class="md-padding">
 								<div class="row">
-									<h1 class="md-display-2 col-xs-12 text-center">Alumnos</h1>
+										<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">REGISTRAR ALUMNO</h3>
 								</div>
-								<div id="buttonForm" class="text-center" layout="row" layout-align="center center">
+								<div id="buttonTeacher" class="text-center" layout="row" layout-align="center center">
 									<div ui-sref-active="active" ui-sref=".alumnopart1">
 										<a>1</a>
 									</div>

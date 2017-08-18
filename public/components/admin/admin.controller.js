@@ -1067,19 +1067,69 @@
         competitionAge: vm.competitionAge,
         competitionGenre: vm.competitionGenre,
         competitionBelt: vm.competitionBelt,
-        competitionWeight: vm.competitionWeight,
+        competitionWeight: vm.competitionWeight
       }
       newCompetition.competitors = [];
-      eventService.setCompetitions(newCompetition)
-        .then(function(response){
-          var responseObj = response;
-          console.log(response);
-          eventService.getCompetitions().then(function(response){
-            vm.competitions = response.data;
+
+      if (eventService.findCompetition(newCompetition.competitionNumber) !== false) {
+        vm.competitionDuplicateAlert();
+      }else {
+        eventService.setCompetitions(newCompetition)
+          .then(function(response){
+            var responseObj = response;
+            console.log(response);
+            eventService.getCompetitions().then(function(response){
+              vm.competitions = response.data;
+            });
+          }).catch(function(err) {
+            console.log(err);
           });
-        })
+        vm.competitionAlert();
+      }
+      cleanCompetition();
       init();
     }
+
+    function cleanCompetition() {
+      vm.competitionNumber = '', 
+      vm.eventBelongs = '', 
+      vm.competitionAge = '', 
+      vm.competitionGenre = '', 
+      vm.competitionBelt = '', 
+      vm.competitionWeight = ''
+    }
+
+    vm.competitionDuplicateAlert = function() {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('La competicia ya existe')
+          .textContent('La competicia ya existe, registre otra')
+          .ariaLabel()
+          .ok('¡Gracias!')
+          .targetEvent()
+        );
+      };
+
+      vm.competitionAlert = function() {
+          // Appending dialog to document.body to cover sidenav in docs app
+          // Modal dialogs should fully cover application
+          // to prevent interaction outside of dialog
+          $mdDialog.show(
+            $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Registo correcto')
+            .textContent('Registro de la competecia realizado')
+            .ariaLabel()
+            .ok('¡Gracias!')
+            .targetEvent()
+          );
+        };
 
     vm.changeViews = function() {
       vm.userActive = true;
