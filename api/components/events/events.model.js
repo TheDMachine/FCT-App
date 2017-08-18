@@ -13,28 +13,20 @@ var EventSchema = new mongoose.Schema({
 	selectSponsors:     {type: String, required: true},
 	costInsc:           {type: String, required: true},
 	photo:              {type: String, required: true},
-	org :            	{
-							orgName:      {type: String},
-							orgType:      {type: String},
-							description:  {type: String}
-						},
-	date : 				{
-							date1:        {type: Date, required: true},
-							date2:        {type: Date, required: true}
-						},
-	time : 				{
-							time1:        {type: Date, required: true},
-							time2:        {type: Date, required: true}
-						},
-	place: 				{
-							placeName:    {type: String, required: true},
-							coords:     {type: Object, required: true},
-							seats:        {type: String, required: true},
-							tickets:      {type: String, required: true},
-							ticketPrice:  {type: String, required: true},
-							contactName:  {type: String, required: true},
-							contactPhone: {type: String, required: true}
-						}
+	orgName:      		{type: String},
+	orgType:      		{type: String},
+	description:  		{type: String},
+	date1:        		{type: Date, required: true},
+	date2:        		{type: Date, required: true},
+	time1:        		{type: Date, required: true},
+	time2:        		{type: Date, required: true},
+	placeName:    		{type: String, required: true},
+	coords:     		{type: Object, required: true},
+	seats:        		{type: String, required: true},
+	tickets:      		{type: String, required: true},
+	ticketPrice:  		{type: String, required: true},
+	contactName:  		{type: String, required: true},
+	contactPhone: 		{type: String, required: true}
 						
 });
 
