@@ -654,7 +654,7 @@
 										<tbody>
 											<!-- | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter} -->
 											<tr ng-repeat="event in vm.events track by $index">
-												<td>{{event.date.date1 | date : "shortDate"}}</td>
+												<td>{{event.date1 | date : "shortDate"}}</td>
 												<td>
 													<md-button class="md-raised" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button>
 												</td>

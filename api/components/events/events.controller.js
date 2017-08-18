@@ -12,28 +12,20 @@ module.exports.save = function(req, res){
 		selectSponsors:req.body.selectSponsors,
 		costInsc:req.body.costInsc,
 		photo:req.body.photo,
-		org :           {
-							orgName:req.body.org.orgName,
-							orgType:req.body.org.orgType,
-							description:req.body.org.description
-						},
-		date : 			{
-							date1:req.body.date.date1,
-							date2:req.body.date.date2
-						},
-		time : 			{
-							time1:req.body.time.time1,
-							time2:req.body.time.time2
-						},
-		place: 			{
-							placeName:req.body.place.placeName,
-							coords:req.body.place.coords,
-							seats:req.body.place.seats,
-							tickets:req.body.place.tickets,
-							ticketPrice:req.body.place.ticketPrice,
-							contactName:req.body.place.contactName,
-							contactPhone:req.body.place.contactPhone
-						}
+		orgName:req.body.orgName,
+		orgType:req.body.orgType,
+		description:req.body.description,
+		date1:req.body.date1,
+		date2:req.body.date2,
+		time1:req.body.time1,
+		time2:req.body.time2,
+		placeName:req.body.placeName,
+		coords:req.body.coords,
+		seats:req.body.seats,
+		tickets:req.body.tickets,
+		ticketPrice:req.body.ticketPrice,
+		contactName:req.body.contactName,
+		contactPhone:req.body.contactPhone
 						
 	});
 
