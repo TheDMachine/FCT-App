@@ -14,7 +14,7 @@
 					<label>Seleccione el evento</label>
 					<md-select name="event" ng-model="vm.event.eventName" ng-change="vm.checkInfoEvent(vm.event.eventName)" required>
 						<!-- | eventFrom -->
-						<md-option ng-repeat="event in vm.events track by $index" value="{{event.eventName}}"><span class="strongLetter">Nombre:</span> {{event.eventName}} , <span class="strongLetter">Fecha de Inicio:</span> {{event.date.date1 | date : "shortDate"}}, <span class="strongLetter">Tipo de evento:</span> {{event.eventType}}</md-option>
+						<md-option ng-repeat="event in vm.events track by $index" value="{{event.eventName}}"><span class="strongLetter">Nombre:</span> {{event.eventName}} , <span class="strongLetter">Fecha de Inicio:</span> {{event.date1 | date : "shortDate"}}, <span class="strongLetter">Tipo de evento:</span> {{event.eventType}}</md-option>
 					</md-select>
 				</md-input-container>
 			</div>
@@ -33,17 +33,17 @@
 					component-restrictions="{country:'cr'}"
 					on-place-changed="vm.placeChanged()"
 					maxlength="100" type="text" class="form-control" name="location" />
-					<p><span class="strongLetter">Hora de Inicio:</span><br>{{vm.consultEvent.time.time1 | date : "shortTime"}}</p>
-					<p><span class="strongLetter">Lugar:</span><br>{{vm.consultEvent.place.placeName}}</p>
-					<p><span class="strongLetter">Precio de entrada:</span><br>{{vm.consultEvent.place.ticketPrice}}</p>
-					<p><span class="strongLetter">Nombre de contacto:</span><br>{{vm.consultEvent.place.contactName}}</p>
-					<p><span class="strongLetter">Nombre de contacto:</span><br>{{vm.consultEvent.place.contactPhone}}</p>
+					<p><span class="strongLetter">Hora de Inicio:</span><br>{{vm.consultEvent.time1 | date : "shortTime"}}</p>
+					<p><span class="strongLetter">Lugar:</span><br>{{vm.consultEvent.placeName}}</p>
+					<p><span class="strongLetter">Precio de entrada:</span><br>{{vm.consultEvent.ticketPrice}}</p>
+					<p><span class="strongLetter">Nombre de contacto:</span><br>{{vm.consultEvent.contactName}}</p>
+					<p><span class="strongLetter">Nombre de contacto:</span><br>{{vm.consultEvent.contactPhone}}</p>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-7 col-md-6">
 				<div id="mapSpace" class="col-xs-12">
 					<ng-map class="md-whiteframe-3dp" zoom="7" center=[9.9333300,-84.0833300]>
-						<marker ng-show="vm.place" position="{{vm.consultEvent.place.coords}}" ></marker>
+						<marker ng-show="vm.place" position="{{vm.consultEvent.coords}}" ></marker>
 					</ng-map>
 					<div ng-show="vm.place">
 						Coordenadas: {{vm.place.geometry.location}}<br/>

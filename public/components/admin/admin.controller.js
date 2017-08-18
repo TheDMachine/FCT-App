@@ -141,7 +141,7 @@
         vm.map.setZoom(18);
         console.log(vm.place.name);
         console.log(vm.place.geometry);
-        vm.event.place.coords = vm.place.geometry.location;
+        vm.event.coords = vm.place.geometry.location;
       }
       NgMap.getMap().then(function(map) {
         vm.map = map;
@@ -321,25 +321,25 @@
           eventType: pEvent.eventType,
           eventState: pEvent.eventState,
           photo: pEvent.photo,
-          date1: pEvent.date.date1,
-          time1: pEvent.time.time1,
-          date2: pEvent.date.date2,
-          time2: pEvent.time.time2,
+          date1: pEvent.date1,
+          time1: pEvent.time1,
+          date2: pEvent.date2,
+          time2: pEvent.time2,
           selectAcademies: pEvent.selectAcademies.toString(),
           selectCategories: pEvent.selectCategories.toString(),
           costInsc: pEvent.costInsc,
           selectSponsors: pEvent.selectSponsors.toString(),
-          placeName: pEvent.place.placeName,
-          coords: pEvent.place.coords,
-          seats: pEvent.place.seats,
-          tickets: pEvent.place.tickets,
-          ticketPrice: pEvent.place.ticketPrice,
-          contactName: pEvent.place.contactName,
-          contactPhone: pEvent.place.contactPhone,
+          placeName: pEvent.placeName,
+          coords: pEvent.coords,
+          seats: pEvent.seats,
+          tickets: pEvent.tickets,
+          ticketPrice: pEvent.ticketPrice,
+          contactName: pEvent.contactName,
+          contactPhone: pEvent.contactPhone,
           charityEvent: pEvent.charityEvent,
-          orgName: pEvent.org.orgName,
-          orgType: pEvent.org.orgType,
-          description: pEvent.org.description
+          orgName: pEvent.orgName,
+          orgType: pEvent.orgType,
+          description: pEvent.description
         }
       }
 
@@ -358,11 +358,11 @@
 
     // Función para guardar
     vm.createNewEvent = function (pNewEvent) {
-      if(pNewEvent.org == undefined){
-        pNewEvent.org.orgName = '';
-        pNewEvent.org.orgType = '';
-        pNewEvent.org.description = '';
-      }
+      // if(pNewEvent.org == undefined){
+      //   pNewEvent.org.orgName = '';
+      //   pNewEvent.org.orgType = '';
+      //   pNewEvent.org.description = '';
+      // }
 
       if (eventService.findEvent(pNewEvent.eventName) != false) {
         vm.showEventDuplicateAlert();
@@ -654,89 +654,81 @@
 
       // Función para imprimir datos en el formulario
       vm.getInfo = function(pEvent) {
+        console.log(pEvent);
         vm.event._id = pEvent._id;
         vm.event.eventName = pEvent.eventName;
         vm.event.invitedName = pEvent.invitedName;
         vm.event.eventType = pEvent.eventType;
         vm.event.eventState = pEvent.eventState;
         vm.event.photo = pEvent.photo;
-        var fecha = new Date(pEvent.date.date1);
-        vm.event.date1 =new Date(fecha.getFullYear(),fecha.getMonth()-2, fecha.getDate());
-        vm.event.time.time1 = new Date(pEvent.time.time1);
-        vm.event.date.date2 = new Date(pEvent.date.date2);
-        vm.event.time.time2 = new Date(pEvent.time.time2);
+        vm.event.date1 =new Date(pEvent.date1);
+        vm.event.time1 = new Date(pEvent.time1);
+        vm.event.date2 = new Date(pEvent.date2);
+        vm.event.time2 = new Date(pEvent.time2);
         vm.event.selectAcademies = pEvent.selectAcademies;
         vm.event.selectCategories = pEvent.selectCategories;
-        vm.event.costInsc = pEvent.costInsc;
+        vm.event.costInsc = Number(pEvent.costInsc);
         vm.event.selectSponsors = pEvent.selectSponsors;
-        vm.event.place.placeName = pEvent.place.placeName;
-        vm.event.place.coords = pEvent.place.coords;
-        vm.event.place.seats = pEvent.place.seats;
-        vm.event.place.tickets = pEvent.place.tickets;
-        vm.event.place.ticketPrice = pEvent.place.ticketPrice;
-        vm.event.place.contactName = pEvent.place.contactName;
-        vm.event.place.contactPhone = pEvent.place.contactPhone;
+        vm.event.placeName = pEvent.placeName;
+        vm.event.coords = pEvent.coords.lat + ' ' +pEvent.coords.lng;
+        vm.event.seats = Number(pEvent.seats);
+        vm.event.tickets = Number(pEvent.tickets);
+        vm.event.ticketPrice = Number(pEvent.ticketPrice);
+        vm.event.contactName = pEvent.contactName;
+        vm.event.contactPhone = pEvent.contactPhone;
         vm.event.charityEvent = pEvent.charityEvent;
-        vm.event.org.orgType = pEvent.org.orgType;
-        vm.event.org.orgName = pEvent.org.orgName;
-        vm.event.org.description = pEvent.org.description;
+        vm.event.orgType = pEvent.orgType;
+        vm.event.orgName = pEvent.orgName;
+        vm.event.description = pEvent.description;
         vm.updateDisable = false;
       };
 
       // Función para actualizar datos de evento
       vm.updateEvent = function() {
         var modEvent = {
-          _id: vm._id,
+          _id: vm.event._id,
           eventName: vm.event.eventName,
           invitedName: vm.event.invitedName,
           eventType: vm.event.eventType,
           eventState: vm.event.eventState,
           photo: vm.event.photo,
-          date: {
-            date1: vm.event.date.date1,
-            date2: vm.event.date.date2
-          },
-          time: {
-            time1: vm.event.time.time1,
-            time2: vm.event.time.time2
-          },
+          date1: vm.event.date1,
+          date2: vm.event.date2,
+          time1: vm.event.time1,
+          time2: vm.event.time2,
           selectAcademies: vm.event.selectAcademies,
           selectCategories: vm.event.selectCategories,
           costInsc: vm.event.costInsc,
           selectSponsors: vm.event.selectSponsors,
-          place: {
-            placeName: vm.event.place.placeName,
-            coords: vm.event.place.coords,
-            seats: vm.event.place.seats,
-            tickets: vm.event.place.tickets,
-            ticketPrice: vm.event.place.ticketPrice,
-            contactName: vm.event.place.contactName,
-            contactPhone: vm.event.place.contactPhone
-          },
+          placeName: vm.event.placeName,
+          coords: vm.event.coords,
+          seats: vm.event.seats,
+          tickets: vm.event.tickets,
+          ticketPrice: vm.event.ticketPrice,
+          contactName: vm.event.contactName,
+          contactPhone: vm.event.contactPhone,
           charityEvent: vm.event.charityEvent,
-          org: {
-            orgName: vm.event.org.orgName,
-            orgType: vm.event.org.orgType,
-            description: vm.event.org.description
-          }
+          orgName: vm.event.orgName,
+          orgType: vm.event.orgType,
+          description: vm.event.description
         }
       vm.updateDisable = true;
-      eventService.updateEvent(modEvent);
-      vm.showEditEventAlert();
-      init();
-      clean();
-      // eventService.updateEvent(modEvent)
-      // .then(function(response){
-      //   console.log(response);
-      //   eventService.getEvents().then(function(response) {
-      //     vm.events = response.data;
-      //   });
-      // }).catch(function(err){
-      //   console.log(err);
-      // });
+      // eventService.updateEvent(modEvent);
       // vm.showEditEventAlert();
-      // clean();
       // init();
+      // clean();
+      eventService.updateEvent(modEvent)
+      .then(function(response){
+        console.log(response);
+        eventService.getEvents().then(function(response) {
+          vm.events = response.data;
+        });
+      }).catch(function(err){
+        console.log(err);
+      });
+      vm.showEditEventAlert();
+      clean();
+      init();
     };
 
       // Función para mensaje de registro de evento satisfactorio

@@ -3,7 +3,7 @@
 
 		<!-- Campo de fecha inicio  -->
 		<md-input-container flex-offset>
-			<md-datepicker name="frmEventInfo.date1"  ng-model="vm.event.date.date1"  md-placeholder="Fecha inicio" md-min-date="vm.today" required></md-datepicker>
+			<md-datepicker name="frmEventInfo.date1"  ng-model="vm.event.date1"  md-placeholder="Fecha inicio" md-min-date="vm.today" required></md-datepicker>
 
 			<!-- Mensaje de retroalimentacion -->
 		 	<div ng-messages="frmEventInfo.$error">
@@ -15,7 +15,7 @@
 
 		<!-- Campo de Fecha fin -->
 		<md-input-container flex-offset>
-			<md-datepicker name="frmEventInfo.date2"  ng-model="vm.event.date.date2"  md-placeholder="Fecha fin" md-min-date="vm.today" required></md-datepicker>
+			<md-datepicker name="frmEventInfo.date2"  ng-model="vm.event.date2"  md-placeholder="Fecha fin" md-min-date="vm.today" required></md-datepicker>
 			<!-- Mensaje de retroalimentacion -->
 		 	<div ng-messages="frmEventInfo.$error">
 		   		<div ng-messages-include="components/includes/messages.html"></div>
@@ -30,7 +30,7 @@
 		<div>						    		
 			<md-input-container>
 				<label>Hora Inicio</label>
-				<input type="time" name="frmEventInfo.time1" ng-model="vm.event.time.time1" required>
+				<input type="time" name="frmEventInfo.time1" ng-model="vm.event.time1" required>
 				<!-- Mensaje de retroalimentacion -->
 				<div ng-messages="frmEventInfo.$error">
 			   		<div ng-messages-include="components/includes/messages.html"></div>
@@ -44,7 +44,7 @@
 		<div>
 			<md-input-container>
 				<label>Hora fin</label>
-				<input type="time" name="frmEventInfo.time2" ng-model="vm.event.time.time2" required>
+				<input type="time" name="frmEventInfo.time2" ng-model="vm.event.time2" required>
 				<!-- Mensaje de retroalimentacion -->
 				<div ng-messages="frmEventInfo.$error">
 		   			<div ng-messages-include="components/includes/messages.html"></div>
