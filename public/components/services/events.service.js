@@ -164,14 +164,15 @@
     }
 
     function _updateCompetition(pModCompetition){
-      var competitionsList = _getCompetitions();
+      /*var competitionsList = _getCompetitions();
       for(var i = 0; i < competitionsList.length; i++){
         if(competitionsList[i].competitionNumber == pModCompetition.competitionNumber){
           competitionsList[i] = pModCompetition;
         }
       }
       console.log(competitionsList);
-      localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));
+      localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));*/
+      return $http.put('http://localhost:3000/api/update_competitions', pModCompetition);
     }
   }
 

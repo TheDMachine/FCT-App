@@ -32,4 +32,9 @@ router.route('/get_all_competitions')
     eventsController.findAllCompetitions(req, res);
   });
 
+router.route('/update_competitions')
+  .put(function(req, res){
+    eventsController.updateCompetition(req, res);
+  });  
+
 module.exports = router;

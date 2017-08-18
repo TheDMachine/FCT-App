@@ -56,6 +56,7 @@ module.exports.saveCompetition = function(req, res){
     competitionNumber: req.body.competitionNumber,
     eventBelongs: req.body.eventBelongs,
     competitionGenre: req.body.competitionGenre,
+    competitionBelt: req.body.competitionBelt,
     competitionAge: req.body.competitionAge,
     competitionWeight: req.body.competitionWeight,
     competitors: req.body.competitors
@@ -75,3 +76,10 @@ module.exports.findAllCompetitions = function(req,res){
     res.send(competitions);
   })
 };
+
+module.exports.updateCompetition = function(req, res){
+	console.log(req.body.id);
+	competition.findByIdAndUpdate(req.body._id, {$set:req.body}).then(function(data){
+			res.json({succes:true,msg:'Se ha actualizado la competencia correctamente.'});
+		});
+}

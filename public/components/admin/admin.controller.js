@@ -1007,10 +1007,16 @@
     //     userService.setUsers(pNewStudent);
     pNewStudent.role = 'student';
     pNewStudent.status = 'activo';
-    userService.setUsers(pNewStudent);
-         vm.studentAlert();
-         clean();
-         init();
+    pNewStudent.newUser = 1;
+    userService.setUsers(pNewStudent)
+    .then(function(response){
+        vm.studentAlert();
+        clean();
+        init();
+      })
+      .catch(function(err){
+        console.log(err);
+      });
     //   }
      }
 
