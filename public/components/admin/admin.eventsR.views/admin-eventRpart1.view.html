@@ -83,7 +83,10 @@
 		<!-- Campo tipo de organización -->
 		<md-input-container flex-gt-sm ng-show="vm.event.charityEvent == 'Beneficencia'">
 			<label>Tipo de organización</label>
-			<input type="text" name="frmEventInfo.orgType" ng-model="vm.event.orgType" maxlength="15" md-maxlength="15">
+			<md-select name="frmEventInfo.orgType" ng-model="vm.event.orgType">
+				<md-option value="gubernamental">Gubernamental</md-option>
+				<md-option value="no gubernamental">No gubernamental</md-option>
+			</md-select>
 		</md-input-container>
 	</div>
 </div>

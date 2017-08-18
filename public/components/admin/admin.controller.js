@@ -667,7 +667,7 @@
       // Función para actualizar datos de evento
       vm.updateEvent = function() {
         var modEvent = {
-          _id: vm._id,
+          _id: vm.event._id,
           eventName: vm.event.eventName,
           invitedName: vm.event.invitedName,
           eventType: vm.event.eventType,
@@ -680,7 +680,7 @@
           selectAcademies: vm.event.selectAcademies,
           selectCategories: vm.event.selectCategories,
           costInsc: vm.event.costInsc,
-          selectSponsors: vm.event.selectSponsor,
+          selectSponsors: vm.event.selectSponsors,
           placeName: vm.event.placeName,
           coords: vm.event.coords,
           seats: vm.event.seats,
@@ -694,22 +694,22 @@
           description: vm.event.description
         }
       vm.updateDisable = true;
-      eventService.updateEvent(modEvent);
-      vm.showEditEventAlert();
-      init();
-      clean();
-      // eventService.updateEvent(modEvent)
-      // .then(function(response){
-      //   console.log(response);
-      //   eventService.getEvents().then(function(response) {
-      //     vm.events = response.data;
-      //   });
-      // }).catch(function(err){
-      //   console.log(err);
-      // });
+      // eventService.updateEvent(modEvent);
       // vm.showEditEventAlert();
-      // clean();
       // init();
+      // clean();
+      eventService.updateEvent(modEvent)
+      .then(function(response){
+        console.log(response);
+        eventService.getEvents().then(function(response) {
+          vm.events = response.data;
+        });
+      }).catch(function(err){
+        console.log(err);
+      });
+      vm.showEditEventAlert();
+      clean();
+      init();
     };
 
       // Función para mensaje de registro de evento satisfactorio
