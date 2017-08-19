@@ -144,7 +144,9 @@ html,body{
 
 /*Inicio estilos para la tabla de profesoresr*/
 
-
+#boton1, #boton2{
+  margin-bottom: 50px;
+}
 #tblTeacher table{
   width: 100%;
 }
@@ -209,6 +211,7 @@ html,body{
   font-weight: 500;
   cursor: pointer;
   margin-right: 8%;
+  margin-bottom: 50px;
 }
 
 #buttonTeacher div a{

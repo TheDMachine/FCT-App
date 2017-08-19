@@ -6,7 +6,7 @@
 			<input places-auto-complete="true"
                       placeholder="Ej. Gimnasio Nacional" 
                       size=80
-                      ng-model="vm.event.place.placeName" 
+                      ng-model="vm.event.placeName" 
                       component-restrictions="{country:'cr'}"
                       on-place-changed="vm.placeChanged()"
               maxlength="100" type="text" class="form-control" name="frmEventInfo.placeName" required />
@@ -21,7 +21,7 @@
 		<!-- Campo latitud -->
 		<md-input-container flex-offset>
 			<label>Latitud Y Longitud</label>
-			<input type="text" name="frmEventInfo.coords" ng-model="vm.event.place.coords" disabled="disabled">
+			<input type="text" name="frmEventInfo.coords" ng-model="vm.event.coords" disabled="disabled">
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">

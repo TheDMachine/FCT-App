@@ -183,7 +183,7 @@
         nationality: vm.nationality,
         phone: vm.phone,
         email: vm.email,
-        attendAcademy: vm.attendAcademy,
+        attendAcademy: vm.academy,
         teacher: vm.teacher,
         belt: vm.belt,
         category: vm.category,
@@ -210,7 +210,7 @@
       vm.nationality = '',
       vm.phone = '',
       vm.email = '',
-      vm.attendAcademy = '',
+      vm.academy = '',
       vm.teacher = '',
       vm.belt = '',
       vm.category = '',
@@ -220,24 +220,25 @@
 
     //funcion para editar alumno
     vm.getStudent = function(student){
-      vm.id = student.id,
-      vm.birthday = student.birthday,
-      vm.firstName = student.firstName,
-      vm.secondName = student.secondName,
-      vm.firstLastName = student.firstLastName,
-      vm.secondLastName = student.secondLastName,
-      vm.genre = student.genre,
-      vm.weight = student.weight,
-      vm.height = student.height,
-      vm.nationality = student.nationality,
-      vm.phone = student.phone,
-      vm.email = student.email,
-      vm.attendAcademy = student.attendAcademy,
-      vm.teacher = student.teacher,
-      vm.belt = student.belt,
-      vm.category = student.category,
-      vm.tournaments = student.tournaments,
-      vm.tournamentsWins = student.tournamentsWins
+      vm.student.id = user.id;
+      vm.student.birthday = user.birthday;
+      vm.student.firstName = user.firstName;
+      vm.student.secondName = user.secondName;
+      vm.student.firstLastName = user.firstLastName;
+      vm.student.secondLastName = user.secondLastName;
+      vm.student.genre = user.genre;
+      vm.student.weight = user.weight;
+      vm.student.height = user.height;
+      vm.student.nationality = user.nationality;
+      vm.student.phone = user.phone;
+      vm.student.email = user.email;
+      vm.student.academy = user.academy;
+      vm.student.teacher = user.teacher;
+      vm.student.belt = user.belt;
+      vm.student.category = user.category;
+      vm.student.tournaments = user.tournaments;
+      vm.student.tournamentsWins = user.tournamentsWins;
+      vm.student.role = user.role;
     }
 
     //funcion para guardar alumno editada
@@ -255,12 +256,14 @@
         nationality: vm.nationality,
         phone: vm.phone,
         email: vm.email,
-        attendAcademy: vm.attendAcademy,
+        attendAcademy: vm.academy,
         teacher: vm.teacher,
         belt: vm.belt,
         category: vm.category,
         tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins
+        tournamentsWins: vm.tournamentsWins,
+        status: vm.status,
+        role: vm.role
       }
       userService.updateUsers(editstudent);
       init();

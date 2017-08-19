@@ -3,7 +3,7 @@
 		<!-- Campo nombre del lugar -->
 		<md-input-container flex-offset>
 			<label>Cantidad de asientos</label>
-			<input type="number" name="frmEventInfo.seats" ng-model="vm.event.place.seats" min="0" required>
+			<input type="number" name="frmEventInfo.seats" ng-model="vm.event.seats" min="0" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">
@@ -15,7 +15,7 @@
 		<!-- Campo cantidad de entradas -->
 		<md-input-container flex-offset>
 			<label>Cantidad de entradas a vender</label>
-			<input type="number" name="frmEventInfo.tickets" ng-model="vm.event.place.tickets" min="0" required>
+			<input type="number" name="frmEventInfo.tickets" ng-model="vm.event.tickets" min="0" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">
@@ -27,7 +27,7 @@
 		<!-- Campo precio de entradas -->
 		<md-input-container flex-offset>
 			<label>Precio de entradas (colones)</label>
-			<input type="number" name="frmEventInfo.ticketPrice" ng-model="vm.event.place.ticketPrice" min="0" required>
+			<input type="number" name="frmEventInfo.ticketPrice" ng-model="vm.event.ticketPrice" min="0" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">
@@ -41,7 +41,7 @@
 		<!-- Campo nombre de contacto -->
 		<md-input-container flex-offset>
 			<label>Nombre de contacto</label>
-			<input type="text" name="frmEventInfo.contactName" ng-model="vm.event.place.contactName" maxlength="30" md-maxlength="30" placeholder="Valeria Mora" required>
+			<input type="text" name="frmEventInfo.contactName" ng-model="vm.event.contactName" maxlength="30" md-maxlength="30" placeholder="Valeria Mora" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">
@@ -53,7 +53,7 @@
 		<!-- Campo teléfono de contacto -->
 		<md-input-container flex-offset>
 			<label>Teléfono de contacto</label>
-			<input name="frmEventInfo.contactPhone" ng-model="vm.event.place.contactPhone" ng-pattern="/^[0-9]{8}$/" minlength="8" maxlength="8" placeholder="22267375" required>
+			<input name="frmEventInfo.contactPhone" ng-model="vm.event.contactPhone" ng-pattern="/^[0-9]{8}$/" minlength="8" maxlength="8" placeholder="22267375" required>
 
 			<!-- Mensaje de retroalimentacion -->
 			<div ng-messages="frmEventInfo.$error">

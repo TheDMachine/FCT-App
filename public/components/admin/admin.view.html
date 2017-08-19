@@ -656,7 +656,7 @@
 										<tbody>
 											<!-- | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter} -->
 											<tr ng-repeat="event in vm.events track by $index">
-												<td>{{event.date.date1 | date : "shortDate"}}</td>
+												<td>{{event.date1 | date : "shortDate"}}</td>
 												<td>
 													<md-button class="md-raised" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button>
 												</td>
@@ -1251,10 +1251,10 @@
 							<md-content class="md-padding">
 								<h1 class="md-display-2">Profesores</h1>
 								<div class="text-center" id="buttonTeacher" layout="row" layout-align="center center">
-									<div ui-sref-active="active" ui-sref=".teachpart1" class="md-whiteframe-3dp">
+									<div ui-sref-active="active" ui-sref=".teachpart1" class="md-whiteframe-3dp" id="boton1">
 										<a>1</a>
 									</div>
-									<div ui-sref-active="active" ui-sref=".teachpart2" class="md-whiteframe-3dp">
+									<div ui-sref-active="active" ui-sref=".teachpart2" class="md-whiteframe-3dp" id="boton2">
 										<a>2</a>
 									</div>
 								</div>
@@ -1301,6 +1301,7 @@
 														<td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
 														<!-- Botones para editar profesores -->
 														<td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)"></td>
+														<td><md-switch md-invert aria-label="Switch 7" ng-click="vm.editTeacher()" ng-true-value="'Inactivo'" ng-false-value="'Activo'">{{vm.teacher.status}}</md-switch></div></td>
 													</tr>
 												</tbody>
 											</table>
@@ -1366,6 +1367,7 @@
 													<th>Cédula</th>
 													<th>Nombre completo</th>
 													<th>Estado</th>
+													<th></th>
 													<th></th>
 												</tr>
 											</thead>

@@ -4,7 +4,7 @@
     <!-- Select para seleccionar academia -->
     <md-input-container flex-offset>
       <label>Seleccione el género</label>
-      <md-select id="sltGender" ng-model="vm.teacher.genre">
+      <md-select id="sltGender" ng-model="vm.teacher.genre" required>
         <md-option value="masculino">Masculino</md-option>
         <md-option value="femenino">Femenino</md-option>
       </md-select>
@@ -15,7 +15,7 @@
     <!-- Select para seleccionar grado -->
     <md-input-container flex-offset>
       <label>Seleccione la nacionalidad</label>
-      <md-select id="sltCountry" ng-model="vm.teacher.nationality">
+      <md-select id="sltCountry" ng-model="vm.teacher.nationality" required>
         <md-option ng-repeat='country in vm.countries' value="{{country}}">{{country}}</md-option>
       </md-select>
     </md-input-container>
@@ -38,8 +38,8 @@
     <!-- Select para seleccionar academia -->
     <md-input-container flex-offset>
       <label>Seleccione una academia</label>
-      <md-select id="sltAcademia" ng-model="vm.teacher.academy" >
-        <md-option ng-repeat="academy in vm.academy" value="{{academy.name}}">{{academy.name}}</md-option>
+      <md-select id="sltAcademia" ng-model="vm.teacher.academy" required >
+        <md-option ng-repeat="academy in vm.academies" value="{{academy.name}}" >{{academy.name}}</md-option>
       </md-select>
     </md-input-container>
   </div>
@@ -49,8 +49,8 @@
 <!-- Calendario Fecha Nacimiento -->
 <div class="row">
   <div class="col-md-4">
-    <md-input-container flex-offset>
-      <md-datepicker name="teacherBornDate" ng-model="vm.teacher.birthday" md-placeholder="Ingrese una fecha" md-max-date="vm.today" required></md-datepicker>
+    <md-input-container flex-offset >
+      <md-datepicker name="teacherbirthday" ng-model="vm.teacher.birthday" md-placeholder="Ingrese una fecha" md-max-date="vm.today" required></md-datepicker>
 
       <!-- Mensaje de retroalimentacion -->
       <div ng-messages="frmRegTeacher.teacherbirthday.$error">
