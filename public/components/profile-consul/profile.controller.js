@@ -45,5 +45,6 @@
     }, function() {
      vm.status = 'Noo Hubo un problema.';
     });
-    };  
+    };
+  }
 }());
