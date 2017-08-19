@@ -5,11 +5,15 @@
   .controller('profileCtrl',profileCtrl);
 
 //Función constructura de profile
-  function profileCtrl(userService, AuthService, $stateParams, $mdDialog, $location) {
+  function profileCtrl(userService, AuthService, $stateParams, $mdDialog, $location, $cookies) {
     var vm = this;
     //función para iniciar el controlador.
     function init(){
       vm.currentUser = $stateParams.cuser;
+      if(vm.currentUser == 'No encontrado el competitor'){
+        vm.currentUser = $cookies.getObject('currentUserActive');
+        console.log(vm.currentUser);
+      }
    }init();
    vm.updateProfile = function (vmUserToUpdate) {
     var fotoEdit = document.getElementById('#photo').files[0];

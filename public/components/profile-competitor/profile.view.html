@@ -9,7 +9,7 @@
       </md-card-title-media>
       <md-card-title-text>
         <span class="md-headline name-profile">{{vm.currentUser.firstName}}  {{vm.currentUser.firstLastName}}</span>
-        <p class="profile-info"><span>ID:</span> {{vm.currentUser.id}}</p>
+        <p class="profile-info"><span>ID:</span> {{vm.currentUser.id}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt.id)"></span></p>
         <p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
         <p class="profile-info"><span>Edad:</span> {{vm.currentUser.bornhDate}}</p>
         <p class="profile-info"><span>Grado:</span> {{vm.currentUser.grade}}</p>
@@ -22,8 +22,8 @@
       </md-card-title-text>
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="vm.showUpdateWeight(vm.currentUser)">Actualizar peso</md-button>
-        <md-button ui-sref=".edit">Modificar Perfil</md-button>
+        <!-- <md-button ng-click="vm.showUpdateWeight(vm.currentUser)">Actualizar peso</md-button> -->
+        <!-- <md-button ui-sref="competitorProfile.edit">Modificar Perfil</md-button> -->
     </md-card-actions>
   </md-card>
 </div>

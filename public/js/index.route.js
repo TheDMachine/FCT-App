@@ -267,7 +267,7 @@
       controllerAs: 'vm'
     })
     .state('displayProposes',{
-      url:'/displayProposes',
+      url:'/consul',
       templateUrl:'components/consul/propose.view.html',
       resolve: {
         load: ['$ocLazyLoad', function($ocLazyLoad){
@@ -292,7 +292,7 @@
       url:'/profile-competitor',
       templateUrl:'components/profile-competitor/profile.view.html',
       params:{
-        cuser:'No encontrado el competidor'
+        cuser:'No encontrado el competitor'
       },
       resolve:{
         load: ['$ocLazyLoad', function($ocLazyLoad){
@@ -302,15 +302,11 @@
       controller:'profileCtrl',
       controllerAs:'vm'
     })
-    .state('competitorProfile.edit', {
-      url:'/edit-profile-competitor',
-      templateUrl:'components/profile-competitor/edit.view.html'
-    })
     .state('consulProfile',{
       url:'/profile-consul',
       templateUrl:'components/profile-consul/profile.view.html',
       params:{
-        cuser:'No encontado el consultor'
+        cuser:'No encontrado el consejero'
       },
       resolve:{
         load: ['$ocLazyLoad', function($ocLazyLoad){
@@ -319,10 +315,6 @@
       },
       controller:'profileCtrl',
       controllerAs:'vm'
-    })
-    .state('consulProfile.edit', {
-      url:'/edit-profile-consul',
-      templateUrl:'components/profile-consul/edit.view.html'
     })
 
     $urlRouterProvider.otherwise('/landing');
