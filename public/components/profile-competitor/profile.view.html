@@ -6,7 +6,16 @@
     <md-card-title class="no-padding">
       <md-card-title-media flex="35">
         <div class="md-media-lg card-media profile-picture">
-          <img ng-src="{{vm.currentUser.photo}}">
+          <img alt="Imagen de perfil del competidor" ng-src="{{vm.currentUser.photo}}">
+          <!-- <div ng-show="vm.isMod">
+            <div>
+              <label for="photo">Subir foto</label>
+              <input type="file" id="photo" style="display:none"/>
+              <md-input-container>
+                <md-button ng-click="vm.uploadPhoto(vm.currentUser._id)">Actualizar Foto</md-button>
+              </md-input-container>
+          </div>
+          </div> -->
         </div>
       </md-card-title-media>
       <md-card-title-text>

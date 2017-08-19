@@ -16,20 +16,20 @@
         console.log(vm.currentUser);
       }
    }init();
-   vm.updateProfile = function (vmUserToUpdate) {
+   vm.updateProfile = function (pUserToUpdate,pDataToUpdate) {
     var fotoEdit = document.getElementById('#photo').files[0];
      if(fotoEdit == undefined && fotoEdit ==  null){
-       vmUserToUpdate.photo = vm.currentUser.photo;
+       pUserToUpdate.photo = vm.currentUser.photo;
      }
-     userService.updateUser(vmUserToUpdate);
+     userService.updateUser(pUserToUpdate,pDataToUpdate);
      init();
-     $location.path('/profile');
+     $location.path('/profile-competitor');
    }
    vm.editProfile = function(pUserToUpdate,pParamToEdit) {
    // Appending dialog to document.body to cover sidenav in docs app
    var confirm = $mdDialog.prompt()
      .title('Actualizando información')
-     .textContent('Actualizando' -pParamToEdit)
+     .textContent('Actualizando' +pParamToEdit)
      .placeholder('Escribe el nuevo dato.')
      .ariaLabel(pParamToEdit)
      .ok('Actualizar')
@@ -38,15 +38,13 @@
    $mdDialog.show(confirm).then(function(result) {
      //settingsService.e
      console.log(result);
-     vm.updateUser(pUserToUpdate,result);
+     console.log(pUserToUpdate);
+     console.log(pParamToEdit);
+     vm.updateProfile(pUserToUpdate,result);
      init();
    }, function() {
      vm.status = 'Noo Hubo un problema.';
    });
  };
-  //Función para actualizar el peso
-   vm.updateWeigth = function(pUserToWeight) {
-     userService.updateWeigth(pUserToWeight);
-   }
   }
 }());
