@@ -1299,6 +1299,7 @@
 														<td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
 														<!-- Botones para editar profesores -->
 														<td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)"></td>
+														<td><md-switch md-invert aria-label="Switch 7" ng-click="vm.editTeacher()" ng-true-value="'Inactivo'" ng-false-value="'Activo'">{{vm.teacher.status}}</md-switch></div></td>
 													</tr>
 												</tbody>
 											</table>
