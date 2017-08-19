@@ -9,6 +9,7 @@
     var vm = this;
     //función para iniciar el controlador.
     function init(){
+      vm.isMod = false;
       vm.currentUser = $stateParams.cuser;
       if(vm.currentUser == 'No encontrado el competitor'){
         vm.currentUser = $cookies.getObject('currentUserActive');
@@ -24,21 +25,20 @@
      init();
      $location.path('/profile');
    }
-   vm.showUpdateWeight = function(pParamToEdit) {
+   vm.editProfile = function(pUserToUpdate,pParamToEdit) {
    // Appending dialog to document.body to cover sidenav in docs app
    var confirm = $mdDialog.prompt()
-     .title('!Actualizando el peso!')
-     .textContent('Actualizando el usuario: ' +pParamToEdit.name)
-     .placeholder('Escribe el nuevo peso.')
-     .ariaLabel(pParamToEdit.name)
+     .title('Actualizando información')
+     .textContent('Actualizando' -pParamToEdit)
+     .placeholder('Escribe el nuevo dato.')
+     .ariaLabel(pParamToEdit)
      .ok('Actualizar')
      .cancel('Cancelar');
 
    $mdDialog.show(confirm).then(function(result) {
      //settingsService.e
      console.log(result);
-     pParamToEdit.weight= result;
-     vm.updateWeigth(result);
+     vm.updateUser(pUserToUpdate,result);
      init();
    }, function() {
      vm.status = 'Noo Hubo un problema.';
