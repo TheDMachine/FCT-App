@@ -25,10 +25,11 @@ nodemailerMailgun.sendMail({
   }
 }, function (err, info) {
   if (err) {
-    console.log('Error Mierda: ' + err);
+    console.log('Error: ' + err);
+    console.log('Revisa que no te falta el archivo de configuracion.')
   }
   else {
-    console.log('Response: ' + info);
+    console.log(info.message);
   }
 });
 };
