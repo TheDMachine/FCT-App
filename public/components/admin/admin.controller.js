@@ -696,7 +696,15 @@
       // Función para cancelar un evento
       vm.cancelEvent = function(pEvent) {
         pEvent.eventState = 'cancelado';
-        eventService.updateEvent(pEvent);
+        eventService.updateEvent(pEvent)
+        .then(function(response){
+          console.log(response);
+          eventService.getEvents().then(function(response) {
+            vm.events = response.data;
+          });
+        }).catch(function(err){
+          console.log(err);
+        });
         vm.showCxlEventAlert();
         acceptedEvents();
         init();
