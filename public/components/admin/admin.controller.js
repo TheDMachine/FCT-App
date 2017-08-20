@@ -20,7 +20,6 @@
       vm.students = {};
       vm.log = {};
       vm.imageActive = false;
-      vm.cloudObj = imageService.getConfiguration();
       vm.weights = estabInfoService.getWeight();
       vm.categories = estabInfoService.getCategories();
       vm.acceptedEvents = [];
@@ -97,7 +96,9 @@
         });
         vm.teacher.status = "activo";
         vm.userActive = false;
-        vm.reservations = ticketService.getsReservations();
+        ticketService.getsReservations().then(function(response) {
+          vm.reservations = response.data;
+        });
         vm.status = "activo"
       }
       init();
@@ -358,12 +359,6 @@
 
     // Función para guardar
     vm.createNewEvent = function (pNewEvent) {
-      // if(pNewEvent.org == undefined){
-      //   pNewEvent.org.orgName = '';
-      //   pNewEvent.org.orgType = '';
-      //   pNewEvent.org.description = '';
-      // }
-
       if (eventService.findEvent(pNewEvent.eventName) != false) {
         vm.showEventDuplicateAlert();
       }
@@ -382,37 +377,7 @@
       }
       clean();
       init();
-
-      // var bError = false;
-      // var newEvent = pNewEvent;
-
-      // if (vm.events.length == 0) {
-      //   eventService.setEvents(newEvent);
-      //   vm.showEventAlert();
-      //   clean();
-      //   init();
-      // } else {
-      //   for (var i = 0; i < vm.events.length; i++) {
-      //     if (newEvent.eventName == vm.events[i].eventName) {
-      //       bError = true;
-      //     }
-      //   }
-      //   if (bError == false) {
-      //       eventService.setEvents(newEvent);
-      //       vm.showEventAlert();
-      //       clean();
-      //       init();
-      //     } else {
-      //       vm.showEventDuplicateAlert();
-      //     }
-      //   }
       };
-      // Funciones para guardar patrocinadores
-
-      // Función para crear mapa
-      // function createMap(pLat, pLeng) {
-
-      // }
 
       // Función para mensaje de registro de evento satisfactorio
       vm.showEventAlert = function() {
@@ -748,7 +713,15 @@
       // Función para cancelar un evento
       vm.cancelEvent = function(pEvent) {
         pEvent.eventState = 'cancelado';
-        eventService.updateEvent(pEvent);
+        eventService.updateEvent(pEvent)
+        .then(function(response){
+          console.log(response);
+          eventService.getEvents().then(function(response) {
+            vm.events = response.data;
+          });
+        }).catch(function(err){
+          console.log(err);
+        });
         vm.showCxlEventAlert();
         acceptedEvents();
         init();
