@@ -3,18 +3,22 @@
   angular
   .module('app')
   .controller('reserveCtrl', reserveCtrl);
-  function reserveCtrl($scope, eventService, ticketService, $location, $mdDialog) {
+
+  reserveCtrl.$inject = ['$scope', '$http', '$location', '$mdDialog','eventService', 'ticketService' ];
+
+  function reserveCtrl($scope, $http, $location, $mdDialog, eventService, ticketService) {
   var vm = this;
   vm.reservation = {};
   vm.eventTicketPrice = {};
 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
     function init() { 
-      vm.events = eventService.getEvents();
-      vm.reservations = ticketService.getsReservations();
-      // ticketService.getsReservations().then(function(response) {
-      //     vm.tickets = response.data;
-      //   });
+      eventService.getEvents().then(function(response) {
+          vm.events = response.data;
+        });
+      ticketService.getsReservations().then(function(response) {
+          vm.reservations = response.data;
+        });
       }init();
 
     // Función para devolverse al landing
@@ -28,7 +32,7 @@
       for (var i = 0; i < vm.events.length; i++) {
         if (vm.events[i].eventName === pEvent) {
           vm.eventTicketPrice = {
-            ticketPrice: vm.events[i].place.ticketPrice
+            ticketPrice: vm.events[i].ticketPrice
           }
         }
       }
@@ -42,10 +46,8 @@
         email : vm.reservation.email,
         fullName : vm.reservation.fullName,
         ced : vm.reservation.ced,
-        card : {
-            number: vm.reservation.card.number,
-            expiration: vm.reservation.card.expiration
-        },
+        cardNumber: vm.reservation.cardNumber,
+        cardExpiration: vm.reservation.cardExpiration,
         confirmationNum : conNum(),
         state : 'activo'
       };
@@ -57,29 +59,22 @@
         vm.Error = true;
       }
       if (vm.Error === false) {
-        
-        // ticketService.setReservations(newRsv)
-        // .then(function(response){
-        //   var responseObj = response;
-        //   console.log(response);
-        //   ticketService.getsReservations().then(function(response){
-        //     vm.tickets = response.data;
-        //   });
-        // }).catch(function(err){
-        //   console.log(err);
-        // });
-        // vm.showReservationAlert(newRsv.confirmationNum);
-
-        ticketService.setReservations(newRsv);
+        ticketService.setReservations(newRsv)
+        .then(function(response){
+          var responseObj = response;
+          console.log(response);
+          ticketService.getsReservations().then(function(response){
+            vm.reservations = response.data;
+          });
+        }).catch(function(err){
+          console.log(err);
+        });
         vm.showReservationAlert(newRsv.confirmationNum);
-        clean();
-        init();
       }else{
         vm.showRsvErrorAlert(vm.availableTkts);
-        init();
       }
-      // clean();
-      //   init();
+      clean();
+        init();
     };
 
     // Función para mensaje de registro de entrada satisfactorio
@@ -137,13 +132,12 @@
     }
 
      function availableTickects(pNewRsv) {
-      vm.events = eventService.getEvents();
       vm.reservedTkts = reservedTickects(pNewRsv);
       vm.availableTkts = 0;
 
       for (var i = 0; i < vm.events.length; i++) {
         if (pNewRsv.event === vm.events[i].eventName) {
-          vm.availableTkts = vm.events[i].place.tickets - vm.reservedTkts;
+          vm.availableTkts = vm.events[i].tickets - vm.reservedTkts;
         }
       }
       return vm.availableTkts;
@@ -151,7 +145,6 @@
 
     // función para sumar los tiquetes reservados
     function reservedTickects(pNewRsv) {
-      vm.reservations = ticketService.getsReservations();
       vm.reservedTkts = 0;
       vm.eventReservations = [];
 

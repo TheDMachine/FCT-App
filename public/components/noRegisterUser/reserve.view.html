@@ -94,7 +94,7 @@
 						<!-- Campo nombre evento -->
 						<md-input-container flex-offset>
 							<label>Número de tarjeta (Visa/MasterCard)</label>
-							<input name="card" ng-model="vm.reservation.card.number" ng-pattern="/^[0-9]{16}$/" maxlength="16" md-maxlength="16" placeholder="4198876545679876" required>
+							<input name="card" ng-model="vm.reservation.cardNumber" ng-pattern="/^[0-9]{16}$/" maxlength="16" md-maxlength="16" placeholder="4198876545679876" required>
 
 							<!-- Mensaje de retroalimentacion -->
 							<div ng-messages="frmTktsReservations.card.$error">
@@ -107,7 +107,7 @@
 						<!-- Campo nombre evento -->
 						<md-input-container flex-offset>
 							<label>Expiración</label>
-							<input type="text" name="expCard" ng-model="vm.reservation.card.expiration" maxlength="5" md-maxlength="5" placeholder="01-22" required>
+							<input type="text" name="expCard" ng-model="vm.reservation.cardExpiration" maxlength="5" md-maxlength="5" placeholder="01-22" required>
 
 							<!-- Mensaje de retroalimentacion -->
 							<div ng-messages="frmTktsReservations.expCard.$error">
