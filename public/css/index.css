@@ -1279,6 +1279,7 @@ md-card md-card-title md-card-title-text{
 
 .avatar{
   width: 30%;
+  height: 30%;
   position: absolute;
   z-index: 4;
   top: 8.5%;
@@ -1313,6 +1314,8 @@ md-card md-card-title{
 
 .avatar img{
   width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
 /* Base styles */

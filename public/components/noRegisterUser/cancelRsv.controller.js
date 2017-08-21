@@ -3,14 +3,21 @@
   angular
   .module('app')
   .controller('cancelRsvCtrl', cancelRsvCtrl);
-  function cancelRsvCtrl($scope, ticketService, eventService, $location, $mdDialog) {
+
+  cancelRsvCtrl.$inject = ['$scope', '$http', '$location', '$mdDialog','eventService', 'ticketService' ];
+
+  function cancelRsvCtrl($scope, $http, $location, $mdDialog, eventService, ticketService) {
   var vm = this;
   vm.reservation = {};
 
     // función que se llama así misma para indicar que sea lo primero que se ejecute
     function init() { 
-      vm.events = eventService.getEvents();
-      vm.reservations = ticketService.getsReservations();
+      eventService.getEvents().then(function(response) {
+          vm.events = response.data;
+        });
+      ticketService.getsReservations().then(function(response) {
+          vm.reservations = response.data;
+        });
       }init();
 
     // Función para devolverse al landing
@@ -21,7 +28,6 @@
 
     // obtiene reserva a buscar
     vm.searchRsv = function(pRsv) {
-      vm.reservations = ticketService.getsReservations();
       var bError =  false;
       for (var i = 0; i < vm.reservations.length; i++) {
         if (vm.reservations[i].confirmationNum === pRsv.confNum) {
@@ -39,27 +45,35 @@
 
     // Devueñve la información de la reserva a cancelar
     function sendInfo(pRsvToCxl) {
+      vm.reservation._id = pRsvToCxl._id;
       vm.reservation.confNum = pRsvToCxl.confirmationNum;
       vm.reservation.ced = pRsvToCxl.ced;
       vm.reservation.fullName = pRsvToCxl.fullName;
       vm.reservation.event = pRsvToCxl.event;
-      vm.reservation.tktsQuantity = pRsvToCxl.tktsQuantity;
+      vm.reservation.tktsQuantity = Number(pRsvToCxl.tktsQuantity);
     }
 
-    // Cambia el estado de la reserva a cancelada
-    vm.cancelRsv = function(pCxlRsv) {
-      console.log(pCxlRsv);
-      vm.reservations = ticketService.getsReservations();
-      for (var i = 0; i < vm.reservations.length; i++) {
-        if (vm.reservations[i].confirmationNum === pCxlRsv.confNum) {
-          vm.reservations[i].state = 'cancelado';
-          vm.showCxlSuccessAlert();
-          ticketService.updateReservation(vm.reservations[i]);
-          init();
-          clean();
-        }
-      }
-    };
+   // Cambia el estado de la reserva a cancelada
+vm.cancelRsv = function(pCxlRsv) {
+  console.log(pCxlRsv);
+  for (var i = 0; i < vm.reservations.length; i++) {
+    if (vm.reservations[i].confirmationNum === pCxlRsv.confNum) {
+      vm.reservations[i].state = 'cancelado';
+      
+      ticketService.updateReservation(vm.reservations[i]).then(function(response){
+        console.log(response);
+        ticketService.getsReservations().then(function(response) {
+          vm.reservations = response.data;
+        });
+      }).catch(function(err){
+        console.log(err);
+      });
+      vm.showCxlSuccessAlert();
+      clean();
+      init();
+    }
+  }
+};
 
     // Función para mensaje cancelacion de reserva satisfactoria
     vm.showCxlSuccessAlert = function() {

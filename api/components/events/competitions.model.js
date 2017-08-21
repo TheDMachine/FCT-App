@@ -6,6 +6,7 @@ var CompetitionSchema = new mongoose.Schema({
   competitionGenre: {type: String, required: true},
   competitionAge:   {type: String, required: true},
   competitionWeight:{type: String, required: true},
+  competitionBelt:  {type: String, required: true},
   competitors:      []
 });
 
