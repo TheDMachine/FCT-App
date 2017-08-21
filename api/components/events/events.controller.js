@@ -75,3 +75,10 @@ module.exports.findAllCompetitions = function(req,res){
     res.send(competitions);
   })
 };
+// Backend Josue competencias
+module.exports.updateCompetition = function(req, res){
+	console.log(req.body.id);
+	competition.findByIdAndUpdate(req.body._id, {$set:req.body}).then(function(data){
+			res.json({succes:true,msg:'Se ha actualizado la competencia correctamente.'});
+		});
+}
