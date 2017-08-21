@@ -20,7 +20,6 @@
       vm.students = {};
       vm.log = {};
       vm.imageActive = false;
-      vm.cloudObj = imageService.getConfiguration();
       vm.weights = estabInfoService.getWeight();
       vm.categories = estabInfoService.getCategories();
       vm.acceptedEvents = [];
@@ -97,7 +96,9 @@
         });
         vm.teacher.status = "activo";
         vm.userActive = false;
-        vm.reservations = ticketService.getsReservations();
+        ticketService.getsReservations().then(function(response) {
+          vm.reservations = response.data;
+        });
         vm.status = "activo"
       }
       init();
@@ -358,12 +359,6 @@
 
     // Función para guardar
     vm.createNewEvent = function (pNewEvent) {
-      // if(pNewEvent.org == undefined){
-      //   pNewEvent.org.orgName = '';
-      //   pNewEvent.org.orgType = '';
-      //   pNewEvent.org.description = '';
-      // }
-
       if (eventService.findEvent(pNewEvent.eventName) != false) {
         vm.showEventDuplicateAlert();
       }
@@ -382,37 +377,7 @@
       }
       clean();
       init();
-
-      // var bError = false;
-      // var newEvent = pNewEvent;
-
-      // if (vm.events.length == 0) {
-      //   eventService.setEvents(newEvent);
-      //   vm.showEventAlert();
-      //   clean();
-      //   init();
-      // } else {
-      //   for (var i = 0; i < vm.events.length; i++) {
-      //     if (newEvent.eventName == vm.events[i].eventName) {
-      //       bError = true;
-      //     }
-      //   }
-      //   if (bError == false) {
-      //       eventService.setEvents(newEvent);
-      //       vm.showEventAlert();
-      //       clean();
-      //       init();
-      //     } else {
-      //       vm.showEventDuplicateAlert();
-      //     }
-      //   }
       };
-      // Funciones para guardar patrocinadores
-
-      // Función para crear mapa
-      // function createMap(pLat, pLeng) {
-
-      // }
 
       // Función para mensaje de registro de evento satisfactorio
       vm.showEventAlert = function() {
@@ -748,7 +713,15 @@
       // Función para cancelar un evento
       vm.cancelEvent = function(pEvent) {
         pEvent.eventState = 'cancelado';
-        eventService.updateEvent(pEvent);
+        eventService.updateEvent(pEvent)
+        .then(function(response){
+          console.log(response);
+          eventService.getEvents().then(function(response) {
+            vm.events = response.data;
+          });
+        }).catch(function(err){
+          console.log(err);
+        });
         vm.showCxlEventAlert();
         acceptedEvents();
         init();
@@ -893,6 +866,33 @@
       init();
       cleanTeacher();
     };
+
+// Funcion para actualizar competición
+vm.updateCompetition = function() {
+var pModCompetition = {
+    _id: vm._id,
+    competitionNumber: vm.competitionNumber,
+    eventBelongs: vm.eventBelongs,
+    competitionAge: vm.competitionAge,
+    competitionGenre: vm.competitionGenre,
+    competitionBelt: vm.competitionBelt,
+    competitionWeight: vm.competitionWeight,
+  }
+  eventService.updateCompetition(pModCompetition)
+  init();
+  cleanCompetition();
+  }
+
+  function cleanCompetition() {
+    vm._id = '',
+    vm.competitionNumber = '',
+    vm.eventBelongs = '',
+    vm.competitionAge ='',
+    vm.competitionGenre = '',
+    vm.competitionBelt = '',
+    vm.competitionWeight = ''
+
+  }
 
     //funcion para guardar informacion de academia
 
@@ -1216,14 +1216,14 @@
     //crea el miembro nuevo de la junta directiva
     vm.createMember = function(pNewMember) {
       settingsService.updateDirect(pNewMember);
-      vm.showAlertEditParams('El miembro llamado ' + pNewMember.name + ' ha sido creado exitosamente.', '¡Nuevo miembro de la junta directiva!');
+      vm.showAlertEditParams('El usuario  ' + pNewMember.name + ' ha sido creado exitosamente.', '¡Nuevo miembro de la junta directiva!');
       init();
       vm.modDisplay = false;
       clearForm(vm.editMem);
     }
     vm.updateMember = function(pMemberToUpdate) {
       settingsService.updateDirect(pMemberToUpdate);
-      vm.showAlertEditParams('El miembro llamado ' + pMemberToUpdate.name + ' ha sido actualizado exitosamente.', '¡Actualización de miembro en la junta directiva!');
+      vm.showAlertEditParams('El usuario  ' + pMemberToUpdate.name + ' ha sido actualizado exitosamente.', '¡Actualización de miembro en la junta directiva!');
       init();
       vm.modDisplay = false;
       clearForm(vm.editMem);
@@ -1289,6 +1289,31 @@
 
 
   }
+  vm.compareDate = function (competition){
+    var edit = true;
+    var fecha = new Date();
+    for(var i = 0 ; i < vm.events.length ; i++){
+      if(competition.eventBelongs == vm.events[i].eventName){
+        if(new Date(vm.events[i].date1) > fecha){
+          edit = true;
+        }else{
+          edit = false;
+        }
+
+      }
+    }
+    return edit;
+  }
+  vm.editCompetition = function(item){
+
+      vm._id = item._id,
+      vm.competitionNumber = Number(item.competitionNumber),
+      vm.eventBelongs = item.eventBelongs,
+      vm.competitionAge = item.competitionAge,
+      vm.competitionGenre = item.competitionGenre,
+      vm.competitionWeight = item.competitionWeight
+  }
+
 }
 
 })();

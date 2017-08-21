@@ -17,6 +17,7 @@ router.route('/get_all_events')
     eventsController.findAll(req,res);
   });
 
+
 router.route('/update_events')
   .put(function(req, res){
     eventsController.update(req,res);
@@ -32,9 +33,10 @@ router.route('/get_all_competitions')
     eventsController.findAllCompetitions(req, res);
   });
 
-router.route('/update_competitions')
-  .put(function(req, res){
-    eventsController.updateCompetition(req, res);
-  });  
+  //Backend update Competencias Josué
+  router.route('/update_competition')
+    .put(function(req, res){
+      eventsController.updateCompetition(req,res);
+   	});
 
 module.exports = router;

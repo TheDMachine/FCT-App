@@ -164,6 +164,7 @@
     }
 
     function _updateCompetition(pModCompetition){
+<<<<<<< HEAD
       /*var competitionsList = _getCompetitions();
       for(var i = 0; i < competitionsList.length; i++){
         if(competitionsList[i].competitionNumber == pModCompetition.competitionNumber){
@@ -173,6 +174,17 @@
       console.log(competitionsList);
       localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));*/
       return $http.put('http://localhost:3000/api/update_competitions', pModCompetition);
+=======
+      // var competitionsList = _getCompetitions();
+      // for(var i = 0; i < competitionsList.length; i++){
+      //   if(competitionsList[i].competitionNumber == pModCompetition.competitionNumber){
+      //     competitionsList[i] = pModCompetition;
+      //   }
+      // }
+      // console.log(competitionsList);
+      // localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));
+      return $http.put('http://localhost:3000/api/update_competition',pModCompetition);
+>>>>>>> master
     }
   }
 
