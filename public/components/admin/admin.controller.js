@@ -17,6 +17,7 @@
       vm.stepThreeConsult = false;
       vm.stepOneConsult = true;
       vm.user = {};
+      vm.student = {};
       vm.students = {};
       vm.log = {};
       vm.imageActive = false;
@@ -1022,53 +1023,53 @@ var pModCompetition = {
 
 
     //funcion para editar alumno
-    vm.getStudent = function(user) {
-      vm.student._id= user._id;
-      vm.student.id = user.id;
-      vm.student.birthday = user.birthday;
-      vm.student.firstName = user.firstName;
-      vm.student.secondName = user.secondName;
-      vm.student.firstLastName = user.firstLastName;
-      vm.student.secondLastName = user.secondLastName;
-      vm.student.genre = user.genre;
-      vm.student.weight = user.weight;
-      vm.student.height = user.height;
-      vm.student.nationality = user.nationality;
-      vm.student.phone = user.phone;
-      vm.student.email = user.email;
-      vm.student.academy = user.academy;
-      vm.student.teacher = user.teacher;
-      vm.student.belt = user.belt;
-      vm.student.category = user.category;
-      vm.student.tournaments = user.tournaments;
-      vm.student.tournamentsWins = user.tournamentsWins;
-      vm.student.role = user.role;
+    vm.getStudent = function(pStudent) {
+      vm.student._id= pStudent._id;
+      vm.student.id = pStudent.id;
+      vm.student.birthday = pStudent.birthday;
+      vm.student.name = pStudent.name;
+      vm.student.surName = pStudent.surName;
+      vm.student.firstName = pStudent.firstName;
+      vm.student.lastName = pStudent.lastName;
+      vm.student.genre = pStudent.genre;
+      vm.student.weight = Number(pStudent.weight);
+      vm.student.height = Number(pStudent.height);
+      vm.student.nationality = pStudent.nationality;
+      vm.student.phone = pStudent.phone;
+      vm.student.email = pStudent.email;
+      vm.student.academy = pStudent.academy;
+      vm.student.teacher = pStudent.teacher;
+      vm.student.belt = pStudent.belt;
+      vm.student.category = pStudent.category;
+      vm.student.tournaments = Number(pStudent.tournaments);
+      vm.student.tournamentsWins = Number(pStudent.tournamentsWins);
+      vm.student.role = pStudent.role;
     }
 
     //funcion para guardar alumno editada
     vm.updateStudent = function() {
       var editstudent = {
-        _id: vm._id,
-        id: vm.id,
-        birthday: vm.birthday,
-        firstName: vm.firstName,
-        secondName: vm.secondName,
-        firstLastName: vm.firstLastName,
-        secondLastName: vm.secondLastName,
-        genre: vm.genre,
-        weight: vm.weight,
-        height: vm.height,
-        nationality: vm.nationality,
-        phone: vm.phone,
-        email: vm.email,
-        attendAcademy: vm.academy,
-        teacher: vm.teacher,
-        belt: vm.belt,
-        category: vm.category,
-        tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins,
-        status: vm.status,
-        role: vm.role
+        _id: vm.student._id,
+        id: vm.student.id,
+        birthday: vm.student.birthday,
+        name: vm.student.name,
+        surName: vm.student.surName,
+        firstName: vm.student.firstName,
+        lastName: vm.student.lastName,
+        genre: vm.student.genre,
+        weight: vm.student.weight,
+        height: vm.student.height,
+        nationality: vm.student.nationality,
+        phone: vm.student.phone,
+        email: vm.student.email,
+        attendAcademy: vm.student.academy,
+        teacher: vm.student.teacher,
+        belt: vm.student.belt,
+        category: vm.student.category,
+        tournaments: vm.student.tournaments,
+        tournamentsWins: vm.student.tournamentsWins,
+        status: vm.student.status,
+        role: vm.student.role
       }
       userService.updateUsers(editstudent);
       init();
