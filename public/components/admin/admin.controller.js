@@ -1023,6 +1023,7 @@ var pModCompetition = {
 
     //funcion para editar alumno
     vm.getStudent = function(user) {
+      vm.student._id= user._id;
       vm.student.id = user.id;
       vm.student.birthday = user.birthday;
       vm.student.firstName = user.firstName;
@@ -1047,6 +1048,7 @@ var pModCompetition = {
     //funcion para guardar alumno editada
     vm.updateStudent = function() {
       var editstudent = {
+        _id: vm._id,
         id: vm.id,
         birthday: vm.birthday,
         firstName: vm.firstName,
