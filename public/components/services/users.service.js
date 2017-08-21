@@ -134,13 +134,14 @@
     }
     //editar la informacion del alumno ya registrada
     function _updateUsers(editUser){
-      var usersList = _getUsers();
-      for(var i = 0; i < usersList.length; i++){
-        if(usersList[i].id == editUser.id){
-          usersList[i] = editUser;
-        }
-      }
-      localStorage.setItem('lsUsersList', JSON.stringify(usersList));
+      // var usersList = _getUsers();
+      // for(var i = 0; i < usersList.length; i++){
+      //   if(usersList[i].id == editUser.id){
+      //     usersList[i] = editUser;
+      //   }
+      // }
+      // localStorage.setItem('lsUsersList', JSON.stringify(usersList));
+      return $http.put('http://localhost:3000/api/update_student',editUser);
     }
 
     function _updateUsersConsul(editUser) {

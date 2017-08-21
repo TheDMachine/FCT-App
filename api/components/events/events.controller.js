@@ -56,6 +56,7 @@ module.exports.saveCompetition = function(req, res){
     competitionNumber: req.body.competitionNumber,
     eventBelongs: req.body.eventBelongs,
     competitionGenre: req.body.competitionGenre,
+    competitionBelt: req.body.competitionBelt,
     competitionAge: req.body.competitionAge,
     competitionWeight: req.body.competitionWeight,
     competitors: req.body.competitors
