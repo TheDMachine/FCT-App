@@ -1071,7 +1071,16 @@ var pModCompetition = {
         status: vm.student.status,
         role: vm.student.role
       }
-      userService.updateUsers(editstudent);
+      userService.updateUsers(editstudent)
+      .then(function(response){
+        $http.get('http://localhost:3000/api/get_all_students')
+        .then(function(response){
+          vm.students = response.data
+        })
+      })
+      .catch(function(err) {
+        console.log(err);
+      })
       init();
       clean();
     }
@@ -1109,11 +1118,11 @@ var pModCompetition = {
     }
 
     function cleanCompetition() {
-      vm.competitionNumber = '', 
-      vm.eventBelongs = '', 
-      vm.competitionAge = '', 
-      vm.competitionGenre = '', 
-      vm.competitionBelt = '', 
+      vm.competitionNumber = '',
+      vm.eventBelongs = '',
+      vm.competitionAge = '',
+      vm.competitionGenre = '',
+      vm.competitionBelt = '',
       vm.competitionWeight = ''
     }
 
