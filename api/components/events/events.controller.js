@@ -59,7 +59,8 @@ module.exports.saveCompetition = function(req, res){
     competitionBelt: req.body.competitionBelt,
     competitionAge: req.body.competitionAge,
     competitionWeight: req.body.competitionWeight,
-    competitors: req.body.competitors
+    competitors: req.body.competitors,
+		status : req.body.status
   });
 
   newCompetition.save(function(err){
