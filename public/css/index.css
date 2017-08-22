@@ -1,6 +1,18 @@
 html,body{
   background-color: white;
 }
+.container{
+  display: block;
+  position: relative;
+  margin: 40px auto;
+  height: auto;
+  width: 500px;
+  padding: 20px;
+}
+
+
+
+
 /*Inicio Estilos de tablas usuarios*/
 #tableUser h3{
   font-family: 'Montserrat';

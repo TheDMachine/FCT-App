@@ -1080,6 +1080,7 @@ var pModCompetition = {
     //funcion para guardar competencia
     vm.createCompetition = function() {
       var newCompetition = {
+        status: 'activo',
         competitionNumber: vm.competitionNumber,
         eventBelongs: vm.eventBelongs,
         competitionAge: vm.competitionAge,
