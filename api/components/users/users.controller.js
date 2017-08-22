@@ -1,5 +1,6 @@
 var User = require('./users.model');
 var bcrypt = require('bcrypt');
+// var email = require('./../notifications/email');
 
 module.exports.updateBelt = function(req,res){
 
@@ -120,3 +121,33 @@ module.exports.updateStudent = function(req,res){
 
 
 }
+
+module.exports.saveConsul = function(req,res) {
+    var salt =10;
+    // email.sEmail('newPassword', req.body.email,'Nuevo registro de fct-app', {name:req.body.name, username:req.body.id, password:req.body.password})
+     var newConsul = new User({
+         id:req.body.id,
+         name:req.body.name,
+         surName:req.body.surName,
+         firstName:req.body.firstName,
+         lastName:req.body.lastName,
+         birthday:req.body.birthday,
+         genre:req.body.genre,
+         nationality:req.body.nationality,
+         email:req.body.email,
+         photo:req.body.photo,
+         password:req.body.password,
+         newUser : req.body.newUser,
+         role:req.body.role,
+         status:req.body.status
+     });
+     console.log(req.body.password);
+     newConsul.save(function(err){
+         if(err){
+             console.log('Hubo un error al guardar el usuario');
+             res.json({success:false, msg:'Hubo un problema al registrar Joder tio.'})
+         }else{
+             console.log('Yass');
+         }
+     })
+};

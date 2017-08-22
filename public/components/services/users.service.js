@@ -143,14 +143,16 @@
       localStorage.setItem('lsUsersList', JSON.stringify(usersList));
     }
 
+    //Actualiza el represetante de consejo.
     function _updateUsersConsul(editUser) {
-      var usersList = _getUsers();
-      for(var i = 0; i < usersList.length; i++){
-        if(usersList[i].id == editUser.id){
-          usersList[i] = editUser;
-        }
-      }
-      localStorage.setItem('lsConsulUsers', JSON.stringify(usersList));
+    //   var usersList = _getUsers();
+    //   for(var i = 0; i < usersList.length; i++){
+    //     if(usersList[i].id == editUser.id){
+    //       usersList[i] = editUser;
+    //     }
+    //   }
+    //   localStorage.setItem('lsConsulUsers', JSON.stringify(usersList));
+    return $http.put('http://localhost:3000/api/update_consul',editUser);
     }
     // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
@@ -219,18 +221,19 @@
         return consulList;
       }
       //se crea un nuevo representante de consejo.
-      function _setNewConsul(pNewObjConsult){
-        var consulList = _getUserConsult();
-        for (var i = 0; i < consulList.length; i++) {
-          if (consulList[i].id == pNewObjConsult.id) {
-            return false;
-          }else{
-            pNewObjConsult.password = _generatePassword();
-            consulList.push(pNewObjConsult);
-            localStorage.setItem('lsConsulUsers', JSON.stringify(consulList));
-            return true;
-          }
-        }
+      function _setNewConsul(pNewObjConsul){
+        // var consulList = _getUserConsult();
+        // for (var i = 0; i < consulList.length; i++) {
+        //   if (consulList[i].id == pNewObjConsult.id) {
+        //     return false;
+        //   }else{
+            pNewObjConsul.password = _generatePassword();
+        //     consulList.push(pNewObjConsult);
+        //     localStorage.setItem('lsConsulUsers', JSON.stringify(consulList));
+        //     return true;
+        //   }
+        // }
+        return $http.post('http://localhost:3000/api/save_consul',pNewObjConsul);
     }
 
    function _getCookie(){
