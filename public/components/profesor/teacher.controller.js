@@ -36,20 +36,32 @@
     vm.acceptedEvents = [];
 
   function init() {
-    vm.currentUser = $cookies.get('currentUserActive');
-    vm.currentUser = JSON.parse(vm.currentUser);
+    vm.currentUser = $cookies.getObject('currentUserActive');
+    //vm.currentUser = JSON.parse(vm.currentUser);
     vm.selected = 2;
         vm.academy = academyServices.getAcademy();
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
-        vm.competitions = eventService.getCompetitions();
+        vm.competitions = eventService.getCompetitions()
+        .then(function(response){
+          vm.competitions = response.data;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
         acceptedEvents();
         vm.event = {};
         vm.sponsors = sponsorService.getSponsors();
         vm.teacher = {};
         vm.teachers = userService.getTeachers();
         vm.sponsor = {};
-        vm.users = userService.getUsers();
+        vm.users = userService.getUsers()
+        .then(function(response){
+          vm.users = response.data;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
         vm.log = logService.showLog();
         vm.belts = estabInfoService.getBelts();
         vm.to = new Date();
@@ -155,7 +167,13 @@
             }
             if(duplicate !== true){
               vm.competitions[i].competitors.push(vm.competitor);
-              eventService.updateCompetition(vm.competitions[i]);
+              eventService.updateCompetition(vm.competitions[i])
+              .then(function(response){
+                console.log(response);
+              })
+              .catch(function(err){
+                console.log(err);
+              });
               return;
             }
           }
@@ -288,22 +306,28 @@
     }
 
     vm.showCompetition = function(competition, $index){
+      for(var i = 0; i < vm.competitionsToShow.length; i++){
+        if(vm.competitionsToShow[i] == undefined){
+          vm.competitionsToShow[i] = {};
+        }
+        vm.competitionsToShow[i].show = false;
+      }
       for(var i = 0; i < vm.competitions.length; i++){
         if(competition.competitionNumber == vm.competitions[i].competitionNumber){
           vm.competitionsToShow[$index] = competition;
-          for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
-            vm.competitionsToShow[i].competitors[j].points = 0;
+          for(var j = 0; j < vm.competitionsToShow[$index].competitors.length; j++){
+            vm.competitionsToShow[$index].competitors[j].points = 0;
           }
         }
       }
       for(var i = 0; i < vm.competitionsToShow.length; i++){
-        for(var j = 0; j < vm.competitionsToShow[i].competitors.length; j++){
-          if(vm.competitionsToShow[i].competitors.length == 5){
+        for(var j = 0; j < vm.competitionsToShow[$index].competitors.length; j++){
+          if(vm.competitionsToShow[$index].competitors.length == 5){
             kLoop:
             for(var k = 0; k < 4; k++){
               vm.pairFights = [];
-              vm.pairFights.push(vm.competitionsToShow[i].competitors[j]);
-              vm.pairFights.push(vm.competitionsToShow[i].competitors[k + 1])
+              vm.pairFights.push(vm.competitionsToShow[$index].competitors[j]);
+              vm.pairFights.push(vm.competitionsToShow[$index].competitors[k + 1])
               if(vm.pairFights.length == 2){
                 if(vm.fights.length == 0){
                   vm.fights.push(vm.pairFights);
@@ -333,7 +357,9 @@
             }
           }
         }
-        vm.competitionsToShow[i].fights = vm.fights;
+        vm.competitionsToShow[$index].fights = vm.fights;
+        vm.competitionsToShow[$index].show = true;
+        break;
       }
       console.log(vm.fights);
       vm.selected = 8;

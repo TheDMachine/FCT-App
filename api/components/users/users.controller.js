@@ -91,12 +91,13 @@ module.exports.saveStudent = function(req, res){
     tournaments : req.body.tournaments,
     tournamentsWins : req.body.tournamentsWins,
     category : req.body.category,
-    teacher : req.body.teacher
+    teacher : req.body.teacher,
+    newUser : req.body.newUser
   });
 
   newUser.save(function(err){
     if(err){
-      res.json({success:false, msg:'No se pudo registrar el profesor' + err});
+      res.json({success:false, msg:'No se pudo registrar el alumno' + err});
     }else{
       res.json({success:true, msg:'Se registró el profesor correctamente'});
     }

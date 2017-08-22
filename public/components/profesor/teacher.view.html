@@ -131,14 +131,14 @@
   			</div>
   			<!--Vista de competencias y competidores -->
   			<div ng-show="vm.selected == 8">
-  				<div ng-repeat="item in vm.competitionsToShow track by $index" flex>
+  				<div ng-repeat="item in vm.competitionsToShow track by $index" ng-show="item.show" flex>
   					<h1>Competencia {{item.competitionNumber}}</h1>
   					<h2 class="text-center">Competidores</h2>
 					<div class="competitors-info-container" layout="row">
 						<div flex-xs flex-gt-xs="20" ng-repeat="competitor in item.competitors">
 						      <md-card class="user-card">
 						          <md-card-avatar class="avatar avatar-test">
-						            <!--<img src="{{competitor.photo}}">-->
+						            <img class="md-user-avatar" src="{{competitor.photo}}">
 						          </md-card-avatar>
 						          <md-toolbar class="red">
 						          	<p class="md-headline name-test" layout="column" layout-align="start">{{competitor.firstName}} {{competitor.firstLastName}}</p>
