@@ -883,21 +883,6 @@
 															</div>
 														</md-input-container>
 													</div>
-
-													<!-- categoria de cinta -->
-													<div class="col-xs-12 col-sm-6">
-														<md-input-container flex-offset class="md-block">
-															<label for="">Categoria por cinta</label>
-															<md-select name="competitionWeight" ng-model="vm.competitionBelt" required>
-																<md-option ng-repeat="belt in vm.belts track by $index" ng-value="belt.belt">{{belt.belt}}</md-option>
-															</md-select>
-
-															<!-- Mensaje de retroalimentacion -->
-															<div ng-messages="frmCompetition.competitionWeight.$error">
-																<div ng-messages-include="components/includes/messages.html"></div>
-															</div>
-														</md-input-container>
-													</div>
 												</div>
 											</div>
 
