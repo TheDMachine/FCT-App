@@ -442,7 +442,7 @@
 					<md-tab label="Lista">
 						<md-content id="tableAcaademy">
 							<div class="container-fluid">
-								<div class="row">
+								<div class="row col-xs-12 col-sm-10 col-sm-offset-1">
 									<!-- filtro por nombre -->
 									<div class="col-xs-12 col-sm-4 pull-right">
 										<md-input-container flex-offset class="md-block">
@@ -453,7 +453,7 @@
 								</div>
 
 								<!-- tabla de academias-->
-								<div class="row col-md-offset-1 col-md-10">
+								<div class="row col-xs-12">
 									<table class="table col-xs-12 md-whiteframe-3dp">
 										<thead class="md-whiteframe-3dp">
 											<tr>
@@ -464,7 +464,9 @@
 										</thead>
 										<tbody>
 											<tr ng-repeat="academy in vm.academies | filter:{name:vm.academyFilter}">
-												<td>{{academy.name}}</td>
+												<td>
+													<md-button class="md-raised" type="button" ng-click="vm.consultAcademy(academy, $academy)">{{academy.name}}</md-button>
+												</td>
 												<td>{{academy.manager}}</td>
 												<td>
 													<md-button ng-click="vm.getAcademy(academy)" class="md-raised">Editar</md-button>
@@ -472,14 +474,41 @@
 											</tr>
 										</tbody>
 									</table>
+
+									<!-- modal para consulta de academias -->
+									<div style="visibility: hidden">
+										<div class="md-dialog-container" id="infoAcademy">
+											<md-dialog layout-padding>
+
+												<!-- encabezado de la información del evento -->
+												<div id="modalAcademy" class="col-xs-12 md-whiteframe-3dp">
+													<h3>{{vm.academy.name}}</h3>
+												</div>
+
+												<!-- cuerpo de la información -->
+												<div id="modalInfoAcademy" class="col-xs-12">
+													<p><span>address: </span> {{vm.academy.address}}</p>
+													<p><span>manager:</span> {{vm.academy.manager}}</p>
+													<p><span>competitors:</span> {{vm.academy.competitors}}</p>
+													<p><span>phone:</span> {{vm.academy.phone}}</p>
+													<p><span>email:</span> {{vm.academy.email}}</p>
+												</div>
+
+												<!-- botón para salir del modal -->
+												<div id="modalBtnAcademy" class="col-xs-12">
+													<md-button class="md-raised" type="button" ng-click="vm.cancel()">Salir</md-button>
+												</div>
+											</md-dialog>
+										</div>
+									</div>
 								</div>
 							</div>
 						</md-content>
 					</md-tab>
-					<md-tab label="mostrar">
+					<!-- <md-tab label="mostrar">
 						<md-content layout="column">
 							<div layout="row">
-								<md-card ng-repeat="academy in vm.academy" flex="25" class="sizeCard">
+								<md-card ng-repeat="academy in vm.academies" flex="25" class="sizeCard">
 									<md-card-title>
 										<md-card-title-text>
 											<span class="md-headline">{{academy.name}}</span>
@@ -497,7 +526,7 @@
 								</md-card>
 							</div>
 						</md-content>
-					</md-tab>
+					</md-tab> -->
 			</div>
 
 			<!-- Sección de eventos -->
@@ -1352,42 +1381,44 @@
 						</md-tab>
 						<md-tab label="Lista">
 							<md-content class="md-padding">
+								<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 
-								<!-- filtro por nombre -->
-								<div class="col-xs-12 col-sm-4 pull-right">
-									<md-input-container flex-offset class="md-block">
-										<label for="">Filtrar por nombre</label>
-										<input type="text" name="studentFilter" ng-model="vm.studentFilter" />
-									</md-input-container>
-								</div>
+									<!-- filtro por nombre -->
+									<div class="col-xs-12 col-sm-4 pull-right">
+										<md-input-container flex-offset class="md-block">
+											<label for="">Filtrar por nombre</label>
+											<input type="text" name="studentFilter" ng-model="vm.studentFilter" />
+										</md-input-container>
+									</div>
 
-								<!-- tabla de alumnos-->
-								<div class="container-fluid row">
-									<div class="col-xs-12">
-										<table class="table-responsive col-xs-12" id="tableUser">
-											<thead>
-												<tr>
-													<th>Cédula</th>
-													<th>Nombre completo</th>
-													<th>Estado</th>
-													<th></th>
-													<th></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr ng-repeat="student in vm.students | filter:{name:vm.studentFilter}">
-													<td>{{student.id}}</td>
-													<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
-													<td>{{student.status}}</td>
-													<td>
-														<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
-													</td>
-													<td>
-														<md-button ng-click="vm.updateBelt(student)" class="md-raised">Promover grado</md-button>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+									<!-- tabla de alumnos-->
+									<div class="container-fluid row">
+										<div class="col-xs-12">
+											<table class="table-responsive col-xs-12 md-whiteframe-3dp" id="tblTeacher">
+												<thead class="md-whiteframe-3dp">
+													<tr>
+														<th>Cédula</th>
+														<th>Nombre completo</th>
+														<th>Estado</th>
+														<th></th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="student in vm.students | filter:{name:vm.studentFilter}">
+														<td>{{student.id}}</td>
+														<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
+														<td>{{student.status}}</td>
+														<td>
+															<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
+														</td>
+														<td>
+															<md-button ng-click="vm.updateBelt(student)" class="md-raised">Promover grado</md-button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</md-content>

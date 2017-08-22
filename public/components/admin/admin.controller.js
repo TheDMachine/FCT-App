@@ -161,6 +161,29 @@
         });
       };
 
+      // Función para mostrar academias
+      vm.consultAcademy = function(academy, ac) {
+        checkConsultAcademy(academy);
+        $mdDialog.show({
+          contentElement: '#infoAcademy',
+          parent: angular.element(document.body),
+          targetEvent: ac,
+          clickOutsideToClose: true,
+        });
+      };
+
+      //funcion para imprimir datos de academia
+      function checkConsultAcademy(academy){
+        vm.academy ={
+          name: academy.name,
+          address: academy.address,
+          manager: academy.manager,
+          competitors: academy.competitors,
+          phone: academy.phone,
+          email: academy.email
+        }
+      };
+
       //Alertas de Registro de alumnos
       vm.studentAlert = function() {
         // Appending dialog to document.body to cover sidenav in docs app

@@ -43,6 +43,13 @@ html,body{
   text-align: center;
   padding: 10px 0;
 }
+
+.academyCard{
+  font-weight: 500;
+}
+.academyCardtxt{
+  font-weight: 300;
+}
 /*Fin Estilos de tablas usuarios*/
 
 /*Inicio estilos de tabla de academias*/
@@ -1473,3 +1480,38 @@ md-card md-card-title.no-padding{
   .genericButtonsSteps div.active a{
     color:white;
   }
+
+  /*inicio estilo de modal academias*/
+  #modalAcademy{
+    background: #85c8dd;
+    text-align: center;
+  }
+
+  #modalAcademy h3{
+    color: #fff;
+    font-weight: bold;
+    display: inline;
+    font-size: 1.571em;
+    font-family: 'Montserrat';
+  }
+
+  #modalInfoAcademy{
+    padding-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  #modalInfoAcademy p{
+    padding-bottom: 5px;
+    line-height: 1;
+  }
+
+  #modalInfoAcademy p span{
+    font-weight: bold;
+  }
+
+  #modalBtnAcademy .md-button{
+    color: #fff;
+    background: #85c8dd;
+  }
+
+  /*Fin estilo de modal academias*/
