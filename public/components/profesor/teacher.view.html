@@ -86,12 +86,12 @@
     				</div>
     			</div>
   			</md-toolbar>
-  			<!-- Poner la vista aquí 
+  			<!-- Poner la vista aquí
 
   			!!-->
   			<!-- Vista de editar profesor-->
   			<div ng-show="vm.editTeacherProfile">
-  				
+
               <!-- Campo contraseña -->
               <md-input-container flex-offset>
                 <label>Contraseña</label>
@@ -123,7 +123,7 @@
               </md-input-container>
 
               <br>
-              
+
               <!-- Campo fotografía -->
 
               <button class="btn btn-primary buttonForm" type="submit" ng-click="vm.updateCurrentTeacher()" ng-disabled="frmModInfo.$invalid">Actualizar</button>
@@ -236,303 +236,84 @@
 			    <md-tabs md-dynamic-height md-border-bottom>
 
 				<!--Registro de alumnos-->
-				<md-tab label="Registro de alumnos">
-							<md-content class="md-padding">
-								<h1 class="md-display-2">Registro de alumnos</h1>
-								<div class="container-fluid row">
-									<div class="col-xs-12">
-										<form name="frmStudent" novalidate autocomplete="off">
-
-											<!-- input de cedula -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Cédula</label>
-													<input name="id" ng-model="vm.id" ng-pattern="/^[0-9]{9}$/" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-											          <div ng-messages="frmStudent.id.$error">
-											            <div ng-message="pattern">######### - Ingrese un número de identificación válido.</div>
-											          </div>
-												</md-input-container>
-											</div>
-
-											<!-- input de  Fecha de nacimiento -->
-											<div class="col-xs-12 col-sm-6">
-										        <md-input-container flex-gt-xs flex="20">
-										          <label>Fecha de nacimiento</label>
-										          <md-datepicker ng-model="vm.birthday" md-current-view="year" md-placeholder="Enter date"></md-datepicker>
-										        </md-input-container>
-											</div>
-
-											<!-- input de primer nombre -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Primer nombre</label>
-													<input name="firstName" type="text" ng-model="vm.firstName" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.firstName.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de  segundo nombre-->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Segundo nombre</label>
-													<input name="secondName" type="text" ng-model="vm.secondName" />
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.secondName.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de primer apellido -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Primer apellido</label>
-													<input name="firstLastName" type="text" ng-model="vm.firstLastName" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.firstLastName.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de  segundo apellido -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Segundo apellido</label>
-													<input name="secondLastName" type="text" ng-model="vm.secondLastName" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.secondLastName.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de género -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Género</label>
-													<md-select name="genre" ng-model="vm.genre" required>
-								            <md-option value="masculino">Masculino</md-option>
-								            <md-option value="femenino">Femenino</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.genre.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de peso -->
-											<div class="col-xs-12 col-sm-3">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Peso</label>
-													<input name="weight" type="number" ng-model="vm.weight" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.weight.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de altura -->
-											<div class="col-xs-12 col-sm-3">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Altura</label>
-													<input name="height" type="number" ng-model="vm.height" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.height.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de nacionalidad -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Nacionalidad</label>
-													<input name="nationality" type="text" ng-model="vm.nationality" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.nationality.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de télefono -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Télefono</label>
-													<input name="phone" type="text" ng-model="vm.phone" ng-pattern="/^[0-9]{8}$/" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-										          <div ng-messages="frmStudent.phone.$error">
-										            <div ng-message="pattern">######### - Ingrese un número de teléfono válido.</div>
-										          </div>
-												</md-input-container>
-											</div>
-
-											<!-- input de email -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Email</label>
-													<input name="email" type="text" ng-model="vm.email" ng-pattern="/^[a-z0-9]+[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-										          <div ng-messages="frmStudent.emergContact.$error" ng-hide="showHints">
-										            <div ng-message="pattern">
-										              Your email must be between 10 and 100 characters long and look like an e-mail address.
-										            </div>
-										          </div>
-												</md-input-container>
-											</div>
-
-											<!-- input de academia -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Academia</label>
-													<md-select name="attendAcademy" ng-model="vm.attendAcademy" required>
-								            <md-option ng-repeat="academy in vm.academy" ng-value="academy.name">{{academy.name}}</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.attendAcademy.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de profesor -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Profesor</label>
-													<md-select name="teacher" ng-model="vm.teacher" required>
-								            <md-option ng-repeat="teacher in vm.teachers" ng-value="teacher.id">{{teacher.firstName}} {{teacher.firstLastName}}</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.teacher.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de cinta -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Cinta</label>
-													<md-select name="belt" ng-model="vm.belt" required>
-								            <md-option ng-repeat="belt in vm.belts" ng-value="belt.belt">{{belt.belt}}</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.belt.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de categoría -->
-											<div class="col-xs-12 col-sm-6">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Categoría</label>
-													<md-select name="category" ng-model="vm.category" required>
-								            <md-option ng-repeat="category in vm.categoriesAge" ng-value="category.categorieName">{{category.categorieName}}</md-option>
-													</md-select>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.category.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de torneos participaddos -->
-											<div class="col-xs-12 col-sm-3">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Torneos participaddos</label>
-													<input name="tournaments" type="number" ng-model="vm.tournaments" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.tournaments.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- input de torneos ganados -->
-											<div class="col-xs-12 col-sm-3">
-												<md-input-container flex-offset class="md-block">
-													<label for="">Torneos ganados</label>
-													<input name="tournamentsWins" type="number" ng-model="vm.tournamentsWins" required/>
-
-													<!-- Mensaje de retroalimentacion -->
-													<div ng-messages="frmStudent.tournamentsWins.$error">
-														<div ng-messages-include="components/includes/messages.html"></div>
-													</div>
-												</md-input-container>
-											</div>
-
-											<!-- boton para guardar -->
-											<md-button ng-click="vm.createStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Agregar Alumno</md-button>
-
-											<!-- boton para editar -->
-											<md-button ng-click="vm.updateStudent()" class="md-raised" ng-disabled="frmStudent.$invalid">Editar Alumno</md-button>
-										</form>
-									</div>
+					<md-tab label="Registro" ui-sref=".alumnopart1">
+						<md-content class="md-padding">
+							<div class="row">
+									<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">REGISTRAR ALUMNO</h3>
+							</div>
+							<div id="buttonTeacher" class="text-center" layout="row" layout-align="center center">
+								<div ui-sref-active="active" ui-sref=".alumnopart1">
+									<a>1</a>
 								</div>
+								<div ui-sref-active="active" ui-sref=".alumnopart2">
+									<a>2</a>
+								</div>
+								<div ui-sref-active="active" ui-sref=".alumnopart3">
+									<a>3</a>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-offset-1 col-md-10">
+
+									<!-- Formulario para registro de alumnos -->
+									<form name="frmStudent" novalidate ng-submit="vm.presaveStudent(vm.student)" autocomplete="off">
+
+										<!-- Espacio para mostrar vistas del registro -->
+										<div ui-view></div>
+									</form>
+								</div>
+							</div>
+						</md-content>
+					</md-tab>
+
+					<!-- lista de Alumnos -->
+					<md-tab label="Lista">
+						<md-content class="md-padding">
+							<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 
 								<!-- filtro por nombre -->
 								<div class="col-xs-12 col-sm-4 pull-right">
 									<md-input-container flex-offset class="md-block">
 										<label for="">Filtrar por nombre</label>
-										<input type="text" name="studentFilter" ng-model="vm.studentFilter"/>
+										<input type="text" name="studentFilter" ng-model="vm.studentFilter" />
 									</md-input-container>
 								</div>
 
-								<!-- tabla -->
-									<div class="container-fluid row">
-										<div class="col-xs-12">
-											<table class="table col-xs-12">
-												<thead>
-													<tr>
-														<th>Cédula</th>
-														<th>Nombre completo</th>
-														<th>Profesor</th>
-														<th>Cinta</th>
-														<th>Categoria</th>
-														<th>Email</th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr ng-repeat="student in vm.users | filter:{firstName:vm.studentFilter}">
-														<td>{{student.id}}</td>
-														<td>{{student.firstName}} {{student.secondName}} {{student.firstLastName}} {{student.secondLastName}}</td>
-														<td>{{student.teacher}}</td>
-														<td>{{student.belt}}</td>
-														<td>{{student.category}}</td>
-														<td>{{student.email}}</td>
-														<td><md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
+								<!-- tabla de alumnos-->
+								<div class="container-fluid row">
+									<div class="col-xs-12">
+										<table class="table-responsive col-xs-12 md-whiteframe-3dp" id="tblTeacher">
+											<thead class="md-whiteframe-3dp">
+												<tr>
+													<th>Cédula</th>
+													<th>Nombre completo</th>
+													<th>Estado</th>
+													<th></th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="student in vm.students | filter:{name:vm.studentFilter}">
+													<td>{{student.id}}</td>
+													<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
+													<td>{{student.status}}</td>
+													<td>
+														<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
+													</td>
+													<td>
+														<md-button ng-click="vm.updateBelt(student)" class="md-raised">Promover grado</md-button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
-							</md-content>
-						</md-tab>
+								</div>
+							</div>
+						</md-content>
+					</md-tab>
+
+					<!-- Registro de competencias -->
 					<md-tab label="Registro de alumno en competencia" md-active="vm.userActive">
 							<md-content class="md-padding">
 								<h1 class="md-display-2">Registro de alumno en competencias</h1>
@@ -573,7 +354,7 @@
 							</md-content>
 						</md-tab>
 
-			      
+
 	    </md-tabs>
 	    </md-content>
 	</div>
@@ -749,7 +530,7 @@
 							<br>
 							<md-datepicker name="from"  ng-model="vm.from" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
 					    	<md-datepicker name="to"  ng-model="vm.to" md-placeholder="Fecha fin"></md-datepicker>
-							
+
 					        	<!-- Tabla de info eventos -->
 						        <div>
 						          	<table class="table-responsive">
@@ -772,7 +553,7 @@
 									      	</tr>
 									    </thead>
 									    <tbody>
-									      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to" > 
+									      	<tr ng-repeat="event in vm.acceptedEvents | dateRange:vm.from:vm.to" >
 									      		<td>{{event.eventName}}</td>
 									      		<td>{{event.invitedName}}</td>
 										        <td>{{event.date1 | date : "shortDate"}}</td>
@@ -794,9 +575,9 @@
 					        </md-content>
 				      	</md-tab>
 			  	</md-content>
-			</div>	
-  			
-  			
+			</div>
+
+
 
 		</md-content>
 

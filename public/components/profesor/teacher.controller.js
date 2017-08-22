@@ -4,7 +4,7 @@
   .module('app')
   .controller('teacherCtrl', teacherCtrl);
 
-  function teacherCtrl ($scope, AuthService, $location, $cookies, userService, $mdDialog, imageService, eventService, estabInfoService, academyServices, sponsorService, logService, $http) {
+  function teacherCtrl ($scope, AuthService, $location, $cookies, userService, $mdDialog, imageService, eventService, estabInfoService, academyServices, sponsorService, logService, $http, Upload) {
   	/*Sidenav functionality*/
  	var originatorEv;
   var vm = this;
@@ -34,12 +34,19 @@
     vm.editTeacherProfile = false;
     vm.today = new Date();
     vm.acceptedEvents = [];
+    vm.student = {};
+    vm.students = {};
 
   function init() {
     vm.currentUser = $cookies.getObject('currentUserActive');
     //vm.currentUser = JSON.parse(vm.currentUser);
     vm.selected = 2;
-        vm.academy = academyServices.getAcademy();
+    academyServices.getAcademy().then(function(response) {
+      vm.academies = response.data;
+    });
+    userService.getUsers().then(function (response) {
+      vm.students = response.data;
+    });
         vm.weights = estabInfoService.getWeight();
         vm.events = eventService.getEvents();
         vm.competitions = eventService.getCompetitions()
@@ -53,7 +60,9 @@
         vm.event = {};
         vm.sponsors = sponsorService.getSponsors();
         vm.teacher = {};
-        vm.teachers = userService.getTeachers();
+      userService.getTeachers().then(function (response) {
+        vm.teachers = response.data;
+      });
         vm.sponsor = {};
         vm.users = userService.getUsers()
         .then(function(response){
@@ -186,55 +195,79 @@
         vm.selected = 5;
       }
 
-      //funcion para guardar informacion del alumno
-    vm.createStudent = function(){
-      var newUser = {
-        id: vm.id,
-        birthday: vm.birthday,
-        firstName: vm.firstName,
-        secondName: vm.secondName,
-        firstLastName: vm.firstLastName,
-        secondLastName: vm.secondLastName,
-        genre: vm.genre,
-        weight: vm.weight,
-        height: vm.height,
-        nationality: vm.nationality,
-        phone: vm.phone,
-        email: vm.email,
-        attendAcademy: vm.academy,
-        teacher: vm.teacher,
-        belt: vm.belt,
-        category: vm.category,
-        tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins
-      };
-      console.log(newUser);
-      userService.setUsers(newUser);
-      cleanStudent();
-      init();
-    }
+      //funcion para pre guardar alumno
+      vm.presaveStudent = function(pNewStudent) {
+        console.log(pNewStudent);
+        vm.cloudObj.data.file = document.getElementById("photo").files[0];
+        Upload.upload(vm.cloudObj)
+          .success(function(data) {
+            pNewStudent.photo = data.url;
+            vm.createStudent(pNewStudent);
+          })
+          .catch(function(error) {
+            console.log(error);
+          })
+      }
 
-    //funcion para limpiar los input del alumno
-    function cleanStudent(){
-      vm.id = '',
-      vm.birthday = '',
-      vm.firstName = '',
-      vm.secondName = '',
-      vm.firstLastName = '',
-      vm.secondLastName = '',
-      vm.genre = '',
-      vm.weight = '',
-      vm.height = '',
-      vm.nationality = '',
-      vm.phone = '',
-      vm.email = '',
-      vm.academy = '',
-      vm.teacher = '',
-      vm.belt = '',
-      vm.category = '',
-      vm.tournaments = '',
-      vm.tournamentsWins = ''
-    }
+      //funcion para guardar informacion del alumno
+      vm.createStudent = function(pNewStudent) {
+      //   if (userService.searchUser(pNewStudent.id) !== false) {
+      //     vm.studentDuplicateAlert();
+      //   } else {
+      //     console.log(pNewStudent);
+      //     pNewStudent.role = 'student';
+      //     userService.setUsers(pNewStudent);
+      pNewStudent.role = 'student';
+      pNewStudent.status = 'activo';
+      pNewStudent.newUser = 1;
+      userService.setUsers(pNewStudent)
+      .then(function(response){
+          vm.studentAlert();
+          cleanStudent();
+          init();
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+      //   }
+       }
+
+       function cleanStudent(){
+         vm.student = '';
+       };
+
+       //Alertas de Registro de alumnos
+       vm.studentAlert = function() {
+         // Appending dialog to document.body to cover sidenav in docs app
+         // Modal dialogs should fully cover application
+         // to prevent interaction outside of dialog
+         $mdDialog.show(
+           $mdDialog.alert()
+           .parent(angular.element(document.querySelector('#popupContainer')))
+           .clickOutsideToClose(true)
+           .title('Registo correcto')
+           .textContent('¡Registro de alumno realizado!')
+           .ariaLabel()
+           .ok('¡Gracias!')
+           .targetEvent()
+         );
+       };
+
+       vm.studentDuplicateAlert = function() {
+         // Appending dialog to document.body to cover sidenav in docs app
+         // Modal dialogs should fully cover application
+         // to prevent interaction outside of dialog
+         $mdDialog.show(
+           $mdDialog.alert()
+           .parent(angular.element(document.querySelector('#popupContainer')))
+           .clickOutsideToClose(true)
+           .title('Alumno ya existe')
+           .textContent('El alumno ya existe, registre otro')
+           .ariaLabel()
+           .ok('¡Gracias!')
+           .targetEvent()
+         );
+       };
 
     //funcion para editar alumno
     vm.getStudent = function(student){

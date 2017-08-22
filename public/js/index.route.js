@@ -180,6 +180,21 @@
       controller: 'competitorCtrl',
       controllerAs: 'vm'
     })
+    // inicio vista de registrar alumno en teacher
+    .state('teacher.alumnopart1',{
+      url : '/alumnopart1T', //ruta del url del estado
+      templateUrl : 'components/profesor/teacher.alumnoR.views/teacher-alumnopart1.view.html',//vista que se va a cargar para este estado
+    })
+    .state('teacher.alumnopart2',{
+      url : '/alumnopart2T', //ruta del url del estado
+      templateUrl : 'components/profesor/teacher.alumnoR.views/teacher-alumnopart2.view.html',//vista que se va a cargar para este estado
+    })
+    .state('teacher.alumnopart3',{
+      url : '/alumnopart3T', //ruta del url del estado
+      templateUrl : 'components/profesor/teacher.alumnoR.views/teacher-alumnopart3.view.html',//vista que se va a cargar para este estado
+    })
+    // fin vista de registrar alumno en teacher
+
     .state('teacher',{
       url : '/teacher', //ruta del url del estado
       templateUrl : 'components/profesor/teacher.view.html',//vista que se va a cargar para este estado
@@ -192,6 +207,7 @@
       controller: 'teacherCtrl',
       controllerAs: 'vm'
     })
+
     .state('login',{
       url : '/login', //ruta del url del estado
       templateUrl : 'components/login/login.view.html',//vista que se va a cargar para este estado
