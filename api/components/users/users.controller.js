@@ -2,6 +2,12 @@ var User = require('./users.model');
 var bcrypt = require('bcrypt');
 var email = require('./../notifications/email');
 
+
+
+// Funciones Josué
+
+// Backend Actualizar cinturon de alumno
+
 module.exports.updateBelt = function(req,res){
 
   User.findByIdAndUpdate(req.body._id, { $set: {'belt': req.body.belt}}, function (err, user) {
@@ -16,7 +22,6 @@ module.exports.updateBelt = function(req,res){
 
 }
 
-// Funciones Josué
 //Backend Profesor
 
 module.exports.saveTeacher = function(req, res){
