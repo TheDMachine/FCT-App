@@ -62,4 +62,8 @@ router.route('/update_belt')
     userController.updateBelt(req, res);
   });
 
+router.route('/save_consul')
+    .post(function(req, res){
+        userController.saveConsul(req,res);
+    });
 module.exports = router;

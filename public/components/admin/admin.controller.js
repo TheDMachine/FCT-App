@@ -85,7 +85,9 @@
         vm.teacher = {};
         vm.sponsor = {};
 
-        vm.log = logService.showLog();
+        logService.showLog().then(function(response){
+            vm.log = response.data;
+        });
         vm.belts = estabInfoService.getBelts();
         vm.to = new Date();
         console.log(vm.to);
@@ -276,6 +278,8 @@
         $mdDialog.cancel();
       };
 
+
+    //   Función para actualizar parametros del sistema.
       vm.showAlertEditParams = function(pMessage, pFeedback) {
         // Appending dialog to document.body to cover sidenav in docs app
         // Modal dialogs should fully cover application
@@ -300,7 +304,7 @@
         var confirm = $mdDialog.prompt()
           .title('!Actualización de parametro del sistema!')
           .textContent('Actualizando de ' + pParamToEdit)
-          .placeholder('Escribe la nueva dirreción')
+          .placeholder('Escribe el nuevo dato')
           .ariaLabel(pParamToEdit)
           .ok('Actualizar')
           .cancel('Cancelar');
@@ -754,10 +758,14 @@
       }
 
       vm.createNewConsult = function(pNewConsul) {
-        console.log("El objeto con imagen es %o", pNewConsul);
-        console.log("Gracias, ha sido creado un nuevo represetante de consejo %o", pNewConsul);
-        var bFlag = userService.createConsul(pNewConsul);
-        var temDataZero = $cookies.get('currentUserActive');
+        pNewConsul.role = 'consul';
+        pNewConsul.status = 'activo';
+        pNewConsul.newUser = 1;
+        var bFlag;
+        userService.createConsul(pNewConsul).then(function(response){
+            bFlag = response.data.success;
+            console.log(response.data.success);
+        });
         if (bFlag == false) {
           document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
           //te manda a la página uno del registro.
