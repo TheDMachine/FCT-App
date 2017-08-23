@@ -67,9 +67,29 @@ module.exports.updateTeacher = function(req,res){
   User.findByIdAndUpdate(req.body._id, { $set: req.body}).then(function(data){
     res.json({success:true,msg:'Se ha actualizado correctamente.'});
   });
+}
 
+module.exports.updateTemporalPassword = function(req, res){
+    var salt = 15;
+  // console.log(req.body.id);
+  // User.findByIdAndUpdate(req.body._id,{$set:req.body}).then(function(data){
+  //   res.json({success:true,msg:'Se ha actualizado correctamente.' + res});
+  // });
 
-
+  bcrypt.hash(req.body.password, salt, function(err, hash){
+    if(err){
+    res.json({
+        success:false,
+        msg:"No se pudo cifrar la contraseña"
+    });
+    }else{
+      email.sEmail('successPassword', req.body.email, 'Cambio de contraseña temporal exitoso', {name: req.body.name, password: req.body.password});
+      req.body.password = hash;
+      User.findByIdAndUpdate(req.body._id, { $set: req.body}).then(function(data){
+        res.json({success:true,msg:'Se ha actualizado correctamente.'});
+      });
+    }
+  })
 }
 
 //Backend Alumnos

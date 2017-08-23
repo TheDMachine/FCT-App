@@ -94,9 +94,10 @@
     $mdDialog.show(confirm).then(function(result) {
       vm.currentUser.password =  result;
       vm.currentUser.newUser = 0;
-      userService.updateTeacher(vm.currentUser)
+      userService.updateTemporalPassword(vm.currentUser)
       .then(function(response){
         console.log(response);
+        $cookies.putObject('currentUserActive', vm.currentUser);
       })
       .catch(function(err){
         console.log(err);

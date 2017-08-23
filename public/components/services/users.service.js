@@ -45,6 +45,7 @@
         updateAssistant : _updateAssistant,
         updateConsul: _updateUsersConsul,
         updateWeigth: _findAndSetUserToWeigth,
+        updateTemporalPassword : _updateTemporalPassword,
         updateBelt : _updateBelt
     };
     return publicAPI;
@@ -53,6 +54,10 @@
     function _findAndSetUserToWeigth(pUserToUpdateWeigth) {
       console.log(pUserToUpdateWeigth);
       _updateUsers(pUserToUpdateWeigth);
+    }
+
+    function _updateTemporalPassword(pUserToUpdate){
+      return $http.put('http://localhost:3000/api/update_temporal_password',pUserToUpdate);
     }
 
     //Guardar alumno
