@@ -26,6 +26,7 @@ var UserSchema = new mongoose.Schema({
   tournaments:    {type: String, required: false},
   tournamentsWins:{type: String, required: false},
   password:       {type: String, required: true},
+  points:         {type: Number, required: false},
   newUser:        {type: Number, required: true}
 });
 

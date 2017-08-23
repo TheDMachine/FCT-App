@@ -1089,6 +1089,7 @@ var pModCompetition = {
         competitionWeight: vm.competitionWeight
       }
       newCompetition.competitors = [];
+      newCompetition.fights = [];
       eventService.setCompetitions(newCompetition)
         .then(function(response){
           var responseObj = response;
