@@ -84,3 +84,19 @@ module.exports.updateCompetition = function(req, res){
 			res.json({succes:true,msg:'Se ha actualizado la competencia correctamente.'});
 		});
 }
+
+// Backend  eliminar competencias
+
+module.exports.deleteCompetition = function(req,res){
+
+  competition.findByIdAndUpdate(req.body._id, { $set: {'status': req.body.status}}, function (err, user) {
+    if (err){
+      res.json({success:true,msg:'No se ha actualizado.' + handleError(err)});
+
+    } else{
+      res.json({success:true,msg:'Se ha actualizado correctamente.' + res});
+    }
+
+  });
+
+}
