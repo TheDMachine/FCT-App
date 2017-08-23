@@ -14,19 +14,19 @@
         var role = response.data.response[0].role; 
 
         switch (role) {
-        case 'Administrador':
+        case 'admin':
           $location.path('/admin');
           break;
         case 'teacher':
           $location.path('/teacher');
           break;
-        case 'Competidor':
+        case 'student':
           $location.path('/competitor');
           break;
-        case 'Representante':
+        case 'consul':
           $location.path('/consul');
           break;
-        case 'Asistente':
+        case 'assistant':
           $location.path('/assistant');
           break;
         default:

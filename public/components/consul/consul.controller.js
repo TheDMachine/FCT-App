@@ -15,6 +15,7 @@
     }
   }
 function init() {
+  vm.currentUser = $cookies.getObject('currentUserActive');
   vm.proposes = eventService.getPropose();
   vm.propose = {};
   vm.categoriesAge = estabInfoService.getCategories();
@@ -22,6 +23,38 @@ function init() {
     vm.messageToHave = 'No existen propuestas de eventos para revisar';
   }
 }init();
+
+    $scope.showPrompt = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('Bienvenido ' + vm.currentUser.id + '!')
+      .textContent('Modifica tu contraseña temporal')
+      .placeholder('Nueva contraseña')
+      .ariaLabel('New password')
+      .initialValue('')
+      .targetEvent()
+      .ok('Cambiar')
+      .cancel('');
+
+    $mdDialog.show(confirm).then(function(result) {
+      vm.currentUser.password =  result;
+      vm.currentUser.newUser = 0;
+      userService.updateTemporalPassword(vm.currentUser)
+      .then(function(response){
+        console.log(response);
+        $cookies.putObject('currentUserActive', vm.currentUser);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }, function() {
+      $scope.status = 'You didn\'t name your dog.';
+    });
+  };
+
+ if(vm.currentUser.newUser == 1) {
+    $scope.showPrompt();
+  }
 //Modald para cargar el Modald
 vm.showAlertPropose = function(pMessage, pFeedback) {
   // Appending dialog to document.body to cover sidenav in docs app
