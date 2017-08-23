@@ -957,12 +957,15 @@
 						<md-tab label="Competencias">
 							<md-content class="md-padding">
 								<h1 class="md-display-2">Competencias</h1>
-								<div class="container">
-								<label for="">Mostrar competencias por su estado:</label>
-								<md-radio-group ng-model="data.group1">
-								<md-radio-button value="activa" class="md-primary">Activas</md-radio-button>
-								<md-radio-button value="inactiva">Inactiva</md-radio-button>
+								<div class="container123213">
+									<div  id="btnFiltrosCompetencias">
+								<label>Mostrar competencias por su estado:</label>
+								<md-radio-group ng-model="data.group1" layout="row">
+								<md-radio-button ng-value="true" id="btnActivas" value="activa" class="md-primary">Activas</md-radio-button>
+								<md-radio-button value="inactiva">Inactivas</md-radio-button>
 								</md-radio-group>
+							</div>
+
 								</div>
 								<h2 id="errorConsul"></h2>
 
