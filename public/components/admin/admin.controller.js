@@ -85,7 +85,9 @@
         vm.teacher = {};
         vm.sponsor = {};
 
-        vm.log = logService.showLog();
+        logService.showLog().then(function(response){
+            vm.log = response.data;
+        });
         vm.belts = estabInfoService.getBelts();
         vm.to = new Date();
         console.log(vm.to);

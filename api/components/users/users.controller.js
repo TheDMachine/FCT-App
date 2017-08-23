@@ -1,6 +1,6 @@
 var User = require('./users.model');
 var bcrypt = require('bcrypt');
-// var email = require('./../notifications/email');
+var email = require('./../notifications/email');
 
 module.exports.updateBelt = function(req,res){
 
@@ -124,31 +124,60 @@ module.exports.updateStudent = function(req,res){
 }
 
 module.exports.saveConsul = function(req,res) {
-    var salt =10;
-    // email.sEmail('newPassword', req.body.email,'Nuevo registro de fct-app', {name:req.body.name, username:req.body.id, password:req.body.password})
-     var newConsul = new User({
-         id:req.body.id,
-         name:req.body.name,
-         surName:req.body.surName,
-         firstName:req.body.firstName,
-         lastName:req.body.lastName,
-         birthday:req.body.birthday,
-         genre:req.body.genre,
-         nationality:req.body.nationality,
-         email:req.body.email,
-         photo:req.body.photo,
-         password:req.body.password,
-         newUser : req.body.newUser,
-         role:req.body.role,
-         status:req.body.status
-     });
-     console.log(req.body.password);
-     newConsul.save(function(err){
-         if(err){
-             console.log('Hubo un error al guardar el usuario');
-             res.json({success:false, msg:'Hubo un problema al registrar Joder tio.'})
-         }else{
-             console.log('Yass');
-         }
-     })
+    email.sEmail('newPassword',req.body.email, 'Nueva cuenta creada', {
+        name:req.body.name,
+        username:req.body.id,
+        password:req.body.password
+    });
+    var salt = 15;
+    var newConsul = new User({
+        id:req.body.id,
+        name:req.body.name,
+        surName:req.body.surName,
+        firstName:req.body.firstName,
+        lastName:req.body.lastName,
+        genre:req.body.genre,
+        birthday:req.body.birthday,
+        nationality:req.body.nationality,
+        phone:req.body.phone,
+        email:req.body.email,
+        photo:req.body.photo,
+        status:req.body.status,
+        role:req.body.role,
+        newUser:req.body.newUser,
+        academy : "No procede",
+        belt : "No procede",
+        weight : "No procede",
+        height : "No procede",
+        tournaments : "No procede",
+        tournamentsWins : "No procede",
+        category : "No procede",
+        teacher : "No procede"
+    });
+    bcrypt.hash(req.body.password, salt, function(err, hash) {
+        console.log(hash);
+        if(err){
+            res.json({
+                success:false,
+                msg:"No se pudo cifrar la contraseña"
+            })
+        }else{
+
+        newConsul.password = hash;
+        newConsul.save(function(e) {
+            if(e){
+                res.json({
+                    success:false,
+                    msg:"Hubo un problema al guardar el usuario"
+                })
+            }
+            else{
+                res.json({
+                    success:true,
+                    msg:"Usuario registrado correctamente"
+                })
+            }
+        })
+    }
+    })
 };

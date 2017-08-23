@@ -73,11 +73,12 @@
 						<p class="menu-button">Patrocinadores</p>
 					</md-button>
 				</md-list-item>
-				<md-list-item layout="column">
-					<md-button class="button-selected" ng-click="vm.selected = 13">
-						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xEB3F;</i>
-						<p class="menu-button">Mantening</p>
-					</md-button>
+				<md-list-item  layout="column">
+  					<md-button class="button-selected" ng-click="vm.selected = 13">
+						<!--<i class="material-icons">&#xE869;</i>  -->
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE869;</i>
+						<p class="menu-button">Mantenimiento</p>
+  					</md-button>
 				</md-list-item>
 			</md-list>
 		</md-sidenav>
@@ -1503,8 +1504,17 @@
 										</md-input-container>
 										<md-input-container>
 											<label>Cargo de miembro de junta directiva</label>
-											<input type="text" ng-model="vm.editMem.position" name="directModifPosition" required ng-pattern="/^([A-Z])\w+$/" />
-
+											<!-- <input type="text" ng-model="vm.editMem.position" name="directModifPosition" required ng-pattern="/^([A-Z])\w+$/" /> -->
+											<md-select ng-model="vm.ediMem.position" name="directModifPosition" required>
+												<md-option value="Presidencia">Presidencia</md-option>
+												<md-option value="Vicepresidencia">Vicepresidencia</md-option>
+												<md-option value="Secretaria">Secretaria</md-option>
+												<md-option value="Tesoraria">Tesoraria</md-option>
+												<md-option value="Fiscalia">Fiscalia</md-option>
+												<md-option value="Vocal 1">Vocal 1</md-option>
+												<md-option value="Vocal 2">Vocal 2</md-option>
+												<md-option value="Vocal 3">Vocal 3</md-option>
+											</md-select>
 											<!-- Mesaje de retroalimentación -->
 											<div ng-messages="frmEdit.directModifPosition.$error">
 												<div ng-messages-include="components/includes/messages.html"></div>
