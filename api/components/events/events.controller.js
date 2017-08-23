@@ -60,7 +60,8 @@ module.exports.saveCompetition = function(req, res){
     competitionAge: req.body.competitionAge,
     competitionWeight: req.body.competitionWeight,
     competitors: req.body.competitors,
-		status : req.body.status
+	status : req.body.status,
+	fights : req.body.fights
   });
 
   newCompetition.save(function(err){

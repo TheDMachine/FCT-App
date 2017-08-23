@@ -7,7 +7,8 @@ var CompetitionSchema = new mongoose.Schema({
   competitionAge:   {type: String, required: true},
   competitionWeight:{type: String, required: true},
   status:           {type: String, required: false},
-  competitors:      []
+  competitors:      [],
+  fights:			[]
 });
 
 module.exports = mongoose.model('competitions', CompetitionSchema);

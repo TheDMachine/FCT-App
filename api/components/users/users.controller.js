@@ -97,6 +97,7 @@ module.exports.saveStudent = function(req, res){
     tournamentsWins : req.body.tournamentsWins,
     category : req.body.category,
     teacher : req.body.teacher,
+    points : req.body.points,
     newUser : req.body.newUser
   });
 
