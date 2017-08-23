@@ -1,6 +1,19 @@
 html,body{
   background-color: white;
 }
+
+/*Inicio Estilos de perfil de admin*/
+#per{
+    font-family: 'Montserrat';
+    font-size: 2.143em;
+    font-weight: normal;
+    padding: 0 3%;
+}
+.imgPerfil{
+  margin: 5% 0 0 5%;
+}
+/*Fin Estilos de perfil de admin*/
+
 /*Inicio Estilos de tablas usuarios*/
 #tableUser h3{
   font-family: 'Montserrat';

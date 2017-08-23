@@ -84,7 +84,7 @@
 		<md-content id="content" flex>
 			<md-toolbar class="tool-icons md-whiteframe-3dp" layout="row">
 				<md-list-item class="noright" flex="20">
-					<img src="components/admin/admin.jpg" class="md-avatar" />
+					<img src="{{vm.currentUser.photo}}" class="md-avatar" />
 					<p>{{vm.currentUser.email}}</p>
 				</md-list-item>
 				<div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
@@ -179,32 +179,42 @@
 							<div class="row container-fluid">
 								<div class="col-xs-12">
 									<!-- boton para actualizar -->
-									<md-button type="submit" class="md-raised" ng-click="vm.editAdmin()">actualizar</md-button>
+									<md-button type="submit" class="md-raised" ng-click="vm.updateCurrentAdmin()">actualizar</md-button>
 								</div>
 							</div>
 						</form>
 					</div>
 
 					<!-- Datos del perfil -->
-					<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-						<md-card-title class="no-padding">
-							<md-card-title-media flex="30">
-								<div class="md-media-lg card-media profile-picture" id="img-avatar">
-									<img src="components/admin/avatar.png" class="img-circle">
-								</div>
-							</md-card-title-media>
-							<md-card-title-text>
-								<span class="md-headline name-profile">{{vm.currentUser.firstName}}  {{vm.currentUser.firstLastName}}</span>
-								<p class="profile-info"><span>Cédula:</span> {{vm.currentUser.id}}</p>
-								<p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
-								<p class="profile-info"><span>Edad:</span> {{vm.currentUser.bornhDate}}</p>
-								<p class="profile-info "><span>Teléfono:</span> {{vm.currentUser.phone}}</p>
-								<p class="profile-info "><span>Email:</span> {{vm.currentUser.email}}</p>
-							</md-card-title-text>
-						</md-card-title>
-						<md-card-actions layout="row" layout-align="end center">
-						</md-card-actions>
-					</md-card>
+					<h1 id="per">PERFIL</h1>
+  				<div flex-xs flex-gt-xs="100" layout="column">
+			      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+			        <md-card-title class="no-padding">
+			          <md-card-title-media flex="35">
+			            <div class="md-media-lg card-media profile-picture imgPerfil">
+			            	<img ng-src="{{vm.currentUser.photo}}">
+			            </div>
+			          </md-card-title-media>
+			          <md-card-title-text>
+			            <span class="md-headline name-profile">{{vm.currentUser.name}}  {{vm.currentUser.firstName}}</span>
+									<span class="md-subhead info-profile"></span>
+			            <p class="profile-info"><span>ID:</span> {{vm.currentUser.id}}</p>
+			            <p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
+			            <div layout="row" class="contact-info">
+		            		<i class="material-icons">&#xE0CD;</i>
+			            	<p class="profile-info phone-info"><span>Teléfono:</span> {{vm.currentUser.phone}}</p>
+			            </div>
+			            <div layout="row" class="contact-info">
+		            		<i class="material-icons">&#xE0BE;</i>
+			            	<p class="profile-info phone-info"><span>Email:</span> {{vm.currentUser.email}}</p>
+			            </div>
+			          </md-card-title-text>
+			        </md-card-title>
+			        <md-card-actions layout="row" layout-align="end center">
+			          <md-button ng-click="vm.getCurrentAdmin(vm.currentUser)">Editar</md-button>
+			        </md-card-actions>
+			      </md-card>
+  				</div>
 				</div>
 			</div>
 

@@ -9,6 +9,7 @@
     function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, ticketService, settingsService, NgMap) {
 
       var vm = this;
+      vm.currentUser = '';
       vm.cloudObj = imageService.getConfiguration();
       vm.selected = 0;
       vm.updateDisable = true;
@@ -61,7 +62,7 @@
         vm.isEdit = false;
         vm.isNew = false;
         // Fin Daniel
-        vm.currentUser = userService.searchAdmin(userService.getCookie());
+        vm.currentUser = $cookies.getObject('currentUserActive');
         console.log(vm.currentUser);
         vm.originatorEv;
         vm.weights = estabInfoService.getWeight();
@@ -1397,6 +1398,38 @@ var pModCompetition = {
       vm.competitionAge = item.competitionAge,
       vm.competitionGenre = item.competitionGenre,
       vm.competitionWeight = item.competitionWeight
+  }
+
+  //editar perfil de administrador
+  vm.getCurrentAdmin = function(admin){
+    console.log(admin);
+    vm.editAdminProfile = true;
+    vm.currentUser.password = admin.password;
+    vm.currentUser.email = admin.email;
+    vm.currentUser.phone = admin.phone;
+  }
+
+  vm.updateCurrentAdmin = function (){
+    var editAdmin ={
+      _id : vm.currentUser._id,
+      id: vm.currentUser.id,
+      name: vm.currentUser.name,
+      surName: vm.currentUser.surName,
+      firstName: vm.currentUser.firstName,
+      lastName: vm.currentUser.lastName,
+      genre: vm.currentUser.genre,
+      birthday: vm.currentUser.birthday,
+      nationality: vm.currentUser.nationality,
+      phone: vm.currentUser.phone,
+      status: vm.currentUser.status,
+      email: vm.currentUser.email,
+      photo: vm.currentUser.photo,
+      role: vm.currentUser.role,
+      password: vm.currentUser.password
+    }
+    console.log(editAdmin);
+    userService.updateUsers(editAdmin).then(function(response){});
+    vm.editAdminProfile = false;
   }
 
 }

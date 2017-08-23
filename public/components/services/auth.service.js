@@ -11,10 +11,10 @@
       $http.post('http://localhost:3000/api/find_user', {id : pId, password : pPassword})
       .then(function(response){
         console.log(response);
-        var role = response.data.response[0].role; 
+        var role = response.data.response[0].role;
 
         switch (role) {
-        case 'Administrador':
+        case 'admin':
           $location.path('/admin');
           break;
         case 'teacher':
@@ -41,7 +41,7 @@
       .catch(function(err){
         console.log(err);
       })
-      /*var user = 
+      /*var user =
         { 'email' : 'luisbianco28@hotmail.com',
           'password' : '123',
           'userType' : 'Profesor',
@@ -112,7 +112,7 @@
     }
     function _redirectTo(pValidUser){
       switch (pValidUser.userType) {
-        case 'Administrador':
+        case 'admin':
           $location.path('/admin');
           break;
         case 'Profesor':
