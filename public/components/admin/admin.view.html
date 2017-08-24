@@ -1038,7 +1038,7 @@
 									<md-card-actions layout="row" layout-align="end">
 										<md-button ng-click="vm.editCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Editar</md-button>
 										<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Eliminar</md-button>
-										<md-button ng-click="vm.showCompetition(item)">Ver competencia</md-button>
+										<md-button ng-click="vm.showCompetition(item, $index)">Ver competencia</md-button>
 									</md-card-actions>
 								</md-card>
 							</md-content>

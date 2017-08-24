@@ -1591,3 +1591,12 @@ md-card md-card-title.no-padding{
   }
 
   /*Fin estilo de modal academias*/
+
+  @media (max-width: 456px){
+    md-sidenav {
+     width: calc(100% - 56px); 
+     min-width: calc(100% - 230px); 
+     max-width: calc(100% - 56px); 
+    }
+  }
+

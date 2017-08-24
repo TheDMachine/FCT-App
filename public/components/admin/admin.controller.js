@@ -1407,11 +1407,13 @@ var pModCompetition = {
       for(var i = 0; i < vm.competitions.length; i++){
         if(competition == vm.competitions[i].competitionNumber){
           for(var j = 0; j < vm.users.length; j++){
-            if(vm.users[j].category == vm.competitions[i].competitionAge){
-              if(vm.users[j].weight == vm.competitions[i].competitionWeight)
-              //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
-                vm.competitorsEvent.push(vm.users[j]);
-              //}
+            if(vm.users[j].genre == vm.competitions[i].competitionGenre){
+              if(vm.users[j].category == vm.competitions[i].competitionAge){
+                if(vm.users[j].weight == vm.competitions[i].competitionWeight)
+                //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+                  vm.competitorsEvent.push(vm.users[j]);
+                //}
+              }
             }
           }
         }

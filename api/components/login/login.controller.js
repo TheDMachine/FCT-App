@@ -40,7 +40,7 @@ module.exports.recoverPassword = function(req, res){
         }else{
           console.log(user); 
         User.findByIdAndUpdate(user[0]._id, {$set:user[0]}).then(function(data){
-          //email.sEmail('successRecoveryPassword', user[0].email, 'Cambio de contraseña exitoso', {name: user[0].name, password: req.body.password});
+          email.sEmail('successRecoveryPassword', user[0].email, 'Cambio de contraseña exitoso', {name: user[0].name, password: req.body.password});
           console.log(req.body.password);
           console.log(user); 
           req.body.password = hash;

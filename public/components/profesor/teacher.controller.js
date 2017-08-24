@@ -167,13 +167,17 @@
         }
       }
 
-      vm.registerUsersCompetitions = function(competition){
+      vm.registerUsersCompetitions = function(competition) {
         vm.competitor;
         for(var i = 0; i < vm.competitions.length; i++){
           if(competition == vm.competitions[i].competitionNumber){
             for(var j = 0; j < vm.competitions[i].competitors.length; j++){
               if(vm.competitor.academy == vm.competitions[i].competitors[j].academy){
                 var duplicate = true;
+              }
+              else if(vm.competitions[i].competitors.length == 5){
+                vm.maxLengthCompetition();
+                return;
               }
             }
             if(duplicate !== true){
@@ -187,10 +191,45 @@
               });
               return;
             }
+            else{
+              vm.duplicateAcademyCompetition();
+            }
           }
         console.log(eventService.getCompetitions());
       }
     }
+
+    vm.duplicateAcademyCompetition = function() {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Error')
+        .textContent('Ya existe un usuario de esta academia en la competición')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+      );
+    };
+
+    vm.maxLengthCompetition = function() {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Error')
+        .textContent('La competición ya tiene un máximo de competidores registrados')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+      );
+    };
 
       vm.changeViews = function(){
         vm.userActive = true;
@@ -341,10 +380,14 @@
         if(competition == vm.competitions[i].competitionNumber){
           for(var j = 0; j < vm.users.length; j++){
             if(vm.currentUser.id == vm.users[j].teacher){
-              if(vm.users[j].category == vm.competitions[i].competitionAge){
-                //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
-                  vm.competitorsEvent.push(vm.users[j]);
-                //}
+              if(vm.users[j].genre == vm.competitions[i].competitionGenre){
+                if(vm.users[j].category == vm.competitions[i].competitionAge){
+                  if(vm.users[j].weight == vm.competitions[i].competitionWeight){
+                    //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+                      vm.competitorsEvent.push(vm.users[j]);
+                    //}
+                  }
+                }
               }
             }
           }
