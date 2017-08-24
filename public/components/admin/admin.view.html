@@ -84,7 +84,7 @@
 		<md-content id="content" flex>
 			<md-toolbar class="tool-icons md-whiteframe-3dp" layout="row">
 				<md-list-item class="noright" flex="20">
-					<img src="components/admin/admin.jpg" class="md-avatar" />
+					<img src="{{vm.currentUser.photo}}" class="md-avatar" />
 					<p>{{vm.currentUser.email}}</p>
 				</md-list-item>
 				<div class="md-toolbar-tools" layout="row" layout-align="end center" flex="80">
@@ -179,32 +179,42 @@
 							<div class="row container-fluid">
 								<div class="col-xs-12">
 									<!-- boton para actualizar -->
-									<md-button type="submit" class="md-raised" ng-click="vm.editAdmin()">actualizar</md-button>
+									<md-button type="submit" class="md-raised" ng-click="vm.updateCurrentAdmin()">actualizar</md-button>
 								</div>
 							</div>
 						</form>
 					</div>
 
 					<!-- Datos del perfil -->
-					<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-						<md-card-title class="no-padding">
-							<md-card-title-media flex="30">
-								<div class="md-media-lg card-media profile-picture" id="img-avatar">
-									<img src="components/admin/avatar.png" class="img-circle">
-								</div>
-							</md-card-title-media>
-							<md-card-title-text>
-								<span class="md-headline name-profile">{{vm.currentUser.firstName}}  {{vm.currentUser.firstLastName}}</span>
-								<p class="profile-info"><span>Cédula:</span> {{vm.currentUser.id}}</p>
-								<p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
-								<p class="profile-info"><span>Edad:</span> {{vm.currentUser.bornhDate}}</p>
-								<p class="profile-info "><span>Teléfono:</span> {{vm.currentUser.phone}}</p>
-								<p class="profile-info "><span>Email:</span> {{vm.currentUser.email}}</p>
-							</md-card-title-text>
-						</md-card-title>
-						<md-card-actions layout="row" layout-align="end center">
-						</md-card-actions>
-					</md-card>
+					<h1 id="per">PERFIL</h1>
+  				<div flex-xs flex-gt-xs="100" layout="column">
+			      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+			        <md-card-title class="no-padding">
+			          <md-card-title-media flex="35">
+			            <div class="md-media-lg card-media profile-picture imgPerfil">
+			            	<img ng-src="{{vm.currentUser.photo}}">
+			            </div>
+			          </md-card-title-media>
+			          <md-card-title-text>
+			            <span class="md-headline name-profile">{{vm.currentUser.name}}  {{vm.currentUser.firstName}}</span>
+									<span class="md-subhead info-profile"></span>
+			            <p class="profile-info"><span>ID:</span> {{vm.currentUser.id}}</p>
+			            <p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
+			            <div layout="row" class="contact-info">
+		            		<i class="material-icons">&#xE0CD;</i>
+			            	<p class="profile-info phone-info"><span>Teléfono:</span> {{vm.currentUser.phone}}</p>
+			            </div>
+			            <div layout="row" class="contact-info">
+		            		<i class="material-icons">&#xE0BE;</i>
+			            	<p class="profile-info phone-info"><span>Email:</span> {{vm.currentUser.email}}</p>
+			            </div>
+			          </md-card-title-text>
+			        </md-card-title>
+			        <md-card-actions layout="row" layout-align="end center">
+			          <md-button ng-click="vm.getCurrentAdmin(vm.currentUser)">Editar</md-button>
+			        </md-card-actions>
+			      </md-card>
+  				</div>
 				</div>
 			</div>
 
@@ -343,9 +353,9 @@
 				<md-tabs md-dynamic-height md-border-bottom>
 					<md-tab label="Registro">
 						<md-content class="md-padding">
-							<h1 class="md-display-2 col-xs-12 text-center">Registro de academias</h1>
+							<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">REGISTRO DE ACADEMIAS</h3>
 							<div class="container-fluid row">
-								<div class="col-xs-12">
+								<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 									<form name="frmAcademy" novalidate autocomplete="off">
 
 										<!-- input nombre de acdemia -->
@@ -426,11 +436,13 @@
 											</md-input-container>
 										</div>
 
-										<!-- boton para guardar -->
-										<md-button ng-click="vm.createAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Registrar</md-button>
+										<div class="row text-right">
+											<!-- boton para guardar -->
+											<md-button ng-click="vm.createAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Registrar</md-button>
 
-										<!-- boton para editar -->
-										<md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Actializar</md-button>
+											<!-- boton para editar -->
+											<md-button ng-click="vm.updateAcademy()" class="md-raised" ng-disabled="frmAcademy.$invalid">Actializar</md-button>
+										</div>
 									</form>
 								</div>
 							</div>
@@ -440,7 +452,7 @@
 					<md-tab label="Lista">
 						<md-content id="tableAcaademy">
 							<div class="container-fluid">
-								<div class="row">
+								<div class="row col-xs-12 col-sm-10 col-sm-offset-1">
 									<!-- filtro por nombre -->
 									<div class="col-xs-12 col-sm-4 pull-right">
 										<md-input-container flex-offset class="md-block">
@@ -451,9 +463,9 @@
 								</div>
 
 								<!-- tabla de academias-->
-								<div class="row">
-									<table class="table col-xs-12">
-										<thead>
+								<div class="row col-xs-12">
+									<table class="table col-xs-12 md-whiteframe-3dp">
+										<thead class="md-whiteframe-3dp">
 											<tr>
 												<th>Nombre de la academia</th>
 												<th>Encargado</th>
@@ -462,7 +474,9 @@
 										</thead>
 										<tbody>
 											<tr ng-repeat="academy in vm.academies | filter:{name:vm.academyFilter}">
-												<td>{{academy.name}}</td>
+												<td>
+													<md-button class="md-raised" type="button" ng-click="vm.consultAcademy(academy, $academy)">{{academy.name}}</md-button>
+												</td>
 												<td>{{academy.manager}}</td>
 												<td>
 													<md-button ng-click="vm.getAcademy(academy)" class="md-raised">Editar</md-button>
@@ -470,14 +484,41 @@
 											</tr>
 										</tbody>
 									</table>
+
+									<!-- modal para consulta de academias -->
+									<div style="visibility: hidden">
+										<div class="md-dialog-container" id="infoAcademy">
+											<md-dialog layout-padding>
+
+												<!-- encabezado de la información del evento -->
+												<div id="modalAcademy" class="col-xs-12 md-whiteframe-3dp">
+													<h3>{{vm.academy.name}}</h3>
+												</div>
+
+												<!-- cuerpo de la información -->
+												<div id="modalInfoAcademy" class="col-xs-12">
+													<p><span>address: </span> {{vm.academy.address}}</p>
+													<p><span>manager:</span> {{vm.academy.manager}}</p>
+													<p><span>competitors:</span> {{vm.academy.competitors}}</p>
+													<p><span>phone:</span> {{vm.academy.phone}}</p>
+													<p><span>email:</span> {{vm.academy.email}}</p>
+												</div>
+
+												<!-- botón para salir del modal -->
+												<div id="modalBtnAcademy" class="col-xs-12">
+													<md-button class="md-raised" type="button" ng-click="vm.cancel()">Salir</md-button>
+												</div>
+											</md-dialog>
+										</div>
+									</div>
 								</div>
 							</div>
 						</md-content>
 					</md-tab>
-					<md-tab label="mostrar">
+					<!-- <md-tab label="mostrar">
 						<md-content layout="column">
 							<div layout="row">
-								<md-card ng-repeat="academy in vm.academy" flex="25" class="sizeCard">
+								<md-card ng-repeat="academy in vm.academies" flex="25" class="sizeCard">
 									<md-card-title>
 										<md-card-title-text>
 											<span class="md-headline">{{academy.name}}</span>
@@ -495,7 +536,7 @@
 								</md-card>
 							</div>
 						</md-content>
-					</md-tab>
+					</md-tab> -->
 			</div>
 
 			<!-- Sección de eventos -->
@@ -769,7 +810,7 @@
 					<md-tabs md-dynamic-height md-border-bottom>
 						<md-tab label="Registro de competencias">
 							<md-content class="md-padding">
-								<h1 class="md-display-2">Registro de competencias</h1>
+								<h1 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">REGISTRO DE COMPETENCIAS</h1>
 								<div class="container-fluid row">
 									<div class="col-xs-12">
 										<form name="frmCompetition" novalidate autocomplete="off">
@@ -856,13 +897,13 @@
 											</div>
 
 											<!-- contenedor de botones -->
-											<div class="col-xs-12">
+											<div class="col-xs-12 col-sm-10 col-sm-offset-1 text-right">
 
 												<!-- boton para guardar -->
 												<md-button ng-click="vm.createCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Agregar competición</md-button>
 
 												<!-- boton para editar -->
-												<md-button ng-click="vm.updateCompetition()" class="md-raised" >Actualizar competición</md-button>
+												<!-- <md-button ng-click="vm.updateCompetition()" class="md-raised" disabled>Actualizar competición</md-button> -->
 											</div>
 										</form>
 									</div>
@@ -1316,9 +1357,9 @@
 						<md-tab label="Registro" ui-sref=".alumnopart1">
 							<md-content class="md-padding">
 								<div class="row">
-									<h1 class="md-display-2 col-xs-12 text-center">Alumnos</h1>
+										<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">REGISTRAR ALUMNO</h3>
 								</div>
-								<div id="buttonForm" class="text-center" layout="row" layout-align="center center">
+								<div id="buttonTeacher" class="text-center" layout="row" layout-align="center center">
 									<div ui-sref-active="active" ui-sref=".alumnopart1">
 										<a>1</a>
 									</div>
@@ -1345,42 +1386,44 @@
 						</md-tab>
 						<md-tab label="Lista">
 							<md-content class="md-padding">
+								<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 
-								<!-- filtro por nombre -->
-								<div class="col-xs-12 col-sm-4 pull-right">
-									<md-input-container flex-offset class="md-block">
-										<label for="">Filtrar por nombre</label>
-										<input type="text" name="studentFilter" ng-model="vm.studentFilter" />
-									</md-input-container>
-								</div>
+									<!-- filtro por nombre -->
+									<div class="col-xs-12 col-sm-4 pull-right">
+										<md-input-container flex-offset class="md-block">
+											<label for="">Filtrar por nombre</label>
+											<input type="text" name="studentFilter" ng-model="vm.studentFilter" />
+										</md-input-container>
+									</div>
 
-								<!-- tabla de alumnos-->
-								<div class="container-fluid row">
-									<div class="col-xs-12">
-										<table class="table-responsive col-xs-12" id="tableUser">
-											<thead>
-												<tr>
-													<th>Cédula</th>
-													<th>Nombre completo</th>
-													<th>Estado</th>
-													<th></th>
-													<th></th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr ng-repeat="student in vm.students | filter:{name:vm.studentFilter}">
-													<td>{{student.id}}</td>
-													<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
-													<td>{{student.status}}</td>
-													<td>
-														<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
-													</td>
-													<td>
-														<md-button ng-click="vm.updateBelt(student)" class="md-raised">Promover grado</md-button>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+									<!-- tabla de alumnos-->
+									<div class="container-fluid row">
+										<div class="col-xs-12">
+											<table class="table-responsive col-xs-12 md-whiteframe-3dp" id="tblTeacher">
+												<thead class="md-whiteframe-3dp">
+													<tr>
+														<th>Cédula</th>
+														<th>Nombre completo</th>
+														<th>Estado</th>
+														<th></th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="student in vm.students | filter:{name:vm.studentFilter}">
+														<td>{{student.id}}</td>
+														<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
+														<td>{{student.status}}</td>
+														<td>
+															<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
+														</td>
+														<td>
+															<md-button ng-click="vm.updateBelt(student)" class="md-raised">Promover grado</md-button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</md-content>
