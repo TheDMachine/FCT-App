@@ -43,7 +43,7 @@
 							</li>
 							<li>
 								<md-button class="button-selected" ng-click="vm.selected = 12">
-									<p>Inactivar</p>
+									<p>Usuarios</p>
 								</md-button>
 							</li>
 						</ul>
@@ -1408,20 +1408,23 @@
 										<tr>
 											<th>Cédula</th>
 											<th>Nombre completo</th>
+											<th>Usuario</th>
 											<th>Estado</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr ng-repeat="user in vm.users | filter:{firstName:vm.statusName}">
+										<tr ng-repeat="user in vm.students |  filter:{firstName:vm.statusName} | orderBy:'id'">
 											<td>{{user.id}}</td>
-											<td>{{user.firstName}} {{user.secondName}} {{user.firstLastName}} {{user.secondLastName}}</td>
+											<td>{{user.name}} {{user.surName}} {{user.firstName}} {{user.lastName}}</td>
+											<td>{{user.role}}</td>
 											<td>
 												<md-button ng-click="vm.state(user)" class="md-raised">{{user.status}}</md-button>
 											</td>
 										</tr>
-										<tr ng-repeat="user in vm.teachers | filter:{firstName:vm.statusName}">
+										<tr ng-repeat="user in vm.teachers | filter:{firstName:vm.statusName} | orderBy:'id'">
 											<td>{{user.id}}</td>
-											<td>{{user.firstName}} {{user.secondName}} {{user.firstLastName}} {{user.secondLastName}}</td>
+											<td>{{user.name}} {{user.surName}} {{user.firstName}} {{user.lastName}}</td>
+											<td>{{user.role}}</td>
 											<td>
 												<md-button ng-click="vm.state(user)" class="md-raised">{{user.status}}</md-button>
 											</td>
