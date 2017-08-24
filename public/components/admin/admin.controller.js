@@ -94,6 +94,13 @@
         vm.to = new Date();
         console.log(vm.to);
         vm.to2 = new Date();
+        vm.users = userService.getUsers()
+          .then(function(response){
+            vm.users = response.data;
+          })
+          .catch(function(err){
+            console.log(err);
+          });
         vm.weights = estabInfoService.getWeight();
         vm.categoriesAge = estabInfoService.getCategories();
         estabInfoService.getCountries().then(function(data) {
@@ -136,9 +143,9 @@
     });
   };
 
- if(vm.currentUser.newUser == 1) {
+ /*if(vm.currentUser.newUser == 1) {
     $scope.showPrompt();
-  }
+  }*/
 
       /*Sidenav*/
       vm.openMenu = function($mdMenu, ev) {
@@ -1242,92 +1249,212 @@ var pModCompetition = {
 
     //Registrar alumnos en competencia
 
-    vm.registerUsersCompetitions = function(competition) {
-      vm.competitor;
-      for (var i = 0; i < vm.competitions.length; i++) {
-        if (competition == vm.competitions[i].competitionNumber) {
-          for (var j = 0; j < vm.competitions[i].competitors.length; j++) {
-            if (vm.competitor.attendAcademy == vm.competitions[i].competitors[j].attendAcademy) {
-              var duplicate = true;
+    //Bianco9
+
+      vm.registerUsersCompetitions = function(competition) {
+        vm.competitor;
+        for(var i = 0; i < vm.competitions.length; i++){
+          if(competition == vm.competitions[i].competitionNumber){
+            for(var j = 0; j < vm.competitions[i].competitors.length; j++){
+              if(vm.competitor.academy == vm.competitions[i].competitors[j].academy){
+                var duplicate = true;
+              }
+              else if(vm.competitions[i].competitors.length == 5){
+                vm.maxLengthCompetition();
+                return;
+              }
+            }
+            if(duplicate !== true){
+              vm.competitions[i].competitors.push(vm.competitor);
+              eventService.updateCompetition(vm.competitions[i])
+              .then(function(response){
+                console.log(response);
+              })
+              .catch(function(err){
+                console.log(err);
+              });
+              return;
+            }
+            else{
+              vm.duplicateAcademyCompetition();
             }
           }
-          if (duplicate !== true) {
-            vm.competitions[i].competitors.push(vm.competitor);
-            eventService.updateCompetition(vm.competitions[i]);
-            return;
-          }
-        }
         console.log(eventService.getCompetitions());
       }
     }
 
-    vm.showCompetition = function(competition) {
-      for (var i = 0; i < vm.competitions.length; i++) {
-        if (competition.competitionNumber == vm.competitions[i].competitionNumber) {
-          vm.competitionsToShow.push(competition);
-          for (var j = 0; j < vm.competitionsToShow[i].competitors.length; j++) {
-            vm.competitionsToShow[i].competitors[j].points = 0;
+    vm.duplicateAcademyCompetition = function() {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Error')
+        .textContent('Ya existe un usuario de esta academia en la competición')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+      );
+    };
+
+    vm.maxLengthCompetition = function() {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Error')
+        .textContent('La competición ya tiene un máximo de competidores registrados')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+      );
+    };
+
+    vm.changeViews = function() {
+      vm.userActive = true;
+      vm.selected = 5;
+    }
+
+    vm.showCompetition = function(competition, $index){
+      for(var i = 0; i < vm.competitionsToShow.length; i++){
+        if(vm.competitionsToShow[i] == undefined){
+          vm.competitionsToShow[i] = {};
+        }
+        vm.competitionsToShow[i].show = false;
+      }
+      for(var i = 0; i < vm.competitions.length; i++){
+        if(competition.competitionNumber == vm.competitions[i].competitionNumber){
+          vm.competitionsToShow[$index] = competition;
+          for(var j = 0; j < vm.competitionsToShow[$index].competitors.length; j++){
+            if(vm.competitionsToShow[$index].competitors[j].points == undefined){
+              vm.competitionsToShow[$index].competitors[j].points = 0;
+            }
           }
         }
       }
-      for (var i = 0; i < vm.competitionsToShow.length; i++) {
-        for (var j = 0; j < vm.competitionsToShow[i].competitors.length; j++) {
-          if (vm.competitionsToShow[i].competitors.length == 5) {
-            kLoop: for (var k = 0; k < 5; k++) {
+      for(var i = 0; i < vm.competitionsToShow.length; i++){
+        for(var j = 0; j < vm.competitionsToShow[$index].competitors.length; j++){
+          if(vm.competitionsToShow[$index].competitors.length == 5 && (vm.competitionsToShow[$index].fights.length == 0 || vm.competitionsToShow[$index].fights == undefined)){
+            kLoop:
+            for(var k = 0; k < 4; k++){
               vm.pairFights = [];
-              vm.pairFights.push(vm.competitionsToShow[i].competitors[j]);
-              vm.pairFights.push(vm.competitionsToShow[i].competitors[k + 1])
-              if (vm.pairFights.length == 2) {
-                if (vm.fights.length == 0) {
+              vm.pairFights.push(vm.competitionsToShow[$index].competitors[j]);
+              vm.pairFights.push(vm.competitionsToShow[$index].competitors[k + 1])
+              if(vm.pairFights.length == 2){
+                if(vm.fights.length == 0){
                   vm.fights.push(vm.pairFights);
                 }
-                if (vm.pairFights.length == 2) {
-                  for (var x = 0; x < vm.fights.length; x++) {
-                    if (vm.pairFights == vm.fights[x]) {
+                if(vm.pairFights.length == 2){
+                  for(var x = 0; x < vm.fights.length; x++){
+                    if(vm.pairFights == vm.fights[x]){
                       continue kLoop;
                     }
                   }
-                  for (var x = 0; x < vm.fights.length; x++) {
-                    if ((vm.pairFights[0] == vm.fights[x][1]) && (vm.pairFights[1] == vm.fights[x][0])) {
+                  for(var x = 0; x < vm.fights.length; x++){
+                    if((vm.pairFights[0] == vm.fights[x][1]) && (vm.pairFights[1] == vm.fights[x][0])){
                       continue kLoop;
                     }
                   }
-                  for (var x = 0; x < vm.fights.length; x++) {
-                    if ((vm.pairFights[0] == vm.pairFights[1])) {
+                  for(var x = 0; x < vm.fights.length; x++){
+                    if((vm.pairFights[0] == vm.pairFights[1])){
                       continue kLoop;
                     }
                   }
                   vm.fights.push(vm.pairFights);
-                  if (vm.fights.length == 20) {
+                  if(vm.fights.length == 20){
+                    if(vm.competitionsToShow[$index]._id == competition._id){
+                      vm.competitionsToShow[$index].fights = vm.fights;
+                      eventService.updateCompetition(vm.competitionsToShow[$index])
+                      .then(function(response){
+                        console.log(response)
+                        eventService.getCompetitions()
+                        .then(function(response){
+                          vm.competitions = response.data;
+                        })
+                        .catch(function(err){
+                          console.log(err);
+                        })
+                      })
+                      .catch(function(err){
+                        console.log(err);
+                      })
+                    }
                     break;
                   }
                 }
               }
             }
+            vm.competitionsToShow[$index].fights = vm.fights;
+          }
+          else{
+            vm.fights = vm.competitionsToShow[$index].fights;
           }
         }
-        vm.competitionsToShow[i].fights = vm.fights;
+        vm.competitionsToShow[$index].show = true;
+        break;
       }
       console.log(vm.fights);
       vm.selected = 8;
     }
 
-    vm.updateOptions = function(competition) {
+    vm.updateOptions = function(competition){
       vm.competitorsEvent = [];
-      for (var i = 0; i < vm.competitions.length; i++) {
-        if (competition == vm.competitions[i].competitionNumber) {
-          for (var j = 0; j < vm.users.length; j++) {
-            if (vm.currentUser.id == vm.users[j].teacher) {
-              if (vm.users[j].category == vm.competitions[i].competitionAge) {
-                if (vm.users[j].belt == vm.competitions[i].competitionBelt) {
-                  vm.competitorsEvent.push(vm.users[j]);
-                }
-              }
+      for(var i = 0; i < vm.competitions.length; i++){
+        if(competition == vm.competitions[i].competitionNumber){
+          for(var j = 0; j < vm.users.length; j++){
+            if(vm.users[j].category == vm.competitions[i].competitionAge){
+              if(vm.users[j].weight == vm.competitions[i].competitionWeight)
+              //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+                vm.competitorsEvent.push(vm.users[j]);
+              //}
             }
           }
         }
       }
     }
+
+    vm.updatePoints = function(competitor, $index, competition){
+      if(competitor.points == 5){
+        return
+      }else{
+        competitor.points += 1;
+        vm.ready = true;
+        vm.fights[$index].push(vm.ready);
+        console.log(vm.fights);
+      }
+      for(var i = 0; i < vm.competitions.length; i++){
+        for(var j = 0; j < vm.competitions[i].competitors.length; j++){
+          if(vm.competitions[i]._id == competition._id){
+            if(vm.competitions[i].competitors[j]._id == competitor._id){
+              vm.competitions[i].competitors[j].points = competitor.points;
+              vm.competitions[i].fights = vm.fights;
+              eventService.updateCompetition(vm.competitions[i])
+                .then(function(response){
+                  console.log(response);
+                  eventService.getCompetitions()
+                  .then(function(response){
+                    vm.competitions = response.data;
+                  })
+                  .catch(function(err){
+                    console.log(err);
+                  })
+                })
+                .catch(function(err){
+                  console.log(err);
+                });
+                return;
+            }
+          }
+        }
+      }
+    }
+
+    // Fin Bianco9
 
     // Inicia Daniel
 
