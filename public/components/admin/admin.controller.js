@@ -1428,7 +1428,13 @@ var pModCompetition = {
       password: vm.currentUser.password
     }
     console.log(editAdmin);
-    userService.updateUsers(editAdmin).then(function(response){});
+    userService.updateUsers(editAdmin).then(function(response){
+      console.log(response);
+      $http.get('http://localhost:3000/api/get_all_Users')
+      .catch(function(err){
+        console.log(err);
+      });
+    });
     vm.editAdminProfile = false;
   }
 

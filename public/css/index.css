@@ -12,6 +12,10 @@ html,body{
 .imgPerfil{
   margin: 5% 0 0 5%;
 }
+
+#adminEdit{
+  margin-top: 2%;
+}
 /*Fin Estilos de perfil de admin*/
 
 /*Inicio Estilos de tablas usuarios*/
