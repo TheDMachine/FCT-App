@@ -5,7 +5,8 @@
     return {
       getCredencials:_getAuthCredencials,
       logOut : _destroyAuthCredentials,
-      getCookie : _getCookie
+      getCookie : _getCookie,
+      recoverPassword : _recoverPassword
     }
     function _getAuthCredencials(pId,pPassword){
       $http.post('http://localhost:3000/api/find_user', {id : pId, password : pPassword})
@@ -102,6 +103,28 @@
       $cookies.remove('currentUserActive');
       _redirectTo(false);
     }
+
+    function _recoverPassword(userId){
+      var recoveredPassword = _generatePassword();
+      var recover = {"id" : userId, "password" : recoveredPassword};
+      $http.put('http://localhost:3000/api/recover_password', recover)
+      .then(function(response){
+        $http.put('http://localhost:3000/api/update_teacher', response.data)
+        .then(function(response){
+          console.log(response);
+        })
+        .catch(function(response){
+          console.log(response);
+        })
+        return;
+        console.log(response);
+      })
+      .catch(function(err){
+        return;
+        console.log(err);
+      })
+    }
+
     function _validateFields(pUserId, pPassField, userFound){
       if(userFound.id == pUserId && userFound.password == pPassField){
         _redirectTo(userFound);
@@ -133,6 +156,37 @@
 
       }
     }
+
+    function _generatePassword() {
+     var a = [];
+     var chars = ['#', '%', '£', '!', '?', '&', ';', '(', ')', '=', '+', '$'];
+     for (var i = 97; i <= 122; i++) {
+          a[a.length] = String.fromCharCode(i).toUpperCase();
+
+          // create random letters.
+           var one = a[Math.floor(Math.random() * a.length)];
+           var two = a[Math.floor(Math.random() * a.length)];
+           var three = a[Math.floor(Math.random() * a.length)];
+           var four = a[Math.floor(Math.random() * a.length)];
+           var five = a[Math.floor(Math.random() * a.length)];
+           var six = a[Math.floor(Math.random() * a.length)];
+           var seven = a[Math.floor(Math.random() * a.length)];
+           var eight = a[Math.floor(Math.random() * a.length)];
+
+           // create random numbers.
+           var int1 = Math.floor(Math.random() * 10);
+           var int2 = Math.floor(Math.random() * 10);
+           var ints = int1.toFixed(0) + int2.toFixed(0);
+           var intsDecimal = int1.toFixed(0) + "." + int2.toFixed(0);
+
+           // create random characters, based on array (chars).
+           var randChar = chars[Math.floor(Math.random() * chars.length).toFixed(0)];
+
+           // create variable moving all letters, numbers and characters together.
+           var c = one + two + three + four + five + six + seven + eight + ints + randChar;
+        }
+        return c;
+      }
 
    function _getCookie(){
     return $cookies.get('currentUserActive');

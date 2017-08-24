@@ -3,7 +3,7 @@
     <h1 class="recover-password">Recuperar contraseña</h1>
     <md-input-container class="md-block recover-id" flex="80">
       <label>ID</label>
-      <input class="id-email" required name="clientEmail" ng-model="vm.id"
+      <input class="id-email recover-email" required name="clientEmail" ng-model="vm.id"
              minlength="9" maxlength="100" ng-pattern="/^[0-9]{9}$/" />
 
       <div ng-messages="projectForm.clientEmail.$error" role="alert">
@@ -14,10 +14,15 @@
     </md-input-container>
     <div class="text-center">
       <!--<a href="" class="btn btn-raised btn-info text-center" ng-disabled="signup.$invalid" abm-component>Log In</a>-->
-      <md-button style="color: #fff" type="submit" ng-click="vm.login()" class="btn btn-raised btn-lg btn-warning">
+      <md-button style="color: #fff" type="submit" ng-click="vm.recoverPassword(vm.id)" class="btn btn-raised btn-lg btn-warning">
         Cambiar
       </md-button>
     </div>
+  </div>
+</div>
+<div ng-show="vm.successRecovery" ng-hide="!vm.successRecovery" class="modal-password">
+  <div class="box-password">
+    <h1 class="recover-password">Contraseña cambiada correctamente</h1>
   </div>
 </div>
 <div class="body" >

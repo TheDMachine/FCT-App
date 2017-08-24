@@ -51,6 +51,10 @@ html,body{
   color: #fff;
 }
 
+input.recover-email{
+  color: #000;
+}
+
 
 /*Inicio Estilos de tablas usuarios*/
 #tableUser h3{
