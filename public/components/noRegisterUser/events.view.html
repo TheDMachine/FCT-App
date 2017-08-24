@@ -13,8 +13,7 @@
 				<md-input-container>
 					<label>Seleccione el evento</label>
 					<md-select name="event" ng-model="vm.event.eventName" ng-change="vm.checkInfoEvent(vm.event.eventName)" required>
-						<!-- | eventFrom -->
-						<md-option ng-repeat="event in vm.events track by $index" value="{{event.eventName}}"><span class="strongLetter">Nombre:</span> {{event.eventName}} , <span class="strongLetter">Fecha de Inicio:</span> {{event.date1 | date : "shortDate"}}, <span class="strongLetter">Tipo de evento:</span> {{event.eventType}}</md-option>
+						<md-option ng-repeat="event in vm.events | eventFrom" value="{{event.eventName}}"><span class="strongLetter">Nombre:</span> {{event.eventName}} , <span class="strongLetter">Fecha de Inicio:</span> {{event.date1 | date : "shortDate"}}, <span class="strongLetter">Tipo de evento:</span> {{event.eventType}}</md-option>
 					</md-select>
 				</md-input-container>
 			</div>

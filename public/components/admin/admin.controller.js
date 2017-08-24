@@ -22,7 +22,7 @@
       vm.imageActive = false;
       vm.weights = estabInfoService.getWeight();
       vm.categories = estabInfoService.getCategories();
-      vm.acceptedEvents = [];
+      // vm.acceptedEvents = [];
       vm.updateDisable = true;
       vm.nameSponsorEdit = false;
       vm.showCompetition = false;
@@ -68,7 +68,7 @@
         eventService.getCompetitions().then(function(response){
           vm.competitions = response.data;
         });
-        acceptedEvents();
+        // acceptedEvents();
         vm.event = {};
         sponsorService.getSponsors().then(function(response) {
           vm.sponsors = response.data;
@@ -706,7 +706,7 @@
           console.log(err);
         });
         vm.showCxlEventAlert();
-        acceptedEvents();
+        // acceptedEvents();
         init();
       };
 
@@ -725,15 +725,15 @@
       };
 
       // Función para filtrar la tabla de consulta de eventos
-      function acceptedEvents() {
-        var today = new Date();
-        vm.events = eventService.getEvents();
-        for (var i = 0; i < vm.events.length; i++) {
-          if (vm.events[i].eventState === 'aprobado') {
-            vm.acceptedEvents.push(vm.events[i]);
-          }
-        }
-      }
+      // function acceptedEvents() {
+      //   var today = new Date();
+      //   vm.events = eventService.getEvents();
+      //   for (var i = 0; i < vm.events.length; i++) {
+      //     if (vm.events[i].eventState === 'aprobado') {
+      //       vm.acceptedEvents.push(vm.events[i]);
+      //     }
+      //   }
+      // }
 
       vm.createNewConsult = function(pNewConsul) {
         console.log("El objeto con imagen es %o", pNewConsul);
@@ -873,7 +873,7 @@
             .then(function(response) {
               var responseObj = response;
               console.log(response);
-              academyServices.getSponsors().then(function(response) {
+              academyServices.getAcademy().then(function(response) {
                 vm.academies = response.data;
               });
             }).catch(function(err) {

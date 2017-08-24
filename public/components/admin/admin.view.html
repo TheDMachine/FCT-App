@@ -573,7 +573,7 @@
 												<tbody>
 													<!-- | dateRange:vm.from3:vm.to3 -->
 													<!-- ng-repeat="event in vm.acceptedEvents track by $index" -->
-													<tr ng-repeat="event in vm.events ">
+													<tr ng-repeat="event in vm.events | dateRange:vm.from3:vm.to3 | filter:{eventState:'aprobado'} ">
 														<td>{{event.eventName}}</td>
 														<td>{{event.date.date1 | date : "shortDate"}}</td>
 
@@ -653,10 +653,10 @@
 										</thead>
 										<tbody>
 											<!-- | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter} -->
-											<tr ng-repeat="event in vm.events track by $index">
+											<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
 												<td>{{event.date1 | date : "shortDate"}}</td>
 												<td>
-													<md-button class="md-raised" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button>
+													<md-button class="md-flat" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button>
 												</td>
 												<td>{{event.eventState}}</td>
 											</tr>
@@ -676,9 +676,9 @@
 
 												<!-- cuerpo de la información -->
 												<div id="eventInfo" class="col-xs-12">
-													<p><span>Lugar: </span> {{vm.consultEvent.placeName}} <span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
-													<p><span>Inicio:</span> {{vm.consultEvent.date1 | date : "shortDate"}} {{vm.consultEvent.time1 | date : "shortTime"}}</p>
-													<p><span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} {{vm.consultEvent.time2 | date : "shortTime"}}</p>
+													<p><span>Lugar: </span> {{vm.consultEvent.placeName}}</p>
+													<p><span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
+													<p><span>Inicia:</span> {{vm.consultEvent.date1 | date : "shortDate"}} <span>hra:</span> {{vm.consultEvent.time1 | date : "shortTime"}} - <span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} <span>hra:</span> {{vm.consultEvent.time2 | date : "shortTime"}}</p>
 													<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
 													<p><span>Invitado especial:</span> {{vm.consultEvent.invitedName}}</p>
 													<p><span>Academias invitadas:</span> {{vm.consultEvent.selectAcademies}}</p>
@@ -689,7 +689,6 @@
 													<p><span>Beneficia a:</span> {{vm.consultEvent.orgName}}</p>
 													<p><span>Descripción de la org.:</span> {{vm.consultEvent.description}}</p>
 													<p><span>Patrocinadores:</span> {{vm.consultEvent.selectSponsors}}</p>
-													<p><span>Latitud y longitud:</span> {{vm.consultEvent.coords}}</p>
 												</div>
 
 												<!-- botón para salir del modal -->

@@ -15,7 +15,9 @@
       vm.consultEvent = {};
       
       function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
-        vm.events = eventService.getEvents();
+        eventService.getEvents().then(function(response) {
+          vm.events = response.data;
+        });
         console.log(vm.events);
         acceptedEvents();
         vm.to = new Date();
@@ -40,8 +42,7 @@
           if (vm.events[i].eventName === pEvent) {
             vm.consultEvent = vm.events[i];
           }
-        }
-        // vm.event.place = vm.consultEvent.place.eventName;
+        }      
       };
 
        // Función para devolverse al landing

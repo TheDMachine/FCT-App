@@ -582,8 +582,8 @@ html,body{
 }
 
 #histTable tbody tr td .md-button{
-  color: #fff;
-  background: #00978f;
+  color: #00978f;
+  font-weight: bold;
 }
 
 #eventName{
@@ -610,8 +610,10 @@ html,body{
 }
 
 #eventInfo p{
-  padding-bottom: 5px;
   line-height: 1;
+  border-bottom: 1px solid #dbdee4;
+  padding-top: 5px;
+  padding-bottom: 3px;
 }
 
 #eventInfo p span{
@@ -811,6 +813,11 @@ md-input-container{
   color: #cb3e42;
 }
 
+#photo{
+  outline: none;
+}
+
+
 /*Fin estilos de pasos formulario eventos*/
 
 /*Inicio estilos de tabla modificar y tabla de reservaciones*/
@@ -863,6 +870,10 @@ md-input-container{
 #modTable .editCxlB:not([disabled]):hover {
     background-color: #fcb132;
     transition: 0.3s;
+}
+
+#information .titleInfo{
+  font-weight: bold;
 }
 
 /*Fin estilos tabla modificar*/
