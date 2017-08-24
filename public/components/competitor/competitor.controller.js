@@ -80,7 +80,5 @@
       AuthService.logOut();
     }
 
-    -->
-
    }
 })();

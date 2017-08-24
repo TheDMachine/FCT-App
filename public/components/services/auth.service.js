@@ -11,7 +11,9 @@
       $http.post('http://localhost:3000/api/find_user', {id : pId, password : pPassword})
       .then(function(response){
         console.log(response);
-        var role = response.data.response[0].role; 
+        var role = response.data.user[0].role; 
+        var userLogged = response.data.user[0];
+        $cookies.putObject('currentUserActive', userLogged);
 
         switch (role) {
         case 'admin':
@@ -34,8 +36,6 @@
           break;
 
       }
-        var userLogged = response.data.response[0];
-        $cookies.putObject('currentUserActive', userLogged);
 
       })
       .catch(function(err){

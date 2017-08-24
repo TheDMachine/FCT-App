@@ -3,7 +3,7 @@
   angular
   .module('app')
   .controller('consulCtrl', consulCtrl);
-  function consulCtrl($scope, eventService, imageService, Upload, estabInfoService, $mdDialog, $location) {
+  function consulCtrl($scope, eventService, imageService, Upload, estabInfoService, $mdDialog, $location, $cookies, userService) {
  	var originatorEv;
   var vm = this;
   vm.cloudObj = imageService.getConfiguration();
@@ -42,6 +42,7 @@ function init() {
       userService.updateTemporalPassword(vm.currentUser)
       .then(function(response){
         console.log(response);
+        $cookies.remove('currentUserActive');
         $cookies.putObject('currentUserActive', vm.currentUser);
       })
       .catch(function(err){
