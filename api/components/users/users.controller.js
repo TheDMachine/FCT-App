@@ -1,6 +1,12 @@
 var User = require('./users.model');
 var bcrypt = require('bcrypt');
 
+
+
+// Funciones Josué
+
+// Backend Actualizar cinturon de alumno
+
 module.exports.updateBelt = function(req,res){
 
   User.findByIdAndUpdate(req.body._id, { $set: {'belt': req.body.belt}}, function (err, user) {
@@ -15,7 +21,6 @@ module.exports.updateBelt = function(req,res){
 
 }
 
-// Funciones Josué
 //Backend Profesor
 
 module.exports.saveTeacher = function(req, res){
@@ -90,12 +95,13 @@ module.exports.saveStudent = function(req, res){
     tournaments : req.body.tournaments,
     tournamentsWins : req.body.tournamentsWins,
     category : req.body.category,
-    teacher : req.body.teacher
+    teacher : req.body.teacher,
+    newUser : req.body.newUser
   });
 
   newUser.save(function(err){
     if(err){
-      res.json({success:false, msg:'No se pudo registrar el profesor' + err});
+      res.json({success:false, msg:'No se pudo registrar el alumno' + err});
     }else{
       res.json({success:true, msg:'Se registró el profesor correctamente'});
     }

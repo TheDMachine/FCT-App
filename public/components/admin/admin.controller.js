@@ -17,6 +17,7 @@
       vm.stepThreeConsult = false;
       vm.stepOneConsult = true;
       vm.user = {};
+      vm.student = {};
       vm.students = {};
       vm.log = {};
       vm.imageActive = false;
@@ -535,6 +536,23 @@
         );
       };
 
+      // Mnesaje para promover de grado a un alumno
+      vm.showStudentUpdateBelt = function() {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('¡Grado ascendido!')
+          .textContent('¡Se ha ascendido el grado del alumno correctamente!')
+          .ariaLabel()
+          .ok('¡Gracias!')
+          .targetEvent()
+        );
+      };
+
       vm.showProfesorAlert = function() {
         // Appending dialog to document.body to cover sidenav in docs app
         // Modal dialogs should fully cover application
@@ -850,6 +868,33 @@
       cleanTeacher();
     };
 
+// Funcion para actualizar competición
+vm.updateCompetition = function() {
+var pModCompetition = {
+    _id: vm._id,
+    competitionNumber: vm.competitionNumber,
+    eventBelongs: vm.eventBelongs,
+    competitionAge: vm.competitionAge,
+    competitionGenre: vm.competitionGenre,
+    competitionBelt: vm.competitionBelt,
+    competitionWeight: vm.competitionWeight,
+  }
+  eventService.updateCompetition(pModCompetition)
+  init();
+  cleanCompetition();
+  }
+
+  function cleanCompetition() {
+    vm._id = '',
+    vm.competitionNumber = '',
+    vm.eventBelongs = '',
+    vm.competitionAge ='',
+    vm.competitionGenre = '',
+    vm.competitionBelt = '',
+    vm.competitionWeight = ''
+
+  }
+
     //funcion para guardar informacion de academia
 
     vm.createAcademy = function() {
@@ -963,60 +1008,68 @@
     //     userService.setUsers(pNewStudent);
     pNewStudent.role = 'student';
     pNewStudent.status = 'activo';
-    userService.setUsers(pNewStudent);
-         vm.studentAlert();
-         clean();
-         init();
+    pNewStudent.newUser = 1;
+    userService.setUsers(pNewStudent)
+    .then(function(response){
+        vm.studentAlert();
+        clean();
+        init();
+      })
+      .catch(function(err){
+        console.log(err);
+      });
     //   }
      }
 
 
     //funcion para editar alumno
-    vm.getStudent = function(user) {
-      vm.student.id = user.id;
-      vm.student.birthday = user.birthday;
-      vm.student.firstName = user.firstName;
-      vm.student.secondName = user.secondName;
-      vm.student.firstLastName = user.firstLastName;
-      vm.student.secondLastName = user.secondLastName;
-      vm.student.genre = user.genre;
-      vm.student.weight = user.weight;
-      vm.student.height = user.height;
-      vm.student.nationality = user.nationality;
-      vm.student.phone = user.phone;
-      vm.student.email = user.email;
-      vm.student.academy = user.academy;
-      vm.student.teacher = user.teacher;
-      vm.student.belt = user.belt;
-      vm.student.category = user.category;
-      vm.student.tournaments = user.tournaments;
-      vm.student.tournamentsWins = user.tournamentsWins;
-      vm.student.role = user.role;
+    vm.getStudent = function(pStudent) {
+      vm.student._id= pStudent._id;
+      vm.student.id = pStudent.id;
+      vm.student.birthday = pStudent.birthday;
+      vm.student.name = pStudent.name;
+      vm.student.surName = pStudent.surName;
+      vm.student.firstName = pStudent.firstName;
+      vm.student.lastName = pStudent.lastName;
+      vm.student.genre = pStudent.genre;
+      vm.student.weight = Number(pStudent.weight);
+      vm.student.height = Number(pStudent.height);
+      vm.student.nationality = pStudent.nationality;
+      vm.student.phone = pStudent.phone;
+      vm.student.email = pStudent.email;
+      vm.student.academy = pStudent.academy;
+      vm.student.teacher = pStudent.teacher;
+      vm.student.belt = pStudent.belt;
+      vm.student.category = pStudent.category;
+      vm.student.tournaments = Number(pStudent.tournaments);
+      vm.student.tournamentsWins = Number(pStudent.tournamentsWins);
+      vm.student.role = pStudent.role;
     }
 
     //funcion para guardar alumno editada
     vm.updateStudent = function() {
       var editstudent = {
-        id: vm.id,
-        birthday: vm.birthday,
-        firstName: vm.firstName,
-        secondName: vm.secondName,
-        firstLastName: vm.firstLastName,
-        secondLastName: vm.secondLastName,
-        genre: vm.genre,
-        weight: vm.weight,
-        height: vm.height,
-        nationality: vm.nationality,
-        phone: vm.phone,
-        email: vm.email,
-        attendAcademy: vm.academy,
-        teacher: vm.teacher,
-        belt: vm.belt,
-        category: vm.category,
-        tournaments: vm.tournaments,
-        tournamentsWins: vm.tournamentsWins,
-        status: vm.status,
-        role: vm.role
+        _id: vm.student._id,
+        id: vm.student.id,
+        birthday: vm.student.birthday,
+        name: vm.student.name,
+        surName: vm.student.surName,
+        firstName: vm.student.firstName,
+        lastName: vm.student.lastName,
+        genre: vm.student.genre,
+        weight: vm.student.weight,
+        height: vm.student.height,
+        nationality: vm.student.nationality,
+        phone: vm.student.phone,
+        email: vm.student.email,
+        attendAcademy: vm.student.academy,
+        teacher: vm.student.teacher,
+        belt: vm.student.belt,
+        category: vm.student.category,
+        tournaments: vm.student.tournaments,
+        tournamentsWins: vm.student.tournamentsWins,
+        status: vm.student.status,
+        role: vm.student.role
       }
       userService.updateUsers(editstudent);
       init();
@@ -1027,12 +1080,13 @@
     //funcion para guardar competencia
     vm.createCompetition = function() {
       var newCompetition = {
+        status: 'activo',
         competitionNumber: vm.competitionNumber,
         eventBelongs: vm.eventBelongs,
         competitionAge: vm.competitionAge,
         competitionGenre: vm.competitionGenre,
         competitionBelt: vm.competitionBelt,
-        competitionWeight: vm.competitionWeight,
+        competitionWeight: vm.competitionWeight
       }
       newCompetition.competitors = [];
       eventService.setCompetitions(newCompetition)
@@ -1166,14 +1220,14 @@
     //crea el miembro nuevo de la junta directiva
     vm.createMember = function(pNewMember) {
       settingsService.updateDirect(pNewMember);
-      vm.showAlertEditParams('El miembro llamado ' + pNewMember.name + ' ha sido creado exitosamente.', '¡Nuevo miembro de la junta directiva!');
+      vm.showAlertEditParams('El usuario  ' + pNewMember.name + ' ha sido creado exitosamente.', '¡Nuevo miembro de la junta directiva!');
       init();
       vm.modDisplay = false;
       clearForm(vm.editMem);
     }
     vm.updateMember = function(pMemberToUpdate) {
       settingsService.updateDirect(pMemberToUpdate);
-      vm.showAlertEditParams('El miembro llamado ' + pMemberToUpdate.name + ' ha sido actualizado exitosamente.', '¡Actualización de miembro en la junta directiva!');
+      vm.showAlertEditParams('El usuario  ' + pMemberToUpdate.name + ' ha sido actualizado exitosamente.', '¡Actualización de miembro en la junta directiva!');
       init();
       vm.modDisplay = false;
       clearForm(vm.editMem);
@@ -1218,7 +1272,7 @@
           }
           break;
         case 'rojo':
-          if (pStudent.tournaments >= 6) {
+          if (pStudent.tournaments >= 7) {
             pStudent.belt = 'negro';
           } else {
             // Mensaje de retroalimentacion
@@ -1234,10 +1288,36 @@
         //mostrar mensaje
       } else {
         userService.updateBelt(pStudent);
+        vm.showStudentUpdateBelt ();
       }
 
 
   }
+  vm.compareDate = function (competition){
+    var edit = true;
+    var fecha = new Date();
+    for(var i = 0 ; i < vm.events.length ; i++){
+      if(competition.eventBelongs == vm.events[i].eventName){
+        if(new Date(vm.events[i].date1) > fecha){
+          edit = true;
+        }else{
+          edit = false;
+        }
+
+      }
+    }
+    return edit;
+  }
+  vm.editCompetition = function(item){
+
+      vm._id = item._id,
+      vm.competitionNumber = Number(item.competitionNumber),
+      vm.eventBelongs = item.eventBelongs,
+      vm.competitionAge = item.competitionAge,
+      vm.competitionGenre = item.competitionGenre,
+      vm.competitionWeight = item.competitionWeight
+  }
+
 }
 
 })();
