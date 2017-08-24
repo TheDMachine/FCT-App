@@ -55,6 +55,27 @@ input.recover-email{
   color: #000;
 }
 
+#btnActivas{
+  margin-left: 45px;
+}
+
+/*Inicio Estilos de perfil de admin*/
+#per{
+    font-family: 'Montserrat';
+    font-size: 2.143em;
+    font-weight: normal;
+    padding: 0 3%;
+}
+.imgPerfil{
+  margin: 5% 0 0 5%;
+}
+
+#adminEdit{
+  margin-top: 2%;
+}
+/*Fin Estilos de perfil de admin*/
+
+
 
 /*Inicio Estilos de tablas usuarios*/
 #tableUser h3{
@@ -97,6 +118,13 @@ input.recover-email{
   border-bottom: 0.1px solid #00978f;
   text-align: center;
   padding: 10px 0;
+}
+
+.academyCard{
+  font-weight: 500;
+}
+.academyCardtxt{
+  font-weight: 300;
 }
 /*Fin Estilos de tablas usuarios*/
 
@@ -596,7 +624,7 @@ input.recover-email{
 /*Fin estilos del landing*/
 
 /*Inicio estilo de modal de consulta y tabla de historial eventos*/
-#table1 h3, #table2 h3, #registerEvents h3{
+#table1 h3, #table2 h3, #registerEvents h3, #titleR{
   font-family: 'Montserrat';
   font-size: 1.571em;
   margin-bottom: 60px;
@@ -1528,3 +1556,38 @@ md-card md-card-title.no-padding{
   .genericButtonsSteps div.active a{
     color:white;
   }
+
+  /*inicio estilo de modal academias*/
+  #modalAcademy{
+    background: #85c8dd;
+    text-align: center;
+  }
+
+  #modalAcademy h3{
+    color: #fff;
+    font-weight: bold;
+    display: inline;
+    font-size: 1.571em;
+    font-family: 'Montserrat';
+  }
+
+  #modalInfoAcademy{
+    padding-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  #modalInfoAcademy p{
+    padding-bottom: 5px;
+    line-height: 1;
+  }
+
+  #modalInfoAcademy p span{
+    font-weight: bold;
+  }
+
+  #modalBtnAcademy .md-button{
+    color: #fff;
+    background: #85c8dd;
+  }
+
+  /*Fin estilo de modal academias*/

@@ -839,5 +839,12 @@
           }
         }
       }
+      // Funcion para actualizar estado de competición
+      vm.deleteCompetition = function(pModCompetition) {
+        pModCompetition.status = 'inactivo';
+        eventService.deleteCompetition(pModCompetition)
+        init();
+        cleanCompetition();
+        }
    }
 })();

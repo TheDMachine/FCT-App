@@ -9,6 +9,7 @@
     function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, ticketService, settingsService, NgMap) {
 
       var vm = this;
+      vm.currentUser = '';
       vm.cloudObj = imageService.getConfiguration();
       vm.selected = 0;
       vm.updateDisable = true;
@@ -62,7 +63,7 @@
         vm.isEdit = false;
         vm.isNew = false;
         // Fin Daniel
-        vm.currentUser = userService.searchAdmin(userService.getCookie());
+        vm.currentUser = $cookies.getObject('currentUserActive');
         console.log(vm.currentUser);
         vm.originatorEv;
         vm.weights = estabInfoService.getWeight();
@@ -194,6 +195,29 @@
           targetEvent: ev,
           clickOutsideToClose: true,
         });
+      };
+
+      // Función para mostrar academias
+      vm.consultAcademy = function(academy, ac) {
+        checkConsultAcademy(academy);
+        $mdDialog.show({
+          contentElement: '#infoAcademy',
+          parent: angular.element(document.body),
+          targetEvent: ac,
+          clickOutsideToClose: true,
+        });
+      };
+
+      //funcion para imprimir datos de academia
+      function checkConsultAcademy(academy){
+        vm.academy ={
+          name: academy.name,
+          address: academy.address,
+          manager: academy.manager,
+          competitors: academy.competitors,
+          phone: academy.phone,
+          email: academy.email
+        }
       };
 
       //Alertas de Registro de alumnos
@@ -925,6 +949,15 @@ var pModCompetition = {
   cleanCompetition();
   }
 
+  // Funcion para actualizar estado de competición
+  vm.deleteCompetition = function(pModCompetition) {
+    pModCompetition.status = 'inactivo';
+    eventService.deleteCompetition(pModCompetition)
+    init();
+    cleanCompetition();
+    }
+
+//Funcion para limpiar campos de academias
   function cleanCompetition() {
     vm._id = '',
     vm.competitionNumber = '',
@@ -1112,7 +1145,16 @@ var pModCompetition = {
         status: vm.student.status,
         role: vm.student.role
       }
-      userService.updateUsers(editstudent);
+      userService.updateUsers(editstudent)
+      .then(function(response){
+        $http.get('http://localhost:3000/api/get_all_students')
+        .then(function(response){
+          vm.students = response.data
+        })
+      })
+      .catch(function(err) {
+        console.log(err);
+      })
       init();
       clean();
     }
@@ -1131,16 +1173,67 @@ var pModCompetition = {
       }
       newCompetition.competitors = [];
       newCompetition.fights = [];
-      eventService.setCompetitions(newCompetition)
-        .then(function(response){
-          var responseObj = response;
-          console.log(response);
-          eventService.getCompetitions().then(function(response){
-            vm.competitions = response.data;
+
+      if (eventService.findCompetition(newCompetition.competitionNumber) !== false) {
+        vm.competitionDuplicateAlert();
+      }else {
+        eventService.setCompetitions(newCompetition)
+          .then(function(response){
+            var responseObj = response;
+            console.log(response);
+            eventService.getCompetitions().then(function(response){
+              vm.competitions = response.data;
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
           });
-        })
+        vm.competitionAlert();
+      }
+      cleanCompetition();
       init();
     }
+
+    function cleanCompetition() {
+      vm.competitionNumber = '',
+      vm.eventBelongs = '',
+      vm.competitionAge = '',
+      vm.competitionGenre = '',
+      vm.competitionBelt = '',
+      vm.competitionWeight = ''
+    }
+
+    vm.competitionDuplicateAlert = function() {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('La competicia ya existe')
+          .textContent('La competicia ya existe, registre otra')
+          .ariaLabel()
+          .ok('¡Gracias!')
+          .targetEvent()
+        );
+      };
+
+      vm.competitionAlert = function() {
+          // Appending dialog to document.body to cover sidenav in docs app
+          // Modal dialogs should fully cover application
+          // to prevent interaction outside of dialog
+          $mdDialog.show(
+            $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Registo correcto')
+            .textContent('Registro de la competecia realizado')
+            .ariaLabel()
+            .ok('¡Gracias!')
+            .targetEvent()
+          );
+        };
 
     vm.changeViews = function() {
       vm.userActive = true;
@@ -1358,6 +1451,44 @@ var pModCompetition = {
       vm.competitionAge = item.competitionAge,
       vm.competitionGenre = item.competitionGenre,
       vm.competitionWeight = item.competitionWeight
+  }
+
+  //editar perfil de administrador
+  vm.getCurrentAdmin = function(admin){
+    console.log(admin);
+    vm.editAdminProfile = true;
+    vm.currentUser.password = admin.password;
+    vm.currentUser.email = admin.email;
+    vm.currentUser.phone = admin.phone;
+  }
+
+  vm.updateCurrentAdmin = function (){
+    var editAdmin ={
+      _id : vm.currentUser._id,
+      id: vm.currentUser.id,
+      name: vm.currentUser.name,
+      surName: vm.currentUser.surName,
+      firstName: vm.currentUser.firstName,
+      lastName: vm.currentUser.lastName,
+      genre: vm.currentUser.genre,
+      birthday: vm.currentUser.birthday,
+      nationality: vm.currentUser.nationality,
+      phone: vm.currentUser.phone,
+      status: vm.currentUser.status,
+      email: vm.currentUser.email,
+      photo: vm.currentUser.photo,
+      role: vm.currentUser.role,
+      password: vm.currentUser.password
+    }
+    console.log(editAdmin);
+    userService.updateUsers(editAdmin).then(function(response){
+      console.log(response);
+      $http.get('http://localhost:3000/api/get_all_Users')
+      .catch(function(err){
+        console.log(err);
+      });
+    });
+    vm.editAdminProfile = false;
   }
 
 }
