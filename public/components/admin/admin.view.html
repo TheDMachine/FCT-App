@@ -22,7 +22,7 @@
 				</md-list-item> -->
 				<md-list-item layout="column">
 					<md-button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i><br>
+						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 12 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i><br>
 						<p class="menu-button">Usuarios</p>
 					</md-button>
 					<div class="dropdown-menu">
@@ -1002,6 +1002,7 @@
 									<div  id="btnFiltrosCompetencias">
 								<label>Mostrar competencias por su estado:</label>
 								<md-radio-group ng-model="vm.stateFilter" layout="row">
+									<md-radio-button  value="" class="md-primary" >Todas</md-radio-button>
 								<md-radio-button  value="activo" class="md-primary" >Activas</md-radio-button>
 								<md-radio-button value="inactivo" class="md-primary">Inactivas</md-radio-button>
 								</md-radio-group>
@@ -1321,17 +1322,19 @@
 														<th>Primer nombre</th>
 														<th>Primer apellido</th>
 														<th>Estado</th>
+														<th>Academia</th>
 														<th>Teléfono</th>
 														<th>Foto</th>
 														<th></th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr ng-repeat="teacher in vm.teachers track by $index">
+													<tr ng-repeat="teacher in vm.teachers | orderBy:'id'">
 														<td>{{teacher.id}}</td>
 														<td>{{teacher.name}}</td>
 														<td>{{teacher.firstName}}</td>
 														<td>{{teacher.status}}</td>
+														<td>{{teacher.academy}}</td>
 														<td>{{teacher.phone}}</td>
 														<td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
 														<!-- Botones para editar profesores -->
@@ -1435,6 +1438,8 @@
 													<th>Nombre completo</th>
 													<th>Estado</th>
 													<th>Grado</th>
+													<th>Academia</th>
+													<th>Foto</th>
 													<th></th>
 													<th></th>
 												</tr>
@@ -1445,6 +1450,8 @@
 													<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
 													<td>{{student.status}}</td>
 													<td>{{student.belt}}</td>
+													<td>{{student.academy}}</td>
+													<td><img ng-src="{{student.photo}}" alt="Description" width="60px" height="60px" /></td>
 													<td>
 														<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
 													</td>

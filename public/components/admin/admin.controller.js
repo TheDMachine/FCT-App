@@ -112,7 +112,8 @@
           vm.reservations = response.data;
         });
         vm.status = "activo";
-        vm.roleFilter = ""
+        vm.roleFilter = "";
+        vm.stateFilter = ""
       }
       init();
 
@@ -1111,7 +1112,7 @@ var pModCompetition = {
     userService.setUsers(pNewStudent)
     .then(function(response){
         vm.studentAlert();
-        clean();
+        cleanStudent();
         init();
       })
       .catch(function(err){
@@ -1120,6 +1121,29 @@ var pModCompetition = {
     //   }
      }
 
+     function cleanAcademy() {
+       vm.student._id= '';
+       vm.student.id = '';
+       vm.student.birthday = '';
+       vm.student.name = '';
+       vm.student.surName = '';
+       vm.student.firstName = '';
+       vm.student.lastName = '';
+       vm.student.genre = '';
+       vm.student.weight = '';
+       vm.student.height = '';
+       vm.student.nationality = '';
+       vm.student.phone = '';
+       vm.student.email = '';
+       vm.student.academy = '';
+       vm.student.teacher = '';
+       vm.student.belt = '';
+       vm.student.category = '';
+       vm.student.tournaments = '';
+       vm.student.tournamentsWins = '';
+       vm.student.role = '';
+
+     }
 
     //funcion para editar alumno
     vm.getStudent = function(pStudent) {
@@ -1181,7 +1205,7 @@ var pModCompetition = {
         console.log(err);
       })
       init();
-      clean();
+      cleanStudent();
     }
 
 
@@ -1427,12 +1451,26 @@ var pModCompetition = {
           for(var j = 0; j < vm.users.length; j++){
             if(vm.users[j].genre == vm.competitions[i].competitionGenre){
               if(vm.users[j].category == vm.competitions[i].competitionAge){
-                if(vm.users[j].weight == vm.competitions[i].competitionWeight)
-                //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
-                  vm.competitorsEvent.push(vm.users[j]);
-                //}
+                if(vm.users[j].weight == vm.competitions[i].competitionWeight){
+                  //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+                    vm.competitorsEvent.push(vm.users[j]);
+                  //}
+                }
               }
             }
+          }
+        }
+      }
+    }
+
+    vm.updateOptionsTeachers = function(academyName){
+      vm.teachersFromAcademy = [];
+      for(var i = 0; i < vm.teachers.length; i++){
+        if(vm.teachers[i].role == 'teacher'){
+          if(vm.teachers[i].academy == academyName){
+            //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+              vm.teachersFromAcademy.push(vm.teachers[i]);
+            //}
           }
         }
       }
