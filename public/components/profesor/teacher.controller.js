@@ -395,6 +395,19 @@
       }
     }
 
+    vm.updateOptionsTeachers = function(academyName){
+      vm.teachersFromAcademy = [];
+      for(var i = 0; i < vm.teachers.length; i++){
+        if(vm.teachers[i].role == 'teacher'){
+          if(vm.teachers[i].academy == academyName){
+            //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+              vm.teachersFromAcademy.push(vm.teachers[i]);
+            //}
+          }
+        }
+      }
+    }
+
     vm.showCompetition = function(competition, $index){
       for(var i = 0; i < vm.competitionsToShow.length; i++){
         if(vm.competitionsToShow[i] == undefined){
