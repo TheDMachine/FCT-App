@@ -1322,17 +1322,19 @@
 														<th>Primer nombre</th>
 														<th>Primer apellido</th>
 														<th>Estado</th>
+														<th>Academia</th>
 														<th>Teléfono</th>
 														<th>Foto</th>
 														<th></th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr ng-repeat="teacher in vm.teachers track by $index">
+													<tr ng-repeat="teacher in vm.teachers | orderBy:'id'">
 														<td>{{teacher.id}}</td>
 														<td>{{teacher.name}}</td>
 														<td>{{teacher.firstName}}</td>
 														<td>{{teacher.status}}</td>
+														<td>{{teacher.academy}}</td>
 														<td>{{teacher.phone}}</td>
 														<td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
 														<!-- Botones para editar profesores -->
