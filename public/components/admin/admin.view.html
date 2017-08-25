@@ -934,7 +934,7 @@
 
 								<!-- Tabla historial de competencias -->
 								<div>
-									<table class="table-responsive">
+									<table class="table-responsive ">
 										<thead>
 											<tr>
 												<th>Número de competencia</th>
@@ -960,16 +960,15 @@
 								<div class="container123213">
 									<div  id="btnFiltrosCompetencias">
 								<label>Mostrar competencias por su estado:</label>
-								<md-radio-group ng-model="data.group1" layout="row">
-								<md-radio-button ng-value="true" id="btnActivas" value="activa" class="md-primary">Activas</md-radio-button>
-								<md-radio-button value="inactiva">Inactivas</md-radio-button>
+								<md-radio-group ng-model="vm.stateFilter" layout="row">
+								<md-radio-button  value="activo" class="md-primary" >Activas</md-radio-button>
+								<md-radio-button value="inactivo" class="md-primary">Inactivas</md-radio-button>
 								</md-radio-group>
 							</div>
-
 								</div>
 								<h2 id="errorConsul"></h2>
 
-								<md-card ng-repeat="item in vm.competitions | orderBy:'competitionNumber'" flex="20">
+								<md-card ng-repeat="item in vm.competitions | filter:{status:vm.stateFilter} | orderBy:'competitionNumber'" flex="20">
 									<md-card-title>
 										<md-card-title-text>
 											<span class="md-headline">Competencia {{item.competitionNumber}}</span>
@@ -1296,8 +1295,7 @@
 														<td>{{teacher.phone}}</td>
 														<td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
 														<!-- Botones para editar profesores -->
-														<td><input type="button" value="Editar" ng-click="vm.getInfoTeacher(teacher)"></td>
-														<td><md-switch md-invert aria-label="Switch 7" ng-click="vm.editTeacher()" ng-true-value="'Inactivo'" ng-false-value="'Activo'">{{vm.teacher.status}}</md-switch></div></td>
+														<td><md-button type="button"  class="md-raised" ng-click="vm.getInfoTeacher(teacher)">Editar</md-button></td>
 													</tr>
 												</tbody>
 											</table>
@@ -1363,6 +1361,7 @@
 													<th>Cédula</th>
 													<th>Nombre completo</th>
 													<th>Estado</th>
+													<th>Grado</th>
 													<th></th>
 													<th></th>
 												</tr>
@@ -1372,6 +1371,7 @@
 													<td>{{student.id}}</td>
 													<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
 													<td>{{student.status}}</td>
+													<td>{{student.belt}}</td>
 													<td>
 														<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
 													</td>
@@ -1391,6 +1391,16 @@
 			<div ng-show="vm.selected == 12">
 				<md-content class="md-padding">
 					<div class="row container-fluid">
+
+						<!-- Filtro por rol del usuario -->
+						<div class="col-xs-12 col-sm-4 pull-left">
+					<label>Filtrar por tipo de usuario </label>
+					<md-radio-group ng-model="vm.roleFilter" layout="row">
+					<md-radio-button value="" class="my-radio">Todos</md-radio-button>
+					<md-radio-button  value="teacher">Profesor</md-radio-button>
+					<md-radio-button value="student" >Alumno</md-radio-button>
+					</md-radio-group>
+				</div>
 
 						<!-- filtro por nombre -->
 						<div class="col-xs-12 col-sm-4 pull-right">
@@ -1413,7 +1423,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr ng-repeat="user in vm.students |  filter:{firstName:vm.statusName} | orderBy:'id'">
+										<tr ng-repeat="user in vm.students |  filter:{firstName:vm.statusName} | filter:{role:vm.roleFilter} | orderBy:'id'">
 											<td>{{user.id}}</td>
 											<td>{{user.name}} {{user.surName}} {{user.firstName}} {{user.lastName}}</td>
 											<td>{{user.role}}</td>
@@ -1421,7 +1431,7 @@
 												<md-button ng-click="vm.state(user)" class="md-raised">{{user.status}}</md-button>
 											</td>
 										</tr>
-										<tr ng-repeat="user in vm.teachers | filter:{firstName:vm.statusName} | orderBy:'id'">
+										<tr ng-repeat="user in vm.teachers | filter:{firstName:vm.statusName} | filter:{role:vm.roleFilter} | orderBy:'id'">
 											<td>{{user.id}}</td>
 											<td>{{user.name}} {{user.surName}} {{user.firstName}} {{user.lastName}}</td>
 											<td>{{user.role}}</td>
