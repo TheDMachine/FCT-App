@@ -68,8 +68,12 @@
         vm.originatorEv;
         vm.weights = estabInfoService.getWeight();
         console.log(vm.events);
-        eventService.getCompetitions().then(function(response){
+        eventService.getCompetitions()
+        .then(function(response){
           vm.competitions = response.data;
+        })
+        .catch(function(err){
+          console.log(err);
         });
         acceptedEvents();
         vm.event = {};
@@ -1287,6 +1291,7 @@ var pModCompetition = {
               eventService.updateCompetition(vm.competitions[i])
               .then(function(response){
                 console.log(response);
+                vm.successCompetitorCompetition();
               })
               .catch(function(err){
                 console.log(err);
@@ -1300,6 +1305,22 @@ var pModCompetition = {
         console.log(eventService.getCompetitions());
       }
     }
+
+    vm.successCompetitorCompetition = function() {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Registro correcto')
+        .textContent('Registro exitoso!')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+      );
+    };
 
     vm.duplicateAcademyCompetition = function() {
       // Appending dialog to document.body to cover sidenav in docs app
@@ -1357,7 +1378,7 @@ var pModCompetition = {
       }
       for(var i = 0; i < vm.competitionsToShow.length; i++){
         for(var j = 0; j < vm.competitionsToShow[$index].competitors.length; j++){
-          if(vm.competitionsToShow[$index].competitors.length == 5 && (vm.competitionsToShow[$index].fights.length == 0 || vm.competitionsToShow[$index].fights == undefined)){
+          if(vm.competitionsToShow[$index].competitors.length == 5 && vm.competitionsToShow[$index].fights.length !== 10){
             kLoop:
             for(var k = 0; k < 4; k++){
               vm.pairFights = [];
@@ -1384,7 +1405,7 @@ var pModCompetition = {
                     }
                   }
                   vm.fights.push(vm.pairFights);
-                  if(vm.fights.length == 20){
+                  if(vm.fights.length == 10){
                     if(vm.competitionsToShow[$index]._id == competition._id){
                       vm.competitionsToShow[$index].fights = vm.fights;
                       eventService.updateCompetition(vm.competitionsToShow[$index])
@@ -1453,14 +1474,19 @@ var pModCompetition = {
     }
 
     vm.updatePoints = function(competitor, $index, competition){
-      if(competitor.points == 5){
-        return
-      }else{
-        competitor.points += 1;
-        vm.ready = true;
-        vm.fights[$index].push(vm.ready);
-        console.log(vm.fights);
+
+      for(var i = 0; i < vm.competitions.length; i++){
+        for(var j = 0; j < vm.competitions[i].competitors.length; j++){
+          if(vm.competitions[i].competitors[j].id == competitor.id){
+            competitor.points = vm.competitions[i].competitors[j].points;
+          }
+        }
       }
+      competitor.points += 1;
+      vm.ready = true;
+      vm.fights[$index].push(vm.ready);
+      console.log(vm.fights);
+
       for(var i = 0; i < vm.competitions.length; i++){
         for(var j = 0; j < vm.competitions[i].competitors.length; j++){
           if(vm.competitions[i]._id == competition._id){
@@ -1469,19 +1495,19 @@ var pModCompetition = {
               vm.competitions[i].fights = vm.fights;
               eventService.updateCompetition(vm.competitions[i])
                 .then(function(response){
-                  console.log(response);
-                  eventService.getCompetitions()
+                    vm.competitionsToShow[i] = vm.competitions[i];
+                    vm.selected = 8;
+                  /*eventService.getCompetitions()
                   .then(function(response){
                     vm.competitions = response.data;
                   })
                   .catch(function(err){
                     console.log(err);
-                  })
+                  })*/
                 })
-                .catch(function(err){
+                /*.catch(function(err){
                   console.log(err);
-                });
-                return;
+                });*/
             }
           }
         }

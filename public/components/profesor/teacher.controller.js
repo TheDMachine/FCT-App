@@ -427,7 +427,7 @@
       }
       for(var i = 0; i < vm.competitionsToShow.length; i++){
         for(var j = 0; j < vm.competitionsToShow[$index].competitors.length; j++){
-          if(vm.competitionsToShow[$index].competitors.length == 5 && (vm.competitionsToShow[$index].fights.length == 0 || vm.competitionsToShow[$index].fights == undefined)){
+          if(vm.competitionsToShow[$index].competitors.length == 5 && vm.competitionsToShow[$index].fights.length !== 10){
             kLoop:
             for(var k = 0; k < 4; k++){
               vm.pairFights = [];
@@ -454,7 +454,7 @@
                     }
                   }
                   vm.fights.push(vm.pairFights);
-                  if(vm.fights.length == 20){
+                  if(vm.fights.length == 10){
                     if(vm.competitionsToShow[$index]._id == competition._id){
                       vm.competitionsToShow[$index].fights = vm.fights;
                       eventService.updateCompetition(vm.competitionsToShow[$index])
@@ -540,14 +540,19 @@
     }
 
     vm.updatePoints = function(competitor, $index, competition){
-      if(competitor.points == 5){
-        return
-      }else{
-        competitor.points += 1;
-        vm.ready = true;
-        vm.fights[$index].push(vm.ready);
-        console.log(vm.fights);
+
+      for(var i = 0; i < vm.competitions.length; i++){
+        for(var j = 0; j < vm.competitions[i].competitors.length; j++){
+          if(vm.competitions[i].competitors[j].id == competitor.id){
+            competitor.points = vm.competitions[i].competitors[j].points;
+          }
+        }
       }
+      competitor.points += 1;
+      vm.ready = true;
+      vm.fights[$index].push(vm.ready);
+      console.log(vm.fights);
+
       for(var i = 0; i < vm.competitions.length; i++){
         for(var j = 0; j < vm.competitions[i].competitors.length; j++){
           if(vm.competitions[i]._id == competition._id){
@@ -556,19 +561,19 @@
               vm.competitions[i].fights = vm.fights;
               eventService.updateCompetition(vm.competitions[i])
                 .then(function(response){
-                  console.log(response);
-                  eventService.getCompetitions()
+                    vm.competitionsToShow[i] = vm.competitions[i];
+                    vm.selected = 8;
+                  /*eventService.getCompetitions()
                   .then(function(response){
                     vm.competitions = response.data;
                   })
                   .catch(function(err){
                     console.log(err);
-                  })
+                  })*/
                 })
-                .catch(function(err){
+                /*.catch(function(err){
                   console.log(err);
-                });
-                return;
+                });*/
             }
           }
         }
