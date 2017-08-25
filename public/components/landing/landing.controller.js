@@ -2,13 +2,27 @@
   angular
   .module('app')
   .controller('landingCtrl', landingCtrl);
-    function landingCtrl($scope, $location){ //se inyecta el service userService en el controlador para que se tenga acceso
+
+  landingCtrl.$inject = ['$scope', '$location', '$http' , 'eventService'];
+
+    function landingCtrl($scope, $location,$http, eventService){ //se inyecta el service userService en el controlador para que se tenga acceso
       //controlador
       var vm = this; //binding del controlador con el html, solo en el controlador
+      vm.threeEvents = {};
+      loadEvents();
 
+      function loadEvents(){
+        eventService.getEvents().then(function(response) {
+          vm.callEventsDB = response.data;
+          showEvents();
+        });
+      }
+      // console.log(vm.events);
       function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
-       
+
       }init();
+
+      
 
       vm.logIn = function(event){
         event.preventDefault();
@@ -35,7 +49,15 @@
         $location.path('/events');
       }
 
-    
+      function showEvents(){
+        for (var i = 0; i < vm.callEventsDB.length; i++) {
+          if (vm.callEventsDB[i].eventName === 'Torneo Nacional el Cambiori' && vm.callEventsDB[i].eventName === 'Torneo de Taekwondo IV 2017' && vm.callEventsDB[i].eventName === 'Torneo Kiguty Sam') {
+            vm.threeEvents.push(vm.callEventsDB[i]);
+          }
+        }
+      }
+
+
     }
 
      //se establece un objeto de angular normal
