@@ -822,7 +822,7 @@
       }
 
       vm.createNewConsult = function(pNewConsul) {
-        pNewConsul.role = 'admin';
+        pNewConsul.role = 'consul';
         pNewConsul.status = 'activo';
         pNewConsul.newUser = 1;
         var bFlag;
