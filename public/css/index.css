@@ -1605,7 +1605,7 @@ md-card md-card-title.no-padding{
      max-width: calc(100% - 56px);
     }
   }
-
+/*Inicio estilos de informacion del landing*/
   .cardTam{
     width: 46%;
     margin: 2%;
@@ -1629,5 +1629,48 @@ md-card md-card-title.no-padding{
   .cardTam2{
     width: 30%;
     margin: 1%;
-    height: 29em;
+    background: #424242;
+    color: #fff;
   }
+
+  .cardTam2 p{
+    font-weight: 300;
+  }
+
+  .cardTam2 p span{
+    font-weight: 500;
+  }
+
+  #infoBelt{
+    background: #1c1c1c;
+  }
+
+  #infoBelt h1{
+    color: #fff;
+  }
+
+  #btnBlanca{
+    background: #fff;
+  }
+
+  #btnAmarilla{
+    background: #fcb132;
+  }
+
+  #btnVerde{
+    background: #00a652;
+  }
+
+  #btnAzul{
+    background: #0082c8;
+  }
+
+  #btnRoja{
+    background: #ee334e;
+  }
+
+  #btnNegra{
+    background: #000;
+    color: #fff;
+  }
+  /*fin estilos de informacion del landing*/
