@@ -3,87 +3,42 @@
   angular
   .module('app')
   .service('settingsService', settingsService);
-  function settingsService(logService) {
-
-    var globalFieldSettings = {
-      address:'Pavas, San José, Costa Rica',
-      phone:'22314308',
-      idJ:'3-002-660565',
-      emailNotifications: 'no-reply@tckcr.org',
-      direct:[
-        {name:'Wilmer Alvarado Castro',
-        position:'Presidente',
-      email:'info@tkdcr.com',
-    phone:'89829607'},
-        {name:'Ferdinardo Alfaro Jimenez',
-    position:'Vicepresidente',
-  email:'ferdinandoalfaro@gmail.com',
-phone:'89916463'}
-,{name:'Kenneth Viquez Guevara',
-position:'Secretario',
-email:'prosema@racsa.co.cr',
-phone:'88561919'}
-      ]
-    };
-
+  function settingsService(logService, $http) {
     var publicApi = {
-      setSetting:_setSettings,
-      getSettings:_getSettings,
+      updateParam:_updateParam,
+      getSetting:_getSetting,
       updateDirect:_updateDirect,
-      editParamToSystem: _editParamToSystem
+      setDirect:_saveDirective,
+      getDirect: _getDirectives,
+      deleteDirective: _deleteDirective
     };
     return publicApi;
 
-    //Función para actualizar los parametros del sistema
-    function _editParamToSystem(pOldParam, pNewParam) {
-      var data = _getSettings();
-      for (var index in data) {
-        if (data[index] === pOldParam) {
-          data[index] = pNewParam;
-          localStorage.setItem('LSSettingsValues', JSON.stringify(data));
-          return;
-        }
-      }
+    // Se Actualiza un nuevo setting
+    function _updateParam(pSettingObj) {
+        return $http.put('http://localhost:3000/api/update_param', pSettingObj);
+    }
+    // Agarra toda la configuración
+    function _getSetting() {
+        return $http.get('http://localhost:3000/api/get_param');
     }
 
-
-
-
-
-    //funcion para actualizar información de un
-    //integrante de la junta directiva
-    function _updateDirect(pnewDirect){
-      var directList = _getSettings();
-        for (var i = 0; i < directList.direct.length; i++) {
-          if(directList.direct[i].name === pnewDirect.name || directList.direct[i].position === pnewDirect.position || directList.direct[i].email === pnewDirect.email || directList.direct[i].phone === pnewDirect.phone) {
-            directList.direct[i]= pnewDirect;
-            localStorage.setItem('LSSettingsValues',JSON.stringify(directList));
-            return false;
-          }
-        }
-        directList.direct.push(pnewDirect);
-        localStorage.setItem('LSSettingsValues',JSON.stringify(directList));
+    // Guarda al nuevo directivo
+    function _saveDirective(pNewDirective) {
+        return $http.post('http://localhost:3000/api/save_directive', pNewDirective);
     }
 
-    //functionn para actualizar algo
-    function _setSettings(pNewSetting) {
-      console.log(pNewSetting);
-      var settingsList = _getSettings();
-      for (var index in settingsList) {
-        console.log(settingsList[index]);
-
-        }
-      localStorage.setItem('LSSettingsValues',JSON.stringify(settingsList));
+    // Obtiene todos los directivos
+    function _getDirectives(){
+        return $http.get('http://localhost:3000/api/get_directive');
     }
 
-    //function para obtener los parametros de configuración del sistema
-    function _getSettings() {
-      var settingsList = JSON.parse(localStorage.getItem('LSSettingsValues'));
-      if(settingsList == null) {
-        settingsList = globalFieldSettings;
-      }
-      return settingsList;
-
+    //Actualiza el directivo
+    function _updateDirect(pDirectiveUpdate) {
+        return $http.put('http://localhost:3000/api/update_directive', pDirectiveUpdate);
+    }
+    function _deleteDirective(pIdDirective){
+        return $http.put('http://localhost:3000/api/deleteDirective/:pIdDirective');
     }
   }
 }());

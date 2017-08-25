@@ -840,27 +840,72 @@
         }
       }
 
-      vm.createNewConsult = function(pNewConsul) {
-        pNewConsul.role = 'consul';
-        pNewConsul.status = 'activo';
-        pNewConsul.newUser = 1;
-        var bFlag;
-        userService.createConsul(pNewConsul).then(function(response){
-            bFlag = response.data.success;
-            console.log(response.data.success);
-        });
-        if (bFlag == false) {
-          document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
-          //te manda a la página uno del registro.
-          $state.go('admin.partOne');
-          var tempDataOne = 'fallo al crear a ' + pNewConsul.firstName;
-          vm.showConsulAlert('!Registro fallido!', '¡Registro de representante de consejo fallida!');
-          logService.createLog(false, temDataZero, tempDataOne);
-        } else {
-          vm.showConsulAlert('!Registro exitoso!', '¡Registro de representante de consejo exitosamente!');
-          logService.createLog(0, temDataZero, tempDataOne);
-        }
-      }
+    //  Iniacia la funcion para crear represetante de consejo
+    vm.createNewConsult = function(pNewConsul) {
+      pNewConsul.role = 'consul';
+      pNewConsul.status = 'activo';
+      pNewConsul.newUser = 1;
+      var bFlag;
+      userService.createConsul(pNewConsul).then(function(response){
+          bFlag = response.data.success;
+          console.log(response.data.success);
+          if (bFlag == false) {
+              document.getElementById('errorConsul').innerHTML = 'El represetante de consejo ya existe';
+              //te manda a la página uno del registro.
+              $state.go('admin.partOne');
+              var tempDataOne = 'fallo al crear a ' + pNewConsul.name;
+              vm.showConsulAlert('!Registro fallido!', '¡Registro de representante de consejo fallida!');
+              logService.createLog(false, temDataOne);
+          } else {
+              tempDataOne = 'Registro exitosamente a ' +pNewConsul.name;
+              vm.showConsulAlert('!Registro exitoso!', '¡Registro de representante de consejo exitosamente!');
+              logService.createLog(0, tempDataOne).then(function(r){
+                  console.log(r);
+              });
+          }
+      })
+      };
+
+          //   Función para actualizar parametros del sistema.
+            vm.showAlertEditParams = function(pMessage, pFeedback) {
+              // Appending dialog to document.body to cover sidenav in docs app
+              // Modal dialogs should fully cover application
+              // to prevent interaction outside of dialog
+              $mdDialog.show(
+                $mdDialog.alert()
+                .parent(angular.element(document.querySelector('#popupContainer')))
+                .clickOutsideToClose(true)
+                .title(pFeedback)
+                .textContent(pMessage)
+                .ariaLabel()
+                .ok('Gracias!')
+                .targetEvent()
+              );
+            };
+            vm.editParam = function(pFullObj, pParamToEdit, pPropertyObj) {
+              vm.showPrompt(pFullObj, pParamToEdit, pPropertyObj);
+            }
+
+            vm.showPrompt = function(pFullObj, pParamToEdit, pPropertyObj) {
+              // Appending dialog to document.body to cover sidenav in docs app
+              var confirm = $mdDialog.prompt()
+                .title('!Actualización de parametro del sistema!')
+                .textContent('Actualizando de ' + pPropertyObj)
+                .placeholder('Escribe el nuevo dato')
+                .ariaLabel(pParamToEdit)
+                .ok('Actualizar')
+                .cancel('Cancelar');
+
+              $mdDialog.show(confirm).then(function(result) {
+                //settingsService.e
+                console.log(result);
+                pFullObj[pPropertyObj] = result;
+                settingsService.updateParam(pFullObj);
+                init();
+              }, function() {
+                vm.status = 'You didn\'t name your dog.';
+              });
+            }
 
       // Función para pre guardar datos del profesor
 
@@ -1515,17 +1560,6 @@ var pModCompetition = {
     // Fin Bianco9
 
     // Inicia Daniel
-
-    vm.editMember = function(pMemberToEdit) {
-      console.log(pMemberToEdit);
-      console.log(vm);
-      vm.editMem.name = pMemberToEdit.name;
-      vm.editMem.position = pMemberToEdit.position;
-      vm.editMem.email = pMemberToEdit.email;
-      vm.editMem.phone = pMemberToEdit.phone;
-      vm.isEdit = true;
-      vm.modDisplay = true;
-    }
     //Limpia el formulario de actualización y /o creación de miembro
     function clearForm(pObjectToFrm) {
       for (var index in pObjectToFrm) {
@@ -1536,6 +1570,17 @@ var pModCompetition = {
     vm.addNewDirect = function() {
       vm.modDisplay = true;
       vm.isNew = true;
+    }
+    vm.editMember = function(pMemberToEdit) {
+      console.log(pMemberToEdit);
+      console.log(vm);
+      vm.editMem.name = pMemberToEdit.name;
+      vm.editMem.position = pMemberToEdit.position;
+      vm.editMem.email = pMemberToEdit.email;
+      vm.editMem.phone = pMemberToEdit.phone;
+      settingsService.setDirect(vm.editMem);
+      vm.isEdit = true;
+      vm.modDisplay = true;
     }
     //crea el miembro nuevo de la junta directiva
     vm.createMember = function(pNewMember) {
