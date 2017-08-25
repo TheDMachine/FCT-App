@@ -112,7 +112,8 @@
           vm.reservations = response.data;
         });
         vm.status = "activo";
-        vm.roleFilter = ""
+        vm.roleFilter = "";
+        vm.stateFilter = ""
       }
       init();
 
