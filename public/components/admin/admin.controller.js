@@ -143,9 +143,9 @@
     });
   };
 
- /*if(vm.currentUser.newUser == 1) {
+ if(vm.currentUser.newUser == 1) {
     $scope.showPrompt();
-  }*/
+  }
 
       /*Sidenav*/
       vm.openMenu = function($mdMenu, ev) {
@@ -822,7 +822,7 @@
       }
 
       vm.createNewConsult = function(pNewConsul) {
-        pNewConsul.role = 'consul';
+        pNewConsul.role = 'admin';
         pNewConsul.status = 'activo';
         pNewConsul.newUser = 1;
         var bFlag;
