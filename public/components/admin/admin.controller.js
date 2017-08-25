@@ -1441,11 +1441,11 @@ var pModCompetition = {
 
     vm.updateOptionsTeachers = function(academyName){
       vm.teachersFromAcademy = [];
-      for(var i = 0; i < vm.competitions.length; i++){
-        if(vm.users[i].role == 'teacher'){
-          if(vm.users[i].academy == academyName){
+      for(var i = 0; i < vm.teachers.length; i++){
+        if(vm.teachers[i].role == 'teacher'){
+          if(vm.teachers[i].academy == academyName){
             //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
-              vm.teachersFromAcademy.push(vm.users[i]);
+              vm.teachersFromAcademy.push(vm.teachers[i]);
             //}
           }
         }
