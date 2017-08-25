@@ -12,4 +12,9 @@ router.route('/find_user')
     loginController.getCredentials(req,res);
   });
 
+  router.route('/recover_password')
+  .put(function(req,res){
+    loginController.recoverPassword(req,res);
+  });
+
   module.exports = router;

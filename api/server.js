@@ -16,6 +16,7 @@ var db = mongoose.connection,
 var server = app.listen(port,_server());
 
 // Se define la conexion con mongoose
+mongoose.Promise = global.Promise;
 mongoose.connect(dburl);
 // Se define las respuestas del servidor
 db.on('error', console.error.bind(console, 'error de conexion:'));

@@ -22,7 +22,9 @@
       getPropose: _getProposeEvent,
       findPropose: _findProposeEvent,
       updateProposeToEvent: _updateProposeToEvent,
-      updateReject: _updateReject
+      updateReject: _updateReject,
+      deleteCompetition: _deleteCompetition,
+      findCompetition: _findCompetition
     };
     return publicAPI; // todas las funciones que sean llamadas por ajax deben estar debajo del return, para que cuando angular corra el script haga el return y devuelva el api , las funciones debajo del return son privadas y se devuelve el api que es el que contiene las funciones
 
@@ -173,6 +175,22 @@
       // console.log(competitionsList);
       // localStorage.setItem('lsCompetitionsList', JSON.stringify(competitionsList));
       return $http.put('http://localhost:3000/api/update_competition',pModCompetition);
+    }
+
+
+    function _deleteCompetition(pModCompetition) {
+      return $http.put('http://localhost:3000/api/delete_competition',pModCompetition);
+     }
+
+      
+    function _findCompetition(competitionNumber) {
+      var competitionsList = _getCompetitions();
+      for (var i = 0; i < competitionsList.length; i++) {
+        if (competitionsList[i].competitionNumber == competitionNumber) {
+          return competitionsList[i];
+        }
+      }
+      return false;
     }
   }
 

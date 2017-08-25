@@ -9,6 +9,7 @@
     function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, ticketService, settingsService, NgMap) {
 
       var vm = this;
+      vm.currentUser = '';
       vm.cloudObj = imageService.getConfiguration();
       vm.selected = 0;
       vm.updateDisable = true;
@@ -53,6 +54,7 @@
               }
 
       function init() {
+        vm.currentUser = $cookies.getObject('currentUserActive');
         // función que se llama así misma para indicar que sea lo primero que se ejecute
         // Inicio Daniel
         vm.stt = settingsService.getSettings();
@@ -61,7 +63,7 @@
         vm.isEdit = false;
         vm.isNew = false;
         // Fin Daniel
-        vm.currentUser = userService.searchAdmin(userService.getCookie());
+        vm.currentUser = $cookies.getObject('currentUserActive');
         console.log(vm.currentUser);
         vm.originatorEv;
         vm.weights = estabInfoService.getWeight();
@@ -92,6 +94,13 @@
         vm.to = new Date();
         console.log(vm.to);
         vm.to2 = new Date();
+        vm.users = userService.getUsers()
+          .then(function(response){
+            vm.users = response.data;
+          })
+          .catch(function(err){
+            console.log(err);
+          });
         vm.weights = estabInfoService.getWeight();
         vm.categoriesAge = estabInfoService.getCategories();
         estabInfoService.getCountries().then(function(data) {
@@ -102,9 +111,43 @@
         ticketService.getsReservations().then(function(response) {
           vm.reservations = response.data;
         });
-        vm.status = "activo"
+        vm.status = "activo";
+        vm.roleFilter = "";
+        vm.stateFilter = ""
       }
       init();
+
+  $scope.showPrompt = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('Bienvenido ' + vm.currentUser.id + '!')
+      .textContent('Modifica tu contraseña temporal')
+      .placeholder('Nueva contraseña')
+      .ariaLabel('New password')
+      .initialValue('')
+      .targetEvent()
+      .ok('Cambiar')
+      .cancel('');
+
+    $mdDialog.show(confirm).then(function(result) {
+      vm.currentUser.password =  result;
+      vm.currentUser.newUser = 0;
+      userService.updateTemporalPassword(vm.currentUser)
+      .then(function(response){
+        console.log(response);
+        $cookies.putObject('currentUserActive', vm.currentUser);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }, function() {
+      $scope.status = 'You didn\'t name your dog.';
+    });
+  };
+
+ if(vm.currentUser.newUser == 1) {
+    $scope.showPrompt();
+  }
 
       /*Sidenav*/
       vm.openMenu = function($mdMenu, ev) {
@@ -161,6 +204,29 @@
           targetEvent: ev,
           clickOutsideToClose: true,
         });
+      };
+
+      // Función para mostrar academias
+      vm.consultAcademy = function(academy, ac) {
+        checkConsultAcademy(academy);
+        $mdDialog.show({
+          contentElement: '#infoAcademy',
+          parent: angular.element(document.body),
+          targetEvent: ac,
+          clickOutsideToClose: true,
+        });
+      };
+
+      //funcion para imprimir datos de academia
+      function checkConsultAcademy(academy){
+        vm.academy ={
+          name: academy.name,
+          address: academy.address,
+          manager: academy.manager,
+          competitors: academy.competitors,
+          phone: academy.phone,
+          email: academy.email
+        }
       };
 
       //Alertas de Registro de alumnos
@@ -557,6 +623,23 @@
         );
       };
 
+      // Mnesaje cuando no se pudede promover de grado a un alumno
+      vm.showStudentWithoutRequirements = function() {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('¡Sin ascender!')
+          .textContent('¡El estudiante no cumple con los requisitos para poder ser ascendido!')
+          .ariaLabel()
+          .ok('¡Gracias!')
+          .targetEvent()
+        );
+      };
+
       vm.showProfesorAlert = function() {
         // Appending dialog to document.body to cover sidenav in docs app
         // Modal dialogs should fully cover application
@@ -892,6 +975,15 @@ var pModCompetition = {
   cleanCompetition();
   }
 
+  // Funcion para actualizar estado de competición
+  vm.deleteCompetition = function(pModCompetition) {
+    pModCompetition.status = 'inactivo';
+    eventService.deleteCompetition(pModCompetition)
+    init();
+    cleanCompetition();
+    }
+
+//Funcion para limpiar campos de academias
   function cleanCompetition() {
     vm._id = '',
     vm.competitionNumber = '',
@@ -1020,7 +1112,7 @@ var pModCompetition = {
     userService.setUsers(pNewStudent)
     .then(function(response){
         vm.studentAlert();
-        clean();
+        cleanStudent();
         init();
       })
       .catch(function(err){
@@ -1029,6 +1121,29 @@ var pModCompetition = {
     //   }
      }
 
+     function cleanAcademy() {
+       vm.student._id= '';
+       vm.student.id = '';
+       vm.student.birthday = '';
+       vm.student.name = '';
+       vm.student.surName = '';
+       vm.student.firstName = '';
+       vm.student.lastName = '';
+       vm.student.genre = '';
+       vm.student.weight = '';
+       vm.student.height = '';
+       vm.student.nationality = '';
+       vm.student.phone = '';
+       vm.student.email = '';
+       vm.student.academy = '';
+       vm.student.teacher = '';
+       vm.student.belt = '';
+       vm.student.category = '';
+       vm.student.tournaments = '';
+       vm.student.tournamentsWins = '';
+       vm.student.role = '';
+
+     }
 
     //funcion para editar alumno
     vm.getStudent = function(pStudent) {
@@ -1079,9 +1194,18 @@ var pModCompetition = {
         status: vm.student.status,
         role: vm.student.role
       }
-      userService.updateUsers(editstudent);
+      userService.updateUsers(editstudent)
+      .then(function(response){
+        $http.get('http://localhost:3000/api/get_all_students')
+        .then(function(response){
+          vm.students = response.data
+        })
+      })
+      .catch(function(err) {
+        console.log(err);
+      })
       init();
-      clean();
+      cleanStudent();
     }
 
 
@@ -1098,16 +1222,67 @@ var pModCompetition = {
       }
       newCompetition.competitors = [];
       newCompetition.fights = [];
-      eventService.setCompetitions(newCompetition)
-        .then(function(response){
-          var responseObj = response;
-          console.log(response);
-          eventService.getCompetitions().then(function(response){
-            vm.competitions = response.data;
+
+      if (eventService.findCompetition(newCompetition.competitionNumber) !== false) {
+        vm.competitionDuplicateAlert();
+      }else {
+        eventService.setCompetitions(newCompetition)
+          .then(function(response){
+            var responseObj = response;
+            console.log(response);
+            eventService.getCompetitions().then(function(response){
+              vm.competitions = response.data;
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
           });
-        })
+        vm.competitionAlert();
+      }
+      cleanCompetition();
       init();
     }
+
+    function cleanCompetition() {
+      vm.competitionNumber = '',
+      vm.eventBelongs = '',
+      vm.competitionAge = '',
+      vm.competitionGenre = '',
+      vm.competitionBelt = '',
+      vm.competitionWeight = ''
+    }
+
+    vm.competitionDuplicateAlert = function() {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('La competicia ya existe')
+          .textContent('La competicia ya existe, registre otra')
+          .ariaLabel()
+          .ok('¡Gracias!')
+          .targetEvent()
+        );
+      };
+
+      vm.competitionAlert = function() {
+          // Appending dialog to document.body to cover sidenav in docs app
+          // Modal dialogs should fully cover application
+          // to prevent interaction outside of dialog
+          $mdDialog.show(
+            $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Registo correcto')
+            .textContent('Registro de la competecia realizado')
+            .ariaLabel()
+            .ok('¡Gracias!')
+            .targetEvent()
+          );
+        };
 
     vm.changeViews = function() {
       vm.userActive = true;
@@ -1116,85 +1291,170 @@ var pModCompetition = {
 
     //Registrar alumnos en competencia
 
-    vm.registerUsersCompetitions = function(competition) {
-      vm.competitor;
-      for (var i = 0; i < vm.competitions.length; i++) {
-        if (competition == vm.competitions[i].competitionNumber) {
-          for (var j = 0; j < vm.competitions[i].competitors.length; j++) {
-            if (vm.competitor.attendAcademy == vm.competitions[i].competitors[j].attendAcademy) {
-              var duplicate = true;
+    //Bianco9
+
+      vm.registerUsersCompetitions = function(competition) {
+        vm.competitor;
+        for(var i = 0; i < vm.competitions.length; i++){
+          if(competition == vm.competitions[i].competitionNumber){
+            for(var j = 0; j < vm.competitions[i].competitors.length; j++){
+              if(vm.competitor.academy == vm.competitions[i].competitors[j].academy){
+                var duplicate = true;
+              }
+              else if(vm.competitions[i].competitors.length == 5){
+                vm.maxLengthCompetition();
+                return;
+              }
+            }
+            if(duplicate !== true){
+              vm.competitions[i].competitors.push(vm.competitor);
+              eventService.updateCompetition(vm.competitions[i])
+              .then(function(response){
+                console.log(response);
+              })
+              .catch(function(err){
+                console.log(err);
+              });
+              return;
+            }
+            else{
+              vm.duplicateAcademyCompetition();
             }
           }
-          if (duplicate !== true) {
-            vm.competitions[i].competitors.push(vm.competitor);
-            eventService.updateCompetition(vm.competitions[i]);
-            return;
-          }
-        }
         console.log(eventService.getCompetitions());
       }
     }
 
-    vm.showCompetition = function(competition) {
-      for (var i = 0; i < vm.competitions.length; i++) {
-        if (competition.competitionNumber == vm.competitions[i].competitionNumber) {
-          vm.competitionsToShow.push(competition);
-          for (var j = 0; j < vm.competitionsToShow[i].competitors.length; j++) {
-            vm.competitionsToShow[i].competitors[j].points = 0;
+    vm.duplicateAcademyCompetition = function() {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Error')
+        .textContent('Ya existe un usuario de esta academia en la competición')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+      );
+    };
+
+    vm.maxLengthCompetition = function() {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Error')
+        .textContent('La competición ya tiene un máximo de competidores registrados')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+      );
+    };
+
+    vm.changeViews = function() {
+      vm.userActive = true;
+      vm.selected = 5;
+    }
+
+    vm.showCompetition = function(competition, $index){
+      for(var i = 0; i < vm.competitionsToShow.length; i++){
+        if(vm.competitionsToShow[i] == undefined){
+          vm.competitionsToShow[i] = {};
+        }
+        vm.competitionsToShow[i].show = false;
+      }
+      for(var i = 0; i < vm.competitions.length; i++){
+        if(competition.competitionNumber == vm.competitions[i].competitionNumber){
+          vm.competitionsToShow[$index] = competition;
+          for(var j = 0; j < vm.competitionsToShow[$index].competitors.length; j++){
+            if(vm.competitionsToShow[$index].competitors[j].points == undefined){
+              vm.competitionsToShow[$index].competitors[j].points = 0;
+            }
           }
         }
       }
-      for (var i = 0; i < vm.competitionsToShow.length; i++) {
-        for (var j = 0; j < vm.competitionsToShow[i].competitors.length; j++) {
-          if (vm.competitionsToShow[i].competitors.length == 5) {
-            kLoop: for (var k = 0; k < 5; k++) {
+      for(var i = 0; i < vm.competitionsToShow.length; i++){
+        for(var j = 0; j < vm.competitionsToShow[$index].competitors.length; j++){
+          if(vm.competitionsToShow[$index].competitors.length == 5 && (vm.competitionsToShow[$index].fights.length == 0 || vm.competitionsToShow[$index].fights == undefined)){
+            kLoop:
+            for(var k = 0; k < 4; k++){
               vm.pairFights = [];
-              vm.pairFights.push(vm.competitionsToShow[i].competitors[j]);
-              vm.pairFights.push(vm.competitionsToShow[i].competitors[k + 1])
-              if (vm.pairFights.length == 2) {
-                if (vm.fights.length == 0) {
+              vm.pairFights.push(vm.competitionsToShow[$index].competitors[j]);
+              vm.pairFights.push(vm.competitionsToShow[$index].competitors[k + 1])
+              if(vm.pairFights.length == 2){
+                if(vm.fights.length == 0){
                   vm.fights.push(vm.pairFights);
                 }
-                if (vm.pairFights.length == 2) {
-                  for (var x = 0; x < vm.fights.length; x++) {
-                    if (vm.pairFights == vm.fights[x]) {
+                if(vm.pairFights.length == 2){
+                  for(var x = 0; x < vm.fights.length; x++){
+                    if(vm.pairFights == vm.fights[x]){
                       continue kLoop;
                     }
                   }
-                  for (var x = 0; x < vm.fights.length; x++) {
-                    if ((vm.pairFights[0] == vm.fights[x][1]) && (vm.pairFights[1] == vm.fights[x][0])) {
+                  for(var x = 0; x < vm.fights.length; x++){
+                    if((vm.pairFights[0] == vm.fights[x][1]) && (vm.pairFights[1] == vm.fights[x][0])){
                       continue kLoop;
                     }
                   }
-                  for (var x = 0; x < vm.fights.length; x++) {
-                    if ((vm.pairFights[0] == vm.pairFights[1])) {
+                  for(var x = 0; x < vm.fights.length; x++){
+                    if((vm.pairFights[0] == vm.pairFights[1])){
                       continue kLoop;
                     }
                   }
                   vm.fights.push(vm.pairFights);
-                  if (vm.fights.length == 20) {
+                  if(vm.fights.length == 20){
+                    if(vm.competitionsToShow[$index]._id == competition._id){
+                      vm.competitionsToShow[$index].fights = vm.fights;
+                      eventService.updateCompetition(vm.competitionsToShow[$index])
+                      .then(function(response){
+                        console.log(response)
+                        eventService.getCompetitions()
+                        .then(function(response){
+                          vm.competitions = response.data;
+                        })
+                        .catch(function(err){
+                          console.log(err);
+                        })
+                      })
+                      .catch(function(err){
+                        console.log(err);
+                      })
+                    }
                     break;
                   }
                 }
               }
             }
+            vm.competitionsToShow[$index].fights = vm.fights;
+          }
+          else{
+            vm.fights = vm.competitionsToShow[$index].fights;
           }
         }
-        vm.competitionsToShow[i].fights = vm.fights;
+        vm.competitionsToShow[$index].show = true;
+        break;
       }
       console.log(vm.fights);
       vm.selected = 8;
     }
 
-    vm.updateOptions = function(competition) {
+    vm.updateOptions = function(competition){
       vm.competitorsEvent = [];
-      for (var i = 0; i < vm.competitions.length; i++) {
-        if (competition == vm.competitions[i].competitionNumber) {
-          for (var j = 0; j < vm.users.length; j++) {
-            if (vm.currentUser.id == vm.users[j].teacher) {
-              if (vm.users[j].category == vm.competitions[i].competitionAge) {
-                if (vm.users[j].belt == vm.competitions[i].competitionBelt) {
-                  vm.competitorsEvent.push(vm.users[j]);
+      for(var i = 0; i < vm.competitions.length; i++){
+        if(competition == vm.competitions[i].competitionNumber){
+          for(var j = 0; j < vm.users.length; j++){
+            if(vm.users[j].genre == vm.competitions[i].competitionGenre){
+              if(vm.users[j].category == vm.competitions[i].competitionAge){
+                if(vm.users[j].weight == vm.competitions[i].competitionWeight){
+                  //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+                    vm.competitorsEvent.push(vm.users[j]);
+                  //}
                 }
               }
             }
@@ -1202,6 +1462,57 @@ var pModCompetition = {
         }
       }
     }
+
+    vm.updateOptionsTeachers = function(academyName){
+      vm.teachersFromAcademy = [];
+      for(var i = 0; i < vm.teachers.length; i++){
+        if(vm.teachers[i].role == 'teacher'){
+          if(vm.teachers[i].academy == academyName){
+            //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+              vm.teachersFromAcademy.push(vm.teachers[i]);
+            //}
+          }
+        }
+      }
+    }
+
+    vm.updatePoints = function(competitor, $index, competition){
+      if(competitor.points == 5){
+        return
+      }else{
+        competitor.points += 1;
+        vm.ready = true;
+        vm.fights[$index].push(vm.ready);
+        console.log(vm.fights);
+      }
+      for(var i = 0; i < vm.competitions.length; i++){
+        for(var j = 0; j < vm.competitions[i].competitors.length; j++){
+          if(vm.competitions[i]._id == competition._id){
+            if(vm.competitions[i].competitors[j]._id == competitor._id){
+              vm.competitions[i].competitors[j].points = competitor.points;
+              vm.competitions[i].fights = vm.fights;
+              eventService.updateCompetition(vm.competitions[i])
+                .then(function(response){
+                  console.log(response);
+                  eventService.getCompetitions()
+                  .then(function(response){
+                    vm.competitions = response.data;
+                  })
+                  .catch(function(err){
+                    console.log(err);
+                  })
+                })
+                .catch(function(err){
+                  console.log(err);
+                });
+                return;
+            }
+          }
+        }
+      }
+    }
+
+    // Fin Bianco9
 
     // Inicia Daniel
 
@@ -1294,7 +1605,7 @@ var pModCompetition = {
           break;
       }
       if (bError == true) {
-        //mostrar mensaje
+        vm.showStudentWithoutRequirements();
       } else {
         userService.updateBelt(pStudent);
         vm.showStudentUpdateBelt ();
@@ -1325,6 +1636,44 @@ var pModCompetition = {
       vm.competitionAge = item.competitionAge,
       vm.competitionGenre = item.competitionGenre,
       vm.competitionWeight = item.competitionWeight
+  }
+
+  //editar perfil de administrador
+  vm.getCurrentAdmin = function(admin){
+    console.log(admin);
+    vm.editAdminProfile = true;
+    vm.currentUser.password = admin.password;
+    vm.currentUser.email = admin.email;
+    vm.currentUser.phone = admin.phone;
+  }
+
+  vm.updateCurrentAdmin = function (){
+    var editAdmin ={
+      _id : vm.currentUser._id,
+      id: vm.currentUser.id,
+      name: vm.currentUser.name,
+      surName: vm.currentUser.surName,
+      firstName: vm.currentUser.firstName,
+      lastName: vm.currentUser.lastName,
+      genre: vm.currentUser.genre,
+      birthday: vm.currentUser.birthday,
+      nationality: vm.currentUser.nationality,
+      phone: vm.currentUser.phone,
+      status: vm.currentUser.status,
+      email: vm.currentUser.email,
+      photo: vm.currentUser.photo,
+      role: vm.currentUser.role,
+      password: vm.currentUser.password
+    }
+    console.log(editAdmin);
+    userService.updateUsers(editAdmin).then(function(response){
+      console.log(response);
+      $http.get('http://localhost:3000/api/get_all_Users')
+      .catch(function(err){
+        console.log(err);
+      });
+    });
+    vm.editAdminProfile = false;
   }
 
 }
