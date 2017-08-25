@@ -997,8 +997,8 @@
 							</md-content>
 						</md-tab>
 						<md-tab label="Competencias">
-							<md-content class="md-padding">
-								<h1 class="md-display-2">Competencias</h1>
+							<md-content id="categHist" class="md-padding">
+								<h3 class="md-display-2">COMPETENCIAS</h3>
 								<div class="container123213">
 									<div  id="btnFiltrosCompetencias">
 								<label>Mostrar competencias por su estado:</label>
@@ -1018,7 +1018,7 @@
 											<span class="md-subhead">Evento: {{item.eventBelongs}}</span>
 										</md-card-title-text>
 									</md-card-title>
-									<div layout="row">
+									<!--<div layout="row">
 										<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
 											<i class="material-icons">&#xE227;</i>
 										</md-icon>
@@ -1034,10 +1034,10 @@
 										<p>
 											{{item.description}}
 										</p>
-									</md-card-content>
+									</md-card-content>-->
 									<md-card-actions layout="row" layout-align="end">
 										<md-button ng-click="vm.editCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Editar</md-button>
-										<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Eliminar</md-button>
+										<!--<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Eliminar</md-button>-->
 										<md-button ng-click="vm.showCompetition(item, $index)">Ver competencia</md-button>
 									</md-card-actions>
 								</md-card>
@@ -1148,11 +1148,11 @@
 									</md-input-container>
 								</div>
 								<div layout="row">
-									<md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="20">
+									<md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="30">
 										<img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
 										<md-card-title>
 											<md-card-title-text>
-												<span class="md-headline">ID: {{item.sponsorName}}</span>
+												<span class="md-headline">{{item.sponsorName}}</span>
 												<span class="md-subhead">{{item.sponsorCompany}}</span>
 											</md-card-title-text>
 										</md-card-title>
@@ -1218,7 +1218,7 @@
 						</div>
 					</div>
 					<div class="container container-competition">
-							<h2 style="text-align: left;">Tabla de posiciones</h2>
+							<h2 style="text-align: center;">Tabla de posiciones</h2>
 							<md-list flex="90">
 								<md-list-item ng-repeat="competitor in item.competitors" ng-click="goToPerson(person.name, $event)" class="noright">
 			    					<img ng-src="{{ comp.img }}" class="md-avatar" />
@@ -1232,16 +1232,16 @@
 							</md-list>
 						</div>
 						<div class="container container-competition">
-							<h2 layout="row" layout-align="start">Peleas</h2>
+							<h2 layout="row" layout-align="center" style="text-align: center;">Peleas</h2>
 							<div ng-repeat="fight in item.fights track by $index" layout="row" layout-align="center center">
 								<div flex-xs flex-gt-xs="25" ng-repeat="pairFight in fight track by $index" ng-if="pairFight !== true">
 								      <md-card class="user-card">
-								          <md-card-avatar class="avatar avatar-test">
-								            <img src="{{competitor.photo}}">
+								          <md-card-avatar class="avatar avatar-test avatar-fight">
+								            <img src="{{pairFight.photo}}">
 								          </md-card-avatar>
 								          <md-toolbar class="red">
 								          	<p class="md-headline name-test" layout="column" layout-align="start">{{pairFight.firstName}} {{pairFight.firstLastName}}</p>
-								          	<p class="md-subhead sub-header-test">Academia: Pros</p>
+								          	<p class="md-subhead sub-header-test">Academia: {{pairFight.academy}}</p>
 								          </md-toolbar>
 								          <md-button ng-click="vm.updatePoints(pairFight, $parent.$parent.$index, item);" ng-disabled="fight[2] == true">
 								          	<i class="material-icons fa fa-trophy"></i>
