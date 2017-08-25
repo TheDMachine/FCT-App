@@ -38,7 +38,7 @@
         return $http.put('http://localhost:3000/api/update_directive', pDirectiveUpdate);
     }
     function _deleteDirective(pIdDirective){
-        return $http.put('http://localhost:3000/api/deleteDirective/:pIdDirective');
+        return $http.put('http://localhost:3000/api/deleteDirective/'+pIdDirective);
     }
   }
 }());

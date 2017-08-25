@@ -76,7 +76,7 @@
 				<md-list-item  layout="column">
   					<md-button class="button-selected" ng-click="vm.selected = 13">
 						<!--<i class="material-icons">&#xE869;</i>  -->
-						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE869;</i>
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 13 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE869;</i>
 						<p class="menu-button">Mantenimiento</p>
   					</md-button>
 				</md-list-item>
@@ -1527,122 +1527,121 @@
 					</div>
 				</md-content>
 			</div>
+			<!-- Espacio de mantenimiento -->
+			<div ng-show="vm.selected === 13">
+				<md-tabs md-dynamic-height md-border-bottom>
+					<md-tab label="Bitacora del Sistema">
+						<md-content class="md-padding col-md-offset-1 col-md-10">
+							<h1 class="md-display-2">Bitacora del sistema</h1>
+							<table class="table table-striped">
+								<thead>
+									<th>
+										<td>Acción</td>
+										<td>Agente ejecutador</td>
+										<td>Resultado de la acción</td>
+										<td>Hora de realización</td>
+									</th>
+								</thead>
+								<tbody>
+									<tr ng-repeat="logRegister in vm.log track by $index">
+										<th>{{$index +1}}</th>
+										<td>{{logRegister.action}}</td>
+										<td>{{logRegister.actionBy}}</td>
+										<td>{{logRegister.resultAction}}</td>
+										<td>{{logRegister.timestamp | date:"dd/MM/yyyy 'a las' h:mma"}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</md-content>
+					</md-tab>
 
-						<!-- Espacio de mantenimiento -->
-						<div ng-show="vm.selected == 13">
-							<md-tabs md-dynamic-height md-border-bottom>
-								<md-tab label="Bitacora del Sistema">
-									<md-content class="md-padding col-md-offset-1 col-md-10">
-										<h1 class="md-display-2">Bitacora del sistema</h1>
-										<table class="table table-striped">
-											<thead>
-												<th>
-													<td>Acción</td>
-													<td>Agente ejecutador</td>
-													<td>Resultado de la acción</td>
-													<td>Hora de realización</td>
-												</th>
-											</thead>
-											<tbody>
-												<tr ng-repeat="logRegister in vm.log track by $index">
-													<th>{{$index +1}}</th>
-													<td>{{logRegister.action}}</td>
-													<td>{{logRegister.actionBy}}</td>
-													<td>{{logRegister.resultAction}}</td>
-													<td>{{logRegister.timestamp | date:"dd/MM/yyyy 'a las' h:mma"}}</td>
-												</tr>
-											</tbody>
-										</table>
-									</md-content>
-								</md-tab>
 
+					<md-tab label="Configuración del sistema">
+						<md-content layout="column">
+							<div class="col-md-offset-1 col-md-10">
 
-								<md-tab label="Configuración del sistema">
-									<md-content layout="column">
-										<div class="col-md-offset-1 col-md-10">
+								<h2 class="md-headline">Configuración del sistema</h2>
+								<p class="md-headline">Dirreción fisica: {{vm.stt.address}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.address, 'address')"></span></p>
+								<p class="md-headline">Teléfono: {{vm.stt.phone}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.phone, 'phone')"></span></p>
+								<p class="md-headline">Cédula juridica: {{vm.stt.id}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.id, 'id')"></span></p>
+								<p class="md-headline">Correo de notificaciónes: {{vm.stt.emailNotifications}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.emailNotifications, 'emailNotifications')"></span></p>
+								<md-button ng-click="vm.addNewDirect()">Agregar nuevo miembro de junta</md-button>
+								<table id="tblMembers" class="table table-responsive table-striped">
+									<thead>
+										<th></th>
+										<th>Nombre</th>
+										<th>Puesto</th>
+										<th>Correo electrónico</th>
+										<th>Teléfono</th>
+										<th>Actualizar</th>
+										<th></th>
+									</thead>
+									<tbody>
+										<tr ng-repeat="direct in vm.directives track by $index">
+											<td>{{$index +1}}</td>
+											<td>{{direct.name}}</td>
+											<td>{{direct.position}}</td>
+											<td>{{direct.email}}</td>
+											<td>{{direct.phone}}</td>
+											<td>
+												<md-button ng-click="vm.editMember(direct)">Actualizar</md-button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div id="directModif" ng-show="vm.modDisplay">
+									<form name="frmEdit">
+										<md-input-container>
+											<label>Nombre de miembro de junta directiva</label>
+											<input type="text" ng-model="vm.editMem.name" name="directModifName" ng-pattern="/^([A-Z])\w+ ([A-Z])\w+ ([A-Z])\w+$/" required/>
 
-											<h2 class="md-headline">Configuración del sistema</h2>
-											<p class="md-headline">Dirreción fisica: {{vm.stt.address}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.address, 'address')"></span></p>
-											<p class="md-headline">Teléfono: {{vm.stt.phone}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.phone, 'phone')"></span></p>
-											<p class="md-headline">Cédula juridica: {{vm.stt.id}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.id, 'id')"></span></p>
-											<p class="md-headline">Correo de notificaciónes: {{vm.stt.emailNotifications}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.emailNotifications, 'emailNotifications')"></span></p>
-											<md-button ng-click="vm.addNewDirect()">Agregar nuevo miembro de junta</md-button>
-											<table id="tblMembers" class="table table-responsive table-striped">
-												<thead>
-													<th></th>
-													<th>Nombre</th>
-													<th>Puesto</th>
-													<th>Correo electrónico</th>
-													<th>Teléfono</th>
-													<th>Actualizar</th>
-													<th></th>
-												</thead>
-												<tbody>
-													<tr ng-repeat="direct in vm.directives track by $index">
-														<td>{{$index +1}}</td>
-														<td>{{direct.name}}</td>
-														<td>{{direct.position}}</td>
-														<td>{{direct.email}}</td>
-														<td>{{direct.phone}}</td>
-														<td>
-															<md-button ng-click="vm.editMember(direct)">Actualizar</md-button>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<div id="directModif" ng-show="vm.modDisplay">
-												<form name="frmEdit">
-													<md-input-container>
-														<label>Nombre de miembro de junta directiva</label>
-														<input type="text" ng-model="vm.editMem.name" name="directModifName" ng-pattern="/^([A-Z])\w+ ([A-Z])\w+ ([A-Z])\w+$/" required/>
-
-														<!-- Mesaje de retroalimentación -->
-														<div ng-messages="frmEdit.directModifName.$error">
-															<div ng-messages-include="components/includes/messages.html"></div>
-														</div>
-													</md-input-container>
-													<md-input-container>
-														<label>Cargo de miembro de junta directiva</label>
-														<!-- <input type="text" ng-model="vm.editMem.position" name="directModifPosition" required ng-pattern="/^([A-Z])\w+$/" /> -->
-														<md-select ng-model="vm.ediMem.position" name="directModifPosition" required>
-															<md-option value="Presidencia">Presidencia</md-option>
-															<md-option value="Vicepresidencia">Vicepresidencia</md-option>
-															<md-option value="Secretaria">Secretaria</md-option>
-															<md-option value="Tesoraria">Tesoraria</md-option>
-															<md-option value="Fiscalia">Fiscalia</md-option>
-															<md-option value="Vocal 1">Vocal 1</md-option>
-															<md-option value="Vocal 2">Vocal 2</md-option>
-															<md-option value="Vocal 3">Vocal 3</md-option>
-														</md-select>
-														<!-- Mesaje de retroalimentación -->
-														<div ng-messages="frmEdit.directModifPosition.$error">
-															<div ng-messages-include="components/includes/messages.html"></div>
-														</div>
-													</md-input-container>
-													<md-input-container>
-														<label>Correo electrónico de miembro de junta directiva</label>
-														<input type="text" ng-model="vm.editMem.email" name="directModidEmail" required ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" />
-
-														<!-- Mesaje de retroalimentación -->
-														<div ng-messages="frmEdit.directModidEmail.$error">
-															<div ng-messages-include="components/includes/messages.html"></div>
-														</div>
-													</md-input-container>
-													<md-input-container>
-														<label>Teléfono del miembro de junta directiva</label>
-														<input type="text" ng-model="vm.editMem.phone" name="directModifPhone" />
-
-														<!-- Mesaje de retroalimentación -->
-														<div ng-messages="frmEdit.directModifPhone.$error">
-															<div ng-messages-include="components/includes/messages.html"></div>
-														</div>
-													</md-input-container>
-													<md-button ng-show="vm.isEdit" ng-click="vm.updateMember(vm.editMem)">Actualizar Miembro</md-button>
-													<md-button ng-show="vm.isNew" ng-click="vm.createMember(vm.editMem)">Crear nuevo miembro</md-button>
+											<!-- Mesaje de retroalimentación -->
+											<div ng-messages="frmEdit.directModifName.$error">
+												<div ng-messages-include="components/includes/messages.html"></div>
 											</div>
-											</form>
-										</div>
-									</md-content>
-								</md-tab>
-							</md-tabs>
-						</div>
+										</md-input-container>
+										<md-input-container>
+											<label>Cargo de miembro de junta directiva</label>
+											<!-- <input type="text" ng-model="vm.editMem.position" name="directModifPosition" required ng-pattern="/^([A-Z])\w+$/" /> -->
+											<md-select ng-model="vm.ediMem.position" name="directModifPosition" required>
+												<md-option value="Presidencia">Presidencia</md-option>
+												<md-option value="Vicepresidencia">Vicepresidencia</md-option>
+												<md-option value="Secretaria">Secretaria</md-option>
+												<md-option value="Tesoraria">Tesoraria</md-option>
+												<md-option value="Fiscalia">Fiscalia</md-option>
+												<md-option value="Vocal 1">Vocal 1</md-option>
+												<md-option value="Vocal 2">Vocal 2</md-option>
+												<md-option value="Vocal 3">Vocal 3</md-option>
+											</md-select>
+											<!-- Mesaje de retroalimentación -->
+											<div ng-messages="frmEdit.directModifPosition.$error">
+												<div ng-messages-include="components/includes/messages.html"></div>
+											</div>
+										</md-input-container>
+										<md-input-container>
+											<label>Correo electrónico de miembro de junta directiva</label>
+											<input type="text" ng-model="vm.editMem.email" name="directModidEmail" required ng-pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" />
+
+											<!-- Mesaje de retroalimentación -->
+											<div ng-messages="frmEdit.directModidEmail.$error">
+												<div ng-messages-include="components/includes/messages.html"></div>
+											</div>
+										</md-input-container>
+										<md-input-container>
+											<label>Teléfono del miembro de junta directiva</label>
+											<input type="text" ng-model="vm.editMem.phone" name="directModifPhone" />
+
+											<!-- Mesaje de retroalimentación -->
+											<div ng-messages="frmEdit.directModifPhone.$error">
+												<div ng-messages-include="components/includes/messages.html"></div>
+											</div>
+										</md-input-container>
+										<md-button ng-show="vm.isEdit" ng-click="vm.updateMember(vm.editMem)">Actualizar Miembro</md-button>
+										<md-button ng-show="vm.isNew" ng-click="vm.createMember(vm.editMem)">Crear nuevo miembro</md-button>
+								</div>
+								</form>
+							</div>
+						</md-content>
+					</md-tab>
+				</md-tabs>
+			</div>

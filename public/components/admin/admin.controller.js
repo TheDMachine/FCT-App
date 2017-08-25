@@ -9,6 +9,8 @@
     function adminCtrl($scope, $mdDialog, $http, $state, $cookies, $location, eventService, imageService, Upload, academyServices, logService, userService, sponsorService, AuthService, estabInfoService, ticketService, settingsService, NgMap) {
 
       var vm = this;
+      vm.stt;
+      vm.directives;
       vm.currentUser = '';
       vm.cloudObj = imageService.getConfiguration();
       vm.selected = 0;
@@ -57,7 +59,12 @@
         vm.currentUser = $cookies.getObject('currentUserActive');
         // función que se llama así misma para indicar que sea lo primero que se ejecute
         // Inicio Daniel
-        vm.stt = settingsService.getSettings();
+        settingsService.getSetting().then(function(r){
+            vm.stt = r.data.setups[0];
+        })
+        settingsService.getDirect().then(function(r) {
+            vm.directives = r.data.members;
+        })
         vm.editMem = {};
         vm.modDisplay = false;
         vm.isEdit = false;
@@ -87,8 +94,9 @@
         vm.teacher = {};
         vm.sponsor = {};
 
-        logService.showLog().then(function(response){
-            vm.log = response.data;
+        logService.showLog().then(function(resp){
+            console.log(resp);
+            vm.log = resp.data.logs;
         });
         vm.belts = estabInfoService.getBelts();
         vm.to = new Date();
@@ -144,10 +152,10 @@
       $scope.status = 'You didn\'t name your dog.';
     });
   };
-
- if(vm.currentUser.newUser == 1) {
-    $scope.showPrompt();
-  }
+ // 
+ // if(vm.currentUser.newUser == 1) {
+ //    $scope.showPrompt();
+ //  }
 
       /*Sidenav*/
       vm.openMenu = function($mdMenu, ev) {
