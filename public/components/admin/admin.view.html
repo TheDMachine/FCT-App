@@ -1320,8 +1320,7 @@
 												<thead class="md-whiteframe-3dp">
 													<tr>
 														<th>Cedula</th>
-														<th>Primer nombre</th>
-														<th>Primer apellido</th>
+														<th>Nombre</th>
 														<th>Estado</th>
 														<th>Academia</th>
 														<th>Teléfono</th>
@@ -1332,8 +1331,7 @@
 												<tbody>
 													<tr ng-repeat="teacher in vm.teachers | orderBy:'id'">
 														<td>{{teacher.id}}</td>
-														<td>{{teacher.name}}</td>
-														<td>{{teacher.firstName}}</td>
+														<td>{{teacher.name}} {{teacher.firstName}}</td>
 														<td>{{teacher.status}}</td>
 														<td>{{teacher.academy}}</td>
 														<td>{{teacher.phone}}</td>
@@ -1448,7 +1446,7 @@
 											<tbody>
 												<tr ng-repeat="student in vm.students | filter:{name:vm.studentFilter}">
 													<td>{{student.id}}</td>
-													<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
+													<td>{{student.name}} {{student.firstName}}</td>
 													<td>{{student.status}}</td>
 													<td>{{student.belt}}</td>
 													<td>{{student.academy}}</td>
