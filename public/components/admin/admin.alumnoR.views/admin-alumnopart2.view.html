@@ -81,7 +81,7 @@
     <md-input-container flex-offset class="md-block">
       <label for="">Profesor</label>
       <md-select name="teacher" ng-model="vm.student.teacher" required>
-        <md-option ng-repeat="teacher in vm.teachersFromAcademy" ng-value="teacher.id">{{teacher.firstName}} {{teacher.firstLastName}}</md-option>
+        <md-option ng-repeat="teacher in vm.teachersFromAcademy" ng-value="teacher.id">{{teacher.name}} {{teacher.firstName}}</md-option>
       </md-select>
 
       <!-- Mensaje de retroalimentacion -->
