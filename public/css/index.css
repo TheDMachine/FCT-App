@@ -1605,3 +1605,29 @@ md-card md-card-title.no-padding{
      max-width: calc(100% - 56px);
     }
   }
+
+  .cardTam{
+    width: 46%;
+    margin: 2%;
+  }
+
+  .card-block{
+    padding: 0 5%;
+    margin-bottom: 3%;
+  }
+
+  .card-title{
+    font-weight: bold;
+  }
+  .card-text{
+    line-height: normal;
+    font-weight: normal;
+    font-size: 1.2em;
+    margin: 1% 0;
+  }
+
+  .cardTam2{
+    width: 30%;
+    margin: 1%;
+    height: 29em;
+  }
