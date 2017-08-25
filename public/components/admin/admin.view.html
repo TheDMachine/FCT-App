@@ -1003,6 +1003,7 @@
 									<div  id="btnFiltrosCompetencias">
 								<label>Mostrar competencias por su estado:</label>
 								<md-radio-group ng-model="vm.stateFilter" layout="row">
+									<md-radio-button  value="" class="md-primary" >Todas</md-radio-button>
 								<md-radio-button  value="activo" class="md-primary" >Activas</md-radio-button>
 								<md-radio-button value="inactivo" class="md-primary">Inactivas</md-radio-button>
 								</md-radio-group>
@@ -1438,6 +1439,8 @@
 													<th>Nombre completo</th>
 													<th>Estado</th>
 													<th>Grado</th>
+													<th>Academia</th>
+													<th>Foto</th>
 													<th></th>
 													<th></th>
 												</tr>
@@ -1448,6 +1451,8 @@
 													<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
 													<td>{{student.status}}</td>
 													<td>{{student.belt}}</td>
+													<td>{{student.academy}}</td>
+													<td><img ng-src="{{student.photo}}" alt="Description" width="60px" height="60px" /></td>
 													<td>
 														<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
 													</td>

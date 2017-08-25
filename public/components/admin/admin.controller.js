@@ -116,7 +116,8 @@
           vm.reservations = response.data;
         });
         vm.status = "activo";
-        vm.roleFilter = ""
+        vm.roleFilter = "";
+        vm.stateFilter = ""
       }
       init();
 
@@ -1115,7 +1116,7 @@ var pModCompetition = {
     userService.setUsers(pNewStudent)
     .then(function(response){
         vm.studentAlert();
-        clean();
+        cleanStudent();
         init();
       })
       .catch(function(err){
@@ -1124,6 +1125,29 @@ var pModCompetition = {
     //   }
      }
 
+     function cleanAcademy() {
+       vm.student._id= '';
+       vm.student.id = '';
+       vm.student.birthday = '';
+       vm.student.name = '';
+       vm.student.surName = '';
+       vm.student.firstName = '';
+       vm.student.lastName = '';
+       vm.student.genre = '';
+       vm.student.weight = '';
+       vm.student.height = '';
+       vm.student.nationality = '';
+       vm.student.phone = '';
+       vm.student.email = '';
+       vm.student.academy = '';
+       vm.student.teacher = '';
+       vm.student.belt = '';
+       vm.student.category = '';
+       vm.student.tournaments = '';
+       vm.student.tournamentsWins = '';
+       vm.student.role = '';
+
+     }
 
     //funcion para editar alumno
     vm.getStudent = function(pStudent) {
@@ -1185,7 +1209,7 @@ var pModCompetition = {
         console.log(err);
       })
       init();
-      clean();
+      cleanStudent();
     }
 
 
