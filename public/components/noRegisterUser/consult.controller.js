@@ -11,8 +11,12 @@
 
   // función que se llama así misma para indicar que sea lo primero que se ejecute
   function init() {
-    vm.events = eventService.getEvents();
-    vm.reservations = ticketService.getsReservations();
+    eventService.getEvents().then(function(response) {
+        vm.events = response.data;
+      });
+    ticketService.getsReservations().then(function(response) {
+        vm.reservations = response.data;
+      });
     }init();
 
   // Función para devolverse al landing
@@ -23,7 +27,9 @@
 
   // obtiene reserva a buscar
   vm.searchRsvs = function(pClientName) {
-        vm.reservations = ticketService.getsReservations();
+    ticketService.getsReservations().then(function(response) {
+        vm.reservations = response.data;
+      });
         var error = false;
         for (var i = 0; i < vm.reservations.length; i++) {
           if (pClientName.ced === vm.reservations[i].ced) {

@@ -59,6 +59,7 @@ input.recover-email{
   margin-left: 45px;
 }
 
+
 /*Inicio Estilos de perfil de admin*/
 #per{
     font-family: 'Montserrat';
@@ -76,7 +77,12 @@ input.recover-email{
 /*Fin Estilos de perfil de admin*/
 
 
-
+md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
+  background-color: #00a652;
+}
+md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off {
+  border-color: #00a652;
+}
 /*Inicio Estilos de tablas usuarios*/
 #tableUser h3{
   font-family: 'Montserrat';
@@ -1594,9 +1600,8 @@ md-card md-card-title.no-padding{
 
   @media (max-width: 456px){
     md-sidenav {
-     width: calc(100% - 56px); 
-     min-width: calc(100% - 230px); 
-     max-width: calc(100% - 56px); 
+     width: calc(100% - 56px);
+     min-width: calc(100% - 230px);
+     max-width: calc(100% - 56px);
     }
   }
-

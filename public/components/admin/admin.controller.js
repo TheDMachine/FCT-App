@@ -111,7 +111,8 @@
         ticketService.getsReservations().then(function(response) {
           vm.reservations = response.data;
         });
-        vm.status = "activo"
+        vm.status = "activo";
+        vm.roleFilter = ""
       }
       init();
 
@@ -615,6 +616,23 @@
           .clickOutsideToClose(true)
           .title('¡Grado ascendido!')
           .textContent('¡Se ha ascendido el grado del alumno correctamente!')
+          .ariaLabel()
+          .ok('¡Gracias!')
+          .targetEvent()
+        );
+      };
+
+      // Mnesaje cuando no se pudede promover de grado a un alumno
+      vm.showStudentWithoutRequirements = function() {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+          .parent(angular.element(document.querySelector('#popupContainer')))
+          .clickOutsideToClose(true)
+          .title('¡Sin ascender!')
+          .textContent('¡El estudiante no cumple con los requisitos para poder ser ascendido!')
           .ariaLabel()
           .ok('¡Gracias!')
           .targetEvent()
@@ -1549,7 +1567,7 @@ var pModCompetition = {
           break;
       }
       if (bError == true) {
-        //mostrar mensaje
+        vm.showStudentWithoutRequirements();
       } else {
         userService.updateBelt(pStudent);
         vm.showStudentUpdateBelt ();
