@@ -119,6 +119,13 @@ module.exports.updateTemporalPassword = function(req, res){
 
 //Backend Alumnos
 module.exports.saveStudent = function(req, res){
+  email.sEmail('newPassword',req.body.email, 'Nueva cuenta creada', {
+      name:req.body.name,
+      username:req.body.id,
+      password:req.body.password
+  });
+
+  var salt = 15;
   var newUser = new User({
     id: req.body.id,
     name : req.body.name,
@@ -145,14 +152,32 @@ module.exports.saveStudent = function(req, res){
     points : req.body.points,
     newUser : req.body.newUser
   });
+  bcrypt.hash(req.body.password, salt, function(err, hash) {
+      console.log(hash);
+      if(err){
+          res.json({
+              success:false,
+              msg:"No se pudo cifrar la contraseña"
+          })
+      }else{
 
-  newUser.save(function(err){
-    if(err){
-      res.json({success:false, msg:'No se pudo registrar el alumno' + err});
-    }else{
-      res.json({success:true, msg:'Se registró el profesor correctamente'});
-    }
-  });
+      newUser.password = hash;
+      newUser.save(function(e) {
+          if(e){
+              res.json({
+                  success:false,
+                  msg:"No se pudo registrar el alumno" + err
+              })
+          }
+          else{
+              res.json({
+                  success:true,
+                  msg:"Se registró el profesor correctamente"
+              })
+          }
+      })
+  }
+})
 }
 module.exports.findAllStudents = function(req,res){
   User.find({'role': 'student'}).then(function(student){
