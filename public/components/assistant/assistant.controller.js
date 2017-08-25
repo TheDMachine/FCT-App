@@ -30,6 +30,7 @@
       vm.editAssistantProfile = false;
 
       function init(){
+        vm.currentUser = $cookies.getObject('currentUserActive');
       // función que se llama así misma para indicar que sea lo primero que se ejecute
           vm.selected = 1;
           vm.currentUser = userService.searchAssistant(userService.getCookie());
@@ -58,6 +59,38 @@
           vm.userActive = false;
           vm.status = "Activo"
         }init();
+
+            $scope.showPrompt = function() {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.prompt()
+      .title('Bienvenido ' + vm.currentUser.id + '!')
+      .textContent('Modifica tu contraseña temporal')
+      .placeholder('Nueva contraseña')
+      .ariaLabel('New password')
+      .initialValue('')
+      .targetEvent()
+      .ok('Cambiar')
+      .cancel('');
+
+    $mdDialog.show(confirm).then(function(result) {
+      vm.currentUser.password =  result;
+      vm.currentUser.newUser = 0;
+      userService.updateTemporalPassword(vm.currentUser)
+      .then(function(response){
+        console.log(response);
+        $cookies.putObject('currentUserActive', vm.currentUser);
+      })
+      .catch(function(err){
+        console.log(err);
+      });
+    }, function() {
+      $scope.status = 'You didn\'t name your dog.';
+    });
+  };
+
+ if(vm.currentUser.newUser == 1) {
+    $scope.showPrompt();
+  }
 
 
       /*Sidenav*/
@@ -806,5 +839,12 @@
           }
         }
       }
+      // Funcion para actualizar estado de competición
+      vm.deleteCompetition = function(pModCompetition) {
+        pModCompetition.status = 'inactivo';
+        eventService.deleteCompetition(pModCompetition)
+        init();
+        cleanCompetition();
+        }
    }
 })();

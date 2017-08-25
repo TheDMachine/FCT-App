@@ -3,7 +3,7 @@ angular
   .module('app')
   .service('logService', logService);
   //Funcion costructora del servicio logService
-  function logService(){
+  function logService($http,$cookies){
     var publicApi ={
       createLog:_newLog,
       showLog:_getLog
@@ -13,27 +13,30 @@ angular
 
     //Se obitene todos los logs que tiene el local storage
     function _getLog(){
-      return JSON.parse(localStorage.getItem('logStorage'));
+    //   return JSON.parse(localStorage.getItem('logStorage'));
+    return $http.get('http://localhost:3000/api/get_logs');
     }
     //Guarda el nuevo log en el local storage
     function _setLog(newData){
-      var log = _getLog();
-      if(log == null){
-        log = [];
-      }
-      log.push(newData);
-      localStorage.setItem('logStorage',JSON.stringify(log));
+    //   var log = _getLog();
+    //   if(log == null){
+    //     log = [];
+    //   }
+    //   log.push(newData);
+    //   localStorage.setItem('logStorage',JSON.stringify(log));
+    return $http.post('http://localhost:3000/api/set_log', newData);
     }
     //Crea un nuevo log para ser visualizado por el administrador
-    function _newLog(pFlag, pWhoMake, pWhatDo){
+    function _newLog(pFlag,pWhatDo){
       var objToPush;
+      actionbyUser = $cookies.getOject('currentUserActive');
       //Depende del vlaor de la bandera númerica no booleana crea el log dependiendo de ello.
       //Si la bandera es un false implica que va al default y eso realizara un log de que fallo realizar la acción.
       switch (pFlag) {
         case 0://Crear.
         objToPush = {
           action: 'Crear',
-          actionBy:pWhoMake,
+          actionBy:actionbyUser.name,
           resultAction: pWhatDo,
           timestamp: new Date()
         }
@@ -43,7 +46,7 @@ angular
         case 1://Modificar.
         objToPush = {
           action: 'Modificar',
-          actionBy:pWhoMake,
+          actionBy:actionbyUser.name,
           resultAction: pWhatDo,
           timestamp: new Date()
         }
@@ -53,7 +56,7 @@ angular
         case 2://Eliminar de forma logica.
         objToPush = {
           action: 'Eliminar',
-          actionBy:pWhoMake,
+          actionBy:actionbyUser.name,
           resultAction: pWhatDo,
           timestamp: new Date()
         }
@@ -63,7 +66,7 @@ angular
         default:
         objToPush = {
           action: 'Error',
-          actionBy:pWhoMake,
+          actionBy:actionbyUser.name,
           resultAction: pWhatDo,
           timestamp: new Date()
         }

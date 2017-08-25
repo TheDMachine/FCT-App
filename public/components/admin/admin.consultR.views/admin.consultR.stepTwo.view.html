@@ -3,7 +3,7 @@
   <!-- Select para escoger el genero de la persona -->
   <md-input-container flex-offset>
     <label>Seleccione el género</label>
-    <md-select name="genre" id="sltGender" ng-model="vm.user.gender">
+    <md-select name="genre" id="sltGender" ng-model="vm.user.genre">
       <md-option value="male">Masculino</md-option>
       <md-option value="female">Femenino</md-option>
       <md-option value="other">Otro</md-option>
@@ -18,8 +18,8 @@
   <!-- Select para escoger el pais de la nacionalidad de la persona -->
   <md-input-container flex-offset>
     <label>Seleccione la nacionalidad</label>
-    <md-select id="sltCountry" ng-model="vm.user.nationality">
-      <md-option name="nationality"ng-repeat='country in vm.countries' value="{{country}}">{{country}}</md-option>
+    <md-select name="nationality" id="sltCountry" ng-model="vm.user.nationality">
+      <md-option ng-repeat='country in vm.countries' value="{{country}}">{{country}}</md-option>
     </md-select>
 
     <!-- Mesaje de retroalimentación -->
@@ -40,6 +40,16 @@
   </md-input-container>
 </div>
 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-offset-5">
+    <!-- Campo para escribir el correo electrónico de la persona  -->
+    <md-input-container layout="column">
+      <label>Teléfono</label>
+      <input type="text" name="phone" ng-model="vm.user.phone" required ng-pattern="/^[0-9]{3,14}$/">
+
+      <!-- Mesaje de retroalimentación -->
+      <div ng-messages="frmRegisterConsul.email.$error">
+      <div ng-messages-include="components/includes/messages.html"></div>
+      </div>
+    </md-input-container>
   <div>
 
     <!-- Campo para subir la imagen de la foto -->
@@ -47,6 +57,7 @@
       Adjuntar Foto <input id="photo" name="photo" type="file" style="display: none;" ng-model="vm.user.photo">
     </label>
   </div>
+
 </div>
 </div>
 <div class="col-xs-6 col-xs-offset-3">

@@ -10,11 +10,13 @@ var express = require('express'),
 // Se establece una conexión con mongoose por medio de las siguientes variables
 var db = mongoose.connection,
     dburl = 'mongodb://admin:dmachine2017@ds139761.mlab.com:39761/db_fct',
+    // dburl = 'mongodb://localhost:27017/db_fct_testing',
     port = 3000;
 // se le indica al servidor la tarea a ejecutar
 var server = app.listen(port,_server());
 
 // Se define la conexion con mongoose
+mongoose.Promise = global.Promise;
 mongoose.connect(dburl);
 // Se define las respuestas del servidor
 db.on('error', console.error.bind(console, 'error de conexion:'));
@@ -44,7 +46,8 @@ var index = require('./index'),
     academiesRoutes = require('./components/academies/academies.route'),
     loginRoutes = require('./components/login/login.route'),
     sponsorsRoutes = require('./components/sponsors/sponsors.route'),
-    reservationsRoutes = require('./components/reservations/reservations.route');
+    reservationsRoutes = require('./components/reservations/reservations.route'),
+    settingRoutes = require('./components/settings/settings.route');
 
 
 app.use('/', index);
@@ -54,6 +57,7 @@ app.use('/api', academiesRoutes);
 app.use('/api', sponsorsRoutes);
 app.use('/api', loginRoutes);
 app.use('/api', reservationsRoutes);
+app.use('/api', settingRoutes);
 
 // Se guarda todo lo que se ha realizado
 module.exports = app;
@@ -62,4 +66,5 @@ module.exports = app;
 function _server(){
   console.log('Conexion establecida en el puerto ' + port);
 }
-
+//
+// mail.sEmail('recoveryPassword', 'dcamposa@ucenfotec.ac.cr','Recuperación de contraseña', {name:'Daniel Campos Arce', linkToClear:'http://localhost:8000'});

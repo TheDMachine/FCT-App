@@ -1,18 +1,88 @@
 html,body{
   background-color: white;
 }
-.container{
+
+/*.container{
   display: block;
   position: relative;
   margin: 40px auto;
   height: auto;
   width: 500px;
   padding: 20px;
+}*/
+
+.modal-password{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 2;
+}
+
+.recover-id{
+  max-width: 100%;
+  width: 95%;
+  margin: 12.5% 0;
+}
+
+.recover-password{
+  font-size: 2.75rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.box-password{
+  width: 25%;
+  background: rgba(255,255,255,1);
+  margin: 12.5% auto;
+  padding: 3%;
+  border-radius: 3px;
+}
+
+.i-forgot-p{
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 7.5%;
+}
+
+.i-forgot-p a{
+  color: #fff;
+}
+
+input.recover-email{
+  color: #000;
+}
+
+#btnActivas{
+  margin-left: 45px;
 }
 
 
+/*Inicio Estilos de perfil de admin*/
+#per{
+    font-family: 'Montserrat';
+    font-size: 2.143em;
+    font-weight: normal;
+    padding: 0 3%;
+}
+.imgPerfil{
+  margin: 5% 0 0 5%;
+}
+
+#adminEdit{
+  margin-top: 2%;
+}
+/*Fin Estilos de perfil de admin*/
 
 
+md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
+  background-color: #00a652;
+}
+md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off {
+  border-color: #00a652;
+}
 /*Inicio Estilos de tablas usuarios*/
 #tableUser h3{
   font-family: 'Montserrat';
@@ -54,6 +124,13 @@ html,body{
   border-bottom: 0.1px solid #00978f;
   text-align: center;
   padding: 10px 0;
+}
+
+.academyCard{
+  font-weight: 500;
+}
+.academyCardtxt{
+  font-weight: 300;
 }
 /*Fin Estilos de tablas usuarios*/
 
@@ -554,7 +631,7 @@ html,body{
 /*Fin estilos del landing*/
 
 /*Inicio estilo de modal de consulta y tabla de historial eventos*/
-#table1 h3, #table2 h3, #registerEvents h3{
+#table1 h3, #table2 h3, #registerEvents h3, #titleR{
   font-family: 'Montserrat';
   font-size: 1.571em;
   margin-bottom: 60px;
@@ -1496,4 +1573,47 @@ md-card md-card-title.no-padding{
   }
   .genericButtonsSteps div.active a{
     color:white;
+  }
+
+  /*inicio estilo de modal academias*/
+  #modalAcademy{
+    background: #85c8dd;
+    text-align: center;
+  }
+
+  #modalAcademy h3{
+    color: #fff;
+    font-weight: bold;
+    display: inline;
+    font-size: 1.571em;
+    font-family: 'Montserrat';
+  }
+
+  #modalInfoAcademy{
+    padding-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  #modalInfoAcademy p{
+    padding-bottom: 5px;
+    line-height: 1;
+  }
+
+  #modalInfoAcademy p span{
+    font-weight: bold;
+  }
+
+  #modalBtnAcademy .md-button{
+    color: #fff;
+    background: #85c8dd;
+  }
+
+  /*Fin estilo de modal academias*/
+
+  @media (max-width: 456px){
+    md-sidenav {
+     width: calc(100% - 56px);
+     min-width: calc(100% - 230px);
+     max-width: calc(100% - 56px);
+    }
   }

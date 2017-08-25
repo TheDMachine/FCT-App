@@ -180,6 +180,21 @@
       controller: 'competitorCtrl',
       controllerAs: 'vm'
     })
+    // inicio vista de registrar alumno en teacher
+    .state('teacher.alumnopart1',{
+      url : '/alumnopart1T', //ruta del url del estado
+      templateUrl : 'components/profesor/teacher.alumnoR.views/teacher-alumnopart1.view.html',//vista que se va a cargar para este estado
+    })
+    .state('teacher.alumnopart2',{
+      url : '/alumnopart2T', //ruta del url del estado
+      templateUrl : 'components/profesor/teacher.alumnoR.views/teacher-alumnopart2.view.html',//vista que se va a cargar para este estado
+    })
+    .state('teacher.alumnopart3',{
+      url : '/alumnopart3T', //ruta del url del estado
+      templateUrl : 'components/profesor/teacher.alumnoR.views/teacher-alumnopart3.view.html',//vista que se va a cargar para este estado
+    })
+    // fin vista de registrar alumno en teacher
+
     .state('teacher',{
       url : '/teacher', //ruta del url del estado
       templateUrl : 'components/profesor/teacher.view.html',//vista que se va a cargar para este estado
@@ -192,6 +207,7 @@
       controller: 'teacherCtrl',
       controllerAs: 'vm'
     })
+
     .state('login',{
       url : '/login', //ruta del url del estado
       templateUrl : 'components/login/login.view.html',//vista que se va a cargar para este estado
@@ -267,7 +283,7 @@
       controllerAs: 'vm'
     })
     .state('displayProposes',{
-      url:'/displayProposes',
+      url:'/consul',
       templateUrl:'components/consul/propose.view.html',
       resolve: {
         load: ['$ocLazyLoad', function($ocLazyLoad){
@@ -292,7 +308,7 @@
       url:'/profile-competitor',
       templateUrl:'components/profile-competitor/profile.view.html',
       params:{
-        cuser:'No encontrado el competidor'
+        cuser:'No encontrado el competitor'
       },
       resolve:{
         load: ['$ocLazyLoad', function($ocLazyLoad){
@@ -302,15 +318,11 @@
       controller:'profileCtrl',
       controllerAs:'vm'
     })
-    .state('competitorProfile.edit', {
-      url:'/edit-profile-competitor',
-      templateUrl:'components/profile-competitor/edit.view.html'
-    })
     .state('consulProfile',{
       url:'/profile-consul',
       templateUrl:'components/profile-consul/profile.view.html',
       params:{
-        cuser:'No encontado el consultor'
+        cuser:'No encontrado el consejero'
       },
       resolve:{
         load: ['$ocLazyLoad', function($ocLazyLoad){
@@ -319,10 +331,6 @@
       },
       controller:'profileCtrl',
       controllerAs:'vm'
-    })
-    .state('consulProfile.edit', {
-      url:'/edit-profile-consul',
-      templateUrl:'components/profile-consul/edit.view.html'
     })
 
     $urlRouterProvider.otherwise('/landing');

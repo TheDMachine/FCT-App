@@ -1,3 +1,30 @@
+<div ng-show="vm.changePassword" ng-hide="!vm.changePassword" class="modal-password">
+  <div class="box-password">
+    <h1 class="recover-password">Recuperar contraseña</h1>
+    <md-input-container class="md-block recover-id" flex="80">
+      <label>ID</label>
+      <input class="id-email recover-email" required name="clientEmail" ng-model="vm.id"
+             minlength="9" maxlength="100" ng-pattern="/^[0-9]{9}$/" />
+
+      <div ng-messages="projectForm.clientEmail.$error" role="alert">
+        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+          Your email must be between 10 and 100 characters long and look like an e-mail address.
+        </div>
+      </div>
+    </md-input-container>
+    <div class="text-center">
+      <!--<a href="" class="btn btn-raised btn-info text-center" ng-disabled="signup.$invalid" abm-component>Log In</a>-->
+      <md-button style="color: #fff" type="submit" ng-click="vm.recoverPassword(vm.id)" class="btn btn-raised btn-lg btn-warning">
+        Cambiar
+      </md-button>
+    </div>
+  </div>
+</div>
+<div ng-show="vm.successRecovery" ng-hide="!vm.successRecovery" class="modal-password">
+  <div class="box-password">
+    <h1 class="recover-password">Contraseña cambiada correctamente</h1>
+  </div>
+</div>
 <div class="body" >
   <div class="log-container">
   <form name="signup">
@@ -35,6 +62,9 @@
               <div ng-message="pattern">xyz08 OR abcd78 - Ingrese una contraseña válida.</div>
             </div>
           </md-input-container>
+        </div>
+        <div class="i-forgot-p">
+          <a href="" ng-click="vm.changePassword = true">Olvide mi contraseña</a>
         </div>
         <div class="text-center">
           <!--<a href="" class="btn btn-raised btn-info text-center" ng-disabled="signup.$invalid" abm-component>Log In</a>-->
