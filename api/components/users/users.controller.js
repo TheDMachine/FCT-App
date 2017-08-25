@@ -59,8 +59,8 @@ module.exports.saveTeacher = function(req, res){
           })
       }else{
 
-      newConsul.password = hash;
-      newConsul.save(function(e) {
+      newUser.password = hash;
+      newUser.save(function(e) {
           if(e){
               res.json({
                   success:false,
