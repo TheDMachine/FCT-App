@@ -617,7 +617,7 @@
 													<!-- ng-repeat="event in vm.acceptedEvents track by $index" -->
 													<tr ng-repeat="event in vm.events | dateRange:vm.from3:vm.to3 | filter:{eventState:'aprobado'} ">
 														<td>{{event.eventName}}</td>
-														<td>{{event.date.date1 | date : "shortDate"}}</td>
+														<td>{{event.date1 | date : "shortDate"}}</td>
 
 														<!-- Botones para editar y cancelar eventos -->
 														<td>
