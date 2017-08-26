@@ -24,7 +24,7 @@
       vm.imageActive = false;
       vm.weights = estabInfoService.getWeight();
       vm.categories = estabInfoService.getCategories();
-      vm.acceptedEvents = [];
+      // vm.acceptedEvents = [];
       vm.updateDisable = true;
       vm.nameSponsorEdit = false;
       vm.showCompetition = false;
@@ -76,7 +76,7 @@
         .catch(function(err){
           console.log(err);
         });
-        acceptedEvents();
+        // acceptedEvents();
         vm.event = {};
         sponsorService.getSponsors().then(function(response) {
           vm.sponsors = response.data;
@@ -118,7 +118,7 @@
         });
         vm.status = "activo";
         vm.roleFilter = "";
-        vm.stateFilter = ""
+        vm.stateFilter = "";
       }
       init();
 
@@ -846,7 +846,7 @@
           console.log(err);
         });
         vm.showCxlEventAlert();
-        acceptedEvents();
+        // acceptedEvents();
         init();
       };
 
@@ -865,15 +865,15 @@
       };
 
       // Función para filtrar la tabla de consulta de eventos
-      function acceptedEvents() {
-        var today = new Date();
-        vm.events = eventService.getEvents();
-        for (var i = 0; i < vm.events.length; i++) {
-          if (vm.events[i].eventState === 'aprobado') {
-            vm.acceptedEvents.push(vm.events[i]);
-          }
-        }
-      }
+      // function acceptedEvents() {
+      //   var today = new Date();
+      //   vm.events = eventService.getEvents();
+      //   for (var i = 0; i < vm.events.length; i++) {
+      //     if (vm.events[i].eventState === 'aprobado') {
+      //       vm.acceptedEvents.push(vm.events[i]);
+      //     }
+      //   }
+      // }
 
       vm.createNewConsult = function(pNewConsul) {
         pNewConsul.role = 'consul';
@@ -1053,7 +1053,7 @@ var pModCompetition = {
             .then(function(response) {
               var responseObj = response;
               console.log(response);
-              academyServices.getSponsors().then(function(response) {
+              academyServices.getAcademy().then(function(response) {
                 vm.academies = response.data;
               });
             }).catch(function(err) {
@@ -1190,7 +1190,7 @@ var pModCompetition = {
       vm.student.firstName = pStudent.firstName;
       vm.student.lastName = pStudent.lastName;
       vm.student.genre = pStudent.genre;
-      vm.student.weight = Number(pStudent.weight);
+      vm.student.weight = pStudent.weight;
       vm.student.height = Number(pStudent.height);
       vm.student.nationality = pStudent.nationality;
       vm.student.phone = pStudent.phone;
