@@ -2,39 +2,39 @@
 
 	<!-- Navegación -->
 	<div id="Navegation" class="row">
-      	<nav class="navbar navbar-default">
-         	<div class="container-fluid" id="Menu">
-	           <div class="navbar-header">
-	             	<button id="button" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-	               		<span class="sr-only">Toggle navigation</span>
-	               		<span class="icon-bar"></span>
-	               		<span class="icon-bar"></span>
-	               		<span class="icon-bar"></span>
-	             	</button>
-	           </div>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid" id="Menu">
+				<div class="navbar-header">
+					<button id="button" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
 
-           		<div class="nav navbar-nav navbar-right">
-             		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-               			<ul class="nav navbar-nav" id="listaNav">
-                 			<li href="#" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">EVENTOS <span class="fa fa-angle-down"></span></a>
-                   				<ul class="dropdown-menu">
-                   					<li><a ng-click="vm.events($event)">FUTUROS EVENTOS</a></li>
-				                    <li><a ui-sref-active="active" ui-sref="proposes.proposeOne">HACER PROPUESTAS</a></li>
-                   				</ul>
-                 			</li>
-                 			<li href="#" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">ENTRADAS <span class="fa fa-angle-down"></span></a>
-                   				<ul class="dropdown-menu">
-                   					<li><a ng-click="vm.reserve($event)">RESERVAR</a></li>
-														<li><a ng-click="vm.consult($event)">CONSULTAR</a></li>
-				                    <li><a ng-click="vm.cancel($event)">CANCELAR</a></li>
-                   				</ul>
-                 			</li>
-			                <li><a ng-click="vm.logIn($event)">LOG IN</a></li>
-               			</ul>
-             		</div>
-           		</div>
-         	</div>
-       	</nav>
+				<div class="nav navbar-nav navbar-right">
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav" id="listaNav">
+							<li href="#" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">EVENTOS <span class="fa fa-angle-down"></span></a>
+								<ul class="dropdown-menu">
+									<li><a ng-click="vm.events($event)">FUTUROS EVENTOS</a></li>
+									<li><a ui-sref-active="active" ui-sref="proposes.proposeOne">HACER PROPUESTAS</a></li>
+								</ul>
+							</li>
+							<li href="#" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button">ENTRADAS <span class="fa fa-angle-down"></span></a>
+								<ul class="dropdown-menu">
+									<li><a ng-click="vm.reserve($event)">RESERVAR</a></li>
+									<li><a ng-click="vm.consult($event)">CONSULTAR</a></li>
+									<li><a ng-click="vm.cancel($event)">CANCELAR</a></li>
+								</ul>
+							</li>
+							<li><a ng-click="vm.logIn($event)">LOG IN</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</nav>
 	</div>
 
 	<!-- Nombre e información de la Federación -->
@@ -56,17 +56,17 @@
 <section class="collapse" id="moreInfo">
 	<section class="row col-xs-12">
 		<div class="card cardTam col-xs-12">
-		  <div class="card-block">
-		    <h3 class="card-title">Información general.</h3>
-		    <p class="card-text text-justify">Federación Costarricense de Taekwondo conforme a los preceptos establecidos en sus estatutos y reglamentos, los de la Federación Mundial de Taekwondo (W.T.F) y los de la Unión Panamericana de Taekwondo (P.A.T.U), de las cuales es miembro, siendo la unica y es el Único ente regulatorio del Taekwondo en Costa Rica.</p>
+			<div class="card-block">
+				<h3 class="card-title">Información general.</h3>
+				<p class="card-text text-justify">Federación Costarricense de Taekwondo conforme a los preceptos establecidos en sus estatutos y reglamentos, los de la Federación Mundial de Taekwondo (W.T.F) y los de la Unión Panamericana de Taekwondo (P.A.T.U), de las cuales es miembro, siendo la unica y es el Único ente regulatorio del Taekwondo en Costa Rica.</p>
 				<p class="card-text text-justify">Es una organización de caracter tecnico deportivo que administra, rige, promueve, organiza, masifica y fomenta la practica del Taekwondo en todo Costa Rica.</p>
-		  </div>
+			</div>
 		</div>
 		<div class="card cardTam col-xs-12">
-		  <div class="card-block">
-		    <h3 class="card-title">Costa Rica en la élite mundial del taekwondo.</h3>
-		    <p class="card-text text-justify">La Federación Costarricense de Taekwondo recibió una muy buena noticia para el deporte nacional y es que la Federación Mundial de esta disciplina ortogó a nuestro país la categoría A que lo distingue como una de las nacionales que desarrollan taekwondo de primer mundo.</p>
-		  </div>
+			<div class="card-block">
+				<h3 class="card-title">Costa Rica en la élite mundial del taekwondo.</h3>
+				<p class="card-text text-justify">La Federación Costarricense de Taekwondo recibió una muy buena noticia para el deporte nacional y es que la Federación Mundial de esta disciplina ortogó a nuestro país la categoría A que lo distingue como una de las nacionales que desarrollan taekwondo de primer mundo.</p>
+			</div>
 		</div>
 	</section>
 
@@ -90,66 +90,167 @@
 						<p class="card-text text-justify"><span>Simbolismo:</span> Pureza / Inocencia</p>
 						<p class="card-text text-justify"><span>Significado:</span> Esta cinta representa la pureza, el portador del mismo es una persona que comienza en la práctica del Arte Marcial, busca comprender el sentido y orden de su Micro Universo interno y comienza a entender que se debe trabajar
 							duro para conseguir las metas propuestas.</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="collapse" id="amarilla">
-				<div class="card col-xs-12 cardTam2">
-					<div class="card-block">
-						<h3 class="card-title">CINTA AMARILLA</h3>
-						<p class="card-text text-justify"><span>Nombre de la Cinta:</span> Norang-Ti</p>
-						<p class="card-text text-justify"><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
-						<p class="card-text text-justify"><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
-						<p class="card-text text-justify"><span>Requisitos:</span> para ascender del cinturón blanco al amarillo debe tener como mínimo 3 torneos participados.</p>
+				<div class="collapse" id="amarilla">
+					<div class="card col-xs-12 cardTam2">
+						<div class="card-block">
+							<h3 class="card-title">CINTA AMARILLA</h3>
+							<p class="card-text text-justify"><span>Nombre de la Cinta:</span> Norang-Ti</p>
+							<p class="card-text text-justify"><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
+							<p class="card-text text-justify"><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
+							<p class="card-text text-justify"><span>Requisitos:</span> para ascender del cinturón blanco al amarillo debe tener como mínimo 3 torneos participados.</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="collapse" id="verde">
-				<div class="card col-xs-12 cardTam2">
-					<div class="card-block">
-						<h3 class="card-title">CINTA VERDE</h3>
-						<p class="card-text text-justify"><span>Nombre de la Cinta:</span> Chorok-Ti</p>
-						<p class="card-text text-justify"><span>Simbolismo:</span> Naturaleza, fe y esperanza</p>
-						<p class="card-text text-justify"><span>Significado:</span> La cinta verde representa el florecimiento de una nueva vida. En este color se demuestra que el practicante del Arte Marcial comienza a meterse dentro de la práctica y empieza a desarrollar destrezas.</p>
-						<p class="card-text text-justify"><span>Requisitos:</span> para ascender del cinturón amarillo al verde debe tener como mínimo 4 torneos participados.</p>
+				<div class="collapse" id="verde">
+					<div class="card col-xs-12 cardTam2">
+						<div class="card-block">
+							<h3 class="card-title">CINTA VERDE</h3>
+							<p class="card-text text-justify"><span>Nombre de la Cinta:</span> Chorok-Ti</p>
+							<p class="card-text text-justify"><span>Simbolismo:</span> Naturaleza, fe y esperanza</p>
+							<p class="card-text text-justify"><span>Significado:</span> La cinta verde representa el florecimiento de una nueva vida. En este color se demuestra que el practicante del Arte Marcial comienza a meterse dentro de la práctica y empieza a desarrollar destrezas.</p>
+							<p class="card-text text-justify"><span>Requisitos:</span> para ascender del cinturón amarillo al verde debe tener como mínimo 4 torneos participados.</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="collapse" id="azul">
-				<div class="card col-xs-12 cardTam2">
-					<div class="card-block">
-						<h3 class="card-title">CINTA AZUL</h3>
-						<p class="card-text text-justify"><span>Nombre de la Cinta:</span> Parang-Ti</p>
-						<p class="card-text text-justify"><span>Simbolismo:</span> Atardecer / Fruto maduro</p>
-						<p class="card-text text-justify"><span>Significado:</span> La cinta roja es considerada uno de los grados más dificiles, ya que en este el practicante del Arte Marcial debe alcanzar la fuerza, el arrojo, la valentía y lo que es más importante la humildad necesaria para poder
-							llegar al grado de cinta negra. El color rojo representa el esfuerzo realizado a través de los años para llegar a ese nivel.</p>
-						<p class="card-text text-justify"><span>Requisitos:</span> para ascender del cinturón verde al azul debe tener como mínimo 5 torneos participados.</p>
+				<div class="collapse" id="azul">
+					<div class="card col-xs-12 cardTam2">
+						<div class="card-block">
+							<h3 class="card-title">CINTA AZUL</h3>
+							<p class="card-text text-justify"><span>Nombre de la Cinta:</span> Parang-Ti</p>
+							<p class="card-text text-justify"><span>Simbolismo:</span> Atardecer / Fruto maduro</p>
+							<p class="card-text text-justify"><span>Significado:</span> La cinta roja es considerada uno de los grados más dificiles, ya que en este el practicante del Arte Marcial debe alcanzar la fuerza, el arrojo, la valentía y lo que es más importante la humildad necesaria para poder
+								llegar al grado de cinta negra. El color rojo representa el esfuerzo realizado a través de los años para llegar a ese nivel.</p>
+								<p class="card-text text-justify"><span>Requisitos:</span> para ascender del cinturón verde al azul debe tener como mínimo 5 torneos participados.</p>
+							</div>
+						</div>
+					</div>
+					<div class="collapse" id="roja">
+						<div class="card col-xs-12 cardTam2">
+							<div class="card-block">
+								<h3 class="card-title">CINTA ROJA</h3>
+								<p class="card-text text-justify"><span>Nombre de la Cinta:</span> Palgang-Ti</p>
+								<p class="card-text text-justify"><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
+								<p class="card-text text-justify"><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
+								<p class="card-text text-justify"><span>Requisitos:</span> para ascender del cinturón azul al rojo debe tener como mínimo 6 torneos participados.</p>
+							</div>
+						</div>
+					</div>
+					<div class="collapse" id="negra">
+						<div class="card col-xs-12 cardTam2">
+							<div class="card-block">
+								<h3 class="card-title">CINTA NEGRA</h3>
+								<p class="card-text text-justify"><span>Nombre de la Cinta:</span> Conjon-Ti</p>
+								<p class="card-text text-justify"><span>Simbolismo:</span> Idealismo y Pureza</p>
+								<p class="card-text text-justify"><span>Significado:</span> El trayecto transcurrido entre la "Cinta blanca y la "Cinta negra" solo representa un proceso de preparación del practicante de Tae Kwon Do, pero solo al llegar a "cinta negra" es capaz de empezar a recorrer el camino
+									para aprender a disfrutarlo. La "cinta negra" es también, símbolo de habilidad y madurez, el saber aceptar y ejercer esta responsabilidad siempre van juntas, son inseparables.</p>
+									<p class="card-text text-justify"><span>Requisitos:</span> para ascender del cinturón rojo al negro debe tener como mínimo 7 torneos participados y 3 exhibiciones.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<section class="container-fluid">
+				<div class="row">
+					<div class="col-xs-12 cardsLandingEvents">
+						<div class="col-xs-12 col-sm-6 col-md-4 ">
+							<div class="card6 col-xs-12">
+								<div class="firstBlock col-xs-12">
+									<strong class="pInfoTorn center-block"> Torneo Nacional el Cambiori  <br> <span class="fa fa-trophy fa-5x trofeoL"></span></strong>
+								</div>
+								<div class="secondBlock col-xs-12">
+									<p class="pInfoTorn">2 de Setiembre de 2017</p>
+									<p class="pInfoTorn">Gimnasio Liceo de Costa Rica</p>
+									<p class="pInfoTorn">Entrada 5000 colones</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-sm-6 col-md-4 ">
+							<div class="card6 col-xs-12">
+								<div class="firstBlock col-xs-12">
+									<strong class="pInfoTorn center-block"> Torneo Kiguty Sam <br> <span class="fa fa-trophy fa-5x trofeoL"></span></strong>
+								</div>
+								<div class="secondBlock col-xs-12">
+									<p class="pInfoTorn">5 de Setiembre de 2017</p>
+									<p class="pInfoTorn">Gold's Gym Guayabos</p>
+									<p class="pInfoTorn">Entrada 7500 colones</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-sm-6 col-md-4 ">
+							<div class="card6 col-xs-12">
+								<div class="firstBlock col-xs-12">
+									<strong class="pInfoTorn center-block">Torneo de Taekwondo IV 2017 <br> <span class="fa fa-trophy fa-5x trofeoL"></span> </strong>
+								</div>
+								<div class="secondBlock col-xs-12">
+									<p class="pInfoTorn">9 de Setiembre de 2017</p>
+									<p class="pInfoTorn">Liceo de Curridabat</p>
+									<p class="pInfoTorn">Entrada 3000 colones</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<p class="championTitle" >Campeón Nacional de Taekwondo en Costa Rica </p>
+							<p class="champion"> Luis Hernández</p>
+							<img class="imgTrof" src="./images/copa.png" alt="">
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<div id="carousel-1" class="carousel slide" data-ride="carousel">
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+									<li data-target="#carousel-1" data-slide-to="1"></li>
+									<li data-target="#carousel-1" data-slide-to="2"></li>
+									<li data-target="#carousel-1" data-slide-to="3"></li>
+									<li data-target="#carousel-1" data-slide-to="4"></li>
+									<li data-target="#carousel-1" data-slide-to="5"></li>
+									<li data-target="#carousel-1" data-slide-to="6"></li>
+								</ol>
+								<div id="spaceCarousel" class="carousel-inner" role="listbox">
+									<div class="item active">
+										<img src="./images/img1.jpg" class="img-responsive" alt="">
+									</div>
+									<div class="item">
+										<img src="./images/img2.jpg" class="img-responsive" alt="">
+									</div>
+									<div class="item">
+										<img src="./images/img3.jpg" class="img-responsive" alt="">
+									</div>
+									<div class="item">
+										<img src="./images/img4.jpg" class="img-responsive" alt="">
+									</div>
+									<div class="item">
+										<img src="./images/img5.jpg" class="img-responsive" alt="">
+									</div>
+									<div class="item">
+										<img src="./images/img6.jpg" class="img-responsive" alt="">
+									</div>
+									<div class="item">
+										<img src="./images/img7.jpg" class="img-responsive" alt="">
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="collapse" id="roja">
-				<div class="card col-xs-12 cardTam2">
-					<div class="card-block">
-						<h3 class="card-title">CINTA ROJA</h3>
-						<p class="card-text text-justify"><span>Nombre de la Cinta:</span> Palgang-Ti</p>
-						<p class="card-text text-justify"><span>Simbolismo:</span> Descubrimiento, tierra y realismo </p>
-						<p class="card-text text-justify"><span>Significado:</span> La cinta amarrilla representa el inicio del aprendizaje, el nacimiento. Se usa el color amarillo como representación de las riquesazas físicas y espirituales obtenidas gracias a la practica del Arte Marcial.</p>
-						<p class="card-text text-justify"><span>Requisitos:</span> para ascender del cinturón azul al rojo debe tener como mínimo 6 torneos participados.</p>
+			</section>
+
+			<section id="footerLanding" class="container-fluid">
+				<div class="col-xs-12 footerSpace">
+					<div class="col-md-6">
+						<p class="pull-left contact">Teléfono: (506) 2231 4308</p><br>
+						<p class="pull-left contact">infoycomufct@gmail.com</p>
 					</div>
-				</div>
-			</div>
-			<div class="collapse" id="negra">
-				<div class="card col-xs-12 cardTam2">
-					<div class="card-block">
-						<h3 class="card-title">CINTA NEGRA</h3>
-						<p class="card-text text-justify"><span>Nombre de la Cinta:</span> Conjon-Ti</p>
-						<p class="card-text text-justify"><span>Simbolismo:</span> Idealismo y Pureza</p>
-						<p class="card-text text-justify"><span>Significado:</span> El trayecto transcurrido entre la "Cinta blanca y la "Cinta negra" solo representa un proceso de preparación del practicante de Tae Kwon Do, pero solo al llegar a "cinta negra" es capaz de empezar a recorrer el camino
-							para aprender a disfrutarlo. La "cinta negra" es también, símbolo de habilidad y madurez, el saber aceptar y ejercer esta responsabilidad siempre van juntas, son inseparables.</p>
-						<p class="card-text text-justify"><span>Requisitos:</span> para ascender del cinturón rojo al negro debe tener como mínimo 7 torneos participados y 3 exhibiciones.</p>
+					<div class="col-md-6">
+						<a href="" class="pull-right"><span class="fa fa-facebook-square fa-x5 iconFace"></span></a>
 					</div>
+
 				</div>
-			</div>
-		</div>
-	</section>
-</section>
+			</section>
