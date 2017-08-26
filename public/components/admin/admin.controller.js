@@ -13,7 +13,7 @@
       vm.directives;
       vm.currentUser = '';
       vm.cloudObj = imageService.getConfiguration();
-      vm.selected = 0;
+      vm.selected = 5;
       vm.updateDisable = true;
       vm.submitDisable = false;
       vm.stepTwoConsult = false;
