@@ -374,7 +374,7 @@
       cleanStudent();
     }
 
-    vm.updateOptions = function(competition){
+    vm.updateOptions = function(competition) {
       vm.competitorsEvent = [];
       for(var i = 0; i < vm.competitions.length; i++){
         if(competition == vm.competitions[i].competitionNumber){
@@ -395,7 +395,7 @@
       }
     }
 
-    vm.updateOptionsTeachers = function(academyName){
+    vm.updateOptionsTeachers = function(academyName) {
       vm.teachersFromAcademy = [];
       for(var i = 0; i < vm.teachers.length; i++){
         if(vm.teachers[i].role == 'teacher'){
@@ -408,7 +408,7 @@
       }
     }
 
-    vm.showCompetition = function(competition, $index){
+    vm.showCompetition = function(competition, $index) {
       for(var i = 0; i < vm.competitionsToShow.length; i++){
         if(vm.competitionsToShow[i] == undefined){
           vm.competitionsToShow[i] = {};

@@ -158,7 +158,7 @@
 						</div>
 					</div>
 					<div class="container container-competition">
-							<h2 style="text-align: left;">Tabla de posiciones</h2>
+							<h2 style="text-align: center;">Tabla de posiciones</h2>
 							<md-list flex="90">
 								<md-list-item ng-repeat="competitor in item.competitors" ng-click="goToPerson(person.name, $event)" class="noright">
 			    					<img ng-src="{{ comp.img }}" class="md-avatar" />
@@ -172,7 +172,7 @@
 							</md-list>
 						</div>
 						<div class="container container-competition">
-							<h2 layout="row" layout-align="start">Peleas</h2>
+							<h2 layout="row" layout-align="center" style="text-align: center;">Peleas</h2>
 							<div ng-repeat="fight in item.fights track by $index" layout="row" layout-align="center center">
 								<div flex-xs flex-gt-xs="25" ng-repeat="pairFight in fight track by $index" ng-if="pairFight !== true">
 								      <md-card class="user-card">
@@ -195,6 +195,8 @@
   			</div>
   			<!--Vista competiciones-->
   			<div ng-show="vm.selected == 6">
+  				<md-content id="categHist" class="md-padding">
+					<h3 class="md-display-2">COMPETENCIAS</h3>
   					<md-card ng-repeat="item in vm.competitions track by $index" flex="20">
 				        <md-card-title>
 				          <md-card-title-text>
@@ -202,7 +204,7 @@
 				            <span class="md-subhead">Evento: {{item.eventBelongs}}</span>
 				          </md-card-title-text>
 				        </md-card-title>
-				        <div layout="row">
+				        <!--<div layout="row">
 				        	<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
 					        	<i class="material-icons">&#xE227;</i>
 					        </md-icon>
@@ -218,12 +220,13 @@
 					          <p>
 					            {{item.description}}
 					          </p>
-					        </md-card-content>
+					        </md-card-content>-->
 				        <md-card-actions layout="row" layout-align="end">
 				        	<md-button ng-click="vm.showCompetition(item, $index)">Ver competencia</md-button>
 				          <md-button ng-click="vm.changeViews()">Registrar alumno</md-button>
 				        </md-card-actions>
-			      </md-card>
+			     	</md-card>
+			      </md-content>
   			</div>
   			<div ng-show="vm.selected == 2">
   				<h2 layout="row" layout-align="start">Perfil</h2>
