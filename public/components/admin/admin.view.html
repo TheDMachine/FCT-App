@@ -1,4 +1,4 @@
-<!-- Sidenav view -->
+!-- Sidenav view -->
 <div class="body-app md-menu-demo" layout="column" ng-cloak ng-init="selected = 0">
 	<div class="side-content-container" layout="row" flex>
 		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10" flex-sm="15" flex-xs="20">
@@ -220,6 +220,7 @@
   				</div>
 				</div>
 			</div>
+
 
 
 
@@ -617,9 +618,9 @@
 												<tbody>
 													<!-- | dateRange:vm.from3:vm.to3 -->
 													<!-- ng-repeat="event in vm.acceptedEvents track by $index" -->
-													<tr ng-repeat="event in vm.events | dateRange:vm.from3:vm.to3 | filter:{eventState:'aprobado'} ">
+													<tr ng-repeat="event in vm.events ">
 														<td>{{event.eventName}}</td>
-														<td>{{event.date1 | date : "shortDate"}}</td>
+														<td>{{event.date.date1 | date : "shortDate"}}</td>
 
 														<!-- Botones para editar y cancelar eventos -->
 														<td>
@@ -697,10 +698,10 @@
 										</thead>
 										<tbody>
 											<!-- | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter} -->
-											<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
+											<tr ng-repeat="event in vm.events track by $index">
 												<td>{{event.date1 | date : "shortDate"}}</td>
 												<td>
-													<md-button class="md-flat" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button>
+													<md-button class="md-raised" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button>
 												</td>
 												<td>{{event.eventState}}</td>
 											</tr>
@@ -720,9 +721,9 @@
 
 												<!-- cuerpo de la información -->
 												<div id="eventInfo" class="col-xs-12">
-													<p><span>Lugar: </span> {{vm.consultEvent.placeName}}</p>
-													<p><span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
-													<p><span>Inicia:</span> {{vm.consultEvent.date1 | date : "shortDate"}} <span>hra:</span> {{vm.consultEvent.time1 | date : "shortTime"}} - <span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} <span>hra:</span> {{vm.consultEvent.time2 | date : "shortTime"}}</p>
+													<p><span>Lugar: </span> {{vm.consultEvent.placeName}} <span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
+													<p><span>Inicio:</span> {{vm.consultEvent.date1 | date : "shortDate"}} {{vm.consultEvent.time1 | date : "shortTime"}}</p>
+													<p><span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} {{vm.consultEvent.time2 | date : "shortTime"}}</p>
 													<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
 													<p><span>Invitado especial:</span> {{vm.consultEvent.invitedName}}</p>
 													<p><span>Academias invitadas:</span> {{vm.consultEvent.selectAcademies}}</p>
@@ -733,6 +734,7 @@
 													<p><span>Beneficia a:</span> {{vm.consultEvent.orgName}}</p>
 													<p><span>Descripción de la org.:</span> {{vm.consultEvent.description}}</p>
 													<p><span>Patrocinadores:</span> {{vm.consultEvent.selectSponsors}}</p>
+													<p><span>Latitud y longitud:</span> {{vm.consultEvent.coords}}</p>
 												</div>
 
 												<!-- botón para salir del modal -->
@@ -905,7 +907,6 @@
 												<md-button ng-click="vm.createCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Agregar competición</md-button>
 
 												<!-- boton para editar -->
-												<md-button ng-click="vm.updateCompetition()" class="md-raised" ng-disabled="frmCompetition.$invalid">Actualizar competición</md-button>
 												<!-- <md-button ng-click="vm.updateCompetition()" class="md-raised" disabled>Actualizar competición</md-button> -->
 											</div>
 										</form>
@@ -1039,16 +1040,28 @@
 									</md-card-content>-->
 									<md-card-actions layout="row" layout-align="end">
 										<md-button ng-click="vm.editCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Editar</md-button>
-										<!--<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Eliminar</md-button>-->
+										<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Inactivar</md-button>
 										<md-button ng-click="vm.showCompetition(item, $index)">Ver competencia</md-button>
 									</md-card-actions>
 								</md-card>
 							</md-content>
 						</md-tab>
+						<md-tab label="Actualizar pesaje">
+							<md-content class="col-md-offset-1 col-md-10">
+								<h2>Actualiza el peso de un competidor</h2>
+								<md-input-container>
+									<md-select ng-model="vm.userToUpWeight._id">
+										<div ng-repeat="comp in vm.competitions">
+											<md-option ng-repeat="uw in comp.competitors track by $index" value="{{uw._id}}">{{uw.name}}</md-option>
+										</div>
+									</md-selected>
+								</md-input-container>
+								<md-button ng-click="vm.showUpdateWeight(vm.userToUpWeight)">Actualizar Peso</md-button>
+							</md-content>
+						</md-tab>
+						</md-tabs>
 				</md-content>
-
-			</div>
-
+		</div>
 			<!-- Patrocinadores  -->
 			<div ng-show="vm.selected == 7">
 				<md-content>
@@ -1261,7 +1274,7 @@
 				<md-content>
 					<md-tabs md-dynamic-height md-border-bottom>
 						<md-tab label="Representante de consejo" ui-sref="admin.partOne">
-							<md-content class="md-padding">
+							<md-content class="md-padding col-md-offset-1 col-md-10">
 								<h1 class="md-display-2">Registro de representante de consejo</h1>
 								<h2 id="errorConsul"></h2>
 
@@ -1288,8 +1301,10 @@
 					<md-tabs md-dynamic-height md-border-bottom>
 						<md-tab ui-sref=".teachpart1" label="Profesores">
 							<md-content class="md-padding">
-								<h1 class="md-display-2">Profesores</h1>
-								<div class="text-center" id="buttonTeacher" layout="row" layout-align="center center">
+								<div class="row">
+									<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">Profesores</h3>
+								</div>
+								<div class="text-center" id="buttonTeacher" layout="row" layout-align="center center" >
 									<div ui-sref-active="active" ui-sref=".teachpart1" class="md-whiteframe-3dp" id="boton1">
 										<a>1</a>
 									</div>
@@ -1323,15 +1338,19 @@
 													<tr>
 														<th>Cedula</th>
 														<th>Nombre</th>
+														<th>Estado</th>
+														<th>Academia</th>
 														<th>Teléfono</th>
 														<th>Foto</th>
-														<th>Editar</th>
+														<th></th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr ng-repeat="teacher in vm.teachers | orderBy:'id'">
 														<td>{{teacher.id}}</td>
-														<td > <md-button type="button" class="md-raised" ng-click="vm.showTeacherConsult(teacher, $teacher)">{{teacher.name}} {{teacher.firstName}}</md-button></td>
+														<td > <md-button type="button" class="md-flat" ng-click="vm.showTeacherConsult(teacher, $teacher)">{{teacher.name}} {{teacher.firstName}}</md-button></td>
+														<td>{{teacher.status}}</td>
+														<td>{{teacher.academy}}</td>
 														<td>{{teacher.phone}}</td>
 														<td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
 														<!-- Botones para editar profesores -->
@@ -1341,12 +1360,12 @@
 											</table>
 										</div>
 									</div>
-									<!-- modal para consulta de Profesores -->
+									<!-- modal para consulta de eventos -->
 									<div style="visibility: hidden">
 										<div class="md-dialog-container" id="infoTeacher">
 											<md-dialog layout-padding>
 
-												<!-- encabezado de la información del profesor -->
+												<!-- encabezado de la información del evento -->
 												<div id="eventName" class="col-xs-12 md-whiteframe-3dp">
 													<img class="md-whiteframe-3dp" ng-src="{{vm.consultTeacher.photo}}" alt="Description" width="60px" height="60px" />
 													<h3>{{vm.consultTeacher.name}} {{vm.consultTeacher.firstName}} </h3>
@@ -1496,7 +1515,7 @@
 
 			<div ng-show="vm.selected == 12">
 				<md-content class="md-padding">
-					<div class="container-fluid row">
+					<div class="row container-fluid">
 
 						<!-- Filtro por rol del usuario -->
 						<div class="col-xs-12 col-sm-4 pull-left">
@@ -1552,11 +1571,6 @@
 					</div>
 				</md-content>
 			</div>
-
-
-
-
-
 			<!-- Espacio de mantenimiento -->
 			<div ng-show="vm.selected == 13">
 				<md-tabs md-dynamic-height md-border-bottom>
@@ -1573,8 +1587,8 @@
 									</th>
 								</thead>
 								<tbody>
-									<tr ng-repeat="logRegister in vm.log">
-										<th>{{logRegister._id}}</th>
+									<tr ng-repeat="logRegister in vm.log track by $index">
+										<th>{{$index +1}}</th>
 										<td>{{logRegister.action}}</td>
 										<td>{{logRegister.actionBy}}</td>
 										<td>{{logRegister.resultAction}}</td>
@@ -1591,10 +1605,10 @@
 							<div class="col-md-offset-1 col-md-10">
 
 								<h2 class="md-headline">Configuración del sistema</h2>
-								<p class="md-headline">Dirreción fisica: {{vm.stt.address}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt.address)"></span></p>
-								<p class="md-headline">Teléfono: {{vm.stt.phone}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt.phone)"></span></p>
-								<p class="md-headline">Cédula juridica: {{vm.stt.idJ}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt.idJ)"></span></p>
-								<p class="md-headline">Correo de notificaciónes: {{vm.stt.emailNotifications}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt.emailNotifications)"></span></p>
+								<p class="md-headline">Dirreción fisica: {{vm.stt.address}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.address, 'address')"></span></p>
+								<p class="md-headline">Teléfono: {{vm.stt.phone}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.phone, 'phone')"></span></p>
+								<p class="md-headline">Cédula juridica: {{vm.stt.id}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.id, 'id')"></span></p>
+								<p class="md-headline">Correo de notificaciónes: {{vm.stt.emailNotifications}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.emailNotifications, 'emailNotifications')"></span></p>
 								<md-button ng-click="vm.addNewDirect()">Agregar nuevo miembro de junta</md-button>
 								<table id="tblMembers" class="table table-responsive table-striped">
 									<thead>
@@ -1607,7 +1621,7 @@
 										<th></th>
 									</thead>
 									<tbody>
-										<tr ng-repeat="direct in vm.stt.direct track by $index">
+										<tr ng-repeat="direct in vm.directives track by $index">
 											<td>{{$index +1}}</td>
 											<td>{{direct.name}}</td>
 											<td>{{direct.position}}</td>
@@ -1619,7 +1633,7 @@
 										</tr>
 									</tbody>
 								</table>
-								<div id="directModif" ng-show="vm.modDisplay">
+								<div class="col-md-offset-1 col-md-10" id="directModif" ng-show="vm.modDisplay">
 									<form name="frmEdit">
 										<md-input-container>
 											<label>Nombre de miembro de junta directiva</label>
