@@ -84,7 +84,7 @@
 
   			!!-->
   			<!-- Vista de editar profesor-->
-  			<div ng-show="vm.editTeacherProfile">
+  			<div class="col-md-10 col-offset-1 md-padding" ng-show="vm.editTeacherProfile">
 
               <!-- Campo contraseña -->
               <md-input-container flex-offset>
@@ -122,77 +122,7 @@
 
               <button class="btn btn-primary buttonForm" type="submit" ng-click="vm.updateCurrentTeacher()" ng-disabled="frmModInfo.$invalid">Actualizar</button>
             </form>
-  			</div>
-  			<!--Vista de competencias y competidores -->
-  			<div ng-show="vm.selected == 8">
-  				<div ng-repeat="item in vm.competitionsToShow track by $index" ng-show="item.show" flex>
-  					<h1>Competencia {{item.competitionNumber}}</h1>
-  					<h2 class="text-center">Competidores</h2>
-					<div class="competitors-info-container" layout="row">
-						<div flex-xs flex-gt-xs="20" ng-repeat="competitor in item.competitors">
-						      <md-card class="user-card">
-						          <md-card-avatar class="avatar avatar-test">
-						            <img class="md-user-avatar" src="{{competitor.photo}}">
-						          </md-card-avatar>
-						          <md-toolbar class="red">
-						          	<p class="md-headline name-test" layout="column" layout-align="start">{{competitor.firstName}} {{competitor.firstLastName}}</p>
-						          	<p class="md-subhead sub-header-test">Academia: Pros</p>
-						          </md-toolbar>
-						        <md-card-title>
-						          <md-card-title-text layout="row">
-						            <div layout="column" flex="32" class="text-center">
-						              <i class="material-icons card-icon star-icon">&#xE838;</i>
-						              <span class="md-subhead">Categoría: {{competitor.category}}</span>
-						            </div>
-						            <div layout="column" flex="32" class="text-center">
-						            <i class="material-icons card-icon weight-icon">&#xEB43;</i>
-						              <span class="md-subhead">Peso: {{competitor.weight}}</span>
-						            </div>
-						            <div layout="column" flex="32" class="text-center">
-						              <i class="material-icons card-icon won-icon">&#xE3E7;</i>
-						              <span class="md-subhead">Torneos ganados: {{competitor.tournamentsWins}}</span>
-						            </div>
-						          </md-card-title-text>
-						        </md-card-title>
-							</md-card>
-						</div>
-					</div>
-					<div class="container container-competition">
-							<h2 style="text-align: left;">Tabla de posiciones</h2>
-							<md-list flex="90">
-								<md-list-item ng-repeat="competitor in item.competitors" ng-click="goToPerson(person.name, $event)" class="noright">
-			    					<img ng-src="{{ comp.img }}" class="md-avatar" />
-			    					<span class="person-points">{{ competitor.firstName }}</span>
-									<i class="material-icons fa fa-trophy" ng-if="$index == 0"></i>
-			    					<div class="points md-secondary">
-			    					<i class="fa fa-star"></i>
-			    					<span class="person-points">{{competitor.points}}</span>
-			    					</div>
-			 					 </md-list-item>
-							</md-list>
-						</div>
-						<div class="container container-competition">
-							<h2 layout="row" layout-align="start">Peleas</h2>
-							<div ng-repeat="fight in item.fights track by $index" layout="row" layout-align="center center">
-								<div flex-xs flex-gt-xs="25" ng-repeat="pairFight in fight track by $index" ng-if="pairFight !== true">
-								      <md-card class="user-card">
-								          <md-card-avatar class="avatar avatar-test">
-								            <img src="{{competitor.photo}}">
-								          </md-card-avatar>
-								          <md-toolbar class="red">
-								          	<p class="md-headline name-test" layout="column" layout-align="start">{{pairFight.firstName}} {{pairFight.firstLastName}}</p>
-								          	<p class="md-subhead sub-header-test">Academia: Pros</p>
-								          </md-toolbar>
-								          <md-button ng-click="vm.updatePoints(pairFight, $parent.$parent.$index, item);" ng-disabled="fight[2] == true">
-								          	<i class="material-icons fa fa-trophy"></i>
-								          </md-button>
-									</md-card>
-								</div>
-								<span ng-if="fight[2] == true">Pelea realizada</span>
-							</div>
-						</div>
-  				</div>
-  			</div>
+		</div>
 			
 			<!--Inicia vista perfil  -->
 			<div  class="col-md-10 col-offset-1" ng-show="vm.selected == 2">
@@ -202,14 +132,14 @@
 			        <md-card-title class="no-padding">
 			          <md-card-title-media flex="35">
 			            <div class="md-media-lg card-media profile-picture">
-			            	<img ng-src="{{vm.currentUser.photo}}">
+			            	<img id="consulPhoto"width="260px" height="280px" ng-src="{{vm.currentUser.photo}}">
 			            </div>
 			          </md-card-title-media>
 			          <md-card-title-text>
-					<span class="md-headline name-profile">{{vm.currentUser.firstName}}  {{vm.currentUser.firstLastName}}</span>
-			          <p class="profile-info"><span>ID:</span> {{vm.currentUser.id}}</p>
+					<span class="md-headline name-profile">{{vm.currentUser.name}}  {{vm.currentUser.firstLastName}}</span>
+			          <p class="profile-info"><span>Cédula:</span> {{vm.currentUser.id}}</p>
 			          <p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
-			          <p class="profile-info"><span>Edad:</span> {{vm.currentUser.birthday}}</p>
+			          <p class="profile-info"><span>Edad:</span> {{vm.currentUser.birthday | date:'dd/MM/yyyy'}}</p>
 			          </md-card-title-text>
 			        </md-card-title>
 			        <md-card-actions layout="row" layout-align="end center">

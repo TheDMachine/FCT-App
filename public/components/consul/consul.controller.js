@@ -56,9 +56,9 @@ function init() {
     });
   };
 
- // if(vm.currentUser.newUser == 1) {
- //    $scope.showPrompt();
- //  }
+ if(vm.currentUser.newUser == 1) {
+    $scope.showPrompt();
+  }
 //Modald para cargar el Modald
 vm.showAlertPropose = function(pMessage, pFeedback) {
   // Appending dialog to document.body to cover sidenav in docs app
@@ -85,7 +85,55 @@ vm.showAlertPropose = function(pMessage, pFeedback) {
             vm.createNewPropose(pNewPropose);
           })
       }
-
+      /*Editar profesor en perfil*/
+  
+      vm.getCurrentTeacher = function(teacher){
+        vm.editTeacherProfile = true;
+        vm.currentUser.password = teacher.password;
+        vm.currentUser.email = teacher.email;
+        vm.currentUser.phone = teacher.phone;
+      }
+  
+      vm.updateCurrentTeacher = function(){
+        var editTeacher = {
+        _id : vm.currentUser._id,
+        password : vm.currentUser.password,
+        id : vm.currentUser.id,
+        firstName : vm.currentUser.firstName,
+        secondName : vm.currentUser.secondName,
+        firstLastName : vm.currentUser.firstLastName,
+        bornhDate : vm.currentUser.bornhDate,
+        gender : vm.currentUser.gender,
+        nationality : vm.currentUser.nationality,
+        academy : vm.currentUser.academy,
+        grade : vm.currentUser.grade,
+        phone : vm.currentUser.phone,
+        email : vm.currentUser.email,
+        photo : vm.currentUser.photo,
+        newUser : vm.currentUser.newUser
+        }
+        userService.updateTeacher(editTeacher)
+        .then(function(response){
+          console.log(response);
+          $http.get('http://localhost:3000/api/get_all_teachers')
+          .then(function(response){
+            for(var i = 0; i < response.data.length; i++){
+              if(response.data[i].id == vm.currentUser.id){
+                $cookies.putObject('currentUserActive', response.data[i]);
+                vm.currentUser = $cookies.get('currentUserActive');
+                vm.currentUser = JSON.parse(vm.currentUser);
+              }
+            }
+          })
+          .catch(function(err){
+            console.log(err);
+          });
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+        vm.editTeacherProfile = false;
+      }
     //Funcion para crear la propuesta.
     vm.createNewPropose = function(pNewPropose) {
       pNewPropose.status ="En Revisión";

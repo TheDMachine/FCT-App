@@ -1719,3 +1719,7 @@ md-card md-card-title md-card-title-media .md-media-lg {
     width: 82%;
     height: 20%;
 }
+#consulPhoto{
+    width: 250px;
+    height: 280px;
+}
