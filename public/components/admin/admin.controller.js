@@ -36,6 +36,7 @@
       vm.consultEvent = {};
       vm.customFullscreen = false;
       vm.infowindow;
+      vm.consultTeacher = {};
       vm.teachers = {};
       loadTeachers();
       loadStudents();
@@ -206,6 +207,17 @@
           contentElement: '#myDialog',
           parent: angular.element(document.body),
           targetEvent: ev,
+          clickOutsideToClose: true,
+        });
+      };
+
+      // Función para mostrar la consulta de profesores
+      vm.showTeacherConsult = function(pTeacher, te){
+        checkConsultTeacher(pTeacher);
+        $mdDialog.show({
+          contentElement: '#infoTeacher',
+          parent: angular.element(document.body),
+          targetEvent: te,
           clickOutsideToClose: true,
         });
       };
@@ -416,6 +428,25 @@
           orgName: pEvent.orgName,
           orgType: pEvent.orgType,
           description: pEvent.description
+        }
+      }
+
+      //Profesor a consultar
+      function checkConsultTeacher(pTeacher) {
+        vm.consultTeacher = {
+          id: pTeacher.id,
+          name: pTeacher.name,
+          surName: pTeacher.surName,
+          firstName: pTeacher.firstName,
+          lastName: pTeacher.lastName,
+          phone: pTeacher.phone,
+          email: pTeacher.email,
+          birthday: pTeacher.birthday,
+          genre: pTeacher.genre,
+          nationality: pTeacher.nationality,
+          academy: pTeacher.academy,
+          photo: pTeacher.photo,
+          status: pTeacher.status
         }
       }
 
