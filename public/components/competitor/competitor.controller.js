@@ -39,7 +39,8 @@
     vm.students = {};
 
   function init() {
-    vm.currentUser = $cookies.getObject('currentUserActive');
+        vm.currentUser = $cookies.getObject('currentUserActive');
+        console.log(vm.currentUser);
     //vm.currentUser = JSON.parse(vm.currentUser);
     vm.selected = 2;
     academyServices.getAcademy().then(function(response) {

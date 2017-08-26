@@ -69,7 +69,7 @@
 						<p class="menu-button">Competencias</p>
 					</md-button>
 				</md-list-item>
-				<md-list-item layout="column">
+				<md-list-item layout="column">	
 					<md-button class="button-selected" ng-click="vm.selected = 7">
 						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xEB3F;</i>
 						<p class="menu-button">Patrocinadores</p>
@@ -78,7 +78,8 @@
 				<md-list-item  layout="column">
   					<md-button class="button-selected" ng-click="vm.selected = 13">
 						<!--<i class="material-icons">&#xE869;</i>  -->
-						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#f4f1eb'} ">&#xE869;</i>
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 13 ? {'color': '#fff'} : {'color': '#f4511e'} ">&#xE869;</i>
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '##f4511'} ">&#xE86;</i>
 						<p class="menu-button">Mantenimiento</p>
   					</md-button>
 				</md-list-item>
@@ -1607,10 +1608,10 @@
 							<div class="col-md-offset-1 col-md-10">
 
 								<h2 class="md-headline">Configuración del sistema</h2>
-								<p class="md-headline">Dirreción fisica: {{vm.stt.address}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.address, 'address')"></span></p>
-								<p class="md-headline">Teléfono: {{vm.stt.phone}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.phone, 'phone')"></span></p>
-								<p class="md-headline">Cédula juridica: {{vm.stt.id}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.id, 'id')"></span></p>
-								<p class="md-headline">Correo de notificaciónes: {{vm.stt.emailNotifications}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.emailNotifications, 'emailNotifications')"></span></p>
+								<p class="md-headline">Dirreción fisica: {{vm.stt.address}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.address, 'address','Dirección de oficinas')"></span></p>
+								<p class="md-headline">Teléfono: {{vm.stt.phone}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.phone, 'phone', 'Teléfono')"></span></p>
+								<p class="md-headline">Cédula juridica: {{vm.stt.id}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.id, 'id', 'Cédula Júridica')"></span></p>
+								<p class="md-headline">Correo de notificaciónes: {{vm.stt.emailNotifications}} <span class="fa fa-pencil-square-o" ng-click="vm.editParam(vm.stt, vm.stt.emailNotifications, 'emailNotifications','Correo electrónico')"></span></p>
 								<md-button ng-click="vm.addNewDirect()">Agregar nuevo miembro de junta</md-button>
 								<table id="tblMembers" class="table table-responsive table-striped">
 									<thead>

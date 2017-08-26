@@ -157,10 +157,10 @@
       $scope.status = 'You didn\'t name your dog.';
     });
   };
- //
- // if(vm.currentUser.newUser == 1) {
- //    $scope.showPrompt();
- //  }
+ 
+ if(vm.currentUser.newUser == 1) {
+    $scope.showPrompt();
+  }
 
       /*Sidenav*/
       vm.openMenu = function($mdMenu, ev) {
