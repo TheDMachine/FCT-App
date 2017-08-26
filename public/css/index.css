@@ -1432,13 +1432,18 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 }
 
 i.side-icons{
-  font-size: 3.4rem;
+  font-size: 2.4rem;
   line-height: 0;
   margin: 0;
 }
 
 md-list-item > md-icon:first-child:not(.md-avatar-icon), md-list-item .md-list-item-inner > md-icon:first-child:not(.md-avatar-icon){
   margin: 0;
+  
+}
+.side-nav md-list md-list-item{
+  padding-top: 8.5px;
+  padding-bottom: 8.5px;
 }
 span.menu-button{
   margin-left: 5%;
