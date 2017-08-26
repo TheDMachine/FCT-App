@@ -1331,7 +1331,7 @@
 												<tbody>
 													<tr ng-repeat="teacher in vm.teachers | orderBy:'id'">
 														<td>{{teacher.id}}</td>
-														<td > <md-button type="button" class="md-raised" ng-click="vm.showTeacherConsult(teacher, $teacher)">{{teacher.name}} {{teacher.firstName}}</md-button></td>
+														<td > <md-button type="button" class="md-flat" ng-click="vm.showTeacherConsult(teacher, $teacher)">{{teacher.name}} {{teacher.firstName}}</md-button></td>
 														<td>{{teacher.phone}}</td>
 														<td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
 														<!-- Botones para editar profesores -->
