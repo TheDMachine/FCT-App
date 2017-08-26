@@ -395,6 +395,19 @@
       }
     }
 
+    vm.updateOptionsTeachers = function(academyName) {
+      vm.teachersFromAcademy = [];
+      for(var i = 0; i < vm.teachers.length; i++){
+        if(vm.teachers[i].role == 'teacher'){
+          if(vm.teachers[i].academy == academyName){
+            //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+              vm.teachersFromAcademy.push(vm.teachers[i]);
+            //}
+          }
+        }
+      }
+    }
+
     vm.showCompetition = function(competition, $index){
       for(var i = 0; i < vm.competitionsToShow.length; i++){
         if(vm.competitionsToShow[i] == undefined){
@@ -414,7 +427,7 @@
       }
       for(var i = 0; i < vm.competitionsToShow.length; i++){
         for(var j = 0; j < vm.competitionsToShow[$index].competitors.length; j++){
-          if(vm.competitionsToShow[$index].competitors.length == 5 && (vm.competitionsToShow[$index].fights.length == 0 || vm.competitionsToShow[$index].fights == undefined)){
+          if(vm.competitionsToShow[$index].competitors.length == 5 && vm.competitionsToShow[$index].fights.length !== 10){
             kLoop:
             for(var k = 0; k < 4; k++){
               vm.pairFights = [];
@@ -441,7 +454,7 @@
                     }
                   }
                   vm.fights.push(vm.pairFights);
-                  if(vm.fights.length == 20){
+                  if(vm.fights.length == 10){
                     if(vm.competitionsToShow[$index]._id == competition._id){
                       vm.competitionsToShow[$index].fights = vm.fights;
                       eventService.updateCompetition(vm.competitionsToShow[$index])
@@ -478,14 +491,14 @@
     }
     /*Editar profesor en perfil*/
 
-    vm.getCurrentTeacher = function(teacher){
+    vm.getCurrentTeacher = function(teacher) {
       vm.editTeacherProfile = true;
       vm.currentUser.password = teacher.password;
       vm.currentUser.email = teacher.email;
       vm.currentUser.phone = teacher.phone;
     }
 
-    vm.updateCurrentTeacher = function(){
+    vm.updateCurrentTeacher = function() {
       var editTeacher = {
       _id : vm.currentUser._id,
       password : vm.currentUser.password,
@@ -526,7 +539,7 @@
       vm.editTeacherProfile = false;
     }
 
-    vm.updatePoints = function(competitor, $index, competition){
+    /*vm.updatePoints = function(competitor, $index, competition) {
       if(competitor.points == 5){
         return
       }else{
@@ -560,6 +573,6 @@
           }
         }
       }
-    }
+    }*/
   };
 })();
