@@ -22,7 +22,7 @@
 				</md-list-item> -->
 				<md-list-item layout="column">
 					<md-button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i><br>
+						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 12 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i><br>
 						<p class="menu-button">Usuarios</p>
 					</md-button>
 					<div class="dropdown-menu">
@@ -997,12 +997,13 @@
 							</md-content>
 						</md-tab>
 						<md-tab label="Competencias">
-							<md-content class="md-padding">
-								<h1 class="md-display-2">Competencias</h1>
+							<md-content id="categHist" class="md-padding">
+								<h3 class="md-display-2">COMPETENCIAS</h3>
 								<div class="container123213">
 									<div  id="btnFiltrosCompetencias">
 								<label>Mostrar competencias por su estado:</label>
 								<md-radio-group ng-model="vm.stateFilter" layout="row">
+									<md-radio-button  value="" class="md-primary" >Todas</md-radio-button>
 								<md-radio-button  value="activo" class="md-primary" >Activas</md-radio-button>
 								<md-radio-button value="inactivo" class="md-primary">Inactivas</md-radio-button>
 								</md-radio-group>
@@ -1017,7 +1018,7 @@
 											<span class="md-subhead">Evento: {{item.eventBelongs}}</span>
 										</md-card-title-text>
 									</md-card-title>
-									<div layout="row">
+									<!--<div layout="row">
 										<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
 											<i class="material-icons">&#xE227;</i>
 										</md-icon>
@@ -1033,10 +1034,10 @@
 										<p>
 											{{item.description}}
 										</p>
-									</md-card-content>
+									</md-card-content>-->
 									<md-card-actions layout="row" layout-align="end">
 										<md-button ng-click="vm.editCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Editar</md-button>
-										<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Eliminar</md-button>
+										<!--<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Eliminar</md-button>-->
 										<md-button ng-click="vm.showCompetition(item, $index)">Ver competencia</md-button>
 									</md-card-actions>
 								</md-card>
@@ -1147,11 +1148,11 @@
 									</md-input-container>
 								</div>
 								<div layout="row">
-									<md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="20">
+									<md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="30">
 										<img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
 										<md-card-title>
 											<md-card-title-text>
-												<span class="md-headline">ID: {{item.sponsorName}}</span>
+												<span class="md-headline">{{item.sponsorName}}</span>
 												<span class="md-subhead">{{item.sponsorCompany}}</span>
 											</md-card-title-text>
 										</md-card-title>
@@ -1217,7 +1218,7 @@
 						</div>
 					</div>
 					<div class="container container-competition">
-							<h2 style="text-align: left;">Tabla de posiciones</h2>
+							<h2 style="text-align: center;">Tabla de posiciones</h2>
 							<md-list flex="90">
 								<md-list-item ng-repeat="competitor in item.competitors" ng-click="goToPerson(person.name, $event)" class="noright">
 			    					<img ng-src="{{ comp.img }}" class="md-avatar" />
@@ -1231,16 +1232,16 @@
 							</md-list>
 						</div>
 						<div class="container container-competition">
-							<h2 layout="row" layout-align="start">Peleas</h2>
+							<h2 layout="row" layout-align="center" style="text-align: center;">Peleas</h2>
 							<div ng-repeat="fight in item.fights track by $index" layout="row" layout-align="center center">
 								<div flex-xs flex-gt-xs="25" ng-repeat="pairFight in fight track by $index" ng-if="pairFight !== true">
 								      <md-card class="user-card">
-								          <md-card-avatar class="avatar avatar-test">
-								            <img src="{{competitor.photo}}">
+								          <md-card-avatar class="avatar avatar-test avatar-fight">
+								            <img src="{{pairFight.photo}}">
 								          </md-card-avatar>
 								          <md-toolbar class="red">
 								          	<p class="md-headline name-test" layout="column" layout-align="start">{{pairFight.firstName}} {{pairFight.firstLastName}}</p>
-								          	<p class="md-subhead sub-header-test">Academia: Pros</p>
+								          	<p class="md-subhead sub-header-test">Academia: {{pairFight.academy}}</p>
 								          </md-toolbar>
 								          <md-button ng-click="vm.updatePoints(pairFight, $parent.$parent.$index, item);" ng-disabled="fight[2] == true">
 								          	<i class="material-icons fa fa-trophy"></i>
@@ -1319,20 +1320,20 @@
 												<thead class="md-whiteframe-3dp">
 													<tr>
 														<th>Cedula</th>
-														<th>Primer nombre</th>
-														<th>Primer apellido</th>
+														<th>Nombre</th>
 														<th>Estado</th>
+														<th>Academia</th>
 														<th>Teléfono</th>
 														<th>Foto</th>
 														<th></th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr ng-repeat="teacher in vm.teachers track by $index">
+													<tr ng-repeat="teacher in vm.teachers | orderBy:'id'">
 														<td>{{teacher.id}}</td>
-														<td>{{teacher.name}}</td>
-														<td>{{teacher.firstName}}</td>
+														<td > <md-button type="button" class="md-raised" ng-click="vm.showTeacherConsult(teacher, $teacher)">{{teacher.name}} {{teacher.firstName}}</md-button></td>
 														<td>{{teacher.status}}</td>
+														<td>{{teacher.academy}}</td>
 														<td>{{teacher.phone}}</td>
 														<td><img ng-src="{{teacher.photo}}" alt="Description" width="60px" height="60px" /></td>
 														<!-- Botones para editar profesores -->
@@ -1340,6 +1341,42 @@
 													</tr>
 												</tbody>
 											</table>
+										</div>
+									</div>
+									<!-- modal para consulta de eventos -->
+									<div style="visibility: hidden">
+										<div class="md-dialog-container" id="infoTeacher">
+											<md-dialog layout-padding>
+
+												<!-- encabezado de la información del evento -->
+												<div id="eventName" class="col-xs-12 md-whiteframe-3dp">
+													<img class="md-whiteframe-3dp" ng-src="{{vm.consultTeacher.photo}}" alt="Description" width="60px" height="60px" />
+													<h3>{{vm.consultTeacher.name}} {{vm.consultTeacher.firstName}} </h3>
+												</div>
+
+												<!-- cuerpo de la información -->
+												<div id="eventInfo" class="col-xs-12">
+													<p><span>Lugar: </span> {{vm.consultEvent.placeName}} <span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
+													<p><span>Inicio:</span> {{vm.consultEvent.date1 | date : "shortDate"}} {{vm.consultEvent.time1 | date : "shortTime"}}</p>
+													<p><span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} {{vm.consultEvent.time2 | date : "shortTime"}}</p>
+													<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
+													<p><span>Invitado especial:</span> {{vm.consultEvent.invitedName}}</p>
+													<p><span>Academias invitadas:</span> {{vm.consultEvent.selectAcademies}}</p>
+													<p><span>Categorías que participan:</span> {{vm.consultEvent.selectCategories}}</p>
+													<p><span>Costo de inscripción:</span> {{vm.consultEvent.costInsc}} colones</p>
+													<p><span>Asientos:</span> {{vm.consultEvent.seats}} <span>Cant de entradas:</span> {{vm.consultEvent.tickets}}</p>
+													<p><span>El evento es de:</span> {{vm.consultEvent.charityEvent}}</p>
+													<p><span>Beneficia a:</span> {{vm.consultEvent.orgName}}</p>
+													<p><span>Descripción de la org.:</span> {{vm.consultEvent.description}}</p>
+													<p><span>Patrocinadores:</span> {{vm.consultEvent.selectSponsors}}</p>
+													<p><span>Latitud y longitud:</span> {{vm.consultEvent.coords}}</p>
+												</div>
+
+												<!-- botón para salir del modal -->
+												<div id="buttonInfoEvent" class="col-xs-12">
+													<md-button class="md-raised" type="button" ng-click="vm.cancel()">Salir</md-button>
+												</div>
+											</md-dialog>
 										</div>
 									</div>
 								</div>
@@ -1436,6 +1473,8 @@
 													<th>Nombre completo</th>
 													<th>Estado</th>
 													<th>Grado</th>
+													<th>Academia</th>
+													<th>Foto</th>
 													<th></th>
 													<th></th>
 												</tr>
@@ -1443,9 +1482,11 @@
 											<tbody>
 												<tr ng-repeat="student in vm.students | filter:{name:vm.studentFilter}">
 													<td>{{student.id}}</td>
-													<td>{{student.name}} {{student.surName}} {{student.firstName}} {{student.lastName}}</td>
+													<td>{{student.name}} {{student.firstName}}</td>
 													<td>{{student.status}}</td>
 													<td>{{student.belt}}</td>
+													<td>{{student.academy}}</td>
+													<td><img ng-src="{{student.photo}}" alt="Description" width="60px" height="60px" /></td>
 													<td>
 														<md-button ng-click="vm.getStudent(student)" class="md-raised">Editar</md-button>
 													</td>
@@ -1480,7 +1521,7 @@
 						<div class="col-xs-12 col-sm-4 pull-right">
 							<md-input-container flex-offset class="md-block">
 								<label for="">Filtrar por nombre</label>
-								<input type="text" name="studentFilter" ng-model="vm.statusName" />
+								<input type="text" name="studentFilter" ng-model="vm.statusName">
 							</md-input-container>
 						</div>
 

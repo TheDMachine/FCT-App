@@ -36,6 +36,7 @@
       vm.consultEvent = {};
       vm.customFullscreen = false;
       vm.infowindow;
+      vm.consultTeacher = {};
       vm.teachers = {};
       loadTeachers();
       loadStudents();
@@ -68,8 +69,12 @@
         vm.originatorEv;
         vm.weights = estabInfoService.getWeight();
         console.log(vm.events);
-        eventService.getCompetitions().then(function(response){
+        eventService.getCompetitions()
+        .then(function(response){
           vm.competitions = response.data;
+        })
+        .catch(function(err){
+          console.log(err);
         });
         acceptedEvents();
         vm.event = {};
@@ -112,7 +117,8 @@
           vm.reservations = response.data;
         });
         vm.status = "activo";
-        vm.roleFilter = ""
+        vm.roleFilter = "";
+        vm.stateFilter = ""
       }
       init();
 
@@ -201,6 +207,17 @@
           contentElement: '#myDialog',
           parent: angular.element(document.body),
           targetEvent: ev,
+          clickOutsideToClose: true,
+        });
+      };
+
+      // Función para mostrar la consulta de profesores
+      vm.showTeacherConsult = function(pTeacher, te){
+        checkConsultTeacher(pTeacher);
+        $mdDialog.show({
+          contentElement: '#infoTeacher',
+          parent: angular.element(document.body),
+          targetEvent: te,
           clickOutsideToClose: true,
         });
       };
@@ -411,6 +428,25 @@
           orgName: pEvent.orgName,
           orgType: pEvent.orgType,
           description: pEvent.description
+        }
+      }
+
+      //Profesor a consultar
+      function checkConsultTeacher(pTeacher) {
+        vm.consultTeacher = {
+          id: pTeacher.id,
+          name: pTeacher.name,
+          surName: pTeacher.surName,
+          firstName: pTeacher.firstName,
+          lastName: pTeacher.lastName,
+          phone: pTeacher.phone,
+          email: pTeacher.email,
+          birthday: pTeacher.birthday,
+          genre: pTeacher.genre,
+          nationality: pTeacher.nationality,
+          academy: pTeacher.academy,
+          photo: pTeacher.photo,
+          status: pTeacher.status
         }
       }
 
@@ -1111,7 +1147,7 @@ var pModCompetition = {
     userService.setUsers(pNewStudent)
     .then(function(response){
         vm.studentAlert();
-        clean();
+        cleanStudent();
         init();
       })
       .catch(function(err){
@@ -1120,6 +1156,29 @@ var pModCompetition = {
     //   }
      }
 
+     function cleanAcademy() {
+       vm.student._id= '';
+       vm.student.id = '';
+       vm.student.birthday = '';
+       vm.student.name = '';
+       vm.student.surName = '';
+       vm.student.firstName = '';
+       vm.student.lastName = '';
+       vm.student.genre = '';
+       vm.student.weight = '';
+       vm.student.height = '';
+       vm.student.nationality = '';
+       vm.student.phone = '';
+       vm.student.email = '';
+       vm.student.academy = '';
+       vm.student.teacher = '';
+       vm.student.belt = '';
+       vm.student.category = '';
+       vm.student.tournaments = '';
+       vm.student.tournamentsWins = '';
+       vm.student.role = '';
+
+     }
 
     //funcion para editar alumno
     vm.getStudent = function(pStudent) {
@@ -1181,7 +1240,7 @@ var pModCompetition = {
         console.log(err);
       })
       init();
-      clean();
+      cleanStudent();
     }
 
 
@@ -1287,6 +1346,7 @@ var pModCompetition = {
               eventService.updateCompetition(vm.competitions[i])
               .then(function(response){
                 console.log(response);
+                vm.successCompetitorCompetition();
               })
               .catch(function(err){
                 console.log(err);
@@ -1300,6 +1360,22 @@ var pModCompetition = {
         console.log(eventService.getCompetitions());
       }
     }
+
+    vm.successCompetitorCompetition = function() {
+      // Appending dialog to document.body to cover sidenav in docs app
+      // Modal dialogs should fully cover application
+      // to prevent interaction outside of dialog
+      $mdDialog.show(
+        $mdDialog.alert()
+        .parent(angular.element(document.querySelector('#popupContainer')))
+        .clickOutsideToClose(true)
+        .title('Registro correcto')
+        .textContent('Registro exitoso!')
+        .ariaLabel()
+        .ok('¡Gracias!')
+        .targetEvent()
+      );
+    };
 
     vm.duplicateAcademyCompetition = function() {
       // Appending dialog to document.body to cover sidenav in docs app
@@ -1357,7 +1433,7 @@ var pModCompetition = {
       }
       for(var i = 0; i < vm.competitionsToShow.length; i++){
         for(var j = 0; j < vm.competitionsToShow[$index].competitors.length; j++){
-          if(vm.competitionsToShow[$index].competitors.length == 5 && (vm.competitionsToShow[$index].fights.length == 0 || vm.competitionsToShow[$index].fights == undefined)){
+          if(vm.competitionsToShow[$index].competitors.length == 5 && vm.competitionsToShow[$index].fights.length !== 10){
             kLoop:
             for(var k = 0; k < 4; k++){
               vm.pairFights = [];
@@ -1384,7 +1460,7 @@ var pModCompetition = {
                     }
                   }
                   vm.fights.push(vm.pairFights);
-                  if(vm.fights.length == 20){
+                  if(vm.fights.length == 10){
                     if(vm.competitionsToShow[$index]._id == competition._id){
                       vm.competitionsToShow[$index].fights = vm.fights;
                       eventService.updateCompetition(vm.competitionsToShow[$index])
@@ -1427,10 +1503,11 @@ var pModCompetition = {
           for(var j = 0; j < vm.users.length; j++){
             if(vm.users[j].genre == vm.competitions[i].competitionGenre){
               if(vm.users[j].category == vm.competitions[i].competitionAge){
-                if(vm.users[j].weight == vm.competitions[i].competitionWeight)
-                //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
-                  vm.competitorsEvent.push(vm.users[j]);
-                //}
+                if(vm.users[j].weight == vm.competitions[i].competitionWeight){
+                  //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+                    vm.competitorsEvent.push(vm.users[j]);
+                  //}
+                }
               }
             }
           }
@@ -1438,15 +1515,33 @@ var pModCompetition = {
       }
     }
 
-    vm.updatePoints = function(competitor, $index, competition){
-      if(competitor.points == 5){
-        return
-      }else{
-        competitor.points += 1;
-        vm.ready = true;
-        vm.fights[$index].push(vm.ready);
-        console.log(vm.fights);
+    vm.updateOptionsTeachers = function(academyName){
+      vm.teachersFromAcademy = [];
+      for(var i = 0; i < vm.teachers.length; i++){
+        if(vm.teachers[i].role == 'teacher'){
+          if(vm.teachers[i].academy == academyName){
+            //if(vm.users[j].belt == vm.competitions[i].competitionBelt){
+              vm.teachersFromAcademy.push(vm.teachers[i]);
+            //}
+          }
+        }
       }
+    }
+
+    vm.updatePoints = function(competitor, $index, competition){
+
+      for(var i = 0; i < vm.competitions.length; i++){
+        for(var j = 0; j < vm.competitions[i].competitors.length; j++){
+          if(vm.competitions[i].competitors[j].id == competitor.id){
+            competitor.points = vm.competitions[i].competitors[j].points;
+          }
+        }
+      }
+      competitor.points += 1;
+      vm.ready = true;
+      vm.fights[$index].push(vm.ready);
+      console.log(vm.fights);
+
       for(var i = 0; i < vm.competitions.length; i++){
         for(var j = 0; j < vm.competitions[i].competitors.length; j++){
           if(vm.competitions[i]._id == competition._id){
@@ -1455,19 +1550,19 @@ var pModCompetition = {
               vm.competitions[i].fights = vm.fights;
               eventService.updateCompetition(vm.competitions[i])
                 .then(function(response){
-                  console.log(response);
-                  eventService.getCompetitions()
+                    vm.competitionsToShow[i] = vm.competitions[i];
+                    vm.selected = 8;
+                  /*eventService.getCompetitions()
                   .then(function(response){
                     vm.competitions = response.data;
                   })
                   .catch(function(err){
                     console.log(err);
-                  })
+                  })*/
                 })
-                .catch(function(err){
+                /*.catch(function(err){
                   console.log(err);
-                });
-                return;
+                });*/
             }
           }
         }

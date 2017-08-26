@@ -65,7 +65,7 @@
   <div class="col-xs-12 col-sm-6">
     <md-input-container flex-offset class="md-block">
       <label for="">Academia</label>
-      <md-select name="attendAcademy" ng-model="vm.student.academy" >
+      <md-select name="attendAcademy" ng-model="vm.student.academy" ng-change="vm.updateOptionsTeachers(vm.student.academy)">
         <md-option ng-repeat="academy in vm.academies" ng-value="academy.name">{{academy.name}}</md-option>
       </md-select>
 
@@ -81,7 +81,7 @@
     <md-input-container flex-offset class="md-block">
       <label for="">Profesor</label>
       <md-select name="teacher" ng-model="vm.student.teacher" required>
-        <md-option ng-repeat="teacher in vm.teachers" ng-value="teacher.id">{{teacher.firstName}} {{teacher.firstLastName}}</md-option>
+        <md-option ng-repeat="teacher in vm.teachersFromAcademy" ng-value="teacher.id">{{teacher.name}} {{teacher.firstName}}</md-option>
       </md-select>
 
       <!-- Mensaje de retroalimentacion -->
