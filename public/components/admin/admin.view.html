@@ -544,269 +544,331 @@
 			</div>
 
 			<!-- Sección de eventos -->
-			<div ng-show="vm.selected == 5">
-				<md-content>
-					<md-tabs md-dynamic-height md-border-bottom>
+				<div ng-show="vm.selected == 5">
+					<md-content>
+						<md-tabs md-dynamic-height md-border-bottom>
 
-						<!-- Tab de Eventos -->
-						<md-tab id="events" label="Registrar evento" ui-sref=".part1">
-							<md-content class="md-padding">
-								<div class="row">
-									<div id="registerEvents" class="col-md-offset-1 col-md-10">
-										<h3>REGISTRAR EVENTO</h3>
-									</div>
-								</div>
-
-								<!-- links de cada paso del formulario de registro de eventos -->
-								<div id="buttonForm" class="text-center" layout="row" layout-align="center center">
-									<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part1">
-										<a>1</a>
-									</div>
-									<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part2">
-										<a>2</a>
-									</div>
-									<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part3">
-										<a>3</a>
-									</div>
-									<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part4">
-										<a>4</a>
-									</div>
-									<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part5">
-										<a>5</a>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-offset-1 col-md-10">
-										<!-- Formulario para registro de eventos -->
-										<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
-
-											<!-- Espacio para mostrar vistas del registro -->
-											<div id="form-views" ui-view></div>
-										</form>
-									</div>
-								</div>
-							</md-content>
-						</md-tab>
-
-						<!-- Tab consultar de eventos -->
-						<md-tab label="Modificar o cancelar Evento">
-							<md-content id="table1" class="md-padding">
-
-								<!-- Tabla para modificar eventos -->
-								<div id="modTable" class="row">
-									<div class="col-md-offset-1 col-md-10">
-										<h3>MODIFICAR O CANCELAR EVENTOS</h3>
-
-										<!-- Filtro por fecha -->
-										<p>Filtre por fechas: </p>
-										<br>
-										<md-datepicker name="from" ng-model="vm.from3" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
-										<md-datepicker name="to" ng-model="vm.to3" md-placeholder="Fecha fin" md-min-date="vm.today"></md-datepicker>
-
-										<!-- Tabla de info eventos -->
-										<div>
-											<table class="table-responsive md-whiteframe-3dp">
-												<thead class="md-whiteframe-3dp">
-													<tr>
-														<th>Evento</th>
-														<th>Inicio</th>
-														<th></th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
-													<!-- | dateRange:vm.from3:vm.to3 -->
-													<!-- ng-repeat="event in vm.acceptedEvents track by $index" -->
-													<tr ng-repeat="event in vm.events ">
-														<td>{{event.eventName}}</td>
-														<td>{{event.date.date1 | date : "shortDate"}}</td>
-
-														<!-- Botones para editar y cancelar eventos -->
-														<td>
-															<md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button>
-														</td>
-														<td>
-															<md-button href="#!/admin#ventana1" class="md-raised editCxlB" data-toggle="modal">Cancelar</md-button>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-
-										<!-- Modal-->
-										<div class="col-md-8 col-md-offset-4">
-											<div class="modal fade" id="ventana1" role="dialog">
-												<div class="modal-dialog">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5>¿Desea cancelar el evento?</h5>
-															<button type="button" class="close" id="thex" data-dismiss="modal"><i class="fa fa-times"></i></button>
+							<!-- Tab de Eventos -->
+							<md-tab id="info" label="Información" ui-sref=".part1">
+								<md-content class="md-padding">
+									<div class="row">
+										<div id="registerEvents" class="col-md-offset-1 col-md-10">
+											<h3>INFORMACIÓN QUE INTERESA</h3>
+											<div class="col-md-6">
+												<div class="col-xs-12 cardsLandingEvents">
+													<div class="col-xs-12 ">
+														<div class="card6 col-xs-12">
+															<div class="firstBlock col-xs-12">
+																<strong class="pInfoTorn center-block"> Torneo Nacional el Cambiori  <br> <span class="fa fa-trophy fa-5x trofeoL"></span></strong>
+															</div>
+															<div class="secondBlock col-xs-12">
+																<p class="pInfoTorn">2 de Setiembre de 2017</p>
+																<p class="pInfoTorn">Gimnasio Liceo de Costa Rica</p>
+																<p class="pInfoTorn">Entrada 5000 colones</p>
+															</div>
 														</div>
-														<div class="modal-body">
-															<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
-															<button type="submit" class="btn btn-primary" ng-click="vm.cancelEvent(event)" data-dismiss="modal">SI</button>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div id="carousel-1" class="carousel slide" data-ride="carousel">
+													<ol class="carousel-indicators">
+														<li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+														<li data-target="#carousel-1" data-slide-to="1"></li>
+														<li data-target="#carousel-1" data-slide-to="2"></li>
+														<li data-target="#carousel-1" data-slide-to="3"></li>
+														<li data-target="#carousel-1" data-slide-to="4"></li>
+														<li data-target="#carousel-1" data-slide-to="5"></li>
+														<li data-target="#carousel-1" data-slide-to="6"></li>
+													</ol>
+													<div id="spaceCarousel2" class="carousel-inner" role="listbox">
+														<div class="item active">
+															<img src="./images/img1.jpg" class="img-responsive" alt="">
+														</div>
+														<div class="item">
+															<img src="./images/img2.jpg" class="img-responsive" alt="">
+														</div>
+														<div class="item">
+															<img src="./images/img3.jpg" class="img-responsive" alt="">
+														</div>
+														<div class="item">
+															<img src="./images/img4.jpg" class="img-responsive" alt="">
+														</div>
+														<div class="item">
+															<img src="./images/img5.jpg" class="img-responsive" alt="">
+														</div>
+														<div class="item">
+															<img src="./images/img6.jpg" class="img-responsive" alt="">
+														</div>
+														<div class="item">
+															<img src="./images/img7.jpg" class="img-responsive" alt="">
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-
 									</div>
-								</div>
-							</md-content>
-						</md-tab>
+								</md-content>
+							</md-tab>
 
-						<!-- Tab historial de eventos -->
-						<md-tab label="Consulta e Historial de eventos">
-							<md-content id="table2" class="md-padding">
-								<div class="col-md-offset-1 col-md-10">
-									<h3>CONSULTA E HISTORIAL DE EVENTOS</h3>
+							<!-- Tab de Eventos -->
+							<md-tab id="events" label="Registrar evento" ui-sref=".part1">
+								<md-content class="md-padding">
+									<div class="row">
+										<div id="registerEvents" class="col-md-offset-1 col-md-10">
+											<h3>REGISTRAR EVENTO</h3>
+										</div>
+									</div>
 
-									<!-- Filtros -->
-									<div class="col-xs-12">
-										<div class="col-sm-6">
+									<!-- links de cada paso del formulario de registro de eventos -->
+									<div id="buttonForm" class="text-center" layout="row" layout-align="center center">
+										<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part1">
+											<a>1</a>
+										</div>
+										<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part2">
+											<a>2</a>
+										</div>
+										<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part3">
+											<a>3</a>
+										</div>
+										<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part4">
+											<a>4</a>
+										</div>
+										<div class="md-whiteframe-3dp" ui-sref-active="active" ui-sref=".part5">
+											<a>5</a>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-offset-1 col-md-10">
+											<!-- Formulario para registro de eventos -->
+											<form id="sign-form" name="frmEventInfo" autocomplete="off" ng-submit="vm.presaveEvent(vm.event)">
+
+												<!-- Espacio para mostrar vistas del registro -->
+												<div id="form-views" ui-view></div>
+											</form>
+										</div>
+									</div>
+								</md-content>
+							</md-tab>
+
+							<!-- Tab consultar de eventos -->
+							<md-tab label="Modificar o cancelar Evento">
+								<md-content id="table1" class="md-padding">
+
+									<!-- Tabla para modificar eventos -->
+									<div id="modTable" class="row">
+										<div class="col-md-offset-1 col-md-10">
+											<h3>MODIFICAR O CANCELAR EVENTOS</h3>
+
 											<!-- Filtro por fecha -->
 											<p>Filtre por fechas: </p>
 											<br>
-											<md-datepicker name="from" ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
-											<md-datepicker name="to" ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
+											<md-datepicker name="from" ng-model="vm.from3" md-placeholder="Fecha inicio" md-min-date="vm.today"></md-datepicker>
+											<md-datepicker name="to" ng-model="vm.to3" md-placeholder="Fecha fin" md-min-date="vm.today"></md-datepicker>
+
+											<!-- Tabla de info eventos -->
+											<div>
+												<table class="table-responsive md-whiteframe-3dp">
+													<thead class="md-whiteframe-3dp">
+														<tr>
+															<th>Evento</th>
+															<th>Inicio</th>
+															<th></th>
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														<!-- | dateRange:vm.from3:vm.to3 -->
+														<!-- ng-repeat="event in vm.acceptedEvents track by $index" -->
+														<tr ng-repeat="event in vm.events |  eventFrom | dateRange:vm.from3:vm.to3 | filter:{eventState:'aprobado'} ">
+															<td>{{event.eventName}}</td>
+															<td>{{event.date1 | date : "shortDate"}}</td>
+
+															<!-- Botones para editar y cancelar eventos -->
+															<td>
+																<md-button class="md-raised " ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button>
+															</td>
+															<td>
+																<md-button href="#!/admin#ventana1" class="md-raised " data-toggle="modal">Cancelar</md-button>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+
+											<!-- Modal-->
+											<div class="col-md-8 col-md-offset-4">
+												<div class="modal fade" id="ventana1" role="dialog">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5>¿Desea cancelar el evento?</h5>
+																<button type="button" class="close" id="thex" data-dismiss="modal"><i class="fa fa-times"></i></button>
+															</div>
+															<div class="modal-body">
+																<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+																<button type="submit" class="btn btn-primary" ng-click="vm.cancelEvent(event)" data-dismiss="modal">SI</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
 										</div>
-										<div class="col-sm-6">
+									</div>
+								</md-content>
+							</md-tab>
+
+							<!-- Tab historial de eventos -->
+							<md-tab label="Consulta e Historial de eventos">
+								<md-content id="table2" class="md-padding">
+									<div class="col-md-offset-1 col-md-10">
+										<h3>CONSULTA E HISTORIAL DE EVENTOS</h3>
+
+										<!-- Filtros -->
+										<div class="col-xs-12">
+											<div class="col-sm-6">
+												<!-- Filtro por fecha -->
+												<p>Filtre por fechas: </p>
+												<br>
+												<md-datepicker name="from" ng-model="vm.from2" md-placeholder="Fecha inicio"></md-datepicker>
+												<md-datepicker name="to" ng-model="vm.to2" md-placeholder="Fecha fin"></md-datepicker>
+											</div>
+											<div class="col-sm-6">
+
+												<!-- Filtro por estado -->
+												<p>Filtre por estado: </p>
+												<md-input-container>
+													<label>Seleccione el estado</label>
+													<md-select name="stateFilter" ng-model="vm.stateFilter">
+														<md-option value="{{aprobado && cancelado}}">Todos</md-option>
+														<md-option value="aprobado">Aprobado</md-option>
+														<md-option value="cancelado">Cancelado</md-option>
+													</md-select>
+												</md-input-container>
+											</div>
+										</div>
+
+										<!-- Tabla historial de eventos -->
+										<table id="histTable" class="table-responsive md-whiteframe-3dp">
+											<thead class="md-whiteframe-3dp">
+												<tr>
+													<th>Fecha</th>
+													<th>Evento</th>
+													<th>Estado</th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter} -->
+												<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
+													<td>{{event.date1 | date : "shortDate"}}</td>
+													<td>
+														<md-button class="md-flat " type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button>
+													</td>
+													<td>{{event.eventState}}</td>
+												</tr>
+											</tbody>
+										</table>
+
+										<!-- modal para consulta de eventos -->
+										<div style="visibility: hidden">
+											<div class="md-dialog-container" id="myDialog">
+												<md-dialog layout-padding>
+
+													<!-- encabezado de la información del evento -->
+													<div id="eventName" class="col-xs-12 md-whiteframe-3dp">
+														<img class="md-whiteframe-3dp" ng-src="{{vm.consultEvent.photo}}" alt="Description" width="60px" height="60px" />
+														<h3>{{vm.consultEvent.eventName}} ({{vm.consultEvent.eventType}})</h3>
+													</div>
+
+													<!-- cuerpo de la información -->
+													<div id="eventInfo" class="col-xs-12">
+														<p><span>Lugar: </span> {{vm.consultEvent.placeName}}</p>
+														<p><span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
+														<p><span>Inicia:</span> {{vm.consultEvent.date1 | date : "shortDate"}} <span>hra:</span> {{vm.consultEvent.time1 | date : "shortTime"}} - <span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} <span>hra:</span> {{vm.consultEvent.time2 | date : "shortTime"}}</p>
+														<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
+														<p><span>Invitado especial:</span> {{vm.consultEvent.invitedName}}</p>
+														<p><span>Academias invitadas:</span> {{vm.consultEvent.selectAcademies}}</p>
+														<p><span>Categorías que participan:</span> {{vm.consultEvent.selectCategories}}</p>
+														<p><span>Costo de inscripción:</span> {{vm.consultEvent.costInsc}} colones</p>
+														<p><span>Asientos:</span> {{vm.consultEvent.seats}} <span>Cant de entradas:</span> {{vm.consultEvent.tickets}}</p>
+														<p><span>El evento es de:</span> {{vm.consultEvent.charityEvent}}</p>
+														<p><span>Beneficia a:</span> {{vm.consultEvent.orgName}}</p>
+														<p><span>Descripción de la org.:</span> {{vm.consultEvent.description}}</p>
+														<p><span>Patrocinadores:</span> {{vm.consultEvent.selectSponsors}}</p>
+													</div>
+
+													<!-- botón para salir del modal -->
+													<div id="buttonInfoEvent" class="col-xs-12">
+														<md-button class="md-raised" type="button" ng-click="vm.cancel()">Salir</md-button>
+													</div>
+												</md-dialog>
+											</div>
+										</div>
+									</div>
+								</md-content>
+							</md-tab>
+
+							<!-- Tab de reservas de eventos -->
+							<md-tab id="reservations" label="Reservas de eventos">
+								<md-content class="md-padding">
+									<div class="row">
+										<div id="reservationsList" class="col-md-offset-1 col-md-10">
+											<h3>RESERVACIONES DE EVENTOS</h3>
+
+											<!-- Filtro por evento -->
+											<div class="col-md-6">
+												<p>Filtre por evento: </p>
+												<md-input-container>
+													<label>Seleccione el evento</label>
+													<md-select name="evntFilter" ng-model="vm.evntFilter">
+														<md-option value="{{event.vm.events}}">Todos</md-option>
+														<md-option ng-repeat="event in vm.events track by $index" value="{{event.eventName}}">{{event.eventName}}</md-option>
+													</md-select>
+												</md-input-container>
+											</div>
 
 											<!-- Filtro por estado -->
-											<p>Filtre por estado: </p>
-											<md-input-container>
-												<label>Seleccione el estado</label>
-												<md-select name="stateFilter" ng-model="vm.stateFilter">
-													<md-option value="{{aprobado && cancelado}}">Todos</md-option>
-													<md-option value="aprobado">Aprobado</md-option>
-													<md-option value="cancelado">Cancelado</md-option>
-												</md-select>
-											</md-input-container>
+											<div class="col-md-4">
+												<p>Filtre por estado: </p>
+												<md-input-container>
+													<label>Seleccione el estado</label>
+													<md-select name="stateRsvFilter" ng-model="vm.stateRsvFilter">
+														<md-option value="{{activo && cancelado}}">Todos</md-option>
+														<md-option value="activo">Activo</md-option>
+														<md-option value="cancelado">Cancelado</md-option>
+													</md-select>
+												</md-input-container>
+											</div>
+
+
+											<!-- Tabla historial de reservaciones -->
+											<div>
+												<table class="table-responsive md-whiteframe-3dp">
+													<thead class="md-whiteframe-3dp">
+														<tr>
+															<th>Confirmación</th>
+															<th>Cantidad</th>
+															<th>Nombre</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr ng-repeat="item in vm.reservations | filter:{event:vm.evntFilter} |  filter:{state:vm.stateRsvFilter}">
+
+															<td>{{item.confirmationNum}}</td>
+															<td>{{item.tktsQuantity}}</td>
+															<td>{{item.fullName}}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
-
-									<!-- Tabla historial de eventos -->
-									<table id="histTable" class="table-responsive md-whiteframe-3dp">
-										<thead class="md-whiteframe-3dp">
-											<tr>
-												<th>Fecha</th>
-												<th>Evento</th>
-												<th>Estado</th>
-											</tr>
-										</thead>
-										<tbody>
-											<!-- | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter} -->
-											<tr ng-repeat="event in vm.events track by $index">
-												<td>{{event.date1 | date : "shortDate"}}</td>
-												<td>
-													<md-button class="md-raised" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button>
-												</td>
-												<td>{{event.eventState}}</td>
-											</tr>
-										</tbody>
-									</table>
-
-									<!-- modal para consulta de eventos -->
-									<div style="visibility: hidden">
-										<div class="md-dialog-container" id="myDialog">
-											<md-dialog layout-padding>
-
-												<!-- encabezado de la información del evento -->
-												<div id="eventName" class="col-xs-12 md-whiteframe-3dp">
-													<img class="md-whiteframe-3dp" ng-src="{{vm.consultEvent.photo}}" alt="Description" width="60px" height="60px" />
-													<h3>{{vm.consultEvent.eventName}} ({{vm.consultEvent.eventType}})</h3>
-												</div>
-
-												<!-- cuerpo de la información -->
-												<div id="eventInfo" class="col-xs-12">
-													<p><span>Lugar: </span> {{vm.consultEvent.placeName}} <span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
-													<p><span>Inicio:</span> {{vm.consultEvent.date1 | date : "shortDate"}} {{vm.consultEvent.time1 | date : "shortTime"}}</p>
-													<p><span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} {{vm.consultEvent.time2 | date : "shortTime"}}</p>
-													<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
-													<p><span>Invitado especial:</span> {{vm.consultEvent.invitedName}}</p>
-													<p><span>Academias invitadas:</span> {{vm.consultEvent.selectAcademies}}</p>
-													<p><span>Categorías que participan:</span> {{vm.consultEvent.selectCategories}}</p>
-													<p><span>Costo de inscripción:</span> {{vm.consultEvent.costInsc}} colones</p>
-													<p><span>Asientos:</span> {{vm.consultEvent.seats}} <span>Cant de entradas:</span> {{vm.consultEvent.tickets}}</p>
-													<p><span>El evento es de:</span> {{vm.consultEvent.charityEvent}}</p>
-													<p><span>Beneficia a:</span> {{vm.consultEvent.orgName}}</p>
-													<p><span>Descripción de la org.:</span> {{vm.consultEvent.description}}</p>
-													<p><span>Patrocinadores:</span> {{vm.consultEvent.selectSponsors}}</p>
-													<p><span>Latitud y longitud:</span> {{vm.consultEvent.coords}}</p>
-												</div>
-
-												<!-- botón para salir del modal -->
-												<div id="buttonInfoEvent" class="col-xs-12">
-													<md-button class="md-raised" type="button" ng-click="vm.cancel()">Salir</md-button>
-												</div>
-											</md-dialog>
-										</div>
-									</div>
-								</div>
-							</md-content>
-						</md-tab>
-
-						<!-- Tab de reservas de eventos -->
-						<md-tab id="reservations" label="Reservas de eventos">
-							<md-content class="md-padding">
-								<div class="row">
-									<div id="reservationsList" class="col-md-offset-1 col-md-10">
-										<h3>RESERVACIONES DE EVENTOS</h3>
-
-										<!-- Filtro por evento -->
-										<div class="col-md-6">
-											<p>Filtre por evento: </p>
-											<md-input-container>
-												<label>Seleccione el evento</label>
-												<md-select name="evntFilter" ng-model="vm.evntFilter">
-													<md-option value="{{event.vm.events}}">Todos</md-option>
-													<md-option ng-repeat="event in vm.events track by $index" value="{{event.eventName}}">{{event.eventName}}</md-option>
-												</md-select>
-											</md-input-container>
-										</div>
-
-										<!-- Filtro por estado -->
-										<div class="col-md-4">
-											<p>Filtre por estado: </p>
-											<md-input-container>
-												<label>Seleccione el estado</label>
-												<md-select name="stateRsvFilter" ng-model="vm.stateRsvFilter">
-													<md-option value="{{activo && cancelado}}">Todos</md-option>
-													<md-option value="activo">Activo</md-option>
-													<md-option value="cancelado">Cancelado</md-option>
-												</md-select>
-											</md-input-container>
-										</div>
-
-
-										<!-- Tabla historial de reservaciones -->
-										<div>
-											<table class="table-responsive md-whiteframe-3dp">
-												<thead class="md-whiteframe-3dp">
-													<tr>
-														<th>Confirmación</th>
-														<th>Cantidad</th>
-														<th>Nombre</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr ng-repeat="item in vm.reservations | filter:{event:vm.evntFilter} |  filter:{state:vm.stateRsvFilter}">
-
-														<td>{{item.confirmationNum}}</td>
-														<td>{{item.tktsQuantity}}</td>
-														<td>{{item.fullName}}</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</md-content>
-						</md-tab>
-				</md-content>
-			</div>
+								</md-content>
+							</md-tab>
+						</md-content>
+					</div>
 
 			<!--Vista competiciones-->
 			<div ng-show="vm.selected == 6">
@@ -1000,28 +1062,28 @@
 							</md-content>
 						</md-tab>
 						<md-tab label="Competencias">
-							<md-content id="categHist" class="md-padding">
-								<h3 class="md-display-2">COMPETENCIAS</h3>
-								<div class="container123213">
-									<div  id="btnFiltrosCompetencias">
-								<label>Mostrar competencias por su estado:</label>
-								<md-radio-group ng-model="vm.stateFilter" layout="row">
-									<md-radio-button  value="" class="md-primary" >Todas</md-radio-button>
-								<md-radio-button  value="activo" class="md-primary" >Activas</md-radio-button>
-								<md-radio-button value="inactivo" class="md-primary">Inactivas</md-radio-button>
-								</md-radio-group>
-							</div>
-								</div>
-								<h2 id="errorConsul"></h2>
-								<div class="row">
+									<md-content id="categHist" class="md-padding">
+										<h3 class="md-display-2">COMPETENCIAS</h3>
+										<div class="container123213">
+											<div  id="btnFiltrosCompetencias">
+												<label>Mostrar competencias por su estado:</label>
+												<md-radio-group ng-model="vm.stateFilter" layout="row">
+													<md-radio-button  value="" class="md-primary" >Todas</md-radio-button>
+													<md-radio-button  value="activo" class="md-primary" >Activas</md-radio-button>
+													<md-radio-button value="inactivo" class="md-primary">Inactivas</md-radio-button>
+												</md-radio-group>
+											</div>
+										</div>
+										<h2 id="errorConsul"></h2>
 
-								<md-card ng-repeat="item in vm.competitions | filter:{status:vm.stateFilter} | orderBy:'competitionNumber'" flex="20">
-									<md-card-title>
-										<md-card-title-text>
-											<span class="md-headline">Competencia {{item.competitionNumber}}</span>
-											<span class="md-subhead">Evento: {{item.eventBelongs}}</span>
-										</md-card-title-text>
-									</md-card-title>
+										<md-card ng-repeat="item in vm.competitions | filter:{status:vm.stateFilter} | orderBy:'competitionNumber'" class="col-lg-offset-2 col-lg-8 colorCardComp">
+
+											<md-card-title>
+												<md-card-title-text>
+													<span class="md-headline">Competencia {{item.competitionNumber}}</span>
+													<span class="md-subhead">Evento: {{item.eventBelongs}}</span>
+												</md-card-title-text>
+											</md-card-title>
 									<!--<div layout="row">
 										<md-icon class="sponsor-icon" ng-if="item.sponsorType == 'Dinero'">
 											<i class="material-icons">&#xE227;</i>
@@ -1042,28 +1104,14 @@
 									<md-card-actions layout="row" layout-align="end">
 										<md-button ng-click="vm.editCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Editar</md-button>
 										<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Inactivar</md-button>
-										<md-button ng-click="vm.showCompetition(item, $index)">Ver más</md-button>
+										<md-button ng-click="vm.showCompetition(item, $index)">Ver competencia</md-button>
 									</md-card-actions>
 								</md-card>
-								</div>
 							</md-content>
 						</md-tab>
-						<md-tab label="Actualizar pesaje">
-							<md-content class="col-md-offset-1 col-md-10">
-								<h2>Actualiza el peso de un competidor</h2>
-								<md-input-container>
-									<md-select ng-model="vm.userToUpWeight._id">
-										<div ng-repeat="comp in vm.competitions">
-											<md-option ng-repeat="uw in comp.competitors track by $index" value="{{uw._id}}">{{uw.name}}</md-option>
-										</div>
-									</md-selected>
-								</md-input-container>
-								<md-button ng-click="vm.showUpdateWeight(vm.userToUpWeight)">Actualizar Peso</md-button>
-							</md-content>
-						</md-tab>
-						</md-tabs>
-				</md-content>
-		</div>
+					</md-content>
+
+				</div>
 			<!-- Patrocinadores  -->
 			<div ng-show="vm.selected == 7">
 				<md-content>
