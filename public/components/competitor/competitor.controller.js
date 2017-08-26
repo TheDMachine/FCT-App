@@ -10,7 +10,7 @@
   var vm = this;
   vm.newPassword = false;
   vm.currentUser = '';
-  vm.selected = 0;
+  vm.selected = 5;
     vm.cloudObj = imageService.getConfiguration();
     vm.selected = 0;
     vm.updateDisable = true;
