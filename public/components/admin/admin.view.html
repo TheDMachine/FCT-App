@@ -1013,6 +1013,7 @@
 							</div>
 								</div>
 								<h2 id="errorConsul"></h2>
+								<div class="row">
 
 								<md-card ng-repeat="item in vm.competitions | filter:{status:vm.stateFilter} | orderBy:'competitionNumber'" flex="20">
 									<md-card-title>
@@ -1041,9 +1042,10 @@
 									<md-card-actions layout="row" layout-align="end">
 										<md-button ng-click="vm.editCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Editar</md-button>
 										<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Inactivar</md-button>
-										<md-button ng-click="vm.showCompetition(item, $index)">Ver competencia</md-button>
+										<md-button ng-click="vm.showCompetition(item, $index)">Ver más</md-button>
 									</md-card-actions>
 								</md-card>
+								</div>
 							</md-content>
 						</md-tab>
 						<md-tab label="Actualizar pesaje">
@@ -1069,7 +1071,7 @@
 						<!-- Tab de patrocinadores -->
 						<md-tab label="Patrocinadores" md-active="vm.imageActive" ui-sref=".sponsorPartOne">
 							<md-content class="md-padding">
-								<h1 class="md-display-2">Patrocinadores</h1>
+								<h3 class="md-display-2">Patrocinadores</h3>
 
 								<!--<div id="sponsorButtons" class="text-center" layout="row"  layout-align="center center">
                   <div ui-sref-active="active" ui-sref=".sponsorPartOne">
@@ -1163,7 +1165,7 @@
 									</md-input-container>
 								</div>
 								<div layout="row">
-									<md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="30">
+									<md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" >
 										<img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
 										<md-card-title>
 											<md-card-title-text>
@@ -1302,7 +1304,7 @@
 						<md-tab ui-sref=".teachpart1" label="Profesores">
 							<md-content class="md-padding">
 								<div class="row">
-									<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">Profesores</h3>
+									<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">Registro Profesores</h3>
 								</div>
 								<div class="text-center" id="buttonTeacher" layout="row" layout-align="center center" >
 									<div ui-sref-active="active" ui-sref=".teachpart1" class="md-whiteframe-3dp" id="boton1">
@@ -1332,7 +1334,16 @@
 								<div id="tblTeacher" class="row">
 									<div class="col-md-offset-1 col-md-10">
 										<div>
-											<h3>Lista de Profesores</h3>
+											<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR1">Lista de Profesores</h3>
+
+											<!-- filtro por nombre -->
+											<div class="col-xs-12 col-sm-4 pull-right">
+												<md-input-container flex-offset class="md-block">
+													<label for="">Filtrar por nombre</label>
+													<input type="text" name="studentFilter" ng-model="vm.statusName">
+												</md-input-container>
+											</div>
+
 											<table class="table-responsive md-whiteframe-3dp">
 												<thead class="md-whiteframe-3dp">
 													<tr>
@@ -1346,7 +1357,7 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr ng-repeat="teacher in vm.teachers | orderBy:'id'">
+													<tr ng-repeat="teacher in vm.teachers | filter:{name:vm.studentFilter} | orderBy:'id'">
 														<td>{{teacher.id}}</td>
 														<td > <md-button type="button" class="md-flat" ng-click="vm.showTeacherConsult(teacher, $teacher)">{{teacher.name}} {{teacher.firstName}}</md-button></td>
 														<td>{{teacher.status}}</td>
@@ -1403,7 +1414,7 @@
 						<md-tab label="Registro" ui-sref=".alumnopart1">
 							<md-content class="md-padding">
 								<div class="row">
-										<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">REGISTRAR ALUMNO</h3>
+										<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR1">REGISTRAR ALUMNO</h3>
 								</div>
 								<div id="buttonTeacher" class="text-center" layout="row" layout-align="center center">
 									<div ui-sref-active="active" ui-sref=".alumnopart1">
@@ -1472,9 +1483,20 @@
 						</md-tab>
 						<md-tab label="Lista">
 							<md-content class="md-padding">
+								<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR1">Lista de Alumnos</h3>
+
+								<!-- filtro por nombre -->
+								<div class="col-xs-12 col-sm-4 pull-right">
+									<md-input-container flex-offset class="md-block">
+										<label for="">Filtrar por nombre</label>
+										<input type="text" name="studentFilter" ng-model="vm.statusName">
+									</md-input-container>
+								</div>
+
 								<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 
 								<!-- tabla de alumnos-->
+
 								<div class="container-fluid row">
 									<div class="col-xs-12">
 										<table class="table-responsive col-xs-12" id="tableUser">
@@ -1547,21 +1569,24 @@
 											<th>Nombre completo</th>
 											<th>Usuario</th>
 											<th>Estado</th>
+											<th>Foto</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr ng-repeat="user in vm.students |  filter:{firstName:vm.statusName} | filter:{role:vm.roleFilter} | orderBy:'id'">
+										<tr ng-repeat="user in vm.students |  filter:{name:vm.statusName}  | orderBy:'id'">
 											<td>{{user.id}}</td>
 											<td>{{user.name}} {{user.surName}} {{user.firstName}} {{user.lastName}}</td>
 											<td>{{user.role}}</td>
+											<td><img ng-src="{{user.photo}}" alt="Description" width="60px" height="60px" /></td>
 											<td>
 												<md-button ng-click="vm.state(user)" class="md-raised">{{user.status}}</md-button>
 											</td>
 										</tr>
-										<tr ng-repeat="user in vm.teachers | filter:{firstName:vm.statusName} | filter:{role:vm.roleFilter} | orderBy:'id'">
+										<tr ng-repeat="user in vm.teachers | filter:{name:vm.statusName} | filter:{role:vm.roleFilter} | orderBy:'id'">
 											<td>{{user.id}}</td>
 											<td>{{user.name}} {{user.surName}} {{user.firstName}} {{user.lastName}}</td>
 											<td>{{user.role}}</td>
+											<td><img ng-src="{{user.photo}}" alt="Description" width="60px" height="60px" /></td>
 											<td>
 												<md-button ng-click="vm.state(user)" class="md-raised">{{user.status}}</md-button>
 											</td>
