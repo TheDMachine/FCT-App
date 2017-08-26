@@ -3,7 +3,7 @@
   angular
   .module('app')
   .controller('consulCtrl', consulCtrl);
-  function consulCtrl($scope, eventService, imageService, Upload, estabInfoService, $mdDialog, $location, $cookies, userService) {
+  function consulCtrl($scope, eventService, imageService, Upload, estabInfoService, $mdDialog, $location, $cookies, userService, AuthService) {
  	var originatorEv;
   var vm = this;
   vm.cloudObj = imageService.getConfiguration();
@@ -13,6 +13,9 @@
     for (var index in pObjectToFrm) {
       pObjectToFrm[index] = '';
     }
+  }
+  vm.logOut = function() {
+    AuthService.logOut();
   }
 function init() {
   vm.currentUser = $cookies.getObject('currentUserActive');
@@ -53,9 +56,9 @@ function init() {
     });
   };
 
- if(vm.currentUser.newUser == 1) {
-    $scope.showPrompt();
-  }
+ // if(vm.currentUser.newUser == 1) {
+ //    $scope.showPrompt();
+ //  }
 //Modald para cargar el Modald
 vm.showAlertPropose = function(pMessage, pFeedback) {
   // Appending dialog to document.body to cover sidenav in docs app

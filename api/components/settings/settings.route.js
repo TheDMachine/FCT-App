@@ -6,24 +6,39 @@ router.param('id', function(req, res, next, id) {
   req.body.id = id;
   next();
 });
-router.route('/save_direct')
-    .post(function(req,res){
-        settingController.saveDirect(req,res);
-    });
-router.route('/get_settings')
-    .get(function(req,res){
-        settingController.getAll(req,res);
-    });
+// Sección de parametros del sistema
 router.route('/update_param')
-    .put(function(req,res){
+    .put(function(req,res) {
         settingController.updateParam(req,res);
     });
+router.route('/get_param')
+    .get(function(req,res){
+        settingController.getParam(req,res);
+    });
+// Sección de directivo
+router.route('/save_directive')
+    .post(function(req,res) {
+        settingController.saveDirective(req,res);
+    });
+router.route('/get_directive')
+    .get(function(req,res) {
+        settingController.getAllDirect(req,res);
+    })
+router.route('/update_directive')
+    .put(function(req,res) {
+        settingController.updateDirective(req,res);
+    })
+router.route('/delete_directive')
+    .put(function(req,res) {
+        settingController.deleteDirective(req,res);
+    })
+// Sección de bitacora del sistema.
 router.route('/set_log')
     .post(function(req, res){
         settingController.setLog(req,res);
     });
-router.route('/get_logs')
+router.route('/get_log')
     .get(function(req,res){
-        settingController.getLogs(req,res);
+        settingController.getLog(req,res);
     })
 module.exports = router;

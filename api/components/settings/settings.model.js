@@ -4,8 +4,7 @@ var settingScheme = new mongoose.Schema({
     address:String,
     phone:String,
     id:String,
-    emailNotifications:String,
-    direct:[Object]
+    emailNotifications:String
 });
 module.exports = mongoose.model('Setting',settingScheme);
 

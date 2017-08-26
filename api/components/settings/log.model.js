@@ -3,6 +3,6 @@ var logScheme = new mongoose.Schema({
     action:String,
     actionBy: String,
     resultAction:String,
-    timestamp:Date
+    timestamp:String
 });
-module.ecports = mongoose.model('Log', logScheme);
+module.exports = mongoose.model('Log', logScheme);

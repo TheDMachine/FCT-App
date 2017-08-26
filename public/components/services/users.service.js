@@ -49,11 +49,10 @@
         updateBelt : _updateBelt
     };
     return publicAPI;
-
     //Busca y actualiza el peso del competiddor
     function _findAndSetUserToWeigth(pUserToUpdateWeigth) {
       console.log(pUserToUpdateWeigth);
-      _updateUsers(pUserToUpdateWeigth);
+      $http.put('http://localhost:3000/api/update_weight', pUserToUpdateWeigth)
     }
 
     function _updateTemporalPassword(pUserToUpdate){
@@ -228,17 +227,7 @@
       }
       //se crea un nuevo representante de consejo.
       function _setNewConsul(pNewObjConsul){
-        // var consulList = _getUserConsult();
-        // for (var i = 0; i < consulList.length; i++) {
-        //   if (consulList[i].id == pNewObjConsult.id) {
-        //     return false;
-        //   }else{
-            pNewObjConsul.password = _generatePassword();
-        //     consulList.push(pNewObjConsult);
-        //     localStorage.setItem('lsConsulUsers', JSON.stringify(consulList));
-        //     return true;
-        //   }
-        // }
+        pNewObjConsul.password = _generatePassword();
         return $http.post('http://localhost:3000/api/save_consul',pNewObjConsul);
     }
 
