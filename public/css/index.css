@@ -381,50 +381,10 @@ md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked 
 #mapSpace{
   margin-top: 70px;
 }
-/*#eventsTable h3{
-  font-family: 'Montserrat';
-  font-size: 1.571em;
-  margin-bottom: 60px;
+#infoEvents{
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
-
-#eventsTable table{
-  width: 100%;
-}
-
-#eventsTable thead, #eventsTable tbody{
-  width: 100%;
-}
-
-#eventsTable tbody{
-  text-align: center;
-}
-
-#eventsTable tr th{
-  width: 60px;
-  text-align: center;
-  margin: 0 auto;
-  padding: 20px 10px;
-  font-size: 1.143em;
-  background-color: #00978f;;
-  color: #fff;
-}
-
-#eventsTable tr:hover{
-  background: rgba(252, 179, 50,0.2);
-}
-
-#eventsTable tbody td{
-  width: 60px;
-  margin: 0 auto;
-  border-bottom: 0.1px solid #242629;
-  text-align: center;
-  padding: 10px 0;
-}
-
-#tableSpace{
-  margin-bottom: 400px;
-}*/
-
 
 /*Fin estilos de eventos no registrado*/
 
@@ -566,7 +526,6 @@ md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked 
   background-image: url(../images/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
 }
 
 #landing .navbar{
@@ -626,6 +585,14 @@ md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked 
 
 #landing #listaNav .dropdown-menu li a:hover{
   background: rgba(252, 177, 50, 0.5);
+}
+#landingSecondPart{
+  background: red;
+}
+
+#cardsEventos{
+  height: 100px;
+  background-color: yellow;
 }
 
 /*Fin estilos del landing*/

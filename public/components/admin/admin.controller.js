@@ -113,7 +113,7 @@
         });
         vm.status = "activo";
         vm.roleFilter = "";
-        vm.stateFilter = ""
+        vm.stateFilter = "";
       }
       init();
 
