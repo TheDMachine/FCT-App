@@ -21,29 +21,31 @@
 					</md-button>
 				</md-list-item> -->
 				<md-list-item layout="column">
-					<md-button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+					<md-button class="button-selected" data-toggle="collapse" data-target="#demo">
 						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 12 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i><br>
 						<p class="menu-button">Usuarios</p>
 					</md-button>
-					<div class="dropdown-menu">
+					<div id="demo" class="collapse">
 						<ul>
 							<li>
-								<md-button class="button-selected" ui-sref="admin.partOne" ng-click="vm.selected = 9">R/Consejo
+								<md-button class="button-selected" ng-click="vm.selected = 9">
+								<p class="menu-button pull-left">R/Consejo</p>
 								</md-button>
 							</li>
 							<li>
-								<md-button class="button-selected" ng-click="vm.selected = 10" ui-sref=".teachpart1">
-									<p>Profesor</p>
+								<md-button class="button-selected" ng-click="vm.selected = 10">
+									<p class="menu-button pull-left">Profesor</p>
 								</md-button>
 							</li>
 							<li>
 								<md-button class="button-selected" ng-click="vm.selected = 11">
-									<p>Alumno</p>
+									<p class="menu-button pull-left">Alumno</p>
 								</md-button>
 							</li>
 							<li>
 								<md-button class="button-selected" ng-click="vm.selected = 12">
-									<p>Usuarios</p>
+									<p class="menu-button pull-left">Usuarios</p>
 								</md-button>
 							</li>
 						</ul>
@@ -76,7 +78,7 @@
 				<md-list-item  layout="column">
   					<md-button class="button-selected" ng-click="vm.selected = 13">
 						<!--<i class="material-icons">&#xE869;</i>  -->
-						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 13 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE869;</i>
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#f4f1eb'} ">&#xE869;</i>
 						<p class="menu-button">Mantenimiento</p>
   					</md-button>
 				</md-list-item>
@@ -218,6 +220,7 @@
   				</div>
 				</div>
 			</div>
+
 
 
 
@@ -1037,7 +1040,7 @@
 									</md-card-content>-->
 									<md-card-actions layout="row" layout-align="end">
 										<md-button ng-click="vm.editCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Editar</md-button>
-										<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Eliminar</md-button>
+										<md-button ng-click="vm.deleteCompetition(item)" ng-disabled="vm.compareDate(item) == false" >Inactivar</md-button>
 										<md-button ng-click="vm.showCompetition(item, $index)">Ver competencia</md-button>
 									</md-card-actions>
 								</md-card>
@@ -1298,8 +1301,10 @@
 					<md-tabs md-dynamic-height md-border-bottom>
 						<md-tab ui-sref=".teachpart1" label="Profesores">
 							<md-content class="md-padding">
-								<h1 class="md-display-2">Profesores</h1>
-								<div class="text-center" id="buttonTeacher" layout="row" layout-align="center center">
+								<div class="row">
+									<h3 class="md-display-2 col-xs-12 col-sm-10 col-sm-offset-1" id="titleR">Profesores</h3>
+								</div>
+								<div class="text-center" id="buttonTeacher" layout="row" layout-align="center center" >
 									<div ui-sref-active="active" ui-sref=".teachpart1" class="md-whiteframe-3dp" id="boton1">
 										<a>1</a>
 									</div>
@@ -1343,7 +1348,7 @@
 												<tbody>
 													<tr ng-repeat="teacher in vm.teachers | orderBy:'id'">
 														<td>{{teacher.id}}</td>
-														<td > <md-button type="button" class="md-raised" ng-click="vm.showTeacherConsult(teacher, $teacher)">{{teacher.name}} {{teacher.firstName}}</md-button></td>
+														<td > <md-button type="button" class="md-flat" ng-click="vm.showTeacherConsult(teacher, $teacher)">{{teacher.name}} {{teacher.firstName}}</md-button></td>
 														<td>{{teacher.status}}</td>
 														<td>{{teacher.academy}}</td>
 														<td>{{teacher.phone}}</td>
@@ -1361,27 +1366,21 @@
 											<md-dialog layout-padding>
 
 												<!-- encabezado de la información del evento -->
-												<div id="eventName" class="col-xs-12 md-whiteframe-3dp">
+												<div id="eventName1" class="col-xs-12 md-whiteframe-3dp">
 													<img class="md-whiteframe-3dp" ng-src="{{vm.consultTeacher.photo}}" alt="Description" width="60px" height="60px" />
 													<h3>{{vm.consultTeacher.name}} {{vm.consultTeacher.firstName}} </h3>
 												</div>
 
 												<!-- cuerpo de la información -->
 												<div id="eventInfo" class="col-xs-12">
-													<p><span>Lugar: </span> {{vm.consultEvent.placeName}} <span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
-													<p><span>Inicio:</span> {{vm.consultEvent.date1 | date : "shortDate"}} {{vm.consultEvent.time1 | date : "shortTime"}}</p>
-													<p><span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} {{vm.consultEvent.time2 | date : "shortTime"}}</p>
-													<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
-													<p><span>Invitado especial:</span> {{vm.consultEvent.invitedName}}</p>
-													<p><span>Academias invitadas:</span> {{vm.consultEvent.selectAcademies}}</p>
-													<p><span>Categorías que participan:</span> {{vm.consultEvent.selectCategories}}</p>
-													<p><span>Costo de inscripción:</span> {{vm.consultEvent.costInsc}} colones</p>
-													<p><span>Asientos:</span> {{vm.consultEvent.seats}} <span>Cant de entradas:</span> {{vm.consultEvent.tickets}}</p>
-													<p><span>El evento es de:</span> {{vm.consultEvent.charityEvent}}</p>
-													<p><span>Beneficia a:</span> {{vm.consultEvent.orgName}}</p>
-													<p><span>Descripción de la org.:</span> {{vm.consultEvent.description}}</p>
-													<p><span>Patrocinadores:</span> {{vm.consultEvent.selectSponsors}}</p>
-													<p><span>Latitud y longitud:</span> {{vm.consultEvent.coords}}</p>
+													<p><span>Nombre completo:</span> {{vm.consultTeacher.name}} {{vm.consultTeacher.surName}} {{vm.consultTeacher.firstName}} {{vm.consultTeacher.lastName}}</p>
+													<p><span>Cédula: </span> {{vm.consultTeacher.id}} </p>
+													<p><span>Teléfono:</span> {{vm.consultTeacher.phone}}</p>
+													<p><span>Email:</span> {{vm.consultTeacher.email}}</p>
+													<p><span>Fecha de Nacimiento:</span> {{vm.consultTeacher.birthday | date : "shortDate"}} <span>Género:</span> {{vm.consultTeacher.genre}}</p>
+													<p><span>Nacionalidad:</span> {{vm.consultTeacher.nationality}}</p>
+													<p><span>Academia:</span> {{vm.consultTeacher.academy}}</p>
+													<p><span>Estado:</span> {{vm.consultTeacher.status}}</p>
 												</div>
 
 												<!-- botón para salir del modal -->
@@ -1514,6 +1513,7 @@
 						</md-tab>
 				</md-content>
 			</div>
+		</div>
 
 			<div ng-show="vm.selected == 12">
 				<md-content class="md-padding">

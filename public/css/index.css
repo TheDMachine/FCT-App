@@ -647,12 +647,27 @@ md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked 
   background: #cb3e42;
   text-align: center;
 }
+#eventName1{
+  background: #00a652;
+  text-align: center;
+}
 
+#eventName1 img{
+  border-radius: 50%;
+  border: 0.5px solid #fff;
+}
 #eventName img{
   border-radius: 50%;
   border: 0.5px solid #fff;
 }
 
+#eventName1 h3{
+  color: #fff;
+  font-weight: bold;
+  display: inline;
+  font-size: 1.571em;
+  font-family: 'Montserrat';
+}
 #eventName h3{
   color: #fff;
   font-weight: bold;
@@ -1419,7 +1434,7 @@ i.side-icons{
 
 md-list-item > md-icon:first-child:not(.md-avatar-icon), md-list-item .md-list-item-inner > md-icon:first-child:not(.md-avatar-icon){
   margin: 0;
-  
+
 }
 .side-nav md-list md-list-item{
   padding-top: 8.5px;
