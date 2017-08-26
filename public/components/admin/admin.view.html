@@ -1043,10 +1043,22 @@
 								</md-card>
 							</md-content>
 						</md-tab>
+						<md-tab label="Actualizar pesaje">
+							<md-content class="col-md-10 col-offset-1">
+								<h2>Actualiza el peso de un competidor</h2>
+								<md-input-container>
+									<md-select ng-model="vm.userToUpWeight._id">
+										<div ng-repeat="comp in vm.competitions">
+											<md-option ng-repeat="uw in comp.competitors track by $index" value="{{uw._id}}">{{uw.name}}</md-option>
+										</div>
+									</md-selected>
+								</md-input-container>
+								<md-button ng-click="vm.showUpdateWeight(vm.userToUpWeight)">Actualizar Peso</md-button>
+							</md-content>
+						</md-tab>
+						</md-tabs>
 				</md-content>
-
-			</div>
-
+		</div>
 			<!-- Patrocinadores  -->
 			<div ng-show="vm.selected == 7">
 				<md-content>

@@ -126,7 +126,7 @@
         });
         vm.status = "activo";
         vm.roleFilter = "";
-        vm.stateFilter = ""
+        vm.stateFilter = "";
       }
       init();
 
@@ -157,7 +157,7 @@
       $scope.status = 'You didn\'t name your dog.';
     });
   };
- // 
+ //
  // if(vm.currentUser.newUser == 1) {
  //    $scope.showPrompt();
  //  }
@@ -369,6 +369,28 @@
       };
 
 
+      //   Funcion para actualizar el puto peso.
+      vm.showUpdateWeight = function(userToUpdateWeight) {
+          // Appending dialog to document.body to cover sidenav in docs app
+          var confirm = $mdDialog.prompt()
+            .title('!Actualización de peso del competidor!')
+            .textContent('Actualizando competidor')
+            .placeholder('Escribe el peso.')
+            .ariaLabel(userToUpdateWeight.name)
+            .ok('Actualizar')
+            .cancel('Cancelar');
+
+          $mdDialog.show(confirm).then(function(result) {
+            //settingsService.e
+            console.log(userToUpdateWeight);
+            userToUpdateWeight.status = 'activo';
+            userToUpdateWeight.weight= result;
+            userService.updateWeigth(userToUpdateWeight);
+            init();
+          }, function() {
+            vm.status = 'You didn\'t name your dog.';
+          });
+        }
     //   Función para actualizar parametros del sistema.
       vm.showAlertEditParams = function(pMessage, pFeedback) {
         // Appending dialog to document.body to cover sidenav in docs app
@@ -1785,7 +1807,6 @@ var pModCompetition = {
     });
     vm.editAdminProfile = false;
   }
-
 }
 
 })();

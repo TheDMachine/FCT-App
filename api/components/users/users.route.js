@@ -71,4 +71,8 @@ router.route('/save_consul')
     .post(function(req, res){
         userController.saveConsul(req,res);
     });
+router.route('/update_weight')
+    .put(function(req,res){
+        userController.updateWeigth(req,res);
+    });
 module.exports = router;

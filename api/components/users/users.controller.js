@@ -198,7 +198,14 @@ module.exports.updateStudent = function(req,res){
 
 
 }
-
+// Se actualiza el peso del competidor.
+module.exports.updateWeigth = function(req,res){
+    console.log("A ver que traigo aqui: %o",req.body);
+    User.findByIdAndUpdate(req.body._id, {$set:req.body})
+        .then(function(values){
+            res.json({success:true, msg:values});
+        })
+}
 module.exports.saveConsul = function(req,res) {
     email.sEmail('newPassword',req.body.email, 'Nueva cuenta creada', {
         name:req.body.name,
