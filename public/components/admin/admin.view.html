@@ -1213,7 +1213,7 @@
 									</md-input-container>
 								</div>
 								<div layout="row">
-									<md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" >
+									<md-card ng-repeat="item in vm.sponsors | filter:{sponsorName:vm.sponsorFilter}" flex="grow">
 										<img ng-src="{{item.photo}}" class="md-card-image" alt="Washed Out">
 										<md-card-title>
 											<md-card-title-text>

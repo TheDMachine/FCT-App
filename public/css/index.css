@@ -1745,7 +1745,9 @@ md-sidenav.md-locked-open, md-sidenav.md-locked-open.md-closed, md-sidenav.md-lo
 /*fin estilos de informacion del landing*/
 
 md-card.md-default-theme .md-card-image, md-card .md-card-image{
-  min-height: 120px;
+  min-height: 325px;
+  min-width: 300px;
+  width: 300px;
 }
 
 md-card md-card-title{
