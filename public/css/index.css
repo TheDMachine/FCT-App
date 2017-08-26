@@ -1595,6 +1595,7 @@ md-card md-card-title.no-padding{
   .cardTam{
     width: 46%;
     margin: 2%;
+    height: 19em;
   }
 
   .card-block{
@@ -1613,7 +1614,7 @@ md-card md-card-title.no-padding{
   }
 
   .cardTam2{
-    width: 30%;
+    width: 48%;
     margin: 1%;
     background: #424242;
     color: #fff;
