@@ -1189,6 +1189,7 @@ button.button-selected{
   text-align: center;
   margin: 0 auto;
   text-transform: none;
+  text-decoration: none;
 }
 
 /* Fin de estilos base */
@@ -1605,7 +1606,7 @@ md-card md-card-title.no-padding{
      max-width: calc(100% - 56px);
     }
   }
-  
+
 /*Inicio estilos de informacion del landing*/
   .cardTam{
     width: 46%;
