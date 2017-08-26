@@ -1046,15 +1046,13 @@
 											<tr>
 												<th>Número de competencia</th>
 												<th>Competidores</th>
-												<th>Ganador</th>
 											</tr>
 										</thead>
 										<tbody>
 											<!-- | filter:{stateFilter:vm.stateFilter} -->
 											<tr ng-repeat="item in vm.competitions | filter:{eventBelongs:vm.eventFilter} | filter:{competitionAge:vm.catFilter} | filter:{competitionWeight:vm.weightFilter} | filter:{competitionGenre:vm.genreFilter} | filter:{competitionBelt:vm.beltFilter} | filter:{competitors:vm.competidorNameFilter}">
 												<td>{{item.competitionNumber}}</td>
-												<td>{{item.competitors}}</td>
-												<td></td>
+												<td ><span ng-repeat="competitor in item.competitors">{{competitor.name}} {{competitor.firstName}} </span> </td>
 											</tr>
 										</tbody>
 									</table>
