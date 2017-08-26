@@ -74,11 +74,11 @@
 <div class="row">
   <div class="col-md-offset-8 col-md-4">
     <!-- botón para guardar datos actualizados -->
-    <md-button class="md-raised" type="submit" ng-disabled="frmRegTeacher.$invalid" ng-click="vm.updateTeacher()">Actualizar</md-button>
+    <md-button class="md-raised" type="submit" ng-disabled="frmRegTeacher.$invalid || vm.submitDisable" ng-click="vm.updateTeacher()">Actualizar</md-button>
 
 
     <!-- botón para registrar -->
-    <md-button type="submit" ng-disabled="frmRegTeacher.$invalid" class="md-raised" ng-click="vm.reset()">Registrar</md-button>
+    <md-button type="submit" ng-disabled="frmRegTeacher.$invalid || vm.updateDisable" class="md-raised" ng-click="vm.reset()">Registrar</md-button>
   </div>
 </div>
 <div class="row">

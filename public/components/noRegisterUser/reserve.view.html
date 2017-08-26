@@ -18,7 +18,7 @@
 						    <label>Seleccione el evento</label>
 						    <md-select name="event" ng-model="vm.reservation.event" ng-change="vm.checkPrice(vm.reservation.event)" required>
 						    	<!-- | eventFrom -->
-						    	<md-option ng-repeat="event in vm.events track by $index" value="{{event.eventName}}">{{event.eventName}}</md-option>
+						    	<md-option ng-repeat="event in vm.events | eventFrom" value="{{event.eventName}}">{{event.eventName}}</md-option>
 						    </md-select>
 
 							<!-- Mensaje de retroalimentacion -->
@@ -125,8 +125,8 @@
 		</div>
 		<div id="information" class="col-md-offset-1 col-md-10 md-whiteframe-3dp">
 			<div class="col-xs-12">
-				<p>Información importante:</p>
-				<p>1. La tarejta (crédito / débito) solicitada será utilizada como respaldo de la reservación para las entradas, las mismas se cancelarán el día del evento.</p>
+				<p class="titleInfo">Información importante:</p>
+				<p>1. La tarejta (crédito / débito) solicitada será utilizada solamente como respaldo de la reservación para las entradas, las mismas se cancelarán el día del evento.</p>
 				<p>2. Las entradas reservadas se retiran en la entrada principal de las instalaciones el día del evento.</p>
 				<p>3. Puede cancelar la reservación en el momento que desee sin ningún costo.</p>
 			</div>

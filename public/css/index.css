@@ -381,50 +381,10 @@ md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked 
 #mapSpace{
   margin-top: 70px;
 }
-/*#eventsTable h3{
-  font-family: 'Montserrat';
-  font-size: 1.571em;
-  margin-bottom: 60px;
+#infoEvents{
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
-
-#eventsTable table{
-  width: 100%;
-}
-
-#eventsTable thead, #eventsTable tbody{
-  width: 100%;
-}
-
-#eventsTable tbody{
-  text-align: center;
-}
-
-#eventsTable tr th{
-  width: 60px;
-  text-align: center;
-  margin: 0 auto;
-  padding: 20px 10px;
-  font-size: 1.143em;
-  background-color: #00978f;;
-  color: #fff;
-}
-
-#eventsTable tr:hover{
-  background: rgba(252, 179, 50,0.2);
-}
-
-#eventsTable tbody td{
-  width: 60px;
-  margin: 0 auto;
-  border-bottom: 0.1px solid #242629;
-  text-align: center;
-  padding: 10px 0;
-}
-
-#tableSpace{
-  margin-bottom: 400px;
-}*/
-
 
 /*Fin estilos de eventos no registrado*/
 
@@ -626,6 +586,14 @@ md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked 
 #landing #listaNav .dropdown-menu li a:hover{
   background: rgba(252, 177, 50, 0.5);
 }
+#landingSecondPart{
+  background: red;
+}
+
+#cardsEventos{
+  height: 100px;
+  background-color: yellow;
+}
 
 /*Fin estilos del landing*/
 
@@ -671,8 +639,8 @@ md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked 
 }
 
 #histTable tbody tr td .md-button{
-  color: #fff;
-  background: #00978f;
+  color: #00978f;
+  font-weight: bold;
 }
 
 #eventName{
@@ -699,8 +667,10 @@ md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked 
 }
 
 #eventInfo p{
-  padding-bottom: 5px;
   line-height: 1;
+  border-bottom: 1px solid #dbdee4;
+  padding-top: 5px;
+  padding-bottom: 3px;
 }
 
 #eventInfo p span{
@@ -900,6 +870,11 @@ md-input-container{
   color: #cb3e42;
 }
 
+#photo{
+  outline: none;
+}
+
+
 /*Fin estilos de pasos formulario eventos*/
 
 /*Inicio estilos de tabla modificar y tabla de reservaciones*/
@@ -952,6 +927,10 @@ md-input-container{
 #modTable .editCxlB:not([disabled]):hover {
     background-color: #fcb132;
     transition: 0.3s;
+}
+
+#information .titleInfo{
+  font-weight: bold;
 }
 
 /*Fin estilos tabla modificar*/
@@ -1189,6 +1168,7 @@ button.button-selected{
   text-align: center;
   margin: 0 auto;
   text-transform: none;
+  text-decoration: none;
 }
 
 /* Fin de estilos base */
@@ -1432,13 +1412,18 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 }
 
 i.side-icons{
-  font-size: 3.4rem;
+  font-size: 2.4rem;
   line-height: 0;
   margin: 0;
 }
 
 md-list-item > md-icon:first-child:not(.md-avatar-icon), md-list-item .md-list-item-inner > md-icon:first-child:not(.md-avatar-icon){
   margin: 0;
+  
+}
+.side-nav md-list md-list-item{
+  padding-top: 8.5px;
+  padding-bottom: 8.5px;
 }
 span.menu-button{
   margin-left: 5%;
@@ -1605,11 +1590,12 @@ md-card md-card-title.no-padding{
      max-width: calc(100% - 56px);
     }
   }
-  
+
 /*Inicio estilos de informacion del landing*/
   .cardTam{
     width: 46%;
     margin: 2%;
+    height: 19em;
   }
 
   .card-block{
@@ -1628,7 +1614,7 @@ md-card md-card-title.no-padding{
   }
 
   .cardTam2{
-    width: 30%;
+    width: 48%;
     margin: 1%;
     background: #424242;
     color: #fff;
