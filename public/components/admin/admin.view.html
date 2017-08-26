@@ -21,29 +21,31 @@
 					</md-button>
 				</md-list-item> -->
 				<md-list-item layout="column">
-					<md-button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+					<md-button class="button-selected" data-toggle="collapse" data-target="#demo">
 						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 12 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i><br>
 						<p class="menu-button">Usuarios</p>
 					</md-button>
-					<div class="dropdown-menu">
+					<div id="demo" class="collapse">
 						<ul>
 							<li>
-								<md-button class="button-selected" ui-sref="admin.partOne" ng-click="vm.selected = 9">R/Consejo
+								<md-button class="button-selected" ng-click="vm.selected = 9">
+								<p class="menu-button pull-left">R/Consejo</p>
 								</md-button>
 							</li>
 							<li>
-								<md-button class="button-selected" ng-click="vm.selected = 10" ui-sref=".teachpart1">
-									<p>Profesor</p>
+								<md-button class="button-selected" ng-click="vm.selected = 10">
+									<p class="menu-button pull-left">Profesor</p>
 								</md-button>
 							</li>
 							<li>
 								<md-button class="button-selected" ng-click="vm.selected = 11">
-									<p>Alumno</p>
+									<p class="menu-button pull-left">Alumno</p>
 								</md-button>
 							</li>
 							<li>
 								<md-button class="button-selected" ng-click="vm.selected = 12">
-									<p>Usuarios</p>
+									<p class="menu-button pull-left">Usuarios</p>
 								</md-button>
 							</li>
 						</ul>
@@ -76,7 +78,7 @@
 				<md-list-item  layout="column">
   					<md-button class="button-selected" ng-click="vm.selected = 13">
 						<!--<i class="material-icons">&#xE869;</i>  -->
-						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE869;</i>
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#f4f1eb'} ">&#xE869;</i>
 						<p class="menu-button">Mantenimiento</p>
   					</md-button>
 				</md-list-item>
@@ -615,9 +617,9 @@
 												<tbody>
 													<!-- | dateRange:vm.from3:vm.to3 -->
 													<!-- ng-repeat="event in vm.acceptedEvents track by $index" -->
-													<tr ng-repeat="event in vm.events ">
+													<tr ng-repeat="event in vm.events | dateRange:vm.from3:vm.to3 | filter:{eventState:'aprobado'} ">
 														<td>{{event.eventName}}</td>
-														<td>{{event.date.date1 | date : "shortDate"}}</td>
+														<td>{{event.date1 | date : "shortDate"}}</td>
 
 														<!-- Botones para editar y cancelar eventos -->
 														<td>
@@ -695,10 +697,10 @@
 										</thead>
 										<tbody>
 											<!-- | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter} -->
-											<tr ng-repeat="event in vm.events track by $index">
+											<tr ng-repeat="event in vm.events | dateRange:vm.from2:vm.to2 | filter:{eventState:vm.stateFilter}">
 												<td>{{event.date1 | date : "shortDate"}}</td>
 												<td>
-													<md-button class="md-raised" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button>
+													<md-button class="md-flat" type="button" ng-click="vm.showEventConsult(event, $event)">{{event.eventName}}</md-button>
 												</td>
 												<td>{{event.eventState}}</td>
 											</tr>
@@ -718,9 +720,9 @@
 
 												<!-- cuerpo de la información -->
 												<div id="eventInfo" class="col-xs-12">
-													<p><span>Lugar: </span> {{vm.consultEvent.placeName}} <span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
-													<p><span>Inicio:</span> {{vm.consultEvent.date1 | date : "shortDate"}} {{vm.consultEvent.time1 | date : "shortTime"}}</p>
-													<p><span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} {{vm.consultEvent.time2 | date : "shortTime"}}</p>
+													<p><span>Lugar: </span> {{vm.consultEvent.placeName}}</p>
+													<p><span>Entrada:</span> {{vm.consultEvent.ticketPrice}} colones</p>
+													<p><span>Inicia:</span> {{vm.consultEvent.date1 | date : "shortDate"}} <span>hra:</span> {{vm.consultEvent.time1 | date : "shortTime"}} - <span>Finaliza:</span> {{vm.consultEvent.date2 | date : "shortDate"}} <span>hra:</span> {{vm.consultEvent.time2 | date : "shortTime"}}</p>
 													<p><span>Contacto:</span> {{vm.consultEvent.contactName}} <span>Tel:</span> {{vm.consultEvent.contactPhone}}</p>
 													<p><span>Invitado especial:</span> {{vm.consultEvent.invitedName}}</p>
 													<p><span>Academias invitadas:</span> {{vm.consultEvent.selectAcademies}}</p>
@@ -731,7 +733,6 @@
 													<p><span>Beneficia a:</span> {{vm.consultEvent.orgName}}</p>
 													<p><span>Descripción de la org.:</span> {{vm.consultEvent.description}}</p>
 													<p><span>Patrocinadores:</span> {{vm.consultEvent.selectSponsors}}</p>
-													<p><span>Latitud y longitud:</span> {{vm.consultEvent.coords}}</p>
 												</div>
 
 												<!-- botón para salir del modal -->

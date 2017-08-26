@@ -13,22 +13,24 @@
       console.log(vm.acceptedEvents);
       vm.infowindow;
       vm.consultEvent = {};
+      vm.openCard = false;
       
       function init(){ // función que se llama así misma para indicar que sea lo primero que se ejecute
-        vm.events = eventService.getEvents();
-        console.log(vm.events);
+        eventService.getEvents().then(function(response) {
+          vm.events = response.data;
+        });
         acceptedEvents();
         vm.to = new Date();
       }init();
 
       // funcion p el mapa
-      vm.placeChanged = function() {
-        vm.place = this.getPlace();
+      vm.placeChanged = function(pPlace) {
+        pPlace = this.getPlace();
         console.log(vm.place);
-        vm.map.setCenter(vm.place.geometry.location);
+        vm.map.setCenter(pPlace.coords);
         vm.map.setZoom(18);
-        console.log(vm.place.name);
-        console.log(vm.place.geometry);
+        console.log(pPlace.name);
+        console.log(pPlace.geometry);
       }
       NgMap.getMap().then(function(map) {
         vm.map = map;
@@ -36,18 +38,20 @@
       });
 
       vm.checkInfoEvent = function(pEvent){
+        vm.openCard = true;
         for (var i = 0; i < vm.events.length; i++) {
           if (vm.events[i].eventName === pEvent) {
             vm.consultEvent = vm.events[i];
           }
-        }
-        // vm.event.place = vm.consultEvent.place.eventName;
+        }     
+        vm.placeChanged(vm.consultEvent); 
       };
 
        // Función para devolverse al landing
        vm.return = function(event){
         event.preventDefault();
         $location.path('/landing');
+        vm.openCard = false;
       };
 
        // Función para filtrar la tabla de consulta de eventos
