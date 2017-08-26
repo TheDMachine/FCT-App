@@ -1,10 +1,21 @@
+<div class="col-md-10 col-offset-1">
+
 <h2 layout="row" layout-align="start">Perfil</h2>
 <div flex-xs flex-gt-xs="100" layout="column">
   <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
     <md-card-title class="no-padding">
       <md-card-title-media flex="35">
         <div class="md-media-lg card-media profile-picture">
-          <img ng-src="{{vm.currentUser.photo}}">
+          <img alt="Imagen de perfil del competidor" ng-src="{{vm.currentUser.photo}}">
+          <!-- <div ng-show="vm.isMod">
+            <div>
+              <label for="photo">Subir foto</label>
+              <input type="file" id="photo" style="display:none"/>
+              <md-input-container>
+                <md-button ng-click="vm.uploadPhoto(vm.currentUser._id)">Actualizar Foto</md-button>
+              </md-input-container>
+          </div>
+          </div> -->
         </div>
       </md-card-title-media>
       <md-card-title-text>
@@ -13,17 +24,20 @@
         <p class="profile-info"><span>Nacionalidad:</span> {{vm.currentUser.nationality}}</p>
         <p class="profile-info"><span>Edad:</span> {{vm.currentUser.bornhDate}}</p>
         <p class="profile-info"><span>Grado:</span> {{vm.currentUser.grade}}</p>
+        <p class="profile-info"><span>Peso:</span> {{vm.currentUser.weight}}</p>
+        <p class="profile-info"><span>Altura:</span> {{vm.currentUser.height}}</p>
         <div layout="row" class="contact-info">
-          <p class="profile-info"><span>Teléfono:</span> {{vm.currentUser.phone}}</p>
+          <p class="profile-info"><span>Teléfono:</span> {{vm.currentUser.phone}}<span ng-show="vm.isMod" class="fa fa-pencil-square-o" ng-click="vm.editProfile(vm.currentUser._id,vm.currentUser.phone)">Actualizar</span></p>
         </div>
         <div layout="row" class="contact-info">
-          <p class="profile-info"><span>Email:</span> {{vm.currentUser.email}}</p>
+          <p class="profile-info"><span>Email:</span> {{vm.currentUser.email}}<span ng-show="vm.isMod" class="fa fa-pencil-square-o" ng-click="vm.editProfile(vm.currentUser._id,vm.currentUser.email)">Actualizar</span></p>
         </div>
       </md-card-title-text>
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="vm.showUpdateWeight(vm.currentUser)">Actualizar peso</md-button>
-        <md-button ui-sref=".edit">Modificar Perfil</md-button>
+        <!-- <md-button ng-click="vm.showUpdateWeight(vm.currentUser)">Actualizar peso</md-button> -->
+        <md-button ng-click="vm.isMod = true">Modificar Perfil</md-button>
     </md-card-actions>
   </md-card>
+</div>
 </div>

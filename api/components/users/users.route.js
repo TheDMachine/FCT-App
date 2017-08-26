@@ -41,6 +41,11 @@ router.route('/update_teacher')
     userController.updateTeacher(req, res);
   });
 
+  router.route('/update_temporal_password')
+  .put(function(req, res) {
+    userController.updateTemporalPassword(req, res);
+  });
+
   //Ruta para Alumnos
   router.route('/save_student')
     .post(function(req, res) {
@@ -62,4 +67,8 @@ router.route('/update_belt')
     userController.updateBelt(req, res);
   });
 
+router.route('/save_consul')
+    .post(function(req, res){
+        userController.saveConsul(req,res);
+    });
 module.exports = router;

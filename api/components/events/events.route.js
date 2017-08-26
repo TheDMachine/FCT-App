@@ -39,4 +39,10 @@ router.route('/get_all_competitions')
       eventsController.updateCompetition(req,res);
    	});
 
+    //Desactivar Competencias
+    router.route('/delete_competition')
+      .put(function(req, res){
+        eventsController.deleteCompetition(req,res);
+      });
+
 module.exports = router;
