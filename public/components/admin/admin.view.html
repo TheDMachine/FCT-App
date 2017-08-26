@@ -1,4 +1,4 @@
-<!-- Sidenav view -->
+!-- Sidenav view -->
 <div class="body-app md-menu-demo" layout="column" ng-cloak ng-init="selected = 0">
 	<div class="side-content-container" layout="row" flex>
 		<md-sidenav md-is-locked-open="true" class="md-whiteframe-3dp side-nav" flex="10" flex-sm="15" flex-xs="20">
@@ -21,29 +21,31 @@
 					</md-button>
 				</md-list-item> -->
 				<md-list-item layout="column">
-					<md-button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+					<md-button class="button-selected" data-toggle="collapse" data-target="#demo">
 						<i class="material-icons side-icons profile-icon" ng-style="vm.selected == 9 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 10 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 11 ? {'color': '#fff'} : {'color': '#00a652'} && vm.selected == 12 ? {'color': '#fff'} : {'color': '#00a652'}">&#xE853;</i><br>
 						<p class="menu-button">Usuarios</p>
 					</md-button>
-					<div class="dropdown-menu">
+					<div id="demo" class="collapse">
 						<ul>
 							<li>
-								<md-button class="button-selected" ui-sref="admin.partOne" ng-click="vm.selected = 9">R/Consejo
+								<md-button class="button-selected" ng-click="vm.selected = 9">
+								<p class="menu-button pull-left">R/Consejo</p>
 								</md-button>
 							</li>
 							<li>
-								<md-button class="button-selected" ng-click="vm.selected = 10" ui-sref=".teachpart1">
-									<p>Profesor</p>
+								<md-button class="button-selected" ng-click="vm.selected = 10">
+									<p class="menu-button pull-left">Profesor</p>
 								</md-button>
 							</li>
 							<li>
 								<md-button class="button-selected" ng-click="vm.selected = 11">
-									<p>Alumno</p>
+									<p class="menu-button pull-left">Alumno</p>
 								</md-button>
 							</li>
 							<li>
 								<md-button class="button-selected" ng-click="vm.selected = 12">
-									<p>Usuarios</p>
+									<p class="menu-button pull-left">Usuarios</p>
 								</md-button>
 							</li>
 						</ul>
@@ -76,7 +78,7 @@
 				<md-list-item  layout="column">
   					<md-button class="button-selected" ng-click="vm.selected = 13">
 						<!--<i class="material-icons">&#xE869;</i>  -->
-						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 13 ? {'color': '#fff'} : {'color': '#0082c8'} ">&#xE869;</i>
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#f4f1eb'} ">&#xE869;</i>
 						<p class="menu-button">Mantenimiento</p>
   					</md-button>
 				</md-list-item>
@@ -218,6 +220,7 @@
   				</div>
 				</div>
 			</div>
+
 
 
 
