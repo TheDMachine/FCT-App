@@ -639,7 +639,7 @@ md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked 
 }
 
 #histTable tbody tr td .md-button{
-  color: #00978f;
+  color: #242629;
   font-weight: bold;
 }
 
@@ -1277,6 +1277,15 @@ h2{
   width: 100%;
 }
 
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+  border-color: #242629;
+  color: #242629;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused label {
+  color: #242629;
+}
+
 md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-container .md-placeholder{
   font-size: 1.2rem;
 }
@@ -1289,7 +1298,7 @@ md-input-container label:not(.md-no-float):not(.md-container-ignore), md-input-c
 .login-icon i{
   line-height: 3.55;
   font-size: 1.8rem;
-  color: #fff;
+  color: #fff!important;
 }
 
 .form-group{
@@ -1695,3 +1704,5 @@ md-card md-card-title md-card-title-media .md-media-lg {
     width: 82%;
     height: 20%;
 }
+
+

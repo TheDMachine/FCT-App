@@ -14,6 +14,8 @@
       vm.selected = 0;
       vm.updateDisable = true;
       vm.submitDisable = false;
+      vm.showButtonUpDate = false;
+      vm.showButtonSubmit = true;
       vm.stepTwoConsult = false;
       vm.stepThreeConsult = false;
       vm.stepOneConsult = true;
@@ -25,7 +27,6 @@
       vm.weights = estabInfoService.getWeight();
       vm.categories = estabInfoService.getCategories();
       // vm.acceptedEvents = [];
-      vm.updateDisable = true;
       vm.nameSponsorEdit = false;
       vm.showCompetition = false;
       vm.competitionsToShow = [];
@@ -68,7 +69,6 @@
         console.log(vm.currentUser);
         vm.originatorEv;
         vm.weights = estabInfoService.getWeight();
-        console.log(vm.events);
         eventService.getCompetitions()
         .then(function(response){
           vm.competitions = response.data;
@@ -80,15 +80,16 @@
         vm.event = {};
         sponsorService.getSponsors().then(function(response) {
           vm.sponsors = response.data;
+          console.log(vm.sponsors);
         });
-        console.log(vm.sponsors);
+        
         academyServices.getAcademy().then(function(response) {
           vm.academies = response.data;
         });
         eventService.getEvents().then(function(response) {
           vm.events = response.data;
+          console.log(vm.events);
         });
-        console.log(vm.events);
         vm.teacher = {};
         vm.sponsor = {};
 
@@ -768,7 +769,9 @@
         vm.event.orgType = pEvent.orgType;
         vm.event.orgName = pEvent.orgName;
         vm.event.description = pEvent.description;
-        vm.updateDisable = false;
+
+        vm.showButtonUpDate = true;
+        vm.showButtonSubmit = false;
       };
 
       // Función para actualizar datos de evento
@@ -800,7 +803,8 @@
           orgType: vm.event.orgType,
           description: vm.event.description
         }
-      vm.updateDisable = true;
+        vm.submitDisable = false;
+        vm.updateDisable = true;
       // eventService.updateEvent(modEvent);
       // vm.showEditEventAlert();
       // init();

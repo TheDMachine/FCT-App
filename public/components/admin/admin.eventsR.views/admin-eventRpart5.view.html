@@ -74,16 +74,12 @@
 <div class="row">
 	<div class="col-md-offset-8 col-md-4">
 		<!-- botón para guardar datos -->
-		<md-button type="submit" class="md-raised"  ng-disabled="frmEventInfo.$invalid" ng-click="vm.reset()">Ingresar</md-button>
+		<md-button type="submit" class="md-raised pull-right"  ng-disabled="frmEventInfo.$invalid" ng-click="vm.reset()" ng-show="vm.showButtonSubmit">Ingresar</md-button>
 
 		<!-- botón para guardar datos actualizados -->
-		<md-button type="submit" class="md-raised" ng-disabled="frmEventInfo.$invalid || updateDisable" ng-click="vm.updateEvent()">Actualizar</md-button>
+		<md-button type="submit" class="md-raised pull-right" ng-disabled="frmEventInfo.$invalid" ng-click="vm.updateEvent()" ng-show="vm.showButtonUpDate">Actualizar</md-button>
 	</div>
-	<div id="messages" class="col-md-12">
-		<!-- Mensajes de error o éxito del registro -->
-		<p class="ErrorMessage"></p>
-		<p class="SuccessMessage"></p>
-	</div>
+	
 </div>
 <div class="row">
 	<div class="cl-md-2">

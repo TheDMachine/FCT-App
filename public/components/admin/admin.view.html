@@ -78,7 +78,7 @@
 				<md-list-item  layout="column">
   					<md-button class="button-selected" ng-click="vm.selected = 13">
 						<!--<i class="material-icons">&#xE869;</i>  -->
-						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 7 ? {'color': '#fff'} : {'color': '#f4f1eb'} ">&#xE869;</i>
+						<i class="material-icons side-icons help-icon" ng-style="vm.selected == 13 ? {'color': '#fff'} : {'color': '#f4f1eb'} ">&#xE869;</i>
 						<p class="menu-button">Mantenimiento</p>
   					</md-button>
 				</md-list-item>
@@ -617,16 +617,16 @@
 												<tbody>
 													<!-- | dateRange:vm.from3:vm.to3 -->
 													<!-- ng-repeat="event in vm.acceptedEvents track by $index" -->
-													<tr ng-repeat="event in vm.events | dateRange:vm.from3:vm.to3 | filter:{eventState:'aprobado'} ">
+													<tr ng-repeat="event in vm.events |  eventFrom | dateRange:vm.from3:vm.to3 | filter:{eventState:'aprobado'} ">
 														<td>{{event.eventName}}</td>
 														<td>{{event.date1 | date : "shortDate"}}</td>
 
 														<!-- Botones para editar y cancelar eventos -->
 														<td>
-															<md-button class="md-raised editCxlB" ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button>
+															<md-button class="md-raised " ng-click="vm.getInfo(event)" ui-sref=".part1">Editar</md-button>
 														</td>
 														<td>
-															<md-button href="#!/admin#ventana1" class="md-raised editCxlB" data-toggle="modal">Cancelar</md-button>
+															<md-button href="#!/admin#ventana1" class="md-raised " data-toggle="modal">Cancelar</md-button>
 														</td>
 													</tr>
 												</tbody>
