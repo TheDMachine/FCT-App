@@ -61,7 +61,7 @@
     <!-- Campo para telefono -->
     <md-input-container flex-offset>
       <label>Télefono</label>
-      <input name="teacherPhone" ng-model="vm.teacher.phone" ng-pattern="/^[0-9]{8}$/" required>
+      <input name="teacherPhone" type="text" ng-model="vm.teacher.phone" ng-pattern="/^[0-9]{8}$/" required>
 
       <!-- Mensaje de retroalimentacion -->
       <div ng-messages="frmRegTeacher.teacherPhone.$error">

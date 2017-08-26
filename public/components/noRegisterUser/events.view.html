@@ -13,37 +13,38 @@
 				<md-input-container>
 					<label>Seleccione el evento</label>
 					<md-select name="event" ng-model="vm.event.eventName" ng-change="vm.checkInfoEvent(vm.event.eventName)" required>
-						<!-- | eventFrom -->
-						<md-option ng-repeat="event in vm.events track by $index" value="{{event.eventName}}"><span class="strongLetter">Nombre:</span> {{event.eventName}} , <span class="strongLetter">Fecha de Inicio:</span> {{event.date1 | date : "shortDate"}}, <span class="strongLetter">Tipo de evento:</span> {{event.eventType}}</md-option>
+						<md-option ng-repeat="event in vm.events | eventFrom" value="{{event.eventName}}"><span class="strongLetter">Nombre:</span> {{event.eventName}} , <span class="strongLetter">Fecha de Inicio:</span> {{event.date1 | date : "shortDate"}}, <span class="strongLetter">Tipo de evento:</span> {{event.eventType}}</md-option>
 					</md-select>
 				</md-input-container>
 			</div>
 			<div class="col-xs-12 col-sm-5 col-md-6">
-				<div id="infoCard" class="col-xs-12 md-whiteframe-3dp">
+				<div id="infoCard" class="col-xs-12 md-whiteframe-3dp" ng-show="vm.openCard">
 					<div class="col-xs-12 headerCard md-whiteframe-3dp">
 						<div id="headerSpace" class="col-xs-12">
 							<img class="md-whiteframe-3dp" ng-src="{{vm.consultEvent.photo}}" alt="Description" width="60px" height="60px" />
-							<h3>{{vm.consultEvent.eventName}} ({{vm.consultEvent.eventType}})</h3>
+							<h3>{{vm.consultEvent.eventName}}</h3>
 						</div>
 					</div>
-					<input  places-auto-complete="true"
+					<!-- <input  places-auto-complete="true"
 					placeholder="Ubicación" 
 					size=80
 					ng-model="vm.event.place"
 					component-restrictions="{country:'cr'}"
 					on-place-changed="vm.placeChanged()"
-					maxlength="100" type="text" class="form-control" name="location" />
-					<p><span class="strongLetter">Hora de Inicio:</span><br>{{vm.consultEvent.time1 | date : "shortTime"}}</p>
-					<p><span class="strongLetter">Lugar:</span><br>{{vm.consultEvent.placeName}}</p>
-					<p><span class="strongLetter">Precio de entrada:</span><br>{{vm.consultEvent.ticketPrice}}</p>
-					<p><span class="strongLetter">Nombre de contacto:</span><br>{{vm.consultEvent.contactName}}</p>
-					<p><span class="strongLetter">Nombre de contacto:</span><br>{{vm.consultEvent.contactPhone}}</p>
+					maxlength="100" type="text" class="form-control" name="location" /> -->
+					<div id="infoEvents" class="col-xs-12">
+						<p><span class="strongLetter">Hora de Inicio:</span><br>{{vm.consultEvent.time1 | date : "shortTime"}}</p>
+						<p><span class="strongLetter">Lugar:</span><br>{{vm.consultEvent.placeName}}</p>
+						<p><span class="strongLetter">Precio de entrada:</span><br>{{vm.consultEvent.ticketPrice}}</p>
+						<p><span class="strongLetter">Nombre de contacto:</span><br>{{vm.consultEvent.contactName}}</p>
+						<p><span class="strongLetter">Nombre de contacto:</span><br>{{vm.consultEvent.contactPhone}}</p>
+					</div>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-7 col-md-6">
 				<div id="mapSpace" class="col-xs-12">
-					<ng-map class="md-whiteframe-3dp" zoom="7" center=[9.9333300,-84.0833300]>
-						<marker ng-show="vm.place" position="{{vm.consultEvent.coords}}" ></marker>
+					<ng-map class="md-whiteframe-3dp" zoom="7" center=[9.9333300,-84.0833300] >
+						<marker ng-show="vm.place" position="{{vm.consultEvent.coords}}" zoom = "18" ></marker>
 					</ng-map>
 					<div ng-show="vm.place">
 						Coordenadas: {{vm.place.geometry.location}}<br/>
