@@ -56,9 +56,9 @@ function init() {
     });
   };
 
- if(vm.currentUser.newUser == 1) {
-    $scope.showPrompt();
-  }
+ // if(vm.currentUser.newUser == 1) {
+ //    $scope.showPrompt();
+ //  }
 //Modald para cargar el Modald
 vm.showAlertPropose = function(pMessage, pFeedback) {
   // Appending dialog to document.body to cover sidenav in docs app
