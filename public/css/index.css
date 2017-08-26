@@ -1605,13 +1605,83 @@ md-card md-card-title.no-padding{
      max-width: calc(100% - 56px);
     }
   }
+  
+/*Inicio estilos de informacion del landing*/
+  .cardTam{
+    width: 46%;
+    margin: 2%;
+  }
+
+  .card-block{
+    padding: 0 5%;
+    margin-bottom: 3%;
+  }
+
+  .card-title{
+    font-weight: bold;
+  }
+  .card-text{
+    line-height: normal;
+    font-weight: normal;
+    font-size: 1.2em;
+    margin: 1% 0;
+  }
+
+  .cardTam2{
+    width: 30%;
+    margin: 1%;
+    background: #424242;
+    color: #fff;
+  }
+
+  .cardTam2 p{
+    font-weight: 300;
+  }
+
+  .cardTam2 p span{
+    font-weight: 500;
+  }
+
+  #infoBelt{
+    background: #1c1c1c;
+  }
+
+  #infoBelt h1{
+    color: #fff;
+  }
+
+  #btnBlanca{
+    background: #fff;
+  }
+
+  #btnAmarilla{
+    background: #fcb132;
+  }
+
+  #btnVerde{
+    background: #00a652;
+  }
+
+  #btnAzul{
+    background: #0082c8;
+  }
+
+  #btnRoja{
+    background: #ee334e;
+  }
+
+  #btnNegra{
+    background: #000;
+    color: #fff;
+  }
+  /*fin estilos de informacion del landing*/
 
   md-card.md-default-theme .md-card-image, md-card .md-card-image{
     min-height: 120px;
   }
 
   md-card md-card-title{
-    max-height: 230px;  
+    max-height: 230px;
   }
 
   .md-headline{
